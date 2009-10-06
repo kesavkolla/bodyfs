@@ -1,0 +1,22 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="/"?>
+<?page title="Welcome" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="main" apply="com.bodyfs.ui.MyWindow">
+		<grid id="persons" model="@{personDAO.all }" fixedLayout="true">
+			<columns menupopup="auto">
+				<column label="Id" />
+				<column label="First Name" />
+				<column label="Last Name" />
+			</columns>
+			<rows>
+				<row self="@{each='person' }">
+					<label value="@{person.id }" />
+					<label value="@{person.firstName }" />
+					<label value="@{person.lastName }" />
+				</row>
+			</rows>
+		</grid>
+		<label value="@{person.firstName }" />
+	</window>
+</zk>

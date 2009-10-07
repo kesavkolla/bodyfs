@@ -10,10 +10,10 @@
 				<column label="Last Name" />
 			</columns>
 			<rows>
-				<row self="@{each='person' }">
-					<label value="@{person.id }" />
-					<label value="@{person.firstName }" />
-					<label value="@{person.lastName }" />
+				<row self="@{each='user' }">
+					<label value="@{user.id }" />
+					<label value="@{user.firstName }" />
+					<label value="@{user.lastName }" />
 				</row>
 			</rows>
 		</grid>

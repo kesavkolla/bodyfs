@@ -4,12 +4,7 @@
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring Libraries"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zcommon.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zk.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zul.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zweb.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zkplus.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Zk Libraries"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/zkspring.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

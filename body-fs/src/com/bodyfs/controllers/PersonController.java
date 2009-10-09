@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
@@ -17,7 +18,7 @@ import com.bodyfs.model.Person;
 @RequestMapping("/person")
 public class PersonController {
 
-	@Autowired
+	@Autowired()
 	private IPersonDAO personDAO;
 
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
@@ -26,6 +27,16 @@ public class PersonController {
 	@ModelAttribute("model")
 	public Person getPerson(final @PathVariable Long id) {
 		return personDAO.getPerson(id);
+	}
+
+	@RequestMapping(value = "/detail/{id}")
+	public ModelAndView detail(final @PathVariable Long id) {
+		LOGGER.fatal("Entering details");
+		final ModelAndView mv = new ModelAndView("person");
+
+		mv.addObject("person", personDAO.getPerson(id));
+		mv.addObject("testmsg", "This is a test message");
+		return mv;
 	}
 
 	@PostConstruct

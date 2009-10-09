@@ -63,8 +63,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 
 	@Override
 	public Person getPerson(final Long id) {
-		LOGGER.error("Get Person for id: " + id);
-		LOGGER.error(this.jdoTemplate);
 		return this.jdoTemplate.getObjectById(Person.class, id);
 	}
 

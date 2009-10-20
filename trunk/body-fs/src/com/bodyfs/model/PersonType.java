@@ -1,12 +1,10 @@
 package com.bodyfs.model;
 
+/*
+ * $Id$
+ */
 /**
  * This enum reprasents the various types of the person
- * 
- * @author Kesav Kumar Kolla
- * @version 1.0
- * 
- *          $Id$
  * 
  */
 public enum PersonType {

@@ -2,6 +2,7 @@ package com.bodyfs.model;
 
 /*
  * $Id$
+ * $
  */
 /**
  * This enum reprasents the various types of the person

@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package com.bodyfs.model;
 
 import javax.jdo.annotations.IdGeneratorStrategy;

@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package com.bodyfs.model;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -13,8 +16,6 @@ import com.google.appengine.api.datastore.Key;
  * This class represents person in the system. This class defines all
  * nonmultable properties
  * 
- * @author Kesav Kumar Kolla
- * @version 1.0
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
 public class Person {

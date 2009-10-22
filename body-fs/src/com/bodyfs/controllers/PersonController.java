@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package com.bodyfs.controllers;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bodyfs.dao.IPersonDAO;
+import com.bodyfs.model.Gender;
 import com.bodyfs.model.Person;
 
 @Controller
@@ -48,15 +52,18 @@ public class PersonController {
 		Person p1 = new Person();
 		p1.setFirstName("Kesav Kumar");
 		p1.setLastName("Kolla");
+		p1.setGender(Gender.MALE);
 		personDAO.createPerson(p1);
 		LOGGER.error("Created person1:" + p1.getId());
 		Person p2 = new Person();
 		p2.setFirstName("Shivani");
 		p2.setLastName("Kolla");
+		p2.setGender(Gender.FEMALE);
 		personDAO.createPerson(p2);
 		Person p3 = new Person();
 		p3.setFirstName("Shreya");
 		p3.setLastName("Kolla");
+		p3.setGender(Gender.FEMALE);
 		personDAO.createPerson(p3);
 		LOGGER.error(personDAO.getAll());
 	}

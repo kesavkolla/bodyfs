@@ -1,7 +1,16 @@
+<!-- $Id -->
 <?page title="Person Details" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Person Details" border="normal">
+	<window id="win" title="Hi!" border="normal" width="200px">
 		<label value="${person.firstName}" />
 		<label value="${testmsg}" />
+		<caption>
+			<toolbarbutton label="Close" onClick="win.setVisible(false)" />
+		</caption>
 	</window>
+	<button label="Overlap" onClick="win.doOverlapped();" />
+	<button label="Popup" onClick="win.doPopup();" />
+	<button label="Modal" onClick="win.doModal();" />
+	<button label="Embed" onClick="win.doEmbedded();" />
+	<button label="Highlighted" onClick="win.doHighlighted();" />
 </zk>

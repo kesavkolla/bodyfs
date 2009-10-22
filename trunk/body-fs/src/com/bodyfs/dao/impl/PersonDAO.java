@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
@@ -29,7 +32,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	@PostConstruct
 	public void init() {
 		this.jdoTemplate = new JdoTemplate(PMF.get());
-		LOGGER.error("Post construct: " + this.jdoTemplate);
+		LOGGER.debug("Post construct: " + this.jdoTemplate);
 	}
 
 	@Override

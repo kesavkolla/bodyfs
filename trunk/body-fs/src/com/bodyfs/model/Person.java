@@ -58,6 +58,9 @@ public class Person {
 	@Persistent
 	private PersonType personType;
 
+	@Persistent
+	private boolean married;
+
 	public final Long getId() {
 		return id;
 	}
@@ -186,6 +189,14 @@ public class Person {
 	 */
 	public final void setPersonType(final PersonType personType) {
 		this.personType = personType;
+	}
+
+	public final boolean isMarried() {
+		return married;
+	}
+
+	public final void setMarried(final boolean married) {
+		this.married = married;
 	}
 
 	@Override

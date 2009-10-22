@@ -35,7 +35,7 @@ public class PersonController {
 
 	@RequestMapping(value = "/detail/{id}")
 	public ModelAndView detail(final @PathVariable Long id) {
-		LOGGER.fatal("Entering details");
+		LOGGER.debug("Entering details");
 		final ModelAndView mv = new ModelAndView("person");
 
 		mv.addObject("person", personDAO.getPerson(id));
@@ -46,7 +46,7 @@ public class PersonController {
 	@PostConstruct
 	public void initPersons() {
 		if (personDAO.getAll().size() > 0) {
-			LOGGER.error(personDAO.getAll());
+			LOGGER.debug(personDAO.getAll());
 			return;
 		}
 		Person p1 = new Person();
@@ -54,7 +54,7 @@ public class PersonController {
 		p1.setLastName("Kolla");
 		p1.setGender(Gender.MALE);
 		personDAO.createPerson(p1);
-		LOGGER.error("Created person1:" + p1.getId());
+		LOGGER.debug("Created person1:" + p1.getId());
 		Person p2 = new Person();
 		p2.setFirstName("Shivani");
 		p2.setLastName("Kolla");
@@ -65,7 +65,7 @@ public class PersonController {
 		p3.setLastName("Kolla");
 		p3.setGender(Gender.FEMALE);
 		personDAO.createPerson(p3);
-		LOGGER.error(personDAO.getAll());
+		LOGGER.debug(personDAO.getAll());
 	}
 
 }

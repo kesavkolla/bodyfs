@@ -3,6 +3,8 @@
  */
 package com.bodyfs.model;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -18,7 +20,9 @@ import com.google.appengine.api.datastore.Key;
  * 
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
-public class Person {
+public class Person implements Serializable {
+
+	private static final long serialVersionUID = 7682118330339432960L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)

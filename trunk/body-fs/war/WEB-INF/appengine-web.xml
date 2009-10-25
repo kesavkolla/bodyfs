@@ -12,9 +12,11 @@
 	<static-files>
 		<exclude path="/**.zul" />
 		<exclude path="/**.zhtml" />
+		<exclude path="/**.dsp" />
 	</static-files>
 	<resource-files>
 		<include path="/**.zul" />
 		<include path="/**.zhtml" />
+		<include path="/**.dsp" />
 	</resource-files>
 </appengine-web-app>

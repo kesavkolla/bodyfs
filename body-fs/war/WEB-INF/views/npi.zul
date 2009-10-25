@@ -1,0 +1,88 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer">
+		<columns>
+			<column width="100px" />
+			<column width="175px" />
+			<column width="100px" />
+			<column width="175px" />
+			<column width="100px" />
+			<column width="175px" />
+			<column width="100px" />
+			<column />
+		</columns>
+		<rows>
+			<row>
+				First Name:
+				<textbox id="firstName" value="@{person.firstName }" constraint="no empty" maxlength="100" hflex="1" />
+				Initial:
+				<textbox id="initial" value="@{person.initial}" maxlength="100" hflex="1" />
+				SSN:
+				<textbox id="ssn" value="@{person.SSN }" constraint="no empty" maxlength="11" hflex="1" />
+				Birthdate:
+				<datebox id="dob" value="@{person.dateOfBirth }" constraint="no empty,no future,no today"
+					format="MM/dd/yyyy" hflex="1" />
+			</row>
+			<row spans=",,,,,,2">
+				LastName:
+				<textbox id="lastName" value="@{person.lastName}" constraint="no empty" maxlength="100" hflex="1" />
+				Marital Status:
+				<checkbox label="Married" checked="@{person.married }" />
+				Gender:
+				<radiogroup id="married">
+					<radio label="M" value="MALE" />
+					<radio label="F" value="FEMALE" />
+				</radiogroup>
+				<space />
+			</row>
+			<row valign="top">
+				Address
+				<textbox id="line1" hflex="1" />
+				City:
+				<textbox id="city" hflex="1" />
+				State:
+				<textbox id="state" hflex="1" />
+				Zipcode:
+				<textbox id="zip" hflex="1" />
+			</row>
+			<row spans=",,,,2,2">
+				Height:
+				<textbox id="height" hflex="1" />
+				Weight:
+				<textbox id="weight" hflex="1" />
+				Emergency Contact's Name &amp; Phone
+				<textbox id="emergency" hflex="1" />
+			</row>
+			<row>
+				Home Phone:
+				<textbox id="homePhone" value="@{person.homePhone }" hflex="1" />
+				Work Phone:
+				<textbox id="workPhone" value="@{person.workPhone }" hflex="1" />
+				Cell Phone:
+				<textbox id="mobilePhone" value="@{person.mobilePhone }" hflex="1" />
+				Referred By:
+				<textbox id="referrer" hflex="1" />
+			</row>
+			<row spans="2,2,2,2">
+				Reason for visit today
+				<textbox id="reason" hflex="2" rows="2" />
+				<vbox>
+					Have you had accupunture before ?
+					<radiogroup>
+						<radio label="Yes" />
+						<radio label="No" />
+					</radiogroup>
+				</vbox>
+				<vbox>
+					Chinese herbal medicine?
+					<radiogroup>
+						<radio label="Yes" />
+						<radio label="No" />
+					</radiogroup>
+				</vbox>
+			</row>
+		</rows>
+	</grid>
+</zk>

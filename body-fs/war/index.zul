@@ -29,6 +29,8 @@
 						forward="onClick=main.onHandleClick" id="btnInventory" />
 					<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1"
 						forward="onClick=main.onHandleClick" id="btnPayment" />
+					<toolbarbutton label="New Patient" image="/img/user_add.png" hflex="1"
+						forward="onClick=main.onHandleClick" id="btnNPI" />
 				</vbox>
 			</div>
 		</west>

@@ -22,11 +22,14 @@ public class MainWindowComposer extends GenericAutowireComposer {
 
 	public void onHandleClick(ForwardEvent event) {
 		final String id = event.getOrigin().getTarget().getId();
-		LOGGER.debug("Event id: " + id);
+		LOGGER.error("Event id: " + id);
 		if (id.equals("btnCustomers")) {
-
+			return;
 		} else if (id.equals("btnScheduling")) {
 			xcontents.setSrc("/WEB-INF/views/calendar.zul");
+			return;
+		} else if (id.equals("btnNPI")) {
+			xcontents.setSrc("/WEB-INF/views/npi.zul");
 			return;
 		}
 	}

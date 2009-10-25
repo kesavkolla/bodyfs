@@ -31,6 +31,10 @@ public class Person {
 	private String lastName;
 
 	@Persistent
+	private String initial;
+
+	@Persistent
+	@Unique
 	private String email;
 
 	@Persistent
@@ -48,6 +52,9 @@ public class Person {
 	@Persistent
 	@Unique
 	private String SSN;
+
+	@Persistent
+	private String dateOfBirth;
 
 	@Persistent
 	private Key homeAddress;
@@ -83,6 +90,14 @@ public class Person {
 
 	public final void setLastName(final String lastName) {
 		this.lastName = lastName;
+	}
+
+	public final String getInitial() {
+		return initial;
+	}
+
+	public final void setInitial(final String initial) {
+		this.initial = initial;
 	}
 
 	public final String getEmail() {
@@ -136,6 +151,23 @@ public class Person {
 	 */
 	public final void setSSN(final String sSN) {
 		SSN = sSN;
+	}
+
+	/**
+	 * 
+	 * @return Date of birth
+	 */
+	public final String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	/**
+	 * Sets date of birth of the person
+	 * 
+	 * @param dateOfBirth
+	 */
+	public final void setDateOfBirth(final String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	/**
@@ -215,6 +247,8 @@ public class Person {
 			builder.append("id=").append(id).append(", ");
 		if (lastName != null)
 			builder.append("lastName=").append(lastName);
+		if (initial != null)
+			builder.append("initial=").append(initial);
 		builder.append("]");
 		return builder.toString();
 	}

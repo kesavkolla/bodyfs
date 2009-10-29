@@ -1,0 +1,52 @@
+<?page title="Welcome - Body Feng Shui, CA" contentType="text/html;charset=UTF-8"?>
+<zk >
+	<window border="normal" apply="com.bodyfs.ui.LoginWindow" title="Enter Login Information" width="400px" >
+		<div id="loginDiv" >
+			<grid>
+				<rows>
+					<row>
+						Name :
+						<textbox id="usertb" width="200px" value="" />
+					</row>
+					<row>
+						Password :
+						<textbox id="pwdtb" width="200px"
+							type="password" />
+					</row>
+				</rows>
+			</grid>			
+			<hbox pack="center" width="100%">
+				<button id="login" label="Login"/><a id="anchor">glogin</a>
+			</hbox>
+			<div>
+				<label id="msg" style="color:red"/>
+			</div>
+		</div>
+				
+	</window>
+	
+	<window id="win" title="Hi!" border="normal" width="200px" onOK="">    
+        <caption>        
+            <toolbarbutton label="Close" onClick="win.setVisible(false)"/>            
+        </caption>
+            <textbox id="openid_identifier" name="openid_identifier" width="60"></textbox>
+		    <button label="Send" forward=""></button>
+		    <a class="rpxnow" onclick=""
+   					href="https://body-fsamit.rpxnow.com/openid/v2/signin?token_url=localhost">
+  			Sign In
+</a>
+    </window>    
+        
+    <button label="Overlap" onClick="win.doOverlapped();"/>    
+    <button label="Popup" onClick="win.doPopup();"/>    
+    <button label="Modal" onClick="win.doModal();"/>    
+    <button label="Embed" onClick="win.doEmbedded();"/>    
+    <button label="Highlighted" onClick="win.doHighlighted();"/>
+    
+    <script type="text/javascript" src="https://rpxnow.com/openid/v2/widget"></script>
+	<script type="text/javascript">
+		RPXNOW.overlay = true;
+  		RPXNOW.language_preference = "en";
+	</script>
+	
+</zk>

@@ -44,6 +44,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>zkLoader</servlet-name>
+		<url-pattern>*.zuml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>zkLoader</servlet-name>
 		<url-pattern>*.zhtml</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -92,8 +96,28 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
-		<welcome-file>index.zul</welcome-file>
+		<welcome-file>login.zuml</welcome-file>
 	</welcome-file-list>
+	
+	<filter>
+	    <filter-name>openid-filter</filter-name>
+	    <filter-class>com.dyuproject.openid.OpenIdServletFilter</filter-class>
+	    <load-on-startup>1</load-on-startup>
+	      <init-param>
+	        <param-name>forwardUri</param-name>
+	        <param-value>/login.zuml</param-value>
+	      </init-param>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>openid-filter</filter-name>
+	    <url-pattern>*.zul</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+	    <filter-name>openid-filter</filter-name>
+	    <url-pattern>*.zuml</url-pattern>
+	</filter-mapping>
+	
 </web-app>
 
 

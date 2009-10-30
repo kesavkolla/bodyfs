@@ -1,0 +1,9 @@
+<?page title="Login" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="~/css/openid.css"?>
+<?script type="text/javascript" src="~/scripts/jquery.openid.min.js"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<window title="Login" border="normal" position="center" width="400px" mode="overlapped">
+		<n:form method="get" action="index.zul" id="openid"></n:form>
+	</window>
+	<n:script type="text/javascript">$(function() { jq('#openid').openid(); });</n:script>
+</zk>

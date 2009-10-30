@@ -11,6 +11,7 @@
 				<label
 					style="position:relative; top:-30px;padding-left: 50px; font-size:24px;color:#000000;font-weight:bold;"
 					value="BODY FENG SHUI" />
+				<label id="username" style="float:right;padding-top:50px;padding-right:20px">Kesav Kolla</label>
 			</div>
 		</north>
 		<west title="Action Menu" size="170px" flex="true" splittable="true" minsize="150" maxsize="500"

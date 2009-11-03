@@ -1,9 +1,10 @@
 <!-- $Id$ -->
-<?page title="Body Feng Shui" contentType="text/html;charset=UTF-8"?>
+<?page title="Body Feng Shui" contentType="text/html;charset=UTF-8" id="index"?>
 <?link  rel="stylesheet" type="text/css" href="~./zul/css/ext.css.dsp"?>
 <?script content="jq.IE6_ALPHAFIX=/24x24.png|32x32.png|48x48.png|128x128.png|ButtonBlue.png|ButtonGray.png|small.png|small-sel.png|normal.png|normal-sel.png|large.png|large-sel.png|Logo.png/;"?>
+<?script src="~/scripts/jquery.ufvalidator.1.0.1.min.js" ?>
 <?meta name="keywords" content="Body Feng Shui, Chinese Medicine, Belmont" ?>
-<zk xmlns:x="http://www.w3.org/1999/xhtml">
+<zk>
 	<borderlayout id="main" style="background:#dd0000;" apply="com.bodyfs.ui.MainWindowComposer">
 		<north size="100px" border="0" style="background:#dd0000;background:transparent url('/img/category-bg.png')">
 			<div>

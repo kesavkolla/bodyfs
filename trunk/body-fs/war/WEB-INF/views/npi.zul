@@ -1,7 +1,12 @@
-<?page title="New Patient Intake" contentType="text/html;charset=UTF-8"?>
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi" complete="true"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation">
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<style>
+		.form .error-input, .form .error-both .input, .form .error-same .input { background-color:#FFEFEF;
+		border-color:#BB6666; color:#660000; } .form .error-div { float:right; margin:7px 10px 0 0; color:#935;
+		font-size:10px; }
+	</style>
 	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer">
 		<columns>
 			<column width="100px" />
@@ -16,18 +21,20 @@
 		<rows>
 			<row>
 				First Name:
-				<textbox id="firstName" value="@{person.firstName }" constraint="no empty" maxlength="100" hflex="1" />
+				<textbox id="firstName" value="@{person.firstName }" constraint="no empty" maxlength="100" hflex="1"
+					zclass="req-string" />
 				Initial:
 				<textbox id="initial" value="@{person.initial}" maxlength="100" hflex="1" />
-				SSN:
-				<textbox id="ssn" value="@{person.SSN }" constraint="no empty" maxlength="11" hflex="1" />
+				LastName:
+				<textbox id="lastName" value="@{person.lastName}" constraint="no empty" maxlength="100" hflex="1" />
+
 				Birthdate:
 				<datebox id="dob" value="@{person.dateOfBirth }" constraint="no empty,no future,no today"
 					format="MM/dd/yyyy" hflex="1" />
 			</row>
 			<row spans=",,,,,,2">
-				LastName:
-				<textbox id="lastName" value="@{person.lastName}" constraint="no empty" maxlength="100" hflex="1" />
+				SSN:
+				<textbox id="ssn" value="@{person.SSN }" constraint="no empty" maxlength="11" hflex="1" />
 				Marital Status:
 				<checkbox label="Married" checked="@{person.married }" />
 				Gender:
@@ -83,6 +90,56 @@
 					</radiogroup>
 				</vbox>
 			</row>
+			<row spans="4,4">
+				How loang have you had this condition?
+				<textbox hflex="1" />
+			</row>
+			<row spans="2,2,4">
+				Is it getting worse?
+				<textbox hflex="1" />
+				<hbox hflex="1">
+					Does it bother your
+					<checkbox label="Sleep" />
+					<checkbox label="Work" />
+					<checkbox label="Other" />
+					<textbox hflex="1" />
+				</hbox>
+			</row>
+			<row spans="2,6">
+				What seemed to be the initial cause?
+				<textbox rows="3" cols="40" />
+			</row>
+			<row spans="2,6">
+				What seems to make it better?
+				<textbox rows="3" cols="40" />
+			</row>
+			<row spans="2,6">
+				What seems to make it worse?
+				<textbox rows="3" cols="40" />
+			</row>
+			<row spans="2,2,2,2">
+				Are you under the care of physician now?
+				<radiogroup hflex="1">
+					<radio label="Yes" />
+					<radio label="No" />
+				</radiogroup>
+				If Yes, for what?
+				<textbox hflex="1" />
+			</row>
+			<row spans="2,2,2,2">
+				Physician's name
+				<textbox hflex="1" />
+				Physician's phone
+				<textbox hflex="1" />
+			</row>
+			<row spans="2,4">
+				Other concurrent therapies
+				<textbox rows="3" cols="40" />
+			</row>
 		</rows>
 	</grid>
+	<hbox width="100%" pack="end">
+		<div id="errorDiv1" />
+		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext" />
+	</hbox>
 </zk>

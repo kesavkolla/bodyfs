@@ -1,0 +1,187 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi2"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" />
+	<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Alcohol" />
+					<checkbox label="Tobacco" />
+				</vbox>
+				<vbox>
+					<checkbox label="Marijuana" />
+					<checkbox label="Drugs" />
+				</vbox>
+				<vbox>
+					<checkbox label="Stress" />
+					<checkbox label="Occupational hazards" />
+				</vbox>
+				<vbox>
+					Regular Exercise
+					<hbox>
+						Type
+						<textbox />
+						Frequency
+						<textbox />
+					</hbox>
+					<hbox>
+						Type
+						<textbox />
+						Frequency
+						<textbox />
+					</hbox>
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="General Symptoms" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Poor appetite" />
+					<checkbox label="Heavy appetite" />
+					<checkbox label="Strongly like cold drinks" />
+					<checkbox label="Strongly like hot drinks" />
+					<checkbox label="Recent weight loss/gain" />
+				</vbox>
+				<vbox>
+					<checkbox label="Poor Sleep" />
+					<checkbox label="Heavy sleep" />
+					<checkbox label="Dream-disturbed sleep" />
+					<checkbox label="Fatigue" />
+					<checkbox label="Lack of Strength" />
+				</vbox>
+				<vbox>
+					<checkbox label="Bodily heaviness" />
+					<checkbox label="Cold hands or feet" />
+					<checkbox label="Poor circulation" />
+					<checkbox label="Shortness of breath" />
+					<checkbox label="Fever" />
+				</vbox>
+				<vbox>
+					<checkbox label="Chills" />
+					<checkbox label="Night sweat" />
+					<checkbox label="Sweat easily" />
+					<checkbox label="Muscle cramps" />
+					<checkbox label="Vertigo or dizziness" />
+				</vbox>
+				<vbox>
+					<checkbox label="Bleed or bruise easily" />
+					<checkbox label="Pecular taste (Describe)" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Head, Eyes, Ears, Nose, Throat" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Glasses (What age:   )" />
+					<checkbox label="Eye strain" />
+					<checkbox label="Eye pain" />
+					<checkbox label="Red eyes" />
+					<checkbox label="Itchy eyes" />
+					<checkbox label="Spots in eyes" />
+					<checkbox label="Poor vision" />
+					<checkbox label="Blurred vision" />
+				</vbox>
+				<vbox>
+					<checkbox label="Night blindness" />
+					<checkbox label="Myopia or Presbyopia" />
+					<checkbox label="Glaucoma" />
+					<checkbox label="Cataracts" />
+					<checkbox label="Teeth problems" />
+					<checkbox label="Grinding teeth" />
+					<checkbox label="TMJ" />
+					<checkbox label="Facial pain" />
+				</vbox>
+				<vbox>
+					<checkbox label="Gum problems" />
+					<checkbox label="Sores on lips or tongue" />
+					<checkbox label="Dry mouth" />
+					<checkbox label="Excessive saliva" />
+					<checkbox label="Sinus problems" />
+					<checkbox label="Excessive phlegm Color:" />
+				</vbox>
+				<vbox>
+					<checkbox label="Recurrent sore throat" />
+					<checkbox label="Swollen glands" />
+					<checkbox label="Lumps in throat" />
+					<checkbox label="Enlarged thyroid" />
+					<checkbox label="Nosebleeds" />
+					<checkbox label="Ringing in ears (High or Low?)" />
+					<checkbox label="Poor hearing" />
+					<checkbox label="Earaches" />
+				</vbox>
+				<vbox>
+					<checkbox label="Headaches" />
+					<checkbox label="Migraines" />
+					<checkbox label="Concussions" />
+					Other head or neck problems
+					<textbox rows="3" hflex="1" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Respiratory" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Difficulty breathing when" />
+					lying down
+					<checkbox label="Shortness of breath" />
+				</vbox>
+				<vbox>
+					<checkbox label="Tight chest" />
+					<checkbox label="Asthama/wheezing" />
+					<checkbox label="Difficult inhalation? exhalation ?" />
+				</vbox>
+				<vbox>
+					<checkbox label="Cough" />
+					<checkbox label="Wet or Dry?" />
+					<checkbox label="Thick or thin?" />
+				</vbox>
+				<vbox>
+					Color of phlegm
+					<textbox rows="2" vflex="1" />
+				</vbox>
+				<vbox>
+					<checkbox label="Coughing up blood" />
+					<checkbox label="Pneumonia" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Cardiovascular" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="High blood pressure" />
+					<checkbox label="Blood clots" />
+				</vbox>
+				<vbox>
+					<checkbox label="Low blood pressure" />
+					<checkbox label="Fainting" />
+				</vbox>
+				<vbox>
+					<checkbox label="Chest pain" />
+					<checkbox label="Difficulty breathing" />
+				</vbox>
+				<vbox>
+					<checkbox label="Tachycardia" />
+					<checkbox label="Heart palpitations" />
+				</vbox>
+				<vbox>
+					<checkbox label="Phlebitis" />
+					<checkbox label="Irregular heartbeat" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<hbox width="100%" pack="end">
+		<button label="Prev" forward="onClick=npigrid.onPrev" />
+		<button label="Next" forward="onClick=npigrid.onNext" />
+	</hbox>
+</zk>

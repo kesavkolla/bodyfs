@@ -1,0 +1,195 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi1"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" />
+	<panel title="Health Insurance Info" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<grid fixedLayout="true" style="border:0px" height="100%">
+				<columns>
+					<column />
+					<column />
+					<column />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						Insurance Co. Name
+						<textbox hflex="1" />
+						Policy #
+						<textbox hflex="1" />
+					</row>
+					<row>
+						<vbox>
+							<label value="Address" />
+							<label value="City,State, Zip" />
+						</vbox>
+						<textbox rows="2" hflex="1" />
+						Phone
+						<textbox hflex="1" />
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<panel title="Family Medical History" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%" height="100%">
+				<vbox>
+					<checkbox label="Allergies (list)" />
+					<textbox />
+					<textbox />
+				</vbox>
+				<vbox>
+					<checkbox label="Arteriosclerosis" />
+					<checkbox label="Asthma" />
+					<checkbox label="Alcoholism" />
+				</vbox>
+				<vbox>
+					<checkbox label="Cancer (type)" />
+					<textbox />
+					<checkbox label="Depression" />
+				</vbox>
+				<vbox>
+					<checkbox label="Diabetes" />
+					<checkbox label="Heart disease" />
+					<checkbox label="High blood pressure" />
+				</vbox>
+				<vbox>
+					<checkbox label="Seizures" />
+					<checkbox label="Stroke" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Family Medical History" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			(Check any of the following conditions you currently have, or have had in past. Please also check if you
+			feel any of the following are significant part of your medical history.)
+			<hbox width="100%" height="100%">
+				<vbox>
+					<checkbox label="AIDS/HIV" />
+					<checkbox label="Alcoholism" />
+					<checkbox label="Allergies" />
+					<checkbox label="Appendicitis" />
+					<checkbox label="Arteriosclerosis" />
+					<checkbox label="Asthma" />
+					<checkbox label="Birth trauma" />
+					(your own birth)
+					<checkbox label="Cancer" />
+					<checkbox label="Chicken pox" />
+				</vbox>
+				<vbox>
+					<checkbox label="Diabetes" />
+					<checkbox label="Emphysema" />
+					<checkbox label="Epilepsy" />
+					<checkbox label="Goiter" />
+					<checkbox label="Gout" />
+					<checkbox label="Heart disease" />
+					<checkbox label="Hepatitis" />
+					<checkbox label="Herpes" />
+					<checkbox label="High blood pressure" />
+					<checkbox label="Measles" />
+				</vbox>
+				<vbox>
+					<checkbox label="Multiple Sclerosis" />
+					<checkbox label="Mumps" />
+					<checkbox label="Pacemaker" />
+					<checkbox label="Pleurisy" />
+					<checkbox label="Pneumonia" />
+					<checkbox label="Polio" />
+					<checkbox label="Rheumatic fever" />
+					<checkbox label="Scarlet fever" />
+					<checkbox label="Seizures" />
+					<checkbox label="Stroke" />
+				</vbox>
+				<vbox>
+					<checkbox label="Surgery (list)" />
+					<textbox rows="3" />
+					<checkbox label="Thyroid disorders" />
+					<checkbox label="Major trauma" />
+					(Car, fall, etc-list)
+					<textbox rows="3" />
+				</vbox>
+				<vbox>
+					<checkbox label="Tuberculosis" />
+					<checkbox label="Typhoid fever" />
+					<checkbox label="Ulcers" />
+					<checkbox label="Venereal disease" />
+					<checkbox label="Whooping cough" />
+					<checkbox label="Other (Specify)" />
+					<textbox rows="4" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Your Diet" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				Appetite
+				<vbox>
+					<checkbox label="Low" />
+					<checkbox label="High" />
+				</vbox>
+				<vbox>
+					<checkbox label="Coffee/Tea" />
+					<checkbox label="Soft Drinks/Fruit Juices" />
+				</vbox>
+				Protein Intake
+				<vbox>
+					<checkbox label="Low" />
+					<checkbox label="High" />
+				</vbox>
+				<vbox>
+					<checkbox label="Artificial" />
+					Sweeteners
+				</vbox>
+				<vbox>
+					<checkbox label="Sugar" />
+					<checkbox label="Salty foods" />
+				</vbox>
+				<vbox>
+					Thirst for water:
+					<hbox>
+						# glasses per day:
+						<textbox />
+					</hbox>
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Average Daily Menu" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					Morning
+					<textbox rows="3" hflex="1" />
+				</vbox>
+				<vbox>
+					Snack
+					<textbox rows="3" hflex="1" />
+				</vbox>
+				<vbox>
+					Noon
+					<textbox rows="3" hflex="1" />
+				</vbox>
+				<vbox>
+					Snack
+					<textbox rows="3" hflex="1" />
+				</vbox>
+				<vbox>
+					Evening
+					<textbox rows="3" hflex="1" />
+				</vbox>
+				<vbox>
+					Snack
+					<textbox rows="3" hflex="1" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<hbox width="100%" pack="end">
+		<button label="Prev" forward="onClick=npigrid.onPrev" />
+		<button label="Next" forward="onClick=npigrid.onNext" />
+	</hbox>
+</zk>

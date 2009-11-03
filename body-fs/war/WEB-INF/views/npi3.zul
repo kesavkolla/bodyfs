@@ -1,0 +1,197 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi3"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" />
+	<panel title="Gastrointestinal" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Nausea" />
+					<checkbox label="Vomiting" />
+					<checkbox label="Acid regurgitation" />
+					<checkbox label="Gas" />
+					<checkbox label="Hiccup" />
+					<checkbox label="Bloating" />
+					<checkbox label="Bad breath" />
+				</vbox>
+				<vbox>
+					<checkbox label="Diarrhea" />
+					<checkbox label="Constipation" />
+					<checkbox label="Black stools" />
+					<checkbox label="Bloody stools" />
+					<checkbox label="Mucous in stools" />
+					<checkbox label="Henorrhoid" />
+					<checkbox label="Itchy anus" />
+				</vbox>
+				<vbox>
+					<checkbox label="Intestinal pain or cramping" />
+					<checkbox label="Burning anus" />
+					<checkbox label="Rectal pain" />
+					<checkbox label="Anal fissures" />
+					<checkbox label="Laxative use" />
+					<hbox>
+						What kind?Depression
+						<textbox />
+					</hbox>
+					<hbox>
+						How often?
+						<textbox />
+					</hbox>
+				</vbox>
+				<vbox>
+					Bowel movements:
+
+					<hbox>
+						Frequency
+						<textbox />
+					</hbox>
+					<hbox>
+						Color
+						<textbox />
+					</hbox>
+				</vbox>
+				<vbox>
+
+
+					<hbox>
+						Texture/form
+						<textbox />
+					</hbox>
+					<hbox>
+						Odor
+						<textbox />
+					</hbox>
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Musculoskeletal" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Neck/shoulder pain" />
+					<checkbox label="Muscle pain" />
+				</vbox>
+				<vbox>
+					<checkbox label="Upper back pain" />
+					<checkbox label="Low back pain" />
+				</vbox>
+				<vbox>
+					<checkbox label="Joint pain" />
+					<checkbox label="Rib pain" />
+				</vbox>
+				<vbox>
+					<checkbox label="Limited range of motion" />
+					<checkbox label="Limited use" />
+				</vbox>
+				<vbox>
+					Other(Describe)
+					<textbox />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Skin and Hair" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Rashes" />
+					<checkbox label="Hives" />
+					<checkbox label="Ulcerations" />
+				</vbox>
+				<vbox>
+					<checkbox label="Eczema" />
+					<checkbox label="Psoriasis" />
+					<checkbox label="Acne" />
+				</vbox>
+				<vbox>
+					<checkbox label="Dandruff" />
+					<checkbox label="Itching" />
+					<checkbox label="Hair loss" />
+				</vbox>
+				<vbox>
+					<checkbox label="Change in hair/skin texture" />
+					<checkbox label="Fungal infections" />
+				</vbox>
+				<vbox>
+					Other hair or skin problems
+					<textbox rows="2" hflex="1" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Neuropsychological" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Seizures" />
+					<checkbox label="Numbness" />
+					<checkbox label="Tics" />
+				</vbox>
+				<vbox>
+					<checkbox label="Poor memory" />
+					<checkbox label="Depression" />
+					<checkbox label="Anxiety" />
+				</vbox>
+				<vbox>
+					<checkbox label="Irritability" />
+					<checkbox label="Easily stressed" />
+					<checkbox label="Abuse survivor" />
+				</vbox>
+				<vbox>
+					<checkbox label="Considered/attempted" />
+					suicide
+					<checkbox label="Seeing a therapist" />
+				</vbox>
+				<vbox>
+					Other (Specify)
+					<textbox rows="2" hflex="1" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Genitourinary" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Pain on urination" />
+					<checkbox label="Frequent urination" />
+					<checkbox label="Urgent urination" />
+				</vbox>
+				<vbox>
+					<checkbox label="Blood in urine" />
+					<checkbox label="Unable to hold urinne" />
+					<checkbox label="Incomplete urination" />
+				</vbox>
+				<vbox>
+					<checkbox label="Venereal disease" />
+					<checkbox label="Bedwetting" />
+					<checkbox label="Wake to urinate" />
+				</vbox>
+				<vbox>
+					<checkbox label="Increased libido" />
+					<checkbox label="Decreased libido" />
+					<checkbox label="Kidney stone" />
+				</vbox>
+				<vbox>
+					<checkbox label="Impotence" />
+					<checkbox label="Premature ejaculation" />
+					<checkbox label="Nocturnal emission" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Gynecology" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<hbox width="100%">
+				<vbox>
+					<checkbox label="Age menses began" />
+				</vbox>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<hbox width="100%" pack="end">
+		<button label="Prev" forward="onClick=npigrid.onPrev" />
+	</hbox>
+</zk>

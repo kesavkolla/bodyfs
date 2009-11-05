@@ -1,3 +1,5 @@
+/* $Id
+ */
 package com.bodyfs.ui.listener;
 
 import java.util.Map;
@@ -13,6 +15,12 @@ import com.dyuproject.openid.ext.AxSchemaExtension;
 import com.dyuproject.openid.ext.SRegExtension;
 import com.dyuproject.util.http.UrlEncodedParameterMap;
 
+/**
+ * This class initializes the OpenID plugin
+ * 
+ * @author kesav
+ * 
+ */
 public class OpenIdLoaderListener implements ServletContextListener {
 
 	@Override

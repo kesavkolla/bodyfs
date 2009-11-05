@@ -5,18 +5,23 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
-import org.zkoss.zk.ui.util.GenericAutowireComposer;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 
+import com.bodyfs.dao.IPageDAO;
+import com.bodyfs.model.Page;
 import com.dyuproject.openid.OpenIdUser;
 
-public class MainWindowComposer extends GenericAutowireComposer {
+public class MainWindowComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 7255967269134815134L;
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 
+	private IPageDAO pageDAO;
 	private Include xcontents;
 	private Label username;
 
@@ -25,12 +30,12 @@ public class MainWindowComposer extends GenericAutowireComposer {
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		final OpenIdUser user = (OpenIdUser) this.requestScope.get(OpenIdUser.ATTR_NAME);
-		LOGGER.error("A: " + user.getA());
-		LOGGER.error("Attributes: " + user.getAttributes());
-		LOGGER.error("Extensions:" + user.getExtensions());
 		final Map<String, String> userinfo = (Map<String, String>) user.getAttribute("info");
 		if (userinfo != null) {
 			username.setValue(userinfo.get("lastname") + ", " + userinfo.get("firstname"));
+		}
+		if (pageDAO == null) {
+			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		}
 	}
 
@@ -45,5 +50,21 @@ public class MainWindowComposer extends GenericAutowireComposer {
 			xcontents.setSrc("/WEB-INF/views/npi.zul");
 			return;
 		}
+	}
+
+	public void onBookmarkChange$main(final BookmarkEvent event) {
+		final String pageid = event.getBookmark();
+		LOGGER.debug("Navigated to bookmark: " + pageid);
+		if (pageid == null || pageid.equals("")) {
+			return;
+		}
+		final Page page = pageDAO.getById(pageid);
+		if (page == null) {
+			return;
+		}
+		LOGGER.debug("Navigating to : " + page.getPath());
+		xcontents.setSrc(page.getPath());
+		return;
+
 	}
 }

@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zul.Include;
@@ -16,15 +17,16 @@ import com.bodyfs.model.Person;
 public class NPIComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
+	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 	final Person person = new Person();
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
+		LOGGER.error("inside NPIComposer");
 		super.doAfterCompose(comp);
-		LOGGER.error("Inside NPI composer");
-		LOGGER.error("Page: " + comp.getPage());
+		this.desktop.setBookmark(page.getId());
 		this.page.setAttribute("person", person);
 	}
 
@@ -32,8 +34,12 @@ public class NPIComposer extends GenericAutowireComposer {
 		return sdf.format(Calendar.getInstance().getTime());
 	}
 
+	public void onBookmarkChange$main(final BookmarkEvent event) {
+	}
+
 	public void onNext(final ForwardEvent event) {
 		final String pageId = event.getPage().getId();
+		// this.desktop.setBookmark(pageId);
 		final Include xcontents = (Include) Path.getComponent("//index/xcontents");
 		System.out.println("Page Id: " + pageId);
 		if (pageId.equals("npi")) {

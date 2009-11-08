@@ -39,17 +39,20 @@ public class MainWindowComposer extends GenericForwardComposer {
 		}
 	}
 
-	public void onHandleClick(ForwardEvent event) {
-		final String id = event.getOrigin().getTarget().getId();
-		if (id.equals("btnCustomers")) {
-			return;
-		} else if (id.equals("btnScheduling")) {
-			xcontents.setSrc("/WEB-INF/views/calendar.zul");
-			return;
-		} else if (id.equals("btnNPI")) {
-			xcontents.setSrc("/WEB-INF/views/npi.zul");
+	public void onHandleClick(final ForwardEvent event) {
+		final String pageid = (String) event.getData();
+		if (pageid == null || pageid.equals("")) {
 			return;
 		}
+		final Page page = pageDAO.getById(pageid);
+		if (page == null) {
+			return;
+		}
+		xcontents.setSrc(page.getPath());
+		if (page.getTitle() != null) {
+			this.page.setTitle(page.getTitle());
+		}
+		this.desktop.setBookmark(page.getId());
 	}
 
 	public void onBookmarkChange$main(final BookmarkEvent event) {

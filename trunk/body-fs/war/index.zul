@@ -22,7 +22,7 @@
 					<toolbarbutton label="Customers" image="/img/user_group_colored.png" hflex="1"
 						forward="onClick=main.onHandleClick" id="btnCustomers" />
 					<toolbarbutton label="Scheduling" image="/img/ical.png" hflex="1"
-						forward="onClick=main.onHandleClick" id="btnScheduling" />
+						forward="onClick=main.onHandleClick(scheduler)" id="btnScheduling" />
 					<toolbarbutton label="Mail" image="/img/mail_check.png" hflex="1"
 						forward="onClick=main.onHandleClick" id="btnMail" />
 					<toolbarbutton label="Settings" image="/img/preferences.png" hflex="1"
@@ -32,7 +32,7 @@
 					<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1"
 						forward="onClick=main.onHandleClick" id="btnPayment" />
 					<toolbarbutton label="New Patient" image="/img/user_add.png" hflex="1"
-						forward="onClick=main.onHandleClick" id="btnNPI" />
+						forward="onClick=main.onHandleClick(npi)" id="btnNPI" />
 				</vbox>
 			</div>
 		</west>

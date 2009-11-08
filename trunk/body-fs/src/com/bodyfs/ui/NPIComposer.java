@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
@@ -7,26 +10,34 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
-import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
+import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 
+import com.bodyfs.dao.IPageDAO;
+import com.bodyfs.model.Page;
 import com.bodyfs.model.Person;
 
+/**
+ * 
+ * @author kesav
+ * 
+ */
 public class NPIComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
-	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 	final Person person = new Person();
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	private IPageDAO pageDAO;
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
-		LOGGER.error("inside NPIComposer");
 		super.doAfterCompose(comp);
-		this.desktop.setBookmark(page.getId());
+		if (pageDAO == null) {
+			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
+		}
 		this.page.setAttribute("person", person);
 	}
 
@@ -34,48 +45,17 @@ public class NPIComposer extends GenericAutowireComposer {
 		return sdf.format(Calendar.getInstance().getTime());
 	}
 
-	public void onBookmarkChange$main(final BookmarkEvent event) {
-	}
-
 	public void onNext(final ForwardEvent event) {
-		final String pageId = event.getPage().getId();
-		// this.desktop.setBookmark(pageId);
+		final String pageId = event.getData().toString();
 		final Include xcontents = (Include) Path.getComponent("//index/xcontents");
+		LOGGER.debug("Page Id: " + pageId);
 		System.out.println("Page Id: " + pageId);
-		if (pageId.equals("npi")) {
-			xcontents.setSrc("/WEB-INF/views/npi1.zul");
-			return;
-		}
-		if (pageId.equals("npi1")) {
-			xcontents.setSrc("/WEB-INF/views/npi2.zul");
-			return;
-		}
-		if (pageId.equals("npi2")) {
-			xcontents.setSrc("/WEB-INF/views/npi3.zul");
-			return;
-		}
+		final Page page = pageDAO.getById(pageId);
+		LOGGER.debug("Navigating to:" + page.getPath());
+		xcontents.setSrc(page.getPath());
 	}
 
-	public void onPrev(final ForwardEvent event) {
-		final String pageId = event.getPage().getId();
-		System.out.println("OnPrev: PageId " + pageId);
-		final Include xcontents = (Include) Path.getComponent("//index/xcontents");
-		System.out.println(xcontents);
-		if (pageId.equals("npi3")) {
-			xcontents.setSrc("/WEB-INF/views/npi2.zul");
-			return;
-		}
-		if (pageId.equals("npi2")) {
-			xcontents.setSrc("/WEB-INF/views/npi1.zul");
-			return;
-		}
-		if (pageId.equals("npi1")) {
-			xcontents.setSrc("/WEB-INF/views/npi.zul");
-			return;
-		}
-	}
-
-	public void saveNPI(final ForwardEvent event) {
+	public void onSaveNPI(final ForwardEvent event) {
 
 	}
 }

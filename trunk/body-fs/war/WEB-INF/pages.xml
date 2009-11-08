@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<!-- Main Page URLS -->
+	<page id="scheduler" title="Scheduler" path="/WEB-INF/views/calendar.zul" />
+	<!-- NPI Pages  -->
+	<page id="npi" title="NPI Form" path="/WEB-INF/views/npi.zul" />
+	<page id="npi1" title="NPI Form" path="/WEB-INF/views/npi1.zul" />
+	<page id="npi2" title="NPI Form" path="/WEB-INF/views/npi2.zul" />
+	<page id="npi3" title="NPI Form" path="/WEB-INF/views/npi3.zul" />
+
+</pages>

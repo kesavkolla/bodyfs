@@ -181,7 +181,7 @@
 		</panelchildren>
 	</panel>
 	<hbox width="100%" pack="end">
-		<button label="Prev" forward="onClick=npigrid.onPrev" />
-		<button label="Next" forward="onClick=npigrid.onNext" />
+		<button label="Prev" forward="onClick=npigrid.onNext(npi1)" />
+		<button label="Next" forward="onClick=npigrid.onNext(npi3)" />
 	</hbox>
 </zk>

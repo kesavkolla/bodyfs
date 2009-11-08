@@ -187,11 +187,61 @@
 			<hbox width="100%">
 				<vbox>
 					<checkbox label="Age menses began" />
+					<textbox />
+					Length of cycle(day1 to day1)
+				</vbox>
+				<vbox>
+					<checkbox label="Duration of flow" />
+					<textbox />
+					<checkbox label="Irregular periods" />
+					<checkbox label="Painful periods" />
+					<checkbox label="PMS" />
+				</vbox>
+				<vbox>
+					<checkbox label="Vaginal discharge" />
+					<hbox>
+						(color)
+						<textbox />
+					</hbox>
+					<checkbox label="Vaginal sores" />
+					<checkbox label="Vaginal odor" />
+					<checkbox label="Clots" />
+				</vbox>
+				<vbox>
+					<checkbox label="Breast lumps" />
+					<hbox>
+						# Pregnancies
+						<intbox />
+					</hbox>
+					<hbox>
+						# Live births
+						<intbox />
+					</hbox>
+					<hbox>
+						# Premature births
+						<intbox />
+					</hbox>
+					<hbox>
+						# Age ar menopause
+						<intbox />
+					</hbox>
+				</vbox>
+				<vbox>
+					Date of last PAP
+					<textbox />
+					Date last period began
+					<textbox />
 				</vbox>
 			</hbox>
 		</panelchildren>
 	</panel>
+	<panel title="Other" border="normal" style="margin-bottom:10px">
+		<panelchildren>
+			<textbox hflex="1" rows="4" />
+		</panelchildren>
+	</panel>
 	<hbox width="100%" pack="end">
-		<button label="Prev" forward="onClick=npigrid.onPrev" />
+		<button label="Prev" forward="onClick=npigrid.onNext(npi2)" />
+		<button label="Finish" forward="onClick=npigrid.onSaveNPI" />
 	</hbox>
 </zk>

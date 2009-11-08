@@ -62,7 +62,7 @@
 			</hbox>
 		</panelchildren>
 	</panel>
-	<panel title="Family Medical History" border="normal" style="margin-bottom:10px">
+	<panel title="Your Past Medical History" border="normal" style="margin-bottom:10px">
 		<panelchildren>
 			(Check any of the following conditions you currently have, or have had in past. Please also check if you
 			feel any of the following are significant part of your medical history.)
@@ -127,19 +127,23 @@
 		<panelchildren>
 			<hbox width="100%">
 				Appetite
-				<vbox>
-					<checkbox label="Low" />
-					<checkbox label="High" />
-				</vbox>
+				<radiogroup>
+					<vbox>
+						<radio label="Low" />
+						<radio label="High" />
+					</vbox>
+				</radiogroup>
 				<vbox>
 					<checkbox label="Coffee/Tea" />
 					<checkbox label="Soft Drinks/Fruit Juices" />
 				</vbox>
 				Protein Intake
-				<vbox>
-					<checkbox label="Low" />
-					<checkbox label="High" />
-				</vbox>
+				<radiogroup>
+					<vbox>
+						<radio label="Low" />
+						<radio label="High" />
+					</vbox>
+				</radiogroup>
 				<vbox>
 					<checkbox label="Artificial" />
 					Sweeteners
@@ -189,7 +193,7 @@
 		</panelchildren>
 	</panel>
 	<hbox width="100%" pack="end">
-		<button label="Prev" forward="onClick=npigrid.onPrev" />
-		<button label="Next" forward="onClick=npigrid.onNext" />
+		<button label="Prev" forward="onClick=npigrid.onNext(npi)" />
+		<button label="Next" forward="onClick=npigrid.onNext(npi2)" />
 	</hbox>
 </zk>

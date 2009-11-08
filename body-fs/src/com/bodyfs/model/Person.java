@@ -4,6 +4,7 @@
 package com.bodyfs.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -11,8 +12,6 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Unique;
-
-import com.google.appengine.api.datastore.Key;
 
 /**
  * This class represents person in the system. This class defines all
@@ -58,13 +57,7 @@ public class Person implements Serializable {
 	private String SSN;
 
 	@Persistent
-	private String dateOfBirth;
-
-	@Persistent
-	private Key homeAddress;
-
-	@Persistent
-	private Key businessAddress;
+	private Date dateOfBirth;
 
 	@Persistent
 	private PersonType personType;
@@ -161,7 +154,7 @@ public class Person implements Serializable {
 	 * 
 	 * @return Date of birth
 	 */
-	public final String getDateOfBirth() {
+	public final Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -170,43 +163,8 @@ public class Person implements Serializable {
 	 * 
 	 * @param dateOfBirth
 	 */
-	public final void setDateOfBirth(final String dateOfBirth) {
+	public final void setDateOfBirth(final Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-	}
-
-	/**
-	 * 
-	 * @return primary key of address object
-	 */
-	public final Key getHomeAddress() {
-		return homeAddress;
-	}
-
-	/**
-	 * Sets primary key of the home address
-	 * 
-	 * @param homeAddress
-	 */
-	public final void setHomeAddress(final Key homeAddress) {
-		this.homeAddress = homeAddress;
-	}
-
-	/**
-	 * 
-	 * @return primary key of the business address
-	 */
-	public final Key getBusinessAddress() {
-		return businessAddress;
-	}
-
-	/**
-	 * Sets primary key of address object for business address
-	 * 
-	 * @param businessAddress
-	 *            key of address object
-	 */
-	public final void setBusinessAddress(final Key businessAddress) {
-		this.businessAddress = businessAddress;
 	}
 
 	/**

@@ -30,28 +30,28 @@ public class Musculoskeletal implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean neckpain;
+	private Boolean neckpain;
 
 	@Persistent
-	private boolean musclepain;
+	private Boolean musclepain;
 
 	@Persistent
-	private boolean upperbackpain;
+	private Boolean upperbackpain;
 
 	@Persistent
-	private boolean lowbackpain;
+	private Boolean lowbackpain;
 
 	@Persistent
-	private boolean jointpain;
+	private Boolean jointpain;
 
 	@Persistent
-	private boolean ribpain;
+	private Boolean ribpain;
 
 	@Persistent
-	private boolean limitedrangeofmotion;
+	private Boolean limitedrangeofmotion;
 
 	@Persistent
-	private boolean limiteduse;
+	private Boolean limiteduse;
 
 	@Persistent
 	private String other;
@@ -75,67 +75,67 @@ public class Musculoskeletal implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isNeckpain() {
+	public final Boolean isNeckpain() {
 		return neckpain;
 	}
 
-	public final void setNeckpain(boolean neckpain) {
+	public final void setNeckpain(Boolean neckpain) {
 		this.neckpain = neckpain;
 	}
 
-	public final boolean isMusclepain() {
+	public final Boolean isMusclepain() {
 		return musclepain;
 	}
 
-	public final void setMusclepain(boolean musclepain) {
+	public final void setMusclepain(Boolean musclepain) {
 		this.musclepain = musclepain;
 	}
 
-	public final boolean isUpperbackpain() {
+	public final Boolean isUpperbackpain() {
 		return upperbackpain;
 	}
 
-	public final void setUpperbackpain(boolean upperbackpain) {
+	public final void setUpperbackpain(Boolean upperbackpain) {
 		this.upperbackpain = upperbackpain;
 	}
 
-	public final boolean isLowbackpain() {
+	public final Boolean isLowbackpain() {
 		return lowbackpain;
 	}
 
-	public final void setLowbackpain(boolean lowbackpain) {
+	public final void setLowbackpain(Boolean lowbackpain) {
 		this.lowbackpain = lowbackpain;
 	}
 
-	public final boolean isJointpain() {
+	public final Boolean isJointpain() {
 		return jointpain;
 	}
 
-	public final void setJointpain(boolean jointpain) {
+	public final void setJointpain(Boolean jointpain) {
 		this.jointpain = jointpain;
 	}
 
-	public final boolean isRibpain() {
+	public final Boolean isRibpain() {
 		return ribpain;
 	}
 
-	public final void setRibpain(boolean ribpain) {
+	public final void setRibpain(Boolean ribpain) {
 		this.ribpain = ribpain;
 	}
 
-	public final boolean isLimitedrangeofmotion() {
+	public final Boolean isLimitedrangeofmotion() {
 		return limitedrangeofmotion;
 	}
 
-	public final void setLimitedrangeofmotion(boolean limitedrangeofmotion) {
+	public final void setLimitedrangeofmotion(Boolean limitedrangeofmotion) {
 		this.limitedrangeofmotion = limitedrangeofmotion;
 	}
 
-	public final boolean isLimiteduse() {
+	public final Boolean isLimiteduse() {
 		return limiteduse;
 	}
 
-	public final void setLimiteduse(boolean limiteduse) {
+	public final void setLimiteduse(Boolean limiteduse) {
 		this.limiteduse = limiteduse;
 	}
 
@@ -153,6 +153,43 @@ public class Musculoskeletal implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (jointpain != null) {
+			return true;
+		}
+		if (limitedrangeofmotion != null) {
+			return true;
+		}
+		if (limiteduse != null) {
+			return true;
+		}
+		if (lowbackpain != null) {
+			return true;
+		}
+		if (musclepain != null) {
+			return true;
+		}
+		if (neckpain != null) {
+			return true;
+		}
+		if (other != null) {
+			return true;
+		}
+		if (ribpain != null) {
+			return true;
+		}
+		if (upperbackpain != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

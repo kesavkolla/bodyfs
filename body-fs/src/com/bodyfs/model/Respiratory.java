@@ -30,25 +30,25 @@ public class Respiratory implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean difficultybreathingwhen;
+	private Boolean difficultybreathingwhen;
 
 	@Persistent
-	private boolean lyingdown;
+	private Boolean lyingdown;
 
 	@Persistent
-	private boolean shortnessofbreath;
+	private Boolean shortnessofbreath;
 
 	@Persistent
-	private boolean tightchest;
+	private Boolean tightchest;
 
 	@Persistent
-	private boolean asthamawheezing;
+	private Boolean asthamawheezing;
 
 	@Persistent
-	private boolean difficultinhalation;
+	private Boolean difficultinhalation;
 
 	@Persistent
-	private boolean cough;
+	private Boolean cough;
 
 	@Persistent
 	private String wetorDry;
@@ -57,13 +57,13 @@ public class Respiratory implements Serializable {
 	private String thickorthin;
 
 	@Persistent
-	private boolean colorofphlegm;
+	private Boolean colorofphlegm;
 
 	@Persistent
-	private boolean coughingupblood;
+	private Boolean coughingupblood;
 
 	@Persistent
-	private boolean pneumonia;
+	private Boolean pneumonia;
 
 	@Persistent
 	private Date createDate = new Date(System.currentTimeMillis());
@@ -84,59 +84,59 @@ public class Respiratory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isDifficultybreathingwhen() {
+	public final Boolean isDifficultybreathingwhen() {
 		return difficultybreathingwhen;
 	}
 
-	public final void setDifficultybreathingwhen(boolean difficultybreathingwhen) {
+	public final void setDifficultybreathingwhen(Boolean difficultybreathingwhen) {
 		this.difficultybreathingwhen = difficultybreathingwhen;
 	}
 
-	public final boolean isLyingdown() {
+	public final Boolean isLyingdown() {
 		return lyingdown;
 	}
 
-	public final void setLyingdown(boolean lyingdown) {
+	public final void setLyingdown(Boolean lyingdown) {
 		this.lyingdown = lyingdown;
 	}
 
-	public final boolean isShortnessofbreath() {
+	public final Boolean isShortnessofbreath() {
 		return shortnessofbreath;
 	}
 
-	public final void setShortnessofbreath(boolean shortnessofbreath) {
+	public final void setShortnessofbreath(Boolean shortnessofbreath) {
 		this.shortnessofbreath = shortnessofbreath;
 	}
 
-	public final boolean isTightchest() {
+	public final Boolean isTightchest() {
 		return tightchest;
 	}
 
-	public final void setTightchest(boolean tightchest) {
+	public final void setTightchest(Boolean tightchest) {
 		this.tightchest = tightchest;
 	}
 
-	public final boolean isAsthamawheezing() {
+	public final Boolean isAsthamawheezing() {
 		return asthamawheezing;
 	}
 
-	public final void setAsthamawheezing(boolean asthamawheezing) {
+	public final void setAsthamawheezing(Boolean asthamawheezing) {
 		this.asthamawheezing = asthamawheezing;
 	}
 
-	public final boolean isDifficultinhalation() {
+	public final Boolean isDifficultinhalation() {
 		return difficultinhalation;
 	}
 
-	public final void setDifficultinhalation(boolean difficultinhalation) {
+	public final void setDifficultinhalation(Boolean difficultinhalation) {
 		this.difficultinhalation = difficultinhalation;
 	}
 
-	public final boolean isCough() {
+	public final Boolean isCough() {
 		return cough;
 	}
 
-	public final void setCough(boolean cough) {
+	public final void setCough(Boolean cough) {
 		this.cough = cough;
 	}
 
@@ -156,27 +156,27 @@ public class Respiratory implements Serializable {
 		this.thickorthin = thickorthin;
 	}
 
-	public final boolean isColorofphlegm() {
+	public final Boolean isColorofphlegm() {
 		return colorofphlegm;
 	}
 
-	public final void setColorofphlegm(boolean colorofphlegm) {
+	public final void setColorofphlegm(Boolean colorofphlegm) {
 		this.colorofphlegm = colorofphlegm;
 	}
 
-	public final boolean isCoughingupblood() {
+	public final Boolean isCoughingupblood() {
 		return coughingupblood;
 	}
 
-	public final void setCoughingupblood(boolean coughingupblood) {
+	public final void setCoughingupblood(Boolean coughingupblood) {
 		this.coughingupblood = coughingupblood;
 	}
 
-	public final boolean isPneumonia() {
+	public final Boolean isPneumonia() {
 		return pneumonia;
 	}
 
-	public final void setPneumonia(boolean pneumonia) {
+	public final void setPneumonia(Boolean pneumonia) {
 		this.pneumonia = pneumonia;
 	}
 
@@ -186,6 +186,52 @@ public class Respiratory implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (asthamawheezing != null) {
+			return true;
+		}
+		if (colorofphlegm != null) {
+			return true;
+		}
+		if (cough != null) {
+			return true;
+		}
+		if (coughingupblood != null) {
+			return true;
+		}
+		if (difficultinhalation != null) {
+			return true;
+		}
+		if (difficultybreathingwhen != null) {
+			return true;
+		}
+		if (lyingdown != null) {
+			return true;
+		}
+		if (pneumonia != null) {
+			return true;
+		}
+		if (shortnessofbreath != null) {
+			return true;
+		}
+		if (thickorthin != null) {
+			return true;
+		}
+		if (tightchest != null) {
+			return true;
+		}
+		if (wetorDry != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

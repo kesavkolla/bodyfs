@@ -52,45 +52,47 @@
 			</row>
 			<row valign="top">
 				Address
-				<textbox id="line1" hflex="1" />
+				<textbox value="@{ginfo.street, save-when='btnNext.onClick' }" hflex="1" />
 				City:
-				<textbox id="city" hflex="1" />
+				<textbox value="@{ginfo.city, save-when='btnNext.onClick' }" hflex="1" />
 				State:
-				<textbox id="state" hflex="1" />
+				<textbox value="@{ginfo.state, save-when='btnNext.onClick' }" hflex="1" />
 				Zipcode:
-				<textbox id="zip" hflex="1" />
+				<textbox value="@{ginfo.zipcode, save-when='btnNext.onClick' }" hflex="1" />
 			</row>
 			<row spans=",,,,2,2">
 				Height:
-				<textbox id="height" hflex="1" />
+				<textbox value="@{ginfo.height, save-when='btnNext.onClick' }" hflex="1" />
 				Weight:
-				<textbox id="weight" hflex="1" />
+				<textbox value="@{ginfo.weight, save-when='btnNext.onClick' }" hflex="1" />
 				Emergency Contact's Name &amp; Phone
-				<textbox id="emergency" hflex="1" />
+				<textbox value="@{ginfo.emergencycontact, save-when='btnNext.onClick' }" hflex="1" />
 			</row>
 			<row>
 				Home Phone:
-				<textbox id="homePhone" value="@{person.homePhone, save-when='btnNext.onClick' }" hflex="1" />
+				<textbox value="@{ginfo.homePhone, save-when='btnNext.onClick' }" hflex="1" />
 				Work Phone:
-				<textbox id="workPhone" value="@{person.workPhone, save-when='btnNext.onClick' }" hflex="1" />
+				<textbox value="@{ginfo.workPhone, save-when='btnNext.onClick' }" hflex="1" />
 				Cell Phone:
-				<textbox id="mobilePhone" value="@{person.mobilePhone, save-when='btnNext.onClick' }" hflex="1" />
+				<textbox value="@{ginfo.cellPhone, save-when='btnNext.onClick' }" hflex="1" />
 				Referred By:
-				<textbox id="referrer" hflex="1" />
+				<textbox value="@{ginfo.referredBy, save-when='btnNext.onClick' }" hflex="1" />
 			</row>
 			<row spans="2,2,2,2">
 				Reason for visit today
-				<textbox id="reason" hflex="2" rows="2" />
+				<textbox value="@{ginfo.reasonforvisit, save-when='btnNext.onClick' }" hflex="2" rows="2" />
 				<vbox>
 					Have you had accupunture before ?
-					<radiogroup>
+					<radiogroup
+						selectedIndex="@{ginfo.accupunture, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
 						<radio label="Yes" />
 						<radio label="No" />
 					</radiogroup>
 				</vbox>
 				<vbox>
 					Chinese herbal medicine?
-					<radiogroup>
+					<radiogroup
+						selectedIndex="@{ginfo.chineseherbalmedicine, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
 						<radio label="Yes" />
 						<radio label="No" />
 					</radiogroup>
@@ -98,54 +100,56 @@
 			</row>
 			<row spans="2,2">
 				How loang have you had this condition?
-				<textbox hflex="1" />
+				<textbox value="@{ginfo.condition, save-when='btnNext.onClick' }" hflex="1" />
 			</row>
 			<row spans="2,2,4">
 				Is it getting worse?
 				<textbox hflex="1" />
 				<hbox hflex="1">
 					Does it bother your
-					<checkbox label="Sleep" />
-					<checkbox label="Work" />
-					<checkbox label="Other" />
-					<textbox hflex="1" />
+					<checkbox label="Sleep" checked="@{ginfo.botherSleep, save-when='btnNext.onClick' }" />
+					<checkbox label="Work" checked="@{ginfo.botherWork, save-when='btnNext.onClick' }" />
+					<checkbox label="Other" checked="@{ginfo.botherOther, save-when='btnNext.onClick' }" />
+					<textbox hflex="1" value="@{ginfo.botherReason, save-when='btnNext.onClick' }" />
 				</hbox>
 			</row>
 			<row spans="2,6">
 				What seemed to be the initial cause?
-				<textbox rows="3" cols="40" />
+				<textbox rows="3" cols="40" value="@{ginfo.initialcause, save-when='btnNext.onClick' }" />
 			</row>
 			<row spans="2,6">
 				What seems to make it better?
-				<textbox rows="3" cols="40" />
+				<textbox rows="3" cols="40" value="@{ginfo.makeitbetter, save-when='btnNext.onClick' }" />
 			</row>
 			<row spans="2,6">
 				What seems to make it worse?
-				<textbox rows="3" cols="40" />
+				<textbox rows="3" cols="40" value="@{ginfo.makeitworse, save-when='btnNext.onClick' }" />
 			</row>
 			<row spans="2,2,2,2">
 				Are you under the care of physician now?
-				<radiogroup hflex="1">
+				<radiogroup hflex="1"
+					selectedIndex="@{ginfo.physiciancare, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
 					<radio label="Yes" />
 					<radio label="No" />
 				</radiogroup>
 				If Yes, for what?
-				<textbox hflex="1" />
+				<textbox hflex="1" value="@{ginfo.carereason, save-when='btnNext.onClick' }" />
 			</row>
 			<row spans="2,2,2,2">
 				Physician's name
-				<textbox hflex="1" />
+				<textbox hflex="1" value="@{ginfo.physicianname, save-when='btnNext.onClick' }" />
 				Physician's phone
-				<textbox hflex="1" />
+				<textbox hflex="1" value="@{ginfo.physicianphone, save-when='btnNext.onClick' }" />
 			</row>
 			<row spans="2,4">
 				Other concurrent therapies
-				<textbox rows="3" cols="40" />
+				<textbox rows="3" cols="40" value="@{ginfo.othertherapies, save-when='btnNext.onClick' }" />
 			</row>
 		</rows>
 	</grid>
 	<hbox width="100%" pack="end">
 		<div id="errorDiv1" />
+		<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" />
 		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi1)" />
 	</hbox>
 </zk>

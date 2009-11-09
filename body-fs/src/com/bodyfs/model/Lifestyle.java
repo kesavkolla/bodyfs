@@ -30,22 +30,22 @@ public class Lifestyle implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean alcohol;
+	private Boolean alcohol;
 
 	@Persistent
-	private boolean tobacco;
+	private Boolean tobacco;
 
 	@Persistent
-	private boolean marijuana;
+	private Boolean marijuana;
 
 	@Persistent
-	private boolean drugs;
+	private Boolean drugs;
 
 	@Persistent
-	private boolean stress;
+	private Boolean stress;
 
 	@Persistent
-	private boolean occupationalhazards;
+	private Boolean occupationalhazards;
 
 	@Persistent
 	private String exercise1Type;
@@ -78,51 +78,51 @@ public class Lifestyle implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isAlcohol() {
+	public final Boolean isAlcohol() {
 		return alcohol;
 	}
 
-	public final void setAlcohol(boolean alcohol) {
+	public final void setAlcohol(Boolean alcohol) {
 		this.alcohol = alcohol;
 	}
 
-	public final boolean isTobacco() {
+	public final Boolean isTobacco() {
 		return tobacco;
 	}
 
-	public final void setTobacco(boolean tobacco) {
+	public final void setTobacco(Boolean tobacco) {
 		this.tobacco = tobacco;
 	}
 
-	public final boolean isMarijuana() {
+	public final Boolean isMarijuana() {
 		return marijuana;
 	}
 
-	public final void setMarijuana(boolean marijuana) {
+	public final void setMarijuana(Boolean marijuana) {
 		this.marijuana = marijuana;
 	}
 
-	public final boolean isDrugs() {
+	public final Boolean isDrugs() {
 		return drugs;
 	}
 
-	public final void setDrugs(boolean drugs) {
+	public final void setDrugs(Boolean drugs) {
 		this.drugs = drugs;
 	}
 
-	public final boolean isStress() {
+	public final Boolean isStress() {
 		return stress;
 	}
 
-	public final void setStress(boolean stress) {
+	public final void setStress(Boolean stress) {
 		this.stress = stress;
 	}
 
-	public final boolean isOccupationalhazards() {
+	public final Boolean isOccupationalhazards() {
 		return occupationalhazards;
 	}
 
-	public final void setOccupationalhazards(boolean occupationalhazards) {
+	public final void setOccupationalhazards(Boolean occupationalhazards) {
 		this.occupationalhazards = occupationalhazards;
 	}
 
@@ -165,4 +165,45 @@ public class Lifestyle implements Serializable {
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (alcohol != null) {
+			return true;
+		}
+		if (drugs != null) {
+			return true;
+		}
+		if (exercise1Type != null) {
+			return true;
+		}
+		if (exercise2Type != null) {
+			return true;
+		}
+		if (freq1 != null) {
+			return true;
+		}
+		if (freq2 != null) {
+			return true;
+		}
+		if (marijuana != null) {
+			return true;
+		}
+		if (occupationalhazards != null) {
+			return true;
+		}
+		if (stress != null) {
+			return true;
+		}
+		if (tobacco != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

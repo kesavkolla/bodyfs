@@ -112,4 +112,26 @@ public class HealthInsurance implements Serializable {
 		this.createDate = createDate;
 	}
 
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (address != null) {
+			return true;
+		}
+		if (insuranceName != null) {
+			return true;
+		}
+		if (phone != null) {
+			return true;
+		}
+		if (policy != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

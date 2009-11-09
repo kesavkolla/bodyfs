@@ -30,37 +30,37 @@ public class SkinHair implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean rashes;
+	private Boolean rashes;
 
 	@Persistent
-	private boolean hives;
+	private Boolean hives;
 
 	@Persistent
-	private boolean ulcerations;
+	private Boolean ulcerations;
 
 	@Persistent
-	private boolean eczema;
+	private Boolean eczema;
 
 	@Persistent
-	private boolean psoriasis;
+	private Boolean psoriasis;
 
 	@Persistent
-	private boolean acne;
+	private Boolean acne;
 
 	@Persistent
-	private boolean dandruff;
+	private Boolean dandruff;
 
 	@Persistent
-	private boolean itching;
+	private Boolean itching;
 
 	@Persistent
-	private boolean hairloss;
+	private Boolean hairloss;
 
 	@Persistent
-	private boolean skintexture;
+	private Boolean skintexture;
 
 	@Persistent
-	private boolean fungalinfections;
+	private Boolean fungalinfections;
 
 	@Persistent
 	private String other;
@@ -84,91 +84,91 @@ public class SkinHair implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isRashes() {
+	public final Boolean isRashes() {
 		return rashes;
 	}
 
-	public final void setRashes(boolean rashes) {
+	public final void setRashes(Boolean rashes) {
 		this.rashes = rashes;
 	}
 
-	public final boolean isHives() {
+	public final Boolean isHives() {
 		return hives;
 	}
 
-	public final void setHives(boolean hives) {
+	public final void setHives(Boolean hives) {
 		this.hives = hives;
 	}
 
-	public final boolean isUlcerations() {
+	public final Boolean isUlcerations() {
 		return ulcerations;
 	}
 
-	public final void setUlcerations(boolean ulcerations) {
+	public final void setUlcerations(Boolean ulcerations) {
 		this.ulcerations = ulcerations;
 	}
 
-	public final boolean isEczema() {
+	public final Boolean isEczema() {
 		return eczema;
 	}
 
-	public final void setEczema(boolean eczema) {
+	public final void setEczema(Boolean eczema) {
 		this.eczema = eczema;
 	}
 
-	public final boolean isPsoriasis() {
+	public final Boolean isPsoriasis() {
 		return psoriasis;
 	}
 
-	public final void setPsoriasis(boolean psoriasis) {
+	public final void setPsoriasis(Boolean psoriasis) {
 		this.psoriasis = psoriasis;
 	}
 
-	public final boolean isAcne() {
+	public final Boolean isAcne() {
 		return acne;
 	}
 
-	public final void setAcne(boolean acne) {
+	public final void setAcne(Boolean acne) {
 		this.acne = acne;
 	}
 
-	public final boolean isDandruff() {
+	public final Boolean isDandruff() {
 		return dandruff;
 	}
 
-	public final void setDandruff(boolean dandruff) {
+	public final void setDandruff(Boolean dandruff) {
 		this.dandruff = dandruff;
 	}
 
-	public final boolean isItching() {
+	public final Boolean isItching() {
 		return itching;
 	}
 
-	public final void setItching(boolean itching) {
+	public final void setItching(Boolean itching) {
 		this.itching = itching;
 	}
 
-	public final boolean isHairloss() {
+	public final Boolean isHairloss() {
 		return hairloss;
 	}
 
-	public final void setHairloss(boolean hairloss) {
+	public final void setHairloss(Boolean hairloss) {
 		this.hairloss = hairloss;
 	}
 
-	public final boolean isSkintexture() {
+	public final Boolean isSkintexture() {
 		return skintexture;
 	}
 
-	public final void setSkintexture(boolean skintexture) {
+	public final void setSkintexture(Boolean skintexture) {
 		this.skintexture = skintexture;
 	}
 
-	public final boolean isFungalinfections() {
+	public final Boolean isFungalinfections() {
 		return fungalinfections;
 	}
 
-	public final void setFungalinfections(boolean fungalinfections) {
+	public final void setFungalinfections(Boolean fungalinfections) {
 		this.fungalinfections = fungalinfections;
 	}
 
@@ -186,6 +186,52 @@ public class SkinHair implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (acne != null) {
+			return true;
+		}
+		if (dandruff != null) {
+			return true;
+		}
+		if (eczema != null) {
+			return true;
+		}
+		if (fungalinfections != null) {
+			return true;
+		}
+		if (hairloss != null) {
+			return true;
+		}
+		if (hives != null) {
+			return true;
+		}
+		if (itching != null) {
+			return true;
+		}
+		if (other != null) {
+			return true;
+		}
+		if (psoriasis != null) {
+			return true;
+		}
+		if (rashes != null) {
+			return true;
+		}
+		if (skintexture != null) {
+			return true;
+		}
+		if (ulcerations != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

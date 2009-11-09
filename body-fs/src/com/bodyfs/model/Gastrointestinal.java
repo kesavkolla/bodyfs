@@ -30,61 +30,61 @@ public class Gastrointestinal implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean nausea;
+	private Boolean nausea;
 
 	@Persistent
-	private boolean vomiting;
+	private Boolean vomiting;
 
 	@Persistent
-	private boolean acidregurgitation;
+	private Boolean acidregurgitation;
 
 	@Persistent
-	private boolean gas;
+	private Boolean gas;
 
 	@Persistent
-	private boolean hiccup;
+	private Boolean hiccup;
 
 	@Persistent
-	private boolean bloating;
+	private Boolean bloating;
 
 	@Persistent
-	private boolean badbreath;
+	private Boolean badbreath;
 
 	@Persistent
-	private boolean diarrhea;
+	private Boolean diarrhea;
 
 	@Persistent
-	private boolean constipation;
+	private Boolean constipation;
 
 	@Persistent
-	private boolean blackstools;
+	private Boolean blackstools;
 
 	@Persistent
-	private boolean bloodystools;
+	private Boolean bloodystools;
 
 	@Persistent
-	private boolean mucousinstools;
+	private Boolean mucousinstools;
 
 	@Persistent
-	private boolean henorrhoid;
+	private Boolean henorrhoid;
 
 	@Persistent
-	private boolean itchyanus;
+	private Boolean itchyanus;
 
 	@Persistent
-	private boolean cramping;
+	private Boolean cramping;
 
 	@Persistent
-	private boolean burninganus;
+	private Boolean burninganus;
 
 	@Persistent
-	private boolean rectalpain;
+	private Boolean rectalpain;
 
 	@Persistent
-	private boolean analfissures;
+	private Boolean analfissures;
 
 	@Persistent
-	private boolean laxativeusel;
+	private Boolean laxativeusel;
 
 	@Persistent
 	private String depression;
@@ -123,155 +123,155 @@ public class Gastrointestinal implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isNausea() {
+	public final Boolean isNausea() {
 		return nausea;
 	}
 
-	public final void setNausea(boolean nausea) {
+	public final void setNausea(Boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public final boolean isVomiting() {
+	public final Boolean isVomiting() {
 		return vomiting;
 	}
 
-	public final void setVomiting(boolean vomiting) {
+	public final void setVomiting(Boolean vomiting) {
 		this.vomiting = vomiting;
 	}
 
-	public final boolean isAcidregurgitation() {
+	public final Boolean isAcidregurgitation() {
 		return acidregurgitation;
 	}
 
-	public final void setAcidregurgitation(boolean acidregurgitation) {
+	public final void setAcidregurgitation(Boolean acidregurgitation) {
 		this.acidregurgitation = acidregurgitation;
 	}
 
-	public final boolean isGas() {
+	public final Boolean isGas() {
 		return gas;
 	}
 
-	public final void setGas(boolean gas) {
+	public final void setGas(Boolean gas) {
 		this.gas = gas;
 	}
 
-	public final boolean isHiccup() {
+	public final Boolean isHiccup() {
 		return hiccup;
 	}
 
-	public final void setHiccup(boolean hiccup) {
+	public final void setHiccup(Boolean hiccup) {
 		this.hiccup = hiccup;
 	}
 
-	public final boolean isBloating() {
+	public final Boolean isBloating() {
 		return bloating;
 	}
 
-	public final void setBloating(boolean bloating) {
+	public final void setBloating(Boolean bloating) {
 		this.bloating = bloating;
 	}
 
-	public final boolean isBadbreath() {
+	public final Boolean isBadbreath() {
 		return badbreath;
 	}
 
-	public final void setBadbreath(boolean badbreath) {
+	public final void setBadbreath(Boolean badbreath) {
 		this.badbreath = badbreath;
 	}
 
-	public final boolean isDiarrhea() {
+	public final Boolean isDiarrhea() {
 		return diarrhea;
 	}
 
-	public final void setDiarrhea(boolean diarrhea) {
+	public final void setDiarrhea(Boolean diarrhea) {
 		this.diarrhea = diarrhea;
 	}
 
-	public final boolean isConstipation() {
+	public final Boolean isConstipation() {
 		return constipation;
 	}
 
-	public final void setConstipation(boolean constipation) {
+	public final void setConstipation(Boolean constipation) {
 		this.constipation = constipation;
 	}
 
-	public final boolean isBlackstools() {
+	public final Boolean isBlackstools() {
 		return blackstools;
 	}
 
-	public final void setBlackstools(boolean blackstools) {
+	public final void setBlackstools(Boolean blackstools) {
 		this.blackstools = blackstools;
 	}
 
-	public final boolean isBloodystools() {
+	public final Boolean isBloodystools() {
 		return bloodystools;
 	}
 
-	public final void setBloodystools(boolean bloodystools) {
+	public final void setBloodystools(Boolean bloodystools) {
 		this.bloodystools = bloodystools;
 	}
 
-	public final boolean isMucousinstools() {
+	public final Boolean isMucousinstools() {
 		return mucousinstools;
 	}
 
-	public final void setMucousinstools(boolean mucousinstools) {
+	public final void setMucousinstools(Boolean mucousinstools) {
 		this.mucousinstools = mucousinstools;
 	}
 
-	public final boolean isHenorrhoid() {
+	public final Boolean isHenorrhoid() {
 		return henorrhoid;
 	}
 
-	public final void setHenorrhoid(boolean henorrhoid) {
+	public final void setHenorrhoid(Boolean henorrhoid) {
 		this.henorrhoid = henorrhoid;
 	}
 
-	public final boolean isItchyanus() {
+	public final Boolean isItchyanus() {
 		return itchyanus;
 	}
 
-	public final void setItchyanus(boolean itchyanus) {
+	public final void setItchyanus(Boolean itchyanus) {
 		this.itchyanus = itchyanus;
 	}
 
-	public final boolean isCramping() {
+	public final Boolean isCramping() {
 		return cramping;
 	}
 
-	public final void setCramping(boolean cramping) {
+	public final void setCramping(Boolean cramping) {
 		this.cramping = cramping;
 	}
 
-	public final boolean isBurninganus() {
+	public final Boolean isBurninganus() {
 		return burninganus;
 	}
 
-	public final void setBurninganus(boolean burninganus) {
+	public final void setBurninganus(Boolean burninganus) {
 		this.burninganus = burninganus;
 	}
 
-	public final boolean isRectalpain() {
+	public final Boolean isRectalpain() {
 		return rectalpain;
 	}
 
-	public final void setRectalpain(boolean rectalpain) {
+	public final void setRectalpain(Boolean rectalpain) {
 		this.rectalpain = rectalpain;
 	}
 
-	public final boolean isAnalfissures() {
+	public final Boolean isAnalfissures() {
 		return analfissures;
 	}
 
-	public final void setAnalfissures(boolean analfissures) {
+	public final void setAnalfissures(Boolean analfissures) {
 		this.analfissures = analfissures;
 	}
 
-	public final boolean isLaxativeusel() {
+	public final Boolean isLaxativeusel() {
 		return laxativeusel;
 	}
 
-	public final void setLaxativeusel(boolean laxativeusel) {
+	public final void setLaxativeusel(Boolean laxativeusel) {
 		this.laxativeusel = laxativeusel;
 	}
 
@@ -331,4 +331,88 @@ public class Gastrointestinal implements Serializable {
 		this.createDate = createDate;
 	}
 
+	/***
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (acidregurgitation != null) {
+			return true;
+		}
+		if (analfissures != null) {
+			return true;
+		}
+		if (badbreath != null) {
+			return true;
+		}
+		if (blackstools != null) {
+			return true;
+		}
+		if (bloating != null) {
+			return true;
+		}
+		if (bloodystools != null) {
+			return true;
+		}
+		if (bowelfreq != null) {
+			return true;
+		}
+		if (burninganus != null) {
+			return true;
+		}
+		if (color != null) {
+			return true;
+		}
+		if (constipation != null) {
+			return true;
+		}
+		if (cramping != null) {
+			return true;
+		}
+		if (depression != null) {
+			return true;
+		}
+		if (diarrhea != null) {
+			return true;
+		}
+		if (dpresseionfreq != null) {
+			return true;
+		}
+		if (gas != null) {
+			return true;
+		}
+		if (henorrhoid != null) {
+			return true;
+		}
+		if (hiccup != null) {
+			return true;
+		}
+		if (itchyanus != null) {
+			return true;
+		}
+		if (laxativeusel != null) {
+			return true;
+		}
+		if (mucousinstools != null) {
+			return true;
+		}
+		if (nausea != null) {
+			return true;
+		}
+		if (odor != null) {
+			return true;
+		}
+		if (rectalpain != null) {
+			return true;
+		}
+		if (texture != null) {
+			return true;
+		}
+		if (vomiting != null) {
+			return true;
+		}
+		return false;
+	}
 }

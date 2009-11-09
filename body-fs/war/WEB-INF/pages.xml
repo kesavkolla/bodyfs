@@ -2,10 +2,12 @@
 <pages>
 	<!-- Main Page URLS -->
 	<page id="scheduler" title="Scheduler" path="/WEB-INF/views/calendar.zul" />
+	<!-- User Management -->
+	<page id="usermgmt" title="User Management" path="/WEB-INF/views/usermgmt.zul" />
 	<!-- NPI Pages  -->
-	<page id="npi" title="NPI Form" path="/WEB-INF/views/npi.zul" />
-	<page id="npi1" title="NPI Form" path="/WEB-INF/views/npi1.zul" />
-	<page id="npi2" title="NPI Form" path="/WEB-INF/views/npi2.zul" />
-	<page id="npi3" title="NPI Form" path="/WEB-INF/views/npi3.zul" />
+	<page id="npi" title="NPI Form" path="/WEB-INF/views/npi.zul" target="//usermgmt/usermgmtinclude" />
+	<page id="npi1" title="NPI Form" path="/WEB-INF/views/npi1.zul" target="//usermgmt/usermgmtinclude" />
+	<page id="npi2" title="NPI Form" path="/WEB-INF/views/npi2.zul" target="//usermgmt/usermgmtinclude" />
+	<page id="npi3" title="NPI Form" path="/WEB-INF/views/npi3.zul" target="//usermgmt/usermgmtinclude" />
 
 </pages>

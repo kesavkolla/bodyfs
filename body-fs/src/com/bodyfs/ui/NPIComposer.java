@@ -16,6 +16,7 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 
 import com.bodyfs.dao.IPageDAO;
+import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.Page;
 import com.bodyfs.model.Person;
 
@@ -28,17 +29,14 @@ public class NPIComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
-	final Person person = new Person();
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	private IPageDAO pageDAO;
+	private IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		if (pageDAO == null) {
-			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
-		}
-		this.page.setAttribute("person", person);
+		this.setupPerson();
+		// this.page.setAttribute("person", person);
 	}
 
 	public String getMinDOB() {
@@ -47,15 +45,37 @@ public class NPIComposer extends GenericAutowireComposer {
 
 	public void onNext(final ForwardEvent event) {
 		final String pageId = event.getData().toString();
-		final Include xcontents = (Include) Path.getComponent("//index/xcontents");
+		final Include xcontents = (Include) Path.getComponent("//usermgmt/usermgmtinclude");
 		LOGGER.debug("Page Id: " + pageId);
 		System.out.println("Page Id: " + pageId);
 		final Page page = pageDAO.getById(pageId);
 		LOGGER.debug("Navigating to:" + page.getPath());
 		xcontents.setSrc(page.getPath());
+		this.desktop.setBookmark(pageId);
 	}
 
 	public void onSaveNPI(final ForwardEvent event) {
 
+	}
+
+	public void onCancel(final ForwardEvent event) {
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void setupPerson() {
+		Person person = null;
+		GeneralInfo ginfo = null;
+		if (sessionScope.get("session.person") == null) {
+			person = new Person();
+			ginfo = new GeneralInfo();
+			sessionScope.put("session.person", person);
+			this.page.setAttribute("person", person);
+		} else {
+			person = (Person) sessionScope.get("session.person");
+			ginfo = (GeneralInfo) sessionScope.get("session.ginfo");
+		}
+		this.page.setAttribute("person", person);
+		this.page.setAttribute("ginfo", ginfo);
 	}
 }

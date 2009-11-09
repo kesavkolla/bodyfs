@@ -35,7 +35,9 @@ public class PageDAO implements IPageDAO {
 		if (page == null) {
 			return null;
 		}
-		return new Page(page.attributeValue("id"), page.attributeValue("title"), page.attributeValue("path"));
+
+		return new Page(page.attributeValue("id"), page.attributeValue("title"), page.attributeValue("path"), page
+				.attributeValue("target"));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,7 +52,7 @@ public class PageDAO implements IPageDAO {
 		final List<Page> pagesList = new ArrayList<Page>(pages.size());
 		for (final Element element : pages) {
 			pagesList.add(new Page(element.attributeValue("id"), element.attributeValue("title"), element
-					.attributeValue("path")));
+					.attributeValue("path"), element.attributeValue("target")));
 		}
 		return pagesList;
 	}

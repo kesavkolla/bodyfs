@@ -30,55 +30,55 @@ public class Gynecology implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean agemensesbegan;
+	private Boolean agemensesbegan;
 
 	@Persistent
 	private String lengthofcycle;
 
 	@Persistent
-	private boolean durationofflow;
+	private Boolean durationofflow;
 
 	@Persistent
-	private boolean duration;
+	private Boolean duration;
 
 	@Persistent
-	private boolean irregularperiods;
+	private Boolean irregularperiods;
 
 	@Persistent
-	private boolean painfulperiods;
+	private Boolean painfulperiods;
 
 	@Persistent
-	private boolean pms;
+	private Boolean pms;
 
 	@Persistent
-	private boolean vaginaldischarge;
+	private Boolean vaginaldischarge;
 
 	@Persistent
 	private String color;
 
 	@Persistent
-	private boolean vaginalsores;
+	private Boolean vaginalsores;
 
 	@Persistent
-	private boolean vaginalodor;
+	private Boolean vaginalodor;
 
 	@Persistent
-	private boolean clots;
+	private Boolean clots;
 
 	@Persistent
-	private boolean breastlumps;
+	private Boolean breastlumps;
 
 	@Persistent
-	private int pregnancies;
+	private Integer pregnancies;
 
 	@Persistent
-	private int livebirths;
+	private Integer livebirths;
 
 	@Persistent
-	private boolean prematurebirths;
+	private Boolean prematurebirths;
 
 	@Persistent
-	private int agearmenopause;
+	private Integer agearmenopause;
 
 	@Persistent
 	private String dateoflastPAP;
@@ -105,11 +105,11 @@ public class Gynecology implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isAgemensesbegan() {
+	public final Boolean isAgemensesbegan() {
 		return agemensesbegan;
 	}
 
-	public final void setAgemensesbegan(boolean agemensesbegan) {
+	public final void setAgemensesbegan(Boolean agemensesbegan) {
 		this.agemensesbegan = agemensesbegan;
 	}
 
@@ -121,51 +121,51 @@ public class Gynecology implements Serializable {
 		this.lengthofcycle = lengthofcycle;
 	}
 
-	public final boolean isDurationofflow() {
+	public final Boolean isDurationofflow() {
 		return durationofflow;
 	}
 
-	public final void setDurationofflow(boolean durationofflow) {
+	public final void setDurationofflow(Boolean durationofflow) {
 		this.durationofflow = durationofflow;
 	}
 
-	public final boolean isDuration() {
+	public final Boolean isDuration() {
 		return duration;
 	}
 
-	public final void setDuration(boolean duration) {
+	public final void setDuration(Boolean duration) {
 		this.duration = duration;
 	}
 
-	public final boolean isIrregularperiods() {
+	public final Boolean isIrregularperiods() {
 		return irregularperiods;
 	}
 
-	public final void setIrregularperiods(boolean irregularperiods) {
+	public final void setIrregularperiods(Boolean irregularperiods) {
 		this.irregularperiods = irregularperiods;
 	}
 
-	public final boolean isPainfulperiods() {
+	public final Boolean isPainfulperiods() {
 		return painfulperiods;
 	}
 
-	public final void setPainfulperiods(boolean painfulperiods) {
+	public final void setPainfulperiods(Boolean painfulperiods) {
 		this.painfulperiods = painfulperiods;
 	}
 
-	public final boolean isPms() {
+	public final Boolean isPms() {
 		return pms;
 	}
 
-	public final void setPms(boolean pms) {
+	public final void setPms(Boolean pms) {
 		this.pms = pms;
 	}
 
-	public final boolean isVaginaldischarge() {
+	public final Boolean isVaginaldischarge() {
 		return vaginaldischarge;
 	}
 
-	public final void setVaginaldischarge(boolean vaginaldischarge) {
+	public final void setVaginaldischarge(Boolean vaginaldischarge) {
 		this.vaginaldischarge = vaginaldischarge;
 	}
 
@@ -177,67 +177,67 @@ public class Gynecology implements Serializable {
 		this.color = color;
 	}
 
-	public final boolean isVaginalsores() {
+	public final Boolean isVaginalsores() {
 		return vaginalsores;
 	}
 
-	public final void setVaginalsores(boolean vaginalsores) {
+	public final void setVaginalsores(Boolean vaginalsores) {
 		this.vaginalsores = vaginalsores;
 	}
 
-	public final boolean isVaginalodor() {
+	public final Boolean isVaginalodor() {
 		return vaginalodor;
 	}
 
-	public final void setVaginalodor(boolean vaginalodor) {
+	public final void setVaginalodor(Boolean vaginalodor) {
 		this.vaginalodor = vaginalodor;
 	}
 
-	public final boolean isClots() {
+	public final Boolean isClots() {
 		return clots;
 	}
 
-	public final void setClots(boolean clots) {
+	public final void setClots(Boolean clots) {
 		this.clots = clots;
 	}
 
-	public final boolean isBreastlumps() {
+	public final Boolean isBreastlumps() {
 		return breastlumps;
 	}
 
-	public final void setBreastlumps(boolean breastlumps) {
+	public final void setBreastlumps(Boolean breastlumps) {
 		this.breastlumps = breastlumps;
 	}
 
-	public final int getPregnancies() {
+	public final Integer getPregnancies() {
 		return pregnancies;
 	}
 
-	public final void setPregnancies(int pregnancies) {
+	public final void setPregnancies(Integer pregnancies) {
 		this.pregnancies = pregnancies;
 	}
 
-	public final int getLivebirths() {
+	public final Integer getLivebirths() {
 		return livebirths;
 	}
 
-	public final void setLivebirths(int livebirths) {
+	public final void setLivebirths(Integer livebirths) {
 		this.livebirths = livebirths;
 	}
 
-	public final boolean isPrematurebirths() {
+	public final Boolean isPrematurebirths() {
 		return prematurebirths;
 	}
 
-	public final void setPrematurebirths(boolean prematurebirths) {
+	public final void setPrematurebirths(Boolean prematurebirths) {
 		this.prematurebirths = prematurebirths;
 	}
 
-	public final int getAgearmenopause() {
+	public final Integer getAgearmenopause() {
 		return agearmenopause;
 	}
 
-	public final void setAgearmenopause(int agearmenopause) {
+	public final void setAgearmenopause(Integer agearmenopause) {
 		this.agearmenopause = agearmenopause;
 	}
 
@@ -263,6 +263,73 @@ public class Gynecology implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (agearmenopause != null) {
+			return true;
+		}
+		if (agemensesbegan != null) {
+			return true;
+		}
+		if (breastlumps != null) {
+			return true;
+		}
+		if (clots != null) {
+			return true;
+		}
+		if (color != null) {
+			return true;
+		}
+		if (datelastperiodbegan != null) {
+			return true;
+		}
+		if (dateoflastPAP != null) {
+			return true;
+		}
+		if (duration != null) {
+			return true;
+		}
+		if (durationofflow != null) {
+			return true;
+		}
+		if (irregularperiods != null) {
+			return true;
+		}
+		if (lengthofcycle != null) {
+			return true;
+		}
+		if (livebirths != null) {
+			return true;
+		}
+		if (painfulperiods != null) {
+			return true;
+		}
+		if (pms != null) {
+			return true;
+		}
+		if (pregnancies != null) {
+			return true;
+		}
+		if (prematurebirths != null) {
+			return true;
+		}
+		if (vaginaldischarge != null) {
+			return true;
+		}
+		if (vaginalodor != null) {
+			return true;
+		}
+		if (vaginalsores != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

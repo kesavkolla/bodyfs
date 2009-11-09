@@ -65,25 +65,25 @@ public class GeneralInfo implements Serializable {
 	private String reasonforvisit;
 
 	@Persistent
-	private boolean accupunture;
+	private Boolean accupunture;
 
 	@Persistent
-	private boolean chineseherbalmedicine;
+	private Boolean chineseherbalmedicine;
 
 	@Persistent
 	private String condition;
 
 	@Persistent
-	private boolean gettingworse;
+	private Boolean gettingworse;
 
 	@Persistent
-	private boolean botherSleep;
+	private Boolean botherSleep;
 
 	@Persistent
-	private boolean botherWork;
+	private Boolean botherWork;
 
 	@Persistent
-	private boolean botherOther;
+	private Boolean botherOther;
 
 	@Persistent
 	private String botherReason;
@@ -98,7 +98,7 @@ public class GeneralInfo implements Serializable {
 	private String makeitworse;
 
 	@Persistent
-	private boolean physiciancare;
+	private Boolean physiciancare;
 
 	@Persistent
 	private String carereason;
@@ -224,19 +224,19 @@ public class GeneralInfo implements Serializable {
 		this.reasonforvisit = reasonforvisit;
 	}
 
-	public final boolean isAccupunture() {
+	public final Boolean isAccupunture() {
 		return accupunture;
 	}
 
-	public final void setAccupunture(boolean accupunture) {
+	public final void setAccupunture(Boolean accupunture) {
 		this.accupunture = accupunture;
 	}
 
-	public final boolean isChineseherbalmedicine() {
+	public final Boolean isChineseherbalmedicine() {
 		return chineseherbalmedicine;
 	}
 
-	public final void setChineseherbalmedicine(boolean chineseherbalmedicine) {
+	public final void setChineseherbalmedicine(Boolean chineseherbalmedicine) {
 		this.chineseherbalmedicine = chineseherbalmedicine;
 	}
 
@@ -248,35 +248,35 @@ public class GeneralInfo implements Serializable {
 		this.condition = condition;
 	}
 
-	public final boolean isGettingworse() {
+	public final Boolean isGettingworse() {
 		return gettingworse;
 	}
 
-	public final void setGettingworse(boolean gettingworse) {
+	public final void setGettingworse(Boolean gettingworse) {
 		this.gettingworse = gettingworse;
 	}
 
-	public final boolean isBotherSleep() {
+	public final Boolean isBotherSleep() {
 		return botherSleep;
 	}
 
-	public final void setBotherSleep(boolean botherSleep) {
+	public final void setBotherSleep(Boolean botherSleep) {
 		this.botherSleep = botherSleep;
 	}
 
-	public final boolean isBotherWork() {
+	public final Boolean isBotherWork() {
 		return botherWork;
 	}
 
-	public final void setBotherWork(boolean botherWork) {
+	public final void setBotherWork(Boolean botherWork) {
 		this.botherWork = botherWork;
 	}
 
-	public final boolean isBotherOther() {
+	public final Boolean isBotherOther() {
 		return botherOther;
 	}
 
-	public final void setBotherOther(boolean botherOther) {
+	public final void setBotherOther(Boolean botherOther) {
 		this.botherOther = botherOther;
 	}
 
@@ -312,11 +312,11 @@ public class GeneralInfo implements Serializable {
 		this.makeitworse = makeitworse;
 	}
 
-	public final boolean isPhysiciancare() {
+	public final Boolean isPhysiciancare() {
 		return physiciancare;
 	}
 
-	public final void setPhysiciancare(boolean physiciancare) {
+	public final void setPhysiciancare(Boolean physiciancare) {
 		this.physiciancare = physiciancare;
 	}
 
@@ -351,4 +351,99 @@ public class GeneralInfo implements Serializable {
 	public final void setOthertherapies(String othertherapies) {
 		this.othertherapies = othertherapies;
 	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (accupunture != null) {
+			return true;
+		}
+		if (botherOther != null) {
+			return true;
+		}
+		if (botherReason != null) {
+			return true;
+		}
+		if (botherSleep != null) {
+			return true;
+		}
+		if (botherWork != null) {
+			return true;
+		}
+		if (carereason != null) {
+			return true;
+		}
+		if (cellPhone != null) {
+			return true;
+		}
+		if (chineseherbalmedicine != null) {
+			return true;
+		}
+		if (city != null) {
+			return true;
+		}
+		if (condition != null) {
+			return true;
+		}
+		if (emergencycontact != null) {
+			return true;
+		}
+		if (gettingworse != null) {
+			return true;
+		}
+		if (height != null) {
+			return true;
+		}
+		if (homePhone != null) {
+			return true;
+		}
+		if (initialcause != null) {
+			return true;
+		}
+		if (makeitbetter != null) {
+			return true;
+		}
+		if (makeitworse != null) {
+			return true;
+		}
+		if (othertherapies != null) {
+			return true;
+		}
+		if (physiciancare != null) {
+			return true;
+		}
+		if (physicianname != null) {
+			return true;
+		}
+		if (physicianphone != null) {
+			return true;
+		}
+		if (reasonforvisit != null) {
+			return true;
+		}
+		if (referredBy != null) {
+			return true;
+		}
+		if (state != null) {
+			return true;
+		}
+		if (street != null) {
+			return true;
+		}
+		if (weight != null) {
+			return true;
+		}
+		if (workPhone != null) {
+			return true;
+		}
+		if (zipcode != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

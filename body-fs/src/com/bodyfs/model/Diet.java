@@ -33,22 +33,22 @@ public class Diet implements Serializable {
 	private HighLow appetite;
 
 	@Persistent
-	private boolean coffeeTea;
+	private Boolean coffeeTea;
 
 	@Persistent
-	private boolean drinks;
+	private Boolean drinks;
 
 	@Persistent
 	private HighLow protein;
 
 	@Persistent
-	private boolean sweeteners;
+	private Boolean sweeteners;
 
 	@Persistent
-	private boolean sugar;
+	private Boolean sugar;
 
 	@Persistent
-	private boolean saltyfoods;
+	private Boolean saltyfoods;
 
 	@Persistent
 	private String water;
@@ -80,19 +80,19 @@ public class Diet implements Serializable {
 		this.appetite = appetite;
 	}
 
-	public final boolean isCoffeeTea() {
+	public final Boolean isCoffeeTea() {
 		return coffeeTea;
 	}
 
-	public final void setCoffeeTea(boolean coffeeTea) {
+	public final void setCoffeeTea(Boolean coffeeTea) {
 		this.coffeeTea = coffeeTea;
 	}
 
-	public final boolean isDrinks() {
+	public final Boolean isDrinks() {
 		return drinks;
 	}
 
-	public final void setDrinks(boolean drinks) {
+	public final void setDrinks(Boolean drinks) {
 		this.drinks = drinks;
 	}
 
@@ -104,27 +104,27 @@ public class Diet implements Serializable {
 		this.protein = protein;
 	}
 
-	public final boolean isSweeteners() {
+	public final Boolean isSweeteners() {
 		return sweeteners;
 	}
 
-	public final void setSweeteners(boolean sweeteners) {
+	public final void setSweeteners(Boolean sweeteners) {
 		this.sweeteners = sweeteners;
 	}
 
-	public final boolean isSugar() {
+	public final Boolean isSugar() {
 		return sugar;
 	}
 
-	public final void setSugar(boolean sugar) {
+	public final void setSugar(Boolean sugar) {
 		this.sugar = sugar;
 	}
 
-	public final boolean isSaltyfoods() {
+	public final Boolean isSaltyfoods() {
 		return saltyfoods;
 	}
 
-	public final void setSaltyfoods(boolean saltyfoods) {
+	public final void setSaltyfoods(Boolean saltyfoods) {
 		this.saltyfoods = saltyfoods;
 	}
 
@@ -143,4 +143,42 @@ public class Diet implements Serializable {
 	public final void setCreateDate(final Date createDate) {
 		this.createDate = createDate;
 	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (appetite != null) {
+			return true;
+		}
+		if (coffeeTea != null) {
+			return true;
+		}
+		if (createDate != null) {
+			return true;
+		}
+		if (drinks != null) {
+			return true;
+		}
+		if (protein != null) {
+			return true;
+		}
+		if (saltyfoods != null) {
+			return true;
+		}
+		if (sugar != null) {
+			return true;
+		}
+		if (sweeteners != null) {
+			return true;
+		}
+		if (water != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

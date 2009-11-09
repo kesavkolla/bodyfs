@@ -31,43 +31,43 @@ public class FamilyMedHistory implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean allergies;
+	private Boolean allergies;
 
 	@Persistent
 	private List<String> allergy;
 
 	@Persistent
-	private boolean arteriosclerosis;
+	private Boolean arteriosclerosis;
 
 	@Persistent
-	private boolean asthma;
+	private Boolean asthma;
 
 	@Persistent
-	private boolean alcoholism;
+	private Boolean alcoholism;
 
 	@Persistent
-	private boolean cancer;
+	private Boolean cancer;
 
 	@Persistent
 	private String cancerType;
 
 	@Persistent
-	private boolean depression;
+	private Boolean depression;
 
 	@Persistent
-	private boolean diabetes;
+	private Boolean diabetes;
 
 	@Persistent
-	private boolean heartdisease;
+	private Boolean heartdisease;
 
 	@Persistent
-	private boolean highbloodpressure;
+	private Boolean highbloodpressure;
 
 	@Persistent
-	private boolean seizures;
+	private Boolean seizures;
 
 	@Persistent
-	private boolean stroke;
+	private Boolean stroke;
 
 	@Persistent
 	private Date createDate = new Date(System.currentTimeMillis());
@@ -88,11 +88,11 @@ public class FamilyMedHistory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isAllergies() {
+	public final Boolean isAllergies() {
 		return allergies;
 	}
 
-	public final void setAllergies(boolean allergies) {
+	public final void setAllergies(Boolean allergies) {
 		this.allergies = allergies;
 	}
 
@@ -104,35 +104,35 @@ public class FamilyMedHistory implements Serializable {
 		this.allergy = allergy;
 	}
 
-	public final boolean isArteriosclerosis() {
+	public final Boolean isArteriosclerosis() {
 		return arteriosclerosis;
 	}
 
-	public final void setArteriosclerosis(boolean arteriosclerosis) {
+	public final void setArteriosclerosis(Boolean arteriosclerosis) {
 		this.arteriosclerosis = arteriosclerosis;
 	}
 
-	public final boolean isAsthma() {
+	public final Boolean isAsthma() {
 		return asthma;
 	}
 
-	public final void setAsthma(boolean asthma) {
+	public final void setAsthma(Boolean asthma) {
 		this.asthma = asthma;
 	}
 
-	public final boolean isAlcoholism() {
+	public final Boolean isAlcoholism() {
 		return alcoholism;
 	}
 
-	public final void setAlcoholism(boolean alcoholism) {
+	public final void setAlcoholism(Boolean alcoholism) {
 		this.alcoholism = alcoholism;
 	}
 
-	public final boolean isCancer() {
+	public final Boolean isCancer() {
 		return cancer;
 	}
 
-	public final void setCancer(boolean cancer) {
+	public final void setCancer(Boolean cancer) {
 		this.cancer = cancer;
 	}
 
@@ -144,51 +144,51 @@ public class FamilyMedHistory implements Serializable {
 		this.cancerType = cancerType;
 	}
 
-	public final boolean isDepression() {
+	public final Boolean isDepression() {
 		return depression;
 	}
 
-	public final void setDepression(boolean depression) {
+	public final void setDepression(Boolean depression) {
 		this.depression = depression;
 	}
 
-	public final boolean isDiabetes() {
+	public final Boolean isDiabetes() {
 		return diabetes;
 	}
 
-	public final void setDiabetes(boolean diabetes) {
+	public final void setDiabetes(Boolean diabetes) {
 		this.diabetes = diabetes;
 	}
 
-	public final boolean isHeartdisease() {
+	public final Boolean isHeartdisease() {
 		return heartdisease;
 	}
 
-	public final void setHeartdisease(boolean heartdisease) {
+	public final void setHeartdisease(Boolean heartdisease) {
 		this.heartdisease = heartdisease;
 	}
 
-	public final boolean isHighbloodpressure() {
+	public final Boolean isHighbloodpressure() {
 		return highbloodpressure;
 	}
 
-	public final void setHighbloodpressure(boolean highbloodpressure) {
+	public final void setHighbloodpressure(Boolean highbloodpressure) {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final boolean isSeizures() {
+	public final Boolean isSeizures() {
 		return seizures;
 	}
 
-	public final void setSeizures(boolean seizures) {
+	public final void setSeizures(Boolean seizures) {
 		this.seizures = seizures;
 	}
 
-	public final boolean isStroke() {
+	public final Boolean isStroke() {
 		return stroke;
 	}
 
-	public final void setStroke(boolean stroke) {
+	public final void setStroke(Boolean stroke) {
 		this.stroke = stroke;
 	}
 
@@ -198,6 +198,55 @@ public class FamilyMedHistory implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (alcoholism != null) {
+			return true;
+		}
+		if (allergies != null) {
+			return true;
+		}
+		if (allergy != null) {
+			return true;
+		}
+		if (arteriosclerosis != null) {
+			return true;
+		}
+		if (asthma != null) {
+			return true;
+		}
+		if (cancer != null) {
+			return true;
+		}
+		if (cancerType != null) {
+			return true;
+		}
+		if (depression != null) {
+			return true;
+		}
+		if (diabetes != null) {
+			return true;
+		}
+		if (heartdisease != null) {
+			return true;
+		}
+		if (highbloodpressure != null) {
+			return true;
+		}
+		if (seizures != null) {
+			return true;
+		}
+		if (stroke != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

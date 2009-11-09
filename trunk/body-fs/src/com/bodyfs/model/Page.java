@@ -2,11 +2,6 @@
  */
 package com.bodyfs.model;
 
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 /**
  * This class reprasents all the pages and their corresponding URIs in the
  * application. The page id is used for bookmark purposes
@@ -14,24 +9,20 @@ import javax.jdo.annotations.PrimaryKey;
  * @author kesav
  * 
  */
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Page {
-
-	@PrimaryKey
-	@Persistent
 	private String id;
-	@Persistent
 	private String title;
-	@Persistent
 	private String path;
+	private String target;
 
 	public Page() {
 	}
 
-	public Page(final String id, final String title, final String path) {
+	public Page(final String id, final String title, final String path, final String target) {
 		this.id = id;
 		this.title = title;
 		this.path = path;
+		this.target = target;
 	}
 
 	public final String getId() {
@@ -56,6 +47,14 @@ public class Page {
 
 	public final void setPath(final String path) {
 		this.path = path;
+	}
+
+	public final String getTarget() {
+		return target;
+	}
+
+	public final void setTarget(final String target) {
+		this.target = target;
 	}
 
 	@Override

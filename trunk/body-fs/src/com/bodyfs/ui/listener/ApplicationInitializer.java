@@ -50,10 +50,10 @@ public class ApplicationInitializer implements ServletContextListener {
 	public static void initPages(final ServletContext context) {
 		try {
 			final SAXReader reader = new SAXReader();
-			LOGGER.error("Loading: " + context.getResource("/WEB-INF/pages.xml"));
+			LOGGER.debug("Loading: " + context.getResource("/WEB-INF/pages.xml"));
 			final Document document = reader.read(context.getResourceAsStream("/WEB-INF/pages.xml"));
 			MemcacheServiceFactory.getMemcacheService().put(IPageDAO.PAGES_DOCUMENT, document.getRootElement());
-			LOGGER.error("Saving in memcache: "
+			LOGGER.debug("Saving in memcache: "
 					+ MemcacheServiceFactory.getMemcacheService().get(IPageDAO.PAGES_DOCUMENT));
 		} catch (final Exception e) {
 			LOGGER.error(e);
@@ -94,13 +94,10 @@ public class ApplicationInitializer implements ServletContextListener {
 				final Map<String, String> sreg = SRegExtension.remove(user);
 				final Map<String, String> axschema = AxSchemaExtension.remove(user);
 				if (sreg != null && !sreg.isEmpty()) {
-					System.err.println("sreg: " + sreg);
 					user.setAttribute("info", sreg);
 				} else if (axschema != null && !axschema.isEmpty()) {
-					System.err.println("axschema: " + axschema);
 					user.setAttribute("info", axschema);
 				} else {
-					System.err.println("identity: " + user.getIdentity());
 				}
 
 			}

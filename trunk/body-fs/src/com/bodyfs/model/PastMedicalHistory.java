@@ -30,121 +30,121 @@ public class PastMedicalHistory implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean aids;
+	private Boolean aids;
 
 	@Persistent
-	private boolean alcoholism;
+	private Boolean alcoholism;
 
 	@Persistent
-	private boolean allergies;
+	private Boolean allergies;
 
 	@Persistent
-	private boolean appendicitis;
+	private Boolean appendicitis;
 
 	@Persistent
-	private boolean arteriosclerosis;
+	private Boolean arteriosclerosis;
 
 	@Persistent
-	private boolean asthma;
+	private Boolean asthma;
 
 	@Persistent
-	private boolean birthtrauma;
+	private Boolean birthtrauma;
 
 	@Persistent
-	private boolean cancer;
+	private Boolean cancer;
 
 	@Persistent
-	private boolean chickenpox;
+	private Boolean chickenpox;
 
 	@Persistent
-	private boolean diabetes;
+	private Boolean diabetes;
 
 	@Persistent
-	private boolean emphysema;
+	private Boolean emphysema;
 
 	@Persistent
-	private boolean epilepsy;
+	private Boolean epilepsy;
 
 	@Persistent
-	private boolean goiter;
+	private Boolean goiter;
 
 	@Persistent
-	private boolean gout;
+	private Boolean gout;
 
 	@Persistent
-	private boolean heartdisease;
+	private Boolean heartdisease;
 
 	@Persistent
-	private boolean hepatitis;
+	private Boolean hepatitis;
 
 	@Persistent
-	private boolean herpes;
+	private Boolean herpes;
 
 	@Persistent
-	private boolean highbloodpressure;
+	private Boolean highbloodpressure;
 
 	@Persistent
-	private boolean measles;
+	private Boolean measles;
 
 	@Persistent
-	private boolean multipleSclerosis;
+	private Boolean multipleSclerosis;
 
 	@Persistent
-	private boolean mumps;
+	private Boolean mumps;
 
 	@Persistent
-	private boolean pacemaker;
+	private Boolean pacemaker;
 
 	@Persistent
-	private boolean pleurisy;
+	private Boolean pleurisy;
 
 	@Persistent
-	private boolean pneumonia;
+	private Boolean pneumonia;
 
 	@Persistent
-	private boolean polio;
+	private Boolean polio;
 
 	@Persistent
-	private boolean rheumaticfever;
+	private Boolean rheumaticfever;
 
 	@Persistent
-	private boolean scarletfever;
+	private Boolean scarletfever;
 
 	@Persistent
-	private boolean seizures;
+	private Boolean seizures;
 
 	@Persistent
-	private boolean stroke;
+	private Boolean stroke;
 
 	@Persistent
-	private boolean surgery;
+	private Boolean surgery;
 
 	@Persistent
 	private String surgeryList;
 
 	@Persistent
-	private boolean hyroiddisorders;
+	private Boolean hyroiddisorders;
 
 	@Persistent
-	private boolean majortrauma;
+	private Boolean majortrauma;
 
 	@Persistent
 	private String carfalletc;
 
 	@Persistent
-	private boolean tuberculosis;
+	private Boolean tuberculosis;
 
 	@Persistent
-	private boolean typhoidfever;
+	private Boolean typhoidfever;
 
 	@Persistent
-	private boolean ulcers;
+	private Boolean ulcers;
 
 	@Persistent
-	private boolean venerealdisease;
+	private Boolean venerealdisease;
 
 	@Persistent
-	private boolean whoopingcough;
+	private Boolean whoopingcough;
 
 	@Persistent
 	private String other;
@@ -168,243 +168,243 @@ public class PastMedicalHistory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isAids() {
+	public final Boolean isAids() {
 		return aids;
 	}
 
-	public final void setAids(boolean aids) {
+	public final void setAids(Boolean aids) {
 		this.aids = aids;
 	}
 
-	public final boolean isAlcoholism() {
+	public final Boolean isAlcoholism() {
 		return alcoholism;
 	}
 
-	public final void setAlcoholism(boolean alcoholism) {
+	public final void setAlcoholism(Boolean alcoholism) {
 		this.alcoholism = alcoholism;
 	}
 
-	public final boolean isAllergies() {
+	public final Boolean isAllergies() {
 		return allergies;
 	}
 
-	public final void setAllergies(boolean allergies) {
+	public final void setAllergies(Boolean allergies) {
 		this.allergies = allergies;
 	}
 
-	public final boolean isAppendicitis() {
+	public final Boolean isAppendicitis() {
 		return appendicitis;
 	}
 
-	public final void setAppendicitis(boolean appendicitis) {
+	public final void setAppendicitis(Boolean appendicitis) {
 		this.appendicitis = appendicitis;
 	}
 
-	public final boolean isArteriosclerosis() {
+	public final Boolean isArteriosclerosis() {
 		return arteriosclerosis;
 	}
 
-	public final void setArteriosclerosis(boolean arteriosclerosis) {
+	public final void setArteriosclerosis(Boolean arteriosclerosis) {
 		this.arteriosclerosis = arteriosclerosis;
 	}
 
-	public final boolean isAsthma() {
+	public final Boolean isAsthma() {
 		return asthma;
 	}
 
-	public final void setAsthma(boolean asthma) {
+	public final void setAsthma(Boolean asthma) {
 		this.asthma = asthma;
 	}
 
-	public final boolean isBirthtrauma() {
+	public final Boolean isBirthtrauma() {
 		return birthtrauma;
 	}
 
-	public final void setBirthtrauma(boolean birthtrauma) {
+	public final void setBirthtrauma(Boolean birthtrauma) {
 		this.birthtrauma = birthtrauma;
 	}
 
-	public final boolean isCancer() {
+	public final Boolean isCancer() {
 		return cancer;
 	}
 
-	public final void setCancer(boolean cancer) {
+	public final void setCancer(Boolean cancer) {
 		this.cancer = cancer;
 	}
 
-	public final boolean isChickenpox() {
+	public final Boolean isChickenpox() {
 		return chickenpox;
 	}
 
-	public final void setChickenpox(boolean chickenpox) {
+	public final void setChickenpox(Boolean chickenpox) {
 		this.chickenpox = chickenpox;
 	}
 
-	public final boolean isDiabetes() {
+	public final Boolean isDiabetes() {
 		return diabetes;
 	}
 
-	public final void setDiabetes(boolean diabetes) {
+	public final void setDiabetes(Boolean diabetes) {
 		this.diabetes = diabetes;
 	}
 
-	public final boolean isEmphysema() {
+	public final Boolean isEmphysema() {
 		return emphysema;
 	}
 
-	public final void setEmphysema(boolean emphysema) {
+	public final void setEmphysema(Boolean emphysema) {
 		this.emphysema = emphysema;
 	}
 
-	public final boolean isEpilepsy() {
+	public final Boolean isEpilepsy() {
 		return epilepsy;
 	}
 
-	public final void setEpilepsy(boolean epilepsy) {
+	public final void setEpilepsy(Boolean epilepsy) {
 		this.epilepsy = epilepsy;
 	}
 
-	public final boolean isGoiter() {
+	public final Boolean isGoiter() {
 		return goiter;
 	}
 
-	public final void setGoiter(boolean goiter) {
+	public final void setGoiter(Boolean goiter) {
 		this.goiter = goiter;
 	}
 
-	public final boolean isGout() {
+	public final Boolean isGout() {
 		return gout;
 	}
 
-	public final void setGout(boolean gout) {
+	public final void setGout(Boolean gout) {
 		this.gout = gout;
 	}
 
-	public final boolean isHeartdisease() {
+	public final Boolean isHeartdisease() {
 		return heartdisease;
 	}
 
-	public final void setHeartdisease(boolean heartdisease) {
+	public final void setHeartdisease(Boolean heartdisease) {
 		this.heartdisease = heartdisease;
 	}
 
-	public final boolean isHepatitis() {
+	public final Boolean isHepatitis() {
 		return hepatitis;
 	}
 
-	public final void setHepatitis(boolean hepatitis) {
+	public final void setHepatitis(Boolean hepatitis) {
 		this.hepatitis = hepatitis;
 	}
 
-	public final boolean isHerpes() {
+	public final Boolean isHerpes() {
 		return herpes;
 	}
 
-	public final void setHerpes(boolean herpes) {
+	public final void setHerpes(Boolean herpes) {
 		this.herpes = herpes;
 	}
 
-	public final boolean isHighbloodpressure() {
+	public final Boolean isHighbloodpressure() {
 		return highbloodpressure;
 	}
 
-	public final void setHighbloodpressure(boolean highbloodpressure) {
+	public final void setHighbloodpressure(Boolean highbloodpressure) {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final boolean isMeasles() {
+	public final Boolean isMeasles() {
 		return measles;
 	}
 
-	public final void setMeasles(boolean measles) {
+	public final void setMeasles(Boolean measles) {
 		this.measles = measles;
 	}
 
-	public final boolean isMultipleSclerosis() {
+	public final Boolean isMultipleSclerosis() {
 		return multipleSclerosis;
 	}
 
-	public final void setMultipleSclerosis(boolean multipleSclerosis) {
+	public final void setMultipleSclerosis(Boolean multipleSclerosis) {
 		this.multipleSclerosis = multipleSclerosis;
 	}
 
-	public final boolean isMumps() {
+	public final Boolean isMumps() {
 		return mumps;
 	}
 
-	public final void setMumps(boolean mumps) {
+	public final void setMumps(Boolean mumps) {
 		this.mumps = mumps;
 	}
 
-	public final boolean isPacemaker() {
+	public final Boolean isPacemaker() {
 		return pacemaker;
 	}
 
-	public final void setPacemaker(boolean pacemaker) {
+	public final void setPacemaker(Boolean pacemaker) {
 		this.pacemaker = pacemaker;
 	}
 
-	public final boolean isPleurisy() {
+	public final Boolean isPleurisy() {
 		return pleurisy;
 	}
 
-	public final void setPleurisy(boolean pleurisy) {
+	public final void setPleurisy(Boolean pleurisy) {
 		this.pleurisy = pleurisy;
 	}
 
-	public final boolean isPneumonia() {
+	public final Boolean isPneumonia() {
 		return pneumonia;
 	}
 
-	public final void setPneumonia(boolean pneumonia) {
+	public final void setPneumonia(Boolean pneumonia) {
 		this.pneumonia = pneumonia;
 	}
 
-	public final boolean isPolio() {
+	public final Boolean isPolio() {
 		return polio;
 	}
 
-	public final void setPolio(boolean polio) {
+	public final void setPolio(Boolean polio) {
 		this.polio = polio;
 	}
 
-	public final boolean isRheumaticfever() {
+	public final Boolean isRheumaticfever() {
 		return rheumaticfever;
 	}
 
-	public final void setRheumaticfever(boolean rheumaticfever) {
+	public final void setRheumaticfever(Boolean rheumaticfever) {
 		this.rheumaticfever = rheumaticfever;
 	}
 
-	public final boolean isScarletfever() {
+	public final Boolean isScarletfever() {
 		return scarletfever;
 	}
 
-	public final void setScarletfever(boolean scarletfever) {
+	public final void setScarletfever(Boolean scarletfever) {
 		this.scarletfever = scarletfever;
 	}
 
-	public final boolean isSeizures() {
+	public final Boolean isSeizures() {
 		return seizures;
 	}
 
-	public final void setSeizures(boolean seizures) {
+	public final void setSeizures(Boolean seizures) {
 		this.seizures = seizures;
 	}
 
-	public final boolean isStroke() {
+	public final Boolean isStroke() {
 		return stroke;
 	}
 
-	public final void setStroke(boolean stroke) {
+	public final void setStroke(Boolean stroke) {
 		this.stroke = stroke;
 	}
 
-	public final boolean isSurgery() {
+	public final Boolean isSurgery() {
 		return surgery;
 	}
 
-	public final void setSurgery(boolean surgery) {
+	public final void setSurgery(Boolean surgery) {
 		this.surgery = surgery;
 	}
 
@@ -416,19 +416,19 @@ public class PastMedicalHistory implements Serializable {
 		this.surgeryList = surgeryList;
 	}
 
-	public final boolean isHyroiddisorders() {
+	public final Boolean isHyroiddisorders() {
 		return hyroiddisorders;
 	}
 
-	public final void setHyroiddisorders(boolean hyroiddisorders) {
+	public final void setHyroiddisorders(Boolean hyroiddisorders) {
 		this.hyroiddisorders = hyroiddisorders;
 	}
 
-	public final boolean isMajortrauma() {
+	public final Boolean isMajortrauma() {
 		return majortrauma;
 	}
 
-	public final void setMajortrauma(boolean majortrauma) {
+	public final void setMajortrauma(Boolean majortrauma) {
 		this.majortrauma = majortrauma;
 	}
 
@@ -440,43 +440,43 @@ public class PastMedicalHistory implements Serializable {
 		this.carfalletc = carfalletc;
 	}
 
-	public final boolean isTuberculosis() {
+	public final Boolean isTuberculosis() {
 		return tuberculosis;
 	}
 
-	public final void setTuberculosis(boolean tuberculosis) {
+	public final void setTuberculosis(Boolean tuberculosis) {
 		this.tuberculosis = tuberculosis;
 	}
 
-	public final boolean isTyphoidfever() {
+	public final Boolean isTyphoidfever() {
 		return typhoidfever;
 	}
 
-	public final void setTyphoidfever(boolean typhoidfever) {
+	public final void setTyphoidfever(Boolean typhoidfever) {
 		this.typhoidfever = typhoidfever;
 	}
 
-	public final boolean isUlcers() {
+	public final Boolean isUlcers() {
 		return ulcers;
 	}
 
-	public final void setUlcers(boolean ulcers) {
+	public final void setUlcers(Boolean ulcers) {
 		this.ulcers = ulcers;
 	}
 
-	public final boolean isVenerealdisease() {
+	public final Boolean isVenerealdisease() {
 		return venerealdisease;
 	}
 
-	public final void setVenerealdisease(boolean venerealdisease) {
+	public final void setVenerealdisease(Boolean venerealdisease) {
 		this.venerealdisease = venerealdisease;
 	}
 
-	public final boolean isWhoopingcough() {
+	public final Boolean isWhoopingcough() {
 		return whoopingcough;
 	}
 
-	public final void setWhoopingcough(boolean whoopingcough) {
+	public final void setWhoopingcough(Boolean whoopingcough) {
 		this.whoopingcough = whoopingcough;
 	}
 
@@ -494,6 +494,136 @@ public class PastMedicalHistory implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (aids != null) {
+			return true;
+		}
+		if (alcoholism != null) {
+			return true;
+		}
+		if (allergies != null) {
+			return true;
+		}
+		if (appendicitis != null) {
+			return true;
+		}
+		if (arteriosclerosis != null) {
+			return true;
+		}
+		if (asthma != null) {
+			return true;
+		}
+		if (birthtrauma != null) {
+			return true;
+		}
+		if (cancer != null) {
+			return true;
+		}
+		if (carfalletc != null) {
+			return true;
+		}
+		if (chickenpox != null) {
+			return true;
+		}
+		if (diabetes != null) {
+			return true;
+		}
+		if (emphysema != null) {
+			return true;
+		}
+		if (epilepsy != null) {
+			return true;
+		}
+		if (goiter != null) {
+			return true;
+		}
+		if (gout != null) {
+			return true;
+		}
+		if (heartdisease != null) {
+			return true;
+		}
+		if (hepatitis != null) {
+			return true;
+		}
+		if (herpes != null) {
+			return true;
+		}
+		if (highbloodpressure != null) {
+			return true;
+		}
+		if (hyroiddisorders != null) {
+			return true;
+		}
+		if (majortrauma != null) {
+			return true;
+		}
+		if (measles != null) {
+			return true;
+		}
+		if (multipleSclerosis != null) {
+			return true;
+		}
+		if (mumps != null) {
+			return true;
+		}
+		if (other != null) {
+			return true;
+		}
+		if (pacemaker != null) {
+			return true;
+		}
+		if (pleurisy != null) {
+			return true;
+		}
+		if (pneumonia != null) {
+			return true;
+		}
+		if (polio != null) {
+			return true;
+		}
+		if (rheumaticfever != null) {
+			return true;
+		}
+		if (scarletfever != null) {
+			return true;
+		}
+		if (seizures != null) {
+			return true;
+		}
+		if (stroke != null) {
+			return true;
+		}
+		if (surgery != null) {
+			return true;
+		}
+		if (surgeryList != null) {
+			return true;
+		}
+		if (tuberculosis != null) {
+			return true;
+		}
+		if (typhoidfever != null) {
+			return true;
+		}
+		if (ulcers != null) {
+			return true;
+		}
+		if (venerealdisease != null) {
+			return true;
+		}
+		if (whoopingcough != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

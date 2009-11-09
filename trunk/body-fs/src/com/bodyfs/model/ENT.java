@@ -30,109 +30,109 @@ public class ENT implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean glasses;
+	private Boolean glasses;
 
 	@Persistent
 	private String age;
 
 	@Persistent
-	private boolean eyestrain;
+	private Boolean eyestrain;
 
 	@Persistent
-	private boolean eyepain;
+	private Boolean eyepain;
 
 	@Persistent
-	private boolean redeyes;
+	private Boolean redeyes;
 
 	@Persistent
-	private boolean itchyeyes;
+	private Boolean itchyeyes;
 
 	@Persistent
-	private boolean spotsineyes;
+	private Boolean spotsineyes;
 
 	@Persistent
-	private boolean poorvision;
+	private Boolean poorvision;
 
 	@Persistent
-	private boolean blurredvision;
+	private Boolean blurredvision;
 
 	@Persistent
-	private boolean nightblindness;
+	private Boolean nightblindness;
 
 	@Persistent
-	private boolean myopiaorPresbyopia;
+	private Boolean myopiaorPresbyopia;
 
 	@Persistent
-	private boolean glaucoma;
+	private Boolean glaucoma;
 
 	@Persistent
-	private boolean cataracts;
+	private Boolean cataracts;
 
 	@Persistent
-	private boolean teethproblems;
+	private Boolean teethproblems;
 
 	@Persistent
-	private boolean grindingteeth;
+	private Boolean grindingteeth;
 
 	@Persistent
-	private boolean tmj;
+	private Boolean tmj;
 
 	@Persistent
-	private boolean facialpain;
+	private Boolean facialpain;
 
 	@Persistent
-	private boolean gumproblems;
+	private Boolean gumproblems;
 
 	@Persistent
-	private boolean sores;
+	private Boolean sores;
 
 	@Persistent
-	private boolean drymouth;
+	private Boolean drymouth;
 
 	@Persistent
-	private boolean excessivesaliva;
+	private Boolean excessivesaliva;
 
 	@Persistent
-	private boolean sinusproblems;
+	private Boolean sinusproblems;
 
 	@Persistent
-	private boolean phlegmColor;
+	private Boolean phlegmColor;
 
 	@Persistent
-	private boolean recurrentsorethroat;
+	private Boolean recurrentsorethroat;
 
 	@Persistent
-	private boolean swollenglands;
+	private Boolean swollenglands;
 
 	@Persistent
-	private boolean lumpsinthroat;
+	private Boolean lumpsinthroat;
 
 	@Persistent
-	private boolean enlargedthyroid;
+	private Boolean enlargedthyroid;
 
 	@Persistent
-	private boolean nosebleeds;
+	private Boolean nosebleeds;
 
 	@Persistent
-	private boolean ringinginears;
+	private Boolean ringinginears;
 
 	@Persistent
 	private HighLow ringears;
 
 	@Persistent
-	private boolean poorhearing;
+	private Boolean poorhearing;
 
 	@Persistent
-	private boolean earaches;
+	private Boolean earaches;
 
 	@Persistent
-	private boolean headaches;
+	private Boolean headaches;
 
 	@Persistent
-	private boolean migraines;
+	private Boolean migraines;
 
 	@Persistent
-	private boolean concussions;
+	private Boolean concussions;
 
 	@Persistent
 	private String Other;
@@ -156,11 +156,11 @@ public class ENT implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isGlasses() {
+	public final Boolean isGlasses() {
 		return glasses;
 	}
 
-	public final void setGlasses(boolean glasses) {
+	public final void setGlasses(Boolean glasses) {
 		this.glasses = glasses;
 	}
 
@@ -172,219 +172,219 @@ public class ENT implements Serializable {
 		this.age = age;
 	}
 
-	public final boolean isEyestrain() {
+	public final Boolean isEyestrain() {
 		return eyestrain;
 	}
 
-	public final void setEyestrain(boolean eyestrain) {
+	public final void setEyestrain(Boolean eyestrain) {
 		this.eyestrain = eyestrain;
 	}
 
-	public final boolean isEyepain() {
+	public final Boolean isEyepain() {
 		return eyepain;
 	}
 
-	public final void setEyepain(boolean eyepain) {
+	public final void setEyepain(Boolean eyepain) {
 		this.eyepain = eyepain;
 	}
 
-	public final boolean isRedeyes() {
+	public final Boolean isRedeyes() {
 		return redeyes;
 	}
 
-	public final void setRedeyes(boolean redeyes) {
+	public final void setRedeyes(Boolean redeyes) {
 		this.redeyes = redeyes;
 	}
 
-	public final boolean isItchyeyes() {
+	public final Boolean isItchyeyes() {
 		return itchyeyes;
 	}
 
-	public final void setItchyeyes(boolean itchyeyes) {
+	public final void setItchyeyes(Boolean itchyeyes) {
 		this.itchyeyes = itchyeyes;
 	}
 
-	public final boolean isSpotsineyes() {
+	public final Boolean isSpotsineyes() {
 		return spotsineyes;
 	}
 
-	public final void setSpotsineyes(boolean spotsineyes) {
+	public final void setSpotsineyes(Boolean spotsineyes) {
 		this.spotsineyes = spotsineyes;
 	}
 
-	public final boolean isPoorvision() {
+	public final Boolean isPoorvision() {
 		return poorvision;
 	}
 
-	public final void setPoorvision(boolean poorvision) {
+	public final void setPoorvision(Boolean poorvision) {
 		this.poorvision = poorvision;
 	}
 
-	public final boolean isBlurredvision() {
+	public final Boolean isBlurredvision() {
 		return blurredvision;
 	}
 
-	public final void setBlurredvision(boolean blurredvision) {
+	public final void setBlurredvision(Boolean blurredvision) {
 		this.blurredvision = blurredvision;
 	}
 
-	public final boolean isNightblindness() {
+	public final Boolean isNightblindness() {
 		return nightblindness;
 	}
 
-	public final void setNightblindness(boolean nightblindness) {
+	public final void setNightblindness(Boolean nightblindness) {
 		this.nightblindness = nightblindness;
 	}
 
-	public final boolean isMyopiaorPresbyopia() {
+	public final Boolean isMyopiaorPresbyopia() {
 		return myopiaorPresbyopia;
 	}
 
-	public final void setMyopiaorPresbyopia(boolean myopiaorPresbyopia) {
+	public final void setMyopiaorPresbyopia(Boolean myopiaorPresbyopia) {
 		this.myopiaorPresbyopia = myopiaorPresbyopia;
 	}
 
-	public final boolean isGlaucoma() {
+	public final Boolean isGlaucoma() {
 		return glaucoma;
 	}
 
-	public final void setGlaucoma(boolean glaucoma) {
+	public final void setGlaucoma(Boolean glaucoma) {
 		this.glaucoma = glaucoma;
 	}
 
-	public final boolean isCataracts() {
+	public final Boolean isCataracts() {
 		return cataracts;
 	}
 
-	public final void setCataracts(boolean cataracts) {
+	public final void setCataracts(Boolean cataracts) {
 		this.cataracts = cataracts;
 	}
 
-	public final boolean isTeethproblems() {
+	public final Boolean isTeethproblems() {
 		return teethproblems;
 	}
 
-	public final void setTeethproblems(boolean teethproblems) {
+	public final void setTeethproblems(Boolean teethproblems) {
 		this.teethproblems = teethproblems;
 	}
 
-	public final boolean isGrindingteeth() {
+	public final Boolean isGrindingteeth() {
 		return grindingteeth;
 	}
 
-	public final void setGrindingteeth(boolean grindingteeth) {
+	public final void setGrindingteeth(Boolean grindingteeth) {
 		this.grindingteeth = grindingteeth;
 	}
 
-	public final boolean isTmj() {
+	public final Boolean isTmj() {
 		return tmj;
 	}
 
-	public final void setTmj(boolean tmj) {
+	public final void setTmj(Boolean tmj) {
 		this.tmj = tmj;
 	}
 
-	public final boolean isFacialpain() {
+	public final Boolean isFacialpain() {
 		return facialpain;
 	}
 
-	public final void setFacialpain(boolean facialpain) {
+	public final void setFacialpain(Boolean facialpain) {
 		this.facialpain = facialpain;
 	}
 
-	public final boolean isGumproblems() {
+	public final Boolean isGumproblems() {
 		return gumproblems;
 	}
 
-	public final void setGumproblems(boolean gumproblems) {
+	public final void setGumproblems(Boolean gumproblems) {
 		this.gumproblems = gumproblems;
 	}
 
-	public final boolean isSores() {
+	public final Boolean isSores() {
 		return sores;
 	}
 
-	public final void setSores(boolean sores) {
+	public final void setSores(Boolean sores) {
 		this.sores = sores;
 	}
 
-	public final boolean isDrymouth() {
+	public final Boolean isDrymouth() {
 		return drymouth;
 	}
 
-	public final void setDrymouth(boolean drymouth) {
+	public final void setDrymouth(Boolean drymouth) {
 		this.drymouth = drymouth;
 	}
 
-	public final boolean isExcessivesaliva() {
+	public final Boolean isExcessivesaliva() {
 		return excessivesaliva;
 	}
 
-	public final void setExcessivesaliva(boolean excessivesaliva) {
+	public final void setExcessivesaliva(Boolean excessivesaliva) {
 		this.excessivesaliva = excessivesaliva;
 	}
 
-	public final boolean isSinusproblems() {
+	public final Boolean isSinusproblems() {
 		return sinusproblems;
 	}
 
-	public final void setSinusproblems(boolean sinusproblems) {
+	public final void setSinusproblems(Boolean sinusproblems) {
 		this.sinusproblems = sinusproblems;
 	}
 
-	public final boolean isPhlegmColor() {
+	public final Boolean isPhlegmColor() {
 		return phlegmColor;
 	}
 
-	public final void setPhlegmColor(boolean phlegmColor) {
+	public final void setPhlegmColor(Boolean phlegmColor) {
 		this.phlegmColor = phlegmColor;
 	}
 
-	public final boolean isRecurrentsorethroat() {
+	public final Boolean isRecurrentsorethroat() {
 		return recurrentsorethroat;
 	}
 
-	public final void setRecurrentsorethroat(boolean recurrentsorethroat) {
+	public final void setRecurrentsorethroat(Boolean recurrentsorethroat) {
 		this.recurrentsorethroat = recurrentsorethroat;
 	}
 
-	public final boolean isSwollenglands() {
+	public final Boolean isSwollenglands() {
 		return swollenglands;
 	}
 
-	public final void setSwollenglands(boolean swollenglands) {
+	public final void setSwollenglands(Boolean swollenglands) {
 		this.swollenglands = swollenglands;
 	}
 
-	public final boolean isLumpsinthroat() {
+	public final Boolean isLumpsinthroat() {
 		return lumpsinthroat;
 	}
 
-	public final void setLumpsinthroat(boolean lumpsinthroat) {
+	public final void setLumpsinthroat(Boolean lumpsinthroat) {
 		this.lumpsinthroat = lumpsinthroat;
 	}
 
-	public final boolean isEnlargedthyroid() {
+	public final Boolean isEnlargedthyroid() {
 		return enlargedthyroid;
 	}
 
-	public final void setEnlargedthyroid(boolean enlargedthyroid) {
+	public final void setEnlargedthyroid(Boolean enlargedthyroid) {
 		this.enlargedthyroid = enlargedthyroid;
 	}
 
-	public final boolean isNosebleeds() {
+	public final Boolean isNosebleeds() {
 		return nosebleeds;
 	}
 
-	public final void setNosebleeds(boolean nosebleeds) {
+	public final void setNosebleeds(Boolean nosebleeds) {
 		this.nosebleeds = nosebleeds;
 	}
 
-	public final boolean isRinginginears() {
+	public final Boolean isRinginginears() {
 		return ringinginears;
 	}
 
-	public final void setRinginginears(boolean ringinginears) {
+	public final void setRinginginears(Boolean ringinginears) {
 		this.ringinginears = ringinginears;
 	}
 
@@ -396,43 +396,43 @@ public class ENT implements Serializable {
 		this.ringears = ringears;
 	}
 
-	public final boolean isPoorhearing() {
+	public final Boolean isPoorhearing() {
 		return poorhearing;
 	}
 
-	public final void setPoorhearing(boolean poorhearing) {
+	public final void setPoorhearing(Boolean poorhearing) {
 		this.poorhearing = poorhearing;
 	}
 
-	public final boolean isEaraches() {
+	public final Boolean isEaraches() {
 		return earaches;
 	}
 
-	public final void setEaraches(boolean earaches) {
+	public final void setEaraches(Boolean earaches) {
 		this.earaches = earaches;
 	}
 
-	public final boolean isHeadaches() {
+	public final Boolean isHeadaches() {
 		return headaches;
 	}
 
-	public final void setHeadaches(boolean headaches) {
+	public final void setHeadaches(Boolean headaches) {
 		this.headaches = headaches;
 	}
 
-	public final boolean isMigraines() {
+	public final Boolean isMigraines() {
 		return migraines;
 	}
 
-	public final void setMigraines(boolean migraines) {
+	public final void setMigraines(Boolean migraines) {
 		this.migraines = migraines;
 	}
 
-	public final boolean isConcussions() {
+	public final Boolean isConcussions() {
 		return concussions;
 	}
 
-	public final void setConcussions(boolean concussions) {
+	public final void setConcussions(Boolean concussions) {
 		this.concussions = concussions;
 	}
 
@@ -450,6 +450,124 @@ public class ENT implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (age != null) {
+			return true;
+		}
+		if (blurredvision != null) {
+			return true;
+		}
+		if (cataracts != null) {
+			return true;
+		}
+		if (concussions != null) {
+			return true;
+		}
+		if (createDate != null) {
+			return true;
+		}
+		if (drymouth != null) {
+			return true;
+		}
+		if (earaches != null) {
+			return true;
+		}
+		if (enlargedthyroid != null) {
+			return true;
+		}
+		if (excessivesaliva != null) {
+			return true;
+		}
+		if (eyepain != null) {
+			return true;
+		}
+		if (eyestrain != null) {
+			return true;
+		}
+		if (facialpain != null) {
+			return true;
+		}
+		if (glasses != null) {
+			return true;
+		}
+		if (glaucoma != null) {
+			return true;
+		}
+		if (grindingteeth != null) {
+			return true;
+		}
+		if (gumproblems != null) {
+			return true;
+		}
+		if (headaches != null) {
+			return true;
+		}
+		if (itchyeyes != null) {
+			return true;
+		}
+		if (lumpsinthroat != null) {
+			return true;
+		}
+		if (migraines != null) {
+			return true;
+		}
+		if (myopiaorPresbyopia != null) {
+			return true;
+		}
+		if (nightblindness != null) {
+			return true;
+		}
+		if (nosebleeds != null) {
+			return true;
+		}
+		if (phlegmColor != null) {
+			return true;
+		}
+		if (poorhearing != null) {
+			return true;
+		}
+		if (poorvision != null) {
+			return true;
+		}
+		if (recurrentsorethroat != null) {
+			return true;
+		}
+		if (redeyes != null) {
+			return true;
+		}
+		if (ringears != null) {
+			return true;
+		}
+		if (ringinginears != null) {
+			return true;
+		}
+		if (sinusproblems != null) {
+			return true;
+		}
+		if (sores != null) {
+			return true;
+		}
+		if (spotsineyes != null) {
+			return true;
+		}
+		if (swollenglands != null) {
+			return true;
+		}
+		if (teethproblems != null) {
+			return true;
+		}
+		if (tmj != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

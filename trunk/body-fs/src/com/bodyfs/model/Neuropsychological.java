@@ -30,37 +30,37 @@ public class Neuropsychological implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean seizures;
+	private Boolean seizures;
 
 	@Persistent
-	private boolean numbness;
+	private Boolean numbness;
 
 	@Persistent
-	private boolean tics;
+	private Boolean tics;
 
 	@Persistent
-	private boolean poormemory;
+	private Boolean poormemory;
 
 	@Persistent
-	private boolean depression;
+	private Boolean depression;
 
 	@Persistent
-	private boolean anxiety;
+	private Boolean anxiety;
 
 	@Persistent
-	private boolean irritability;
+	private Boolean irritability;
 
 	@Persistent
-	private boolean easilystressed;
+	private Boolean easilystressed;
 
 	@Persistent
-	private boolean abusesurvivor;
+	private Boolean abusesurvivor;
 
 	@Persistent
-	private boolean suicide;
+	private Boolean suicide;
 
 	@Persistent
-	private boolean seeingatherapist;
+	private Boolean seeingatherapist;
 
 	@Persistent
 	private String Other;
@@ -84,91 +84,91 @@ public class Neuropsychological implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isSeizures() {
+	public final Boolean isSeizures() {
 		return seizures;
 	}
 
-	public final void setSeizures(boolean seizures) {
+	public final void setSeizures(Boolean seizures) {
 		this.seizures = seizures;
 	}
 
-	public final boolean isNumbness() {
+	public final Boolean isNumbness() {
 		return numbness;
 	}
 
-	public final void setNumbness(boolean numbness) {
+	public final void setNumbness(Boolean numbness) {
 		this.numbness = numbness;
 	}
 
-	public final boolean isTics() {
+	public final Boolean isTics() {
 		return tics;
 	}
 
-	public final void setTics(boolean tics) {
+	public final void setTics(Boolean tics) {
 		this.tics = tics;
 	}
 
-	public final boolean isPoormemory() {
+	public final Boolean isPoormemory() {
 		return poormemory;
 	}
 
-	public final void setPoormemory(boolean poormemory) {
+	public final void setPoormemory(Boolean poormemory) {
 		this.poormemory = poormemory;
 	}
 
-	public final boolean isDepression() {
+	public final Boolean isDepression() {
 		return depression;
 	}
 
-	public final void setDepression(boolean depression) {
+	public final void setDepression(Boolean depression) {
 		this.depression = depression;
 	}
 
-	public final boolean isAnxiety() {
+	public final Boolean isAnxiety() {
 		return anxiety;
 	}
 
-	public final void setAnxiety(boolean anxiety) {
+	public final void setAnxiety(Boolean anxiety) {
 		this.anxiety = anxiety;
 	}
 
-	public final boolean isIrritability() {
+	public final Boolean isIrritability() {
 		return irritability;
 	}
 
-	public final void setIrritability(boolean irritability) {
+	public final void setIrritability(Boolean irritability) {
 		this.irritability = irritability;
 	}
 
-	public final boolean isEasilystressed() {
+	public final Boolean isEasilystressed() {
 		return easilystressed;
 	}
 
-	public final void setEasilystressed(boolean easilystressed) {
+	public final void setEasilystressed(Boolean easilystressed) {
 		this.easilystressed = easilystressed;
 	}
 
-	public final boolean isAbusesurvivor() {
+	public final Boolean isAbusesurvivor() {
 		return abusesurvivor;
 	}
 
-	public final void setAbusesurvivor(boolean abusesurvivor) {
+	public final void setAbusesurvivor(Boolean abusesurvivor) {
 		this.abusesurvivor = abusesurvivor;
 	}
 
-	public final boolean isSuicide() {
+	public final Boolean isSuicide() {
 		return suicide;
 	}
 
-	public final void setSuicide(boolean suicide) {
+	public final void setSuicide(Boolean suicide) {
 		this.suicide = suicide;
 	}
 
-	public final boolean isSeeingatherapist() {
+	public final Boolean isSeeingatherapist() {
 		return seeingatherapist;
 	}
 
-	public final void setSeeingatherapist(boolean seeingatherapist) {
+	public final void setSeeingatherapist(Boolean seeingatherapist) {
 		this.seeingatherapist = seeingatherapist;
 	}
 
@@ -186,6 +186,52 @@ public class Neuropsychological implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (Other != null) {
+			return true;
+		}
+		if (abusesurvivor != null) {
+			return true;
+		}
+		if (anxiety != null) {
+			return true;
+		}
+		if (depression != null) {
+			return true;
+		}
+		if (easilystressed != null) {
+			return true;
+		}
+		if (irritability != null) {
+			return true;
+		}
+		if (numbness != null) {
+			return true;
+		}
+		if (poormemory != null) {
+			return true;
+		}
+		if (seeingatherapist != null) {
+			return true;
+		}
+		if (seizures != null) {
+			return true;
+		}
+		if (suicide != null) {
+			return true;
+		}
+		if (tics != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

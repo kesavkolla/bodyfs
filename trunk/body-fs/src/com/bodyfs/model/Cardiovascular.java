@@ -30,34 +30,34 @@ public class Cardiovascular implements Serializable {
 	private Long personId;
 
 	@Persistent
-	private boolean highbloodpressure;
+	private Boolean highbloodpressure;
 
 	@Persistent
-	private boolean bloodclots;
+	private Boolean bloodclots;
 
 	@Persistent
-	private boolean lowbloodpressure;
+	private Boolean lowbloodpressure;
 
 	@Persistent
-	private boolean fainting;
+	private Boolean fainting;
 
 	@Persistent
-	private boolean chestpain;
+	private Boolean chestpain;
 
 	@Persistent
-	private boolean difficultybreathing;
+	private Boolean difficultybreathing;
 
 	@Persistent
-	private boolean tachycardia;
+	private Boolean tachycardia;
 
 	@Persistent
-	private boolean heartpalpitations;
+	private Boolean heartpalpitations;
 
 	@Persistent
-	private boolean phlebitis;
+	private Boolean phlebitis;
 
 	@Persistent
-	private boolean irregularheartbeat;
+	private Boolean irregularheartbeat;
 
 	@Persistent
 	private Date createDate = new Date(System.currentTimeMillis());
@@ -78,83 +78,83 @@ public class Cardiovascular implements Serializable {
 		this.personId = personId;
 	}
 
-	public final boolean isHighbloodpressure() {
+	public final Boolean isHighbloodpressure() {
 		return highbloodpressure;
 	}
 
-	public final void setHighbloodpressure(boolean highbloodpressure) {
+	public final void setHighbloodpressure(Boolean highbloodpressure) {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final boolean isBloodclots() {
+	public final Boolean isBloodclots() {
 		return bloodclots;
 	}
 
-	public final void setBloodclots(boolean bloodclots) {
+	public final void setBloodclots(Boolean bloodclots) {
 		this.bloodclots = bloodclots;
 	}
 
-	public final boolean isLowbloodpressure() {
+	public final Boolean isLowbloodpressure() {
 		return lowbloodpressure;
 	}
 
-	public final void setLowbloodpressure(boolean lowbloodpressure) {
+	public final void setLowbloodpressure(Boolean lowbloodpressure) {
 		this.lowbloodpressure = lowbloodpressure;
 	}
 
-	public final boolean isFainting() {
+	public final Boolean isFainting() {
 		return fainting;
 	}
 
-	public final void setFainting(boolean fainting) {
+	public final void setFainting(Boolean fainting) {
 		this.fainting = fainting;
 	}
 
-	public final boolean isChestpain() {
+	public final Boolean isChestpain() {
 		return chestpain;
 	}
 
-	public final void setChestpain(boolean chestpain) {
+	public final void setChestpain(Boolean chestpain) {
 		this.chestpain = chestpain;
 	}
 
-	public final boolean isDifficultybreathing() {
+	public final Boolean isDifficultybreathing() {
 		return difficultybreathing;
 	}
 
-	public final void setDifficultybreathing(boolean difficultybreathing) {
+	public final void setDifficultybreathing(Boolean difficultybreathing) {
 		this.difficultybreathing = difficultybreathing;
 	}
 
-	public final boolean isTachycardia() {
+	public final Boolean isTachycardia() {
 		return tachycardia;
 	}
 
-	public final void setTachycardia(boolean tachycardia) {
+	public final void setTachycardia(Boolean tachycardia) {
 		this.tachycardia = tachycardia;
 	}
 
-	public final boolean isHeartpalpitations() {
+	public final Boolean isHeartpalpitations() {
 		return heartpalpitations;
 	}
 
-	public final void setHeartpalpitations(boolean heartpalpitations) {
+	public final void setHeartpalpitations(Boolean heartpalpitations) {
 		this.heartpalpitations = heartpalpitations;
 	}
 
-	public final boolean isPhlebitis() {
+	public final Boolean isPhlebitis() {
 		return phlebitis;
 	}
 
-	public final void setPhlebitis(boolean phlebitis) {
+	public final void setPhlebitis(Boolean phlebitis) {
 		this.phlebitis = phlebitis;
 	}
 
-	public final boolean isIrregularheartbeat() {
+	public final Boolean isIrregularheartbeat() {
 		return irregularheartbeat;
 	}
 
-	public final void setIrregularheartbeat(boolean irregularheartbeat) {
+	public final void setIrregularheartbeat(Boolean irregularheartbeat) {
 		this.irregularheartbeat = irregularheartbeat;
 	}
 
@@ -164,6 +164,46 @@ public class Cardiovascular implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	/**
+	 * This method will determine if any of the properties of this class is set
+	 * or not Based on this value this object is either persisted or discarded
+	 * 
+	 * @return true if any one of the property is set false otherwise
+	 */
+	public boolean isDirty() {
+		if (bloodclots != null) {
+			return true;
+		}
+		if (chestpain != null) {
+			return true;
+		}
+		if (difficultybreathing != null) {
+			return true;
+		}
+		if (fainting != null) {
+			return true;
+		}
+		if (heartpalpitations != null) {
+			return true;
+		}
+		if (highbloodpressure != null) {
+			return true;
+		}
+		if (irregularheartbeat != null) {
+			return true;
+		}
+		if (lowbloodpressure != null) {
+			return true;
+		}
+		if (phlebitis != null) {
+			return true;
+		}
+		if (tachycardia != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

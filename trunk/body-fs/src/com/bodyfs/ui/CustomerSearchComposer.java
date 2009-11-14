@@ -1,5 +1,6 @@
 package com.bodyfs.ui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -15,6 +16,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModel;
@@ -26,6 +28,8 @@ import org.zkoss.zul.api.Textbox;
 import org.zkoss.zul.api.Window;
 
 import com.bodyfs.PMF;
+import com.bodyfs.dao.IPageDAO;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
 
 public class CustomerSearchComposer extends GenericForwardComposer {
@@ -37,6 +41,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 	
+	private IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO"); 
 	
 	AnnotateDataBinder binder;
 	
@@ -68,23 +73,30 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable(comp.getId() + "Ctrl", this, true);
 		binder = new AnnotateDataBinder(comp);
-		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery(Person.class);
-		resultSet = (Collection<Person>) query.execute();	
-		//extendedSearch.setVisible(false);
+		
+		try{
+			Query query = pm.newQuery(Person.class);
+			resultSet = (Collection<Person>) query.execute();
+			resultSet = pm.detachCopyAll(resultSet);
+			//extendedSearch.setVisible(false);
+		}finally{
+			pm.close();
+		}
 		binder.loadAll();
 	}
 	
+	
 	public void searchSmart(){
 		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
+		//PersistenceManager pm = PMF.get().getPersistenceManager();
 		smrtTextbox.getValue();
 		CompassHits hits =  compassSession.find(smrtTextbox.getValue());
 		resultSet= new ArrayList<Person>();
 		for(int i=0; i<hits.length();i++){
-			
 			resultSet.add((Person)hits.data(i));
 		}
+		//resultSet = pm.detachCopyAll(resultSet);
 		System.out.println("Amit- "+resultSet.size());
 		binder.loadAll();
 		
@@ -127,7 +139,11 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		searchSmart();
 	}
 	
-	public class SearchOptions{
+	public class SearchOptions implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7148090100102182159L;
 		String firstName;
 		String lastName; 
 		String customerType;

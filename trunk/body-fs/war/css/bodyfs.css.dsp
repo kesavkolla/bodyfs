@@ -128,3 +128,9 @@ div.demo-items {
 .pointer {
 	cursor:pointer;
 }
+
+.userInfo{
+	float:right;
+	padding-right: 10px;"
+}
+

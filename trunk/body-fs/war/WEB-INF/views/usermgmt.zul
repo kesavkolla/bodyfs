@@ -6,6 +6,8 @@
 			<hbox width="100%">
 				<toolbarbutton label="New Patient" image="/img/user_add.png" forward="onClick=main.onHandleClick(npi)"
 					id="btnNPI" />
+				<toolbarbutton label="Search Customers" image="/img/user_group_colored.png" forward="onClick=main.onHandleClick(custSearch)"
+					id="btnSearch" />
 			</hbox>
 		</north>
 		<center autoscroll="true" flex="true">

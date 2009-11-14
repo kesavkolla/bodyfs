@@ -54,14 +54,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 
 	@Override
 	public void deletePerson(Long id) {
-		this.jdoTemplate.execute(new JdoCallback<Long>() {
-			@Override
-			public Long doInJdo(PersistenceManager pm) throws JDOException {
-				final Query query = pm.newQuery(Person.class);
-				return query.deletePersistentAll();
-			}
-
-		});
+		this.jdoTemplate.deletePersistent(this.jdoTemplate.getObjectById(Person.class, id));
 	}
 
 	@Override

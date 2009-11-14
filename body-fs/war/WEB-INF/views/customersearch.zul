@@ -1,0 +1,99 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+<style dynamic="true">	
+</style>
+<window id="mainWindow" height="100%" title="Search Customers" border="normal" apply="com.bodyfs.ui.CustomerSearchComposer">
+<borderlayout height="100%">
+	<north maxsize="100" size="8%">
+		<div id="smartSearch" >
+			<grid id="smartSearchGrid" fixedLayout="true">
+				<columns>
+					<column width="100px" />
+					<column width="310px" />
+					<column width="100px" />
+					<column width="250px" />
+					<column />
+				</columns>
+				<rows >
+					<row spans=",2,">
+					Quick Search: 
+						<textbox id="smrtTextbox" maxlength="400" height="20px" style="text-sixe:30px;" width="400px" focus="true"/>
+						<div style="float:right"><checkbox id="typePre"/>pre    <checkbox id="typeCurrent" checked="true"/>current     <checkbox id="typePost"/>post    </div>
+					</row>
+				</rows>
+			</grid>
+			
+		</div>
+		
+	</north>
+	<center border="20">
+	<groupbox id="gb" mold="3d" width="100%" open="false">
+	  <caption image="/img/ArrowDown-16x16.png" label="More..."/>
+	  <div id="extendedSearch" >
+			<grid id="extendedSearchGrid" fixedLayout="true">
+				<columns>
+					<column width="100px" />
+					<column width="175px" />
+					<column width="100px" />
+					<column width="175px" />
+					<column width="100px" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						First Name:
+						<textbox id="firstName" value="@{person.firstName }" maxlength="100"
+							zclass="req-string" />
+						Last Name:
+						<textbox id="lastName" value="@{person.lastName }"  maxlength="100" 
+							zclass="req-string" />
+						Zip:
+						<textbox id="zip" value="@{person.zip }"  maxlength="100" 							zclass="req-string" />
+					</row>
+					<row spans="2,,,,">
+						<label value="Date Of Treatement"/>
+						From Date:
+						<datebox id="trmtfromDate" maxlength="100" 
+							buttonVisible="true" />
+						To Date:
+						<datebox id="trmttoDate"  maxlength="100" 
+							 />
+					</row>
+				</rows>
+			</grid>
+			
+			<button id="refineSearch" label="Refine Current Results" style="float:center"/>
+			<button id="newSearch" label="New Search" style="float:center"/>
+		</div>
+	</groupbox>
+		
+	</center>
+	<south title="Results" splittable="true" height="60%" autoscroll="true" flex="true">
+		<div id="results" style="position:realtive;bottom:0;right:0" >
+			<grid id="persons" model="@{mainWindowCtrl.resultSet}" fixedLayout="true">
+			<columns>
+				<column label="First Name" sort="auto" />
+				<column label="Last Name" sort="auto" />
+				<column label="email"/>
+				<column label="Type" sort="auto" tooltiptext="pre,current or post Customers" />
+			</columns>
+			<rows>
+				<row self="@{each='person'}">
+					<label value="@{person.firstName}"  />
+					<label value="@{person.lastName}" />
+					<label value="@{person.email}" />
+					<label value="@{person.personType}" />
+				</row>
+			</rows>
+			</grid>
+		</div>
+	</south>
+</borderlayout>
+		 
+		
+		 
+		
+</window>
+</zk>

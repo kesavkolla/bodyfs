@@ -13,24 +13,32 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Unique;
 
+import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableId;
+import org.compass.annotations.SearchableProperty;
+
 /**
  * This class represents person in the system. This class defines all
  * nonmultable properties
  * 
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
+@Searchable
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 7682118330339432960L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@SearchableId
 	private Long id;
 
 	@Persistent
+	@SearchableProperty
 	private String firstName;
 
 	@Persistent
+	@SearchableProperty
 	private String lastName;
 
 	@Persistent
@@ -38,12 +46,14 @@ public class Person implements Serializable {
 
 	@Persistent
 	@Unique
+	@SearchableProperty
 	private String email;
 
 	@Persistent
 	private String homePhone;
 
 	@Persistent
+	@SearchableProperty
 	private String mobilePhone;
 
 	@Persistent
@@ -68,7 +78,7 @@ public class Person implements Serializable {
 	public final Long getId() {
 		return id;
 	}
-
+	
 	public final void setId(final Long id) {
 		this.id = id;
 	}

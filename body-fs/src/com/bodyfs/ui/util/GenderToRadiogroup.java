@@ -3,6 +3,8 @@
  */
 package com.bodyfs.ui.util;
 
+import java.io.Serializable;
+
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zkplus.databind.TypeConverter;
 
@@ -14,7 +16,9 @@ import com.bodyfs.model.Gender;
  * @author kesav
  * 
  */
-public class GenderToRadiogroup implements TypeConverter {
+public class GenderToRadiogroup implements TypeConverter, Serializable {
+
+	private static final long serialVersionUID = -3348774722651545293L;
 
 	@Override
 	public Object coerceToBean(final Object val, final Component comp) {

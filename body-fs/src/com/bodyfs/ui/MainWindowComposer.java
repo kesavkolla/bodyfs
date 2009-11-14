@@ -3,8 +3,6 @@
  */
 package com.bodyfs.ui;
 
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
@@ -18,7 +16,6 @@ import org.zkoss.zul.Label;
 
 import com.bodyfs.dao.IPageDAO;
 import com.bodyfs.model.Page;
-import com.dyuproject.openid.OpenIdUser;
 
 /**
  * 
@@ -38,11 +35,13 @@ public class MainWindowComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		final OpenIdUser user = (OpenIdUser) this.requestScope.get(OpenIdUser.ATTR_NAME);
-		final Map<String, String> userinfo = (Map<String, String>) user.getAttribute("info");
-		if (userinfo != null) {
-			username.setValue(userinfo.get("lastname") + ", " + userinfo.get("firstname"));
-		}
+		/*
+		 * final OpenIdUser user = (OpenIdUser)
+		 * this.requestScope.get(OpenIdUser.ATTR_NAME); final Map<String,
+		 * String> userinfo = (Map<String, String>) user.getAttribute("info");
+		 * if (userinfo != null) { username.setValue(userinfo.get("lastname") +
+		 * ", " + userinfo.get("firstname")); }
+		 */
 		if (pageDAO == null) {
 			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		}

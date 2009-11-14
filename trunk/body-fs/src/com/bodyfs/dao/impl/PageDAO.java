@@ -3,6 +3,7 @@
  */
 package com.bodyfs.dao.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +21,8 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 @Repository(value = "pageDAO")
-public class PageDAO implements IPageDAO {
+public class PageDAO implements IPageDAO, Serializable {
+	private static final long serialVersionUID = 8048078038056041156L;
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
 	private static final MemcacheService cacheService = MemcacheServiceFactory.getMemcacheService();
 

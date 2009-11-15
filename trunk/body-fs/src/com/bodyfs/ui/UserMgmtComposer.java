@@ -23,7 +23,7 @@ public class UserMgmtComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		LOGGER.error(usermgmtinclude);
+		//LOGGER.error(usermgmtinclude);
 	}
 
 	private void navigatePage(final String pageid, boolean bookmark) {

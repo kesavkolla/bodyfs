@@ -7,36 +7,38 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Nausea" />
-					<checkbox label="Vomiting" />
-					<checkbox label="Acid regurgitation" />
-					<checkbox label="Gas" />
-					<checkbox label="Hiccup" />
-					<checkbox label="Bloating" />
-					<checkbox label="Bad breath" />
+					<checkbox label="Nausea" checked="@{gi.nausea, save-when='btnNext.onClick' }" />
+					<checkbox label="Vomiting" checked="@{gi.vomiting, save-when='btnNext.onClick' }" />
+					<checkbox label="Acid regurgitation"
+						checked="@{gi.acidregurgitation, save-when='btnNext.onClick' }" />
+					<checkbox label="Gas" checked="@{gi.gas, save-when='btnNext.onClick' }" />
+					<checkbox label="Hiccup" checked="@{gi.hiccup, save-when='btnNext.onClick' }" />
+					<checkbox label="Bloating" checked="@{gi.bloating, save-when='btnNext.onClick' }" />
+					<checkbox label="Bad breath" checked="@{gi.badbreath, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Diarrhea" />
-					<checkbox label="Constipation" />
-					<checkbox label="Black stools" />
-					<checkbox label="Bloody stools" />
-					<checkbox label="Mucous in stools" />
-					<checkbox label="Henorrhoid" />
-					<checkbox label="Itchy anus" />
+					<checkbox label="Diarrhea" checked="@{gi.diarrhea, save-when='btnNext.onClick' }" />
+					<checkbox label="Constipation" checked="@{gi.constipation, save-when='btnNext.onClick' }" />
+					<checkbox label="Black stools" checked="@{gi.blackstools, save-when='btnNext.onClick' }" />
+					<checkbox label="Bloody stools" checked="@{gi.bloodystools, save-when='btnNext.onClick' }" />
+					<checkbox label="Mucous in stools" checked="@{gi.mucousinstools, save-when='btnNext.onClick' }" />
+					<checkbox label="Henorrhoid" checked="@{gi.henorrhoid, save-when='btnNext.onClick' }" />
+					<checkbox label="Itchy anus" checked="@{gi.itchyanus, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Intestinal pain or cramping" />
-					<checkbox label="Burning anus" />
-					<checkbox label="Rectal pain" />
-					<checkbox label="Anal fissures" />
-					<checkbox label="Laxative use" />
+					<checkbox label="Intestinal pain or cramping"
+						checked="@{gi.cramping, save-when='btnNext.onClick' }" />
+					<checkbox label="Burning anus" checked="@{gi.burninganus, save-when='btnNext.onClick' }" />
+					<checkbox label="Rectal pain" checked="@{gi.rectalpain, save-when='btnNext.onClick' }" />
+					<checkbox label="Anal fissures" checked="@{gi.analfissures, save-when='btnNext.onClick' }" />
+					<checkbox label="Laxative use" checked="@{gi.laxativeusel, save-when='btnNext.onClick' }" />
 					<hbox>
 						What kind?Depression
-						<textbox />
+						<textbox value="@{gi.depression, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
 						How often?
-						<textbox />
+						<textbox value="@{gi.dpresseionfreq, save-when='btnNext.onClick' }" />
 					</hbox>
 				</vbox>
 				<vbox>
@@ -44,11 +46,11 @@
 
 					<hbox>
 						Frequency
-						<textbox />
+						<textbox value="@{gi.bowelfreq, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
 						Color
-						<textbox />
+						<textbox value="@{gi.color, save-when='btnNext.onClick' }" />
 					</hbox>
 				</vbox>
 				<vbox>
@@ -56,11 +58,11 @@
 
 					<hbox>
 						Texture/form
-						<textbox />
+						<textbox value="@{gi.texture, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
 						Odor
-						<textbox />
+						<textbox value="@{gi.odor, save-when='btnNext.onClick' }" />
 					</hbox>
 				</vbox>
 			</hbox>
@@ -70,24 +72,25 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Neck/shoulder pain" />
-					<checkbox label="Muscle pain" />
+					<checkbox label="Neck/shoulder pain" checked="@{ms.neckpain, save-when='btnNext.onClick' }" />
+					<checkbox label="Muscle pain" checked="@{ms.musclepain, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Upper back pain" />
-					<checkbox label="Low back pain" />
+					<checkbox label="Upper back pain" checked="@{ms.upperbackpain, save-when='btnNext.onClick' }" />
+					<checkbox label="Low back pain" checked="@{ms.lowbackpain, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Joint pain" />
-					<checkbox label="Rib pain" />
+					<checkbox label="Joint pain" checked="@{ms.jointpain, save-when='btnNext.onClick' }" />
+					<checkbox label="Rib pain" checked="@{ms.ribpain, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Limited range of motion" />
-					<checkbox label="Limited use" />
+					<checkbox label="Limited range of motion"
+						checked="@{ms.limitedrangeofmotion, save-when='btnNext.onClick' }" />
+					<checkbox label="Limited use" checked="@{ms.limiteduse, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
 					Other(Describe)
-					<textbox />
+					<textbox value="@{ms.other, save-when='btnNext.onClick' }" />
 				</vbox>
 			</hbox>
 		</panelchildren>
@@ -96,27 +99,28 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Rashes" />
-					<checkbox label="Hives" />
-					<checkbox label="Ulcerations" />
+					<checkbox label="Rashes" checked="@{sh.rashes, save-when='btnNext.onClick' }" />
+					<checkbox label="Hives" checked="@{sh.hives, save-when='btnNext.onClick' }" />
+					<checkbox label="Ulcerations" checked="@{sh.ulcerations, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Eczema" />
-					<checkbox label="Psoriasis" />
-					<checkbox label="Acne" />
+					<checkbox label="Eczema" checked="@{sh.eczema, save-when='btnNext.onClick' }" />
+					<checkbox label="Psoriasis" checked="@{sh.psoriasis, save-when='btnNext.onClick' }" />
+					<checkbox label="Acne" checked="@{sh.acne, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Dandruff" />
-					<checkbox label="Itching" />
-					<checkbox label="Hair loss" />
+					<checkbox label="Dandruff" checked="@{sh.dandruff, save-when='btnNext.onClick' }" />
+					<checkbox label="Itching" checked="@{sh.itching, save-when='btnNext.onClick' }" />
+					<checkbox label="Hair loss" checked="@{sh.hairloss, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Change in hair/skin texture" />
-					<checkbox label="Fungal infections" />
+					<checkbox label="Change in hair/skin texture"
+						checked="@{sh.skintexture, save-when='btnNext.onClick' }" />
+					<checkbox label="Fungal infections" checked="@{sh.fungalinfections, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
 					Other hair or skin problems
-					<textbox rows="2" hflex="1" />
+					<textbox rows="2" hflex="1" value="@{sh.other, save-when='btnNext.onClick' }" />
 				</vbox>
 			</hbox>
 		</panelchildren>
@@ -125,28 +129,28 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Seizures" />
-					<checkbox label="Numbness" />
-					<checkbox label="Tics" />
+					<checkbox label="Seizures" checked="@{np.seizures, save-when='btnNext.onClick' }" />
+					<checkbox label="Numbness" checked="@{np.numbness, save-when='btnNext.onClick' }" />
+					<checkbox label="Tics" checked="@{np.tics, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Poor memory" />
-					<checkbox label="Depression" />
-					<checkbox label="Anxiety" />
+					<checkbox label="Poor memory" checked="@{np.poormemory, save-when='btnNext.onClick' }" />
+					<checkbox label="Depression" checked="@{np.depression, save-when='btnNext.onClick' }" />
+					<checkbox label="Anxiety" checked="@{np.anxiety, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Irritability" />
-					<checkbox label="Easily stressed" />
-					<checkbox label="Abuse survivor" />
+					<checkbox label="Irritability" checked="@{np.irritability, save-when='btnNext.onClick' }" />
+					<checkbox label="Easily stressed" checked="@{np.easilystressed, save-when='btnNext.onClick' }" />
+					<checkbox label="Abuse survivor" checked="@{np.abusesurvivor, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Considered/attempted" />
+					<checkbox label="Considered/attempted" checked="@{np.suicide, save-when='btnNext.onClick' }" />
 					suicide
-					<checkbox label="Seeing a therapist" />
+					<checkbox label="Seeing a therapist" checked="@{np.seeingatherapist, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
 					Other (Specify)
-					<textbox rows="2" hflex="1" />
+					<textbox rows="2" hflex="1" value="@{np.Other, save-when='btnNext.onClick' }" />
 				</vbox>
 			</hbox>
 		</panelchildren>
@@ -155,29 +159,34 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Pain on urination" />
-					<checkbox label="Frequent urination" />
-					<checkbox label="Urgent urination" />
+					<checkbox label="Pain on urination" checked="@{gen.painonurination, save-when='btnNext.onClick' }" />
+					<checkbox label="Frequent urination"
+						checked="@{gen.frequenturination, save-when='btnNext.onClick' }" />
+					<checkbox label="Urgent urination" checked="@{gen.urgenturination, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Blood in urine" />
-					<checkbox label="Unable to hold urinne" />
-					<checkbox label="Incomplete urination" />
+					<checkbox label="Blood in urine" checked="@{gen.bloodinurine, save-when='btnNext.onClick' }" />
+					<checkbox label="Unable to hold urinne"
+						checked="@{gen.unabletoholdurinne, save-when='btnNext.onClick' }" />
+					<checkbox label="Incomplete urination"
+						checked="@{gen.incompleteurination, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Venereal disease" />
-					<checkbox label="Bedwetting" />
-					<checkbox label="Wake to urinate" />
+					<checkbox label="Venereal disease" checked="@{gen.venerealdisease, save-when='btnNext.onClick' }" />
+					<checkbox label="Bedwetting" checked="@{gen.bedwetting, save-when='btnNext.onClick' }" />
+					<checkbox label="Wake to urinate" checked="@{gen.waketourinate, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Increased libido" />
-					<checkbox label="Decreased libido" />
-					<checkbox label="Kidney stone" />
+					<checkbox label="Increased libido" checked="@{gen.increasedlibido, save-when='btnNext.onClick' }" />
+					<checkbox label="Decreased libido" checked="@{gen.decreasedlibido, save-when='btnNext.onClick' }" />
+					<checkbox label="Kidney stone" checked="@{gen.kidneystone, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Impotence" />
-					<checkbox label="Premature ejaculation" />
-					<checkbox label="Nocturnal emission" />
+					<checkbox label="Impotence" checked="@{gen.impotence, save-when='btnNext.onClick' }" />
+					<checkbox label="Premature ejaculation"
+						checked="@{gen.prematureejaculation, save-when='btnNext.onClick' }" />
+					<checkbox label="Nocturnal emission"
+						checked="@{gen.nocturnalemission, save-when='btnNext.onClick' }" />
 				</vbox>
 			</hbox>
 		</panelchildren>
@@ -186,62 +195,62 @@
 		<panelchildren>
 			<hbox width="100%">
 				<vbox>
-					<checkbox label="Age menses began" />
-					<textbox />
+					<checkbox label="Age menses began" checked="@{gy.agemensesbegan, save-when='btnNext.onClick' }" />
+					<textbox value="@{gy.lengthofcycle, save-when='btnNext.onClick' }" />
 					Length of cycle(day1 to day1)
 				</vbox>
 				<vbox>
-					<checkbox label="Duration of flow" />
-					<textbox />
-					<checkbox label="Irregular periods" />
-					<checkbox label="Painful periods" />
-					<checkbox label="PMS" />
+					<checkbox label="Duration of flow" checked="@{gy.durationofflow, save-when='btnNext.onClick' }" />
+					<textbox value="@{gy.duration, save-when='btnNext.onClick' }" />
+					<checkbox label="Irregular periods" checked="@{gy.irregularperiods, save-when='btnNext.onClick' }" />
+					<checkbox label="Painful periods" checked="@{gy.painfulperiods, save-when='btnNext.onClick' }" />
+					<checkbox label="PMS" checked="@{gy.pms, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Vaginal discharge" />
+					<checkbox label="Vaginal discharge" checked="@{gy.vaginaldischarge, save-when='btnNext.onClick' }" />
 					<hbox>
 						(color)
-						<textbox />
+						<textbox value="@{gy.color, save-when='btnNext.onClick' }" />
 					</hbox>
-					<checkbox label="Vaginal sores" />
-					<checkbox label="Vaginal odor" />
-					<checkbox label="Clots" />
+					<checkbox label="Vaginal sores" checked="@{gy.vaginalsores, save-when='btnNext.onClick' }" />
+					<checkbox label="Vaginal odor" checked="@{gy.vaginalodor, save-when='btnNext.onClick' }" />
+					<checkbox label="Clots" checked="@{gy.clots, save-when='btnNext.onClick' }" />
 				</vbox>
 				<vbox>
-					<checkbox label="Breast lumps" />
+					<checkbox label="Breast lumps" checked="@{gy.breastlumps, save-when='btnNext.onClick' }" />
 					<hbox>
 						# Pregnancies
-						<intbox />
+						<intbox value="@{gy.pregnancies, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
 						# Live births
-						<intbox />
+						<intbox value="@{gy.livebirths, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
 						# Premature births
-						<intbox />
+						<intbox value="@{gy.prematurebirths, save-when='btnNext.onClick' }" />
 					</hbox>
 					<hbox>
-						# Age ar menopause
-						<intbox />
+						# Age at menopause
+						<intbox value="@{gy.agearmenopause, save-when='btnNext.onClick' }" />
 					</hbox>
 				</vbox>
 				<vbox>
 					Date of last PAP
-					<textbox />
+					<textbox value="@{gy.dateoflastPAP, save-when='btnNext.onClick' }" />
 					Date last period began
-					<textbox />
+					<textbox value="@{gy.datelastperiodbegan, save-when='btnNext.onClick' }" />
 				</vbox>
 			</hbox>
 		</panelchildren>
 	</panel>
 	<panel title="Other" border="normal" style="margin-bottom:10px">
 		<panelchildren>
-			<textbox hflex="1" rows="4" />
+			<textbox hflex="1" rows="4" value="@{gy.other, save-when='btnNext.onClick' }" />
 		</panelchildren>
 	</panel>
 	<hbox width="100%" pack="end">
 		<button label="Prev" forward="onClick=npigrid.onNext(npi2)" />
-		<button label="Finish" forward="onClick=npigrid.onSaveNPI" />
+		<button id="btnNext" label="Finish" forward="onClick=npigrid.onSaveNPI" />
 	</hbox>
 </zk>

@@ -54,6 +54,24 @@ public class Diet implements Serializable {
 	private String water;
 
 	@Persistent
+	private String morning;
+
+	@Persistent
+	private String msnack;
+
+	@Persistent
+	private String noon;
+
+	@Persistent
+	private String nsnack;
+
+	@Persistent
+	private String evening;
+
+	@Persistent
+	private String esnack;
+
+	@Persistent
 	private Date createDate = new Date(System.currentTimeMillis());
 
 	public final Long getId() {
@@ -80,7 +98,7 @@ public class Diet implements Serializable {
 		this.appetite = appetite;
 	}
 
-	public final Boolean isCoffeeTea() {
+	public final Boolean getCoffeeTea() {
 		return coffeeTea;
 	}
 
@@ -88,7 +106,7 @@ public class Diet implements Serializable {
 		this.coffeeTea = coffeeTea;
 	}
 
-	public final Boolean isDrinks() {
+	public final Boolean getDrinks() {
 		return drinks;
 	}
 
@@ -104,7 +122,7 @@ public class Diet implements Serializable {
 		this.protein = protein;
 	}
 
-	public final Boolean isSweeteners() {
+	public final Boolean getSweeteners() {
 		return sweeteners;
 	}
 
@@ -112,7 +130,7 @@ public class Diet implements Serializable {
 		this.sweeteners = sweeteners;
 	}
 
-	public final Boolean isSugar() {
+	public final Boolean getSugar() {
 		return sugar;
 	}
 
@@ -120,7 +138,7 @@ public class Diet implements Serializable {
 		this.sugar = sugar;
 	}
 
-	public final Boolean isSaltyfoods() {
+	public final Boolean getSaltyfoods() {
 		return saltyfoods;
 	}
 
@@ -132,15 +150,63 @@ public class Diet implements Serializable {
 		return water;
 	}
 
-	public final void setWater(final String water) {
+	public final void setWater(String water) {
 		this.water = water;
+	}
+
+	public final String getMorning() {
+		return morning;
+	}
+
+	public final void setMorning(String morning) {
+		this.morning = morning;
+	}
+
+	public final String getMsnack() {
+		return msnack;
+	}
+
+	public final void setMsnack(String msnack) {
+		this.msnack = msnack;
+	}
+
+	public final String getNoon() {
+		return noon;
+	}
+
+	public final void setNoon(String noon) {
+		this.noon = noon;
+	}
+
+	public final String getNsnack() {
+		return nsnack;
+	}
+
+	public final void setNsnack(String nsnack) {
+		this.nsnack = nsnack;
+	}
+
+	public final String getEvening() {
+		return evening;
+	}
+
+	public final void setEvening(String evening) {
+		this.evening = evening;
+	}
+
+	public final String getEsnack() {
+		return esnack;
+	}
+
+	public final void setEsnack(String esnack) {
+		this.esnack = esnack;
 	}
 
 	public final Date getCreateDate() {
 		return createDate;
 	}
 
-	public final void setCreateDate(final Date createDate) {
+	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
@@ -157,10 +223,25 @@ public class Diet implements Serializable {
 		if (coffeeTea != null) {
 			return true;
 		}
-		if (createDate != null) {
+		if (drinks != null) {
 			return true;
 		}
-		if (drinks != null) {
+		if (esnack != null) {
+			return true;
+		}
+		if (evening != null) {
+			return true;
+		}
+		if (morning != null) {
+			return true;
+		}
+		if (msnack != null) {
+			return true;
+		}
+		if (noon != null) {
+			return true;
+		}
+		if (nsnack != null) {
 			return true;
 		}
 		if (protein != null) {

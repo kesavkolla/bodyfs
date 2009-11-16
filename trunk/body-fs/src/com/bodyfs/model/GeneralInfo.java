@@ -224,7 +224,7 @@ public class GeneralInfo implements Serializable {
 		this.reasonforvisit = reasonforvisit;
 	}
 
-	public final Boolean isAccupunture() {
+	public final Boolean getAccupunture() {
 		return accupunture;
 	}
 
@@ -232,7 +232,7 @@ public class GeneralInfo implements Serializable {
 		this.accupunture = accupunture;
 	}
 
-	public final Boolean isChineseherbalmedicine() {
+	public final Boolean getChineseherbalmedicine() {
 		return chineseherbalmedicine;
 	}
 
@@ -248,7 +248,7 @@ public class GeneralInfo implements Serializable {
 		this.condition = condition;
 	}
 
-	public final Boolean isGettingworse() {
+	public final Boolean getGettingworse() {
 		return gettingworse;
 	}
 
@@ -256,7 +256,7 @@ public class GeneralInfo implements Serializable {
 		this.gettingworse = gettingworse;
 	}
 
-	public final Boolean isBotherSleep() {
+	public final Boolean getBotherSleep() {
 		return botherSleep;
 	}
 
@@ -264,7 +264,7 @@ public class GeneralInfo implements Serializable {
 		this.botherSleep = botherSleep;
 	}
 
-	public final Boolean isBotherWork() {
+	public final Boolean getBotherWork() {
 		return botherWork;
 	}
 
@@ -272,7 +272,7 @@ public class GeneralInfo implements Serializable {
 		this.botherWork = botherWork;
 	}
 
-	public final Boolean isBotherOther() {
+	public final Boolean getBotherOther() {
 		return botherOther;
 	}
 
@@ -312,7 +312,7 @@ public class GeneralInfo implements Serializable {
 		this.makeitworse = makeitworse;
 	}
 
-	public final Boolean isPhysiciancare() {
+	public final Boolean getPhysiciancare() {
 		return physiciancare;
 	}
 

@@ -168,7 +168,7 @@ public class PastMedicalHistory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isAids() {
+	public final Boolean getAids() {
 		return aids;
 	}
 
@@ -176,7 +176,7 @@ public class PastMedicalHistory implements Serializable {
 		this.aids = aids;
 	}
 
-	public final Boolean isAlcoholism() {
+	public final Boolean getAlcoholism() {
 		return alcoholism;
 	}
 
@@ -184,7 +184,7 @@ public class PastMedicalHistory implements Serializable {
 		this.alcoholism = alcoholism;
 	}
 
-	public final Boolean isAllergies() {
+	public final Boolean getAllergies() {
 		return allergies;
 	}
 
@@ -192,7 +192,7 @@ public class PastMedicalHistory implements Serializable {
 		this.allergies = allergies;
 	}
 
-	public final Boolean isAppendicitis() {
+	public final Boolean getAppendicitis() {
 		return appendicitis;
 	}
 
@@ -200,7 +200,7 @@ public class PastMedicalHistory implements Serializable {
 		this.appendicitis = appendicitis;
 	}
 
-	public final Boolean isArteriosclerosis() {
+	public final Boolean getArteriosclerosis() {
 		return arteriosclerosis;
 	}
 
@@ -208,7 +208,7 @@ public class PastMedicalHistory implements Serializable {
 		this.arteriosclerosis = arteriosclerosis;
 	}
 
-	public final Boolean isAsthma() {
+	public final Boolean getAsthma() {
 		return asthma;
 	}
 
@@ -216,7 +216,7 @@ public class PastMedicalHistory implements Serializable {
 		this.asthma = asthma;
 	}
 
-	public final Boolean isBirthtrauma() {
+	public final Boolean getBirthtrauma() {
 		return birthtrauma;
 	}
 
@@ -224,7 +224,7 @@ public class PastMedicalHistory implements Serializable {
 		this.birthtrauma = birthtrauma;
 	}
 
-	public final Boolean isCancer() {
+	public final Boolean getCancer() {
 		return cancer;
 	}
 
@@ -232,7 +232,7 @@ public class PastMedicalHistory implements Serializable {
 		this.cancer = cancer;
 	}
 
-	public final Boolean isChickenpox() {
+	public final Boolean getChickenpox() {
 		return chickenpox;
 	}
 
@@ -240,7 +240,7 @@ public class PastMedicalHistory implements Serializable {
 		this.chickenpox = chickenpox;
 	}
 
-	public final Boolean isDiabetes() {
+	public final Boolean getDiabetes() {
 		return diabetes;
 	}
 
@@ -248,7 +248,7 @@ public class PastMedicalHistory implements Serializable {
 		this.diabetes = diabetes;
 	}
 
-	public final Boolean isEmphysema() {
+	public final Boolean getEmphysema() {
 		return emphysema;
 	}
 
@@ -256,7 +256,7 @@ public class PastMedicalHistory implements Serializable {
 		this.emphysema = emphysema;
 	}
 
-	public final Boolean isEpilepsy() {
+	public final Boolean getEpilepsy() {
 		return epilepsy;
 	}
 
@@ -264,7 +264,7 @@ public class PastMedicalHistory implements Serializable {
 		this.epilepsy = epilepsy;
 	}
 
-	public final Boolean isGoiter() {
+	public final Boolean getGoiter() {
 		return goiter;
 	}
 
@@ -272,7 +272,7 @@ public class PastMedicalHistory implements Serializable {
 		this.goiter = goiter;
 	}
 
-	public final Boolean isGout() {
+	public final Boolean getGout() {
 		return gout;
 	}
 
@@ -280,7 +280,7 @@ public class PastMedicalHistory implements Serializable {
 		this.gout = gout;
 	}
 
-	public final Boolean isHeartdisease() {
+	public final Boolean getHeartdisease() {
 		return heartdisease;
 	}
 
@@ -288,7 +288,7 @@ public class PastMedicalHistory implements Serializable {
 		this.heartdisease = heartdisease;
 	}
 
-	public final Boolean isHepatitis() {
+	public final Boolean getHepatitis() {
 		return hepatitis;
 	}
 
@@ -296,7 +296,7 @@ public class PastMedicalHistory implements Serializable {
 		this.hepatitis = hepatitis;
 	}
 
-	public final Boolean isHerpes() {
+	public final Boolean getHerpes() {
 		return herpes;
 	}
 
@@ -304,7 +304,7 @@ public class PastMedicalHistory implements Serializable {
 		this.herpes = herpes;
 	}
 
-	public final Boolean isHighbloodpressure() {
+	public final Boolean getHighbloodpressure() {
 		return highbloodpressure;
 	}
 
@@ -312,7 +312,7 @@ public class PastMedicalHistory implements Serializable {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final Boolean isMeasles() {
+	public final Boolean getMeasles() {
 		return measles;
 	}
 
@@ -320,7 +320,7 @@ public class PastMedicalHistory implements Serializable {
 		this.measles = measles;
 	}
 
-	public final Boolean isMultipleSclerosis() {
+	public final Boolean getMultipleSclerosis() {
 		return multipleSclerosis;
 	}
 
@@ -328,7 +328,7 @@ public class PastMedicalHistory implements Serializable {
 		this.multipleSclerosis = multipleSclerosis;
 	}
 
-	public final Boolean isMumps() {
+	public final Boolean getMumps() {
 		return mumps;
 	}
 
@@ -336,7 +336,7 @@ public class PastMedicalHistory implements Serializable {
 		this.mumps = mumps;
 	}
 
-	public final Boolean isPacemaker() {
+	public final Boolean getPacemaker() {
 		return pacemaker;
 	}
 
@@ -344,7 +344,7 @@ public class PastMedicalHistory implements Serializable {
 		this.pacemaker = pacemaker;
 	}
 
-	public final Boolean isPleurisy() {
+	public final Boolean getPleurisy() {
 		return pleurisy;
 	}
 
@@ -352,7 +352,7 @@ public class PastMedicalHistory implements Serializable {
 		this.pleurisy = pleurisy;
 	}
 
-	public final Boolean isPneumonia() {
+	public final Boolean getPneumonia() {
 		return pneumonia;
 	}
 
@@ -360,7 +360,7 @@ public class PastMedicalHistory implements Serializable {
 		this.pneumonia = pneumonia;
 	}
 
-	public final Boolean isPolio() {
+	public final Boolean getPolio() {
 		return polio;
 	}
 
@@ -368,7 +368,7 @@ public class PastMedicalHistory implements Serializable {
 		this.polio = polio;
 	}
 
-	public final Boolean isRheumaticfever() {
+	public final Boolean getRheumaticfever() {
 		return rheumaticfever;
 	}
 
@@ -376,7 +376,7 @@ public class PastMedicalHistory implements Serializable {
 		this.rheumaticfever = rheumaticfever;
 	}
 
-	public final Boolean isScarletfever() {
+	public final Boolean getScarletfever() {
 		return scarletfever;
 	}
 
@@ -384,7 +384,7 @@ public class PastMedicalHistory implements Serializable {
 		this.scarletfever = scarletfever;
 	}
 
-	public final Boolean isSeizures() {
+	public final Boolean getSeizures() {
 		return seizures;
 	}
 
@@ -392,7 +392,7 @@ public class PastMedicalHistory implements Serializable {
 		this.seizures = seizures;
 	}
 
-	public final Boolean isStroke() {
+	public final Boolean getStroke() {
 		return stroke;
 	}
 
@@ -400,7 +400,7 @@ public class PastMedicalHistory implements Serializable {
 		this.stroke = stroke;
 	}
 
-	public final Boolean isSurgery() {
+	public final Boolean getSurgery() {
 		return surgery;
 	}
 
@@ -416,7 +416,7 @@ public class PastMedicalHistory implements Serializable {
 		this.surgeryList = surgeryList;
 	}
 
-	public final Boolean isHyroiddisorders() {
+	public final Boolean getHyroiddisorders() {
 		return hyroiddisorders;
 	}
 
@@ -424,7 +424,7 @@ public class PastMedicalHistory implements Serializable {
 		this.hyroiddisorders = hyroiddisorders;
 	}
 
-	public final Boolean isMajortrauma() {
+	public final Boolean getMajortrauma() {
 		return majortrauma;
 	}
 
@@ -440,7 +440,7 @@ public class PastMedicalHistory implements Serializable {
 		this.carfalletc = carfalletc;
 	}
 
-	public final Boolean isTuberculosis() {
+	public final Boolean getTuberculosis() {
 		return tuberculosis;
 	}
 
@@ -448,7 +448,7 @@ public class PastMedicalHistory implements Serializable {
 		this.tuberculosis = tuberculosis;
 	}
 
-	public final Boolean isTyphoidfever() {
+	public final Boolean getTyphoidfever() {
 		return typhoidfever;
 	}
 
@@ -456,7 +456,7 @@ public class PastMedicalHistory implements Serializable {
 		this.typhoidfever = typhoidfever;
 	}
 
-	public final Boolean isUlcers() {
+	public final Boolean getUlcers() {
 		return ulcers;
 	}
 
@@ -464,7 +464,7 @@ public class PastMedicalHistory implements Serializable {
 		this.ulcers = ulcers;
 	}
 
-	public final Boolean isVenerealdisease() {
+	public final Boolean getVenerealdisease() {
 		return venerealdisease;
 	}
 
@@ -472,7 +472,7 @@ public class PastMedicalHistory implements Serializable {
 		this.venerealdisease = venerealdisease;
 	}
 
-	public final Boolean isWhoopingcough() {
+	public final Boolean getWhoopingcough() {
 		return whoopingcough;
 	}
 

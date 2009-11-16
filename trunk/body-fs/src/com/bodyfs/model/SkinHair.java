@@ -84,7 +84,7 @@ public class SkinHair implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isRashes() {
+	public final Boolean getRashes() {
 		return rashes;
 	}
 
@@ -92,7 +92,7 @@ public class SkinHair implements Serializable {
 		this.rashes = rashes;
 	}
 
-	public final Boolean isHives() {
+	public final Boolean getHives() {
 		return hives;
 	}
 
@@ -100,7 +100,7 @@ public class SkinHair implements Serializable {
 		this.hives = hives;
 	}
 
-	public final Boolean isUlcerations() {
+	public final Boolean getUlcerations() {
 		return ulcerations;
 	}
 
@@ -108,7 +108,7 @@ public class SkinHair implements Serializable {
 		this.ulcerations = ulcerations;
 	}
 
-	public final Boolean isEczema() {
+	public final Boolean getEczema() {
 		return eczema;
 	}
 
@@ -116,7 +116,7 @@ public class SkinHair implements Serializable {
 		this.eczema = eczema;
 	}
 
-	public final Boolean isPsoriasis() {
+	public final Boolean getPsoriasis() {
 		return psoriasis;
 	}
 
@@ -124,7 +124,7 @@ public class SkinHair implements Serializable {
 		this.psoriasis = psoriasis;
 	}
 
-	public final Boolean isAcne() {
+	public final Boolean getAcne() {
 		return acne;
 	}
 
@@ -132,7 +132,7 @@ public class SkinHair implements Serializable {
 		this.acne = acne;
 	}
 
-	public final Boolean isDandruff() {
+	public final Boolean getDandruff() {
 		return dandruff;
 	}
 
@@ -140,7 +140,7 @@ public class SkinHair implements Serializable {
 		this.dandruff = dandruff;
 	}
 
-	public final Boolean isItching() {
+	public final Boolean getItching() {
 		return itching;
 	}
 
@@ -148,7 +148,7 @@ public class SkinHair implements Serializable {
 		this.itching = itching;
 	}
 
-	public final Boolean isHairloss() {
+	public final Boolean getHairloss() {
 		return hairloss;
 	}
 
@@ -156,7 +156,7 @@ public class SkinHair implements Serializable {
 		this.hairloss = hairloss;
 	}
 
-	public final Boolean isSkintexture() {
+	public final Boolean getSkintexture() {
 		return skintexture;
 	}
 
@@ -164,7 +164,7 @@ public class SkinHair implements Serializable {
 		this.skintexture = skintexture;
 	}
 
-	public final Boolean isFungalinfections() {
+	public final Boolean getFungalinfections() {
 		return fungalinfections;
 	}
 

@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/dyuproject-openid-1.1.6.jar" sourcepath="C:/Software/dyuproject-1.1.6/modules/openid/src/main/java"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/dyuproject-util-1.1.6.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/compass-2.3.0-beta1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

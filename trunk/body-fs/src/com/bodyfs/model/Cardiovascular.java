@@ -78,7 +78,7 @@ public class Cardiovascular implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isHighbloodpressure() {
+	public final Boolean getHighbloodpressure() {
 		return highbloodpressure;
 	}
 
@@ -86,7 +86,7 @@ public class Cardiovascular implements Serializable {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final Boolean isBloodclots() {
+	public final Boolean getBloodclots() {
 		return bloodclots;
 	}
 
@@ -94,7 +94,7 @@ public class Cardiovascular implements Serializable {
 		this.bloodclots = bloodclots;
 	}
 
-	public final Boolean isLowbloodpressure() {
+	public final Boolean getLowbloodpressure() {
 		return lowbloodpressure;
 	}
 
@@ -102,7 +102,7 @@ public class Cardiovascular implements Serializable {
 		this.lowbloodpressure = lowbloodpressure;
 	}
 
-	public final Boolean isFainting() {
+	public final Boolean getFainting() {
 		return fainting;
 	}
 
@@ -110,7 +110,7 @@ public class Cardiovascular implements Serializable {
 		this.fainting = fainting;
 	}
 
-	public final Boolean isChestpain() {
+	public final Boolean getChestpain() {
 		return chestpain;
 	}
 
@@ -118,7 +118,7 @@ public class Cardiovascular implements Serializable {
 		this.chestpain = chestpain;
 	}
 
-	public final Boolean isDifficultybreathing() {
+	public final Boolean getDifficultybreathing() {
 		return difficultybreathing;
 	}
 
@@ -126,7 +126,7 @@ public class Cardiovascular implements Serializable {
 		this.difficultybreathing = difficultybreathing;
 	}
 
-	public final Boolean isTachycardia() {
+	public final Boolean getTachycardia() {
 		return tachycardia;
 	}
 
@@ -134,7 +134,7 @@ public class Cardiovascular implements Serializable {
 		this.tachycardia = tachycardia;
 	}
 
-	public final Boolean isHeartpalpitations() {
+	public final Boolean getHeartpalpitations() {
 		return heartpalpitations;
 	}
 
@@ -142,7 +142,7 @@ public class Cardiovascular implements Serializable {
 		this.heartpalpitations = heartpalpitations;
 	}
 
-	public final Boolean isPhlebitis() {
+	public final Boolean getPhlebitis() {
 		return phlebitis;
 	}
 
@@ -150,7 +150,7 @@ public class Cardiovascular implements Serializable {
 		this.phlebitis = phlebitis;
 	}
 
-	public final Boolean isIrregularheartbeat() {
+	public final Boolean getIrregularheartbeat() {
 		return irregularheartbeat;
 	}
 

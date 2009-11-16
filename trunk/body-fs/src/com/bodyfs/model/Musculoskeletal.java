@@ -75,7 +75,7 @@ public class Musculoskeletal implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isNeckpain() {
+	public final Boolean getNeckpain() {
 		return neckpain;
 	}
 
@@ -83,7 +83,7 @@ public class Musculoskeletal implements Serializable {
 		this.neckpain = neckpain;
 	}
 
-	public final Boolean isMusclepain() {
+	public final Boolean getMusclepain() {
 		return musclepain;
 	}
 
@@ -91,7 +91,7 @@ public class Musculoskeletal implements Serializable {
 		this.musclepain = musclepain;
 	}
 
-	public final Boolean isUpperbackpain() {
+	public final Boolean getUpperbackpain() {
 		return upperbackpain;
 	}
 
@@ -99,7 +99,7 @@ public class Musculoskeletal implements Serializable {
 		this.upperbackpain = upperbackpain;
 	}
 
-	public final Boolean isLowbackpain() {
+	public final Boolean getLowbackpain() {
 		return lowbackpain;
 	}
 
@@ -107,7 +107,7 @@ public class Musculoskeletal implements Serializable {
 		this.lowbackpain = lowbackpain;
 	}
 
-	public final Boolean isJointpain() {
+	public final Boolean getJointpain() {
 		return jointpain;
 	}
 
@@ -115,7 +115,7 @@ public class Musculoskeletal implements Serializable {
 		this.jointpain = jointpain;
 	}
 
-	public final Boolean isRibpain() {
+	public final Boolean getRibpain() {
 		return ribpain;
 	}
 
@@ -123,7 +123,7 @@ public class Musculoskeletal implements Serializable {
 		this.ribpain = ribpain;
 	}
 
-	public final Boolean isLimitedrangeofmotion() {
+	public final Boolean getLimitedrangeofmotion() {
 		return limitedrangeofmotion;
 	}
 
@@ -131,7 +131,7 @@ public class Musculoskeletal implements Serializable {
 		this.limitedrangeofmotion = limitedrangeofmotion;
 	}
 
-	public final Boolean isLimiteduse() {
+	public final Boolean getLimiteduse() {
 		return limiteduse;
 	}
 

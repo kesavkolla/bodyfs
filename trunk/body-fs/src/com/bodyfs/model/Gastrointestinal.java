@@ -123,7 +123,7 @@ public class Gastrointestinal implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isNausea() {
+	public final Boolean getNausea() {
 		return nausea;
 	}
 
@@ -131,7 +131,7 @@ public class Gastrointestinal implements Serializable {
 		this.nausea = nausea;
 	}
 
-	public final Boolean isVomiting() {
+	public final Boolean getVomiting() {
 		return vomiting;
 	}
 
@@ -139,7 +139,7 @@ public class Gastrointestinal implements Serializable {
 		this.vomiting = vomiting;
 	}
 
-	public final Boolean isAcidregurgitation() {
+	public final Boolean getAcidregurgitation() {
 		return acidregurgitation;
 	}
 
@@ -147,7 +147,7 @@ public class Gastrointestinal implements Serializable {
 		this.acidregurgitation = acidregurgitation;
 	}
 
-	public final Boolean isGas() {
+	public final Boolean getGas() {
 		return gas;
 	}
 
@@ -155,7 +155,7 @@ public class Gastrointestinal implements Serializable {
 		this.gas = gas;
 	}
 
-	public final Boolean isHiccup() {
+	public final Boolean getHiccup() {
 		return hiccup;
 	}
 
@@ -163,7 +163,7 @@ public class Gastrointestinal implements Serializable {
 		this.hiccup = hiccup;
 	}
 
-	public final Boolean isBloating() {
+	public final Boolean getBloating() {
 		return bloating;
 	}
 
@@ -171,7 +171,7 @@ public class Gastrointestinal implements Serializable {
 		this.bloating = bloating;
 	}
 
-	public final Boolean isBadbreath() {
+	public final Boolean getBadbreath() {
 		return badbreath;
 	}
 
@@ -179,7 +179,7 @@ public class Gastrointestinal implements Serializable {
 		this.badbreath = badbreath;
 	}
 
-	public final Boolean isDiarrhea() {
+	public final Boolean getDiarrhea() {
 		return diarrhea;
 	}
 
@@ -187,7 +187,7 @@ public class Gastrointestinal implements Serializable {
 		this.diarrhea = diarrhea;
 	}
 
-	public final Boolean isConstipation() {
+	public final Boolean getConstipation() {
 		return constipation;
 	}
 
@@ -195,7 +195,7 @@ public class Gastrointestinal implements Serializable {
 		this.constipation = constipation;
 	}
 
-	public final Boolean isBlackstools() {
+	public final Boolean getBlackstools() {
 		return blackstools;
 	}
 
@@ -203,7 +203,7 @@ public class Gastrointestinal implements Serializable {
 		this.blackstools = blackstools;
 	}
 
-	public final Boolean isBloodystools() {
+	public final Boolean getBloodystools() {
 		return bloodystools;
 	}
 
@@ -211,7 +211,7 @@ public class Gastrointestinal implements Serializable {
 		this.bloodystools = bloodystools;
 	}
 
-	public final Boolean isMucousinstools() {
+	public final Boolean getMucousinstools() {
 		return mucousinstools;
 	}
 
@@ -219,7 +219,7 @@ public class Gastrointestinal implements Serializable {
 		this.mucousinstools = mucousinstools;
 	}
 
-	public final Boolean isHenorrhoid() {
+	public final Boolean getHenorrhoid() {
 		return henorrhoid;
 	}
 
@@ -227,7 +227,7 @@ public class Gastrointestinal implements Serializable {
 		this.henorrhoid = henorrhoid;
 	}
 
-	public final Boolean isItchyanus() {
+	public final Boolean getItchyanus() {
 		return itchyanus;
 	}
 
@@ -235,7 +235,7 @@ public class Gastrointestinal implements Serializable {
 		this.itchyanus = itchyanus;
 	}
 
-	public final Boolean isCramping() {
+	public final Boolean getCramping() {
 		return cramping;
 	}
 
@@ -243,7 +243,7 @@ public class Gastrointestinal implements Serializable {
 		this.cramping = cramping;
 	}
 
-	public final Boolean isBurninganus() {
+	public final Boolean getBurninganus() {
 		return burninganus;
 	}
 
@@ -251,7 +251,7 @@ public class Gastrointestinal implements Serializable {
 		this.burninganus = burninganus;
 	}
 
-	public final Boolean isRectalpain() {
+	public final Boolean getRectalpain() {
 		return rectalpain;
 	}
 
@@ -259,7 +259,7 @@ public class Gastrointestinal implements Serializable {
 		this.rectalpain = rectalpain;
 	}
 
-	public final Boolean isAnalfissures() {
+	public final Boolean getAnalfissures() {
 		return analfissures;
 	}
 
@@ -267,7 +267,7 @@ public class Gastrointestinal implements Serializable {
 		this.analfissures = analfissures;
 	}
 
-	public final Boolean isLaxativeusel() {
+	public final Boolean getLaxativeusel() {
 		return laxativeusel;
 	}
 

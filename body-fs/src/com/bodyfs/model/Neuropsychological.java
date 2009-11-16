@@ -84,7 +84,7 @@ public class Neuropsychological implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isSeizures() {
+	public final Boolean getSeizures() {
 		return seizures;
 	}
 
@@ -92,7 +92,7 @@ public class Neuropsychological implements Serializable {
 		this.seizures = seizures;
 	}
 
-	public final Boolean isNumbness() {
+	public final Boolean getNumbness() {
 		return numbness;
 	}
 
@@ -100,7 +100,7 @@ public class Neuropsychological implements Serializable {
 		this.numbness = numbness;
 	}
 
-	public final Boolean isTics() {
+	public final Boolean getTics() {
 		return tics;
 	}
 
@@ -108,7 +108,7 @@ public class Neuropsychological implements Serializable {
 		this.tics = tics;
 	}
 
-	public final Boolean isPoormemory() {
+	public final Boolean getPoormemory() {
 		return poormemory;
 	}
 
@@ -116,7 +116,7 @@ public class Neuropsychological implements Serializable {
 		this.poormemory = poormemory;
 	}
 
-	public final Boolean isDepression() {
+	public final Boolean getDepression() {
 		return depression;
 	}
 
@@ -124,7 +124,7 @@ public class Neuropsychological implements Serializable {
 		this.depression = depression;
 	}
 
-	public final Boolean isAnxiety() {
+	public final Boolean getAnxiety() {
 		return anxiety;
 	}
 
@@ -132,7 +132,7 @@ public class Neuropsychological implements Serializable {
 		this.anxiety = anxiety;
 	}
 
-	public final Boolean isIrritability() {
+	public final Boolean getIrritability() {
 		return irritability;
 	}
 
@@ -140,7 +140,7 @@ public class Neuropsychological implements Serializable {
 		this.irritability = irritability;
 	}
 
-	public final Boolean isEasilystressed() {
+	public final Boolean getEasilystressed() {
 		return easilystressed;
 	}
 
@@ -148,7 +148,7 @@ public class Neuropsychological implements Serializable {
 		this.easilystressed = easilystressed;
 	}
 
-	public final Boolean isAbusesurvivor() {
+	public final Boolean getAbusesurvivor() {
 		return abusesurvivor;
 	}
 
@@ -156,7 +156,7 @@ public class Neuropsychological implements Serializable {
 		this.abusesurvivor = abusesurvivor;
 	}
 
-	public final Boolean isSuicide() {
+	public final Boolean getSuicide() {
 		return suicide;
 	}
 
@@ -164,7 +164,7 @@ public class Neuropsychological implements Serializable {
 		this.suicide = suicide;
 	}
 
-	public final Boolean isSeeingatherapist() {
+	public final Boolean getSeeingatherapist() {
 		return seeingatherapist;
 	}
 

@@ -23,7 +23,6 @@ public class UserMgmtComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		//LOGGER.error(usermgmtinclude);
 	}
 
 	private void navigatePage(final String pageid, boolean bookmark) {
@@ -46,6 +45,9 @@ public class UserMgmtComposer extends GenericForwardComposer {
 
 	public void onHandleClick(final ForwardEvent event) {
 		final String pageid = (String) event.getData();
+		if (pageid.equals("npi")) {
+			NPIComposer.cleanSession(sessionScope);
+		}
 		navigatePage(pageid, true);
 	}
 }

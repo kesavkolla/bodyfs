@@ -75,7 +75,7 @@ public class Gynecology implements Serializable {
 	private Integer livebirths;
 
 	@Persistent
-	private Boolean prematurebirths;
+	private Integer prematurebirths;
 
 	@Persistent
 	private Integer agearmenopause;
@@ -85,6 +85,9 @@ public class Gynecology implements Serializable {
 
 	@Persistent
 	private String datelastperiodbegan;
+
+	@Persistent
+	private String other;
 
 	@Persistent
 	private Date createDate = new Date(System.currentTimeMillis());
@@ -105,7 +108,7 @@ public class Gynecology implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isAgemensesbegan() {
+	public final Boolean getAgemensesbegan() {
 		return agemensesbegan;
 	}
 
@@ -121,7 +124,7 @@ public class Gynecology implements Serializable {
 		this.lengthofcycle = lengthofcycle;
 	}
 
-	public final Boolean isDurationofflow() {
+	public final Boolean getDurationofflow() {
 		return durationofflow;
 	}
 
@@ -129,7 +132,7 @@ public class Gynecology implements Serializable {
 		this.durationofflow = durationofflow;
 	}
 
-	public final Boolean isDuration() {
+	public final Boolean getDuration() {
 		return duration;
 	}
 
@@ -137,7 +140,7 @@ public class Gynecology implements Serializable {
 		this.duration = duration;
 	}
 
-	public final Boolean isIrregularperiods() {
+	public final Boolean getIrregularperiods() {
 		return irregularperiods;
 	}
 
@@ -145,7 +148,7 @@ public class Gynecology implements Serializable {
 		this.irregularperiods = irregularperiods;
 	}
 
-	public final Boolean isPainfulperiods() {
+	public final Boolean getPainfulperiods() {
 		return painfulperiods;
 	}
 
@@ -153,7 +156,7 @@ public class Gynecology implements Serializable {
 		this.painfulperiods = painfulperiods;
 	}
 
-	public final Boolean isPms() {
+	public final Boolean getPms() {
 		return pms;
 	}
 
@@ -161,7 +164,7 @@ public class Gynecology implements Serializable {
 		this.pms = pms;
 	}
 
-	public final Boolean isVaginaldischarge() {
+	public final Boolean getVaginaldischarge() {
 		return vaginaldischarge;
 	}
 
@@ -177,7 +180,7 @@ public class Gynecology implements Serializable {
 		this.color = color;
 	}
 
-	public final Boolean isVaginalsores() {
+	public final Boolean getVaginalsores() {
 		return vaginalsores;
 	}
 
@@ -185,7 +188,7 @@ public class Gynecology implements Serializable {
 		this.vaginalsores = vaginalsores;
 	}
 
-	public final Boolean isVaginalodor() {
+	public final Boolean getVaginalodor() {
 		return vaginalodor;
 	}
 
@@ -193,7 +196,7 @@ public class Gynecology implements Serializable {
 		this.vaginalodor = vaginalodor;
 	}
 
-	public final Boolean isClots() {
+	public final Boolean getClots() {
 		return clots;
 	}
 
@@ -201,7 +204,7 @@ public class Gynecology implements Serializable {
 		this.clots = clots;
 	}
 
-	public final Boolean isBreastlumps() {
+	public final Boolean getBreastlumps() {
 		return breastlumps;
 	}
 
@@ -225,11 +228,11 @@ public class Gynecology implements Serializable {
 		this.livebirths = livebirths;
 	}
 
-	public final Boolean isPrematurebirths() {
+	public final Integer getPrematurebirths() {
 		return prematurebirths;
 	}
 
-	public final void setPrematurebirths(Boolean prematurebirths) {
+	public final void setPrematurebirths(Integer prematurebirths) {
 		this.prematurebirths = prematurebirths;
 	}
 
@@ -255,6 +258,14 @@ public class Gynecology implements Serializable {
 
 	public final void setDatelastperiodbegan(String datelastperiodbegan) {
 		this.datelastperiodbegan = datelastperiodbegan;
+	}
+
+	public final String getOther() {
+		return other;
+	}
+
+	public final void setOther(String other) {
+		this.other = other;
 	}
 
 	public final Date getCreateDate() {
@@ -306,6 +317,9 @@ public class Gynecology implements Serializable {
 			return true;
 		}
 		if (livebirths != null) {
+			return true;
+		}
+		if (other != null) {
 			return true;
 		}
 		if (painfulperiods != null) {

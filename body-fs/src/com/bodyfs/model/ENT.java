@@ -156,7 +156,7 @@ public class ENT implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isGlasses() {
+	public final Boolean getGlasses() {
 		return glasses;
 	}
 
@@ -172,7 +172,7 @@ public class ENT implements Serializable {
 		this.age = age;
 	}
 
-	public final Boolean isEyestrain() {
+	public final Boolean getEyestrain() {
 		return eyestrain;
 	}
 
@@ -180,7 +180,7 @@ public class ENT implements Serializable {
 		this.eyestrain = eyestrain;
 	}
 
-	public final Boolean isEyepain() {
+	public final Boolean getEyepain() {
 		return eyepain;
 	}
 
@@ -188,7 +188,7 @@ public class ENT implements Serializable {
 		this.eyepain = eyepain;
 	}
 
-	public final Boolean isRedeyes() {
+	public final Boolean getRedeyes() {
 		return redeyes;
 	}
 
@@ -196,7 +196,7 @@ public class ENT implements Serializable {
 		this.redeyes = redeyes;
 	}
 
-	public final Boolean isItchyeyes() {
+	public final Boolean getItchyeyes() {
 		return itchyeyes;
 	}
 
@@ -204,7 +204,7 @@ public class ENT implements Serializable {
 		this.itchyeyes = itchyeyes;
 	}
 
-	public final Boolean isSpotsineyes() {
+	public final Boolean getSpotsineyes() {
 		return spotsineyes;
 	}
 
@@ -212,7 +212,7 @@ public class ENT implements Serializable {
 		this.spotsineyes = spotsineyes;
 	}
 
-	public final Boolean isPoorvision() {
+	public final Boolean getPoorvision() {
 		return poorvision;
 	}
 
@@ -220,7 +220,7 @@ public class ENT implements Serializable {
 		this.poorvision = poorvision;
 	}
 
-	public final Boolean isBlurredvision() {
+	public final Boolean getBlurredvision() {
 		return blurredvision;
 	}
 
@@ -228,7 +228,7 @@ public class ENT implements Serializable {
 		this.blurredvision = blurredvision;
 	}
 
-	public final Boolean isNightblindness() {
+	public final Boolean getNightblindness() {
 		return nightblindness;
 	}
 
@@ -236,7 +236,7 @@ public class ENT implements Serializable {
 		this.nightblindness = nightblindness;
 	}
 
-	public final Boolean isMyopiaorPresbyopia() {
+	public final Boolean getMyopiaorPresbyopia() {
 		return myopiaorPresbyopia;
 	}
 
@@ -244,7 +244,7 @@ public class ENT implements Serializable {
 		this.myopiaorPresbyopia = myopiaorPresbyopia;
 	}
 
-	public final Boolean isGlaucoma() {
+	public final Boolean getGlaucoma() {
 		return glaucoma;
 	}
 
@@ -252,7 +252,7 @@ public class ENT implements Serializable {
 		this.glaucoma = glaucoma;
 	}
 
-	public final Boolean isCataracts() {
+	public final Boolean getCataracts() {
 		return cataracts;
 	}
 
@@ -260,7 +260,7 @@ public class ENT implements Serializable {
 		this.cataracts = cataracts;
 	}
 
-	public final Boolean isTeethproblems() {
+	public final Boolean getTeethproblems() {
 		return teethproblems;
 	}
 
@@ -268,7 +268,7 @@ public class ENT implements Serializable {
 		this.teethproblems = teethproblems;
 	}
 
-	public final Boolean isGrindingteeth() {
+	public final Boolean getGrindingteeth() {
 		return grindingteeth;
 	}
 
@@ -276,7 +276,7 @@ public class ENT implements Serializable {
 		this.grindingteeth = grindingteeth;
 	}
 
-	public final Boolean isTmj() {
+	public final Boolean getTmj() {
 		return tmj;
 	}
 
@@ -284,7 +284,7 @@ public class ENT implements Serializable {
 		this.tmj = tmj;
 	}
 
-	public final Boolean isFacialpain() {
+	public final Boolean getFacialpain() {
 		return facialpain;
 	}
 
@@ -292,7 +292,7 @@ public class ENT implements Serializable {
 		this.facialpain = facialpain;
 	}
 
-	public final Boolean isGumproblems() {
+	public final Boolean getGumproblems() {
 		return gumproblems;
 	}
 
@@ -300,7 +300,7 @@ public class ENT implements Serializable {
 		this.gumproblems = gumproblems;
 	}
 
-	public final Boolean isSores() {
+	public final Boolean getSores() {
 		return sores;
 	}
 
@@ -308,7 +308,7 @@ public class ENT implements Serializable {
 		this.sores = sores;
 	}
 
-	public final Boolean isDrymouth() {
+	public final Boolean getDrymouth() {
 		return drymouth;
 	}
 
@@ -316,7 +316,7 @@ public class ENT implements Serializable {
 		this.drymouth = drymouth;
 	}
 
-	public final Boolean isExcessivesaliva() {
+	public final Boolean getExcessivesaliva() {
 		return excessivesaliva;
 	}
 
@@ -324,7 +324,7 @@ public class ENT implements Serializable {
 		this.excessivesaliva = excessivesaliva;
 	}
 
-	public final Boolean isSinusproblems() {
+	public final Boolean getSinusproblems() {
 		return sinusproblems;
 	}
 
@@ -332,7 +332,7 @@ public class ENT implements Serializable {
 		this.sinusproblems = sinusproblems;
 	}
 
-	public final Boolean isPhlegmColor() {
+	public final Boolean getPhlegmColor() {
 		return phlegmColor;
 	}
 
@@ -340,7 +340,7 @@ public class ENT implements Serializable {
 		this.phlegmColor = phlegmColor;
 	}
 
-	public final Boolean isRecurrentsorethroat() {
+	public final Boolean getRecurrentsorethroat() {
 		return recurrentsorethroat;
 	}
 
@@ -348,7 +348,7 @@ public class ENT implements Serializable {
 		this.recurrentsorethroat = recurrentsorethroat;
 	}
 
-	public final Boolean isSwollenglands() {
+	public final Boolean getSwollenglands() {
 		return swollenglands;
 	}
 
@@ -356,7 +356,7 @@ public class ENT implements Serializable {
 		this.swollenglands = swollenglands;
 	}
 
-	public final Boolean isLumpsinthroat() {
+	public final Boolean getLumpsinthroat() {
 		return lumpsinthroat;
 	}
 
@@ -364,7 +364,7 @@ public class ENT implements Serializable {
 		this.lumpsinthroat = lumpsinthroat;
 	}
 
-	public final Boolean isEnlargedthyroid() {
+	public final Boolean getEnlargedthyroid() {
 		return enlargedthyroid;
 	}
 
@@ -372,7 +372,7 @@ public class ENT implements Serializable {
 		this.enlargedthyroid = enlargedthyroid;
 	}
 
-	public final Boolean isNosebleeds() {
+	public final Boolean getNosebleeds() {
 		return nosebleeds;
 	}
 
@@ -380,7 +380,7 @@ public class ENT implements Serializable {
 		this.nosebleeds = nosebleeds;
 	}
 
-	public final Boolean isRinginginears() {
+	public final Boolean getRinginginears() {
 		return ringinginears;
 	}
 
@@ -396,7 +396,7 @@ public class ENT implements Serializable {
 		this.ringears = ringears;
 	}
 
-	public final Boolean isPoorhearing() {
+	public final Boolean getPoorhearing() {
 		return poorhearing;
 	}
 
@@ -404,7 +404,7 @@ public class ENT implements Serializable {
 		this.poorhearing = poorhearing;
 	}
 
-	public final Boolean isEaraches() {
+	public final Boolean getEaraches() {
 		return earaches;
 	}
 
@@ -412,7 +412,7 @@ public class ENT implements Serializable {
 		this.earaches = earaches;
 	}
 
-	public final Boolean isHeadaches() {
+	public final Boolean getHeadaches() {
 		return headaches;
 	}
 
@@ -420,7 +420,7 @@ public class ENT implements Serializable {
 		this.headaches = headaches;
 	}
 
-	public final Boolean isMigraines() {
+	public final Boolean getMigraines() {
 		return migraines;
 	}
 
@@ -428,7 +428,7 @@ public class ENT implements Serializable {
 		this.migraines = migraines;
 	}
 
-	public final Boolean isConcussions() {
+	public final Boolean getConcussions() {
 		return concussions;
 	}
 

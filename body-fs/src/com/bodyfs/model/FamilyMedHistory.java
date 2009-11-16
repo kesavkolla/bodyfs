@@ -88,7 +88,7 @@ public class FamilyMedHistory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isAllergies() {
+	public final Boolean getAllergies() {
 		return allergies;
 	}
 
@@ -104,7 +104,7 @@ public class FamilyMedHistory implements Serializable {
 		this.allergy = allergy;
 	}
 
-	public final Boolean isArteriosclerosis() {
+	public final Boolean getArteriosclerosis() {
 		return arteriosclerosis;
 	}
 
@@ -112,7 +112,7 @@ public class FamilyMedHistory implements Serializable {
 		this.arteriosclerosis = arteriosclerosis;
 	}
 
-	public final Boolean isAsthma() {
+	public final Boolean getAsthma() {
 		return asthma;
 	}
 
@@ -120,7 +120,7 @@ public class FamilyMedHistory implements Serializable {
 		this.asthma = asthma;
 	}
 
-	public final Boolean isAlcoholism() {
+	public final Boolean getAlcoholism() {
 		return alcoholism;
 	}
 
@@ -128,7 +128,7 @@ public class FamilyMedHistory implements Serializable {
 		this.alcoholism = alcoholism;
 	}
 
-	public final Boolean isCancer() {
+	public final Boolean getCancer() {
 		return cancer;
 	}
 
@@ -144,7 +144,7 @@ public class FamilyMedHistory implements Serializable {
 		this.cancerType = cancerType;
 	}
 
-	public final Boolean isDepression() {
+	public final Boolean getDepression() {
 		return depression;
 	}
 
@@ -152,7 +152,7 @@ public class FamilyMedHistory implements Serializable {
 		this.depression = depression;
 	}
 
-	public final Boolean isDiabetes() {
+	public final Boolean getDiabetes() {
 		return diabetes;
 	}
 
@@ -160,7 +160,7 @@ public class FamilyMedHistory implements Serializable {
 		this.diabetes = diabetes;
 	}
 
-	public final Boolean isHeartdisease() {
+	public final Boolean getHeartdisease() {
 		return heartdisease;
 	}
 
@@ -168,7 +168,7 @@ public class FamilyMedHistory implements Serializable {
 		this.heartdisease = heartdisease;
 	}
 
-	public final Boolean isHighbloodpressure() {
+	public final Boolean getHighbloodpressure() {
 		return highbloodpressure;
 	}
 
@@ -176,7 +176,7 @@ public class FamilyMedHistory implements Serializable {
 		this.highbloodpressure = highbloodpressure;
 	}
 
-	public final Boolean isSeizures() {
+	public final Boolean getSeizures() {
 		return seizures;
 	}
 
@@ -184,7 +184,7 @@ public class FamilyMedHistory implements Serializable {
 		this.seizures = seizures;
 	}
 
-	public final Boolean isStroke() {
+	public final Boolean getStroke() {
 		return stroke;
 	}
 

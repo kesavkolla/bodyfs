@@ -148,7 +148,6 @@
 		</rows>
 	</grid>
 	<hbox width="100%" pack="end">
-		<div id="errorDiv1" />
 		<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" />
 		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi1)" />
 	</hbox>

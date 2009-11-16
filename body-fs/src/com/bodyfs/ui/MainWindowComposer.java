@@ -29,9 +29,9 @@ public class MainWindowComposer extends GenericForwardComposer {
 
 	private IPageDAO pageDAO;
 	private Include xcontents;
+	@SuppressWarnings("unused")
 	private Label username;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -79,9 +79,9 @@ public class MainWindowComposer extends GenericForwardComposer {
 			xcontents.setSrc(page.getPath());
 		} else {
 			final Include target = (Include) Path.getComponent(page.getTarget());
-			/*
-			 * if (target == null) { return; }
-			 */
+			if (target == null) {
+				return;
+			}
 			target.setSrc(page.getPath());
 		}
 

@@ -18,7 +18,7 @@ public class BoolToInt implements TypeConverter, Serializable {
 		if (intVal == -1) {
 			return null;
 		}
-		return intVal.intValue();
+		return new Boolean(intVal == 0);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class BoolToInt implements TypeConverter, Serializable {
 		if (val == null) {
 			return -1;
 		}
-		return ((Boolean) val).booleanValue() ? new Integer(0) : new Integer(1);
+		return ((Boolean) val).booleanValue() ? 0 : 1;
 	}
 
 }

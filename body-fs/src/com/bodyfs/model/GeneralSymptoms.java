@@ -114,7 +114,7 @@ public class GeneralSymptoms implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isPoorappetite() {
+	public final Boolean getPoorappetite() {
 		return poorappetite;
 	}
 
@@ -122,7 +122,7 @@ public class GeneralSymptoms implements Serializable {
 		this.poorappetite = poorappetite;
 	}
 
-	public final Boolean isHeavyappetite() {
+	public final Boolean getHeavyappetite() {
 		return heavyappetite;
 	}
 
@@ -130,7 +130,7 @@ public class GeneralSymptoms implements Serializable {
 		this.heavyappetite = heavyappetite;
 	}
 
-	public final Boolean isCooldrinks() {
+	public final Boolean getCooldrinks() {
 		return cooldrinks;
 	}
 
@@ -138,7 +138,7 @@ public class GeneralSymptoms implements Serializable {
 		this.cooldrinks = cooldrinks;
 	}
 
-	public final Boolean isHotdrinks() {
+	public final Boolean getHotdrinks() {
 		return hotdrinks;
 	}
 
@@ -146,7 +146,7 @@ public class GeneralSymptoms implements Serializable {
 		this.hotdrinks = hotdrinks;
 	}
 
-	public final Boolean isWeight() {
+	public final Boolean getWeight() {
 		return weight;
 	}
 
@@ -154,7 +154,7 @@ public class GeneralSymptoms implements Serializable {
 		this.weight = weight;
 	}
 
-	public final Boolean isPoorsleep() {
+	public final Boolean getPoorsleep() {
 		return poorsleep;
 	}
 
@@ -162,7 +162,7 @@ public class GeneralSymptoms implements Serializable {
 		this.poorsleep = poorsleep;
 	}
 
-	public final Boolean isHeavysleep() {
+	public final Boolean getHeavysleep() {
 		return heavysleep;
 	}
 
@@ -170,7 +170,7 @@ public class GeneralSymptoms implements Serializable {
 		this.heavysleep = heavysleep;
 	}
 
-	public final Boolean isDisturbedsleep() {
+	public final Boolean getDisturbedsleep() {
 		return disturbedsleep;
 	}
 
@@ -178,7 +178,7 @@ public class GeneralSymptoms implements Serializable {
 		this.disturbedsleep = disturbedsleep;
 	}
 
-	public final Boolean isFatigue() {
+	public final Boolean getFatigue() {
 		return fatigue;
 	}
 
@@ -186,7 +186,7 @@ public class GeneralSymptoms implements Serializable {
 		this.fatigue = fatigue;
 	}
 
-	public final Boolean isLackofStrength() {
+	public final Boolean getLackofStrength() {
 		return lackofStrength;
 	}
 
@@ -194,7 +194,7 @@ public class GeneralSymptoms implements Serializable {
 		this.lackofStrength = lackofStrength;
 	}
 
-	public final Boolean isBodilyheaviness() {
+	public final Boolean getBodilyheaviness() {
 		return bodilyheaviness;
 	}
 
@@ -202,7 +202,7 @@ public class GeneralSymptoms implements Serializable {
 		this.bodilyheaviness = bodilyheaviness;
 	}
 
-	public final Boolean isColdhandsorfeet() {
+	public final Boolean getColdhandsorfeet() {
 		return coldhandsorfeet;
 	}
 
@@ -210,7 +210,7 @@ public class GeneralSymptoms implements Serializable {
 		this.coldhandsorfeet = coldhandsorfeet;
 	}
 
-	public final Boolean isPoorcirculation() {
+	public final Boolean getPoorcirculation() {
 		return poorcirculation;
 	}
 
@@ -218,7 +218,7 @@ public class GeneralSymptoms implements Serializable {
 		this.poorcirculation = poorcirculation;
 	}
 
-	public final Boolean isShortnessofbreath() {
+	public final Boolean getShortnessofbreath() {
 		return shortnessofbreath;
 	}
 
@@ -226,7 +226,7 @@ public class GeneralSymptoms implements Serializable {
 		this.shortnessofbreath = shortnessofbreath;
 	}
 
-	public final Boolean isFever() {
+	public final Boolean getFever() {
 		return fever;
 	}
 
@@ -234,7 +234,7 @@ public class GeneralSymptoms implements Serializable {
 		this.fever = fever;
 	}
 
-	public final Boolean isChills() {
+	public final Boolean getChills() {
 		return chills;
 	}
 
@@ -242,7 +242,7 @@ public class GeneralSymptoms implements Serializable {
 		this.chills = chills;
 	}
 
-	public final Boolean isNightsweat() {
+	public final Boolean getNightsweat() {
 		return nightsweat;
 	}
 
@@ -250,7 +250,7 @@ public class GeneralSymptoms implements Serializable {
 		this.nightsweat = nightsweat;
 	}
 
-	public final Boolean isSweateasily() {
+	public final Boolean getSweateasily() {
 		return sweateasily;
 	}
 
@@ -258,7 +258,7 @@ public class GeneralSymptoms implements Serializable {
 		this.sweateasily = sweateasily;
 	}
 
-	public final Boolean isMusclecramps() {
+	public final Boolean getMusclecramps() {
 		return musclecramps;
 	}
 
@@ -266,7 +266,7 @@ public class GeneralSymptoms implements Serializable {
 		this.musclecramps = musclecramps;
 	}
 
-	public final Boolean isVertigo() {
+	public final Boolean getVertigo() {
 		return vertigo;
 	}
 
@@ -274,7 +274,7 @@ public class GeneralSymptoms implements Serializable {
 		this.vertigo = vertigo;
 	}
 
-	public final Boolean isBleed() {
+	public final Boolean getBleed() {
 		return bleed;
 	}
 
@@ -282,7 +282,7 @@ public class GeneralSymptoms implements Serializable {
 		this.bleed = bleed;
 	}
 
-	public final Boolean isPeculartaste() {
+	public final Boolean getPeculartaste() {
 		return peculartaste;
 	}
 

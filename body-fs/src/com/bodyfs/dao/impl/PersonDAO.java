@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.IPersonDAO;
+import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.Person;
 
 @Repository(value = "personDAO")
@@ -36,8 +37,8 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
-	public void createPerson(Person person) {
-		this.jdoTemplate.makePersistent(person);
+	public Person createPerson(final Person person) {
+		return this.jdoTemplate.makePersistent(person);
 	}
 
 	@Override
@@ -75,7 +76,13 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			}
 
 		});
+	}
 
+	@Override
+	public void createGeneralInfo(final GeneralInfo ginfo) {
+		if (ginfo.isDirty()) {
+			this.jdoTemplate.makePersistent(ginfo);
+		}
 	}
 
 }

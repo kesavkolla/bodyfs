@@ -84,7 +84,7 @@ public class Respiratory implements Serializable {
 		this.personId = personId;
 	}
 
-	public final Boolean isDifficultybreathingwhen() {
+	public final Boolean getDifficultybreathingwhen() {
 		return difficultybreathingwhen;
 	}
 
@@ -92,7 +92,7 @@ public class Respiratory implements Serializable {
 		this.difficultybreathingwhen = difficultybreathingwhen;
 	}
 
-	public final Boolean isLyingdown() {
+	public final Boolean getLyingdown() {
 		return lyingdown;
 	}
 
@@ -100,7 +100,7 @@ public class Respiratory implements Serializable {
 		this.lyingdown = lyingdown;
 	}
 
-	public final Boolean isShortnessofbreath() {
+	public final Boolean getShortnessofbreath() {
 		return shortnessofbreath;
 	}
 
@@ -108,7 +108,7 @@ public class Respiratory implements Serializable {
 		this.shortnessofbreath = shortnessofbreath;
 	}
 
-	public final Boolean isTightchest() {
+	public final Boolean getTightchest() {
 		return tightchest;
 	}
 
@@ -116,7 +116,7 @@ public class Respiratory implements Serializable {
 		this.tightchest = tightchest;
 	}
 
-	public final Boolean isAsthamawheezing() {
+	public final Boolean getAsthamawheezing() {
 		return asthamawheezing;
 	}
 
@@ -124,7 +124,7 @@ public class Respiratory implements Serializable {
 		this.asthamawheezing = asthamawheezing;
 	}
 
-	public final Boolean isDifficultinhalation() {
+	public final Boolean getDifficultinhalation() {
 		return difficultinhalation;
 	}
 
@@ -132,7 +132,7 @@ public class Respiratory implements Serializable {
 		this.difficultinhalation = difficultinhalation;
 	}
 
-	public final Boolean isCough() {
+	public final Boolean getCough() {
 		return cough;
 	}
 
@@ -156,7 +156,7 @@ public class Respiratory implements Serializable {
 		this.thickorthin = thickorthin;
 	}
 
-	public final Boolean isColorofphlegm() {
+	public final Boolean getColorofphlegm() {
 		return colorofphlegm;
 	}
 
@@ -164,7 +164,7 @@ public class Respiratory implements Serializable {
 		this.colorofphlegm = colorofphlegm;
 	}
 
-	public final Boolean isCoughingupblood() {
+	public final Boolean getCoughingupblood() {
 		return coughingupblood;
 	}
 
@@ -172,7 +172,7 @@ public class Respiratory implements Serializable {
 		this.coughingupblood = coughingupblood;
 	}
 
-	public final Boolean isPneumonia() {
+	public final Boolean getPneumonia() {
 		return pneumonia;
 	}
 

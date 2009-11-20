@@ -34,8 +34,6 @@ public class NPIComposer extends GenericAutowireComposer {
 	public static final String SESSION_PERSON = "session.person";
 	public static final String SESSION_GENERALINFO = "session.ginfo";
 
-	final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -60,6 +58,7 @@ public class NPIComposer extends GenericAutowireComposer {
 			cleanSession(sessionScope);
 			return;
 		}
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		personDAO.createPerson(person);
 		final GeneralInfo ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
 		ginfo.setPersonId(person.getId());

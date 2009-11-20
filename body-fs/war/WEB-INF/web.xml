@@ -74,7 +74,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<listener>
 		<listener-class>com.bodyfs.ui.listener.ApplicationInitializer</listener-class>
 	</listener>
-
+	<filter>
+		<filter-name>OpenPersistenceManagerInView</filter-name>
+		<filter-class>org.springframework.orm.jdo.support.OpenPersistenceManagerInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenPersistenceManagerInView</filter-name>
+		<servlet-name>zkLoader</servlet-name>
+		<servlet-name>auEngine</servlet-name>
+	</filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.zul</welcome-file>

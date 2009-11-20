@@ -13,4 +13,11 @@
 		<context:exclude-filter type="regex" expression="com.bodyfs.model.*" />
 	</context:component-scan>
 
+	<bean id="persistenceManagerFactory" class="com.bodyfs.PMF" factory-method="get" />
+
+	<bean id="openPersistenceManagerInView" class="org.springframework.orm.jdo.support.OpenPersistenceManagerInViewInterceptor">
+		<property name="persistenceManagerFactory">
+			<ref bean="persistenceManagerFactory" />
+		</property>
+	</bean>
 </beans>

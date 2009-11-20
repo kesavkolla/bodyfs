@@ -9,5 +9,5 @@ package com.bodyfs.model;
  * 
  */
 public enum HighLow {
-	LOW, HIGH;
+	LOW, HIGH, NORMAL;
 }

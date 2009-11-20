@@ -3,8 +3,6 @@
  */
 package com.bodyfs.ui;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -31,7 +29,6 @@ public class NPIComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 
 	public static final String SESSION_PERSON = "session.person";
@@ -44,10 +41,6 @@ public class NPIComposer extends GenericAutowireComposer {
 		super.doAfterCompose(comp);
 		this.setupPerson();
 		// this.page.setAttribute("person", person);
-	}
-
-	public String getMinDOB() {
-		return sdf.format(Calendar.getInstance().getTime());
 	}
 
 	public void onNext(final ForwardEvent event) {

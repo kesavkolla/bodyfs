@@ -21,6 +21,7 @@ import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.GeneralInfo;
+import com.bodyfs.model.PatientVisit;
 import com.bodyfs.model.Person;
 
 @Repository(value = "personDAO")
@@ -85,4 +86,13 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	@Override
+	public PatientVisit createPatientVisit(final PatientVisit visit) {
+		return this.jdoTemplate.makePersistent(visit);
+	}
+
+	@Override
+	public Collection<PatientVisit> GetPatientVisits(final Long personId) {
+		return this.jdoTemplate.find(PatientVisit.class, "personId ==" + personId, "visitDate");
+	}
 }

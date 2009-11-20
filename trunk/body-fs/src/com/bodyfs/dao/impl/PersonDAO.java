@@ -6,7 +6,6 @@ package com.bodyfs.dao.impl;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.annotation.PostConstruct;
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -28,14 +27,9 @@ import com.bodyfs.model.Person;
 public class PersonDAO implements IPersonDAO, Serializable {
 
 	private static final long serialVersionUID = 8672328220267294005L;
+	@SuppressWarnings("unused")
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
-	private transient JdoTemplate jdoTemplate = null;
-
-	@PostConstruct
-	public void init() {
-		this.jdoTemplate = new JdoTemplate(PMF.get());
-		LOGGER.debug("Post construct: " + this.jdoTemplate);
-	}
+	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
 	@Override
 	public Person createPerson(final Person person) {
@@ -66,17 +60,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 
 	@Override
 	public Collection<Person> getAll() {
-		return this.jdoTemplate.execute(new JdoCallback<Collection<Person>>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public Collection<Person> doInJdo(PersistenceManager pm) throws JDOException {
-				final Query query = pm.newQuery(Person.class);
-				Collection<Person> lst = (Collection<Person>) query.execute();
-				lst.size();
-				return lst;
-			}
-
-		});
+		return this.jdoTemplate.find(Person.class);
 	}
 
 	@Override
@@ -94,5 +78,20 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	@Override
 	public Collection<PatientVisit> GetPatientVisits(final Long personId) {
 		return this.jdoTemplate.find(PatientVisit.class, "personId ==" + personId, "visitDate");
+	}
+
+	@Override
+	public Person getByEmail(final String email) {
+		try {
+			final Collection<Person> results = this.jdoTemplate.find(Person.class, "email==pemail", "String pemail",
+					email);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
 	}
 }

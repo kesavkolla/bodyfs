@@ -12,6 +12,8 @@ public interface IPersonDAO {
 	public Collection<Person> getAll();
 
 	public Person createPerson(final Person person);
+	
+	public Person getByEmail(final String email);
 
 	public void deletePerson(final Long id);
 

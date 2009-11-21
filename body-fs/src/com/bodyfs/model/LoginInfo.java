@@ -3,6 +3,8 @@
  */
 package com.bodyfs.model;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -16,13 +18,18 @@ import com.google.appengine.api.datastore.Key;
  * @author Kesav Kumar Kolla
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
-public class LoginInfo {
+public class LoginInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1184170993519404872L;
 
 	@PrimaryKey
 	private String userid;
 	
 	@Persistent
-	private Key person;
+	private Long personId;
 
 	@Persistent
 	private LoginType loginType;
@@ -58,18 +65,12 @@ public class LoginInfo {
 	@Persistent
 	private String secAnswer3;
 	
-	/**
-	 * This method will return the primary key of the person object that this
-	 * logininfo belongs to
-	 * 
-	 * @return person objects primary key
-	 */
-	public final Key getPerson() {
-		return person;
+	public final Long getPersonId() {
+		return personId;
 	}
 
-	public final void setPerson(Key person) {
-		this.person = person;
+	public final void setPersonId(final Long personId) {
+		this.personId = personId;
 	}
 
 	public final LoginType getLoginType() {

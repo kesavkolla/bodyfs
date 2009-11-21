@@ -60,7 +60,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 
 	@Override
 	public Collection<Person> getAll() {
-		return this.jdoTemplate.find(Person.class);
+		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class));
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
-	public Person getByEmail(final String email) {
+	public Person getByEmail(final String email) { 
 		try {
 			final Collection<Person> results = this.jdoTemplate.find(Person.class, "email==pemail", "String pemail",
 					email);

@@ -75,7 +75,7 @@
 			</center>
 			<south title="Results" splittable="true" height="60%" autoscroll="true" flex="true">
 				<div id="results" style="position:realtive;bottom:0;right:0">
-					<listbox id="persons" fixedLayout="true">
+					<listbox id="persons" fixedLayout="true" disabled="true">
 						<listhead>
 							<listheader label="First Name" />
 							<listheader label="Last Name"/>
@@ -87,8 +87,7 @@
 							<listcell label="@{person.lastName}" />
 							<listcell label="@{person.email}" />
 							<listcell label="@{person.personType}" />
-						</listitem>
-						
+						</listitem>						
 					</listbox>
 				</div>
 			</south>

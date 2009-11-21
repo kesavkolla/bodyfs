@@ -3,7 +3,6 @@
  */
 package com.bodyfs.model;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -16,22 +15,19 @@ import com.google.appengine.api.datastore.Key;
  * 
  * @author Kesav Kumar Kolla
  */
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
+@PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
 public class LoginInfo {
 
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
-
+	private String userid;
+	
 	@Persistent
 	private Key person;
 
 	@Persistent
 	private LoginType loginType;
 
-	@Persistent
-	private String userid;
-
+	
 	@Persistent
 	private String password;
 
@@ -41,7 +37,7 @@ public class LoginInfo {
 	@Persistent
 	private String openIdURL;
 
-	@Persistent(valueStrategy = IdGeneratorStrategy.UUIDSTRING)
+	@Persistent//(valueStrategy = IdGeneratorStrategy.UUIDSTRING)
 	private String token;
 
 	@Persistent
@@ -61,15 +57,7 @@ public class LoginInfo {
 
 	@Persistent
 	private String secAnswer3;
-
-	public final Long getId() {
-		return id;
-	}
-
-	public final void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	/**
 	 * This method will return the primary key of the person object that this
 	 * logininfo belongs to

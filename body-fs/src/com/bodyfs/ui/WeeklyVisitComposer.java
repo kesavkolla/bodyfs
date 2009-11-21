@@ -25,7 +25,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	private Person person;
 
 	@Override
-	public void doAfterCompose(Component comp) throws Exception {
+	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		person = personDAO.getByEmail("kesavkolla+bodyfs@gmail.com");

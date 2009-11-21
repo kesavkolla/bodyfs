@@ -15,7 +15,6 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 
 import com.bodyfs.dao.IPageDAO;
-import com.bodyfs.model.LoginInfo;
 import com.bodyfs.model.Page;
 
 /**
@@ -30,7 +29,6 @@ public class MainWindowComposer extends GenericForwardComposer {
 
 	private IPageDAO pageDAO;
 	private Include xcontents;
-	@SuppressWarnings("unused")
 	private Label username;
 
 	@Override
@@ -39,8 +37,9 @@ public class MainWindowComposer extends GenericForwardComposer {
 		if (pageDAO == null) {
 			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		}
-		LoginInfo userInfo = (LoginInfo)session.getAttribute("LOGIN_CREDENTIALS");
-		//username.setValue(userInfo.getUserid());
+		// LoginInfo userInfo =
+		// (LoginInfo)session.getAttribute("LOGIN_CREDENTIALS");
+		// username.setValue(userInfo.getUserid());
 		username.setValue("TEST");
 	}
 

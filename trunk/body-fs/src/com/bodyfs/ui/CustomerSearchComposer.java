@@ -8,7 +8,7 @@ import javax.jdo.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.compass.core.CompassHits;
+import org.compass.core.CompassDetachedHits;
 import org.compass.core.CompassSearchSession;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -71,12 +71,14 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			resultSet = (Collection<Person>) query.execute();
 			resultSet = pm.detachCopyAll(resultSet);
 			//persons.setModel(new ListModelList(resultSet));
-			//this.page.setAttribute("resultSet_", resultSet);
+			this.page.setAttribute("resultSet_", resultSet);
 		}finally{
 			pm.close();
 		}
 		binder.loadAll();
 	}
+	
+	
 	
 	public void onOK$smrtTextbox(Event evt) throws Exception{
 		searchSmart();
@@ -86,7 +88,9 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
 		//PersistenceManager pm = PMF.get().getPersistenceManager();
 		smrtTextbox.getValue();
-		CompassHits hits =  compassSession.find(smrtTextbox.getValue());
+		CompassDetachedHits hits =  compassSession.find(smrtTextbox.getValue()).detach();
+		//hits = hits.detach();
+		compassSession.close();
 		Collection<Person> resultSet = new ArrayList<Person>();
 		//List<Person> model =  (List<Person>)persons.getModel();
 		//model.clear();

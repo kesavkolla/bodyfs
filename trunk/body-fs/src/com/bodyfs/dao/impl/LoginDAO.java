@@ -17,6 +17,7 @@ import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.ILoginDAO;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.ui.util.CustSearchOptions;
 
 @Repository(value = "loginDAO")
 public class LoginDAO implements ILoginDAO, Serializable {
@@ -92,6 +93,15 @@ public class LoginDAO implements ILoginDAO, Serializable {
 			}
 
 		});
+	}
+
+	@Override
+	public Collection<LoginInfo> getByOptions(CustSearchOptions options) {
+		
+		//return this.jdoTemplate.find(queryString);
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

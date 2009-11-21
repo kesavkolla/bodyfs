@@ -15,6 +15,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 
 import com.bodyfs.dao.IPageDAO;
+import com.bodyfs.model.LoginInfo;
 import com.bodyfs.model.Page;
 
 /**
@@ -35,16 +36,12 @@ public class MainWindowComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		/*
-		 * final OpenIdUser user = (OpenIdUser)
-		 * this.requestScope.get(OpenIdUser.ATTR_NAME); final Map<String,
-		 * String> userinfo = (Map<String, String>) user.getAttribute("info");
-		 * if (userinfo != null) { username.setValue(userinfo.get("lastname") +
-		 * ", " + userinfo.get("firstname")); }
-		 */
 		if (pageDAO == null) {
 			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		}
+		LoginInfo userInfo = (LoginInfo)session.getAttribute("LOGIN_CREDENTIALS");
+		//username.setValue(userInfo.getUserid());
+		username.setValue("TEST");
 	}
 
 	public void onHandleClick(final ForwardEvent event) {

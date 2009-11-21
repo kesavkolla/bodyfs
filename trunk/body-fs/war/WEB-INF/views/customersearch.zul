@@ -78,22 +78,21 @@
 			</center>
 			<south title="Results" splittable="true" height="60%" autoscroll="true" flex="true">
 				<div id="results" style="position:realtive;bottom:0;right:0">
-					<grid id="persons" model="@{mainWindowCtrl.resultSet}" fixedLayout="true">
-						<columns>
-							<column label="First Name" sort="auto" />
-							<column label="Last Name" sort="auto" />
-							<column label="email" />
-							<column label="Type" sort="auto" tooltiptext="pre,current or post Customers" />
-						</columns>
-						<rows>
-							<row self="@{each='person'}">
-								<label value="@{person.firstName}" />
-								<label value="@{person.lastName}" />
-								<label value="@{person.email}" />
-								<label value="@{person.personType}" />
-							</row>
-						</rows>
-					</grid>
+					<listbox id="persons" model="@{mainWindowCtrl.resultSet}" fixedLayout="true">
+						<listhead>
+							<listheader label="First Name" />
+							<listheader label="Last Name"/>
+							<listheader label="email" />
+							<listheader label="Type" tooltiptext="pre,current or post Customers" />
+						</listhead>
+						<listitem self="@{each='person'}">
+							<listcell label="@{person.firstName}" />
+							<listcell label="@{person.lastName}" />
+							<listcell label="@{person.email}" />
+							<listcell label="@{person.personType}" />
+						</listitem>
+						
+					</listbox>
 				</div>
 			</south>
 		</borderlayout>

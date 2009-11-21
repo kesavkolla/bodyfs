@@ -3,10 +3,28 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-
-
-	<!-- ZK mappings -->
-
+	<!-- 
+	<filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>com.bodyfs.framework.filters.ApplicationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>*.zul</url-pattern>        
+    </filter-mapping>
+    <filter-mapping>
+		<filter-name>securityFilter</filter-name>
+		<url-pattern>/zkau/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>securityFilter</filter-name>
+		<url-pattern>/zkau*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>securityFilter</filter-name>
+		<url-pattern>/logout*</url-pattern>
+	</filter-mapping>
+ -->
 	<listener>
 		<description>Used to cleanup when a session is destroyed</description>
 		<display-name>ZK Session Cleaner</display-name>
@@ -53,7 +71,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
 	</servlet>
 
-	<!-- spring configurations -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -61,10 +78,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         </param-value>
 	</context-param>
 	<listener>
-		<!--
-			The Spring RequestContextLister uses thread bound variables so to use this Spring freatures requires that we apply
-			<disable-event-thread /> within zk.xml2
-		-->
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
@@ -72,7 +85,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>com.bodyfs.ui.listener.ApplicationInitializer</listener-class>
+		<listener-class>com.bodyfs.framework.listener.ApplicationInitializer</listener-class>
 	</listener>
 	<filter>
 		<filter-name>OpenPersistenceManagerInView</filter-name>

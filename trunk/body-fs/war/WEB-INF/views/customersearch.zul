@@ -12,8 +12,7 @@
 						<columns>
 							<column width="100px" />
 							<column width="310px" />
-							<column width="100px" />
-							<column width="250px" />
+							<column width="50px" />
 							<column />
 						</columns>
 						<rows>
@@ -21,6 +20,7 @@
 								Quick Search:
 								<textbox id="smrtTextbox" maxlength="400" height="20px" style="text-sixe:30px;"
 									width="400px" focus="true" />
+								<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px"/>
 								<div style="float:right">
 									<checkbox id="typePre" />
 									pre
@@ -32,9 +32,7 @@
 							</row>
 						</rows>
 					</grid>
-
 				</div>
-
 			</north>
 			<center border="20">
 				<groupbox id="gb" mold="3d" width="100%" open="false">
@@ -74,11 +72,10 @@
 						<button id="newSearch" label="New Search" style="float:center" />
 					</div>
 				</groupbox>
-
 			</center>
 			<south title="Results" splittable="true" height="60%" autoscroll="true" flex="true">
 				<div id="results" style="position:realtive;bottom:0;right:0">
-					<listbox id="persons" model="@{mainWindowCtrl.resultSet}" fixedLayout="true">
+					<listbox id="persons" fixedLayout="true">
 						<listhead>
 							<listheader label="First Name" />
 							<listheader label="Last Name"/>
@@ -96,9 +93,5 @@
 				</div>
 			</south>
 		</borderlayout>
-
-
-
-
 	</window>
 </zk>

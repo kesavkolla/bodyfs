@@ -12,7 +12,7 @@ public interface IPersonDAO {
 	public Collection<Person> getAll();
 
 	public Person createPerson(final Person person);
-	
+
 	public Person getByEmail(final String email);
 
 	public void deletePerson(final Long id);
@@ -24,4 +24,6 @@ public interface IPersonDAO {
 	public PatientVisit createPatientVisit(final PatientVisit visit);
 
 	public Collection<PatientVisit> GetPatientVisits(final Long personId);
+
+	public int countPatientVisits(final Long patid);
 }

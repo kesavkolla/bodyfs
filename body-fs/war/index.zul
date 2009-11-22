@@ -5,7 +5,7 @@
 <zk>
 	<borderlayout id="main" style="background:#1e1406;" apply="com.bodyfs.ui.MainWindowComposer">
 		<north size="120px" border="0"
-			style="background:#dd0000;background:transparent url('/img/banner.jp2');background-repeat: no-repeat;">
+			style="background:#dd0000;background:transparent url('/img/banner.jpg');background-repeat: no-repeat;">
 			<div style="float:right;padding-top:50px;color:#A5804A">
 				<toolbarbutton label="logout" href="/logout.zul" />
 				<label id="username" />

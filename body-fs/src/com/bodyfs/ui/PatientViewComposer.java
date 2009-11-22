@@ -4,7 +4,6 @@
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,11 +11,11 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Div;
+import org.zkoss.zul.Label;
 
 import com.bodyfs.dao.IPersonDAO;
-import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.Person;
 
 /**
  * 
@@ -28,8 +27,9 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
 	final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
-	private Listbox visitdates;
+	private Label fullname;
+	private Label week;
+	private Div divbar;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -49,20 +49,33 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		}
 
 		LOGGER.debug("Retrieving the details for: " + id);
+		pageScope.put("CURRENT_PATIENT_ID", id);
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		final Collection<PatientVisit> visits = personDAO.GetPatientVisits(id);
-		for (final PatientVisit visit : visits) {
-			final Listitem item = new Listitem(sdf.format(visit.getVisitDate()));
-			this.visitdates.getItems().add(item);
+		final Person person = personDAO.getPerson(id);
+		final int numweek = personDAO.countPatientVisits(person.getId());
+		if (fullname != null) {
+			fullname.setValue(person.getLastName() + " " + person.getFirstName());
+		}
+		if (week != null) {
+			week.setValue(numweek + "");
+		}
+		if (divbar != null) {
+			if (numweek > 0) {
+				int percent = Math.round(numweek * 100 / 52);
+				divbar.setWidth(percent + "px");
+			}
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void onHandleClick(final ForwardEvent event) {
 		final String pageid = (String) event.getData();
 		if (pageid == null || pageid.equals("")) {
 			return;
 		}
-
+		if (pageid.equals("weeklyvisit")) {
+			this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
+		}
 		execution.sendRedirect("/index.zul#" + pageid);
 	}
 }

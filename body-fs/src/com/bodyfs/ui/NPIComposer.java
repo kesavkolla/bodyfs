@@ -65,6 +65,7 @@ public class NPIComposer extends GenericAutowireComposer {
 		personDAO.createGeneralInfo(ginfo);
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession(sessionScope);
+		execution.sendRedirect("/index.zul#custSearch");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -75,6 +76,7 @@ public class NPIComposer extends GenericAutowireComposer {
 
 	public void onCancel(final ForwardEvent event) {
 		cleanSession(sessionScope);
+		execution.sendRedirect("/index.zul#custSearch");
 	}
 
 	@SuppressWarnings("unchecked")

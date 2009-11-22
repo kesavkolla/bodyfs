@@ -7,7 +7,7 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<borderlayout id="main" style="background:#1e1406;" apply="com.bodyfs.ui.PatientViewComposer">
 		<north size="120px" border="0"
-			style="background:#dd0000;background:transparent url('/img/banner.jp2');background-repeat: no-repeat;">
+			style="background:#dd0000;background:transparent url('/img/banner.jpg');background-repeat: no-repeat;">
 			<div style="float:right;padding-top:50px;color:#A5804A">
 				<toolbarbutton label="logout" href="/logout.zul" />
 				<label id="username" />
@@ -44,10 +44,16 @@
 				<center autoscroll="true" flex="true">
 					<div>
 						<n:h1>Hi</n:h1>
-						You are now into your 4th week of the program
+						<label id="fullname" />
+						You are now into your
+						<label id="week" />
+						th week of the program
 						<n:br />
-						<progressmeter value="25" />
-						<listbox id="visitdates" mold="select" style="display:none" />
+						<n:div style="width:40%;height:30px;background-color:gray">
+							<div id="divbar"
+								style="background-color:green; height:30px;font-weight:bold;line-height:30px">
+							</div>
+						</n:div>
 					</div>
 					<!-- div>
 						<div style="height:50px">&#160;</div>

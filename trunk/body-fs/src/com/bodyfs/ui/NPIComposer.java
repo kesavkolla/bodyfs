@@ -28,7 +28,7 @@ import com.bodyfs.model.Person;
 public class NPIComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
-	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
+	private static Log LOGGER = LogFactory.getLog(NPIComposer.class);
 	private IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 
 	public static final String SESSION_PERSON = "session.person";

@@ -12,5 +12,6 @@
 	<page id="npi2" title="NPI Form" path="/WEB-INF/views/npi2.zul" target="//usermgmt/usermgmtinclude" />
 	<page id="npi3" title="NPI Form" path="/WEB-INF/views/npi3.zul" target="//usermgmt/usermgmtinclude" />
 
-	<page id="weeklyvisit" title="Weekly Patient Visit" path="/WEB-INF/views/weeklyvisit.zul" target="//usermgmt/usermgmtinclude" />
+	<page id="patientview" title="Patient View" path="/patientview.zul" />
+	<page id="weeklyvisit" title="Weekly Patient Visit" path="/WEB-INF/views/weeklyvisit.zul" />
 </pages>

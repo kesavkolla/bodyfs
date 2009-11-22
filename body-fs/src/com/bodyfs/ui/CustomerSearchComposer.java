@@ -13,13 +13,11 @@ import org.apache.commons.logging.LogFactory;
 import org.compass.core.CompassDetachedHits;
 import org.compass.core.CompassSearchSession;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -152,9 +150,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	public void onPersonClick(final ForwardEvent event) {
 		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		final Listcell cell = (Listcell) event.getOrigin().getTarget();
-		final Include include = (Include) Path.getComponent("//index/xcontents");
 		final Page page = pageDAO.getById("patientview");
-		include.setSrc(page.getPath() + "?id=" + cell.getValue());
-		this.desktop.setBookmark(page.getId());
+		execution.sendRedirect(page.getPath() + "?id=" + cell.getValue());
 	}
 }

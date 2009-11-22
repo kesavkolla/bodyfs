@@ -3,28 +3,18 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	<!-- 
+
 	<filter>
-        <filter-name>securityFilter</filter-name>
-        <filter-class>com.bodyfs.framework.filters.ApplicationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>securityFilter</filter-name>
-        <url-pattern>*.zul</url-pattern>        
-    </filter-mapping>
-    <filter-mapping>
 		<filter-name>securityFilter</filter-name>
-		<url-pattern>/zkau/*</url-pattern>
-	</filter-mapping>
+		<filter-class>com.bodyfs.framework.filters.ApplicationFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>securityFilter</filter-name>
-		<url-pattern>/zkau*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>securityFilter</filter-name>
+		<servlet-name>zkLoader</servlet-name>
+		<servlet-name>auEngine</servlet-name>
 		<url-pattern>/logout*</url-pattern>
 	</filter-mapping>
- -->
+
 	<listener>
 		<description>Used to cleanup when a session is destroyed</description>
 		<display-name>ZK Session Cleaner</display-name>
@@ -95,6 +85,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<filter-name>OpenPersistenceManagerInView</filter-name>
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-name>auEngine</servlet-name>
+		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 
 	<welcome-file-list>

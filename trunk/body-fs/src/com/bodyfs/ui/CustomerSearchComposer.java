@@ -37,7 +37,6 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -7039984932259770671L;
 
-	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 
 	// private IPersonDAO personDAO = (IPersonDAO)
@@ -148,9 +147,13 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	}
 
 	public void onPersonClick(final ForwardEvent event) {
+		LOGGER.error(event);
 		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
+		LOGGER.error(pageDAO);
 		final Listcell cell = (Listcell) event.getOrigin().getTarget();
+		LOGGER.error(cell);
 		final Page page = pageDAO.getById("patientview");
+		LOGGER.error(page);
 		execution.sendRedirect(page.getPath() + "?id=" + cell.getValue());
 	}
 }

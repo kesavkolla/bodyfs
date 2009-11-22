@@ -11,7 +11,7 @@
 		<rows>
 			<row>
 				<vbox>
-					<space />
+					<image src="/img/bakers-union-body.gif" hflex="true" vflex="true" />
 				</vbox>
 				<vbox vflex="1" hflex="1">
 					<hbox hflex="1">

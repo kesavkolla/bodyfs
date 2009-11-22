@@ -7,7 +7,8 @@
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.Calendar"%><html>
+<%@page import="java.util.Calendar"%>
+<%@page import="com.bodyfs.framework.listener.ApplicationInitializer"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -17,11 +18,7 @@
 	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session
 			.getServletContext());
 	final IPersonDAO personDAO = (IPersonDAO) context.getBean("personDAO");
-	final List<PatientVisit> visits = (List<PatientVisit>) personDAO.GetPatientVisits(1L);
-	Calendar cal = Calendar.getInstance();
-	cal.add(Calendar.DATE, -10);
-	visits.get(0).setVisitDate(cal.getTime());
-	personDAO.createPatientVisit(visits.get(0));
+	ApplicationInitializer.initPages(this.getServletContext());
 %>
 </body>
 </html>

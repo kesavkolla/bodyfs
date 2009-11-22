@@ -18,7 +18,7 @@
 	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session
 			.getServletContext());
 	final IPersonDAO personDAO = (IPersonDAO) context.getBean("personDAO");
-	ApplicationInitializer.initPages(this.getServletContext());
+	out.println("Visits: " + personDAO.countPatientVisits(1L));
 %>
 </body>
 </html>

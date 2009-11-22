@@ -31,31 +31,18 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		if (this.sessionScope.get("personid") != null) {
-			person = personDAO.getPerson((Long) sessionScope.get("personid"));
+		if (sessionScope.get("CURRENT_PATIENT_ID") != null) {
+			person = personDAO.getPerson((Long) sessionScope.get("CURRENT_PATIENT_ID"));
 		} else {
 			person = personDAO.getByEmail("kesavkolla+bodyfs@gmail.com");
 		}
-		if (this.sessionScope.get("visitdate") != null) {
-			final String vdate = (String) sessionScope.get("visitdate");
-			for (final PatientVisit visit : personDAO.GetPatientVisits(person.getId())) {
-				if (vdate.equals(sdf.format(visit.getVisitDate()))) {
-					this.patientVisit = visit;
-					this.page.setAttribute("patvisit", patientVisit);
-					break;
-				}
-			}
-		} else {
-			this.patientVisit = new PatientVisit();
-			this.page.setAttribute("patvisit", patientVisit);
-		}
+		this.patientVisit = new PatientVisit();
 	}
 
 	public void onSave(final ForwardEvent event) {
 		if (patientVisit != null) {
 			patientVisit.setPersonId(person != null ? person.getId() : 1L);
 			personDAO.createPatientVisit(patientVisit);
-			System.out.println(patientVisit.getId());
 		}
 	}
 }

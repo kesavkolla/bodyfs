@@ -5,6 +5,7 @@ package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
@@ -81,7 +82,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
-	public Person getByEmail(final String email) { 
+	public Person getByEmail(final String email) {
 		try {
 			final Collection<Person> results = this.jdoTemplate.find(Person.class, "email==pemail", "String pemail",
 					email);
@@ -93,5 +94,19 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			e.printStackTrace(System.err);
 			throw new RuntimeException(e);
 		}
+	}
+
+	public int countPatientVisits(final Long patid) {
+		return this.jdoTemplate.execute(new JdoCallback<Integer>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public Integer doInJdo(final PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery(PatientVisit.class, "personId == " + patid);
+				query.setResult("visitDate");
+				final Collection<Date> visits = (Collection<Date>) query.execute();
+				return visits.size();
+			}
+
+		});
 	}
 }

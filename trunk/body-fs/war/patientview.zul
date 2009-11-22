@@ -5,15 +5,12 @@
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/selectToUISlider.jQuery.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<borderlayout id="main" style="background:#dd0000;" apply="com.bodyfs.ui.PatientViewComposer">
-		<north size="100px" border="0" style="background:#dd0000;background:transparent url('/img/category-bg.png')">
-			<div>
-				<image style="padding:0 10px;cursor:pointer;padding-top:5px;" src="/img/Logo.png" />
-				<label
-					style="position:relative; top:-30px;padding-left: 50px; font-size:24px;color:#000000;font-weight:bold;"
-					value="BODY FENG SHUI" />
+	<borderlayout id="main" style="background:#1e1406;" apply="com.bodyfs.ui.PatientViewComposer">
+		<north size="120px" border="0"
+			style="background:#dd0000;background:transparent url('/img/banner.jp2');background-repeat: no-repeat;">
+			<div style="float:right;padding-top:50px;color:#A5804A">
 				<toolbarbutton label="logout" href="/logout.zul" />
-				<label id="username" style="float:right;padding-top:50px;padding-right:20px" />
+				<label id="username" />
 			</div>
 		</north>
 		<west title="Action Menu" size="170px" flex="true" splittable="true" minsize="150" maxsize="500"
@@ -46,17 +43,24 @@
 				</north>
 				<center autoscroll="true" flex="true">
 					<div>
+						<n:h1>Hi</n:h1>
+						You are now into your 4th week of the program
+						<n:br />
+						<progressmeter value="25" />
+						<listbox id="visitdates" mold="select" style="display:none" />
+					</div>
+					<!-- div>
 						<div style="height:50px">&#160;</div>
 						<div style="margin-left:60px;width:80%">
-							<listbox id="visitdates" mold="select" style="display:none" />
+						<listbox id="visitdates" mold="select" style="display:none" />
 						</div>
 						<script type="text/javascript" defer="true">
-							function handleChange(event, ui) { var thisHandle = jQuery(ui.handle); var currSelect =
-							jQuery('#' + thisHandle.attr('id').split('handle_')[1]);
-							alert(currSelect.find('option').eq(ui.value).attr("value")); }
-							zk("$visitdates").jq.selectToUISlider( { labels:10, sliderOptions:{change: handleChange} });
+						function handleChange(event, ui) { var thisHandle = jQuery(ui.handle); var currSelect =
+						jQuery('#' + thisHandle.attr('id').split('handle_')[1]);
+						alert(currSelect.find('option').eq(ui.value).attr("value")); }
+						zk("$visitdates").jq.selectToUISlider( { labels:10, sliderOptions:{change: handleChange} });
 						</script>
-					</div>
+						</div -->
 				</center>
 			</borderlayout>
 		</center>

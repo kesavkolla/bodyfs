@@ -47,6 +47,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		} catch (final Throwable t) {
 			return;
 		}
+
 		LOGGER.debug("Retrieving the details for: " + id);
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Collection<PatientVisit> visits = personDAO.GetPatientVisits(id);
@@ -61,6 +62,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		if (pageid == null || pageid.equals("")) {
 			return;
 		}
+
 		execution.sendRedirect("/index.zul#" + pageid);
 	}
 }

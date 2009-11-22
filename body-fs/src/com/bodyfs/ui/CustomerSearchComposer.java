@@ -2,6 +2,8 @@ package com.bodyfs.ui;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -28,34 +30,30 @@ import com.bodyfs.ui.util.CustSearchOptions;
 
 public class CustomerSearchComposer extends GenericForwardComposer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7039984932259770671L;
-	
+
+	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
-	
-	//private IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO"); 
-	
+
+	// private IPersonDAO personDAO = (IPersonDAO)
+	// SpringUtil.getBean("personDAO");
+
 	AnnotateDataBinder binder;
-	
+
 	Checkbox typePre;
 	Checkbox typePost;
 	Checkbox typeCurrent;
-	
+
 	Textbox smrtTextbox;
 	Button smrtSrch;
-	
+
 	Button refineSearch;
 	Button newSearch;
-	
-	
+
 	Listbox persons;
-	
-	
+
 	CustSearchOptions options = new CustSearchOptions();
-	
-		
+
 	/**
 	 * 
 	 */
@@ -66,89 +64,83 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		binder = new AnnotateDataBinder(comp);
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Collection<Person> resultSet = new ArrayList<Person>();
-		try{
+		try {
 			Query query = pm.newQuery(Person.class);
 			resultSet = (Collection<Person>) query.execute();
 			resultSet = pm.detachCopyAll(resultSet);
-			//persons.setModel(new ListModelList(resultSet));
+			// persons.setModel(new ListModelList(resultSet));
 			this.page.setAttribute("resultSet_", resultSet);
-		}finally{
+		} finally {
 			pm.close();
 		}
 		binder.loadAll();
 	}
-	
-	
-	
-	public void onOK$smrtTextbox(Event evt) throws Exception{
+
+	public void onOK$smrtTextbox(Event evt) throws Exception {
 		searchSmart();
 	}
-	
-	public void searchSmart(){
-		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
-		//PersistenceManager pm = PMF.get().getPersistenceManager();
-		smrtTextbox.getValue();
-		CompassDetachedHits hits =  compassSession.find(smrtTextbox.getValue()).detach();
-		//hits = hits.detach();
-		compassSession.close();
-		Collection<Person> resultSet = new ArrayList<Person>();
-		//List<Person> model =  (List<Person>)persons.getModel();
-		//model.clear();
-		
-		//binder.loadComponent(persons);
-		//Collection<Listitem> itemColl = new ArrayList<Listitem>();
-		for(int i=0; i<hits.length();i++){
-			resultSet.add((Person)hits.data(i));
+
+	public void searchSmart() {
+		if (smrtTextbox.getValue() == null || smrtTextbox.getValue().trim().equals("")) {
+			return;
 		}
-		
+
+		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
+		// PersistenceManager pm = PMF.get().getPersistenceManager();
+		smrtTextbox.getValue();
+		CompassDetachedHits hits = compassSession.find(smrtTextbox.getValue()).detach();
+		// hits = hits.detach();
+		compassSession.close();
+		final LinkedList<Person> resultSet = new LinkedList<Person>();
+		for (int i = 0; i < hits.length(); i++) {
+			if (hits.data(i) instanceof Person) {
+				resultSet.add((Person) hits.data(i));
+			}
+		}
 		persons.setModel(new ListModelList(resultSet));
-		//persons.getItems().addAll();
-		//persons.getItems().addAll(c)
-		//resultSet = pm.detachCopyAll(resultSet);
-		LOGGER.error("Amit- "+resultSet.size());
-		//this.page.setAttribute("resultSet_", resultSet);
-		binder.loadComponent(persons);
-		//this.page.setAttribute("resultSet_", resultSet);
-		
 	}
-	
-	//public void
-	
-	public void getSearchQueryString(CustSearchOptions searchOptions){
-		
-		StringBuffer qry = new StringBuffer("SELECT  FROM "+Person.class.getName()+" p,"+ GeneralInfo.class.getName()+" ginfo");
+
+	@SuppressWarnings("unchecked")
+	public List getResults() {
+		return new ArrayList();
+	}
+
+	// public void
+
+	public void getSearchQueryString(CustSearchOptions searchOptions) {
+
+		StringBuffer qry = new StringBuffer("SELECT  FROM " + Person.class.getName() + " p,"
+				+ GeneralInfo.class.getName() + " ginfo");
 		qry.append(" WHERE p.id = ginfo.personId");
-		if(searchOptions.getFirstName() != null && searchOptions.getFirstName().length() > 0){
+		if (searchOptions.getFirstName() != null && searchOptions.getFirstName().length() > 0) {
 			qry.append(" AND p.firstName LIKE '").append(searchOptions.getFirstName()).append("%'");
 		}
-		if(searchOptions.getLastName() != null && searchOptions.getLastName().length() > 0){
+		if (searchOptions.getLastName() != null && searchOptions.getLastName().length() > 0) {
 			qry.append(" AND p.lastName LIKE '").append(searchOptions.getLastName()).append("%'");
 		}
-		if(searchOptions.getEmail() != null && searchOptions.getEmail().length() > 0){
+		if (searchOptions.getEmail() != null && searchOptions.getEmail().length() > 0) {
 			qry.append(" AND p.email LIKE '").append(searchOptions.getEmail()).append("%'");
 		}
-		if(searchOptions.getZip() != null && searchOptions.getZip().length() > 0){
+		if (searchOptions.getZip() != null && searchOptions.getZip().length() > 0) {
 			qry.append(" AND ginfo.zipcode LIKE '%").append(searchOptions.getZip()).append("%'");
 		}
-		if(typePre.isChecked() || typeCurrent.isChecked() || typePost.isChecked()){
+		if (typePre.isChecked() || typeCurrent.isChecked() || typePost.isChecked()) {
 			qry.append(" AND (");
-			if(typePre.isChecked()) qry.append(" personType = '"+PersonType.PRE_USER+"' OR");
-			if(typeCurrent.isChecked()) qry.append(" personType = '"+PersonType.USER+"' OR");
-			if(typePost.isChecked()) qry.append(" personType = '"+PersonType.POST_USER+"' OR");
-			qry.setLength(qry.length() -2);
-			qry.append(" ) "); 
+			if (typePre.isChecked())
+				qry.append(" personType = '" + PersonType.PRE_USER + "' OR");
+			if (typeCurrent.isChecked())
+				qry.append(" personType = '" + PersonType.USER + "' OR");
+			if (typePost.isChecked())
+				qry.append(" personType = '" + PersonType.POST_USER + "' OR");
+			qry.setLength(qry.length() - 2);
+			qry.append(" ) ");
 		}
-		
+
 	}
-	
-	
-	public void onClick$smrtSrch() throws Exception{
+
+	public void onClick$smrtSrch() throws Exception {
 		searchSmart();
-		
+
 	}
-	
-	
-	
-	
-	
+
 }

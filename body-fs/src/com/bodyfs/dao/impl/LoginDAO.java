@@ -77,7 +77,6 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	public void createNewLogin(LoginInfo login) {
 		// TODO Auto-generated method stub
 		this.jdoTemplate.makePersistent(login);
-		;
 	}
 
 	@Override

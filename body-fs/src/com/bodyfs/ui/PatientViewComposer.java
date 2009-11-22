@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Listbox;
@@ -53,5 +54,13 @@ public class PatientViewComposer extends GenericAutowireComposer {
 			final Listitem item = new Listitem(sdf.format(visit.getVisitDate()));
 			this.visitdates.getItems().add(item);
 		}
+	}
+
+	public void onHandleClick(final ForwardEvent event) {
+		final String pageid = (String) event.getData();
+		if (pageid == null || pageid.equals("")) {
+			return;
+		}
+		execution.sendRedirect("/index.zul#" + pageid);
 	}
 }

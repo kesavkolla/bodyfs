@@ -85,7 +85,7 @@
 						</listhead>
 						<listitem self="@{each='person'}">
 							<listcell image="/img/link_go.png" value="@{person.id }"
-								forward="onClick=mainWindow$composer.onPersonClick" />
+								forward="onClick=mainWindow.onPersonClick" />
 							<listcell label="@{person.firstName}" />
 							<listcell label="@{person.lastName}" />
 							<listcell label="@{person.email}" />

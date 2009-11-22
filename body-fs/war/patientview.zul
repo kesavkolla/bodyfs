@@ -5,7 +5,7 @@
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/selectToUISlider.jQuery.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<borderlayout id="main" style="background:#dd0000;" apply="com.bodyfs.ui.MainWindowComposer">
+	<borderlayout id="main" style="background:#dd0000;" apply="com.bodyfs.ui.PatientViewComposer">
 		<north size="100px" border="0" style="background:#dd0000;background:transparent url('/img/category-bg.png')">
 			<div>
 				<image style="padding:0 10px;cursor:pointer;padding-top:5px;" src="/img/Logo.png" />
@@ -37,7 +37,7 @@
 		</west>
 
 		<center autoscroll="false" flex="true">
-			<borderlayout style="background:#dd0000;" apply="com.bodyfs.ui.UserMgmtComposer">
+			<borderlayout style="background:#dd0000;">
 				<north size="50px">
 					<hbox>
 						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
@@ -45,11 +45,11 @@
 					</hbox>
 				</north>
 				<center autoscroll="true" flex="true">
-					<div apply="com.bodyfs.ui.PatientViewComposer">
-						<n:div style="height:50px">&#160;</n:div>
-						<n:div style="margin-left:60px;width:80%">
+					<div>
+						<div style="height:50px">&#160;</div>
+						<div style="margin-left:60px;width:80%">
 							<listbox id="visitdates" mold="select" style="display:none" />
-						</n:div>
+						</div>
 						<script type="text/javascript" defer="true">
 							function handleChange(event, ui) { var thisHandle = jQuery(ui.handle); var currSelect =
 							jQuery('#' + thisHandle.attr('id').split('handle_')[1]);

@@ -10,31 +10,25 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
-
 /**
  * This class reprasents all the login information of the user
  * 
  * @author Kesav Kumar Kolla
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
-public class LoginInfo implements Serializable{
+public class LoginInfo implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1184170993519404872L;
 
 	@PrimaryKey
 	private String userid;
-	
+
 	@Persistent
 	private Long personId;
 
 	@Persistent
 	private LoginType loginType;
 
-	
 	@Persistent
 	private String password;
 
@@ -44,7 +38,8 @@ public class LoginInfo implements Serializable{
 	@Persistent
 	private String openIdURL;
 
-	@Persistent//(valueStrategy = IdGeneratorStrategy.UUIDSTRING)
+	@Persistent
+	// (valueStrategy = IdGeneratorStrategy.UUIDSTRING)
 	private String token;
 
 	@Persistent
@@ -64,7 +59,7 @@ public class LoginInfo implements Serializable{
 
 	@Persistent
 	private String secAnswer3;
-	
+
 	public final Long getPersonId() {
 		return personId;
 	}

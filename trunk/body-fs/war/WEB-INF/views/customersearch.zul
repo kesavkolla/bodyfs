@@ -1,7 +1,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<zk>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<style dynamic="true"></style>
 	<window id="mainWindow" height="100%" title="Search Customers" border="normal"
 		apply="com.bodyfs.ui.CustomerSearchComposer">
@@ -20,7 +20,7 @@
 								Quick Search:
 								<textbox id="smrtTextbox" maxlength="400" height="20px" style="text-sixe:30px;"
 									width="400px" focus="true" />
-								<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px"/>
+								<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
 								<div style="float:right">
 									<checkbox id="typePre" />
 									pre
@@ -75,19 +75,22 @@
 			</center>
 			<south title="Results" splittable="true" height="60%" autoscroll="true" flex="true">
 				<div id="results" style="position:realtive;bottom:0;right:0">
-					<listbox id="persons" fixedLayout="true" disabled="true">
+					<listbox id="persons" fixedLayout="true" model="@{ mainWindow$composer.results }" vflex="true">
 						<listhead>
+							<listheader label="" width="20px" />
 							<listheader label="First Name" />
-							<listheader label="Last Name"/>
+							<listheader label="Last Name" />
 							<listheader label="email" />
 							<listheader label="Type" tooltiptext="pre,current or post Customers" />
 						</listhead>
 						<listitem self="@{each='person'}">
+							<listcell image="/img/link_go.png" value="@{person.id }"
+								forward="onClick=mainWindow$composer.onPersonClick" />
 							<listcell label="@{person.firstName}" />
 							<listcell label="@{person.lastName}" />
 							<listcell label="@{person.email}" />
 							<listcell label="@{person.personType}" />
-						</listitem>						
+						</listitem>
 					</listbox>
 				</div>
 			</south>

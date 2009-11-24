@@ -6,6 +6,7 @@ package com.bodyfs.ui;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
@@ -40,7 +41,11 @@ public class MainWindowComposer extends GenericForwardComposer {
 			pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		}
 		LoginInfo userInfo = (LoginInfo) session.getAttribute("LOGIN_CREDENTIALS");
+		if(username==null){
+			Executions.sendRedirect("/logout.zul");
+		}
 		username.setValue(userInfo.getUserid());
+		
 	}
 
 	public void onHandleClick(final ForwardEvent event) {

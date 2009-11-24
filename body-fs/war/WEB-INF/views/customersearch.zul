@@ -83,9 +83,8 @@
 							<listheader label="email" />
 							<listheader label="Type" tooltiptext="pre,current or post Customers" />
 						</listhead>
-						<listitem self="@{each='person'}">
-							<listcell image="/img/link_go.png" value="@{person.id }"
-								forward="onClick=mainWindow.onPersonClick" />
+						<listitem self="@{each='person'}" value="@{person }">
+							<listcell image="/img/link_go.png"/>
 							<listcell label="@{person.firstName}" />
 							<listcell label="@{person.lastName}" />
 							<listcell label="@{person.email}" />

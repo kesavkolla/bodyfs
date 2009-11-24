@@ -157,10 +157,11 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	}
 	
 	public void onSelect$persons(Event evt){
+		LOGGER.error("Navigating to patient id: " + persons.getSelectedItem());
 		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		Person selectedPerson =  (Person)persons.getSelectedItem().getValue();
 		LOGGER.debug("Navigating to patient id: " + selectedPerson.getId());
 		final Page page = pageDAO.getById("patientview");
-		//Executions.sendRedirect(page.getPath() + "?id=" + selectedPerson.getId());
+		Executions.sendRedirect(page.getPath() + "?id=" + selectedPerson.getId());
 	}
 }

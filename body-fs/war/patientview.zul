@@ -54,6 +54,9 @@
 								style="background-color:green; height:30px;font-weight:bold;line-height:30px">
 							</div>
 						</n:div>
+						<div> 
+						Create/Edit LoginInfo: <button id="createLogin" forward="onClick=main.onCreateLogin" label="login info"/>
+						</div>
 					</div>
 					<!-- div>
 						<div style="height:50px">&#160;</div>

@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.compass.core.CompassDetachedHits;
 import org.compass.core.CompassSearchSession;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -102,6 +103,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			}
 		}
 		persons.setModel(new ListModelList(resultSet));
+		persons.invalidate();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -145,12 +147,20 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	public void onClick$smrtSrch() throws Exception {
 		searchSmart();
 	}
-
+	
 	public void onPersonClick(final ForwardEvent event) {
 		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
 		final Listcell cell = (Listcell) event.getOrigin().getTarget();
 		LOGGER.debug("Navigating to patient id: " + cell.getValue());
 		final Page page = pageDAO.getById("patientview");
 		execution.sendRedirect(page.getPath() + "?id=" + cell.getValue());
+	}
+	
+	public void onSelect$persons(Event evt){
+		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
+		Person selectedPerson =  (Person)persons.getSelectedItem().getValue();
+		LOGGER.debug("Navigating to patient id: " + selectedPerson.getId());
+		final Page page = pageDAO.getById("patientview");
+		//Executions.sendRedirect(page.getPath() + "?id=" + selectedPerson.getId());
 	}
 }

@@ -8,7 +8,7 @@ import com.bodyfs.ui.util.CustSearchOptions;
 public interface ILoginDAO {
 	public LoginInfo verifyLoginDetails(String loginId, String password);
 	
-	public LoginInfo getLoginDetails();
+	public LoginInfo getLoginDetails(Long personId);
 	
 	public void createNewLogin(LoginInfo login);
 	

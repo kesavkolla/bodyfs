@@ -17,6 +17,7 @@ import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.ILoginDAO;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.model.Person;
 import com.bodyfs.ui.util.CustSearchOptions;
 
 @Repository(value = "loginDAO")
@@ -59,9 +60,19 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	}
 
 	@Override
-	public LoginInfo getLoginDetails() {
+	public LoginInfo getLoginDetails(Long personId) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			final Collection<LoginInfo> results = this.jdoTemplate.find(LoginInfo.class, "personId==pid", "String pid",
+					personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class LoginWindow extends GenericForwardComposer {
 	}
 
 	public void doLogin() {
-		String user = usertb.getValue();
+		String user = usertb.getValue().toLowerCase();
 		String pwd = pwdtb.getValue();
 
 		if ((user != null && user.isEmpty()) || (pwd != null && pwd.isEmpty())) {

@@ -11,7 +11,7 @@
 			</columns>
 			<rows>
 				<row spans="3">
-					Create Login ID for ${person.lastName }, ${person.FirstName }
+					<div>Create Login ID for <label id="titleLabel"/></div>
 				</row>
 				<row>
 					Login ID:
@@ -24,8 +24,8 @@
 				</row>
 				<row spans="3">
 					<hbox pack="center">
-						<button label="create"/>
-						<button label="cancel"/>
+						<button label="create" forward="onClick=win.onSave"/>
+						<button label="cancel" onClick="win.detach()"/>
 					</hbox>
 				</row>
 			</rows>

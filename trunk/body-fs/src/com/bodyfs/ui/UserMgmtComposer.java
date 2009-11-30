@@ -46,7 +46,6 @@ public class UserMgmtComposer extends GenericForwardComposer {
 	public void onHandleClick(final ForwardEvent event) {
 		final String pageid = (String) event.getData();
 		if (pageid.equals("npi")) {
-			NPIComposer.cleanSession(sessionScope);
 		}
 		navigatePage(pageid, true);
 	}

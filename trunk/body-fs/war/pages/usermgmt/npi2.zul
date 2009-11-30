@@ -1,5 +1,4 @@
 <?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi1"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" />
@@ -198,7 +197,7 @@
 		</panelchildren>
 	</panel>
 	<hbox width="100%" pack="end">
-		<button label="Prev" forward="onClick=npigrid.onNext(npi)" />
-		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi2)" />
+		<button label="Prev" forward="onClick=npigrid.onNext(npi1)" />
+		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi3)" />
 	</hbox>
 </zk>

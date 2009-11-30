@@ -3,21 +3,16 @@
  */
 package com.bodyfs.ui;
 
-import java.text.SimpleDateFormat;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.api.Button;
 import org.zkoss.zul.api.Window;
 
 import com.bodyfs.dao.IPersonDAO;
@@ -32,28 +27,22 @@ public class PatientViewComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
-	final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 	private Label fullname;
 	private Label week;
 	private Div divbar;
-	
-	AnnotateDataBinder binder;
-	
-	Button createLogin;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
-		
+
 		super.doAfterCompose(comp);
-		
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Inside compose");
 		}
 		if (!this.param.containsKey("id")) {
 			return;
 		}
-		binder = new AnnotateDataBinder(comp);
 		Long id = -1L;
 		try {
 			id = Long.parseLong(this.param.get("id").toString());
@@ -64,7 +53,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		LOGGER.debug("Retrieving the details for: " + id);
 		pageScope.put("CURRENT_PATIENT_ID", id);
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
-		binder.loadAll();
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
 		final int numweek = personDAO.countPatientVisits(person.getId());
@@ -93,20 +81,16 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		}
 		execution.sendRedirect("/index.zul#" + pageid);
 	}
-	
-	public void onCreateLogin(final ForwardEvent event){
+
+	public void onCreateLogin(final ForwardEvent event) {
 		LOGGER.error("create Login");
-		final Window win = (Window) Executions.createComponents(
-				"/WEB-INF/views/createLoginInfo.zul", null, null);
+		final Window win = (Window) Executions.createComponents("/WEB-INF/views/createLoginInfo.zul", null, null);
 		try {
 			win.doModal();
 		} catch (SuspendNotAllowedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }

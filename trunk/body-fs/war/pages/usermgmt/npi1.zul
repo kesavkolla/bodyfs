@@ -1,14 +1,7 @@
-<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi" complete="true"?>
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi"?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
-<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
-	xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<style>
-		.form .error-input, .form .error-both .input, .form .error-same .input { background-color:#FFEFEF;
-		border-color:#BB6666; color:#660000; } .form .error-div { float:right; margin:7px 10px 0 0; color:#935;
-		font-size:10px; }
-	</style>
-	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer">
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" hflex="1">
 		<rows>
 			<row hflex="true">
 				First Name:
@@ -131,14 +124,17 @@
 				Physician's phone
 				<textbox hflex="1" value="@{ginfo.physicianphone, save-when='btnNext.onClick' }" />
 			</row>
-			<row spans="2,4">
+			<row spans="2,6">
 				Other concurrent therapies
 				<textbox rows="3" cols="40" value="@{ginfo.othertherapies, save-when='btnNext.onClick' }" />
 			</row>
+			<row spans="8">
+				<hbox hflex="1">
+					<separator hflex="1" />
+					<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" />
+					<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi2)" />
+				</hbox>
+			</row>
 		</rows>
 	</grid>
-	<hbox width="100%" pack="end">
-		<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" />
-		<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi1)" />
-	</hbox>
 </zk>

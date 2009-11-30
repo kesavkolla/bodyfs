@@ -8,8 +8,6 @@
 					forward="onClick=main.onHandleClick(custSearch)" id="btnSearch" />
 				<toolbarbutton label="New Patient" image="/img/user_add.png" forward="onClick=main.onHandleClick(npi)"
 					id="btnNPI" />
-				<!--toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
-					forward="onClick=main.onHandleClick(weeklyvisit)" /-->
 			</hbox>
 		</north>
 		<center autoscroll="true" flex="true">

@@ -3,6 +3,7 @@
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <zk>
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
+	<style src="/css/annotation.css"></style>
 	<grid fixedLayout="true" id="main" apply="com.bodyfs.ui.WeeklyVisitComposer">
 		<columns>
 			<column width="50%"></column>
@@ -11,7 +12,7 @@
 		<rows>
 			<row>
 				<vbox>
-					<image src="/img/bakers-union-body.gif" hflex="true" vflex="true" />
+					<image src="/img/bakers-union-body.gif" hflex="true" vflex="true" id="imgbody" />
 				</vbox>
 				<vbox vflex="1" hflex="1">
 					<hbox hflex="1">
@@ -148,4 +149,6 @@
 	<hbox width="100%" pack="end">
 		<button id="btnSave" label="Save" forward="onClick=main.onSave" />
 	</hbox>
+	<script src="/scripts/jquery.annotation.js" type="text/javascript" />
+	<script defer="true">alert($("#imgbody").length);</script>
 </zk>

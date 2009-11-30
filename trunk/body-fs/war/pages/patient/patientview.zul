@@ -1,0 +1,32 @@
+<?page title="Patient View" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
+<zk>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout style="background:#dd0000;" id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
+				<north size="50px">
+					<hbox>
+						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
+							href="/pages/patient/weeklyvisit.zul?id=${execution.parameterMap.id[0] }" />
+					</hbox>
+				</north>
+				<center autoscroll="true" flex="true">
+					<div>
+						Hi
+						<label id="fullname" />
+						You are now into your
+						<label id="week" />
+						th week of the program
+						<space />
+						<div style="width:40%;height:30px;background-color:gray">
+							<div id="divbar"
+								style="background-color:green; height:30px;font-weight:bold;line-height:30px">
+							</div>
+						</div>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+</zk>

@@ -1,0 +1,103 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center>
+			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
+				<north size="50px">
+					<hbox>
+						<toolbarbutton label="New Patient" image="/img/user_add.png" href="/pages/usermgmt/npi.zul" />
+					</hbox>
+				</north>
+				<center border="20" autoscroll="true">
+					<vbox hflex="true">
+						<space />
+						<hbox>
+							Quick Search:
+							<textbox id="smrtTextbox" maxlength="400" focus="true" width="400px" />
+							<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
+							<checkbox id="typePre" />
+							pre
+							<checkbox id="typeCurrent" checked="true" />
+							current
+							<checkbox id="typePost" />
+							post
+						</hbox>
+						<panel id="optionsPanel" framable="true" title="More" maximizable="false" minimizable="false"
+							border="normal" collapsible="true" closable="false" hflex="true" open="false">
+							<panelchildren>
+								<div id="extendedSearch">
+									<grid id="extendedSearchGrid" fixedLayout="true">
+										<columns>
+											<column width="100px" />
+											<column width="175px" />
+											<column width="100px" />
+											<column width="175px" />
+											<column width="100px" />
+											<column />
+										</columns>
+										<rows>
+											<row>
+												First Name:
+												<textbox id="firstName" value="@{person.firstName }" maxlength="100"
+													zclass="req-string" />
+												Last Name:
+												<textbox id="lastName" value="@{person.lastName }" maxlength="100"
+													zclass="req-string" />
+												Zip:
+												<textbox id="zip" value="@{person.zip }" maxlength="100"
+													zclass="req-string" />
+											</row>
+											<row spans="2,,,,">
+												<label value="Date Of Treatement" />
+												From Date:
+												<datebox id="trmtfromDate" maxlength="100" buttonVisible="true" />
+												To Date:
+												<datebox id="trmttoDate" maxlength="100" />
+											</row>
+										</rows>
+									</grid>
+
+									<button id="refineSearch" label="Refine Current Results" style="float:center" />
+									<button id="newSearch" label="New Search" style="float:center" />
+								</div>
+							</panelchildren>
+						</panel>
+						<div id="results" style="position:realtive;bottom:0;right:0">
+							<listbox id="persons" fixedLayout="true" model="@{ customersearch$composer.results }"
+								vflex="true">
+								<listhead>
+									<listheader label="" width="20px" />
+									<listheader label="First Name" />
+									<listheader label="Last Name" />
+									<listheader label="email" />
+									<listheader label="Type" tooltiptext="pre,current or post Customers" />
+								</listhead>
+								<listitem self="@{each='person'}" value="@{person }">
+									<listcell image="/img/link_go.png" class="@{person.id }">
+										<attribute w:name="onClick">
+											window.location.href="/pages/patient/patientview.zul?id=" +
+											jq(this).zk.widget()[0]._sclass
+										</attribute>
+									</listcell>
+									<listcell label="@{person.firstName}" />
+									<listcell label="@{person.lastName}" />
+									<listcell label="@{person.email}" />
+									<listcell label="@{person.personType}" />
+								</listitem>
+							</listbox>
+						</div>
+
+					</vbox>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+	<script type="text/javascript" defer="true">
+		var panel = zk("$optionsPanel").widget()[0]; var node = panel.$n(); var body = jq(panel.$n('body')); var zcls =
+		panel.getZclass(); jq(node).addClass(zcls + '-colpsd'); panel._hideShadow(); if (zk.ie6_ &amp;&amp;
+		!node.style.width) { node.runtimeStyle.width = "100%"; } body.zk.slideUp(panel, {beforeAnima:
+		panel._beforeSlideUp});
+	</script>
+</zk>

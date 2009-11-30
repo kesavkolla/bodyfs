@@ -13,23 +13,17 @@ import org.apache.commons.logging.LogFactory;
 import org.compass.core.CompassDetachedHits;
 import org.compass.core.CompassSearchSession;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
-import org.zkoss.zul.api.Button;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.api.Checkbox;
 import org.zkoss.zul.api.Textbox;
 
 import com.bodyfs.PMF;
-import com.bodyfs.dao.IPageDAO;
 import com.bodyfs.model.GeneralInfo;
-import com.bodyfs.model.Page;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.ui.util.CustSearchOptions;
@@ -38,6 +32,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -7039984932259770671L;
 
+	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(MainWindowComposer.class);
 
 	// private IPersonDAO personDAO = (IPersonDAO)
@@ -50,12 +45,10 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	Checkbox typeCurrent;
 
 	Textbox smrtTextbox;
-	Button smrtSrch;
-
-	Button refineSearch;
-	Button newSearch;
 
 	Listbox persons;
+
+	Panel optionsPanel;
 
 	CustSearchOptions options = new CustSearchOptions();
 
@@ -77,6 +70,9 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			this.page.setAttribute("resultSet_", resultSet);
 		} finally {
 			pm.close();
+		}
+		if (optionsPanel != null) {
+			optionsPanel.setOpen(false);
 		}
 		binder.loadAll();
 	}
@@ -146,22 +142,5 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 
 	public void onClick$smrtSrch() throws Exception {
 		searchSmart();
-	}
-	
-	public void onPersonClick(final ForwardEvent event) {
-		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
-		final Listcell cell = (Listcell) event.getOrigin().getTarget();
-		LOGGER.debug("Navigating to patient id: " + cell.getValue());
-		final Page page = pageDAO.getById("patientview");
-		execution.sendRedirect(page.getPath() + "?id=" + cell.getValue());
-	}
-	
-	public void onSelect$persons(Event evt){
-		LOGGER.error("Navigating to patient id: " + persons.getSelectedItem());
-		final IPageDAO pageDAO = (IPageDAO) SpringUtil.getBean("pageDAO");
-		Person selectedPerson =  (Person)persons.getSelectedItem().getValue();
-		LOGGER.debug("Navigating to patient id: " + selectedPerson.getId());
-		final Page page = pageDAO.getById("patientview");
-		Executions.sendRedirect(page.getPath() + "?id=" + selectedPerson.getId());
 	}
 }

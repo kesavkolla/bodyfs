@@ -3,8 +3,6 @@
  */
 package com.bodyfs.ui;
 
-import java.text.SimpleDateFormat;
-
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -25,7 +23,6 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	private PatientVisit patientVisit;
 	private IPersonDAO personDAO;
 	private Person person;
-	private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {

@@ -219,7 +219,7 @@
         } else {
             var newNote = new Object();
             newNote.id = "new";
-            newNote.top = 30;
+            newNote.top = 50;
             newNote.left = 30;
             newNote.width = 30;
             newNote.height = 30;

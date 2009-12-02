@@ -3,6 +3,7 @@
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
+<?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
 <zk>

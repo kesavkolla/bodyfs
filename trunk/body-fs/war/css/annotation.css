@@ -83,6 +83,7 @@
 	padding: 7px;
 	position: absolute;
 	width: 250px;
+	z-index: 999;
 }
 
 #image-annotate-edit-form form {

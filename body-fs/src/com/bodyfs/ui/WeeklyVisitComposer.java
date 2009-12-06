@@ -3,7 +3,10 @@
  */
 package com.bodyfs.ui;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
@@ -24,6 +27,8 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	private IPersonDAO personDAO;
 	private Person person;
 
+	private static Log LOGGER = LogFactory.getLog(WeeklyVisitComposer.class);
+
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -41,5 +46,10 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			patientVisit.setPersonId(person != null ? person.getId() : 1L);
 			personDAO.createPatientVisit(patientVisit);
 		}
+	}
+
+	public void onNoteAdd(final Event event) {
+
+		LOGGER.error(event.getData());
 	}
 }

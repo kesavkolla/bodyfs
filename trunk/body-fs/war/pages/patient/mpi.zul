@@ -1,9 +1,9 @@
 <?page title="MPI Data" contentType="text/html;charset=UTF-8"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="mpiview"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
-<zk>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout style="background:#dd0000;" id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
@@ -17,11 +17,21 @@
 				</north>
 				<center autoscroll="true" flex="true">
 					<div>
+						<space height="20px" orient="vertical" width="100%"/>
 						<hbox>
 							<zk forEach="${mpiview$composer.examDates }">
-								<toolbarbutton label="${fmt:format(each) }" />
+								<toolbarbutton label="${fmt:format(each) }" sclass="${execution.parameterMap.id[0] }_${each.time }">
+									<attribute w:name="onClick">
+										var widget = zk.Widget.$(jq(this).attr("id"));
+										var sclass = widget._sclass.split("_");
+										var mpiview = zk.Widget.$($("$mpiview").attr("id"));
+										var data = {patid: parseFloat(sclass[0]), examDate: parseFloat(sclass[1])};
+										zAu.send(mpiview.fire("onKesav", data));
+									</attribute>
+								</toolbarbutton>
 							</zk>
 						</hbox>
+						<space height="20px" orient="vertical" width="100%"/>
 						<button id="btnAddData" label="Add New"
 							forward="onClick=mpiview.onShow(${execution.parameterMap.id[0] })" />
 						<space />
@@ -32,6 +42,8 @@
 		</center>
 	</borderlayout>
 	<script type="text/javascript" defer="true">
+	var examDate = "${mpi.examDate }";
+	if(examDate.length > 0) {
 $('$mpiChart').gchart({type: 'barVertGrouped',
 	dataLabels: ['LU-5', 'P-7', 'HT-7', 'SI-8', 'TH-3', 'LI-6', 'SP-5', 'LIV', 'KI-1', 'BL-65', 'GB-43', 'ST-41']
 	, legend: ''
@@ -48,10 +60,10 @@ $('$mpiChart').gchart({type: 'barVertGrouped',
 	]
 	, series: [
 		$.gchart.series('Reading1'
-			, [${mpi.LU1}, 200, ${mpi.HT1 }, ${mpi.SI1 }, ${mpi.TH1 }, ${mpi.LT1 }, ${mpi.SP1 }, ${mpi.LV1 }, ${mpi.KI1 }, ${mpi.BL1 }, ${mpi.GB1 }, ${mpi.ST1 }]
+			, [${mpi.LU1}, ${mpi.p1 }, ${mpi.HT1 }, ${mpi.SI1 }, ${mpi.TH1 }, ${mpi.LI1 }, ${mpi.SP1 }, ${mpi.LV1 }, ${mpi.KI1 }, ${mpi.BL1 }, ${mpi.GB1 }, ${mpi.ST1 }]
 			, ['ff0080', 'ff0080', 'ff0080', 'ff0080', '000099', '8c001a', 'ff0080', 'b1b1b1', '7d9c9f', 'ff0080', '000099', '000099'])
 		, $.gchart.series('Reading2'
-			, [${mpi.LU2 }, 200, ${mpi.HT2 }, ${mpi.SI2 }, ${mpi.TH2 }, ${mpi.LT2 }, ${mpi.SP2 }, ${mpi.LV2 }, ${mpi.KI2 }, ${mpi.BL2 }, ${mpi.GB2 }, ${mpi.ST2 }]
+			, [${mpi.LU2 }, ${mpi.p2 }, ${mpi.HT2 }, ${mpi.SI2 }, ${mpi.TH2 }, ${mpi.LI2 }, ${mpi.SP2 }, ${mpi.LV2 }, ${mpi.KI2 }, ${mpi.BL2 }, ${mpi.GB2 }, ${mpi.ST2 }]
 			, ['ff0080', 'ff0080', 'ff0080', 'ff0080', '000099', '8c001a', 'ff0080', 'b1b1b1', '7d9c9f', 'ff0080', '000099', '000099'])
 	]
 	, markers: [
@@ -59,5 +71,19 @@ $('$mpiChart').gchart({type: 'barVertGrouped',
 		, $.gchart.marker('number', 'gray', 1, 'all')
 	]
 });
+}
+
+var mpiview = zk.Widget.$($("$mpiview").attr("id"));
+mpiview.redrawChart = function(data) {
+	var dseries = [
+		$.gchart.series('Reading1'
+			, [data.LU1, data.p1, data.HT1, data.SI1, data.TH1, data.LI1, data.SP1, data.LV1, data.KI1, data.BL1, data.GB1, data.ST1]
+			, ['ff0080', 'ff0080', 'ff0080', 'ff0080', '000099', '8c001a', 'ff0080', 'b1b1b1', '7d9c9f', 'ff0080', '000099', '000099'])
+		, $.gchart.series('Reading2'
+			, [data.LU2, data.p2, data.HT2, data.SI2, data.TH2, data.LI2, data.SP2, data.LV2, data.KI2, data.BL2, data.GB2, data.ST2]
+			, ['ff0080', 'ff0080', 'ff0080', 'ff0080', '000099', '8c001a', 'ff0080', 'b1b1b1', '7d9c9f', 'ff0080', '000099', '000099'])
+	];
+	$("$mpiChart").gchart('change', {series: dseries});
+};
 </script>
 </zk>

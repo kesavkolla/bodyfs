@@ -76,13 +76,13 @@ public class MPIData implements Serializable {
 	private float TH3;
 
 	@Persistent
-	private float LT1;
+	private float LI1;
 
 	@Persistent
-	private float LT2;
+	private float LI2;
 
 	@Persistent
-	private float LT3;
+	private float LI3;
 
 	@Persistent
 	private float SP1;
@@ -294,28 +294,28 @@ public class MPIData implements Serializable {
 		TH3 = tH3;
 	}
 
-	public final float getLT1() {
-		return LT1;
+	public final float getLI1() {
+		return LI1;
 	}
 
-	public final void setLT1(float lT1) {
-		LT1 = lT1;
+	public final void setLI1(float lI1) {
+		LI1 = lI1;
 	}
 
-	public final float getLT2() {
-		return LT2;
+	public final float getLI2() {
+		return LI2;
 	}
 
-	public final void setLT2(float lT2) {
-		LT2 = lT2;
+	public final void setLI2(float lI2) {
+		LI2 = lI2;
 	}
 
-	public final float getLT3() {
-		return LT3;
+	public final float getLI3() {
+		return LI3;
 	}
 
-	public final void setLT3(float lT3) {
-		LT3 = lT3;
+	public final void setLI3(float lI3) {
+		LI3 = lI3;
 	}
 
 	public final float getSP1() {

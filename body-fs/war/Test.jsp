@@ -15,7 +15,9 @@
 <%@page import="com.bodyfs.model.MPIData"%>
 <%@page import="javax.jdo.Query"%>
 <%@page import="javax.jdo.JDOException"%>
-<%@page import="org.zkoss.json.JSONArray"%><html>
+<%@page import="org.zkoss.json.JSONArray"%>
+<%@page import="org.zkoss.json.JSONValue"%>
+<%@page import="org.zkoss.json.JSONObject"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -29,7 +31,7 @@
 
 	final IMPIDao mpiDao = (IMPIDao) context.getBean("MPIDao");
 	final JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
-	Collection<Date> dates = getExamDates(jdoTemplate, 1L);
+	Collection<Date> dates = getExamDates(jdoTemplate, 2L);
 	for (final Date dt : dates) {
 		out.println(dt.getTime());
 		out.println("<br />");
@@ -38,7 +40,10 @@
 	out.println(JSONArray.toJSONString(dates.toArray()));
 	out.println("<br />");
 
-	final MPIData data = getDataByDate(jdoTemplate, 1L, new Date(1260064722938L));
+	final MPIData data = getDataByDate(jdoTemplate, 1L, null);
+	if (data == null) {
+		return;
+	}
 %>
 <table>
 	<tr>
@@ -62,7 +67,25 @@
 		<td><%=data.getP2()%></td>
 	</tr>
 </table>
+<%
+	final MPIData mpiData = data;
+	final StringBuilder jsonData = new StringBuilder();
+	jsonData.append("{personId:").append(mpiData.getPersonId()).append(", examDate:").append(
+			mpiData.getExamDate().getTime()).append(", LU1:").append(mpiData.getLU1()).append(", LU2:").append(
+			mpiData.getLU2()).append(", p1:").append(mpiData.getP1()).append(", p2:").append(mpiData.getP2())
+			.append(", HT1:").append(mpiData.getHT1()).append(", HT2:").append(mpiData.getHT2()).append(
+					", SI1:").append(mpiData.getSI1()).append(", SI2:").append(mpiData.getSI2()).append(
+					", TH1:").append(mpiData.getTH1()).append(", TH2:").append(mpiData.getTH2()).append(
+					", LI1:").append(mpiData.getLI1()).append(", LI2:").append(mpiData.getLI2()).append(
+					", SP1:").append(mpiData.getSP1()).append(", SP2:").append(mpiData.getSP2()).append(
+					", LV1:").append(mpiData.getLV1()).append(", LV2:").append(mpiData.getLV2()).append(
+					", KI1:").append(mpiData.getKI1()).append(", KI2:").append(mpiData.getKI2()).append(
+					", BL1:").append(mpiData.getBL1()).append(", BL2:").append(mpiData.getBL2()).append(
+					", GB1:").append(mpiData.getGB1()).append(", GB2:").append(mpiData.getGB2()).append(
+					", ST1:").append(mpiData.getST1()).append(", ST2:").append(mpiData.getST2()).append("}");
 
+	out.println(JSONValue.toJSONString(jsonData));
+%>
 </body>
 </html>
 <%!public MPIData getDataByDate(final JdoTemplate jdoTemplate, final Long id, final Date examDate) {
@@ -90,10 +113,12 @@
 			@Override
 			public Collection<Date> doInJdo(final PersistenceManager pm) throws JDOException {
 				final Query query = pm.newQuery(MPIData.class);
+				query.setFilter("personId==pid");
+				query.declareParameters("Long pid");
 				query.setResultClass(String.class);
 				query.setOrdering("examDate desc");
 				query.setResult("examDate");
-				return (Collection<Date>) query.execute();
+				return (Collection<Date>) query.execute(id);
 			}
 		});
 	}%>

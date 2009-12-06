@@ -3,6 +3,7 @@ package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,20 +44,28 @@ public class MPIDao implements IMPIDao, Serializable {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Date> getExamDates(final Long id) {
-		return this.jdoTemplate.executeFind(new JdoCallback<Collection<Date>>() {
+		if (id == null || id <= 0) {
+			return Collections.EMPTY_LIST;
+		}
+		return jdoTemplate.executeFind(new JdoCallback<Collection<Date>>() {
 			@Override
 			public Collection<Date> doInJdo(final PersistenceManager pm) throws JDOException {
 				final Query query = pm.newQuery(MPIData.class);
+				query.setFilter("personId==pid");
+				query.declareParameters("Long pid");
 				query.setResultClass(String.class);
-				query.setResult("examDate");
 				query.setOrdering("examDate desc");
-				return (Collection<Date>) query.execute();
+				query.setResult("examDate");
+				return (Collection<Date>) query.execute(id);
 			}
 		});
 	}
 
 	@Override
 	public MPIData getDataByDate(final Long id, final Date examDate) {
+		if (id == null || id <= 0) {
+			return null;
+		}
 		return this.jdoTemplate.execute(new JdoCallback<MPIData>() {
 			@Override
 			public MPIData doInJdo(final PersistenceManager pm) throws JDOException {

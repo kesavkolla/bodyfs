@@ -62,13 +62,13 @@
 					</cell>
 				</row>
 				<row>
-					<cell>LT1</cell>
+					<cell>LI1</cell>
 					<cell>
-						<doublebox value="@{mpi.LT1, save-when='btnSave.onClick' }" hflex="1" />
+						<doublebox value="@{mpi.LI1, save-when='btnSave.onClick' }" hflex="1" />
 					</cell>
-					<cell>LT2</cell>
+					<cell>LI2</cell>
 					<cell>
-						<doublebox value="@{mpi.LT2, save-when='btnSave.onClick' }" hflex="1" />
+						<doublebox value="@{mpi.LI2, save-when='btnSave.onClick' }" hflex="1" />
 					</cell>
 				</row>
 				<row>

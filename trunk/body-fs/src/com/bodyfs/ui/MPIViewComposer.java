@@ -10,6 +10,9 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.zkoss.json.JSONObject;
+import org.zkoss.json.JSONValue;
+import org.zkoss.zk.au.out.AuInvoke;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -39,14 +42,13 @@ public class MPIViewComposer extends GenericForwardComposer {
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
-		System.out.println(comp.getClass());
-		System.out.println(comp.getPage());
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
+		System.out.println("Id: " + Executions.getCurrent().getParameter("id"));
 		if (Executions.getCurrent().getParameterValues("id") != null) {
 			final MPIData mpi = mpiDao.getDataByDate(Long
 					.parseLong(Executions.getCurrent().getParameterValues("id")[0]), null);
+			System.out.println("MPI: " + mpi);
 			if (mpi != null) {
-				System.out.println("Setting attribute: " + mpi.getExamDate());
 				comp.setAttribute("mpi", mpi);
 				comp.getPage().setAttribute("mpi", mpi);
 			}
@@ -58,6 +60,7 @@ public class MPIViewComposer extends GenericForwardComposer {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
 		final Collection<Date> dates = mpiDao.getExamDates(Long.parseLong(Executions.getCurrent().getParameterValues(
 				"id")[0]));
+		System.out.println(dates);
 		if (dates == null || dates.size() <= 0) {
 			return new Date[0];
 		}
@@ -81,6 +84,10 @@ public class MPIViewComposer extends GenericForwardComposer {
 		}
 	}
 
+	/**
+	 * 
+	 * @param event
+	 */
 	public void onSave(final Event event) {
 		final Window win = (Window) event.getTarget();
 		win.detach();
@@ -92,5 +99,55 @@ public class MPIViewComposer extends GenericForwardComposer {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
 		mpiDao.addMPIData(mpi);
 		LOGGER.debug("Created MPI Data with Id: " + mpi.getId());
+	}
+
+	@SuppressWarnings("unchecked")
+	public void onKesav(final Event event) {
+		final Execution execution = Executions.getCurrent();
+		if (execution.getParameter("data_0") == null) {
+			return;
+		}
+		final JSONObject inpData = (JSONObject) JSONValue.parse(execution.getParameter("data_0"));
+		if (!inpData.containsKey("patid")) {
+			return;
+		}
+		if (!inpData.containsKey("examDate")) {
+			return;
+		}
+		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
+		final MPIData mpiData = mpiDao.getDataByDate(new Long((Integer) inpData.get("patid")), new Date((Long) inpData
+				.get("examDate")));
+		if (mpiData == null) {
+			return;
+		}
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("personId", mpiData.getPersonId());
+		jsonObj.put("examDate", mpiData.getExamDate().getTime());
+		jsonObj.put("LU1", mpiData.getLU1());
+		jsonObj.put("LU2", mpiData.getLU2());
+		jsonObj.put("p1", mpiData.getP1());
+		jsonObj.put("p2", mpiData.getP2());
+		jsonObj.put("HT1", mpiData.getHT1());
+		jsonObj.put("HT2", mpiData.getHT2());
+		jsonObj.put("SI1", mpiData.getSI1());
+		jsonObj.put("SI2", mpiData.getSI2());
+		jsonObj.put("TH1", mpiData.getTH1());
+		jsonObj.put("TH2", mpiData.getTH2());
+		jsonObj.put("LI1", mpiData.getLI1());
+		jsonObj.put("LI2", mpiData.getLI2());
+		jsonObj.put("SP1", mpiData.getSP1());
+		jsonObj.put("SP2", mpiData.getSP2());
+		jsonObj.put("LV1", mpiData.getLV1());
+		jsonObj.put("LV2", mpiData.getLV2());
+		jsonObj.put("KI1", mpiData.getKI1());
+		jsonObj.put("KI2", mpiData.getKI2());
+		jsonObj.put("BL1", mpiData.getBL1());
+		jsonObj.put("BL2", mpiData.getBL2());
+		jsonObj.put("GB1", mpiData.getGB1());
+		jsonObj.put("GB2", mpiData.getGB2());
+		jsonObj.put("ST1", mpiData.getST1());
+		jsonObj.put("ST2", mpiData.getST2());
+
+		execution.addAuResponse("chartresp", new AuInvoke(event.getTarget(), "redrawChart", jsonObj));
 	}
 }

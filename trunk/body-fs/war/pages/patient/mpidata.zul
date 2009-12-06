@@ -1,0 +1,157 @@
+<?page title="mpidata" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="mpidata" ?>
+<zk>
+	<window title="mpidata" border="normal" mode="popup" position="center" apply="com.bodyfs.ui.MPIViewComposer"
+		id="mpidata">
+		<grid>
+			<columns>
+				<column width="60px" />
+				<column width="100px" />
+				<column width="50px" />
+				<column width="100px" />
+			</columns>
+			<rows>
+				<row>
+					<cell>LU1</cell>
+					<cell>
+						<doublebox value="@{mpi.LU1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>LU2</cell>
+					<cell>
+						<doublebox value="@{mpi.LU2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>P1</cell>
+					<cell>
+						<doublebox value="@{mpi.P1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>P2</cell>
+					<cell>
+						<doublebox value="@{mpi.P2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>HT1</cell>
+					<cell>
+						<doublebox value="@{mpi.HT1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>HT2</cell>
+					<cell>
+						<doublebox value="@{mpi.HT2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>SI1</cell>
+					<cell>
+						<doublebox value="@{mpi.SI1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>SI2</cell>
+					<cell>
+						<doublebox value="@{mpi.SI2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>TH1</cell>
+					<cell>
+						<doublebox value="@{mpi.TH1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>TH2</cell>
+					<cell>
+						<doublebox value="@{mpi.TH2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>LT1</cell>
+					<cell>
+						<doublebox value="@{mpi.LT1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>LT2</cell>
+					<cell>
+						<doublebox value="@{mpi.LT2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>SP1</cell>
+					<cell>
+						<doublebox value="@{mpi.SP1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>SP2</cell>
+					<cell>
+						<doublebox value="@{mpi.SP2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>LV1</cell>
+					<cell>
+						<doublebox value="@{mpi.LV1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>LV2</cell>
+					<cell>
+						<doublebox value="@{mpi.LV2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>KI1</cell>
+					<cell>
+						<doublebox value="@{mpi.KI1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>KI2</cell>
+					<cell>
+						<doublebox value="@{mpi.KI2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>BL1</cell>
+					<cell>
+						<doublebox value="@{mpi.BL1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>BL2</cell>
+					<cell>
+						<doublebox value="@{mpi.BL2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>GB1</cell>
+					<cell>
+						<doublebox value="@{mpi.GB1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>GB2</cell>
+					<cell>
+						<doublebox value="@{mpi.GB2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>ST1</cell>
+					<cell>
+						<doublebox value="@{mpi.ST1, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>ST2</cell>
+					<cell>
+						<doublebox value="@{mpi.ST2, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row>
+					<cell>Low</cell>
+					<cell>
+						<doublebox value="@{mpi.low, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>High</cell>
+					<cell>
+						<doublebox value="@{mpi.high, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+				</row>
+				<row spans=",,2">
+					<cell>Average</cell>
+					<cell>
+						<doublebox value="@{mpi.average, save-when='btnSave.onClick' }" hflex="1" />
+					</cell>
+					<cell>
+						<button label="Save" id="btnSave" forward="onClick=onSave" />
+						<button label="Cancel" forward="onClick=onSave(cancel)" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

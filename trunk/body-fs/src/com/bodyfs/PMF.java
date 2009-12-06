@@ -13,9 +13,9 @@ import org.compass.gps.impl.SingleCompassGps;
 public class PMF {
 	private static final PersistenceManagerFactory pmfInstance = JDOHelper
 			.getPersistenceManagerFactory("transactions-optional");
-	
+
 	private static Compass compass;
-	
+
 	public static Compass getCompass() {
 		return compass;
 	}
@@ -33,20 +33,19 @@ public class PMF {
 	}
 
 	private static CompassGps compassGps;
-	
+
 	static {
-		compass = new CompassConfiguration().setConnection("gae://index")
-			.setSetting(CompassEnvironment.ExecutorManager.EXECUTOR_MANAGER_TYPE, "disabled")
-			.addScan("com.bodyfs.model")
-			.buildCompass();
-		
+		compass = new CompassConfiguration().setConnection("gae://index").setSetting(
+				CompassEnvironment.ExecutorManager.EXECUTOR_MANAGER_TYPE, "disabled").addScan("com.bodyfs.model")
+				.buildCompass();
+
 		compassGps = new SingleCompassGps(compass);
 		compassGps.addGpsDevice(new Jdo2GpsDevice("appengine", pmfInstance));
 		compassGps.start();
-		
+
 		compassGps.index();
 	}
-	
+
 	private PMF() {
 	}
 

@@ -18,7 +18,7 @@
 				<rows>
 					<row valign="top">
 						<cell valign="top">
-							<image src="/img/bakers-union-body.gif" id="imgbody" />
+							<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" width="485px" />
 						</cell>
 						<vbox vflex="1" hflex="1">
 							<hbox hflex="1">

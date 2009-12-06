@@ -9,6 +9,8 @@
 					<hbox>
 						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
 							href="/pages/patient/weeklyvisit.zul?id=${execution.parameterMap.id[0] }" />
+						<toolbarbutton label="MPI data" image="/img/chart.png"
+							href="/pages/patient/mpi.zul?id=${execution.parameterMap.id[0] }" />
 					</hbox>
 				</north>
 				<center autoscroll="true" flex="true">

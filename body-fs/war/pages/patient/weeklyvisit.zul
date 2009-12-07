@@ -3,13 +3,16 @@
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/pagination.css"?>
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
+<?script type="text/javascript" src="/scripts/jquery.pagination.js"?>
 <zk>
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="true">
+			<div><div id="Pagination" class="pagination"></div>
 			<grid fixedLayout="true" id="visitgrid" apply="com.bodyfs.ui.WeeklyVisitComposer">
 				<columns>
 					<column width="50%"></column>
@@ -157,7 +160,32 @@
 					</row>
 				</rows>
 			</grid>
+			</div>
 		</center>
 	</borderlayout>
-	<script type="text/javascript" defer="true">$("$imgbody").annotateImage({editable: true, useAjax: false});</script>
+	<script type="text/javascript" defer="true">$("$imgbody").annotateImage({editable: true, useAjax: false});
+	 		$(document).ready(function(){      
+               initPagination();
+            });
+            
+            function initPagination() {
+            	alert("amit");
+                var num_entries = $("$visitgrid$composer.visitsCount");
+                alert(num_entries);
+                // Create pagination element
+                $("#Pagination").pagination(num_entries, {
+                    num_edge_entries: 2,
+                    num_display_entries: 8,
+                    callback: pageselectCallback,
+                    items_per_page:1
+                });
+             }
+             
+             function pageselectCallback(page_index, jq){
+             alert(page_index);
+                //var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
+                //$('#Searchresult').empty().append(new_content);
+                return false;
+            }
+	</script>
 </zk>

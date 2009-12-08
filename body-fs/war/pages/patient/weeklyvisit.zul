@@ -1,5 +1,6 @@
 <?page title="Weekly patient visit" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
@@ -12,180 +13,185 @@
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="true">
-			<div><div id="Pagination" class="pagination"></div>
-			<grid fixedLayout="true" id="visitgrid" apply="com.bodyfs.ui.WeeklyVisitComposer">
-				<columns>
-					<column width="50%"></column>
-					<column width="50%"></column>
-				</columns>
-				<rows>
-					<row valign="top">
-						<cell valign="top">
-							<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" width="485px" />
-						</cell>
-						<vbox vflex="1" hflex="1">
-							<hbox hflex="1">
-								<titlelabel value="Health Goals:" />
-								<titlelabel value="# of Herb Bags Left" />
-								<textbox value="@{patvisit.numOfHearbBags, save-when='btnSave.onClick' }" />
-							</hbox>
-							<textbox hflex="1" rows="4" value="@{patvisit.healthGoals, save-when='btnSave.onClick' }" />
-							<hbox hflex="1">
-								<titlelabel value="Energy Level:" />
-								<radiogroup selectedIndex="@{patvisit.energyLevel, save-when='btnSave.onClick' }">
-									<radio label="1" />
-									<radio label="2" />
-									<radio label="3" />
-									<radio label="4" />
-									<radio label="5" />
-									<radio label="6" />
-									<radio label="7" />
-									<radio label="8" />
-									<radio label="9" />
-									<radio label="10" />
+			<div id="visitgrid" apply="com.bodyfs.ui.WeeklyVisitComposer">
+				<script type="text/javascript">
+				var num = ${visitgrid$composer.visitsCount };
+				</script>
+				<div id="Pagination" class="pagination"></div>
+				<grid fixedLayout="true">
+					<columns>
+						<column width="50%"></column>
+						<column width="50%"></column>
+					</columns>
+					<rows>
+						<row valign="top">
+							<cell valign="top">
+								<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" width="485px" />
+							</cell>
+							<vbox vflex="1" hflex="1">
+								<hbox hflex="1">
+									<titlelabel value="Health Goals:" />
+									<titlelabel value="# of Herb Bags Left" />
+									<textbox value="@{patvisit.numOfHearbBags, save-when='btnSave.onClick' }" />
+								</hbox>
+								<textbox hflex="1" rows="4"
+									value="@{patvisit.healthGoals, save-when='btnSave.onClick' }" />
+								<hbox hflex="1">
+									<titlelabel value="Energy Level:" />
+									<radiogroup selectedIndex="@{patvisit.energyLevel, save-when='btnSave.onClick' }">
+										<radio label="1" />
+										<radio label="2" />
+										<radio label="3" />
+										<radio label="4" />
+										<radio label="5" />
+										<radio label="6" />
+										<radio label="7" />
+										<radio label="8" />
+										<radio label="9" />
+										<radio label="10" />
+									</radiogroup>
+								</hbox>
+								<radiogroup
+									selectedIndex="@{patinfo.digestion, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
+									<grid>
+										<rows>
+											<row>
+												<cell colspan="2">
+													<titlelabel value="Digestion:" />
+												</cell>
+											</row>
+											<row>
+												<radio label="Blating(feeling full easily)" />
+												<radio label="Gas" />
+											</row>
+											<row>
+												<radio label="Bleaching/burping" />
+												<radio label="Acid reflux/heart burn" />
+											</row>
+											<row>
+												<radio label="Nausea/Vomitting" />
+												<radio label="Pain/cramping" />
+											</row>
+										</rows>
+									</grid>
 								</radiogroup>
-							</hbox>
-							<radiogroup
-								selectedIndex="@{patinfo.digestion, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
-								<grid>
-									<rows>
-										<row>
-											<cell colspan="2">
-												<titlelabel value="Digestion:" />
-											</cell>
-										</row>
-										<row>
-											<radio label="Blating(feeling full easily)" />
-											<radio label="Gas" />
-										</row>
-										<row>
-											<radio label="Bleaching/burping" />
-											<radio label="Acid reflux/heart burn" />
-										</row>
-										<row>
-											<radio label="Nausea/Vomitting" />
-											<radio label="Pain/cramping" />
-										</row>
-									</rows>
-								</grid>
-							</radiogroup>
-							<titlelabel
-								value="Appetite Level (How hungry are you druing meal times &amp; have you desire to eat?)" />
-							<radiogroup
-								selectedIndex="@{patvisit.appetiteLevel, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
-								<radio label="Low" />
-								<radio label="High" />
-								<radio label="Normal" />
-							</radiogroup>
-							<radiogroup
-								selectedIndex="@{patvisit.bowlMovement, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
-								<grid hflex="1">
-									<rows>
-										<row>
-											<titlelabel value="Bowl Movement:" />
-											How often per day?
-											<textbox value="@{patvisit.bowlTimes, save-when='btnSave.onClick' }"
-												hflex="1" />
-											/day
-										</row>
-										<row>
-											<radio label="Normal" />
-											<radio label="Incomplete" />
-											<radio label="Loose" />
-											<radio label="Blood" />
-										</row>
-										<row>
-											<radio label="Dry" />
-											<radio label="Diarrhea" />
-											<radio label="Mucous" />
-											<radio label="Difficult to push" />
-										</row>
-									</rows>
-								</grid>
-							</radiogroup>
-							<radiogroup
-								selectedIndex="@{patvisit.urine, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.UrinationToRadiogroup' }">
-								<grid hflex="1">
-									<rows>
-										<row>
-											<titlelabel value="Urination:" />
-											How often per day?
-											<textbox value="@{patvisit.urineTimes, save-when='btnSave.onClick' }"
-												hflex="1" />
-											/day
-										</row>
-										<row>
-											<radio label="Normal" />
-											<radio label="Dark yellow" />
-											<radio label="Clear" />
-											<radio label="Urgent" />
-										</row>
-										<row>
-											<radio label="Frequent" />
-											<radio label="Difficult" />
-											<radio label="Burning" />
-										</row>
-									</rows>
-								</grid>
-							</radiogroup>
-							<radiogroup hflex="1"
-								selectedIndex="@{patvisit.sleep, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.QualityOfSleepToRadiogroup' }">
-								<grid>
-									<rows>
-										<row>
-											<titlelabel value="Quality of Sleep:" />
-											<radio label="Good" />
-											<radio label="Bad" />
-											<radio label="Wake up often" />
-										</row>
-										<row>
-											<cell colspan="2">
-												<radio label="Difficult to fall asleep" />
-											</cell>
-											<cell colspan="2">
-												<radio label="Frequent dreams" />
-											</cell>
-										</row>
-									</rows>
-								</grid>
-							</radiogroup>
-							<titlelabel value="Any questions or concerns?" hflex="1" />
-							<textbox rows="3" hflex="1" value="@{patvisit.question, save-when='btnSave.onClick' }" />
-							<titlelabel value="Is there any way we can provide better service for you?:" hflex="1" />
-							<textbox rows="3" hflex="1" value="@{patvisit.betterService, save-when='btnSave.onClick' }" />
-						</vbox>
-					</row>
-					<row spans="2" align="right">
-						<button id="btnSave" label="Save" forward="onClick=visitgrid.onSave" />
-					</row>
-				</rows>
-			</grid>
+								<titlelabel
+									value="Appetite Level (How hungry are you druing meal times &amp; have you desire to eat?)" />
+								<radiogroup
+									selectedIndex="@{patvisit.appetiteLevel, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+									<radio label="Low" />
+									<radio label="High" />
+									<radio label="Normal" />
+								</radiogroup>
+								<radiogroup
+									selectedIndex="@{patvisit.bowlMovement, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
+									<grid hflex="1">
+										<rows>
+											<row>
+												<titlelabel value="Bowl Movement:" />
+												How often per day?
+												<textbox value="@{patvisit.bowlTimes, save-when='btnSave.onClick' }"
+													hflex="1" />
+												/day
+											</row>
+											<row>
+												<radio label="Normal" />
+												<radio label="Incomplete" />
+												<radio label="Loose" />
+												<radio label="Blood" />
+											</row>
+											<row>
+												<radio label="Dry" />
+												<radio label="Diarrhea" />
+												<radio label="Mucous" />
+												<radio label="Difficult to push" />
+											</row>
+										</rows>
+									</grid>
+								</radiogroup>
+								<radiogroup
+									selectedIndex="@{patvisit.urine, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.UrinationToRadiogroup' }">
+									<grid hflex="1">
+										<rows>
+											<row>
+												<titlelabel value="Urination:" />
+												How often per day?
+												<textbox value="@{patvisit.urineTimes, save-when='btnSave.onClick' }"
+													hflex="1" />
+												/day
+											</row>
+											<row>
+												<radio label="Normal" />
+												<radio label="Dark yellow" />
+												<radio label="Clear" />
+												<radio label="Urgent" />
+											</row>
+											<row>
+												<radio label="Frequent" />
+												<radio label="Difficult" />
+												<radio label="Burning" />
+											</row>
+										</rows>
+									</grid>
+								</radiogroup>
+								<radiogroup hflex="1"
+									selectedIndex="@{patvisit.sleep, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.QualityOfSleepToRadiogroup' }">
+									<grid>
+										<rows>
+											<row>
+												<titlelabel value="Quality of Sleep:" />
+												<radio label="Good" />
+												<radio label="Bad" />
+												<radio label="Wake up often" />
+											</row>
+											<row>
+												<cell colspan="2">
+													<radio label="Difficult to fall asleep" />
+												</cell>
+												<cell colspan="2">
+													<radio label="Frequent dreams" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</radiogroup>
+								<titlelabel value="Any questions or concerns?" hflex="1" />
+								<textbox rows="3" hflex="1" value="@{patvisit.question, save-when='btnSave.onClick' }" />
+								<titlelabel value="Is there any way we can provide better service for you?:" hflex="1" />
+								<textbox rows="3" hflex="1"
+									value="@{patvisit.betterService, save-when='btnSave.onClick' }" />
+							</vbox>
+						</row>
+						<row spans="2" align="right">
+							<button id="btnSave" label="Save" forward="onClick=visitgrid.onSave" />
+						</row>
+					</rows>
+				</grid>
 			</div>
 		</center>
 	</borderlayout>
-	<script type="text/javascript" defer="true">$("$imgbody").annotateImage({editable: true, useAjax: false});
-	 		$(document).ready(function(){      
-               initPagination();
-            });
-            
-            function initPagination() {
-            	alert("amit");
-                var num_entries = $("$visitgrid$composer.visitsCount");
-                alert(num_entries);
-                // Create pagination element
-                $("#Pagination").pagination(num_entries, {
-                    num_edge_entries: 2,
-                    num_display_entries: 8,
-                    callback: pageselectCallback,
-                    items_per_page:1
-                });
-             }
-             
-             function pageselectCallback(page_index, jq){
-             alert(page_index);
-                //var new_content = $('#hiddenresult div.result:eq('+page_index+')').clone();
-                //$('#Searchresult').empty().append(new_content);
-                return false;
-            }
+
+	<script type="text/javascript" defer="true" apply="com.bodyfs.ui.WeeklyVisitComposer">
+		$("$imgbody").annotateImage({editable: true, useAjax: false});
+		$(document).ready(function(){ initPagination(); });
+
+		function initPagination() {
+			alert("amit");
+			var num_entries = "${visitgrid$composer.visitsCount}";
+			alert(num_entries);
+			// Create pagination element
+			$("#Pagination").pagination(num_entries, {
+				num_edge_entries: 2
+				, num_display_entries: 8
+				, callback: pageselectCallback, items_per_page:1
+			});
+		}
+
+		function pageselectCallback(page_index, jq) {
+			alert(page_index);
+			//var new_content = $('#hiddenresultdiv.result:eq('+page_index+')').clone();
+			//$('#Searchresult').empty().append(new_content);
+			return false;
+		}
 	</script>
 </zk>

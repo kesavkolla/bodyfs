@@ -7,7 +7,9 @@
 <%@page import="au.com.bytecode.opencsv.CSVReader"%>
 <%@page import="au.com.bytecode.opencsv.bean.CsvToBean"%>
 <%@page import="com.bodyfs.model.Herb"%>
-<%@page import="au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy"%><html>
+<%@page import="au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy"%>
+<%@page import="com.bodyfs.dao.IHerbDAO"%>
+<%@page import="org.zkoss.zkplus.spring.SpringUtil"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -38,8 +40,10 @@
 		strat.setColumnMapping(columns);
 		strat.setType(Herb.class);
 		CsvToBean<Herb> csv = new CsvToBean<Herb>();
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		for (final Herb herb : csv.parse(strat, reader)) {
-			out.println(herb.getPinyin());
-			out.println("<br />");
+			out.println("Loading: " + herb.getPinyin());
+			herbDAO.addHerb(herb);
+			out.println("   Saved with id: " + herb.getId() + "<br />");
 		}
 	}%>

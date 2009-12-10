@@ -3,7 +3,7 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-
+	<distributable />
 	<filter>
 		<filter-name>securityFilter</filter-name>
 		<filter-class>com.bodyfs.framework.filters.ApplicationFilter</filter-class>

@@ -3,8 +3,13 @@ package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
 
+import javax.jdo.JDOException;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.orm.jdo.JdoCallback;
 import org.springframework.orm.jdo.JdoTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +34,16 @@ public class HerbDAO implements IHerbDAO, Serializable {
 
 		final Herb herb1 = this.jdoTemplate.makePersistent(herb);
 		LOGGER.debug("Created herb with id: " + herb1);
+	}
+
+	@Override
+	public void deleteAll() {
+		this.jdoTemplate.execute(new JdoCallback<Long>() {
+			@Override
+			public Long doInJdo(PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery(Herb.class);
+				return query.deletePersistentAll();
+			}
+		});
 	}
 }

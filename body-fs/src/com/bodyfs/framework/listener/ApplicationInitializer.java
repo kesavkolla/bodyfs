@@ -2,17 +2,11 @@
  */
 package com.bodyfs.framework.listener;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dom4j.Document;
-import org.dom4j.io.SAXReader;
-
-import com.bodyfs.dao.IPageDAO;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 /**
  * This class initializes the OpenID plugin
@@ -30,7 +24,7 @@ public class ApplicationInitializer implements ServletContextListener {
 	@Override
 	public void contextInitialized(final ServletContextEvent event) {
 		// initializeOpenId(event);
-		initPages(event.getServletContext());
+		// initPages(event.getServletContext());
 		// initLogins();
 	}
 
@@ -38,19 +32,21 @@ public class ApplicationInitializer implements ServletContextListener {
 	 * This will load the pages.xml in the memory
 	 * 
 	 * @param event
+	 * 
+	 *            public static void initPages(final ServletContext context) {
+	 *            try { final SAXReader reader = new SAXReader();
+	 *            LOGGER.debug("Loading: " +
+	 *            context.getResource("/WEB-INF/pages.xml")); final Document
+	 *            document =
+	 *            reader.read(context.getResourceAsStream("/WEB-INF/pages.xml"
+	 *            ));
+	 *            MemcacheServiceFactory.getMemcacheService().put(IPageDAO.PAGES_DOCUMENT
+	 *            , document.getRootElement());
+	 *            LOGGER.debug("Saving in memcache: " +
+	 *            MemcacheServiceFactory.getMemcacheService
+	 *            ().get(IPageDAO.PAGES_DOCUMENT)); } catch (final Exception e)
+	 *            { LOGGER.error(e); } }
 	 */
-	public static void initPages(final ServletContext context) {
-		try {
-			final SAXReader reader = new SAXReader();
-			LOGGER.debug("Loading: " + context.getResource("/WEB-INF/pages.xml"));
-			final Document document = reader.read(context.getResourceAsStream("/WEB-INF/pages.xml"));
-			MemcacheServiceFactory.getMemcacheService().put(IPageDAO.PAGES_DOCUMENT, document.getRootElement());
-			LOGGER.debug("Saving in memcache: "
-					+ MemcacheServiceFactory.getMemcacheService().get(IPageDAO.PAGES_DOCUMENT));
-		} catch (final Exception e) {
-			LOGGER.error(e);
-		}
-	}
 
 	/**
 	 * This method initializes all the OpenId handlers

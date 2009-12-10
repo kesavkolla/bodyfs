@@ -24,21 +24,28 @@ public class ApplicationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException,
 			ServletException {
 
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-		HttpSession session = req.getSession(true);
-		LoginInfo userInfo = (LoginInfo) session.getAttribute("LOGIN_CREDENTIALS");
-		if (req.getServletPath().contains("logout")) {
-			session.removeAttribute("LOGIN_CREDENTIALS");
-			session.invalidate();
-			String url = req.getContextPath() + "/login.zul";
+		final HttpServletRequest req = (HttpServletRequest) request;
+		final HttpServletResponse res = (HttpServletResponse) response;
+
+		if (!req.getServletPath().contains(".zul") || req.getServletPath().equals("/login.zul")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		final String url = req.getContextPath() + "/login.zul";
+		final HttpSession session = req.getSession(false);
+		if (session == null) {
+			res.sendRedirect(url);
+			return;
+		}
+		final LoginInfo userInfo = (LoginInfo) session.getAttribute("LOGIN_CREDENTIALS");
+		if (userInfo == null) {
 			res.sendRedirect(url);
 			return;
 		}
 
-		// System.out.println("AplicationFilter userInfo=" + userInfo);
-		if (userInfo == null && req.getServletPath().contains(".zul") && !req.getServletPath().equals("/login.zul")) {
-			String url = req.getContextPath() + "/login.zul";
+		if (req.getServletPath().contains("logout")) {
+			session.removeAttribute("LOGIN_CREDENTIALS");
+			session.invalidate();
 			res.sendRedirect(url);
 			return;
 		}

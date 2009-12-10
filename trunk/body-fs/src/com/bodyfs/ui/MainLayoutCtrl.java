@@ -10,8 +10,6 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.ext.AfterCompose;
-import org.zkoss.zk.ui.metainfo.HeaderInfo;
-import org.zkoss.zk.ui.sys.ExecutionsCtrl;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Label;
@@ -41,8 +39,8 @@ public class MainLayoutCtrl extends Borderlayout implements AfterCompose, Serial
 				username.setValue(userInfo.getUserid());
 			}
 		}
-		final HeaderInfo metaInfo = new HeaderInfo("meta", metaAttrs);
-		ExecutionsCtrl.getCurrentCtrl().getCurrentPageDefinition().addHeaderInfo(metaInfo);
+		// final HeaderInfo metaInfo = new HeaderInfo("meta", metaAttrs);
+		// ExecutionsCtrl.getCurrentCtrl().getCurrentPageDefinition().addHeaderInfo(metaInfo);
 		Executions.createComponents("/pages/common/footer.zul", this, null);
 
 		Components.wireVariables(this, this); // auto wire variables

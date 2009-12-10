@@ -171,7 +171,7 @@
 		</center>
 	</borderlayout>
 
-	<script type="text/javascript" defer="true" apply="com.bodyfs.ui.WeeklyVisitComposer">
+	<script type="text/javascript" defer="true">
 		$("$imgbody").annotateImage({editable: true, useAjax: false});
 		$(document).ready(function(){ initPagination(); });
 

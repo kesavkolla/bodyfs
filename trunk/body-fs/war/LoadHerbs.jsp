@@ -9,7 +9,9 @@
 <%@page import="com.bodyfs.model.Herb"%>
 <%@page import="au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy"%>
 <%@page import="com.bodyfs.dao.IHerbDAO"%>
-<%@page import="org.zkoss.zkplus.spring.SpringUtil"%><html>
+<%@page import="org.zkoss.zkplus.spring.SpringUtil"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -40,7 +42,10 @@
 		strat.setColumnMapping(columns);
 		strat.setType(Herb.class);
 		CsvToBean<Herb> csv = new CsvToBean<Herb>();
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+		final WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this
+				.getServletContext());
+		final IHerbDAO herbDAO = (IHerbDAO) context.getBean("herbDAO");
+		herbDAO.deleteAll();
 		for (final Herb herb : csv.parse(strat, reader)) {
 			out.println("Loading: " + herb.getPinyin());
 			herbDAO.addHerb(herb);

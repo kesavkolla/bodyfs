@@ -9,6 +9,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Text;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
 public class Herb implements Serializable {
 
@@ -27,7 +29,7 @@ public class Herb implements Serializable {
 	@Persistent
 	private String temperature;
 	@Persistent
-	private String action;
+	private Text action;
 	@Persistent
 	private String category;
 	@Persistent
@@ -90,11 +92,14 @@ public class Herb implements Serializable {
 	}
 
 	public final String getAction() {
-		return action;
+		if (action == null) {
+			return null;
+		}
+		return action.getValue();
 	}
 
-	public final void setAction(String action) {
-		this.action = action;
+	public final void setAction(final String action) {
+		this.action = new Text(action);
 	}
 
 	public final String getCategory() {

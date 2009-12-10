@@ -11,4 +11,5 @@ import com.bodyfs.model.Herb;
 public interface IHerbDAO {
 
 	public void addHerb(final Herb herb);
+	public void deleteAll();
 }

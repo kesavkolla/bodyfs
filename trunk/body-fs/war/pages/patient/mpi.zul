@@ -116,5 +116,11 @@ function DrawCompare(mpiarr) {
 			</borderlayout>
 		</center>
 	</borderlayout>
-	<script type="text/javascript" defer="true">var mpidata = ${mpidata }; if(mpidata) { DrawChart(mpidata); }</script>
+	<script type="text/javascript" defer="true">
+		var mpidata = ${mpidata };
+		if(mpidata.examDate)
+		{
+			DrawChart(mpidata);
+		}
+	</script>
 </zk>

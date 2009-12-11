@@ -92,6 +92,8 @@ public class MPIViewComposer extends GenericForwardComposer {
 			if (mpi != null) {
 				comp.getPage().setAttribute("mpi", mpi);
 				comp.getPage().setAttribute("mpidata", convertMPI(mpi));
+			} else {
+				comp.getPage().setAttribute("mpidata", "{}");
 			}
 		}
 		super.doAfterCompose(comp);

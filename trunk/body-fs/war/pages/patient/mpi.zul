@@ -106,9 +106,9 @@ function DrawCompare(mpiarr) {
 									}
 								</attribute>
 							</button>
+							<button id="btnAddData" label="Add New" forward="onClick=mpiview.onShow(${param.id })" />
 						</toolbar>
 						<space height="20px" orient="vertical" width="100%" />
-						<button id="btnAddData" label="Add New" forward="onClick=mpiview.onShow(${param.id })" />
 						<space />
 						<div id="mpiChart" hflex="1" vflex="1" />
 					</div>

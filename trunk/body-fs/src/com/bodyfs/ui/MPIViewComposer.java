@@ -145,6 +145,7 @@ public class MPIViewComposer extends GenericForwardComposer {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
 		mpiDao.addMPIData(mpi);
 		LOGGER.debug("Created MPI Data with Id: " + mpi.getId());
+		this.execution.sendRedirect("/pages/patient/mpi.zul?id=" + mpi.getPersonId());
 	}
 
 	/**

@@ -1,4 +1,4 @@
-/* $Id
+/* $Id$
  */
 package com.bodyfs.framework.listener;
 
@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class ApplicationInitializer implements ServletContextListener {
+	@SuppressWarnings("unused")
 	private static Log LOGGER = LogFactory.getLog(ApplicationInitializer.class);
 
 	@Override

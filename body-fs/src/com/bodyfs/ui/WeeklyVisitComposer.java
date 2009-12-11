@@ -14,7 +14,6 @@ import org.zkoss.zkplus.spring.SpringUtil;
 
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.PatientVisit;
-import com.bodyfs.model.Person;
 
 /**
  * 
@@ -24,9 +23,6 @@ import com.bodyfs.model.Person;
 public class WeeklyVisitComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 3816734829122660780L;
-	private PatientVisit patientVisit;
-	private IPersonDAO personDAO;
-	private Person person;
 
 	public final int getVisitsCount() {
 		return 3;
@@ -36,21 +32,21 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
-		personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		if (Executions.getCurrent().getAttribute("id") != null) {// ("CURRENT_PATIENT_ID")
-			person = personDAO.getPerson((Long) Executions.getCurrent().getAttribute("id"));
-		} else {
-			person = personDAO.getByEmail("kesavkolla+bodyfs@gmail.com");
-		}
-		this.patientVisit = new PatientVisit();
+		comp.getPage().setAttribute("patvisit", new PatientVisit());
+		comp.getPage().setAttribute("personid", Executions.getCurrent().getParameter("id"));
 		super.doAfterCompose(comp);
 
 	}
 
 	public void onSave(final ForwardEvent event) {
-		if (patientVisit != null) {
-			patientVisit.setPersonId(person != null ? person.getId() : 1L);
-			personDAO.createPatientVisit(patientVisit);
+		if (page.getAttribute("personid") == null || page.getAttribute("patvisit") == null) {
+			return;
+		}
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final PatientVisit patvisit = (PatientVisit) page.getAttribute("patvisit");
+		if (patvisit != null) {
+			patvisit.setPersonId(Long.parseLong(page.getAttribute("personid").toString()));
+			personDAO.createPatientVisit(patvisit);
 		}
 	}
 

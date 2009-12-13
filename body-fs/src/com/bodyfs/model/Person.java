@@ -184,6 +184,25 @@ public class Person implements Serializable {
 	public final PersonType getPersonType() {
 		return personType;
 	}
+	
+	/**
+	 * 
+	 * @return person's type
+	 */
+	public final String getPersonTypeStr() {
+		if(personType==null)
+			return "";
+		else if(personType.equals(PersonType.PRE_USER))
+			return "pre user";
+		else if(personType.equals(PersonType.POST_USER))
+			return "post user";
+		else if(personType.equals(PersonType.USER))
+			return "current user";
+		else if(personType.equals(PersonType.EMPLOYEE))
+			return "admin";
+		
+ 		return "";
+	}
 
 	/**
 	 * Sets the person type

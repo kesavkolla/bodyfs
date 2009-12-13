@@ -84,7 +84,7 @@
 									<listcell label="@{person.firstName}" />
 									<listcell label="@{person.lastName}" />
 									<listcell label="@{person.email}" />
-									<listcell label="@{person.personType}" />
+									<listcell label="@{person.personTypeStr}" />
 								</listitem>
 							</listbox>
 						</div>

@@ -33,5 +33,42 @@ body {
 	border-right: 1px solid #F0C88B;
 }
 
+.z-west-header,.z-center-header,.z-east-header,.z-north-header,.z-south-header {
+	color: #F1B772;
+	background: transparent repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+	background-color: black;
+	border-bottom: 1px solid #660000;
+}
 
+.z-borderlayout-icon {
+	background-image: url('/img/borderlayout-btn.png')
+}
 
+.z-east-splt,.z-west-splt,.z-north-splt,.z-south-splt {
+	background: black left;
+	background-image: url('/img/splt-h.png');
+}
+
+.z-east-colpsd,.z-west-colpsd,.z-south-colpsd,.z-north-colpsd {
+	background-color: #E1F0F2;
+	width: 22px;
+	height: 22px;
+	border: 1px solid #F0C88B;
+	overflow: hidden;
+	position: absolute;
+}
+
+.z-east-colpsd-over,.z-west-colpsd-over,.z-south-colpsd-over,.z-north-colpsd-over {
+	cursor: pointer;
+	background-color: #EEFCFF;
+}
+
+.z-panel-icon {
+	background-image: url('/img/btn.gif');
+}
+
+div.z-listbox-header tr.z-listhead,div.z-listbox-header tr.z-auxhead {
+	background: #C7E5F1 repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+}

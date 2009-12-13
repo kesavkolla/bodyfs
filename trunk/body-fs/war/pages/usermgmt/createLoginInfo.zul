@@ -1,35 +1,56 @@
 <?page title="Create Customer LoginInfo" contentType="text/html;charset=UTF-8" id="createlogin"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
-<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
-	xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<window id="win" border="normal" title="Login" position="center" width="800px" mode="modal"
-		apply="com.bodyfs.ui.CreateLoginComposer" closable="true" sizable="true">
-		<grid id="main" fixedLayout="true">
-			<columns>
-				<column width="100px" />
-				<column width="150px" />
-				<column />
-			</columns>
-			<rows>
-				<row spans="3">Create Login ID for ${person.lastName }, ${person.FirstName }</row>
-				<row>
-					Login ID:
-					<textbox id="loginid" value="@{login.userid }" />
-					<label id="loginmsg" style="color:red" />
-				</row>
-				<row>
-					password:
-					<textbox id="password" value="@{login.password }" />
-				</row>
-				<row spans="3">
-					<hbox pack="center">
-						<button label="create" forward="onClick=win.onSave" />
-						<button label="cancel" />
+<zk>
+<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center>
+			<borderlayout style="background:#dd0000;">
+				<north size="50px">
+					<hbox>
+						<toolbarbutton label="Report Card" image="/img/report_card.png"
+							href="/pages/patient/patientview.zul?id=${param.id }" />
+						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
+							href="/pages/patient/weeklyvisit.zul?id=${param.id }" />
+						<toolbarbutton label="MPI data" image="/img/chart.png"
+							href="/pages/patient/mpi.zul?id=${param.id }" />
+						<toolbarbutton label="Profile" image="/img/user_add.png"
+							href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
 					</hbox>
-				</row>
-			</rows>
-
-		</grid>
-	</window>
-
+				</north>
+				<center autoscroll="true" vflex="1" hflex="1">
+					<window id="win" border="normal" title="Login" position="center" width="800px" apply="com.bodyfs.ui.CreateLoginComposer" sizable="true">
+						<grid id="main" fixedLayout="true">
+							<columns>
+								<column width="100px" />
+								<column width="150px"/>
+								<column />
+							</columns>
+							<rows>
+								<row spans="3">
+									<div>Create Login ID for <label id="titleLabel"/></div>
+								</row>
+								<row>
+									Login ID:
+									<textbox id="loginid"/>
+									<label id="loginmsg" style="color:red"/>
+								</row>
+								<row>
+									password:
+									<textbox id="password"/>
+								</row>
+								<row spans="3">
+									<hbox pack="center">
+										<button label="create" forward="onClick=win.onSave"/>
+										<button label="cancel" onClick="win.detach()"/>
+									</hbox>
+								</row>
+							</rows>
+							
+						</grid>
+					</window>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>	
 </zk>

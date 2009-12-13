@@ -13,6 +13,9 @@ import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.api.A;
+import org.zkoss.zul.api.Groupbox;
+import org.zkoss.zul.api.Progressmeter;
 import org.zkoss.zul.api.Window;
 
 import com.bodyfs.dao.IPersonDAO;
@@ -27,10 +30,13 @@ public class PatientViewComposer extends GenericAutowireComposer {
 
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
-	private Label fullname;
 	private Label week;
+	private Label nextApppointment;
+	private Label nextReExam;
+	private A newemails;
+	private Progressmeter pm;
+	private Groupbox gbox;
 	private Div divbar;
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
@@ -56,16 +62,30 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
 		final int numweek = personDAO.countPatientVisits(person.getId());
-		if (fullname != null) {
-			fullname.setValue(person.getLastName() + " " + person.getFirstName());
+		final int totalWeeks = 10;
+		if (gbox != null) {
+			gbox.getCaptionApi().setLabel("Report Card: "+person.getFirstName() + " " + person.getLastName());
 		}
 		if (week != null) {
 			week.setValue(numweek + "");
 		}
-		if (divbar != null) {
+		if(nextApppointment!=null){
+			nextApppointment.setValue("12/12/2009 - 3:15 pm");
+		}
+		if(nextReExam!=null){
+			nextReExam.setValue("12/12/2009");
+		}
+		if(newemails!=null){
+			newemails.setLabel("3 New emails");
+		}
+		if (pm != null) {
 			if (numweek > 0) {
-				int percent = Math.round(numweek * 100 / 52);
-				divbar.setWidth(percent + "px");
+				int percent = Math.round(numweek * 100 / totalWeeks);
+				pm.setValue(percent);
+				int divwidth = Integer.parseInt(pm.getWidth().substring(0, pm.getWidth().length()-2));
+				divbar.setWidth((Math.round(percent*divwidth/100)+30)+ "px");
+			}else{
+				pm.setValue(0);
 			}
 		}
 	}
@@ -84,7 +104,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 
 	public void onCreateLogin(final ForwardEvent event) {
 		LOGGER.error("create Login");
-		final Window win = (Window) Executions.createComponents("/WEB-INF/views/createLoginInfo.zul", null, null);
+		final Window win = (Window) Executions.createComponents("/pages/usermgmt/createLoginInfo.zul", null, null);
 		try {
 			win.doModal();
 		} catch (SuspendNotAllowedException e) {

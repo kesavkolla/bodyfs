@@ -15,6 +15,7 @@ import org.zkoss.zul.Include;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.Person;
+import com.bodyfs.model.PersonType;
 
 /**
  * 
@@ -60,6 +61,7 @@ public class NPIComposer extends GenericForwardComposer {
 			return;
 		}
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		person.setPersonType(PersonType.PRE_USER);
 		personDAO.createPerson(person);
 		final GeneralInfo ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
 		ginfo.setPersonId(person.getId());

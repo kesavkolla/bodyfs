@@ -64,7 +64,7 @@
 								</div>
 							</panelchildren>
 						</panel>
-						<div id="results" style="position:realtive;bottom:0;right:0">
+						<div id="results" height="100%" style="position:realtive;bottom:0;right:0">
 							<listbox id="persons" fixedLayout="true" model="@{ customersearch$composer.results }"
 								vflex="true">
 								<listhead>

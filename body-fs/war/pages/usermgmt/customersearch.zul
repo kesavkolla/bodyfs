@@ -11,7 +11,7 @@
 					</hbox>
 				</north>
 				<center border="20" autoscroll="true">
-					<vbox hflex="true">
+					<vbox hflex="true" vflex="1">
 						<space />
 						<hbox>
 							Quick Search:

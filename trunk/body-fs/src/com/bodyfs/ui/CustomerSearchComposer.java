@@ -16,6 +16,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Panel;
@@ -23,6 +24,7 @@ import org.zkoss.zul.api.Checkbox;
 import org.zkoss.zul.api.Textbox;
 
 import com.bodyfs.PMF;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
@@ -51,6 +53,12 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	Panel optionsPanel;
 
 	CustSearchOptions options = new CustSearchOptions();
+	
+	Collection<Person> results;
+	
+	public void setResults(Collection<Person> results) {
+		this.results = results;
+	}
 
 	/**
 	 * 
@@ -62,12 +70,22 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		binder = new AnnotateDataBinder(comp);
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Collection<Person> resultSet = new ArrayList<Person>();
+		results = new ArrayList<Person>();
 		try {
 			Query query = pm.newQuery(Person.class);
 			resultSet = (Collection<Person>) query.execute();
 			resultSet = pm.detachCopyAll(resultSet);
 			//persons.setModel(new ListModelList(resultSet));
-			this.page.setAttribute("resultSet_", resultSet);
+			for (Person person : resultSet) {
+				if(person.getPersonType()==null){
+					results.add(person);
+					continue;
+				}
+				if(person.getPersonType().equals(PersonType.USER)){
+					results.add(person);
+				}
+			}
+			
 		} finally {
 			pm.close();
 		}
@@ -75,6 +93,8 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			optionsPanel.setOpen(false);
 		}
 		binder.loadAll();
+		persons.setModel(new ListModelList(results));
+		persons.invalidate();
 	}
 
 	public void onOK$smrtTextbox(Event evt) throws Exception {
@@ -83,10 +103,10 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 
 	public void searchSmart() {
 		String searchVal = "*";
-		if (smrtTextbox.getValue() != null || !smrtTextbox.getValue().trim().equals("")) {
+		if (smrtTextbox.getValue() != null && !smrtTextbox.getValue().trim().equals("")) {
 			searchVal = smrtTextbox.getValue();
 		}
-
+		IPersonDAO personDao = (IPersonDAO)SpringUtil.getBean("personDAO");
 		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
 		// PersistenceManager pm = PMF.get().getPersistenceManager();
 		CompassDetachedHits hits = compassSession.find(searchVal).detach();
@@ -95,7 +115,19 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		final LinkedList<Person> resultSet = new LinkedList<Person>();
 		for (int i = 0; i < hits.length(); i++) {
 			if (hits.data(i) instanceof Person) {
-				resultSet.add((Person) hits.data(i));
+				Person person = (Person) hits.data(i);
+				person = personDao.getPerson(person.getId());
+				if(person.getPersonType()==null){
+					resultSet.add(person);
+					continue;
+				}
+				if(!typePre.isChecked() && person.getPersonType().equals(PersonType.PRE_USER))
+					continue;
+				else if(!typePost.isChecked() && person.getPersonType().equals(PersonType.POST_USER))
+					continue;
+				else if(!typeCurrent.isChecked() && person.getPersonType().equals(PersonType.USER))
+					continue;
+				resultSet.add(person);
 			}
 		}
 		persons.setModel(new ListModelList(resultSet));
@@ -103,8 +135,8 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List getResults() {
-		return new ArrayList();
+	public Collection<Person> getResults() {
+		return results;
 	}
 
 	// public void

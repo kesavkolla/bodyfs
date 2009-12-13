@@ -18,7 +18,7 @@ public class Herb implements Serializable {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long Id;
+	private Long id;
 
 	@Persistent
 	private String pinyin;
@@ -52,11 +52,11 @@ public class Herb implements Serializable {
 	private String inven;
 
 	public final Long getId() {
-		return Id;
+		return id;
 	}
 
-	public final void setId(Long id) {
-		Id = id;
+	public final void setId(final Long id) {
+		this.id = id;
 	}
 
 	public final String getPinyin() {

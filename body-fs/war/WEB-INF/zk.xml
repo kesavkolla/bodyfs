@@ -6,6 +6,10 @@
 		<ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
 	</system-config>
 
+	<desktop-config>
+		<theme-uri>/css/bodyfs.css</theme-uri>
+	</desktop-config>
+
 	<!-- GAE doesn't allow user's thread -->
 	<client-config>
 		<resend-delay>-1</resend-delay>

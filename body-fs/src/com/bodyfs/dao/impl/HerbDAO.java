@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.bodyfs.PMF;
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.model.Herb;
+import com.bodyfs.model.HerbPanel;
 
 /**
  * 
@@ -46,4 +47,15 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			}
 		});
 	}
+
+	@Override
+	public Herb getHerbById(final Long id) {
+		return this.jdoTemplate.getObjectById(Herb.class, id);
+	}
+
+	@Override
+	public void createPanel(final HerbPanel panel) {
+		this.jdoTemplate.makePersistent(panel);
+	}
+
 }

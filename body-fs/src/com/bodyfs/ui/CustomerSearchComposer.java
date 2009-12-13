@@ -66,7 +66,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			Query query = pm.newQuery(Person.class);
 			resultSet = (Collection<Person>) query.execute();
 			resultSet = pm.detachCopyAll(resultSet);
-			// persons.setModel(new ListModelList(resultSet));
+			//persons.setModel(new ListModelList(resultSet));
 			this.page.setAttribute("resultSet_", resultSet);
 		} finally {
 			pm.close();
@@ -82,14 +82,14 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	}
 
 	public void searchSmart() {
-		if (smrtTextbox.getValue() == null || smrtTextbox.getValue().trim().equals("")) {
-			return;
+		String searchVal = "*";
+		if (smrtTextbox.getValue() != null || !smrtTextbox.getValue().trim().equals("")) {
+			searchVal = smrtTextbox.getValue();
 		}
 
 		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
 		// PersistenceManager pm = PMF.get().getPersistenceManager();
-		smrtTextbox.getValue();
-		CompassDetachedHits hits = compassSession.find(smrtTextbox.getValue()).detach();
+		CompassDetachedHits hits = compassSession.find(searchVal).detach();
 		// hits = hits.detach();
 		compassSession.close();
 		final LinkedList<Person> resultSet = new LinkedList<Person>();

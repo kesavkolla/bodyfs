@@ -1,9 +1,11 @@
 package com.bodyfs.ui;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.ext.AfterCompose;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.api.Label;
@@ -13,6 +15,7 @@ import com.bodyfs.dao.ILoginDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.LoginInfo;
 import com.bodyfs.model.Person;
+import com.bodyfs.model.PersonType;
 
 public class CreateLoginComposer extends GenericForwardComposer {
 
@@ -23,6 +26,7 @@ public class CreateLoginComposer extends GenericForwardComposer {
 	
 	Person person;
 	
+	AnnotateDataBinder binder;
 	Window win;
 	
 	LoginInfo login;
@@ -37,13 +41,13 @@ public class CreateLoginComposer extends GenericForwardComposer {
 	public void doAfterCompose(final Component comp) throws Exception {
 		// TODO Auto-generated method stub
 		super.doAfterCompose(comp);
-		win = (Window) comp;
 		Long patid = (Long)session.getAttribute("patid");//sessionScope.get("patid");
 		IPersonDAO personDao = (IPersonDAO)SpringUtil.getBean("personDAO");
 		ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
+		binder = new AnnotateDataBinder();
+		binder.loadAll();
 		person = personDao.getPerson(patid);
 		login = loginDAO.getLoginDetails(patid);
-		titleLabel.setValue(""+person.getLastName()+", "+person.getFirstName());
 		if(login == null){
 			login = new LoginInfo();
 			login.setPersonId(person.getId());
@@ -60,9 +64,12 @@ public class CreateLoginComposer extends GenericForwardComposer {
 		System.out.println("onsave");
 		login.setUserid(loginid.getValue().toLowerCase());
 		login.setPassword(password.getValue());
+		person.setPersonType(PersonType.USER);
+		IPersonDAO personDao = (IPersonDAO)SpringUtil.getBean("personDAO");
+		personDao.createPerson(person);
 		ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
 		loginDAO.createNewLogin(login);
-		win.detach();
+		Executions.sendRedirect("/pages/patient/patientview.zul?id="+session.getAttribute("patid"));
 	}
 	
 }

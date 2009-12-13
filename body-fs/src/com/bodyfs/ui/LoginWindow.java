@@ -20,9 +20,7 @@ public class LoginWindow extends GenericForwardComposer {
 	Textbox usertb;
 	Textbox pwdtb;
 	Button login;
-
 	Window win;
-
 	Label msg;
 
 	private static final long serialVersionUID = 4311810570038057744L;

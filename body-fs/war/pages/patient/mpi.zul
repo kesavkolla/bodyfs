@@ -73,10 +73,14 @@ function DrawCompare(mpiarr) {
 			<borderlayout style="background:#dd0000;" id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
 				<north size="50px">
 					<hbox>
+						<toolbarbutton label="Report Card" image="/img/report_card.png"
+							href="/pages/patient/patientview.zul?id=${param.id }" />
 						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
 							href="/pages/patient/weeklyvisit.zul?id=${param.id }" />
 						<toolbarbutton label="MPI data" image="/img/chart.png"
 							href="/pages/patient/mpi.zul?id=${param.id }" />
+						<toolbarbutton label="Profile" image="/img/user_add.png"
+							href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
 					</hbox>
 				</north>
 				<center autoscroll="true" flex="true">

@@ -20,6 +20,8 @@ public interface IPersonDAO {
 	public void deleteAll();
 
 	public void createGeneralInfo(final GeneralInfo ginfo);
+	
+	public GeneralInfo getGeneralInfo(final Long personId);
 
 	public PatientVisit createPatientVisit(final PatientVisit visit);
 

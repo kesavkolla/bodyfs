@@ -70,6 +70,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(ginfo);
 		}
 	}
+	
+	@Override
+	public GeneralInfo getGeneralInfo(final Long personId) {
+		try {
+			final Collection<GeneralInfo> results = this.jdoTemplate.find(GeneralInfo.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+		
+	}
 
 	@Override
 	public PatientVisit createPatientVisit(final PatientVisit visit) {

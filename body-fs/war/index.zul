@@ -5,7 +5,38 @@
 <zk>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="true" flex="true">
-			<div></div>
+			<hbox pack="center">
+						 <vbox pack="center" height="400px">
+						 	<div height="20px"></div>
+							<groupbox id="gbox" mold="3d" open="true" closable="false">
+								<caption label="Welcome Adminstrator" />
+								<hbox pack="center" hflex="1">
+									<div align="center" width="800px" >
+									<vbox>
+										<hbox><vbox><div width="100%" align="center"> Next Appointment Today: 10:00 AM (Neel Kamal)</div>
+											<div>Time Remaining : 15 mins </div>
+										</vbox>
+										<space bar="true" height="100%"></space>
+										<vbox> 
+											<div>10:00 AM (Patient 1)</div>
+											<div>11:30 AM (Patient 2)</div>
+											<div> 2:00 PM (Patient 3)</div>
+											<div> 3:00 PM (Patient 4)</div>
+										</vbox>
+										
+										</hbox>
+										<div align="center" height="30px"><space bar="true" width="700px" orient="horizontal"/></div>
+										<div width="100%" align="center"> Next Re Examination Date: <label id="nextReExam"/></div>
+										<div align="center" height="30px"><space bar="true" width="700px" orient="horizontal"/></div>
+										<div width="100%" align="center" style=""> There are <a id="newemails" href="#" label="3 new messages"/> from Body Feng Shui</div>
+										
+									</vbox>
+									</div>
+								</hbox>
+							</groupbox>
+							
+						  </vbox>
+					</hbox>
 		</center>
 	</borderlayout>
 </zk>

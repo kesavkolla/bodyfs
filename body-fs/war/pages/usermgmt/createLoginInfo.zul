@@ -19,36 +19,95 @@
 					</hbox>
 				</north>
 				<center autoscroll="true" vflex="1" hflex="1">
-					<window id="win" border="normal" title="Login" position="center" width="800px" apply="com.bodyfs.ui.CreateLoginComposer" sizable="true">
-						<grid id="main" fixedLayout="true">
-							<columns>
-								<column width="100px" />
-								<column width="150px"/>
-								<column />
-							</columns>
-							<rows>
-								<row spans="3">
-									<div>Create Login ID for <label id="titleLabel"/></div>
-								</row>
-								<row>
-									Login ID:
-									<textbox id="loginid"/>
-									<label id="loginmsg" style="color:red"/>
-								</row>
-								<row>
-									password:
-									<textbox id="password"/>
-								</row>
-								<row spans="3">
-									<hbox pack="center">
-										<button label="create" forward="onClick=win.onSave"/>
-										<button label="cancel" onClick="win.detach()"/>
-									</hbox>
-								</row>
-							</rows>
-							
-						</grid>
-					</window>
+					<hbox pack="center" hflex="1">
+						 <vbox pack="center" height="400px">
+							<window id="win" border="normal" title="View/Edit Profile" position="center" width="800px" apply="com.bodyfs.ui.CreateLoginComposer" sizable="true">
+								<grid id="main" fixedLayout="true">
+									<columns>
+										<column width="100px" />
+										<column width="150px"/>
+										<column />
+									</columns>
+									<rows>
+										<row spans="3,,,,2">
+											<div></div>
+											Login ID:
+											<textbox id="loginid"/>
+											<label id="loginmsg" style="color:red"/>
+											<div></div>
+										</row>
+										<row spans="3,,,3">
+											<div></div>
+											password:
+											<textbox id="password"/>
+											<div></div>
+										</row>
+										<row hflex="true">
+											First Name:
+											<textbox id="firstName" value="@{person.firstName }"
+												maxlength="100" hflex="1" zclass="req-string" />
+											Initial:
+											<textbox id="initial" value="@{person.initial }" maxlength="100" hflex="1" />
+											LastName:
+											<textbox id="lastName" value="@{person.lastName }"
+												maxlength="100" hflex="1" />
+										</row>
+										<row>
+											SSN:
+											<textbox id="ssn" value="@{person.SSN }"
+												maxlength="11" hflex="1" />
+											Marital Status:
+											<checkbox label="Married" checked="@{person.married }" />
+											Gender:
+											<radiogroup id="gender"
+												selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup' }">
+												<radio label="M" />
+												<radio label="F" />
+											</radiogroup>
+											Email:
+											<textbox value="@{person.email }"
+												constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
+										</row>
+										<row valign="top">
+											Address
+											<textbox value="@{ginfo.street }" hflex="1" />
+											City:
+											<textbox value="@{ginfo.city }" hflex="1" />
+											State:
+											<textbox value="@{ginfo.state }" hflex="1" />
+											Zipcode:
+											<textbox value="@{ginfo.zipcode }" hflex="1" />
+										</row>
+										<row spans=",,,,2,2">
+											Height:
+											<textbox value="@{ginfo.height }" hflex="1" />
+											Weight:
+											<textbox value="@{ginfo.weight }" hflex="1" />
+											Emergency Contact's Name &amp; Phone
+											<textbox value="@{ginfo.emergencycontact }" hflex="1" />
+										</row>
+										<row>
+											Home Phone:
+											<textbox value="@{ginfo.homePhone }" hflex="1" />
+											Work Phone:
+											<textbox value="@{ginfo.workPhone }" hflex="1" />
+											Cell Phone:
+											<textbox value="@{ginfo.cellPhone }" hflex="1" />
+											Referred By:
+											<textbox value="@{ginfo.referredBy }" hflex="1" />
+										</row>
+										<row spans="8">
+											<hbox pack="center" hflex="1">
+												<button label="create" forward="onClick=win.onSave"/>
+												<button label="cancel" onClick="onClick=win.onCancel"/>
+											</hbox>
+										</row>
+									</rows>
+									
+								</grid>
+							</window>
+						</vbox>
+					</hbox>
 				</center>
 			</borderlayout>
 		</center>

@@ -11,7 +11,6 @@ import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.api.A;
 import org.zkoss.zul.api.Groupbox;
@@ -36,7 +35,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private A newemails;
 	private Progressmeter pm;
 	private Groupbox gbox;
-	private Div divbar;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
@@ -64,27 +63,25 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		final int numweek = personDAO.countPatientVisits(person.getId());
 		final int totalWeeks = 10;
 		if (gbox != null) {
-			gbox.getCaptionApi().setLabel("Report Card: "+person.getFirstName() + " " + person.getLastName());
+			gbox.getCaptionApi().setLabel("Report Card: " + person.getFirstName() + " " + person.getLastName());
 		}
 		if (week != null) {
 			week.setValue(numweek + "");
 		}
-		if(nextApppointment!=null){
+		if (nextApppointment != null) {
 			nextApppointment.setValue("12/12/2009 - 3:15 pm");
 		}
-		if(nextReExam!=null){
+		if (nextReExam != null) {
 			nextReExam.setValue("12/12/2009");
 		}
-		if(newemails!=null){
+		if (newemails != null) {
 			newemails.setLabel("3 New emails");
 		}
 		if (pm != null) {
 			if (numweek > 0) {
 				int percent = Math.round(numweek * 100 / totalWeeks);
 				pm.setValue(percent);
-				int divwidth = Integer.parseInt(pm.getWidth().substring(0, pm.getWidth().length()-2));
-				divbar.setWidth((Math.round(percent*divwidth/100)+30)+ "px");
-			}else{
+			} else {
 				pm.setValue(0);
 			}
 		}

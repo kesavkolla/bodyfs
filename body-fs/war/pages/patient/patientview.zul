@@ -9,44 +9,71 @@
 					<hbox>
 						<toolbarbutton label="Report Card" image="/img/report_card.png"
 							href="/pages/patient/patientview.zul?id=${execution.parameterMap.id[0] }" />
-						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
+						<toolbarbutton label="Sign in" image="/img/vcard_add.png"
 							href="/pages/patient/weeklyvisit.zul?id=${execution.parameterMap.id[0] }" />
+						<toolbarbutton label="Diagnosis" image="/img/diagnosis.png" href="#" />
+						<toolbarbutton label="Treatment" image="/img/procedure.gif" href="#" />
+						<toolbarbutton label="Prescription" image="/img/prescription.png" href="#" />
 						<toolbarbutton label="MPI data" image="/img/chart.png"
 							href="/pages/patient/mpi.zul?id=${execution.parameterMap.id[0] }" />
 						<toolbarbutton label="Profile" image="/img/user_add.png"
 							href="/pages/usermgmt/createLoginInfo.zul?id=${execution.parameterMap.id[0] }" />
-												
+
 					</hbox>
 				</north>
 				<center autoscroll="true" flex="true">
-					<hbox pack="center">
-						 <vbox pack="center" height="400px">
-						 	
-							<progressmeter id="pm" width="950px"/>
-							<hbox pack="start" hflex="1">
-							<div id="divbar" style="height:15px;font-weight:bold;"><hbox pack="end" hflex="1"><label id="week"/> Weeks</hbox></div>
-							<hbox pack="end" hflex="1">10 weeks</hbox>	
-							</hbox>
-							<div height="20px"></div>
-							<groupbox id="gbox" mold="3d" open="true" closable="false">
-								<caption label="" />
-								<hbox pack="center" hflex="1">
-									<div width="800px" >
+					<vbox style="margin-left:10px">
+						<space orient="vertical" height="20px" />
+						<grid hflex="1" width="90%">
+							<rows>
+								<row spans="2">
+									<progressmeter id="pm" hflex="1" width="100%" />
+								</row>
+								<row style="background-color:none">
+									<cell>
+										<label id="week" />
+										Weeks
+									</cell>
+									<cell>
+										<hbox pack="end" hflex="1">10 weeks</hbox>
+									</cell>
+								</row>
+							</rows>
+						</grid>
+						<space orient="vertical" height="20px"></space>
+						<groupbox id="gbox" mold="3d" open="true" closable="false" hflex="1" width="90%">
+							<caption label="" />
+							<hbox pack="center" hflex="1">
+								<div width="800px">
 									<vbox>
-										<div width="100%" align="center"> Next Appointment: <label id="nextApppointment"/></div>
-										<div align="center" height="30px"><space bar="true" width="700px" orient="horizontal"/></div>
-										<div width="100%" align="center"> Next Re Examination Date: <label id="nextReExam"/></div>
-										<div align="center" height="30px"><space bar="true" width="700px" orient="horizontal"/></div>
-										<div width="100%" align="center" style=""> There are <a id="newemails" href="#" /> from Body Feng Shui</div>
-										<div align="center" height="30px"><space bar="true" width="700px" orient="horizontal"/></div>
-										<div width="100%" align="center"> You have 10 Bags of Herbs remaining.</div>
+										<div width="100%" align="center">
+											Next Appointment:
+											<label id="nextApppointment" />
+										</div>
+										<div align="center" height="30px">
+											<space bar="true" width="700px" orient="horizontal" />
+										</div>
+										<div width="100%" align="center">
+											Next Re Examination Date:
+											<label id="nextReExam" />
+										</div>
+										<div align="center" height="30px">
+											<space bar="true" width="700px" orient="horizontal" />
+										</div>
+										<div width="100%" align="center" style="">
+											There are
+											<a id="newemails" href="#" />
+											from Body Feng Shui
+										</div>
+										<div align="center" height="30px">
+											<space bar="true" width="700px" orient="horizontal" />
+										</div>
+										<div width="100%" align="center">You have 10 Bags of Herbs remaining.</div>
 									</vbox>
-									</div>
-								</hbox>
-							</groupbox>
-							
-						  </vbox>
-					</hbox>
+								</div>
+							</hbox>
+						</groupbox>
+					</vbox>
 				</center>
 			</borderlayout>
 		</center>

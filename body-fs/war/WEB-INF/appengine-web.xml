@@ -10,10 +10,10 @@
 	<sessions-enabled>true</sessions-enabled>
 
 	<static-files>
-		<include path="*.ico" />
-		<include path="/img/*" />
-		<include path="/scripts/*" />
-		<include path="/css/*" />
+		<include path="*.ico" expiration="100d" />
+		<include path="/img/*" expiration="100d" />
+		<include path="/scripts/*" expiration="100d" />
+		<include path="/css/*" expiration="100d" />
 		<exclude path="/**.zul" />
 		<exclude path="/**.zhtml" />
 		<exclude path="/**.dsp" />

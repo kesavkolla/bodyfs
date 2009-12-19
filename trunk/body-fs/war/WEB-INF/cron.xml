@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/login.zul</url>
+		<description>Loads the login.zul. This is to make the app available all the time</description>
+		<schedule>every 10 minutes</schedule>
+	</cron>
+</cronentries>

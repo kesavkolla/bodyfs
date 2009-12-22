@@ -1,8 +1,9 @@
 <?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi"?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl" forward="onBookmarkChange=npigrid.onBookmarkChange">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl"
+		forward="onBookmarkChange=npigrid.onBookmarkChange">
 		<center vflex="1" hflex="1">
 			<borderlayout id="npigrid" apply="com.bodyfs.ui.NPIComposer">
 				<north>

@@ -123,7 +123,7 @@ public class PastMedicalHistory implements Serializable {
 	private String surgeryList;
 
 	@Persistent
-	private Boolean hyroiddisorders;
+	private Boolean thyroiddisorders;
 
 	@Persistent
 	private Boolean majortrauma;
@@ -416,12 +416,12 @@ public class PastMedicalHistory implements Serializable {
 		this.surgeryList = surgeryList;
 	}
 
-	public final Boolean getHyroiddisorders() {
-		return hyroiddisorders;
+	public final Boolean getThyroiddisorders() {
+		return thyroiddisorders;
 	}
 
-	public final void setHyroiddisorders(Boolean hyroiddisorders) {
-		this.hyroiddisorders = hyroiddisorders;
+	public final void setThyroiddisorders(Boolean hyroiddisorders) {
+		this.thyroiddisorders = hyroiddisorders;
 	}
 
 	public final Boolean getMajortrauma() {
@@ -560,7 +560,7 @@ public class PastMedicalHistory implements Serializable {
 		if (highbloodpressure != null) {
 			return true;
 		}
-		if (hyroiddisorders != null) {
+		if (thyroiddisorders != null) {
 			return true;
 		}
 		if (majortrauma != null) {

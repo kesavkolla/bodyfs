@@ -1,5 +1,5 @@
 <?page title="Weekly patient visit" contentType="text/html;charset=UTF-8"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="visitgrid" ?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
@@ -8,7 +8,7 @@
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
-<?script type="text/javascript" src="/scripts/jquery.pagination.js"?>
+<?script type="text/javascript" src="/scripts/jquery.paginate.js"?>
 <zk>
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
@@ -28,43 +28,9 @@
 				</north>
 				<center autoscroll="true" vflex="1" hflex="1">
 			<div id="visitgrid" apply="com.bodyfs.ui.WeeklyVisitComposer" hflex="1" vflex="1">
-				<script type="text/javascript" defer="true">
-				//initPagination(); 
-				
-				function initPagination() {
-					var num_entries = "${visitgrid$composer.visitsCount}";
-					alert(num_entries);
-					// Create pagination element
-					$("$Pagination").pagination(num_entries, {
-						num_edge_entries: 2
-						, num_display_entries: 8
-						, callback: pageselectCallback, items_per_page:1
-					});
-				}
-		
-				function pageselectCallback(page_index, jq) {
-					alert(page_index);
-					var data = page_index;
-					var txtbx = $("$sss");
-					txtbx.value=page_index;
-					$("$sss").click();
-					
-					/*if (document.createEvent) {
-			          var evt = document.createEvent('MouseEvents');
-			          evt.initEvent( 'click', true, true);
-			          txtbx.dispatchEvent(evt);
-			        } else if (document.createEventObject) {
-			          txtbx.fireEvent('click');
-			        }*/
-					//zAu.send(grid.fire("onPageSelection", data));
-					//var new_content = $('#hiddenresultdiv.result:eq('+page_index+')').clone();
-					//$('#Searchresult').empty().append(new_content);
-					return false;
-				}
-				</script>
 				<vbox vflex="1" hflex="1">
-					<div><div id="Pagination" class="pagination" align="right"></div><textbox id="sss" value="test" visible="false"/></div>
-					<grid hflex="1" vflex="1">
+					<div width="100%" align="right"><div id="Pagination" class="pagination" align="right"></div><textbox id="sss" value="test" visible="false"/></div>
+					<grid id="detailsGrid" hflex="1" vflex="1">
 						<columns>
 							<column width="50%"></column>
 							<column width="50%"></column>
@@ -214,6 +180,46 @@
 						</rows>
 					</grid>
 				</vbox>
+				<script type="text/javascript" defer="defer">
+				//initPagination(); 
+				jQuery(function($) {
+					//var data = ['09/20/2009', '09/27/2009', '10/3/2009', '10/10/2009', '10/17/2009', '10/24/2009', '10/30/2009', '11/07/2009', '11/14/2009','11/21/2009', '11/28/2009', '12/4/2009', '12/11/2009'];
+					var data = ${visitgrid$composer.visitsDates};
+					alert(data.length);
+					if(data.length > 1){
+						$("$Pagination").paginate({
+							count 		: data.length,
+							start 		: 1,
+							display     : 8,
+							border					: true,
+							border_color			: '#fff',
+							text_color  			: '#fff',
+							background_color    	: 'black',	
+							border_hover_color		: '#ccc',
+							text_hover_color  		: '#000',
+							background_hover_color	: '#fff', 
+							images					: false,
+							mouse					: 'press',
+							data					: data,
+							onChange     			: function(page){
+																	//alert(page);
+																	$("$sss").val(page);
+																	$("$sss").blur();
+																	
+																	/*var txtbx = document.getElementById($("$sss").attr("id"));
+																	txtbx.value = page;
+																	if (document.createEvent) {
+															          var evt = document.createEvent('MouseEvents');
+															          evt.initEvent( 'click', true, true);
+															          txtbx.dispatchEvent(evt);
+															        } else if (document.createEventObject) {
+															          txtbx.fireEvent('click');
+															        }*/
+																  }
+						});
+					}
+				});
+				</script>
 			</div>
 		</center>
 	</borderlayout>

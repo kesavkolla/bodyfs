@@ -30,9 +30,9 @@
 			<panelchildren>
 				<hbox width="100%" height="100%">
 					<vbox>
-						<checkbox label="Allergies (list)" checked="@{fmh.allergies, save-when='btnNext.onClick' }" />
+						<!-- <checkbox label="Allergies (list)" checked="@{fmh.allergies, save-when='btnNext.onClick' }" />
 						<textbox value="@{fmh.allergy1, save-when='btnNext.onClick' }" />
-						<textbox value="@{fmh.allergy2, save-when='btnNext.onClick' }" />
+						<textbox value="@{fmh.allergy2, save-when='btnNext.onClick' }" /> -->
 					</vbox>
 					<vbox>
 						<checkbox label="Arteriosclerosis"

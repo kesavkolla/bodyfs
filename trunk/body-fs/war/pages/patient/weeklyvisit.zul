@@ -185,7 +185,6 @@
 				jQuery(function($) {
 					//var data = ['09/20/2009', '09/27/2009', '10/3/2009', '10/10/2009', '10/17/2009', '10/24/2009', '10/30/2009', '11/07/2009', '11/14/2009','11/21/2009', '11/28/2009', '12/4/2009', '12/11/2009'];
 					var data = ${visitgrid$composer.visitsDates};
-					alert(data.length);
 					if(data.length > 1){
 						$("$Pagination").paginate({
 							count 		: data.length,

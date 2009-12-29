@@ -1,0 +1,357 @@
+<?page title="Diagnosis" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="/css/ui.dropdownchecklist.css"?>
+<?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.offset.js"?>
+<?script type="text/javascript" src="/scripts/ui.dropdownchecklist-min.js"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
+		border-top: none; border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout id="patientview">
+				<north size="50px">
+					<include src="/pages/common/patmenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true">
+					<grid hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="95%">
+						<rows>
+							<row valign="top">
+								<cell>
+									<groupbox>
+										<caption label="Tongue" />
+										<n:table width="100%">
+											<n:tr>
+												<n:td>Tongue Color</n:td>
+												<n:td>
+													<textbox id="tongueColor" hflex="1" visible="false" />
+													<n:select id="selTongueColor" style="width:200px"
+														multiple="multiple">
+														<n:option>Pink</n:option>
+														<n:option>Dusky</n:option>
+														<n:option>Pale</n:option>
+														<n:option>Purple</n:option>
+														<n:option>Pale Dusky</n:option>
+														<n:option>Red</n:option>
+														<n:option>Red Tip</n:option>
+														<n:option>Pale Sides</n:option>
+														<n:option>Purple Spots</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Coating</n:td>
+												<n:td>
+													<textbox id="tongueCoating" hflex="1" visible="false" />
+													<n:select id="selTongueCoating" style="width:200px"
+														multiple="multiple">
+														<n:option>Thin White</n:option>
+														<n:option>Thin Yellow</n:option>
+														<n:option>Thick White</n:option>
+														<n:option>Thick Yellow</n:option>
+														<n:option>Grey</n:option>
+														<n:option>No Coat</n:option>
+														<n:option>Cracks</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Wetness</n:td>
+												<n:td>
+													<textbox id="tongueWetness" hflex="1" visible="false" />
+													<n:select id="selTongueWetness" style="width:200px"
+														multiple="multiple">
+														<n:option>Dry</n:option>
+														<n:option>Moist</n:option>
+														<n:option>Cracks</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Shape</n:td>
+												<n:td>
+													<textbox id="tongueShape" hflex="1" visible="false" />
+													<n:select id="selTongueShape" style="width:200px"
+														multiple="multiple">
+														<n:option>Normal</n:option>
+														<n:option>Teeth Marks</n:option>
+														<n:option>Thin</n:option>
+														<n:option>Shading</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Veins Underneath</n:td>
+												<n:td>
+													<textbox id="veinsUnderneath" hflex="1" visible="false" />
+													<n:select id="selVeinsUnderneath" style="width:200px"
+														multiple="multiple">
+														<n:option>Scale of One to 10</n:option>
+														<n:option>Right Side</n:option>
+														<n:option>Left Side</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+										</n:table>
+									</groupbox>
+									<groupbox>
+										<caption label="Pulse" />
+										<n:table width="100%">
+											<n:tr>
+												<n:td>Right</n:td>
+												<n:td>
+													<n:select id="selPulseRight1" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													<n:select id="selPulseRight2" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													<n:select id="selPulseRight3" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Left</n:td>
+												<n:td>
+													<n:select id="selPulseLeft1" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													<n:select id="selPulseLeft2" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													<n:select id="selPulseLeft3" style="width:75px">
+														<n:option>select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slip</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+										</n:table>
+									</groupbox>
+									<groupbox>
+										<caption label="Notes" />
+										<textbox id="notes" rows="4" hflex="1" />
+									</groupbox>
+								</cell>
+								<cell valign="top">
+									<n:ol>
+										<n:li>
+											Abdominal, rib-side or breast distention and or pain
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Irritability
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Emotional depression
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Fatigue, especially after eating or eating sweets
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Dizziness when standing up
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Easy bruising
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											A bitter taste in the mouth primarily in the morning on awaking
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Increased or rapid hungering
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Mouth and/or tongue sores
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Loss of astringing and securing of nasal mucus, urine,feces, vaginal
+											discharge and/or menses
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Night sweats
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Hot flashes heat in the five hearts and centers
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Nocturia
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Cold Feet (as opposed to cold hands and feet)
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Decreased visual acuity at night
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+										<n:li>
+											Heat palpations
+											<radiogroup>
+												<radio label="Yes" />
+												<radio label="No" />
+											</radiogroup>
+										</n:li>
+									</n:ol>
+								</cell>
+							</row>
+							<row>
+								<cell></cell>
+								<cell>
+									<button label="Save" />
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+	<script>
+		zk.afterMount(function() {
+
+		$("#selTongueColor").dropdownchecklist({width: $("#selTongueColor").width()});
+		$("#selTongueCoating").dropdownchecklist({width: $("#selTongueCoating").width()});
+		$("#selTongueWetness").dropdownchecklist({width: $("#selTongueWetness").width()});
+		$("#selTongueShape").dropdownchecklist({width: $("#selTongueShape").width()});
+		$("#selVeinsUnderneath").dropdownchecklist({width: $("#selVeinsUnderneath").width()});
+		$("#selPulseRight1").dropdownchecklist({width: $("#selPulseRight1").width()});
+		$("#selPulseRight2").dropdownchecklist({width: $("#selPulseRight2").width()});
+		$("#selPulseRight3").dropdownchecklist({width: $("#selPulseRight3").width()});
+		$("#selPulseLeft1").dropdownchecklist({width: $("#selPulseLeft1").width()});
+		$("#selPulseLeft2").dropdownchecklist({width: $("#selPulseLeft2").width()});
+		$("#selPulseLeft3").dropdownchecklist({width: $("#selPulseLeft3").width()});
+
+		});
+	</script>
+</zk>

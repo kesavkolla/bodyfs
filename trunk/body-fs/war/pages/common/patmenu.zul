@@ -1,0 +1,18 @@
+<?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<hbox>
+		<toolbarbutton label="Report Card" image="/img/report_card.png"
+			href="/pages/patient/patientview.zul?id=${execution.parameterMap.id[0] }" />
+		<toolbarbutton label="Sign in" image="/img/vcard_add.png"
+			href="/pages/patient/weeklyvisit.zul?id=${execution.parameterMap.id[0] }" />
+		<toolbarbutton label="Diagnosis" image="/img/diagnosis.png"
+			href="/pages/patient/diagnosis.zul?id=${execution.parameterMap.id[0] }" />
+		<toolbarbutton label="Treatment" image="/img/procedure.gif" href="#" />
+		<toolbarbutton label="Prescription" image="/img/prescription.png"
+			href="/pages/patient/prescription.zul?id=${execution.parameterMap.id[0] }" />
+		<toolbarbutton label="MPI data" image="/img/chart.png"
+			href="/pages/patient/mpi.zul?id=${execution.parameterMap.id[0] }" />
+		<toolbarbutton label="Profile" image="/img/user_add.png"
+			href="/pages/usermgmt/createLoginInfo.zul?id=${execution.parameterMap.id[0] }" />
+	</hbox>
+</zk>

@@ -1,6 +1,7 @@
 <?page title="Welcome - Body Feng Shui, CA" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="win" border="normal" title="Login" position="center" width="400px" mode="overlapped" apply="com.bodyfs.ui.LoginWindow">
+	<window id="win" border="normal" title="Login" position="center" width="400px" mode="overlapped"
+		apply="com.bodyfs.ui.LoginWindow">
 		<div id="loginDiv" visible="${user == null}">
 			<grid>
 				<rows>
@@ -10,19 +11,17 @@
 					</row>
 					<row>
 						Password :
-						<textbox id="pwdtb" width="200px"
-							type="password" />
+						<textbox id="pwdtb" width="200px" type="password" />
 					</row>
 				</rows>
-			</grid>			
+			</grid>
 			<hbox pack="center" width="100%">
-				<button id="login" label="Login"/>
-				<toolbarbutton label="forgot password?" target="zkdemo"
-							href="http://www.zkoss.org/forum" />
+				<button id="login" label="Login" />
+				<toolbarbutton label="forgot password?" target="zkdemo" href="http://www.zkoss.org/forum" />
 			</hbox>
 			<div>
-				<label id="msg" style="color:red"/>
+				<label id="msg" style="color:red" />
 			</div>
-		</div>		
+		</div>
 	</window>
 </zk>

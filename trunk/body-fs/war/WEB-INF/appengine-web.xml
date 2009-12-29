@@ -14,6 +14,7 @@
 		<include path="/img/*" expiration="100d" />
 		<include path="/scripts/*" expiration="100d" />
 		<include path="/css/*" expiration="100d" />
+		<include path="/**.txt" expiration="100d" />
 		<exclude path="/**.zul" />
 		<exclude path="/**.zhtml" />
 		<exclude path="/**.dsp" />

@@ -91,6 +91,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<welcome-file-list>
 		<welcome-file>login.zul</welcome-file>
 	</welcome-file-list>
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
 </web-app>
 
 

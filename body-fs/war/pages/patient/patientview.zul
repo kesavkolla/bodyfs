@@ -4,22 +4,9 @@
 <zk>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
-			<borderlayout style="background:#dd0000;" id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
+			<borderlayout id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
 				<north size="50px">
-					<hbox>
-						<toolbarbutton label="Report Card" image="/img/report_card.png"
-							href="/pages/patient/patientview.zul?id=${execution.parameterMap.id[0] }" />
-						<toolbarbutton label="Sign in" image="/img/vcard_add.png"
-							href="/pages/patient/weeklyvisit.zul?id=${execution.parameterMap.id[0] }" />
-						<toolbarbutton label="Diagnosis" image="/img/diagnosis.png" href="#" />
-						<toolbarbutton label="Treatment" image="/img/procedure.gif" href="#" />
-						<toolbarbutton label="Prescription" image="/img/prescription.png" href="#" />
-						<toolbarbutton label="MPI data" image="/img/chart.png"
-							href="/pages/patient/mpi.zul?id=${execution.parameterMap.id[0] }" />
-						<toolbarbutton label="Profile" image="/img/user_add.png"
-							href="/pages/usermgmt/createLoginInfo.zul?id=${execution.parameterMap.id[0] }" />
-
-					</hbox>
+					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" flex="true">
 					<vbox style="margin-left:10px">

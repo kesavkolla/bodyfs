@@ -2,10 +2,10 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" hflex="1" vflex="1">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer">
 		<panel title="Health Insurance Info" border="normal" style="margin-bottom:10px">
 			<panelchildren>
-				<grid fixedLayout="true" style="border:0px" height="100%">
+				<grid fixedLayout="true" style="border:0px" hflex="1" vflex="1">
 					<rows>
 						<row>
 							Insurance Co. Name
@@ -31,8 +31,8 @@
 				<hbox width="100%" height="100%">
 					<vbox>
 						<!-- <checkbox label="Allergies (list)" checked="@{fmh.allergies, save-when='btnNext.onClick' }" />
-						<textbox value="@{fmh.allergy1, save-when='btnNext.onClick' }" />
-						<textbox value="@{fmh.allergy2, save-when='btnNext.onClick' }" /> -->
+							<textbox value="@{fmh.allergy1, save-when='btnNext.onClick' }" />
+							<textbox value="@{fmh.allergy2, save-when='btnNext.onClick' }" /> -->
 					</vbox>
 					<vbox>
 						<checkbox label="Arteriosclerosis"

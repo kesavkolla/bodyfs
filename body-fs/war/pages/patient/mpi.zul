@@ -70,18 +70,9 @@ function DrawCompare(mpiarr) {
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
-			<borderlayout style="background:#dd0000;" id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
+			<borderlayout id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
 				<north size="50px">
-					<hbox>
-						<toolbarbutton label="Report Card" image="/img/report_card.png"
-							href="/pages/patient/patientview.zul?id=${param.id }" />
-						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
-							href="/pages/patient/weeklyvisit.zul?id=${param.id }" />
-						<toolbarbutton label="MPI data" image="/img/chart.png"
-							href="/pages/patient/mpi.zul?id=${param.id }" />
-						<toolbarbutton label="Profile" image="/img/user_add.png"
-							href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
-					</hbox>
+					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" flex="true">
 					<div hflex="1" vflex="1" width="100%">

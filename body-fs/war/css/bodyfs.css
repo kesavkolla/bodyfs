@@ -4,6 +4,10 @@ body {
 	background-color: #660000;
 }
 
+.z-borderlayout {
+	background: #dd0000;
+}
+
 .z-center,.z-north,.z-east,.z-west,.z-south {
 	background-color: #660000;
 	color: #F1B772;
@@ -69,6 +73,18 @@ body {
 }
 
 div.z-listbox-header tr.z-listhead,div.z-listbox-header tr.z-auxhead {
+	background: #C7E5F1 repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+}
+
+.z-toolbar {
+	background: transparent repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+	background-color: black;
+	border-bottom: 1px solid #660000;
+}
+
+div.z-grid-header tr.z-columns,div.z-grid-header tr.z-auxhead {
 	background: #C7E5F1 repeat-x 0 0;
 	background-image: url('/img/borderlayout-hm.png');
 }

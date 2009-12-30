@@ -30,26 +30,6 @@ public class ApplicationInitializer implements ServletContextListener {
 	}
 
 	/**
-	 * This will load the pages.xml in the memory
-	 * 
-	 * @param event
-	 * 
-	 *            public static void initPages(final ServletContext context) {
-	 *            try { final SAXReader reader = new SAXReader();
-	 *            LOGGER.debug("Loading: " +
-	 *            context.getResource("/WEB-INF/pages.xml")); final Document
-	 *            document =
-	 *            reader.read(context.getResourceAsStream("/WEB-INF/pages.xml"
-	 *            ));
-	 *            MemcacheServiceFactory.getMemcacheService().put(IPageDAO.PAGES_DOCUMENT
-	 *            , document.getRootElement());
-	 *            LOGGER.debug("Saving in memcache: " +
-	 *            MemcacheServiceFactory.getMemcacheService
-	 *            ().get(IPageDAO.PAGES_DOCUMENT)); } catch (final Exception e)
-	 *            { LOGGER.error(e); } }
-	 */
-
-	/**
 	 * This method initializes all the OpenId handlers
 	 * 
 	 * @param event

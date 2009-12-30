@@ -60,7 +60,6 @@ public class LoginDAO implements ILoginDAO, Serializable {
 
 	@Override
 	public LoginInfo getLoginDetails(Long personId) {
-		// TODO Auto-generated method stub
 		try {
 			final Collection<LoginInfo> results = this.jdoTemplate.find(LoginInfo.class, "personId==pid", "String pid",
 					personId);
@@ -85,7 +84,6 @@ public class LoginDAO implements ILoginDAO, Serializable {
 
 	@Override
 	public void createNewLogin(LoginInfo login) {
-		// TODO Auto-generated method stub
 		this.jdoTemplate.makePersistent(login);
 	}
 
@@ -106,10 +104,7 @@ public class LoginDAO implements ILoginDAO, Serializable {
 
 	@Override
 	public Collection<LoginInfo> getByOptions(CustSearchOptions options) {
-
 		// return this.jdoTemplate.find(queryString);
-
-		// TODO Auto-generated method stub
 		return null;
 	}
 

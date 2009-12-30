@@ -3,7 +3,6 @@ package com.bodyfs.ui;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -53,9 +52,9 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 	Panel optionsPanel;
 
 	CustSearchOptions options = new CustSearchOptions();
-	
+
 	Collection<Person> results;
-	
+
 	public void setResults(Collection<Person> results) {
 		this.results = results;
 	}
@@ -75,17 +74,17 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			Query query = pm.newQuery(Person.class);
 			resultSet = (Collection<Person>) query.execute();
 			resultSet = pm.detachCopyAll(resultSet);
-			//persons.setModel(new ListModelList(resultSet));
+			// persons.setModel(new ListModelList(resultSet));
 			for (Person person : resultSet) {
-				if(person.getPersonType()==null){
+				if (person.getPersonType() == null) {
 					results.add(person);
 					continue;
 				}
-				if(person.getPersonType().equals(PersonType.USER)){
+				if (person.getPersonType().equals(PersonType.USER)) {
 					results.add(person);
 				}
 			}
-			
+
 		} finally {
 			pm.close();
 		}
@@ -106,7 +105,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		if (smrtTextbox.getValue() != null && !smrtTextbox.getValue().trim().equals("")) {
 			searchVal = smrtTextbox.getValue();
 		}
-		IPersonDAO personDao = (IPersonDAO)SpringUtil.getBean("personDAO");
+		IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
 		CompassSearchSession compassSession = PMF.getCompass().openSearchSession();
 		// PersistenceManager pm = PMF.get().getPersistenceManager();
 		CompassDetachedHits hits = compassSession.find(searchVal).detach();
@@ -117,15 +116,15 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			if (hits.data(i) instanceof Person) {
 				Person person = (Person) hits.data(i);
 				person = personDao.getPerson(person.getId());
-				if(person.getPersonType()==null){
+				if (person.getPersonType() == null) {
 					resultSet.add(person);
 					continue;
 				}
-				if(!typePre.isChecked() && person.getPersonType().equals(PersonType.PRE_USER))
+				if (!typePre.isChecked() && person.getPersonType().equals(PersonType.PRE_USER))
 					continue;
-				else if(!typePost.isChecked() && person.getPersonType().equals(PersonType.POST_USER))
+				else if (!typePost.isChecked() && person.getPersonType().equals(PersonType.POST_USER))
 					continue;
-				else if(!typeCurrent.isChecked() && person.getPersonType().equals(PersonType.USER))
+				else if (!typeCurrent.isChecked() && person.getPersonType().equals(PersonType.USER))
 					continue;
 				resultSet.add(person);
 			}
@@ -134,7 +133,6 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		persons.invalidate();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Collection<Person> getResults() {
 		return results;
 	}

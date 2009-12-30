@@ -4,11 +4,8 @@
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +18,6 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Calendar;
 import org.zkoss.zul.api.Div;
 import org.zkoss.zul.api.Grid;
 import org.zkoss.zul.api.Textbox;
@@ -49,6 +45,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		return sdf.format(date);
 	}
 
+	@SuppressWarnings("unchecked")
 	public final String getVisitsDates() {
 		final JSONArray arr = new JSONArray();
 		if (patvisits != null) {

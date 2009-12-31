@@ -15,16 +15,7 @@
 		<center>
 			<borderlayout style="background:#dd0000;">
 				<north size="50px">
-					<hbox>
-						<toolbarbutton label="Report Card" image="/img/report_card.png"
-							href="/pages/patient/patientview.zul?id=${param.id }" />
-						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
-							href="/pages/patient/weeklyvisit.zul?id=${param.id }" />
-						<toolbarbutton label="MPI data" image="/img/chart.png"
-							href="/pages/patient/mpi.zul?id=${param.id }" />
-						<toolbarbutton label="Profile" image="/img/user_add.png"
-							href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
-					</hbox>
+					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" vflex="1" hflex="1">
 			<div id="visitgrid" apply="com.bodyfs.ui.WeeklyVisitComposer" hflex="1" vflex="1">

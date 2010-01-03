@@ -1,6 +1,7 @@
 package com.bodyfs.dao;
 
 import java.util.Collection;
+import java.util.Date;
 
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -34,40 +35,72 @@ public interface IPersonDAO {
 	public void deleteAll();
 
 	public void createGeneralInfo(final GeneralInfo ginfo);
-	
+
 	public GeneralInfo getGeneralInfo(final Long personId);
 
+	/**
+	 * Creates a new patient visit
+	 * 
+	 * @param visit
+	 * @return
+	 */
 	public PatientVisit createPatientVisit(final PatientVisit visit);
 
-	public Collection<PatientVisit> GetPatientVisits(final Long personId);
+	/**
+	 * 
+	 * @param personId
+	 * @return return all the patientvisits for a given patient
+	 */
+	public Collection<PatientVisit> getPatientVisits(final Long personId);
 
+	/**
+	 * 
+	 * @param personId
+	 * @return return all the visit dates for a given patient in chronological
+	 *         order
+	 */
+	public Collection<Date> getPatientVisitDates(final Long personId);
+
+	/**
+	 * 
+	 * @param personId
+	 * @param visitDate
+	 * @return PatientVisit corresponds to the person id and the given date
+	 */
+	public PatientVisit getPatientVisitByDate(final Long personId, final Date visitDate);
+
+	/**
+	 * 
+	 * @param patid
+	 * @return count the number of patient visits
+	 */
 	public int countPatientVisits(final Long patid);
-	
+
 	public void createFamilyMedicalHistory(final FamilyMedHistory fmh);
-	
+
 	public void createPastMedicalHistory(final PastMedicalHistory pmh);
-	
+
 	public void createPatientDiet(final Diet yd);
-	
+
 	public void createLifeStyle(final Lifestyle yls);
-	
+
 	public void createGeneralSymptoms(final GeneralSymptoms gs);
-	
+
 	public void createENT(final ENT ent);
-	
-	public void createRespiratory(final Respiratory rp);	
-	
+
+	public void createRespiratory(final Respiratory rp);
+
 	public void createCardiovascular(final Cardiovascular cv);
-	
+
 	public void createGastrointestinal(final Gastrointestinal gi);
-	
+
 	public void createMusculoskeletal(final Musculoskeletal ms);
-	
+
 	public void createSkinHair(final SkinHair sh);
-	
+
 	public void createNeuropsychological(final Neuropsychological np);
-	
+
 	public void createGenitourinary(final Genitourinary gen);
-	
+
 	public void createGynecology(final Gynecology gy);
 }

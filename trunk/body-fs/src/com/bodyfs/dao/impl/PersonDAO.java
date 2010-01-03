@@ -6,6 +6,8 @@ package com.bodyfs.dao.impl;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
@@ -84,105 +86,105 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(ginfo);
 		}
 	}
-	
+
 	@Override
 	public void createFamilyMedicalHistory(final FamilyMedHistory fmh) {
 		if (fmh.isDirty()) {
 			this.jdoTemplate.makePersistent(fmh);
 		}
 	}
-	
+
 	@Override
 	public void createPastMedicalHistory(final PastMedicalHistory pmh) {
 		if (pmh.isDirty()) {
 			this.jdoTemplate.makePersistent(pmh);
 		}
 	}
-	
+
 	@Override
 	public void createPatientDiet(final Diet yd) {
 		if (yd.isDirty()) {
 			this.jdoTemplate.makePersistent(yd);
 		}
 	}
-	
+
 	@Override
 	public void createLifeStyle(final Lifestyle yls) {
 		if (yls.isDirty()) {
 			this.jdoTemplate.makePersistent(yls);
 		}
 	}
-	
+
 	@Override
 	public void createGeneralSymptoms(final GeneralSymptoms gs) {
 		if (gs.isDirty()) {
 			this.jdoTemplate.makePersistent(gs);
 		}
 	}
-	
+
 	@Override
 	public void createENT(final ENT ent) {
 		if (ent.isDirty()) {
 			this.jdoTemplate.makePersistent(ent);
 		}
 	}
-	
+
 	@Override
 	public void createRespiratory(final Respiratory rp) {
 		if (rp.isDirty()) {
 			this.jdoTemplate.makePersistent(rp);
 		}
 	}
-	
+
 	@Override
 	public void createCardiovascular(final Cardiovascular cv) {
 		if (cv.isDirty()) {
 			this.jdoTemplate.makePersistent(cv);
 		}
 	}
-	
+
 	@Override
 	public void createGastrointestinal(final Gastrointestinal gi) {
 		if (gi.isDirty()) {
 			this.jdoTemplate.makePersistent(gi);
 		}
 	}
-	
+
 	@Override
 	public void createMusculoskeletal(final Musculoskeletal ms) {
 		if (ms.isDirty()) {
 			this.jdoTemplate.makePersistent(ms);
 		}
 	}
-	
+
 	@Override
 	public void createSkinHair(final SkinHair sh) {
 		if (sh.isDirty()) {
 			this.jdoTemplate.makePersistent(sh);
 		}
 	}
-	
+
 	@Override
 	public void createNeuropsychological(final Neuropsychological np) {
 		if (np.isDirty()) {
 			this.jdoTemplate.makePersistent(np);
 		}
 	}
-	
+
 	@Override
 	public void createGenitourinary(final Genitourinary gen) {
 		if (gen.isDirty()) {
 			this.jdoTemplate.makePersistent(gen);
 		}
 	}
-	
+
 	@Override
 	public void createGynecology(final Gynecology gy) {
 		if (gy.isDirty()) {
 			this.jdoTemplate.makePersistent(gy);
 		}
 	}
-	
+
 	@Override
 	public GeneralInfo getGeneralInfo(final Long personId) {
 		try {
@@ -195,7 +197,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			e.printStackTrace(System.err);
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	@Override
@@ -204,8 +206,38 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
-	public Collection<PatientVisit> GetPatientVisits(final Long personId) {
-		return this.jdoTemplate.find(PatientVisit.class, "personId ==" + personId, "visitDate");
+	public Collection<PatientVisit> getPatientVisits(final Long personId) {
+		return this.jdoTemplate.find(PatientVisit.class, "personId ==" + personId, "visitDate desc");
+	}
+
+	@Override
+	public PatientVisit getPatientVisitByDate(final Long personId, final Date visitDate) {
+		final Collection<PatientVisit> visits = this.jdoTemplate.find(PatientVisit.class,
+				"personId==pid && visitDate==pdate", "String pid, java.util.Date pdate", personId, visitDate);
+		if (visits != null && visits.size() > 0) {
+			return visits.iterator().next();
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Date> getPatientVisitDates(final Long personId) {
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pid", personId);
+		return jdoTemplate
+				.find(
+						"SELECT visitDate FROM com.bodyfs.model.PatientVisit WHERE personId==pid PARAMETERS Long pid  ORDER BY visitDate DESC",
+						vals);
+	}
+
+	@Override
+	public int countPatientVisits(final Long patid) {
+		final Collection<Date> dates = getPatientVisitDates(patid);
+		if (dates == null) {
+			return 0;
+		}
+		return dates.size();
 	}
 
 	@Override
@@ -223,17 +255,4 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	public int countPatientVisits(final Long patid) {
-		return this.jdoTemplate.execute(new JdoCallback<Integer>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public Integer doInJdo(final PersistenceManager pm) throws JDOException {
-				final Query query = pm.newQuery(PatientVisit.class, "personId == " + patid);
-				query.setResult("visitDate");
-				final Collection<Date> visits = (Collection<Date>) query.execute();
-				return visits.size();
-			}
-
-		});
-	}
 }

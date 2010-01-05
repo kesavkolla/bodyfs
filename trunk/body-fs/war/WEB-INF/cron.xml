@@ -3,6 +3,6 @@
 	<cron>
 		<url>/login.zul</url>
 		<description>Loads the login.zul. This is to make the app available all the time</description>
-		<schedule>every 10 minutes</schedule>
+		<schedule>every 3 minutes</schedule>
 	</cron>
 </cronentries>

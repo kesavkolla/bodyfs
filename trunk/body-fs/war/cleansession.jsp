@@ -25,8 +25,13 @@
 				keys.add(entity.getKey());
 			}
 			if (keys.size() > 0) {
-				dataService.delete(keys);
-				out.println("Deleted: " + keys.size());
+				for (int i = 0, len = keys.size(); i < len; i = i + 100) {
+					int start = i;
+					int end = i + (keys.size() > 100 ? 99 : keys.size() - 1);
+					dataService.delete(keys.subList(start, end));
+					out.println("Deleted: " + (end - start));
+					out.println("<br />");
+				}
 			} else {
 				break;
 			}

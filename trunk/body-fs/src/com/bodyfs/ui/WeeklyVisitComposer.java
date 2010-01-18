@@ -19,7 +19,7 @@ import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
-import com.bodyfs.dao.IPersonDAO;
+import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientVisit;
 
 /**
@@ -47,9 +47,9 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	public final String getVisitsDates() {
 		final Long personId = Long.parseLong(Executions.getCurrent().getParameter("id"));
-		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final JSONArray arr = new JSONArray();
-		for (final Date date : personDAO.getPatientVisitDates(personId)) {
+		for (final Date date : visitDAO.getPatientVisitDates(personId)) {
 			final JSONObject obj = new JSONObject();
 			obj.put("value", sdf.format(date));
 			obj.put("date", date.getTime());
@@ -72,8 +72,8 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		}
 		comp.getPage().setAttribute("personid", personid);
 		if (visitDate != null) {
-			final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-			final PatientVisit patvisit = personDAO.getPatientVisitByDate(personid, visitDate);
+			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(personid, visitDate);
 			this.page.setAttribute("patvisit", patvisit);
 		} else {
 			final PatientVisit patvisit = new PatientVisit();
@@ -93,10 +93,10 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		if (page.getAttribute("personid") == null || page.getAttribute("patvisit") == null) {
 			return;
 		}
-		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final PatientVisit patvisit = (PatientVisit) page.getAttribute("patvisit");
 		if (patvisit != null) {
-			personDAO.createPatientVisit(patvisit);
+			visitDAO.createPatientVisit(patvisit);
 		}
 	}
 
@@ -114,8 +114,8 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		}
 		final Date visitDate = new Date(new Long(datebox.getValue()));
 		final Component visitgrid = evt.getTarget();
-		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		final PatientVisit visit = personDAO.getPatientVisitByDate((Long) page.getAttribute("personid"), visitDate);
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientVisit visit = visitDAO.getPatientVisitByDate((Long) page.getAttribute("personid"), visitDate);
 		if (visit == null) {
 			return;
 		}

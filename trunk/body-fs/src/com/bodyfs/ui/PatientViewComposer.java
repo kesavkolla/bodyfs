@@ -17,6 +17,7 @@ import org.zkoss.zul.api.Groupbox;
 import org.zkoss.zul.api.Progressmeter;
 import org.zkoss.zul.api.Window;
 
+import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
 
@@ -60,7 +61,8 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
-		final int numweek = personDAO.countPatientVisits(person.getId());
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final int numweek = visitDAO.countPatientVisits(person.getId());
 		final int totalWeeks = 10;
 		if (gbox != null) {
 			gbox.getCaptionApi().setLabel("Report Card: " + person.getFirstName() + " " + person.getLastName());

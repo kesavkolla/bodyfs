@@ -1,8 +1,12 @@
 <?page title="Diagnosis" contentType="text/html;charset=UTF-8"?>
 <?link  rel="stylesheet" type="text/css" href="/css/ui.dropdownchecklist.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/pagination.css"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery.offset.js"?>
 <?script type="text/javascript" src="/scripts/ui.dropdownchecklist-min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
+<?script type="text/javascript" src="/scripts/diagnosis.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
 		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
@@ -15,37 +19,53 @@
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">
-					<grid hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="95%">
+					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="95%"
+						apply="com.bodyfs.ui.DiagnosisComposer">
 						<rows>
+							<row>
+								<cell>
+									<n:table width="100%">
+										<n:tr>
+											<n:td>
+												<div id="Pagination" class="pagination" align="right" width="90%" />
+											</n:td>
+											<n:td>
+												<textbox id="datepage" visible="false"
+													forward="onBlur=diagnosisgrid.onDateChange" />
+											</n:td>
+										</n:tr>
+									</n:table>
+								</cell>
+							</row>
 							<row valign="top">
 								<cell>
 									<groupbox>
+										<textbox id="jsondata" visible="false"
+											value="{'TongueColor':['Dusky', 'Red Tip'], 'Notes':'This a test note', 'Heat': 'No', 'Dizziness':'Yes'}" />
 										<caption label="Tongue" />
 										<n:table width="100%">
 											<n:tr>
 												<n:td>Tongue Color</n:td>
 												<n:td>
-													<textbox id="tongueColor" hflex="1" visible="false" />
-													<n:select id="selTongueColor" style="width:200px"
-														multiple="multiple">
-														<n:option>Pink</n:option>
-														<n:option>Dusky</n:option>
-														<n:option>Pale</n:option>
-														<n:option>Purple</n:option>
-														<n:option>Pale Dusky</n:option>
-														<n:option>Red</n:option>
-														<n:option>Red Tip</n:option>
-														<n:option>Pale Sides</n:option>
-														<n:option>Purple Spots</n:option>
+													<n:select id="selTongueColor" name="selTongueColor"
+														style="width:200px" multiple="multiple">
+														<n:option value="Pink">Pink</n:option>
+														<n:option value="Dusky">Dusky</n:option>
+														<n:option value="Pale">Pale</n:option>
+														<n:option value="Purple">Purple</n:option>
+														<n:option value="Pale Dusky">Pale Dusky</n:option>
+														<n:option value="Red">Red</n:option>
+														<n:option value="Red Tip">Red Tip</n:option>
+														<n:option value="Pale Sides">Pale Sides</n:option>
+														<n:option value="Purple Spots">Purple Spots</n:option>
 													</n:select>
 												</n:td>
 											</n:tr>
 											<n:tr>
 												<n:td>Tongue Coating</n:td>
 												<n:td>
-													<textbox id="tongueCoating" hflex="1" visible="false" />
-													<n:select id="selTongueCoating" style="width:200px"
-														multiple="multiple">
+													<n:select id="selTongueCoating" name="selTongueCoating"
+														style="width:200px" multiple="multiple">
 														<n:option>Thin White</n:option>
 														<n:option>Thin Yellow</n:option>
 														<n:option>Thick White</n:option>
@@ -59,9 +79,8 @@
 											<n:tr>
 												<n:td>Tongue Wetness</n:td>
 												<n:td>
-													<textbox id="tongueWetness" hflex="1" visible="false" />
-													<n:select id="selTongueWetness" style="width:200px"
-														multiple="multiple">
+													<n:select id="selTongueWetness" name="selTongueWetness"
+														style="width:200px" multiple="multiple">
 														<n:option>Dry</n:option>
 														<n:option>Moist</n:option>
 														<n:option>Cracks</n:option>
@@ -71,9 +90,8 @@
 											<n:tr>
 												<n:td>Tongue Shape</n:td>
 												<n:td>
-													<textbox id="tongueShape" hflex="1" visible="false" />
-													<n:select id="selTongueShape" style="width:200px"
-														multiple="multiple">
+													<n:select id="selTongueShape" name="selTongueShape"
+														style="width:200px" multiple="multiple">
 														<n:option>Normal</n:option>
 														<n:option>Teeth Marks</n:option>
 														<n:option>Thin</n:option>
@@ -84,9 +102,8 @@
 											<n:tr>
 												<n:td>Veins Underneath</n:td>
 												<n:td>
-													<textbox id="veinsUnderneath" hflex="1" visible="false" />
-													<n:select id="selVeinsUnderneath" style="width:200px"
-														multiple="multiple">
+													<n:select id="selVeinsUnderneath" name="selVeinsUnderneath"
+														style="width:200px" multiple="multiple">
 														<n:option>Scale of One to 10</n:option>
 														<n:option>Right Side</n:option>
 														<n:option>Left Side</n:option>
@@ -102,7 +119,7 @@
 												<n:td>Right</n:td>
 												<n:td>
 													<n:select id="selPulseRight1" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -118,7 +135,7 @@
 												</n:td>
 												<n:td>
 													<n:select id="selPulseRight2" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -134,7 +151,7 @@
 												</n:td>
 												<n:td>
 													<n:select id="selPulseRight3" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -153,7 +170,7 @@
 												<n:td>Left</n:td>
 												<n:td>
 													<n:select id="selPulseLeft1" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -169,7 +186,7 @@
 												</n:td>
 												<n:td>
 													<n:select id="selPulseLeft2" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -185,7 +202,7 @@
 												</n:td>
 												<n:td>
 													<n:select id="selPulseLeft3" style="width:75px">
-														<n:option>select pulse</n:option>
+														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -204,123 +221,155 @@
 									</groupbox>
 									<groupbox>
 										<caption label="Notes" />
-										<textbox id="notes" rows="4" hflex="1" />
+										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%" />
 									</groupbox>
 								</cell>
 								<cell valign="top">
 									<n:ol>
 										<n:li>
 											Abdominal, rib-side or breast distention and or pain
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radPain" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radPain" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Irritability
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radIrritability" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radIrritability" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Emotional depression
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radEmotional" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radEmotional" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Fatigue, especially after eating or eating sweets
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radFatigue" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radFatigue" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Dizziness when standing up
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radDizziness" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radDizziness" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Easy bruising
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radBruising" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radBruising" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											A bitter taste in the mouth primarily in the morning on awaking
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radTaste" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radTaste" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Increased or rapid hungering
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radHunger" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radHunger" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Mouth and/or tongue sores
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radSores" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radSores" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Loss of astringing and securing of nasal mucus, urine,feces, vaginal
 											discharge and/or menses
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radMenses" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radMenses" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Night sweats
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radNightSweats" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radNightSweats" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Hot flashes heat in the five hearts and centers
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radHeat" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radHeat" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Nocturia
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radNocturia" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radNocturia" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Cold Feet (as opposed to cold hands and feet)
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radColdFeet" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radColdFeet" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Decreased visual acuity at night
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radVisualAcuity" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radVisualAcuity" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 										<n:li>
 											Heat palpations
-											<radiogroup>
-												<radio label="Yes" />
-												<radio label="No" />
-											</radiogroup>
+											<n:input type="radio" name="radHeatPalpations" value="Yes">
+												<n:span class="z-radio-cnt">Yes</n:span>
+											</n:input>
+											<n:input type="radio" name="radHeatPalpations" value="No">
+												<n:span class="z-radio-cnt">No</n:span>
+											</n:input>
 										</n:li>
 									</n:ol>
 								</cell>
@@ -328,7 +377,10 @@
 							<row>
 								<cell></cell>
 								<cell>
-									<button label="Save" />
+									<button label="Save" id="btnSave" forward="onClick=diagnosisgrid.onSave" />
+									<script type="text/javascript" defer="false">
+										zk.afterMount(function() { setupData(); });
+									</script>
 								</cell>
 							</row>
 						</rows>
@@ -337,21 +389,4 @@
 			</borderlayout>
 		</center>
 	</borderlayout>
-	<script>
-		zk.afterMount(function() {
-
-		$("#selTongueColor").dropdownchecklist({width: $("#selTongueColor").width()});
-		$("#selTongueCoating").dropdownchecklist({width: $("#selTongueCoating").width()});
-		$("#selTongueWetness").dropdownchecklist({width: $("#selTongueWetness").width()});
-		$("#selTongueShape").dropdownchecklist({width: $("#selTongueShape").width()});
-		$("#selVeinsUnderneath").dropdownchecklist({width: $("#selVeinsUnderneath").width()});
-		$("#selPulseRight1").dropdownchecklist({width: $("#selPulseRight1").width()});
-		$("#selPulseRight2").dropdownchecklist({width: $("#selPulseRight2").width()});
-		$("#selPulseRight3").dropdownchecklist({width: $("#selPulseRight3").width()});
-		$("#selPulseLeft1").dropdownchecklist({width: $("#selPulseLeft1").width()});
-		$("#selPulseLeft2").dropdownchecklist({width: $("#selPulseLeft2").width()});
-		$("#selPulseLeft3").dropdownchecklist({width: $("#selPulseLeft3").width()});
-
-		});
-	</script>
 </zk>

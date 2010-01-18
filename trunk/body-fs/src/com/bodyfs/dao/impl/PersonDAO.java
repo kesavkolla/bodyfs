@@ -5,9 +5,6 @@ package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
@@ -35,7 +32,6 @@ import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
-import com.bodyfs.model.PatientVisit;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
@@ -198,46 +194,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			throw new RuntimeException(e);
 		}
 
-	}
-
-	@Override
-	public PatientVisit createPatientVisit(final PatientVisit visit) {
-		return this.jdoTemplate.makePersistent(visit);
-	}
-
-	@Override
-	public Collection<PatientVisit> getPatientVisits(final Long personId) {
-		return this.jdoTemplate.find(PatientVisit.class, "personId ==" + personId, "visitDate desc");
-	}
-
-	@Override
-	public PatientVisit getPatientVisitByDate(final Long personId, final Date visitDate) {
-		final Collection<PatientVisit> visits = this.jdoTemplate.find(PatientVisit.class,
-				"personId==pid && visitDate==pdate", "String pid, java.util.Date pdate", personId, visitDate);
-		if (visits != null && visits.size() > 0) {
-			return visits.iterator().next();
-		}
-		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<Date> getPatientVisitDates(final Long personId) {
-		final Map<String, Object> vals = new HashMap<String, Object>();
-		vals.put("pid", personId);
-		return jdoTemplate
-				.find(
-						"SELECT visitDate FROM com.bodyfs.model.PatientVisit WHERE personId==pid PARAMETERS Long pid  ORDER BY visitDate DESC",
-						vals);
-	}
-
-	@Override
-	public int countPatientVisits(final Long patid) {
-		final Collection<Date> dates = getPatientVisitDates(patid);
-		if (dates == null) {
-			return 0;
-		}
-		return dates.size();
 	}
 
 	@Override

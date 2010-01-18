@@ -7,6 +7,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/compass-2.3.0-beta1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-2.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/calendar.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring Libraries"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

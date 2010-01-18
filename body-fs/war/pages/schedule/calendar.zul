@@ -1,10 +1,92 @@
-<?page title="Bodyfs Schedule" contentType="text/html;charset=UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?component name="divtab" macro-uri="divtab.zul"?>
+<?component name="divarrow" macro-uri="divarrow.zul"?>
+<?component name="create" macro-uri="createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="editEvent.zul" inline="true"?>
+<?link rel="stylesheet" type="text/css" href="/css/calendar.css"?>
 <zk>
-	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
-		<center autoscroll="false" flex="true">
-			<iframe id="iframe"
-				src="http://www.google.com/calendar/embed?title=Body%20Feng%20Shui&amp;mode=DAY&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=1h09tdsap9f5fd1h6eqogj8iog%40group.calendar.google.com&amp;color=%23A32929&amp;src=ktoe9l89cak7kttiaqema8qbn4%40group.calendar.google.com&amp;color=%231B887A&amp;ctz=America%2FLos_Angeles"
-				width="100%" height="400px" style="border-width:0" />
+	<zscript><![CDATA[
+	//@IMPORT
+	import java.util.Calendar;
+	import java.text.SimpleDateFormat;
+]]></zscript>
+	<zscript><![CDATA[
+	List dateTime = new LinkedList();
+	Calendar calendar = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+	calendar.set(Calendar.HOUR_OF_DAY, 0);
+	calendar.set(Calendar.MINUTE, 0);
+	calendar.set(Calendar.SECOND, 0);
+
+	for (int i = 0; i < 48; i++) {
+		dateTime.add(sdf.format(calendar.getTime()));
+		calendar.add(Calendar.MINUTE, 30);
+	}
+]]></zscript>
+	<borderlayout id="main">
+		<center border="none">
+			<calendars firstDayOfWeek="Sunday" timeZone="Pacific=GMT-8" model="${cm}" mold="default" id="cal">
+				<attribute name="onEventCreate"></attribute>
+				<attribute name="onEventEdit"></attribute>
+				<attribute name="onEventUpdate"></attribute>
+				<toolbar sclass="calendar-toolbar">
+					<div class="float-left">
+						<hbox>
+							<divarrow type="arrow-left"
+								command='cal.previousPage();Events.postEvent("onCreate", label, null);syncModel();' />
+							<divarrow type="arrow-right"
+								command='cal.nextPage();Events.postEvent("onCreate", label, null);syncModel();' />
+							<div>
+								<button mold="os" label="today"
+									onClick='cal.setCurrentDate(java.util.Calendar.getInstance(cal.getDefaultTimeZone()).getTime());Events.postEvent("onCreate", label, null);syncModel();' />
+								<span id="FDOW"
+									onCreate='self.visible = "month".equals(cal.getMold()) || cal.days == 7'>
+									First Day of Week:
+									<listbox mold="select"
+										onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());syncModel();"
+										onCreate="self.selectedIndex = 0">
+										<listitem forEach="Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
+											label="${each}" />
+									</listbox>
+								</span>
+								<separator orient="vertical" />
+								<label id="label">
+									<attribute name="onCreate"></attribute>
+								</label>
+								<toolbarbutton label="Refresh" class="refresh" onClick='cal.invalidate();' />
+							</div>
+						</hbox>
+					</div>
+					<div class="float-right">
+						<hbox>
+							<divtab
+								command='cal.mold = "default";cal.days = 1;Events.postEvent("onCreate", label, null);FDOW.visible=false;syncModel();'
+								text="Day" />
+							<divtab
+								command='cal.mold = "default";cal.days = 7;Events.postEvent("onCreate", label, null);FDOW.visible=true;syncModel();'
+								text="Week" />
+							<divtab
+								command='cal.mold = "default";cal.days = 5;Events.postEvent("onCreate", label, null);FDOW.visible=false;syncModel();'
+								text="5 Days" />
+							<divtab
+								command='cal.mold = "month";Events.postEvent("onCreate", label, null);FDOW.visible=true;syncModel();'
+								text="Month" />
+						</hbox>
+					</div>
+				</toolbar>
+			</calendars>
 		</center>
 	</borderlayout>
+	<create />
+	<edit />
+
+	<popup id="updateMsg" width="320px" action="onshow:anima.appear(#{self});">
+		<image src="~./zk/img/progress2.gif" />
+		<label />
+		<timer id="timer" delay="1000" running="false">
+			<attribute name="onTimer">
+	updateMsg.close();
+</attribute>
+		</timer>
+	</popup>
 </zk>

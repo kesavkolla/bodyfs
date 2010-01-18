@@ -1,7 +1,6 @@
 package com.bodyfs.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -16,7 +15,6 @@ import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
-import com.bodyfs.model.PatientVisit;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
@@ -37,44 +35,6 @@ public interface IPersonDAO {
 	public void createGeneralInfo(final GeneralInfo ginfo);
 
 	public GeneralInfo getGeneralInfo(final Long personId);
-
-	/**
-	 * Creates a new patient visit
-	 * 
-	 * @param visit
-	 * @return
-	 */
-	public PatientVisit createPatientVisit(final PatientVisit visit);
-
-	/**
-	 * 
-	 * @param personId
-	 * @return return all the patientvisits for a given patient
-	 */
-	public Collection<PatientVisit> getPatientVisits(final Long personId);
-
-	/**
-	 * 
-	 * @param personId
-	 * @return return all the visit dates for a given patient in chronological
-	 *         order
-	 */
-	public Collection<Date> getPatientVisitDates(final Long personId);
-
-	/**
-	 * 
-	 * @param personId
-	 * @param visitDate
-	 * @return PatientVisit corresponds to the person id and the given date
-	 */
-	public PatientVisit getPatientVisitByDate(final Long personId, final Date visitDate);
-
-	/**
-	 * 
-	 * @param patid
-	 * @return count the number of patient visits
-	 */
-	public int countPatientVisits(final Long patid);
 
 	public void createFamilyMedicalHistory(final FamilyMedHistory fmh);
 

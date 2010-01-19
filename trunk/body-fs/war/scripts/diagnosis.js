@@ -5,9 +5,15 @@
  */
 function setupData() {
 	/* Get the data from the jsondata textfield and setup all the input elements */
-	var data = parseJSON($("$jsondata").val());
-	if (isEmptyObject(data)) {
-		return;
+	try {
+		var data = parseJSON($("$jsondata").val());
+	} catch (err) {
+		var wgt = zk.Widget.$($("$jsondata").attr("id"));
+		if (isEmptyObject(wgt)) {
+			var data = {};
+			return;
+		}
+		var data = parseJSON(wgt._value);
 	}
 	/* setup the tongue color */
 	var objselTongueColor = $("#selTongueColor");

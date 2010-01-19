@@ -20,6 +20,7 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientVisit;
 
 /**
@@ -97,6 +98,11 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		final PatientVisit patvisit = (PatientVisit) page.getAttribute("patvisit");
 		if (patvisit != null) {
 			visitDAO.createPatientVisit(patvisit);
+			// create an empty patient diagnosis for this visit
+			final PatientDiagnosis diag = new PatientDiagnosis();
+			diag.setPersonId(patvisit.getId());
+			diag.setVisitDate(patvisit.getVisitDate());
+			visitDAO.createPatientDiagnosis(diag);
 		}
 	}
 

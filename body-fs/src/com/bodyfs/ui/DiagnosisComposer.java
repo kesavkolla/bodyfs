@@ -6,16 +6,16 @@ import java.util.Date;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.model.PatientDiagnosis;
 
 public class DiagnosisComposer extends GenericForwardComposer {
 
@@ -39,7 +39,7 @@ public class DiagnosisComposer extends GenericForwardComposer {
 			return;
 		}
 
-		page.setAttribute("personid", patid);
+		page.setAttribute("patid", patid);
 		Date visitDate = null;
 		if (execution.getParameter("visitDate") != null) {
 			try {
@@ -47,6 +47,12 @@ public class DiagnosisComposer extends GenericForwardComposer {
 			} catch (final Throwable t) {
 				visitDate = null;
 			}
+		}
+		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate(patid, visitDate);
+		if (diagnosis != null) {
+			final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
+			System.out.println(diagnosis.getDiagnosisData());
+			txtjsondata.setText(diagnosis.getDiagnosisData());
 		}
 	}
 
@@ -63,18 +69,19 @@ public class DiagnosisComposer extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onDateChange(final ForwardEvent evt) {
-		final Textbox datebox = (Textbox) Path.getComponent(evt.getPage(), "");
+		final Textbox datebox = (Textbox) evt.getOrigin().getTarget();
 		if (datebox == null || datebox.getValue() == null) {
 			return;
 		}
 		final Date visitDate = new Date(new Long(datebox.getValue()));
-		final Component visitgrid = evt.getTarget();
-
-		final DataBinder binder = (DataBinder) visitgrid.getAttribute("binder");
-		if (binder != null) {
-			// visitgrid.setAttribute("patvisit", visit);
-			binder.loadAll();
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate((Long) page.getAttribute("patid"),
+				visitDate);
+		if (diagnosis == null) {
+			return;
 		}
+		datebox.setText(diagnosis.getDiagnosisData());
+		Clients.evalJavaScript("setupData()");
 	}
 
 	/**

@@ -67,8 +67,15 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 
 	@Override
 	public PatientDiagnosis getPatientDiagnosisByDate(final Long patientId, final Date visitDate) {
-		final Collection<PatientDiagnosis> diagnosis = this.jdoTemplate.find(PatientDiagnosis.class,
-				"personId==pid && visitDate==pdate", "String pid, java.util.Date pdate", patientId, visitDate);
+		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
+		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		final Object[] vals = new Object[visitDate == null ? 1 : 2];
+		vals[0] = patientId;
+		if (visitDate != null) {
+			vals[1] = visitDate;
+		}
+		final Collection<PatientDiagnosis> diagnosis = this.jdoTemplate.find(PatientDiagnosis.class, filter, params,
+				vals, "visitDate desc");
 		if (diagnosis != null && diagnosis.size() > 0) {
 			return diagnosis.iterator().next();
 		}

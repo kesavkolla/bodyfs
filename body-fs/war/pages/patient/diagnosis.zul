@@ -13,7 +13,7 @@
 		border-top: none; border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
-		<center autoscroll="false" flex="true">
+		<center flex="true" autoscroll="false">
 			<borderlayout id="patientview">
 				<north size="50px">
 					<include src="/pages/common/patmenu.zul" />
@@ -22,7 +22,7 @@
 					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="95%"
 						apply="com.bodyfs.ui.DiagnosisComposer">
 						<rows>
-							<row>
+							<row spans="2">
 								<cell>
 									<n:table width="100%">
 										<n:tr>
@@ -30,8 +30,8 @@
 												<div id="Pagination" class="pagination" align="right" width="90%" />
 											</n:td>
 											<n:td>
-												<textbox id="datepage" visible="false" value="${diagnosisgrid$composer.visitsDates}"
-													forward="onBlur=diagnosisgrid.onDateChange" />
+												<textbox id="txtVisitDates" visible="false"
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
 											</n:td>
 										</n:tr>
 									</n:table>
@@ -40,8 +40,7 @@
 							<row valign="top">
 								<cell>
 									<groupbox>
-										<textbox id="jsondata" visible="false"
-											value="{'TongueColor':['Dusky', 'Red Tip'], 'Notes':'This a test note', 'Heat': 'No', 'Dizziness':'Yes'}" />
+										<textbox id="jsondata" visible="false" value="" />
 										<caption label="Tongue" />
 										<n:table width="100%">
 											<n:tr>
@@ -379,7 +378,8 @@
 								<cell>
 									<button label="Save" id="btnSave" forward="onClick=diagnosisgrid.onSave" />
 									<script type="text/javascript" defer="false">
-										zk.afterMount(function() { setupData(); });
+										var data = ${diagnosisgrid$composer.visitsDates}; var start = "${param.visitDate
+										}"; zk.afterMount(function() { setupData(); });
 									</script>
 								</cell>
 							</row>

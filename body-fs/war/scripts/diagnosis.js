@@ -5,16 +5,12 @@
  */
 function setupData() {
 	/* Get the data from the jsondata textfield and setup all the input elements */
-	try {
-		var data = parseJSON($("$jsondata").val());
-	} catch (err) {
-		var wgt = zk.Widget.$($("$jsondata").attr("id"));
-		if (isEmptyObject(wgt)) {
-			var data = {};
-			return;
-		}
-		var data = parseJSON(wgt._value);
+	var wgt = zk.Widget.$($("$jsondata").attr("id"));
+	if (isEmptyObject(wgt)) {
+		var data = {};
 	}
+	var data = parseJSON(wgt.getValue());
+
 	/* setup the tongue color */
 	var objselTongueColor = $("#selTongueColor");
 	if (data.TongueColor && $.isArray(data.TongueColor)) {
@@ -160,7 +156,7 @@ function setupData() {
 		$.each(elements, function() {
 			var name = this.name.substring(3);
 			if (this.value == "") {
-				continue;
+				return true;
 			}
 			if (o[name]) {
 				if (!o[name].push) {
@@ -175,5 +171,54 @@ function setupData() {
 		$("$jsondata").val(toJSON(o));
 		/* invoke blur so that the data will be sent to server */
 		$("$jsondata").blur();
+	});
+
+	setupPagination();
+}
+
+/**
+ * This function setup the pagination
+ * 
+ * @return
+ */
+function setupPagination() {
+	if (!$.isArray(data)) {
+		return;
+	}
+	if (data.length < 1) {
+		return;
+	}
+	/* Find the start parameter which matches the visitdate */
+	if (start.length <= 0) {
+		start = 1;
+	} else {
+		for ( var i = 0, len = data.length; i < len; i++) {
+			if (start == data[i].date) {
+				start = i + 1;
+				break;
+			}
+		}
+	}
+	$("$Pagination").paginate( {
+		count : data.length,
+		start : start,
+		display : 8,
+		border : true,
+		border_color : '#fff',
+		text_color : '#fff',
+		background_color : 'black',
+		border_hover_color : '#ccc',
+		text_hover_color : '#000',
+		background_hover_color : '#fff',
+		images : false,
+		mouse : 'press',
+		data : data,
+		onChange : function(textValue, selectedObj) {
+			jq("$txtVisitDates").val(selectedObj.date);
+			jq("$txtVisitDates").blur();
+			jq("$tbtnDiagnosis").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date;
+			jq("$tbtnTreatment").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date;
+			jq("$tbtnPrescription").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date;
+		}
 	});
 }

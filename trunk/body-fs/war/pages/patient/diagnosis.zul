@@ -30,7 +30,7 @@
 												<div id="Pagination" class="pagination" align="right" width="90%" />
 											</n:td>
 											<n:td>
-												<textbox id="datepage" visible="false"
+												<textbox id="datepage" visible="false" value="${diagnosisgrid$composer.visitsDates}"
 													forward="onBlur=diagnosisgrid.onDateChange" />
 											</n:td>
 										</n:tr>

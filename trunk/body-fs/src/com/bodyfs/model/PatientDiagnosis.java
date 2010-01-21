@@ -60,6 +60,9 @@ public class PatientDiagnosis implements Serializable {
 	}
 
 	public final String getDiagnosisData() {
+		if (diagnosisData == null) {
+			return null;
+		}
 		return diagnosisData.getValue();
 	}
 

@@ -51,20 +51,34 @@ public class DiagnosisComposer extends GenericForwardComposer {
 		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate(patid, visitDate);
 		if (diagnosis != null) {
 			final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
-			System.out.println(diagnosis.getDiagnosisData());
-			txtjsondata.setText(diagnosis.getDiagnosisData());
+			if (diagnosis.getDiagnosisData() != null) {
+				txtjsondata.setText(diagnosis.getDiagnosisData());
+			}
 		}
 	}
 
+	/**
+	 * Save the data to the corresponding PatientDiagnsotics object
+	 * 
+	 * @param event
+	 */
 	public void onSave(final ForwardEvent event) {
 		final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
-		System.out.println(txtjsondata.getValue());
+		final Textbox txtVisitDate = (Textbox) Path.getComponent(this.page, "txtVisitDates");
+
+		final Date visitDate = new Date(new Long(txtVisitDate.getValue()));
+
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate((Long) page.getAttribute("patid"),
+				visitDate);
+		diagnosis.setDiagnosisData(txtjsondata.getValue());
+		visitDAO.createPatientDiagnosis(diagnosis);
 	}
 
 	/**
 	 * This event handler handles the click on pagination of dates When ever a
-	 * new date is selected the corresponding patient visit data is bound to the
-	 * data binder.
+	 * new date is selected the corresponding patient diagnosis data is
+	 * retrieved and set to the jsodata
 	 * 
 	 * @param evt
 	 */
@@ -80,7 +94,8 @@ public class DiagnosisComposer extends GenericForwardComposer {
 		if (diagnosis == null) {
 			return;
 		}
-		datebox.setText(diagnosis.getDiagnosisData());
+		final Textbox jsondata = (Textbox) Path.getComponent(this.page, "jsondata");
+		jsondata.setText(diagnosis.getDiagnosisData());
 		Clients.evalJavaScript("setupData()");
 	}
 

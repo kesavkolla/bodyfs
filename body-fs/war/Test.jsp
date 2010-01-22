@@ -14,12 +14,9 @@
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
 	final IPatientVisitDAO visitDAO = (IPatientVisitDAO) ctx.getBean("patientVisitDAO");
-	for (final Date date : visitDAO.getPatientVisitDates(1L)) {
-		final PatientDiagnosis diag = new PatientDiagnosis();
-		diag.setPersonId(1L);
-		diag.setVisitDate(date);
-		visitDAO.createPatientDiagnosis(diag);
-	}
+	final PatientDiagnosis diag = visitDAO.getPatientDiagnosisByDate(1199L, null);
+	diag.setPersonId(1L);
+	visitDAO.createPatientDiagnosis(diag);
 %>
 </body>
 </html>

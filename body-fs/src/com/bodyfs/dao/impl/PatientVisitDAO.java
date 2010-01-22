@@ -21,7 +21,6 @@ import com.bodyfs.model.PatientVisit;
 public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 
 	private static final long serialVersionUID = -5022100019051536692L;
-	@SuppressWarnings("unused")
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
@@ -69,13 +68,19 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 	public PatientDiagnosis getPatientDiagnosisByDate(final Long patientId, final Date visitDate) {
 		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
 		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
+		}
 		final Object[] vals = new Object[visitDate == null ? 1 : 2];
 		vals[0] = patientId;
 		if (visitDate != null) {
 			vals[1] = visitDate;
 		}
 		final Collection<PatientDiagnosis> diagnosis = this.jdoTemplate.find(PatientDiagnosis.class, filter, params,
-				vals, "visitDate desc");
+				vals, "visitDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(diagnosis);
+		}
 		if (diagnosis != null && diagnosis.size() > 0) {
 			return diagnosis.iterator().next();
 		}

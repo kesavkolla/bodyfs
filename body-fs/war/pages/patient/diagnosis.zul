@@ -4,6 +4,7 @@
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery.offset.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/ui.dropdownchecklist-min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
 <?script type="text/javascript" src="/scripts/diagnosis.js"?>

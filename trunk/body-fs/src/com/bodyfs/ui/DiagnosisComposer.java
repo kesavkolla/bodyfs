@@ -3,6 +3,8 @@ package com.bodyfs.ui;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
@@ -21,6 +23,7 @@ public class DiagnosisComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 6365381701330204030L;
 	private transient static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	private static Log LOGGER = LogFactory.getLog(DiagnosisComposer.class);
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
@@ -48,12 +51,20 @@ public class DiagnosisComposer extends GenericForwardComposer {
 				visitDate = null;
 			}
 		}
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Patid: " + patid + "\tvisitDate:" + visitDate);
+		}
 		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate(patid, visitDate);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(diagnosis);
+		}
 		if (diagnosis != null) {
 			final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
 			if (diagnosis.getDiagnosisData() != null) {
 				txtjsondata.setText(diagnosis.getDiagnosisData());
 			}
+			final Textbox txtVisitDate = (Textbox) Path.getComponent(this.page, "txtVisitDates");
+			txtVisitDate.setValue(diagnosis.getVisitDate().getTime() + "");
 		}
 	}
 
@@ -95,8 +106,8 @@ public class DiagnosisComposer extends GenericForwardComposer {
 			return;
 		}
 		final Textbox jsondata = (Textbox) Path.getComponent(this.page, "jsondata");
-		jsondata.setText(diagnosis.getDiagnosisData());
-		Clients.evalJavaScript("setupData()");
+		jsondata.setText(diagnosis.getDiagnosisData() == null ? "" : diagnosis.getDiagnosisData());
+		Clients.evalJavaScript("setupData(true)");
 	}
 
 	/**

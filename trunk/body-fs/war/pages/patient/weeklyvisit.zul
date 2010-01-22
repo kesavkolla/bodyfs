@@ -7,6 +7,7 @@
 <?link rel="stylesheet" type="text/css" href="/css/pagination.css"?>
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
@@ -219,9 +220,12 @@
 													, onChange: function(textValue, selectedObj) {
 														jq("$datepage").val(selectedObj.date);
 														jq("$datepage").blur();
-														jq("$tbtnDiagnosis").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date;
-														jq("$tbtnTreatment").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date;
-														jq("$tbtnPrescription").zk.widget()[0]._href += "&amp;visitDate=" + selectedObj.date; 
+														var wgt = jq("$tbtnDiagnosis").zk.widget()[0];
+														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
+														var wgt = jq("$tbtnTreatment").zk.widget()[0];
+														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
+														var wgt = jq("$tbtnPrescription").zk.widget()[0];
+														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date); 
 													}
 												});
 											}

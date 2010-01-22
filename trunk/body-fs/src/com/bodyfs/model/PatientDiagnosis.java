@@ -70,4 +70,20 @@ public class PatientDiagnosis implements Serializable {
 		this.diagnosisData = new Text(diagnosisData);
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("PatientDiagnosis [");
+		if (getId() != null)
+			builder.append("Id()=").append(getId()).append(", ");
+		if (getPersonId() != null)
+			builder.append("PersonId()=").append(getPersonId()).append(", ");
+		if (getVisitDate() != null)
+			builder.append("VisitDate()=").append(getVisitDate());
+		if (getDiagnosisData() != null)
+			builder.append("DiagnosisData()=").append(getDiagnosisData()).append(", ");
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

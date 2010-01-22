@@ -100,7 +100,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			visitDAO.createPatientVisit(patvisit);
 			// create an empty patient diagnosis for this visit
 			final PatientDiagnosis diag = new PatientDiagnosis();
-			diag.setPersonId(patvisit.getId());
+			diag.setPersonId(patvisit.getPersonId());
 			diag.setVisitDate(patvisit.getVisitDate());
 			visitDAO.createPatientDiagnosis(diag);
 		}

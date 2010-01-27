@@ -1,37 +1,13 @@
 <?page title="JQuery Test" contentType="text/html;charset=UTF-8"?>
-<?link  rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
-<?link  rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
-<?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
-<?script type="text/javascript" src="/scripts/selectToUISlider.jQuery.js"?>
-<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<n:div style="height:50px" />
-	<n:div style="margin-left:50px;width:80%" apply="com.bodyfs.ui.PatientViewComposer">
-		<n:label for="valueAA"></n:label>
-		<n:select name="valueAA" id="valueAA" style="display:none;">
-			<n:option value="01/03">Jan 03</n:option>
-			<n:option value="02/03">Feb 03</n:option>
-			<n:option value="03/03">Mar 03</n:option>
-			<n:option value="03/03">Apr 03</n:option>
-			<n:option value="03/03">May 03</n:option>
-			<n:option value="06/03">Jun 03</n:option>
-			<n:option value="07/03">Jul 03</n:option>
-			<n:option value="08/03" selected="selected">Aug 03</n:option>
-			<n:option value="09/03">Sep 03</n:option>
-			<n:option value="10/03">Oct 03</n:option>
-			<n:option value="11/03">Nov 03</n:option>
-			<n:option value="12/03">Dec 03</n:option>
-			<n:option value="01/04">Jan 04</n:option>
-			<n:option value="02/04">Feb 04</n:option>
-			<n:option value="03/04">Mar 04</n:option>
-			<n:option value="03/04">Apr 04</n:option>
-		</n:select>
-		<n:div style="height:50px" />
-		<listbox id="visitdates" mold="select" style="display:none" />
-	</n:div>
-	<script type="text/javascript" defer="true">
-		function handleChange(event, ui) { var thisHandle = jQuery(ui.handle); var currSelect = jQuery('#' +
-		thisHandle.attr('id').split('handle_')[1]); alert(currSelect.find('option').eq(ui.value).attr("value")); }
-		jq('select#valueAA').selectToUISlider( { labels:10, sliderOptions:{change: handleChange} });
-		zk("$visitdates").jq.selectToUISlider();
-	</script>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<div hflex="1" vflex="1">
+		<textbox id="txtData" value="company" onFocus='self.setValue((String)self.getAttribute("key"))'
+			onBlur='self.setValue((String)self.getAttribute("value"))'>
+			<custom-attributes key="01" value="company" />
+		</textbox>
+		<textbox id="txtData1" value="company">
+			<attribute w:name="onFocus">$("$txtData1").val("01");</attribute>
+			<attribute w:name="onBlur">$("$txtData1").val("company");</attribute>
+		</textbox>
+	</div>
 </zk>

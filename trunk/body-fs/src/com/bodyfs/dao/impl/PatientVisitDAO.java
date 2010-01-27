@@ -1,3 +1,4 @@
+/* $Id$ */
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
@@ -15,8 +16,15 @@ import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 
+
+/**
+ * 
+ * @author kesav
+ * 
+ */
 @Repository(value = "patientVisitDAO")
 public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 
@@ -91,4 +99,33 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 	public PatientDiagnosis createPatientDiagnosis(final PatientDiagnosis patDiagnosis) {
 		return this.jdoTemplate.makePersistent(patDiagnosis);
 	}
+
+	@Override
+	public PatientTreatment createPatientTreatment(final PatientTreatment patTreatment) {
+		return this.jdoTemplate.makePersistent(patTreatment);
+	}
+
+	@Override
+	public PatientTreatment getPatientTreatmentByDate(final Long patientId, final Date visitDate) {
+		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
+		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
+		}
+		final Object[] vals = new Object[visitDate == null ? 1 : 2];
+		vals[0] = patientId;
+		if (visitDate != null) {
+			vals[1] = visitDate;
+		}
+		final Collection<PatientTreatment> treatments = this.jdoTemplate.find(PatientTreatment.class, filter, params,
+				vals, "visitDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(treatments);
+		}
+		if (treatments != null && treatments.size() > 0) {
+			return treatments.iterator().next();
+		}
+		return null;
+	}
+
 }

@@ -7,7 +7,8 @@
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
 <?script type="text/javascript" src="/scripts/treatment.js"?>
-<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="diagnosisgrid" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<style>
 		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
 		width:605px; height: 440px; } .marker{ position: absolute; width: 20px; height: 20px; } div.z-grid-body {
@@ -45,25 +46,32 @@
 								<cell>
 									<groupbox>
 										<caption label="Diagnosis-plan" />
-										<n:textarea id="txtDiagnosisPlan" style="width:100%" rows="5"></n:textarea>
+										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
+											value="@{treatment.diagnosisPlan, save-when='btnSave.onClick' }" />
 									</groupbox>
 									<groupbox>
 										<caption label="Massage Notes" />
-										<n:textarea id="txtMassageNotes" style="width:100%" rows="5"></n:textarea>
+										<textbox id="txtMassageNotes" style="width:100%" rows="5"
+											value="@{treatment.massageNotes, save-when='btnSave.onClick' }" />
 									</groupbox>
 									<groupbox>
 										<caption label="Additional Notes" />
-										<n:textarea id="txtAdditionalNotes" style="width:100%" rows="5"></n:textarea>
+										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
+											value="@{treatment.additionalNotes, save-when='btnSave.onClick' }" />
 									</groupbox>
 								</cell>
 								<cell>
+									<textbox id="txtMarkers" visible="false"
+										value="@{treatment.markers, save-when='btnSave.onClick' }" />
 									<n:div id="imgdiv" />
 								</cell>
 							</row>
 							<row>
 								<cell></cell>
 								<cell>
-									<button label="Save" id="btnSave" />
+									<button label="Save" id="btnSave">
+										<attribute w:name="onClick">SaveMarkers()</attribute>
+									</button>
 									<script type="text/javascript" defer="false">
 										zk.afterMount(function() { initMarkers(); });
 									</script>

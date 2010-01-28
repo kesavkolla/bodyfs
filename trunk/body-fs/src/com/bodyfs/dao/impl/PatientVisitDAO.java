@@ -19,7 +19,6 @@ import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 
-
 /**
  * 
  * @author kesav

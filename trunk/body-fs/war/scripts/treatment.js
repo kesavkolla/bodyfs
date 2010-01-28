@@ -28,3 +28,19 @@ function removeMarker(marker) {
 	event.preventDefault();
 	$(marker).remove();
 }
+
+/**
+ * This function serializes all the marker positions into a json string
+ * 
+ * @return
+ */
+function SaveMarkers() {
+	var arr = new Array();
+	$(".marker").each(function() {
+		arr.push( {
+			'left' : $(this).css("left"),
+			'top' : $(this).css("top")
+		});
+	});
+	$("$txtMarkers").val(toJSON(arr)).blur();
+}

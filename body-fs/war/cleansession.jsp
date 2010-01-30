@@ -27,10 +27,10 @@
 			if (keys.size() > 0) {
 				for (int i = 0, len = keys.size(); i < len; i = i + 100) {
 					int start = i;
-					int end = i + (keys.size() > 100 ? 99 : keys.size() - 1);
+					int end = keys.size() > (i + 99) ? (i + 99) : keys.size();
 					dataService.delete(keys.subList(start, end));
-					out.println("Deleted: " + (end - start));
-					out.println("<br />");
+					out.println(String.format("Deleted %1$d-%2$d  Count:%3$d <br />", start, end,
+							(end + 1 - start)));
 				}
 			} else {
 				break;

@@ -93,12 +93,12 @@ public class TreatmentComposer extends GenericForwardComposer {
 		}
 		final PatientTreatment treatment = (PatientTreatment) page.getAttribute("treatment");
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-		System.out.println(treatment);
 		LOGGER.debug("Updating the treatment");
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(treatment);
 		}
 		visitDAO.createPatientTreatment(treatment);
+		Clients.evalJavaScript("$.jGrowl('Successfully saved the data', {life:3000})");
 	}
 
 	/**

@@ -9,10 +9,12 @@ function setupData(reload) {
 	}
 	/* Get the data from the jsondata textfield and setup all the input elements */
 	var wgt = zk.Widget.$($("$jsondata").attr("id"));
+	var data = {};
 	if (isEmptyObject(wgt)) {
-		var data = {};
+		data = {};
+	} else {
+		data = parseJSON(wgt.getValue());
 	}
-	var data = parseJSON(wgt.getValue());
 
 	/* setup the tongue color */
 	var objselTongueColor = $("#selTongueColor");

@@ -21,6 +21,7 @@ import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 
 /**
@@ -98,11 +99,20 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		final PatientVisit patvisit = (PatientVisit) page.getAttribute("patvisit");
 		if (patvisit != null) {
 			visitDAO.createPatientVisit(patvisit);
+			LOGGER.debug("Successfully created patient visit with id: " + patvisit.getId());
 			// create an empty patient diagnosis for this visit
 			final PatientDiagnosis diag = new PatientDiagnosis();
 			diag.setPersonId(patvisit.getPersonId());
 			diag.setVisitDate(patvisit.getVisitDate());
 			visitDAO.createPatientDiagnosis(diag);
+			LOGGER.debug("Successfully created diagnosis with id: " + diag.getId());
+
+			// create an empty treatment for this visit
+			final PatientTreatment treatment = new PatientTreatment();
+			treatment.setPersonId(patvisit.getPersonId());
+			treatment.setVisitDate(patvisit.getVisitDate());
+			visitDAO.createPatientTreatment(treatment);
+			LOGGER.debug("Successfully created treatment with id: " + treatment.getId());
 		}
 	}
 

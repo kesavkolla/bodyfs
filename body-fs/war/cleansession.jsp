@@ -8,7 +8,9 @@
 <%@page import="com.google.appengine.api.datastore.Entity"%>
 <%@page import="java.util.List"%>
 <%@page import="com.google.appengine.api.datastore.Key"%>
-<%@page import="java.util.ArrayList"%><html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
+<%@page import="java.util.Calendar"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cleanup Sessions</title>
@@ -20,10 +22,18 @@
 
 		for (;;) {
 			final Query query = new Query("_ah_SESSION");
+			try {
+				final Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.DATE, 0 - Integer.parseInt(request.getParameter("days")));
+				query.addFilter("_expires", Query.FilterOperator.LESS_THAN, cal.getTime().getTime());
+			} catch (final Exception e) {
+			}
+
 			final List<Key> keys = new ArrayList<Key>(1000);
 			for (final Entity entity : dataService.prepare(query).asIterable()) {
 				keys.add(entity.getKey());
 			}
+			out.println("No.of entries to delete: " + keys.size());
 			if (keys.size() > 0) {
 				for (int i = 0, len = keys.size(); i < len; i = i + 100) {
 					int start = i;

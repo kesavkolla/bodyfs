@@ -5,4 +5,9 @@
 		<description>Loads the login.zul. This is to make the app available all the time</description>
 		<schedule>every 2 minutes</schedule>
 	</cron>
+	<cron>
+		<url>/cleansession.jsp?days=3</url>
+		<description>Cleanup of old sessions. This will clean all the old session entries from the database.</description>
+		<schedule>every day 00:00</schedule>
+	</cron>
 </cronentries>

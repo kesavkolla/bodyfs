@@ -1,4 +1,16 @@
 /**
+ * This function initializes all the scripts for this page. This is called after
+ * zk's mount is finished
+ * 
+ * @return
+ */
+function setupPage() {
+	initMarkers();
+	setupPagination();
+	reloadMarkers();
+}
+
+/**
  * This function setup the markers and corresponding events
  * 
  * @return
@@ -15,6 +27,26 @@ function initMarkers() {
 		$(this).append(marker);
 		e.stopPropagation();
 		e.preventDefault();
+	});
+}
+
+/**
+ * Reload the markers from the data from the server
+ * 
+ * @return
+ */
+function reloadMarkers() {
+	$(".marker").remove();
+	var wgt = zk.Widget.$($("$txtMarkers").attr("id"));
+	var markerData = [];
+	if (!isEmptyObject(wgt) && wgt.getValue() != "") {
+		markerData = parseJSON(wgt.getValue());
+	}
+	var imgdiv = $("#imgdiv");
+	/* Loop through each point and add marker point */
+	$.each(markerData, function() {
+		var marker = $("<img src='/img/push-pin.gif' class='marker' onClick='removeMarker(this)'>").css(this);
+		imgdiv.append(marker);
 	});
 }
 
@@ -43,4 +75,54 @@ function SaveMarkers() {
 		});
 	});
 	$("$txtMarkers").val(toJSON(arr)).blur();
+}
+
+/**
+ * This function setup the pagination
+ * 
+ * @return
+ */
+function setupPagination() {
+	if (!$.isArray(data)) {
+		return;
+	}
+	if (data.length < 1) {
+		return;
+	}
+	/* Find the start parameter which matches the visitdate */
+	if (start.length <= 0) {
+		start = 1;
+	} else {
+		for ( var i = 0, len = data.length; i < len; i++) {
+			if (start == data[i].date) {
+				start = i + 1;
+				break;
+			}
+		}
+	}
+	$("$Pagination").paginate( {
+		count : data.length,
+		start : start,
+		display : 8,
+		border : true,
+		border_color : '#fff',
+		text_color : '#fff',
+		background_color : 'black',
+		border_hover_color : '#ccc',
+		text_hover_color : '#000',
+		background_hover_color : '#fff',
+		images : false,
+		mouse : 'press',
+		data : data,
+		onChange : function(textValue, selectedObj) {
+			jq("$txtVisitDates").val(selectedObj.date);
+			jq("$txtVisitDates").blur();
+			var wgt = jq("$tbtnDiagnosis").zk.widget()[0];
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
+			var wgt = jq("$tbtnTreatment").zk.widget()[0];
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
+			var wgt = jq("$tbtnPrescription").zk.widget()[0];
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
+		}
+	});
 }

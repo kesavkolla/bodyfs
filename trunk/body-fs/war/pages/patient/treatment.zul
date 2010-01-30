@@ -7,7 +7,7 @@
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
 <?script type="text/javascript" src="/scripts/treatment.js"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="diagnosisgrid" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="treatmentgrid" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<style>
 		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
@@ -22,7 +22,8 @@
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">
-					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%">
+					<grid id="treatmentgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
+						apply="com.bodyfs.ui.TreatmentComposer">
 						<columns>
 							<column width="40%" />
 						</columns>
@@ -36,7 +37,7 @@
 											</n:td>
 											<n:td>
 												<textbox id="txtVisitDates" visible="false"
-													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=treatmentgrid.onDateChange" />
 											</n:td>
 										</n:tr>
 									</n:table>
@@ -69,11 +70,13 @@
 							<row>
 								<cell></cell>
 								<cell>
-									<button label="Save" id="btnSave">
+									<button label="Save" id="btnSave" forward="onClick=treatmentgrid.onSave">
 										<attribute w:name="onClick">SaveMarkers()</attribute>
 									</button>
 									<script type="text/javascript" defer="false">
-										zk.afterMount(function() { initMarkers(); });
+										var data = ${treatmentgrid$composer.visitsDates};
+
+										var start = "${param.visitDate}"; zk.afterMount(function() { setupPage(); });
 									</script>
 								</cell>
 							</row>

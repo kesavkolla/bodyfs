@@ -10,8 +10,12 @@ import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
+import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientTreatment;
@@ -77,6 +81,55 @@ public class TreatmentComposer extends GenericForwardComposer {
 			arr.add(obj);
 		}
 		return arr.toJSONString();
+	}
+
+	/**
+	 * 
+	 * @param event
+	 */
+	public void onSave(final ForwardEvent event) {
+		if (page.getAttribute("patid") == null || page.getAttribute("treatment") == null) {
+			return;
+		}
+		final PatientTreatment treatment = (PatientTreatment) page.getAttribute("treatment");
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		System.out.println(treatment);
+		LOGGER.debug("Updating the treatment");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(treatment);
+		}
+		visitDAO.createPatientTreatment(treatment);
+	}
+
+	/**
+	 * This event handler handles the click on pagination of dates When ever a
+	 * new date is selected the corresponding patient diagnosis data is
+	 * retrieved and set to the jsodata
+	 * 
+	 * @param evt
+	 */
+	public void onDateChange(final ForwardEvent evt) {
+		final Textbox datebox = (Textbox) evt.getOrigin().getTarget();
+		if (datebox == null || datebox.getValue() == null) {
+			return;
+		}
+		final Date visitDate = new Date(new Long(datebox.getValue()));
+		final Component treatmentgrid = evt.getTarget();
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientTreatment treatment = visitDAO.getPatientTreatmentByDate((Long) page.getAttribute("patid"),
+				visitDate);
+		if (treatment == null) {
+			return;
+		}
+
+		final DataBinder binder = (DataBinder) treatmentgrid.getAttribute("binder");
+		if (binder != null) {
+			treatmentgrid.setAttribute("treatment", treatment);
+			page.setAttribute("treatment", treatment);
+			binder.loadAll();
+		}
+
+		Clients.evalJavaScript("reloadMarkers()");
 	}
 
 }

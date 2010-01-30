@@ -1,3 +1,4 @@
+/* $Id$ */
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,11 @@ import org.zkoss.zul.Textbox;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
 
+/**
+ * 
+ * @author kesav
+ * 
+ */
 public class DiagnosisComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 6365381701330204030L;
@@ -84,6 +90,7 @@ public class DiagnosisComposer extends GenericForwardComposer {
 				visitDate);
 		diagnosis.setDiagnosisData(txtjsondata.getValue());
 		visitDAO.createPatientDiagnosis(diagnosis);
+		Clients.evalJavaScript("$.jGrowl('Successfully saved diagnosis', {life:3000})");
 	}
 
 	/**

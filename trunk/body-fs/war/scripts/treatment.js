@@ -7,7 +7,7 @@
 function setupPage() {
 	initMarkers();
 	setupPagination();
-	reloadMarkers();
+	reloadMarkers(true);
 }
 
 /**
@@ -35,7 +35,7 @@ function initMarkers() {
  * 
  * @return
  */
-function reloadMarkers() {
+function reloadMarkers(nogrowl) {
 	$(".marker").remove();
 	var wgt = zk.Widget.$($("$txtMarkers").attr("id"));
 	var markerData = [];
@@ -48,6 +48,11 @@ function reloadMarkers() {
 		var marker = $("<img src='/img/push-pin.gif' class='marker' onClick='removeMarker(this)'>").css(this);
 		imgdiv.append(marker);
 	});
+	if (!nogrowl) {
+		$.jGrowl("Loaded data for the selected visitdate", {
+			life : 2000
+		});
+	}
 }
 
 /**

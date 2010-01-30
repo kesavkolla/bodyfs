@@ -1,11 +1,14 @@
 <?page title="Treatment" contentType="text/html;charset=UTF-8"?>
 <?link  rel="stylesheet" type="text/css" href="/css/ui.dropdownchecklist.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/pagination.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery.offset.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
 <?script type="text/javascript" src="/scripts/treatment.js"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="treatmentgrid" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">

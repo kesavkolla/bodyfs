@@ -180,6 +180,8 @@ function setupData(reload) {
 
 	if (!reload) {
 		setupPagination();
+	} else {
+		$.jGrowl("Loaded data for the selected visitdate", {life:2000});
 	}
 }
 

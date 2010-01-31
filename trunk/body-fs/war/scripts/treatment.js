@@ -5,7 +5,9 @@
  * @return
  */
 function setupPage() {
-	initMarkers();
+	if (!readonly) {
+		initMarkers();
+	}
 	setupPagination();
 	reloadMarkers(true);
 }
@@ -45,7 +47,12 @@ function reloadMarkers(nogrowl) {
 	var imgdiv = $("#imgdiv");
 	/* Loop through each point and add marker point */
 	$.each(markerData, function() {
-		var marker = $("<img src='/img/push-pin.gif' class='marker' onClick='removeMarker(this)'>").css(this);
+		var marker = null;
+		if (readonly) {
+			marker = $("<img src='/img/push-pin.gif' class='marker'>").css(this);
+		} else {
+			marker = $("<img src='/img/push-pin.gif' class='marker' onClick='removeMarker(this)'>").css(this);
+		}
 		imgdiv.append(marker);
 	});
 	if (!nogrowl) {

@@ -25,7 +25,7 @@ public class CommonUtils {
 	 */
 	public static Long getPatientId() {
 		String id = Executions.getCurrent().getParameter("id");
-		if (id != null) {
+		if (id != null && !id.equals("")) {
 			return new Long(id);
 		}
 		final Session session = Sessions.getCurrent(false);

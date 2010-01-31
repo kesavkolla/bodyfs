@@ -2,9 +2,9 @@
 <zk>
 	<hbox>
 		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png"
-			href="/pages/user/diagnosis.zul?id=${session.attributes['LOGIN_CREDENTIALS'].personId }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
+			href="/pages/user/diagnosis.zul${empty param.visitDate ? '':'?visitDate='}${empty param.visitDate ? '':param.visitDate }" />
 		<toolbarbutton id="tbtnTreatment" label="Treatment" image="/img/procedure.gif"
-			href="/pages/user/treatment.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
+			href="/pages/user/treatment.zul${empty param.visitDate ? '':'?visitDate='}${empty param.visitDate ? '':param.visitDate }" />
 		<toolbarbutton id="tbtnPrescription" label="Prescription" image="/img/prescription.png"
 			href="/pages/user/prescription.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
 	</hbox>

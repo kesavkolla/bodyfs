@@ -1,3 +1,4 @@
+/* $Id$ */
 package com.bodyfs.framework.filters;
 
 import java.io.IOException;
@@ -14,8 +15,13 @@ import javax.servlet.http.HttpSession;
 
 import com.bodyfs.model.LoginInfo;
 
+/**
+ * 
+ * @author kesav
+ * 
+ */
 public class ApplicationFilter implements Filter {
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(final FilterConfig config) throws ServletException {
 	}
 
 	public void destroy() {

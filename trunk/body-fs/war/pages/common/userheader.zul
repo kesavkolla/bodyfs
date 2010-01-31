@@ -1,0 +1,32 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?meta name="keywords" content="Body Feng Shui, Chinese Medicine, Belmont" ?>
+<zk>
+	<north size="100px" border="0">
+		<borderlayout hflex="1" vflex="1" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+			<west border="0">
+				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" />
+			</west>
+			<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+				<hbox hflex="1" vflex="1" style="padding-top:20px">
+					<a href="/logout.zul" sclass="lg-label">Logout</a>
+					<space />
+					<label id="username" sclass="lg-label" />
+					<space width="30px" />
+				</hbox>
+			</east>
+		</borderlayout>
+	</north>
+	<west title="Action Menu" size="170px" flex="true" splittable="true" minsize="150" maxsize="500"
+		collapsible="true">
+		<div>
+			<vbox width="100%">
+				<toolbarbutton label="Report" image="/img/report_card.png" hflex="1" href="/pages/user/index.zul" />
+				<toolbarbutton label="Calendar" image="/img/ical.png" hflex="1" href="#" />
+				<toolbarbutton label="EMI" image="/img/chart.png" hflex="1" href="/pages/user/emi.zul" />
+				<toolbarbutton label="Measurements" image="/img/database.png" hflex="1" href="#" />
+				<toolbarbutton label="WeeklyVisit" image="/img/diagnosis.png" hflex="1" href="#" />
+				<toolbarbutton label="Goals" image="/img/prescription.png" hflex="1" href="#" />
+			</vbox>
+		</div>
+	</west>
+</zk>

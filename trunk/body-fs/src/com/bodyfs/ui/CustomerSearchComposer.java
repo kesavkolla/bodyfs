@@ -80,7 +80,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					results.add(person);
 					continue;
 				}
-				if (person.getPersonType().equals(PersonType.USER)) {
+				if (person.getPersonType() == PersonType.USER || person.getPersonType() == PersonType.EMPLOYEE) {
 					results.add(person);
 				}
 			}
@@ -120,11 +120,12 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					resultSet.add(person);
 					continue;
 				}
-				if (!typePre.isChecked() && person.getPersonType().equals(PersonType.PRE_USER))
+				if (!typePre.isChecked() && person.getPersonType() == PersonType.PRE_USER)
 					continue;
-				else if (!typePost.isChecked() && person.getPersonType().equals(PersonType.POST_USER))
+				else if (!typePost.isChecked() && person.getPersonType() == PersonType.POST_USER)
 					continue;
-				else if (!typeCurrent.isChecked() && person.getPersonType().equals(PersonType.USER))
+				else if (!typeCurrent.isChecked()
+						&& (person.getPersonType() == PersonType.USER || person.getPersonType() == PersonType.EMPLOYEE))
 					continue;
 				resultSet.add(person);
 			}
@@ -158,12 +159,16 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 		}
 		if (typePre.isChecked() || typeCurrent.isChecked() || typePost.isChecked()) {
 			qry.append(" AND (");
-			if (typePre.isChecked())
+			if (typePre.isChecked()) {
 				qry.append(" personType = '" + PersonType.PRE_USER + "' OR");
-			if (typeCurrent.isChecked())
+			}
+			if (typeCurrent.isChecked()) {
 				qry.append(" personType = '" + PersonType.USER + "' OR");
-			if (typePost.isChecked())
+				qry.append(" personType = '" + PersonType.EMPLOYEE + "' OR");
+			}
+			if (typePost.isChecked()) {
 				qry.append(" personType = '" + PersonType.POST_USER + "' OR");
+			}
 			qry.setLength(qry.length() - 2);
 			qry.append(" ) ");
 		}

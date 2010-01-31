@@ -11,7 +11,10 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.api.Window;
 
 import com.bodyfs.dao.ILoginDAO;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.model.Person;
+import com.bodyfs.model.PersonType;
 
 public class LoginWindow extends GenericForwardComposer {
 
@@ -52,7 +55,13 @@ public class LoginWindow extends GenericForwardComposer {
 		session.setAttribute("LOGIN_CREDENTIALS", userDetails);
 
 		msg.setValue("");
-		Executions.sendRedirect("/index.zul");
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final Person person = personDAO.getPerson(userDetails.getPersonId());
+		if (person.getPersonType() == PersonType.EMPLOYEE) {
+			Executions.sendRedirect("/index.zul");
+		} else {
+			Executions.sendRedirect("/pages/user/index.zul");
+		}
 		binder.loadAll();
 	}
 

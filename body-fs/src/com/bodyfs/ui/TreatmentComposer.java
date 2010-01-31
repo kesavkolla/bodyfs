@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -17,8 +16,11 @@ import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
+import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientTreatment;
+import com.bodyfs.model.PersonType;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -35,16 +37,27 @@ public class TreatmentComposer extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		// Do the sanity checks
 		// If the id is not present in the URL send to customer search
-		if (execution.getParameter("id") == null || execution.getParameter("id").trim().equals("")) {
-			execution.sendRedirect("/pages/usermgmt/customersearch.zul");
-			return;
+		final Long patid = CommonUtils.getPatientId();
+		if (patid == null) {
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+				return;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return;
+			}
 		}
-		final Long patid = new Long(execution.getParameter("id"));
+
 		// If there are no patient visits send to sign-in page
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		if (visitDAO.countPatientVisits(patid) < 1) {
-			execution.sendRedirect("/pages/patient/weeklyvisit.zul");
-			return;
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/patient/weeklyvisit.zul?id=" + patid);
+				return;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return;
+			}
 		}
 
 		page.setAttribute("patid", patid);
@@ -71,7 +84,7 @@ public class TreatmentComposer extends GenericForwardComposer {
 	 */
 	@SuppressWarnings("unchecked")
 	public final String getVisitsDates() {
-		final Long personId = Long.parseLong(Executions.getCurrent().getParameter("id"));
+		final Long personId = CommonUtils.getPatientId();
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final JSONArray arr = new JSONArray();
 		for (final Date date : visitDAO.getPatientVisitDates(personId)) {

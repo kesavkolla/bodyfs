@@ -18,11 +18,11 @@
 		background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none;
 		border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD;
 	</style>
-	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center flex="true" autoscroll="false">
 			<borderlayout>
 				<north size="50px">
-					<include src="/pages/common/patmenu.zul" />
+					<include src="/pages/common/userweeklymenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">
 					<grid id="treatmentgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
@@ -51,35 +51,32 @@
 									<groupbox>
 										<caption label="Diagnosis-plan" />
 										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
-											value="@{treatment.diagnosisPlan, save-when='btnSave.onClick' }" />
+											value="@{treatment.diagnosisPlan }" readonly="true" />
 									</groupbox>
 									<groupbox>
 										<caption label="Massage Notes" />
 										<textbox id="txtMassageNotes" style="width:100%" rows="5"
-											value="@{treatment.massageNotes, save-when='btnSave.onClick' }" />
+											value="@{treatment.massageNotes }" readonly="true" />
 									</groupbox>
 									<groupbox>
 										<caption label="Additional Notes" />
 										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
-											value="@{treatment.additionalNotes, save-when='btnSave.onClick' }" />
+											value="@{treatment.additionalNotes }" readonly="true" />
 									</groupbox>
 								</cell>
 								<cell>
-									<textbox id="txtMarkers" visible="false"
-										value="@{treatment.markers, save-when='btnSave.onClick' }" />
+									<textbox id="txtMarkers" visible="false" value="@{treatment.markers }"
+										readonly="true" />
 									<n:div id="imgdiv" />
 								</cell>
 							</row>
 							<row>
 								<cell></cell>
 								<cell>
-									<button label="Save" id="btnSave" forward="onClick=treatmentgrid.onSave">
-										<attribute w:name="onClick">SaveMarkers()</attribute>
-									</button>
 									<script type="text/javascript" defer="false">
 										var data = ${treatmentgrid$composer.visitsDates};
 
-										var readonly = false;
+										var readonly = true;
 
 										var start = "${param.visitDate}"; zk.afterMount(function() { setupPage(); });
 									</script>

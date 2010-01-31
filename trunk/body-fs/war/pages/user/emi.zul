@@ -5,37 +5,30 @@
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
 <?script type="text/javascript" src="/scripts/mpi.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
-				<north size="50px">
-					<include src="/pages/common/patmenu.zul" />
-				</north>
 				<center autoscroll="true" flex="true">
 					<div hflex="1" vflex="1" width="100%">
 						<space height="20px" orient="vertical" width="100%" />
 						<toolbar width="90%" id="dateBar">
-							<custom-attributes patid="${param.id }" />
+							<custom-attributes patid="${patid }" />
 							<zk forEach="${mpiview$composer.examDates }">
 								<checkbox name="${each.time }" if="${!empty mpiview$composer.examDates[1] }" />
 								<toolbarbutton label="${fmt:format(each) }" sclass="${each.time }"
 									onClick='((com.bodyfs.ui.MPIViewComposer)mpiview.getAttribute("mpiview$composer")).drawChart(self)'>
-									<custom-attributes date="${each }" patid="${param.id }" />
+									<custom-attributes date="${each }" patid="${patid }" />
 								</toolbarbutton>
 							</zk>
 							<space hflex="1" />
-							<button label="Compare" if="${!empty mpiview$composer.examDates[1] }"
+							<button label="Compare" if="${!empty mpiview$composer.examDates[1]  }"
 								onClick='((com.bodyfs.ui.MPIViewComposer)mpiview.getAttribute("mpiview$composer")).compareCharts(dateBar)'>
 								<attribute w:name="onClick">
-									var checkCnt = $("input:checked").length;
-									if(checkCnt &gt; 3 || checkCnt &lt; 2) {
-										if(event.preventDefault) { event.preventDefault(); } 
-										if(event.stopPropagation) { event.stopPropagation(); } 
-										return false;
-									}
+									var checkCnt = $("input:checked").length; if(checkCnt &gt; 3 || checkCnt &lt; 2) {
+									if(event.preventDefault) { event.preventDefault(); } if(event.stopPropagation) {
+									event.stopPropagation(); } return false; }
 								</attribute>
 							</button>
-							<button id="btnAddData" label="Add New" forward="onClick=mpiview.onShow(${param.id })" />
 						</toolbar>
 						<space height="20px" orient="vertical" width="100%" />
 						<space />

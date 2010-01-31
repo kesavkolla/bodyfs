@@ -10,6 +10,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.api.Window;
 
+import com.bodyfs.Constants;
 import com.bodyfs.dao.ILoginDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.LoginInfo;
@@ -45,18 +46,19 @@ public class LoginWindow extends GenericForwardComposer {
 			return;
 		}
 
-		LoginInfo userDetails = getLoginDetails(user, pwd);
+		final LoginInfo userDetails = getLoginDetails(user, pwd);
 
 		if (userDetails == null) {
 			msg.setValue("*Wrong username or password!");
 			return;
 		}
 
-		session.setAttribute("LOGIN_CREDENTIALS", userDetails);
+		session.setAttribute(Constants.SESSION_LOGIN_CRED, userDetails);
 
 		msg.setValue("");
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(userDetails.getPersonId());
+		session.setAttribute(Constants.SESSION_PERSON_TYPE, person.getPersonType());
 		if (person.getPersonType() == PersonType.EMPLOYEE) {
 			Executions.sendRedirect("/index.zul");
 		} else {

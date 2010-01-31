@@ -9,16 +9,24 @@ import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
+import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PersonType;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -32,23 +40,42 @@ public class DiagnosisComposer extends GenericForwardComposer {
 	private static Log LOGGER = LogFactory.getLog(DiagnosisComposer.class);
 
 	@Override
-	public void doAfterCompose(final Component comp) throws Exception {
-		super.doAfterCompose(comp);
+	public ComponentInfo doBeforeCompose(final Page page, final Component parent, final ComponentInfo compInfo) {
+		final Session session = Sessions.getCurrent(false);
+		final Execution execution = Executions.getCurrent();
 		// Do the sanity checks
 		// If the id is not present in the URL send to customer search
-		if (execution.getParameter("id") == null || execution.getParameter("id").trim().equals("")) {
-			execution.sendRedirect("/pages/usermgmt/customersearch.zul");
-			return;
+		final Long patid = CommonUtils.getPatientId();
+		if (patid == null) {
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+				return null;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return null;
+			}
 		}
-		final Long patid = new Long(execution.getParameter("id"));
+
 		// If there are no patient visits send to sign-in page
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		if (visitDAO.countPatientVisits(patid) < 1) {
-			execution.sendRedirect("/pages/patient/weeklyvisit.zul");
-			return;
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/patient/weeklyvisit.zul?id=" + patid);
+				return null;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return null;
+			}
 		}
-
 		page.setAttribute("patid", patid);
+		return super.doBeforeCompose(page, parent, compInfo);
+	}
+
+	@Override
+	public void doAfterCompose(final Component comp) throws Exception {
+		super.doAfterCompose(comp);
+		final Long patid = (Long) page.getAttribute("patid");
+
 		Date visitDate = null;
 		if (execution.getParameter("visitDate") != null) {
 			try {
@@ -60,6 +87,7 @@ public class DiagnosisComposer extends GenericForwardComposer {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Patid: " + patid + "\tvisitDate:" + visitDate);
 		}
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final PatientDiagnosis diagnosis = visitDAO.getPatientDiagnosisByDate(patid, visitDate);
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(diagnosis);
@@ -125,10 +153,10 @@ public class DiagnosisComposer extends GenericForwardComposer {
 	 */
 	@SuppressWarnings("unchecked")
 	public final String getVisitsDates() {
-		final Long personId = Long.parseLong(Executions.getCurrent().getParameter("id"));
+		final Long patid = CommonUtils.getPatientId();
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final JSONArray arr = new JSONArray();
-		for (final Date date : visitDAO.getPatientVisitDates(personId)) {
+		for (final Date date : visitDAO.getPatientVisitDates(patid)) {
 			final JSONObject obj = new JSONObject();
 			obj.put("value", sdf.format(date));
 			obj.put("date", date.getTime());

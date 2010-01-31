@@ -5,7 +5,9 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 
+import com.bodyfs.Constants;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.model.PersonType;
 
 /**
  * 
@@ -28,10 +30,12 @@ public class CommonUtils {
 		}
 		final Session session = Sessions.getCurrent(false);
 		if (session != null) {
-			final LoginInfo logininfo = (LoginInfo) session.getAttribute("LOGIN_CREDENTIALS");
-			if (logininfo != null) {
+			final LoginInfo logininfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
+			if (logininfo != null
+					&& ((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
 				return logininfo.getPersonId();
 			}
+
 			final Long patid = (Long) session.getAttribute("patid");
 			if (patid != null) {
 				return patid;

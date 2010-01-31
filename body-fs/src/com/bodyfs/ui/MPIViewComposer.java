@@ -26,6 +26,7 @@ import org.zkoss.zul.api.Window;
 
 import com.bodyfs.dao.IMPIDao;
 import com.bodyfs.model.MPIData;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -86,15 +87,16 @@ public class MPIViewComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
-		if (Executions.getCurrent().getParameterValues("id") != null) {
-			final MPIData mpi = mpiDao.getDataByDate(Long
-					.parseLong(Executions.getCurrent().getParameterValues("id")[0]), null);
+		final Long id = CommonUtils.getPatientId();
+		if (id != null) {
+			final MPIData mpi = mpiDao.getDataByDate(id, null);
 			if (mpi != null) {
 				comp.getPage().setAttribute("mpi", mpi);
 				comp.getPage().setAttribute("mpidata", convertMPI(mpi));
 			} else {
 				comp.getPage().setAttribute("mpidata", "{}");
 			}
+			comp.getPage().setAttribute("patid", id);
 		}
 		super.doAfterCompose(comp);
 	}
@@ -105,8 +107,8 @@ public class MPIViewComposer extends GenericForwardComposer {
 	 */
 	public Date[] getExamDates() {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
-		final Collection<Date> dates = mpiDao.getExamDates(Long.parseLong(Executions.getCurrent().getParameterValues(
-				"id")[0]));
+		final Long patid = CommonUtils.getPatientId();
+		final Collection<Date> dates = mpiDao.getExamDates(patid);
 		if (dates == null || dates.size() <= 0) {
 			return new Date[0];
 		}

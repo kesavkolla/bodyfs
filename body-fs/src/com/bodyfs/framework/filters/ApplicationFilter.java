@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.zkoss.zk.ui.sys.SessionsCtrl;
+
+import com.bodyfs.Constants;
 import com.bodyfs.model.LoginInfo;
 
 /**
@@ -43,7 +46,7 @@ public class ApplicationFilter implements Filter {
 			res.sendRedirect(url);
 			return;
 		}
-		final LoginInfo userInfo = (LoginInfo) session.getAttribute("LOGIN_CREDENTIALS");
+		final LoginInfo userInfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
 		if (userInfo == null) {
 			res.sendRedirect(url);
 			return;
@@ -52,6 +55,9 @@ public class ApplicationFilter implements Filter {
 		if (req.getServletPath().contains("logout")) {
 			session.removeAttribute("LOGIN_CREDENTIALS");
 			session.invalidate();
+			if (SessionsCtrl.getCurrentCtrl() != null) {
+				SessionsCtrl.getCurrentCtrl().invalidateNow();
+			}
 			res.sendRedirect(url);
 			return;
 		}

@@ -1,115 +1,103 @@
 <?page title="Create Customer LoginInfo" contentType="text/html;charset=UTF-8" id="createlogin"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
-<zk>
-<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
 			<borderlayout style="background:#dd0000;">
 				<north size="50px">
-					<hbox>
-						<toolbarbutton label="Report Card" image="/img/report_card.png"
-							href="/pages/patient/patientview.zul?id=${param.id }" />
-						<toolbarbutton label="Weekly Visit" image="/img/vcard_add.png"
-							href="/pages/patient/weeklyvisit.zul?id=${param.id }" />
-						<toolbarbutton label="MPI data" image="/img/chart.png"
-							href="/pages/patient/mpi.zul?id=${param.id }" />
-						<toolbarbutton label="Profile" image="/img/user_add.png"
-							href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
-					</hbox>
+					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" vflex="1" hflex="1">
-					<hbox pack="center" hflex="1">
-						 <vbox pack="center" height="400px">
-							<window id="win" border="normal" title="View/Edit Profile" position="center" width="800px" apply="com.bodyfs.ui.CreateLoginComposer" sizable="true">
-								<grid id="main" fixedLayout="true">
-									<columns>
-										<column width="100px" />
-										<column width="150px"/>
-										<column />
-									</columns>
-									<rows>
-										<row spans="3,,,,2">
-											<div></div>
-											Login ID:
-											<textbox id="loginid"/>
-											<label id="loginmsg" style="color:red"/>
-											<div></div>
-										</row>
-										<row spans="3,,,3">
-											<div></div>
-											password:
-											<textbox id="password"/>
-											<div></div>
-										</row>
-										<row hflex="true">
-											First Name:
-											<textbox id="firstName" value="@{person.firstName }"
-												maxlength="100" hflex="1" zclass="req-string" />
-											Initial:
-											<textbox id="initial" value="@{person.initial }" maxlength="100" hflex="1" />
-											LastName:
-											<textbox id="lastName" value="@{person.lastName }"
-												maxlength="100" hflex="1" />
-										</row>
-										<row>
-											SSN:
-											<textbox id="ssn" value="@{person.SSN }"
-												maxlength="11" hflex="1" />
-											Marital Status:
-											<checkbox label="Married" checked="@{person.married }" />
-											Gender:
-											<radiogroup id="gender"
-												selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup' }">
-												<radio label="M" />
-												<radio label="F" />
-											</radiogroup>
-											Email:
-											<textbox value="@{person.email }"
-												constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
-										</row>
-										<row valign="top">
-											Address
-											<textbox value="@{ginfo.street }" hflex="1" />
-											City:
-											<textbox value="@{ginfo.city }" hflex="1" />
-											State:
-											<textbox value="@{ginfo.state }" hflex="1" />
-											Zipcode:
-											<textbox value="@{ginfo.zipcode }" hflex="1" />
-										</row>
-										<row spans=",,,,2,2">
-											Height:
-											<textbox value="@{ginfo.height }" hflex="1" />
-											Weight:
-											<textbox value="@{ginfo.weight }" hflex="1" />
-											Emergency Contact's Name &amp; Phone
-											<textbox value="@{ginfo.emergencycontact }" hflex="1" />
-										</row>
-										<row>
-											Home Phone:
-											<textbox value="@{ginfo.homePhone }" hflex="1" />
-											Work Phone:
-											<textbox value="@{ginfo.workPhone }" hflex="1" />
-											Cell Phone:
-											<textbox value="@{ginfo.cellPhone }" hflex="1" />
-											Referred By:
-											<textbox value="@{ginfo.referredBy }" hflex="1" />
-										</row>
-										<row spans="8">
-											<hbox pack="center" hflex="1">
-												<button label="create" forward="onClick=win.onSave"/>
-												<button label="cancel" onClick="onClick=win.onCancel"/>
-											</hbox>
-										</row>
-									</rows>
-									
-								</grid>
-							</window>
-						</vbox>
-					</hbox>
+					<grid id="logingrid" fixedLayout="true" apply="com.bodyfs.ui.CreateLoginComposer" width="90%"
+						style="margin-left:20px;margin-top:20px">
+						<columns>
+							<column width="100px" />
+							<column width="150px" />
+							<column />
+						</columns>
+						<rows>
+							<row spans="3,,,,2">
+								<div></div>
+								Login ID:
+								<textbox id="loginid" hflex="1"
+									value="@{logininfo.userid, save-when='btnSave.onClick'}" />
+								<label id="loginmsg" style="color:red" />
+								<checkbox id="admin" label="Admin"
+									checked="@{person.personType, converter='com.bodyfs.ui.util.PersonTypeToAdmin', save-when='btnSave.onClick' }" />
+							</row>
+							<row spans="3,,,3">
+								<div></div>
+								password:
+								<textbox id="password" hflex="1"
+									value="@{logininfo.password, save-when='btnSave.onClick'}" />
+								<div></div>
+							</row>
+							<row hflex="true">
+								First Name:
+								<textbox id="firstName" value="@{person.firstName, save-when='btnSave.onClick' }"
+									maxlength="100" hflex="1" zclass="req-string" />
+								Initial:
+								<textbox id="initial" value="@{person.initial, save-when='btnSave.onClick' }"
+									maxlength="100" hflex="1" />
+								LastName:
+								<textbox id="lastName" value="@{person.lastName, save-when='btnSave.onClick' }"
+									maxlength="100" hflex="1" />
+							</row>
+							<row>
+								SSN:
+								<textbox id="ssn" value="@{person.SSN, save-when='btnSave.onClick' }" maxlength="11"
+									hflex="1" />
+								Marital Status:
+								<checkbox label="Married" checked="@{person.married, save-when='btnSave.onClick' }" />
+								Gender:
+								<radiogroup id="gender"
+									selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup', save-when='btnSave.onClick' }">
+									<radio label="M" />
+									<radio label="F" />
+								</radiogroup>
+								Email:
+								<textbox value="@{person.email, save-when='btnSave.onClick' }"
+									constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
+							</row>
+							<row valign="top">
+								Address
+								<textbox value="@{ginfo.street, save-when='btnSave.onClick' }" hflex="1" />
+								City:
+								<textbox value="@{ginfo.city, save-when='btnSave.onClick' }" hflex="1" />
+								State:
+								<textbox value="@{ginfo.state, save-when='btnSave.onClick' }" hflex="1" />
+								Zipcode:
+								<textbox value="@{ginfo.zipcode, save-when='btnSave.onClick' }" hflex="1" />
+							</row>
+							<row spans=",,,,2,2">
+								Height:
+								<textbox value="@{ginfo.height, save-when='btnSave.onClick' }" hflex="1" />
+								Weight:
+								<textbox value="@{ginfo.weight, save-when='btnSave.onClick' }" hflex="1" />
+								Emergency Contact's Name &amp; Phone
+								<textbox value="@{ginfo.emergencycontact, save-when='btnSave.onClick' }" hflex="1" />
+							</row>
+							<row>
+								Home Phone:
+								<textbox value="@{ginfo.homePhone, save-when='btnSave.onClick' }" hflex="1" />
+								Work Phone:
+								<textbox value="@{ginfo.workPhone, save-when='btnSave.onClick' }" hflex="1" />
+								Cell Phone:
+								<textbox value="@{ginfo.cellPhone, save-when='btnSave.onClick' }" hflex="1" />
+								Referred By:
+								<textbox value="@{ginfo.referredBy, save-when='btnSave.onClick' }" hflex="1" />
+							</row>
+							<row spans="8">
+								<hbox pack="center" hflex="1">
+									<button id="btnSave" label="create" forward="onClick=logingrid.onSave" />
+									<button label="cancel" forward="onClick=logingrid.onCancel" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
 				</center>
 			</borderlayout>
 		</center>
-	</borderlayout>	
+	</borderlayout>
 </zk>

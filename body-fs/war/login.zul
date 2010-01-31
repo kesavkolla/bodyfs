@@ -1,5 +1,5 @@
 <?page title="Welcome - Body Feng Shui, CA" contentType="text/html;charset=UTF-8"?>
-<zk>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<window id="win" border="normal" title="Login" position="center" width="400px" mode="overlapped"
 		apply="com.bodyfs.ui.LoginWindow">
 		<div id="loginDiv" visible="${user == null}">
@@ -17,7 +17,7 @@
 			</grid>
 			<hbox pack="center" width="100%">
 				<button id="login" label="Login" />
-				<toolbarbutton label="forgot password?" target="zkdemo" href="http://www.zkoss.org/forum" />
+				<n:a href="" class="z-label">forgot password?</n:a>
 			</hbox>
 			<div>
 				<label id="msg" style="color:red" />

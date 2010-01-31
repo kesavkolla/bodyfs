@@ -20,6 +20,7 @@ import org.zkoss.zul.api.Window;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -46,16 +47,10 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Inside compose");
 		}
-		if (!this.param.containsKey("id")) {
+		Long id = CommonUtils.getPatientId();
+		if (id == null) {
 			return;
 		}
-		Long id = -1L;
-		try {
-			id = Long.parseLong(this.param.get("id").toString());
-		} catch (final Throwable t) {
-			return;
-		}
-
 		LOGGER.debug("Retrieving the details for: " + id);
 		pageScope.put("CURRENT_PATIENT_ID", id);
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));

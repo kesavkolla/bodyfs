@@ -37,6 +37,12 @@ body {
 	border-right: 1px solid #F0C88B;
 }
 
+.z-toolbarbutton-cnt {
+	font-size: 12px;
+	font-family: "Trebuchet MS";
+	font-weight: none;
+}
+
 .z-west-header,.z-center-header,.z-east-header,.z-north-header,.z-south-header {
 	color: #F1B772;
 	background: transparent repeat-x 0 0;

@@ -5,13 +5,13 @@
 	<north size="100px" border="0">
 		<borderlayout hflex="1" vflex="1" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 			<west border="0">
-				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" />
+				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" id="logo" />
 			</west>
 			<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<hbox hflex="1" vflex="1" style="padding-top:20px">
 					<a href="/logout.zul" sclass="lg-label">Logout</a>
 					<space />
-					<label id="username" sclass="lg-label" />
+					<label id="username" sclass="lg-label" style="font-weight: bold" />
 					<space width="30px" />
 				</hbox>
 			</east>
@@ -24,11 +24,14 @@
 				<toolbarbutton label="Customers" image="/img/user_group_colored.png" hflex="1"
 					href="/pages/usermgmt/customersearch.zul" />
 				<toolbarbutton label="Scheduling" image="/img/ical.png" hflex="1" href="/pages/schedule/calendar.zul" />
-				<toolbarbutton label="Settings" image="/img/preferences.png" hflex="1" href="#" />
-				<toolbarbutton label="Inventory" image="/img/database.png" hflex="1" href="#" />
-				<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1" href="#" />
-				<toolbarbutton label="Herbs" image="/img/leaf.png" hflex="1" href="#" />
+				<!-- toolbarbutton label="Settings" image="/img/preferences.png" hflex="1" href="#" /-->
+				<!-- toolbarbutton label="Inventory" image="/img/database.png" hflex="1" href="#" / -->
+				<!-- toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1" href="#" / -->
+				<!-- toolbarbutton label="Herbs" image="/img/leaf.png" hflex="1" href="#" /-->
 			</vbox>
+			<script type="text/javascript" defer="true">
+				zk.afterMount(function() { $("$logo").click(function() { window.location.href="/index.zul";});});
+			</script>
 		</div>
 	</west>
 </zk>

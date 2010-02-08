@@ -382,8 +382,11 @@
 								<cell>
 									<button label="Save" id="btnSave" forward="onClick=diagnosisgrid.onSave" />
 									<script type="text/javascript" defer="false">
-										var data = ${diagnosisgrid$composer.visitsDates}; var start = "${param.visitDate
-										}"; zk.afterMount(function() { setupData(); });
+										var data = ${diagnosisgrid$composer.visitsDates};
+
+										var start = "${param.visitDate}";
+
+										zk.afterMount(function() { setupData(); });
 									</script>
 								</cell>
 							</row>

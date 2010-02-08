@@ -1,6 +1,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?script type="text/javascript" src="/scripts/customersearch.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
@@ -74,12 +75,9 @@
 									<listheader label="email" />
 									<listheader label="Type" tooltiptext="pre,current or post Customers" />
 								</listhead>
-								<listitem self="@{each='person'}" value="@{person }">
+								<listitem self="@{each='person'}" value="@{person }" class="@{person.id }">
 									<listcell image="/img/link_go.png" class="@{person.id }">
-										<attribute w:name="onClick">
-											window.location.href="/pages/patient/patientview.zul?id=" +
-											jq(this).zk.widget()[0]._sclass
-										</attribute>
+										<attribute w:name="onClick">openPatient(jq(this));</attribute>
 									</listcell>
 									<listcell label="@{person.firstName}" />
 									<listcell label="@{person.lastName}" />
@@ -88,16 +86,10 @@
 								</listitem>
 							</listbox>
 						</div>
-
 					</vbox>
 				</center>
 			</borderlayout>
 		</center>
 	</borderlayout>
-	<script type="text/javascript" defer="true">
-		var panel = zk("$optionsPanel").widget()[0]; var node = panel.$n(); var body = jq(panel.$n('body')); var zcls =
-		panel.getZclass(); jq(node).addClass(zcls + '-colpsd'); panel._hideShadow(); if (zk.ie6_ &amp;&amp;
-		!node.style.width) { node.runtimeStyle.width = "100%"; } body.zk.slideUp(panel, {beforeAnima:
-		panel._beforeSlideUp});
-	</script>
+	<script type="text/javascript" defer="true">zk.afterMount(function() {setupResultsClick();});</script>
 </zk>

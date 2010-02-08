@@ -36,7 +36,6 @@
 											<n:td>
 												<textbox id="datepage" visible="false"
 													forward="onBlur=visitgrid.onDateChange" />
-												<button id="btnNew" label="New" forward="onClick=visitgrid.onNewVisit" />
 											</n:td>
 										</n:tr>
 									</n:table>
@@ -208,12 +207,12 @@
 													, start: start
 													, display: 8
 													, border: true
-													, border_color: '#fff'
-													, text_color: '#fff'
-													, background_color: 'black'
+													, border_color: '#000'
+													, text_color: '#000'
+													, background_color: '#fff'
 													, border_hover_color: '#ccc'
-													, text_hover_color: '#000'
-													, background_hover_color: '#fff'
+													, text_hover_color: '#fff'
+													, background_hover_color: '#000'
 													, images: false
 													, mouse: 'press'
 													, data: data
@@ -235,8 +234,7 @@
 											});
 										});
 									</script>
-									<button id="btnSave" label="Save" forward="onClick=visitgrid.onSave" />
-									<button id="btnCancel" label="Cancel" forward="onClick=visitgrid.onNewVisit" />
+									<button id="btnSave" label="Next" forward="onClick=visitgrid.onSave" />
 								</cell>
 							</row>
 						</rows>

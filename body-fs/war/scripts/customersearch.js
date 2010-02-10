@@ -17,7 +17,8 @@ function setupResultsClick() {
  * @return
  */
 function openPatient(jqobj) {
-	var sclass = jqobj.zk.widget()[0]._sclass;
+	var widget = zk.Widget.$(jqobj.attr("id"));
+	var sclass = widget._sclass;
 	if (sclass) {
 		window.location.href = "/pages/patient/patientview.zul?id=" + sclass;
 	}
@@ -29,7 +30,7 @@ function openPatient(jqobj) {
  * @return
  */
 function setupPanel() {
-	var panel = zk("$optionsPanel").widget()[0];
+	var panel = zk.Widget.$($("$optionsPanel").attr("id"));
 	var node = panel.$n();
 	var body = jq(panel.$n('body'));
 	var zcls = panel.getZclass();

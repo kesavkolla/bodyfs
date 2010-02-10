@@ -129,11 +129,11 @@ function setupPagination() {
 		onChange : function(textValue, selectedObj) {
 			jq("$txtVisitDates").val(selectedObj.date);
 			jq("$txtVisitDates").blur();
-			var wgt = jq("$tbtnDiagnosis").zk.widget()[0];
+			var wgt = zk.Widget.$(jq("$tbtnDiagnosis").attr("id"));
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = jq("$tbtnTreatment").zk.widget()[0];
+			var wgt = zk.Widget(jq("$tbtnTreatment").attr("id"));
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = jq("$tbtnPrescription").zk.widget()[0];
+			var wgt = zk.Widget(jq("$tbtnPrescription").attr("id"));
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
 		}
 	});

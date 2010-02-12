@@ -2,6 +2,7 @@
 package com.bodyfs.framework.filters;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -40,15 +41,26 @@ public class ApplicationFilter implements Filter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		final String url = req.getContextPath() + "/login.zul";
+		StringBuffer url = new StringBuffer(req.getRequestURI().length());
+		if (req.getRequestURI().endsWith("login.zul") || req.getRequestURI().endsWith("index.zul")
+				|| req.getRequestURI().endsWith("login.zu") || req.getRequestURI().endsWith("logout.zul")) {
+			url.append(req.getContextPath()).append("/login.zul");
+		} else {
+			url.append(req.getContextPath()).append("/login.zul");
+			url.append("?redirect=").append(req.getRequestURI());
+			if (req.getQueryString() != null && req.getQueryString().length() > 0) {
+				url.append(URLEncoder.encode("?" + req.getQueryString(), "US-ASCII"));
+			}
+		}
+
 		final HttpSession session = req.getSession(false);
 		if (session == null) {
-			res.sendRedirect(url);
+			res.sendRedirect(url.toString());
 			return;
 		}
 		final LoginInfo userInfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
 		if (userInfo == null) {
-			res.sendRedirect(url);
+			res.sendRedirect(url.toString());
 			return;
 		}
 
@@ -58,11 +70,10 @@ public class ApplicationFilter implements Filter {
 			if (SessionsCtrl.getCurrentCtrl() != null) {
 				SessionsCtrl.getCurrentCtrl().invalidateNow();
 			}
-			res.sendRedirect(url);
+			res.sendRedirect(url.toString());
 			return;
 		}
 
 		filterChain.doFilter(request, response);
 	}
-
 }

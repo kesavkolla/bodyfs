@@ -26,6 +26,7 @@ public class LoginWindow extends GenericForwardComposer {
 	Button login;
 	Window win;
 	Label msg;
+	Textbox redirecturl;
 
 	private static final long serialVersionUID = 4311810570038057744L;
 
@@ -59,6 +60,10 @@ public class LoginWindow extends GenericForwardComposer {
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(userDetails.getPersonId());
 		session.setAttribute(Constants.SESSION_PERSON_TYPE, person.getPersonType());
+		if (redirecturl != null && redirecturl.getText() != null && redirecturl.getText().length() > 0) {
+			Executions.sendRedirect(redirecturl.getText());
+			return;
+		}
 		if (person.getPersonType() == PersonType.EMPLOYEE) {
 			Executions.sendRedirect("/index.zul");
 		} else {

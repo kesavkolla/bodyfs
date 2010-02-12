@@ -52,7 +52,7 @@ public class TreatmentComposer extends GenericForwardComposer {
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		if (visitDAO.countPatientVisits(patid) < 1) {
 			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
-				execution.sendRedirect("/pages/patient/weeklyvisit.zul?id=" + patid);
+				execution.sendRedirect("/pages/patient/patientview.zul?id=" + patid);
 				return;
 			} else {
 				execution.sendRedirect("/pages/user/index.zul");

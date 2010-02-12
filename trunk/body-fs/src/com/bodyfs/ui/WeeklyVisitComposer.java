@@ -14,6 +14,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
@@ -113,6 +114,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			treatment.setVisitDate(patvisit.getVisitDate());
 			visitDAO.createPatientTreatment(treatment);
 			LOGGER.debug("Successfully created treatment with id: " + treatment.getId());
+			Clients.evalJavaScript("showConfirmation()");
 		}
 	}
 

@@ -20,10 +20,10 @@ function openPatient(jqobj) {
 	var widget = zk.Widget.$(jqobj.attr("id"));
 	var sclass = widget._sclass;
 	if (sclass) {
-		if (!pageurl) {
-			zUtl.go("/pages/patient/patientview.zul?id=" + sclass);
-		} else {
+		if (pageurl) {
 			zUtl.go(pageurl + "?id=" + sclass);
+		} else {
+			zUtl.go("/pages/patient/patientview.zul?id=" + sclass);
 		}
 	}
 }

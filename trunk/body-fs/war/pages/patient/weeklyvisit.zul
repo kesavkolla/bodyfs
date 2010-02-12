@@ -1,6 +1,5 @@
 <?page title="Weekly patient visit" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="visitgrid" ?>
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>

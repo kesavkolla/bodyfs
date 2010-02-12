@@ -17,6 +17,8 @@
 			</grid>
 			<hbox pack="center" width="100%">
 				<button id="login" label="Login" />
+				<textbox id="redirecturl" value="${param.redirect }" if="${not empty param.redirect}"
+					style="display:none" />
 				<n:a href="" class="z-label">forgot password?</n:a>
 			</hbox>
 			<div>

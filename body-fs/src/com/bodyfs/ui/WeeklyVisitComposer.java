@@ -65,6 +65,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		final Long personid = new Long(execution.getParameter("id"));
+		// If the visitDate parameter exists in the URL convert to the date
 		Date visitDate = null;
 		if (execution.getParameter("visitDate") != null) {
 			try {
@@ -75,12 +76,18 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		}
 
 		comp.getPage().setAttribute("personid", personid);
+		/*
+		 * This composer is used in two different scenarios
+		 * 1. During the administrative page where admins will see the visit and be able to make changes
+		 * 2. Actual patient signin process
+		 * In the signin process we will always create a new patient visit object for that date
+		 * For admin page if there is no visitDate in URL then we will show the latest visit
+		 */
 		if (visitDate != null || comp.getAttribute("showlast") != null) {
 			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(personid, visitDate);
 			this.page.setAttribute("patvisit", patvisit);
 		} else {
-			System.out.println("newvisit");
 			final PatientVisit patvisit = new PatientVisit();
 			patvisit.setPersonId(personid);
 			this.page.setAttribute("patvisit", patvisit);

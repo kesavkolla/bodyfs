@@ -17,7 +17,7 @@
 				<north size="50px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
-				<center autoscroll="true" hflex="1" vflex="1">
+				<center autoscroll="false" hflex="1" vflex="1">
 					<grid id="visitgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="98%"
 						apply="com.bodyfs.ui.WeeklyVisitComposer">
 						<custom-attributes showlast="true" />

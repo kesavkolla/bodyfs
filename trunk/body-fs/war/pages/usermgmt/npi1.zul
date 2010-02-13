@@ -20,8 +20,8 @@
 			</row>
 			<row>
 				SSN:
-				<textbox id="ssn" value="@{person.SSN, save-when='btnNext.onClick' }" constraint="no empty"
-					maxlength="11" hflex="1" />
+				<textbox id="ssn" value="@{person.SSN, save-when='btnNext.onClick' }"
+					constraint="/\d{3}-?\d{2}-?\d{4}/: Invalid SSN Format" maxlength="11" hflex="1" />
 				Marital Status:
 				<checkbox label="Married" checked="@{person.married, save-when='btnNext.onClick' }" />
 				Gender:

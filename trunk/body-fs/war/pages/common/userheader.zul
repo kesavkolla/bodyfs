@@ -7,7 +7,7 @@
 				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" id="logo" />
 			</west>
 			<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
-				<hbox hflex="1" vflex="1" style="padding-top:20px">
+				<hbox style="padding-top:20px">
 					<a href="/logout.zul" sclass="lg-label">Logout</a>
 					<space />
 					<label id="username" sclass="lg-label" style="font-weight: bold" />

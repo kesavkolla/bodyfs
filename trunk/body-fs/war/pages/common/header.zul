@@ -5,7 +5,7 @@
 	<north size="100px" border="0">
 		<borderlayout hflex="1" vflex="1" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 			<west border="0">
-				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" id="logo" />
+				<image src="/img/banner.jpg" hflex="1" width="404px" height="100px" id="logo" />
 			</west>
 			<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<hbox style="padding-top:20px">

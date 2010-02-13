@@ -228,6 +228,7 @@
 													}
 												});
 											}
+											$("$Pagination").find("ul").parent().css("display", "inline");
 											jq("$imgbody").annotateImage({editable: true, useAjax: false});
 											jq("$btnNew").click(function(evt) {
 												$.fn.paginate.setpage(-1);

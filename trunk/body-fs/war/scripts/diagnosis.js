@@ -256,4 +256,5 @@ function setupPagination() {
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
 		}
 	});
+	$("$Pagination").find("ul").parent().css("display", "inline");
 }

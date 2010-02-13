@@ -7,11 +7,11 @@
 				<rows>
 					<row>
 						Name :
-						<textbox id="usertb" width="200px" value="" />
+						<textbox id="usertb" width="200px" value="" hflex="1" />
 					</row>
 					<row>
 						Password :
-						<textbox id="pwdtb" width="200px" type="password" />
+						<textbox id="pwdtb" width="200px" type="password" hflex="1" />
 					</row>
 				</rows>
 			</grid>

@@ -20,6 +20,7 @@
 				<center autoscroll="true" hflex="1" vflex="1">
 					<grid id="visitgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="98%"
 						apply="com.bodyfs.ui.WeeklyVisitComposer">
+						<custom-attributes showlast="true" />
 						<columns>
 							<column width="50%"></column>
 							<column width="50%"></column>
@@ -192,7 +193,7 @@
 											if(data.length > 1) {
 												//Find the start parameter which matches the visitdate
 												if(start.length &lt;= 0) {
-													start = -1;
+													start = 1;
 												} else {
 													for (var i=0, len = data.length; i&lt;len; i++) {
 														if (start == data[i].date) {

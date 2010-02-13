@@ -20,7 +20,7 @@ function openPatient(jqobj) {
 	var widget = zk.Widget.$(jqobj.attr("id"));
 	var sclass = widget._sclass;
 	if (sclass) {
-		if (pageurl) {
+		if (typeof (pageurl) != "undefined" && pageurl.length > 0) {
 			zUtl.go(pageurl + "?id=" + sclass);
 		} else {
 			zUtl.go("/pages/patient/patientview.zul?id=" + sclass);

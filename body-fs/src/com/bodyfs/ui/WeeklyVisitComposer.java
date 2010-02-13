@@ -73,12 +73,14 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 				visitDate = null;
 			}
 		}
+
 		comp.getPage().setAttribute("personid", personid);
-		if (visitDate != null) {
+		if (visitDate != null || comp.getAttribute("showlast") != null) {
 			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(personid, visitDate);
 			this.page.setAttribute("patvisit", patvisit);
 		} else {
+			System.out.println("newvisit");
 			final PatientVisit patvisit = new PatientVisit();
 			patvisit.setPersonId(personid);
 			this.page.setAttribute("patvisit", patvisit);

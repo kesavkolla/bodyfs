@@ -42,9 +42,22 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 	}
 
 	@Override
-	public PatientVisit getPatientVisitByDate(final Long personId, final Date visitDate) {
-		final Collection<PatientVisit> visits = this.jdoTemplate.find(PatientVisit.class,
-				"personId==pid && visitDate==pdate", "String pid, java.util.Date pdate", personId, visitDate);
+	public PatientVisit getPatientVisitByDate(final Long patientId, final Date visitDate) {
+		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
+		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
+		}
+		final Object[] vals = new Object[visitDate == null ? 1 : 2];
+		vals[0] = patientId;
+		if (visitDate != null) {
+			vals[1] = visitDate;
+		}
+		final Collection<PatientVisit> visits = this.jdoTemplate.find(PatientVisit.class, filter, params, vals,
+				"visitDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(visits);
+		}
 		if (visits != null && visits.size() > 0) {
 			return visits.iterator().next();
 		}

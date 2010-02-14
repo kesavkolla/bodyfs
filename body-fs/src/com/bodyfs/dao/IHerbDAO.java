@@ -2,6 +2,7 @@
 package com.bodyfs.dao;
 
 import com.bodyfs.model.Herb;
+import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.HerbPanel;
 
 /**
@@ -18,4 +19,6 @@ public interface IHerbDAO {
 	public Herb getHerbById(final Long id);
 
 	public void createPanel(final HerbPanel panel);
+
+	public HerbFormula createFormula(final HerbFormula forumula);
 }

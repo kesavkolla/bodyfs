@@ -2,6 +2,7 @@
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
@@ -60,8 +61,13 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	}
 
 	@Override
-	public HerbFormula createFormula(final HerbFormula forumula) {
+	public HerbFormula addFormula(final HerbFormula forumula) {
 		return this.jdoTemplate.makePersistent(forumula);
+	}
+
+	@Override
+	public Collection<HerbFormula> getFormulas() {
+		return this.jdoTemplate.find(HerbFormula.class);
 	}
 
 }

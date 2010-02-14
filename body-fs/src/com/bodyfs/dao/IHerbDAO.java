@@ -1,6 +1,8 @@
 /* $Id$ */
 package com.bodyfs.dao;
 
+import java.util.Collection;
+
 import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.HerbPanel;
@@ -20,5 +22,17 @@ public interface IHerbDAO {
 
 	public void createPanel(final HerbPanel panel);
 
-	public HerbFormula createFormula(final HerbFormula forumula);
+	/**
+	 * Persists the given formula
+	 * 
+	 * @param forumula
+	 * @return
+	 */
+	public HerbFormula addFormula(final HerbFormula forumula);
+
+	/**
+	 * 
+	 * @return Retrieves all the formulas as a list
+	 */
+	public Collection<HerbFormula> getFormulas();
 }

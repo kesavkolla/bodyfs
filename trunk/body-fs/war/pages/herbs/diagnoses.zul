@@ -44,6 +44,7 @@
 														<listitem self="@{each='formula'}" value="@{formula }">
 															<listcell label="@{formula.name }" />
 															<listcell label="@{formula.description }" />
+															<listcell label="@{formula.id }" visible="false" />
 														</listitem>
 													</listbox>
 												</bandpopup>
@@ -79,5 +80,5 @@
 			</borderlayout>
 		</center>
 	</borderlayout>
-
+	<script type="text/javascript" src="/scripts/diagnoses.js" defer="true" />
 </zk>

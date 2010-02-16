@@ -18,10 +18,22 @@ zk.afterMount(function() {
 		}
 		/* Get the selected formula's name and create a tagbox with it */
 		var selrow = $("#" + wgtformulas.getSelectedItem().uuid);
-		/* check wheterh this formula is already in the selected formulas */
+		/* Get the formula id of selected item */
+		var formulaid = selrow.find("td:last>div.z-listcell-cnt").text();
+		/* check whether the formula is already selected or not */
+		var txtFormulaIds = $("$txtFormulaIds").val().split(",");
+		if (jq.inArray(formulaid, txtFormulaIds) > -1) {
+			jq.alert("Formula is already being added", {
+				title : "Error",
+				icon : "ERROR"
+			});
+			return;
+		}
 		var divformulas = $("$divformulas");
-		divformulas.append("<span class='tag'><label><span>" + selrow.find("td:first").text()
+		divformulas.append("<span class='tag'><label><span>" + selrow.find("td:first>div.z-listcell-cnt").text()
 				+ "</span><small class='close' title='close'>x</small></label></span>");
+		txtFormulaIds.push(formulaid);
+		$("$txtFormulaIds").val(txtFormulaIds.join(","));
 	});
 
 	/*

@@ -36,7 +36,7 @@
 											<bandbox id="bdformulas" mold="rounded" hflex="1" autodrop="true">
 												<bandpopup>
 													<listbox hflex="1" rows="10" model="${mformulas }" id="lstformulas"
-														forward="onSelect=cntbox.onSelectFormula">
+														forward="onSelect=cntbox.onSelectFormula" width="250px">
 														<listhead>
 															<listheader label="Name" sort="none" />
 															<listheader label="Description" sort="none" />
@@ -52,6 +52,7 @@
 										</cell>
 										<cell>
 											<image src="/img/add.png" forward="onClick=cntbox.onAddFormula" id="imgAdd" />
+											<textbox id="txtFormulaIds" visible="false" />
 											<div id="divformulas" hflex="1" style="overflow-y: scroll;" height="50px" />
 										</cell>
 									</row>

@@ -14,7 +14,7 @@
 <body>
 <%
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
-	.getServletContext());
+			.getServletContext());
 	final IHerbDAO herbDAO = ctx.getBean(IHerbDAO.class);
 	/*for (int i = 0; i < 10; i++) {
 		final Herb herb = new Herb();
@@ -23,12 +23,11 @@
 	}*/
 	for (int i = 0; i < 1000; i++) {
 		final HerbFormula formula = new HerbFormula();
-		formula.setId(16L + i);
 		formula.setName("Formula: " + (i + 2));
 		formula.setDescription("Formula" + (i + 2) + " Description");
 		final List<Long> herbs = new ArrayList<Long>(2);
-		herbs.add(5L);
-		herbs.add(6L);
+		herbs.add(16L);
+		herbs.add(17L);
 		formula.setHerbs(herbs);
 		herbDAO.addFormula(formula);
 	}

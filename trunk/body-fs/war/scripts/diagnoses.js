@@ -31,7 +31,7 @@ zk.afterMount(function() {
 		}
 		var divformulas = $("$divformulas");
 		divformulas.append("<span class='tag'><label><span>" + selrow.find("td:first>div.z-listcell-cnt").text()
-				+ "</span><small class='close' title='close'>x</small></label></span>");
+				+ "</span><small class='close' title='close' formulaid='" + formulaid + "'>x</small></label></span>");
 		txtFormulaIds.push(formulaid);
 		$("$txtFormulaIds").val(txtFormulaIds.join(","));
 	});
@@ -40,6 +40,22 @@ zk.afterMount(function() {
 	 * Attach the live handler for close on the tagbox
 	 */
 	$("small.close").live("click", function() {
+		var txtFormulaIds = $("$txtFormulaIds").val().split(",");
+		var indx = jq.inArray($(this).attr("formulaid"), txtFormulaIds);
+		txtFormulaIds.splice(indx, 1);
+		$("$txtFormulaIds").val(txtFormulaIds.join(","));
 		$(this).parent().parent().remove();
+	});
+
+	/*
+	 * Handle the click on btnCancel
+	 */
+	$("$btnCancel").click(function() {
+		alert("cancel");
+		/* Clear out all the values for the input fields */
+		$("$txtFormulaIds").val("");
+		$("$txtDiagnosisName").val("");
+		$("$txtDescription").val("");
+		$("$divformulas").html("");
 	});
 });

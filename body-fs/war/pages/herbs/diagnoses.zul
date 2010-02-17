@@ -24,11 +24,13 @@
 									<row valign="top">
 										<cell>Name</cell>
 										<cell>
-											<textbox hflex="1" />
+											<textbox hflex="1" id="txtDiagnosisName"
+												value="@{txtFormulaIds.value, save-when=btnCreate.onClick }" />
 										</cell>
 										<cell>Description</cell>
 										<cell>
-											<textbox rows="3" hflex="1" />
+											<textbox rows="3" hflex="1" id="txtDescription"
+												value="@{txtDescription.value, save-when=btnCreate.onClick }" />
 										</cell>
 									</row>
 									<row spans="2,2" valign="top">
@@ -52,14 +54,15 @@
 										</cell>
 										<cell>
 											<image src="/img/add.png" forward="onClick=cntbox.onAddFormula" id="imgAdd" />
-											<textbox id="txtFormulaIds" visible="false" />
+											<textbox id="txtFormulaIds" visible="false"
+												vale="@{txtFormulaIds, save-when=btnCreate.onClick }" />
 											<div id="divformulas" hflex="1" style="overflow-y: scroll;" height="50px" />
 										</cell>
 									</row>
 									<row spans="2,2">
 										<cell>
-											<button label="cancel" />
-											<button label="create" />
+											<button label="cancel" id="btnCancel" />
+											<button label="create" id="btnCreate" />
 										</cell>
 									</row>
 								</rows>

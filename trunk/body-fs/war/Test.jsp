@@ -6,7 +6,8 @@
 <%@page import="com.bodyfs.model.Herb"%>
 <%@page import="com.bodyfs.model.HerbFormula"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%><html>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Arrays"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -16,21 +17,7 @@
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
 	final IHerbDAO herbDAO = ctx.getBean(IHerbDAO.class);
-	/*for (int i = 0; i < 10; i++) {
-		final Herb herb = new Herb();
-		herb.setCommonName("Herb " + i);
-		herbDAO.addHerb(herb);
-	}*/
-	for (int i = 0; i < 1000; i++) {
-		final HerbFormula formula = new HerbFormula();
-		formula.setName("Formula: " + (i + 2));
-		formula.setDescription("Formula" + (i + 2) + " Description");
-		final List<Long> herbs = new ArrayList<Long>(2);
-		herbs.add(8L);
-		herbs.add(9L);
-		formula.setHerbs(herbs);
-		herbDAO.addFormula(formula);
-	}
+	out.println(herbDAO.getFormulasIds(Arrays.asList(new Long[] { 1L, 20L, 26L })));
 %>
 </body>
 </html>

@@ -65,6 +65,34 @@ zk.afterMount(function() {
 	});
 
 	/*
+	 * Handle the click on create Do all the necessary validations before
+	 * sending data to server
+	 */
+	$("$btnCreate").click(function(evt) {
+		if (jq.trim($("$txtDiagnosisName").val()).length <= 0) {
+			jq.alert("Please provide the Diagnosis name", {
+				title : "Error",
+				icon : "ERROR"
+			});
+			evt.preventDefault();
+			evt.stopPropagation();
+			$("$txtDiagnosisName").focus();
+			return;
+		}
+		var formulaids = $("$txtFormulaIds").val().split(",")
+		if (formulaids.length < 2) {
+			jq.alert("Select atleast one formula to the diagnosis", {
+				title : "Error",
+				icon : "ERROR"
+			});
+			evt.preventDefault();
+			evt.stopPropagation();
+			return;
+		}
+		$("$txtFormulaIds").blur();
+	});
+
+	/*
 	 * Handle the click event on btnAdd
 	 */
 	$("$btnAdd").click(function() {

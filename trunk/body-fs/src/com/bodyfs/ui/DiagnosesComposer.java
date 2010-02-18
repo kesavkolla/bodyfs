@@ -74,7 +74,7 @@ public class DiagnosesComposer extends GenericForwardComposer {
 	 * @param event
 	 */
 	public void onCreateDiagnosis(final ForwardEvent event) {
-		// Check the diagnosis name is appropriate
+		// Do all the usual validations
 		final Textbox txtDiagnosisName = (Textbox) Path.getComponent(page, "txtDiagnosisName");
 		if (txtDiagnosisName.getValue() == null || txtDiagnosisName.getValue().trim().length() <= 0) {
 			try {
@@ -104,6 +104,7 @@ public class DiagnosesComposer extends GenericForwardComposer {
 
 		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
 
+		// Save the diagnois data
 		final Diagnosis diagnosis = new Diagnosis();
 		diagnosis.setDescription(txtDescription.getValue());
 		diagnosis.setName(txtDiagnosisName.getValue());
@@ -114,9 +115,9 @@ public class DiagnosesComposer extends GenericForwardComposer {
 			}
 			formulaIds.add(new Long(s));
 		}
+
 		diagnosis.setFormulas(formulaIds);
 		herbDAO.createDiagnosis(diagnosis);
-		Clients.evalJavaScript("$.jGrowl('Successfully saved diagnosis', {life:3000})");
-
+		Clients.evalJavaScript("onSave()");
 	}
 }

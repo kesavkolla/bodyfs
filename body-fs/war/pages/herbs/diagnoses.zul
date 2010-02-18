@@ -1,6 +1,6 @@
 <?page title="Herbs Management" contentType="text/html;charset=UTF-8"?>
 <?link  rel="stylesheet" type="text/css" href="/css/diagnoses.css"?>
-<zk xmlns:n="http://www.zkoss.org/2005/zk/native" >
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
 		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
 		border-top: none; border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
@@ -53,16 +53,17 @@
 											</bandbox>
 										</cell>
 										<cell>
-											<image src="/img/add.png" forward="onClick=cntbox.onAddFormula" id="imgAdd" />
+											<image src="/img/add.png" id="imgAdd" />
 											<textbox id="txtFormulaIds" visible="false"
-												vale="@{txtFormulaIds, save-when=btnCreate.onClick }" />
+												vale="@{txtFormulaIds.value, save-when=btnCreate.onClick }" />
 											<div id="divformulas" hflex="1" style="overflow-y: scroll;" height="50px" />
 										</cell>
 									</row>
 									<row spans="2,2">
 										<cell>
 											<button label="cancel" id="btnCancel" />
-											<button label="create" id="btnCreate" />
+											<button label="create" id="btnCreate"
+												forward="onClick=cntbox.onCreateDiagnosis" />
 										</cell>
 									</row>
 								</rows>

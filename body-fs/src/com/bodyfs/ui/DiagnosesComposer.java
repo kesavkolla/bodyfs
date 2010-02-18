@@ -11,11 +11,10 @@ import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Bandbox;
-import org.zkoss.zul.Div;
-import org.zkoss.zul.Html;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.model.HerbFormula;
@@ -60,19 +59,13 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		bdformulas.close();
 		final Image imgAdd = (Image) Path.getComponent(page, "imgAdd");
 		imgAdd.setAttribute("formula", formula);
-		// Clients.evalJavaScript("");
 	}
 
-	/**
-	 * This event will be triggered when user clicks on add image
-	 * 
-	 * @param event
-	 */
-	public void onAddFormula(final ForwardEvent event) {
-		final HerbFormula formula = (HerbFormula) event.getOrigin().getTarget().getAttribute("formula");
-		final Div divformulas = (Div) Path.getComponent(page, "divformulas");
-		final Html html = new Html("<span class='tag'><label><span>" + formula.getName()
-				+ "</span><small class='close' title='close'>x</small></label></span>");
-		divformulas.appendChild(html);
+	public void onCreateDiagnosis(final ForwardEvent event) {
+		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
+		final Textbox txtDiagnosisName = (Textbox) Path.getComponent(page, "txtDiagnosisName");
+		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
+
 	}
+
 }

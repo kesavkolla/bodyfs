@@ -51,11 +51,26 @@ zk.afterMount(function() {
 	 * Handle the click on btnCancel
 	 */
 	$("$btnCancel").click(function() {
-		alert("cancel");
 		/* Clear out all the values for the input fields */
 		$("$txtFormulaIds").val("");
 		$("$txtDiagnosisName").val("");
 		$("$txtDescription").val("");
 		$("$divformulas").html("");
+		var bdformulas = zk.Widget.$($("$bdformulas"));
+		bdformulas.setValue("");
+		var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
+		lstformulas.setSelectedIndex(-1);
+		var widget = zk.Widget.$($("$cntdiv").attr("id"));
+		widget.hide();
 	});
+
+	/*
+	 * Handle the click event on btnAdd
+	 */
+	$("$btnAdd").click(function() {
+		var widget = zk.Widget.$($("$cntdiv").attr("id"));
+		widget.show();
+		$("$cntdiv").hide().slideDown();
+	});
+
 });

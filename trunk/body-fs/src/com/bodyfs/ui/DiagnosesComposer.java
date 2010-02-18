@@ -41,6 +41,8 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		final ListModelList formulas = new ListModelList(herbDAO.getFormulas());
 		LOGGER.debug("Retrieving formulas size:" + formulas.size());
 		page.setAttribute("mformulas", formulas);
+		final ListModelList diagnoses = new ListModelList(herbDAO.getDiagnoses());
+		page.setAttribute("mdiagnoses", diagnoses);
 		return super.doBeforeCompose(page, parent, compInfo);
 	}
 
@@ -120,4 +122,5 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		herbDAO.createDiagnosis(diagnosis);
 		Clients.evalJavaScript("onSave()");
 	}
+
 }

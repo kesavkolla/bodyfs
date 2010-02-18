@@ -102,3 +102,15 @@ zk.afterMount(function() {
 	});
 
 });
+
+/**
+ * This will be invoked by the server when it finishes saving successfully.
+ * 
+ * @return
+ */
+function onSave() {
+	$.jGrowl('Successfully saved diagnosis', {
+		life : 3000
+	});
+	$("$btnCancel").click();
+}

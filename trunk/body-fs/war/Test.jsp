@@ -26,8 +26,8 @@
 		formula.setName("Formula: " + (i + 2));
 		formula.setDescription("Formula" + (i + 2) + " Description");
 		final List<Long> herbs = new ArrayList<Long>(2);
-		herbs.add(16L);
-		herbs.add(17L);
+		herbs.add(8L);
+		herbs.add(9L);
 		formula.setHerbs(herbs);
 		herbDAO.addFormula(formula);
 	}

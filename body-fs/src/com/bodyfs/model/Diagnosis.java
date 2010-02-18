@@ -16,17 +16,19 @@ import javax.jdo.annotations.PrimaryKey;
  * 
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
-public class HerbFormula implements Serializable {
-	private static final long serialVersionUID = 6300003259517005440L;
+public class Diagnosis implements Serializable {
+	private static final long serialVersionUID = 8055079755347748856L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
 	@Persistent
 	private String name;
 	@Persistent
+	private String lowername;
+	@Persistent
 	private String description;
 	@Persistent
-	private List<Long> herbs;
+	private List<Long> formulas;
 
 	public Long getId() {
 		return id;
@@ -42,6 +44,9 @@ public class HerbFormula implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+		if (name != null) {
+			this.setLowername(name.toLowerCase());
+		}
 	}
 
 	public String getDescription() {
@@ -52,24 +57,34 @@ public class HerbFormula implements Serializable {
 		this.description = description;
 	}
 
-	public List<Long> getHerbs() {
-		return herbs;
+	public List<Long> getFormulas() {
+		return formulas;
 	}
 
-	public void setHerbs(List<Long> herbs) {
-		this.herbs = herbs;
+	public void setFormulas(List<Long> formulas) {
+		this.formulas = formulas;
+	}
+
+	public String getLowername() {
+		return lowername;
+	}
+
+	public void setLowername(String lowername) {
+		this.lowername = lowername;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("HerbFormula [");
+		final StringBuilder builder = new StringBuilder();
+		builder.append("Diagnosis [");
 		if (id != null)
 			builder.append("id=").append(id).append(", ");
 		if (name != null)
 			builder.append("name=").append(name);
-		if (herbs != null)
-			builder.append("herbs=").append(herbs).append(", ");
+		if (description != null)
+			builder.append("description=").append(description).append(", ");
+		if (formulas != null)
+			builder.append("formulas=").append(formulas).append(", ");
 		builder.append("]");
 		return builder.toString();
 	}

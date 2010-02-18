@@ -69,10 +69,8 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 	public Collection<Date> getPatientVisitDates(final Long personId) {
 		final Map<String, Object> vals = new HashMap<String, Object>();
 		vals.put("pid", personId);
-		return jdoTemplate
-				.find(
-						"SELECT visitDate FROM com.bodyfs.model.PatientVisit WHERE personId==pid PARAMETERS Long pid  ORDER BY visitDate DESC",
-						vals);
+		return jdoTemplate.find("SELECT visitDate FROM " + PatientVisit.class.getName()
+				+ " WHERE personId==pid PARAMETERS Long pid  ORDER BY visitDate DESC", vals);
 	}
 
 	@Override

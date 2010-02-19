@@ -51,15 +51,7 @@ zk.afterMount(function() {
 	 * Handle the click on btnCancel
 	 */
 	$("$btnCancel").click(function() {
-		/* Clear out all the values for the input fields */
-		$("$txtFormulaIds").val("");
-		$("$txtDiagnosisName").val("");
-		$("$txtDescription").val("");
-		$("$divformulas").html("");
-		var bdformulas = zk.Widget.$($("$bdformulas"));
-		bdformulas.setValue("");
-		var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
-		lstformulas.setSelectedIndex(-1);
+		clearData();
 		var widget = zk.Widget.$($("$cntdiv").attr("id"));
 		widget.hide();
 	});
@@ -96,9 +88,26 @@ zk.afterMount(function() {
 	 * Handle the click event on btnAdd
 	 */
 	$("$btnAdd").click(function() {
+		clearData();
+		/* change the create button to Create */
+		var btnCreate = zk.Widget.$($("$btnCreate").attr("id"));
+		btnCreate.setLabel("Create");
+
 		var widget = zk.Widget.$($("$cntdiv").attr("id"));
 		widget.show();
 		$("$cntdiv").hide().slideDown();
+	});
+
+	$(".btnEdit").live("click", function() {
+		var btnEdit = zk.Widget.$($(this).attr("id"));
+		var lstdiagnosis = zk.Widget.$($("$lstdiagnosis").attr("id"));
+		lstdiagnosis.setSelectedItem(btnEdit.parent.parent.parent);
+	});
+
+	$(".btnDelete").live("click", function() {
+		var btnEdit = zk.Widget.$($(this).attr("id"));
+		var lstdiagnosis = zk.Widget.$($("$lstdiagnosis").attr("id"));
+		lstdiagnosis.setSelectedItem(btnEdit.parent.parent.parent);
 	});
 
 });
@@ -113,4 +122,58 @@ function onSave() {
 		life : 3000
 	});
 	$("$btnCancel").click();
+}
+
+/**
+ * This function clears all the data fields
+ * 
+ * @return
+ */
+function clearData() {
+	/* Clear out all the values for the input fields */
+	$("$txtFormulaIds").val("");
+	$("$txtDiagnosisName").val("");
+	$("$txtDescription").val("");
+	$("$txtDiagnosisId").val("");
+	$("$divformulas").html("");
+	var bdformulas = zk.Widget.$($("$bdformulas"));
+	bdformulas.setValue("");
+	var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
+	lstformulas.setSelectedIndex(-1);
+}
+
+/**
+ * 
+ * @param data
+ * @return
+ */
+function SetupEdid(data) {
+	/* Setup name */
+	var txtDiagnosisName = zk.Widget.$($("$txtDiagnosisName").attr("id"));
+	txtDiagnosisName.setValue(data.name);
+	/* setup description */
+	var txtDescription = zk.Widget.$($("$txtDescription").attr("id"));
+	txtDescription.setValue(data.description);
+	/* change the create button to save */
+	var btnCreate = zk.Widget.$($("$btnCreate").attr("id"));
+	btnCreate.setLabel("Save");
+	/* Setup the txtFormulaIds */
+	var txtFormulaIds = zk.Widget.$($("$txtFormulaIds").attr("id"));
+	var tmpText = data.formulas[0].id;
+	for ( var i = 1, len = data.formulas.length; i < len; i++) {
+		tmpText = tmpText + "," + data.formulas[i].id;
+	}
+	txtFormulaIds.setValue(tmpText);
+	/* setup the formula names */
+	var divformulas = $("$divformulas");
+	divformulas.html("");
+	for ( var i = 0, len = data.formulas.length; i < len; i++) {
+		divformulas.append("<span class='tag'><label><span>" + data.formulas[i].name
+				+ "</span><small class='close' title='close' formulaid='" + data.formulas[i].id
+				+ "'>x</small></label></span>");
+	}
+	/* open the div */
+	var widget = zk.Widget.$($("$cntdiv").attr("id"));
+	widget.show();
+	$("$cntdiv").hide().slideDown();
 }

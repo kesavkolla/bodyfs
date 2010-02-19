@@ -2,6 +2,7 @@
 <?link  rel="stylesheet" type="text/css" href="/css/diagnoses.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="cntbox" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
 		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
@@ -26,6 +27,7 @@
 									<row valign="top">
 										<cell>Name</cell>
 										<cell>
+											<textbox id="txtDiagnosisId" visible="false" />
 											<textbox hflex="1" id="txtDiagnosisName"
 												value="@{txtDiagnosisName.value, save-when=btnCreate.onClick }" />
 										</cell>
@@ -73,14 +75,24 @@
 						</div>
 						<div style="background-color:#C3390B" hflex="1">
 							<button label="Add" id="btnAdd" />
-							<button label="Edit" />
-							<button label="Delete" />
 						</div>
-						<listbox id="diagnosis" checkmark="true" multiple="true" hflex="1" rows="20">
+						<listbox id="lstdiagnosis" hflex="1" rows="20" model="@{mdiagnoses }">
 							<listhead>
 								<listheader label="Name" width="30%" sort="none" />
 								<listheader label="Description" sort="none" />
+								<listheader label="" sort="none" />
 							</listhead>
+							<listitem self="@{each='diagnosis' }" value="@{diagnosis }">
+								<listcell label="@{diagnosis.name }" />
+								<listcell label="@{diagnosis.description }" />
+								<listcell>
+									<hbox>
+										<button label="Edit" sclass="btnEdit" forward="onClick=cntbox.onEditDiagnosis" />
+										<button label="Delete" sclass="btnDelete"
+											forward="onClick=cntbox.onDeleteDiagnosis" />
+									</hbox>
+								</listcell>
+							</listitem>
 						</listbox>
 					</vbox>
 				</center>

@@ -47,4 +47,11 @@ public interface ICounterDAO {
 	 */
 	public int decrement(final String name);
 
+	/**
+	 * Resets the counter to the given value
+	 * 
+	 * @param count
+	 */
+	public void resetCount(final String name, final int count);
+
 }

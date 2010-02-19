@@ -35,20 +35,28 @@ public class CounterDAO implements ICounterDAO {
 
 	@Override
 	public int getCount(final String name) {
-		final BodyfsCounters counter = jdoTemplate.getObjectById(BodyfsCounters.class, name);
-		if (counter == null) {
+		try {
+			final BodyfsCounters counter = jdoTemplate.getObjectById(BodyfsCounters.class, name);
+			if (counter == null) {
+				return 0;
+			}
+			return counter.getCount();
+		} catch (final Exception e) {
 			return 0;
 		}
-		return counter.getCount();
 	}
 
 	@Override
 	public int increment(final String name) {
-		final BodyfsCounters counter = jdoTemplate.getObjectById(BodyfsCounters.class, name);
-		if (counter != null) {
-			counter.setCount(counter.getCount() + 1);
-			jdoTemplate.makePersistent(counter);
+		BodyfsCounters counter = jdoTemplate.getObjectById(BodyfsCounters.class, name);
+		if (counter == null) {
+			counter = new BodyfsCounters();
+			counter.setName(name);
+			counter.setCount(0);
 		}
+		counter.setCount(counter.getCount() + 1);
+		jdoTemplate.makePersistent(counter);
+
 		return counter.getCount();
 	}
 
@@ -58,6 +66,15 @@ public class CounterDAO implements ICounterDAO {
 		counter.setName(name);
 		counter.setCount(initVal);
 		this.jdoTemplate.makePersistent(counter);
+	}
+
+	@Override
+	public void resetCount(String name, int count) {
+		final BodyfsCounters counter = jdoTemplate.getObjectById(BodyfsCounters.class, name);
+		if (counter != null) {
+			counter.setCount(count < 0 ? 0 : count);
+			jdoTemplate.makePersistent(counter);
+		}
 	}
 
 }

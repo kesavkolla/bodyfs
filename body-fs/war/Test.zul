@@ -1,13 +1,11 @@
 <?page title="Test" contentType="text/html;charset=UTF-8"?>
-<?script type="text/javascript" content="
-zk.afterMount(function() {
-	alert(zk.mounting);
-});
-"?>
 <zk>
-	<window title="Test" border="normal">
-		<vbox hflex="1" vflex="1" style="margin:10px" id="cntbox">
-			<div id="cntdiv" hflex="1" height="175px">Hello world</div>
-		</vbox>
-	</window>
+	<zscript>
+	ListModel strset = new com.bodyfs.ui.FakeListModel(100);
+</zscript>
+	<listbox id="list" width="200px" rows="10" model="&#36;{strset}" preloadSize="10">
+		<listhead>
+			<listheader label="Load on Demend" sort="none" />
+		</listhead>
+	</listbox>
 </zk>

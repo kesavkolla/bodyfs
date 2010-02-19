@@ -2,10 +2,13 @@
 package com.bodyfs.ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.zkoss.json.JSONArray;
+import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.Path;
@@ -13,11 +16,13 @@ import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Bandbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -105,9 +110,13 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		}
 
 		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
+		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
 
 		// Save the diagnois data
 		final Diagnosis diagnosis = new Diagnosis();
+		if (txtDiagnosisId.getValue() != null && txtDiagnosisId.getValue().length() > 0) {
+			diagnosis.setId(new Long(txtDiagnosisId.getValue()));
+		}
 		diagnosis.setDescription(txtDescription.getValue());
 		diagnosis.setName(txtDiagnosisName.getValue());
 		final List<Long> formulaIds = new ArrayList<Long>();
@@ -120,7 +129,62 @@ public class DiagnosesComposer extends GenericForwardComposer {
 
 		diagnosis.setFormulas(formulaIds);
 		herbDAO.createDiagnosis(diagnosis);
+		final ListModelList listmodel = (ListModelList) page.getAttribute("mdiagnoses");
+		listmodel.add(diagnosis);
+
+		final Listbox lstdiagnosis = (Listbox) Path.getComponent(page, "lstdiagnosis");
+		final AnnotateDataBinder binder = (AnnotateDataBinder) lstdiagnosis.getAttribute("binder", true);
+		System.out.println(binder);
+		binder.loadComponent(lstdiagnosis);
+
 		Clients.evalJavaScript("onSave()");
 	}
 
+	/**
+	 * This will delete the diagnosis clicked by the user
+	 * 
+	 * @param event
+	 */
+	public void onDeleteDiagnosis(final ForwardEvent event) {
+		// Get the listitem from the event's target (button)
+		// parent(hbox)->parent(listcell)->parent(listitem)
+		final Listitem li = (Listitem) event.getOrigin().getTarget().getParent().getParent().getParent();
+		final Diagnosis diagnosis = (Diagnosis) li.getValue();
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+		herbDAO.deleteDiagnosisById(diagnosis.getId());
+		// Remove it from the model and refresh the binder
+		final ListModelList listmodel = (ListModelList) page.getAttribute("mdiagnoses");
+		listmodel.remove(diagnosis);
+		final Listbox lstdiagnosis = (Listbox) Path.getComponent(page, "lstdiagnosis");
+		final AnnotateDataBinder binder = (AnnotateDataBinder) lstdiagnosis.getAttribute("binder", true);
+		binder.loadComponent(lstdiagnosis);
+	}
+
+	/**
+	 * Click on Edit button in the listbox setup all the editing fields
+	 * 
+	 * @param event
+	 */
+	@SuppressWarnings("unchecked")
+	public void onEditDiagnosis(final ForwardEvent event) {
+		// Get the listitem from the event's target (button)
+		// parent(hbox)->parent(listcell)->parent(listitem)
+		final Listitem li = (Listitem) event.getOrigin().getTarget().getParent().getParent().getParent();
+		final Diagnosis diagnosis = (Diagnosis) li.getValue();
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+		final Collection<HerbFormula> formulas = herbDAO.getFormulas(diagnosis.getFormulas());
+		final JSONObject obj = new JSONObject();
+		obj.put("id", diagnosis.getId());
+		obj.put("name", diagnosis.getName());
+		obj.put("description", diagnosis.getDescription());
+		final JSONArray arr = new JSONArray();
+		for (final HerbFormula formula : formulas) {
+			final JSONObject o = new JSONObject();
+			o.put("id", formula.getId());
+			o.put("name", formula.getName());
+			arr.add(o);
+		}
+		obj.put("formulas", arr);
+		Clients.evalJavaScript("SetupEdid(" + obj.toJSONString() + ");");
+	}
 }

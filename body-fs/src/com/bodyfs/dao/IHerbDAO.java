@@ -50,6 +50,13 @@ public interface IHerbDAO {
 
 	/**
 	 * 
+	 * @param formulaids
+	 * @return formula objects for the given list of ids
+	 */
+	public Collection<HerbFormula> getFormulas(final List<Long> formulaids);
+
+	/**
+	 * 
 	 * @return List of herbformulas for the given list of ids
 	 */
 	public Collection<Long> getFormulasIds(final List<Long> formulaids);
@@ -80,7 +87,7 @@ public interface IHerbDAO {
 	 * 
 	 * @return Retrieves all the diagnoses
 	 */
-	public Collection<Diagnosis> getDiagnoses();
+	public List<Diagnosis> getDiagnoses();
 
 	/**
 	 * Deletes the given diagnosis by the
@@ -88,4 +95,10 @@ public interface IHerbDAO {
 	 * @param id
 	 */
 	public void deleteDiagnosisById(final Long id);
+
+	/**
+	 * 
+	 * @return number of diagnoses in the database
+	 */
+	public int countDiagnosis();
 }

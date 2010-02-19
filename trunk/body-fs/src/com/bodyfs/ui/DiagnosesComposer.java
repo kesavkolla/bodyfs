@@ -91,15 +91,21 @@ public class DiagnosesComposer extends GenericForwardComposer {
 			return;
 		}
 		final String diagname = txtDiagnosisName.getValue().trim();
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
-		if (herbDAO.checkDiagnosisName(diagname)) {
-			try {
-				Messagebox.show("Diagnosis name already in use", "Error", Messagebox.OK, Messagebox.ERROR);
-			} catch (final Exception e) {
-			}
-			return;
-		}
+		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
 
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+
+		// For new Diagnoses do the validation of name
+		if (txtDiagnosisId.getValue() == null || txtDiagnosisId.getValue().equals("")) {
+
+			if (herbDAO.checkDiagnosisName(diagname)) {
+				try {
+					Messagebox.show("Diagnosis name already in use", "Error", Messagebox.OK, Messagebox.ERROR);
+				} catch (final Exception e) {
+				}
+				return;
+			}
+		}
 		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
 		if (txtFormulaIds.getValue() == null || txtFormulaIds.getValue().trim().length() <= 0) {
 			try {
@@ -110,8 +116,6 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		}
 
 		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
-		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
-
 		// Save the diagnois data
 		final Diagnosis diagnosis = new Diagnosis();
 		if (txtDiagnosisId.getValue() != null && txtDiagnosisId.getValue().length() > 0) {
@@ -172,10 +176,22 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		final Diagnosis diagnosis = (Diagnosis) li.getValue();
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		final Collection<HerbFormula> formulas = herbDAO.getFormulas(diagnosis.getFormulas());
-		final JSONObject obj = new JSONObject();
-		obj.put("id", diagnosis.getId());
-		obj.put("name", diagnosis.getName());
-		obj.put("description", diagnosis.getDescription());
+
+		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
+		txtDiagnosisId.setValue(diagnosis.getId().toString());
+		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
+		txtDescription.setValue(diagnosis.getDescription());
+		final Textbox txtDiagnosisName = (Textbox) Path.getComponent(page, "txtDiagnosisName");
+		txtDiagnosisName.setValue(diagnosis.getName());
+		txtDiagnosisName.setReadonly(true);
+		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
+		final StringBuilder sb = new StringBuilder();
+		for (HerbFormula formula : formulas) {
+			sb.append(formula.getId()).append(",");
+		}
+		sb.setLength(sb.length() - 1);
+		txtFormulaIds.setValue(sb.toString());
+
 		final JSONArray arr = new JSONArray();
 		for (final HerbFormula formula : formulas) {
 			final JSONObject o = new JSONObject();
@@ -183,7 +199,6 @@ public class DiagnosesComposer extends GenericForwardComposer {
 			o.put("name", formula.getName());
 			arr.add(o);
 		}
-		obj.put("formulas", arr);
-		Clients.evalJavaScript("SetupEdid(" + obj.toJSONString() + ");");
+		Clients.evalJavaScript("SetupEdit(" + arr.toJSONString() + ");");
 	}
 }

@@ -72,7 +72,7 @@ zk.afterMount(function() {
 			return;
 		}
 		var formulaids = $("$txtFormulaIds").val().split(",")
-		if (formulaids.length < 2) {
+		if(formulaids.length == 0 ||(formulaids.length == 1 && formulaids[0] == "")) {
 			jq.alert("Select atleast one formula to the diagnosis", {
 				title : "Error",
 				icon : "ERROR"
@@ -82,6 +82,7 @@ zk.afterMount(function() {
 			return;
 		}
 		$("$txtFormulaIds").blur();
+		$("$txtDiagnosisId").blur();
 	});
 
 	/*
@@ -127,18 +128,13 @@ function onSave() {
  */
 function clearData() {
 	/* Clear out all the values for the input fields */
-	var txtDiagnosisName = zk.Widget.$($("$txtDiagnosisName").attr("id"));
-	txtDiagnosisName.setValue("", true);
-
-	var txtDescription = zk.Widget.$($("$txtDescription").attr("id"));
-	txtDescription.setValue("", true);
-
-	var txtDiagnosisId = zk.Widget.$($("$txtDiagnosisId").attr("id"));
-	txtDiagnosisId.setValue("", true);
+	$($("$txtDiagnosisName").val("");
+	$($("$txtDescription").val(""));
+	$($("$txtDiagnosisId").val(""));
 
 	$("$divformulas").html("");
 	var bdformulas = zk.Widget.$($("$bdformulas"));
-	bdformulas.setValue("", true);
+	bdformulas.setValue("");
 
 	var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
 	lstformulas.setSelectedIndex(-1);
@@ -149,30 +145,13 @@ function clearData() {
  * @param data
  * @return
  */
-function SetupEdid(data) {
-	/* Setup id */
-	var txtDiagnosisId = zk.Widget.$($("$txtDiagnosisId").attr("id"));
-	txtDiagnosisId.setValue(data.id, true);
-	/* Setup name */
-	var txtDiagnosisName = zk.Widget.$($("$txtDiagnosisName").attr("id"));
-	txtDiagnosisName.setValue(data.name, true);
-	/* setup description */
-	var txtDescription = zk.Widget.$($("$txtDescription").attr("id"));
-	txtDescription.setValue(data.description, true);
-	/* Setup the txtFormulaIds */
-	var txtFormulaIds = zk.Widget.$($("$txtFormulaIds").attr("id"));
-	var tmpText = data.formulas[0].id;
-	for ( var i = 1, len = data.formulas.length; i < len; i++) {
-		tmpText = tmpText + "," + data.formulas[i].id;
-	}
-	txtFormulaIds.setValue(tmpText, true);
+function SetupEdit(data) {
 	/* setup the formula names */
 	var divformulas = $("$divformulas");
 	divformulas.html("");
-	for ( var i = 0, len = data.formulas.length; i < len; i++) {
-		divformulas.append("<span class='tag'><label><span>" + data.formulas[i].name
-				+ "</span><small class='close' title='close' formulaid='" + data.formulas[i].id
-				+ "'>x</small></label></span>");
+	for ( var i = 0, len = data.length; i < len; i++) {
+		divformulas.append("<span class='tag'><label><span>" + data[i].name
+				+ "</span><small class='close' title='close' formulaid='" + data[i].id + "'>x</small></label></span>");
 	}
 	/* open the div */
 	var widget = zk.Widget.$($("$cntdiv").attr("id"));

@@ -89,10 +89,6 @@ zk.afterMount(function() {
 	 */
 	$("$btnAdd").click(function() {
 		clearData();
-		/* change the create button to Create */
-		var btnCreate = zk.Widget.$($("$btnCreate").attr("id"));
-		btnCreate.setLabel("Create");
-
 		var widget = zk.Widget.$($("$cntdiv").attr("id"));
 		widget.show();
 		$("$cntdiv").hide().slideDown();
@@ -131,13 +127,19 @@ function onSave() {
  */
 function clearData() {
 	/* Clear out all the values for the input fields */
-	$("$txtFormulaIds").val("");
-	$("$txtDiagnosisName").val("");
-	$("$txtDescription").val("");
-	$("$txtDiagnosisId").val("");
+	var txtDiagnosisName = zk.Widget.$($("$txtDiagnosisName").attr("id"));
+	txtDiagnosisName.setValue("", true);
+
+	var txtDescription = zk.Widget.$($("$txtDescription").attr("id"));
+	txtDescription.setValue("", true);
+
+	var txtDiagnosisId = zk.Widget.$($("$txtDiagnosisId").attr("id"));
+	txtDiagnosisId.setValue("", true);
+
 	$("$divformulas").html("");
 	var bdformulas = zk.Widget.$($("$bdformulas"));
-	bdformulas.setValue("");
+	bdformulas.setValue("", true);
+
 	var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
 	lstformulas.setSelectedIndex(-1);
 }
@@ -148,22 +150,22 @@ function clearData() {
  * @return
  */
 function SetupEdid(data) {
+	/* Setup id */
+	var txtDiagnosisId = zk.Widget.$($("$txtDiagnosisId").attr("id"));
+	txtDiagnosisId.setValue(data.id, true);
 	/* Setup name */
 	var txtDiagnosisName = zk.Widget.$($("$txtDiagnosisName").attr("id"));
-	txtDiagnosisName.setValue(data.name);
+	txtDiagnosisName.setValue(data.name, true);
 	/* setup description */
 	var txtDescription = zk.Widget.$($("$txtDescription").attr("id"));
-	txtDescription.setValue(data.description);
-	/* change the create button to save */
-	var btnCreate = zk.Widget.$($("$btnCreate").attr("id"));
-	btnCreate.setLabel("Save");
+	txtDescription.setValue(data.description, true);
 	/* Setup the txtFormulaIds */
 	var txtFormulaIds = zk.Widget.$($("$txtFormulaIds").attr("id"));
 	var tmpText = data.formulas[0].id;
 	for ( var i = 1, len = data.formulas.length; i < len; i++) {
 		tmpText = tmpText + "," + data.formulas[i].id;
 	}
-	txtFormulaIds.setValue(tmpText);
+	txtFormulaIds.setValue(tmpText, true);
 	/* setup the formula names */
 	var divformulas = $("$divformulas");
 	divformulas.html("");

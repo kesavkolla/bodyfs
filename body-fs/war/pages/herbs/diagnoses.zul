@@ -65,7 +65,7 @@
 									</row>
 									<row spans="2,2">
 										<cell>
-											<button label="create" id="btnCreate"
+											<button label="save" id="btnCreate"
 												forward="onClick=cntbox.onCreateDiagnosis" />
 											<button label="cancel" id="btnCancel" />
 										</cell>

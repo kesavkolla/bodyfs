@@ -134,7 +134,6 @@ public class DiagnosesComposer extends GenericForwardComposer {
 
 		final Listbox lstdiagnosis = (Listbox) Path.getComponent(page, "lstdiagnosis");
 		final AnnotateDataBinder binder = (AnnotateDataBinder) lstdiagnosis.getAttribute("binder", true);
-		System.out.println(binder);
 		binder.loadComponent(lstdiagnosis);
 
 		Clients.evalJavaScript("onSave()");

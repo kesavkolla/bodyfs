@@ -72,7 +72,7 @@ zk.afterMount(function() {
 			return;
 		}
 		var formulaids = $("$txtFormulaIds").val().split(",")
-		if(formulaids.length == 0 ||(formulaids.length == 1 && formulaids[0] == "")) {
+		if (formulaids.length == 0 || (formulaids.length == 1 && formulaids[0] == "")) {
 			jq.alert("Select atleast one formula to the diagnosis", {
 				title : "Error",
 				icon : "ERROR"
@@ -128,9 +128,9 @@ function onSave() {
  */
 function clearData() {
 	/* Clear out all the values for the input fields */
-	$($("$txtDiagnosisName").val("");
-	$($("$txtDescription").val(""));
-	$($("$txtDiagnosisId").val(""));
+	$("$txtDiagnosisName").val("").blur();
+	$("$txtDescription").val("").blur();
+	$("$txtDiagnosisId").val("").blur();
 
 	$("$divformulas").html("");
 	var bdformulas = zk.Widget.$($("$bdformulas"));

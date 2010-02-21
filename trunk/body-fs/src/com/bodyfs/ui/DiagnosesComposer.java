@@ -163,6 +163,19 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		binder.loadComponent(lstdiagnosis);
 	}
 
+	public void onAddDignosis(final ForwardEvent event) {
+		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
+		txtDiagnosisId.setValue("");
+		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
+		txtDescription.setValue("");
+		final Textbox txtDiagnosisName = (Textbox) Path.getComponent(page, "txtDiagnosisName");
+		txtDiagnosisName.setValue("");
+		txtDiagnosisName.setReadonly(false);
+		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
+		txtFormulaIds.setText("");
+		Clients.evalJavaScript("setupAdd();");
+	}
+
 	/**
 	 * Click on Edit button in the listbox setup all the editing fields
 	 * 

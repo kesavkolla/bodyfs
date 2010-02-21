@@ -74,7 +74,7 @@
 							</grid>
 						</div>
 						<div style="background-color:#C3390B" hflex="1">
-							<button label="Add" id="btnAdd" />
+							<button label="Add" id="btnAdd" forward="onClick=cntbox.onAddDignosis" />
 						</div>
 						<listbox id="lstdiagnosis" hflex="1" rows="20" model="@{mdiagnoses }">
 							<listhead>

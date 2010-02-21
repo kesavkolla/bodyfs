@@ -85,16 +85,6 @@ zk.afterMount(function() {
 		$("$txtDiagnosisId").blur();
 	});
 
-	/*
-	 * Handle the click event on btnAdd
-	 */
-	$("$btnAdd").click(function() {
-		clearData();
-		var widget = zk.Widget.$($("$cntdiv").attr("id"));
-		widget.show();
-		$("$cntdiv").hide().slideDown();
-	});
-
 	$(".btnEdit").live("click", function() {
 		var btnEdit = zk.Widget.$($(this).attr("id"));
 		var lstdiagnosis = zk.Widget.$($("$lstdiagnosis").attr("id"));
@@ -138,6 +128,13 @@ function clearData() {
 
 	var lstformulas = zk.Widget.$($("$lstformulas").attr("id"));
 	lstformulas.setSelectedIndex(-1);
+}
+
+function setupAdd() {
+	var widget = zk.Widget.$($("$cntdiv").attr("id"));
+	widget.show();
+	$("$divformulas").html("");
+	$("$cntdiv").hide().slideDown();
 }
 
 /**

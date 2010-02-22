@@ -71,6 +71,16 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	}
 
 	@Override
+	public Collection<Herb> getHerbs(final List<Long> herbIds) {
+		return this.jdoTemplate.execute(new JdoCallback<Collection<Herb>>() {
+			public Collection<Herb> doInJdo(final PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery("select from " + Herb.class.getName() + " where :p.contains(id)");
+				return (Collection<Herb>) query.execute(herbIds);
+			};
+		}, true);
+	}
+
+	@Override
 	public HerbFormula addFormula(final HerbFormula forumula) {
 		// It's a new one so update the counter
 		if (forumula.getId() == null) {
@@ -120,9 +130,9 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	@Override
 	public void createDiagnosis(final Diagnosis diagnosis) {
 		if (diagnosis.getId() == null) {
-			this.jdoTemplate.makePersistent(diagnosis);
+			this.counterbDAO.increment(ICounterDAO.DIAGNOSIS_COUNTER);
 		}
-		this.counterbDAO.increment(ICounterDAO.DIAGNOSIS_COUNTER);
+		this.jdoTemplate.makePersistent(diagnosis);
 	}
 
 	@Override

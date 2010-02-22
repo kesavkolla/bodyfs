@@ -16,18 +16,8 @@
 <%
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
-	final JSONObject obj = new JSONObject();
-	obj.put("id", 10);
-	obj.put("name", "Kesav kolla");
-	JSONArray arr = new JSONArray();
-	for (int i = 0; i < 10; i++) {
-		JSONObject o = new JSONObject();
-		o.put("id", i);
-		o.put("name", "Name: " + i);
-		arr.add(o);
-	}
-	obj.put("formulas", arr);
-	out.println(obj.toJSONString());
+	final ICounterDAO counterDAO = ctx.getBean(ICounterDAO.class);
+	counterDAO.resetCount(ICounterDAO.DIAGNOSIS_COUNTER, 2);
 %>
 </body>
 </html>

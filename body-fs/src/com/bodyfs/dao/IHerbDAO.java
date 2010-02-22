@@ -35,6 +35,13 @@ public interface IHerbDAO {
 	public Herb getHerbById(final Long id);
 
 	/**
+	 * 
+	 * @param herbIds
+	 * @return retrieves all the herbs corresponds to the given herbids
+	 */
+	public Collection<Herb> getHerbs(final List<Long> herbIds);
+
+	/**
 	 * Persists the given formula
 	 * 
 	 * @param forumula

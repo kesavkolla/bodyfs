@@ -24,12 +24,14 @@
 									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
 										forward="onChange=controller.onDiagnosisChange">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
-											value="@{diagnosis }">
-										</comboitem>
+											value="@{diagnosis }" />
 									</combobox>
 								</n:td>
 								<n:td>
-									<div id="divFormulas" width="200px" height="200px" style="border:1px solid red"></div>
+									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
+										forward="onChange=controller.onFormulaChange">
+										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
+									</combobox>
 								</n:td>
 								<n:td>
 									<div id="divHerbs" width="200px" height="200px" style="border:1px solid red"></div>

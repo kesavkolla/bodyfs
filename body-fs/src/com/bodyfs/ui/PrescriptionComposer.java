@@ -24,7 +24,6 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Div;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
@@ -101,6 +100,12 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			page.setAttribute("diagnosislist", diagnoses);
 			final Combobox cmbDiagnosis = (Combobox) Path.getComponent(page, "cmbDiagnosis");
 			cmbDiagnosis.setAutocomplete(true);
+		}
+		final Collection<HerbFormula> formulalist = herbDAO.getFormulas();
+		if (formulalist != null) {
+			page.setAttribute("formulalist", formulalist);
+			final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
+			cmbFormulas.setAutocomplete(true);
 		}
 	}
 

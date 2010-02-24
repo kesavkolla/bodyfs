@@ -15,6 +15,10 @@ import com.bodyfs.model.HerbFormula;
  */
 public interface IHerbDAO {
 
+	public static final String DIAGNOSES_CACHE = IHerbDAO.class.getName() + ".Diagnoses";
+	public static final String FORMULAS_CACHE = IHerbDAO.class.getName() + ".Formulas";
+	public static final String HERBS_CACHE = IHerbDAO.class.getName() + ".Herbs";
+
 	/**
 	 * Persists the her
 	 * 
@@ -36,24 +40,35 @@ public interface IHerbDAO {
 
 	/**
 	 * 
+	 * @return retrieves all the herbs from the data store
+	 */
+	public List<Herb> getHerbs();
+
+	/**
+	 * 
 	 * @param herbIds
 	 * @return retrieves all the herbs corresponds to the given herbids
 	 */
 	public Collection<Herb> getHerbs(final List<Long> herbIds);
 
 	/**
-	 * Persists the given formula
 	 * 
-	 * @param forumula
-	 * @return
+	 * @param herbIds
+	 * @return List of herbids for the given list of ids
 	 */
-	public HerbFormula addFormula(final HerbFormula forumula);
+	public Collection<Long> getHerbIds(final List<Long> herbIds);
+
+	/**
+	 * 
+	 * @return number of herbs in the database
+	 */
+	public int countHerbs();
 
 	/**
 	 * 
 	 * @return Retrieves all the formulas as a list
 	 */
-	public Collection<HerbFormula> getFormulas();
+	public List<HerbFormula> getFormulas();
 
 	/**
 	 * 
@@ -69,11 +84,24 @@ public interface IHerbDAO {
 	public Collection<Long> getFormulasIds(final List<Long> formulaids);
 
 	/**
+	 * Persists the given formula object
+	 * 
+	 * @param diagnosis
+	 */
+	public void createFormula(final HerbFormula formula);
+
+	/**
 	 * Deletes the formula by given id
 	 * 
 	 * @param id
 	 */
 	public void deleteFormulaById(final Long id);
+
+	/**
+	 * 
+	 * @return number of diagnoses in the database
+	 */
+	public int countFormulas();
 
 	/**
 	 * Persists the given diagnosis object

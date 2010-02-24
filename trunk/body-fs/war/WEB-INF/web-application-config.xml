@@ -20,4 +20,13 @@
 			<ref bean="persistenceManagerFactory" />
 		</property>
 	</bean>
+	<bean id="cacheManager" class="net.sf.jsr107cache.CacheManager" factory-method="getInstance" scope="singleton" />
+	<bean id="cacheFactory" factory-bean="cacheManager" factory-method="getCacheFactory" scope="singleton" />
+	<bean id="datacache" factory-bean="cacheFactory" factory-method="createCache" scope="singleton" name="datacache">
+		<constructor-arg value="#{ T(java.util.Collections).emptyMap() }" index="0" type="java.util.Map" />
+	</bean>
+	<bean id="herbDAO" class="com.bodyfs.dao.impl.HerbDAO">
+		<property name="cache" ref="datacache" />
+	</bean>
+
 </beans>

@@ -1,7 +1,4 @@
 <!-- $Id$ -->
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<south size="20px">
-		<div>&#169;Body Feng Shui</div>
-	</south>
 </zk>

@@ -5,12 +5,7 @@
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
-			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
-				<north size="50px">
-					<hbox>
-						<toolbarbutton label="New Patient" image="/img/user_add.png" href="/pages/usermgmt/npi.zul" />
-					</hbox>
-				</north>
+			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer" style="margin-left:10px">
 				<center border="20" autoscroll="true">
 					<vbox hflex="true" vflex="1">
 						<space />

@@ -1,0 +1,69 @@
+<?page title="Welcome - Body Feng Shui, CA" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="/css/bodyfs.css"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		div.z-grid { border: none} div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row
+		.z-cell { background: #660000; border:none; }
+	</style>
+	<borderlayout id="main" style="background:#1e1406;">
+		<north size="96px" border="0">
+			<borderlayout hflex="1" vflex="1"
+				style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+				<west border="0">
+					<image src="/img/banner6.jpg" hflex="1" width="800px" height="100%" id="logo" />
+				</west>
+				<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+					<hbox style="padding-top:20px">
+						<a href="/logout.zul" sclass="lg-label">Logout</a>
+						<space />
+						<label id="username" sclass="lg-label" style="font-weight: bold" />
+						<space width="30px" />
+					</hbox>
+				</east>
+			</borderlayout>
+		</north>
+		<center hflex="1">
+			<grid width="100%">
+				<rows>
+					<row>
+						<cell>
+							<space height="300px" />
+						</cell>
+						<cell>
+							<vbox>
+								<space height="200px" />
+								<n:table>
+									<n:tr valign="top">
+										<n:td align="right">Name:</n:td>
+										<n:td align="left">
+											<textbox id="usertb" width="200px" value="" />
+										</n:td>
+									</n:tr>
+									<n:tr>
+										<n:td></n:td>
+									</n:tr>
+									<n:tr valign="top">
+										<n:td align="right">Password:</n:td>
+										<n:td align="left">
+											<textbox id="pwdtb" width="200px" type="password" />
+										</n:td>
+									</n:tr>
+									<n:tr>
+										<n:td></n:td>
+									</n:tr>
+									<n:tr>
+										<n:td></n:td>
+										<n:td>
+											<button id="login" label="Login" height="28px" width="75px"
+												style="font-size:14px" />
+										</n:td>
+									</n:tr>
+								</n:table>
+							</vbox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</center>
+	</borderlayout>
+</zk>

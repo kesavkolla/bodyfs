@@ -2,7 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" style="padding-left:5px;background-color:white">
 		<panel title="Health Insurance Info" border="normal" style="margin-bottom:10px">
 			<panelchildren>
 				<grid fixedLayout="true" style="border:0px" hflex="1" vflex="1">

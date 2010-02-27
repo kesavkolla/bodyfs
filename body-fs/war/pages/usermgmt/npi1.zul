@@ -2,7 +2,8 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" hflex="1">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" hflex="1"
+		style="padding-left:5px;background-color:white">
 		<rows>
 			<row hflex="true">
 				First Name:

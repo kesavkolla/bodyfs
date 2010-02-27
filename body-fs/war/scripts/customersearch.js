@@ -4,7 +4,7 @@
  * @return
  */
 function setupResultsClick() {
-	$("$persons").find("tr.z-listitem").live("dblclick", function() {
+	$("$persons").find("tr.z-listitem").live("click", function() {
 		openPatient($(this));
 	});
 	setupPanel();

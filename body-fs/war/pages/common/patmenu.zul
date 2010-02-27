@@ -2,17 +2,22 @@
 <zk>
 	<hbox>
 		<toolbarbutton label="Report Card" image="/img/report_card.png"
-			href="/pages/patient/patientview.zul?id=${param.id }" />
+			href="/pages/patient/patientview.zul?id=${param.id }" width="100px" />
+
 		<toolbarbutton label="Sign in" image="/img/vcard_add.png"
-			href="/pages/patient/weeklyvisit.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
+			href="/pages/patient/weeklyvisit.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }"
+			width="100px" />
 		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png"
-			href="/pages/patient/diagnosis.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
+			href="/pages/patient/diagnosis.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }"
+			width="110px" />
 		<toolbarbutton id="tbtnTreatment" label="Treatment" image="/img/procedure.gif"
-			href="/pages/patient/treatment.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
+			href="/pages/patient/treatment.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }"
+			width="125px" style="background-color:#F1B772; color:black;"/>
 		<toolbarbutton id="tbtnPrescription" label="Prescription" image="/img/prescription.png"
-			href="/pages/patient/prescription.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }" />
-		<toolbarbutton label="EMI data" image="/img/chart.png" href="/pages/patient/mpi.zul?id=${param.id }" />
+			href="/pages/patient/prescription.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }"
+			width="125px" />
+		<toolbarbutton label="EMI" image="/img/chart.png" href="/pages/patient/mpi.zul?id=${param.id }" width="100px" />
 		<toolbarbutton label="Profile" image="/img/user_add.png"
-			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" />
+			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" width="100px" />
 	</hbox>
 </zk>

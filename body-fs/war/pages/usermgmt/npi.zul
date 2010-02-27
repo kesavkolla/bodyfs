@@ -6,10 +6,6 @@
 		forward="onBookmarkChange=npigrid.onBookmarkChange">
 		<center vflex="1" hflex="1">
 			<borderlayout id="npigrid" apply="com.bodyfs.ui.NPIComposer">
-				<north>
-					<toolbarbutton label="Search Customers" image="/img/user_group_colored.png"
-						href="/pages/usermgmt/customersearch.zul" />
-				</north>
 				<center autoscroll="true" hflex="1" vflex="1">
 					<include id="npiinclude" src="npi1.zul" hflex="1" vflex="1" width="98%" />
 				</center>

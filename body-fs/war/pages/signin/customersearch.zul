@@ -5,11 +5,11 @@
 <?script type="text/javascript" src="/scripts/customersearch.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout style="background:#1e1406;" id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
-		<north size="100px" border="0">
+		<north size="96px" border="0">
 			<borderlayout hflex="1" vflex="1"
 				style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<west border="0">
-					<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" id="logo" />
+					<image src="/img/banner7.jpg" hflex="1" width="952px" height="95px" id="logo" />
 				</west>
 			</borderlayout>
 		</north>

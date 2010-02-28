@@ -222,6 +222,13 @@ public class Person implements Serializable {
 		this.married = married;
 	}
 
+	public String getDisplayName() {
+		if (this.firstName == null) {
+			return this.lastName;
+		}
+		return this.lastName + " " + this.firstName;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();

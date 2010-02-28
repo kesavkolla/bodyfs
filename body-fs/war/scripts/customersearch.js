@@ -23,7 +23,7 @@ function openPatient(jqobj) {
 		if (typeof (pageurl) != "undefined" && pageurl.length > 0) {
 			zUtl.go(pageurl + "?id=" + sclass);
 		} else {
-			zUtl.go("/pages/patient/patientview.zul?id=" + sclass);
+			zUtl.go("/pages/patient/patientview.zul?savepat=true&id=" + sclass);
 		}
 	}
 }

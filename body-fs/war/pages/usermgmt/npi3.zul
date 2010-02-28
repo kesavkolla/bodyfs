@@ -3,7 +3,7 @@
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" style="padding-left:5px;background-color:white">
-		<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px">
+		<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -37,7 +37,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="General Symptoms" border="normal" style="margin-bottom:10px">
+		<panel title="General Symptoms" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -45,7 +45,8 @@
 						<checkbox label="Heavy appetite" checked="@{gs.heavyappetite, save-when='btnNext.onClick' }" />
 						<checkbox label="Strongly like cold drinks"
 							checked="@{gs.cooldrinks, save-when='btnNext.onClick' }" />
-						<checkbox label="Strongly like hot drinks" checked="@{gs.hotdrinks, save-when='btnNext.onClick' }" />
+						<checkbox label="Strongly like hot drinks"
+							checked="@{gs.hotdrinks, save-when='btnNext.onClick' }" />
 						<checkbox label="Recent weight loss/gain" checked="@{gs.weight, save-when='btnNext.onClick' }" />
 					</vbox>
 					<vbox>
@@ -57,9 +58,12 @@
 						<checkbox label="Lack of Strength" checked="@{gs.lackofStrength, save-when='btnNext.onClick' }" />
 					</vbox>
 					<vbox>
-						<checkbox label="Bodily heaviness" checked="@{gs.bodilyheaviness, save-when='btnNext.onClick' }" />
-						<checkbox label="Cold hands or feet" checked="@{gs.coldhandsorfeet, save-when='btnNext.onClick' }" />
-						<checkbox label="Poor circulation" checked="@{gs.poorcirculation, save-when='btnNext.onClick' }" />
+						<checkbox label="Bodily heaviness"
+							checked="@{gs.bodilyheaviness, save-when='btnNext.onClick' }" />
+						<checkbox label="Cold hands or feet"
+							checked="@{gs.coldhandsorfeet, save-when='btnNext.onClick' }" />
+						<checkbox label="Poor circulation"
+							checked="@{gs.poorcirculation, save-when='btnNext.onClick' }" />
 						<checkbox label="Shortness of breath"
 							checked="@{gs.shortnessofbreath, save-when='btnNext.onClick' }" />
 						<checkbox label="Fever" checked="@{gs.fever, save-when='btnNext.onClick' }" />
@@ -79,7 +83,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Head, Eyes, Ears, Nose, Throat" border="normal" style="margin-bottom:10px">
+		<panel title="Head, Eyes, Ears, Nose, Throat" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -107,7 +111,8 @@
 						<checkbox label="Gum problems" checked="@{ent.gumproblems, save-when='btnNext.onClick' }" />
 						<checkbox label="Sores on lips or tongue" checked="@{ent.sores, save-when='btnNext.onClick' }" />
 						<checkbox label="Dry mouth" checked="@{ent.drymouth, save-when='btnNext.onClick' }" />
-						<checkbox label="Excessive saliva" checked="@{ent.excessivesaliva, save-when='btnNext.onClick' }" />
+						<checkbox label="Excessive saliva"
+							checked="@{ent.excessivesaliva, save-when='btnNext.onClick' }" />
 						<checkbox label="Sinus problems" checked="@{ent.sinusproblems, save-when='btnNext.onClick' }" />
 						<checkbox label="Excessive phlegm Color:"
 							checked="@{ent.phlegmColor, save-when='btnNext.onClick' }" />
@@ -117,7 +122,8 @@
 							checked="@{ent.recurrentsorethroat, save-when='btnNext.onClick' }" />
 						<checkbox label="Swollen glands" checked="@{ent.swollenglands, save-when='btnNext.onClick' }" />
 						<checkbox label="Lumps in throat" checked="@{ent.lumpsinthroat, save-when='btnNext.onClick' }" />
-						<checkbox label="Enlarged thyroid" checked="@{ent.enlargedthyroid, save-when='btnNext.onClick' }" />
+						<checkbox label="Enlarged thyroid"
+							checked="@{ent.enlargedthyroid, save-when='btnNext.onClick' }" />
 						<checkbox label="Nosebleeds" checked="@{ent.nosebleeds, save-when='btnNext.onClick' }" />
 						<checkbox label="Ringing in ears (High or Low?)"
 							checked="@{ent.ringinginears, save-when='btnNext.onClick' }" />
@@ -134,7 +140,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Respiratory" border="normal" style="margin-bottom:10px">
+		<panel title="Respiratory" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -146,7 +152,8 @@
 					</vbox>
 					<vbox>
 						<checkbox label="Tight chest" checked="@{rp.tightchest, save-when='btnNext.onClick' }" />
-						<checkbox label="Asthama/wheezing" checked="@{rp.asthamawheezing, save-when='btnNext.onClick' }" />
+						<checkbox label="Asthama/wheezing"
+							checked="@{rp.asthamawheezing, save-when='btnNext.onClick' }" />
 						<checkbox label="Difficult inhalation? exhalation ?"
 							checked="@{rp.difficultinhalation, save-when='btnNext.onClick' }" />
 					</vbox>
@@ -157,16 +164,17 @@
 					</vbox>
 					<vbox>
 						Color of phlegm
-						<textbox rows="2" vflex="1" value="@{rp.colorofphlegm, save-when='btnNext.onClick' }" />
+						<textbox rows="2" hflex="1" value="@{rp.colorofphlegm, save-when='btnNext.onClick' }" />
 					</vbox>
 					<vbox>
-						<checkbox label="Coughing up blood" checked="@{rp.coughingupblood, save-when='btnNext.onClick' }" />
+						<checkbox label="Coughing up blood"
+							checked="@{rp.coughingupblood, save-when='btnNext.onClick' }" />
 						<checkbox label="Pneumonia" checked="@{rp.pneumonia, save-when='btnNext.onClick' }" />
 					</vbox>
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Cardiovascular" border="normal" style="margin-bottom:10px">
+		<panel title="Cardiovascular" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -175,7 +183,8 @@
 						<checkbox label="Blood clots" checked="@{cv.bloodclots, save-when='btnNext.onClick' }" />
 					</vbox>
 					<vbox>
-						<checkbox label="Low blood pressure" checked="@{cv.lowbloodpressure, save-when='btnNext.onClick' }" />
+						<checkbox label="Low blood pressure"
+							checked="@{cv.lowbloodpressure, save-when='btnNext.onClick' }" />
 						<checkbox label="Fainting" checked="@{cv.fainting, save-when='btnNext.onClick' }" />
 					</vbox>
 					<vbox>

@@ -21,7 +21,7 @@
 							post
 						</hbox>
 						<panel id="optionsPanel" framable="true" title="More" maximizable="false" minimizable="false"
-							border="normal" collapsible="true" closable="false" hflex="true" open="false">
+							border="normal" collapsible="true" closable="false" width="96%" open="false">
 							<panelchildren>
 								<div id="extendedSearch">
 									<grid id="extendedSearchGrid" fixedLayout="true">
@@ -60,7 +60,7 @@
 								</div>
 							</panelchildren>
 						</panel>
-						<div id="results" height="100%" style="position:realtive;bottom:0;right:0">
+						<div id="results" height="100%" style="position:realtive;bottom:0;right:0" width="96%">
 							<listbox id="persons" fixedLayout="true" model="@{ customersearch$composer.results }"
 								vflex="true">
 								<listhead>

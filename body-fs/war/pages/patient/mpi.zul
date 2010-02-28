@@ -1,4 +1,4 @@
-<?page title="MPI Data" contentType="text/html;charset=UTF-8"?>
+<?page title="EMI Data" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>

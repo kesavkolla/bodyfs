@@ -3,7 +3,7 @@
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" style="padding-left:5px;background-color:white">
-		<panel title="Gastrointestinal" border="normal" style="margin-bottom:10px">
+		<panel title="Gastrointestinal" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -68,7 +68,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Musculoskeletal" border="normal" style="margin-bottom:10px">
+		<panel title="Musculoskeletal" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -95,7 +95,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Skin and Hair" border="normal" style="margin-bottom:10px">
+		<panel title="Skin and Hair" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -125,7 +125,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Neuropsychological" border="normal" style="margin-bottom:10px">
+		<panel title="Neuropsychological" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -155,7 +155,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Genitourinary" border="normal" style="margin-bottom:10px">
+		<panel title="Genitourinary" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -191,7 +191,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Gynecology" border="normal" style="margin-bottom:10px">
+		<panel title="Gynecology" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
@@ -244,7 +244,7 @@
 				</hbox>
 			</panelchildren>
 		</panel>
-		<panel title="Other" border="normal" style="margin-bottom:10px">
+		<panel title="Other" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<textbox hflex="1" rows="4" value="@{gy.other, save-when='btnNext.onClick' }" />
 			</panelchildren>

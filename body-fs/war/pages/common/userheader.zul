@@ -1,10 +1,10 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <?meta name="keywords" content="Body Feng Shui, Chinese Medicine, Belmont" ?>
 <zk>
-	<north size="100px" border="0">
+	<north size="96px" border="0">
 		<borderlayout hflex="1" vflex="1" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 			<west border="0">
-				<image src="/img/logo_small_size.jpg" hflex="1" width="404px" height="100px" id="logo" />
+				<image src="/img/banner7.jpg" hflex="1" width="952px" height="95px" id="logo" />
 			</west>
 			<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<hbox style="padding-top:20px">
@@ -20,9 +20,11 @@
 		collapsible="true">
 		<div>
 			<vbox width="100%">
-				<toolbarbutton label="Report" image="/img/report_card.png" hflex="1" href="/pages/user/index.zul" />
+				<toolbarbutton label="Report" image="/img/report_card.png" hflex="1" href="/pages/user/index.zul"
+					zclass="${page.title eq 'Body Feng Shi' ? 'bodyfs-toolbar-selected' : '' }" />
 				<toolbarbutton label="Calendar" image="/img/ical.png" hflex="1" href="#" />
-				<toolbarbutton label="EMI" image="/img/chart.png" hflex="1" href="/pages/user/emi.zul" />
+				<toolbarbutton label="EMI" image="/img/chart.png" hflex="1" href="/pages/user/emi.zul"
+					zclass="${page.title eq 'EMI Data' ? 'bodyfs-toolbar-selected' : '' }" />
 				<toolbarbutton label="Measurements" image="/img/database.png" hflex="1" href="#" />
 				<toolbarbutton label="WeeklyVisit" image="/img/vcard_add.png" hflex="1"
 					href="/pages/user/diagnosis.zul" />

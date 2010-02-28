@@ -2,13 +2,11 @@ package com.bodyfs.ui;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.api.Window;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.ILoginDAO;
@@ -19,49 +17,41 @@ import com.bodyfs.model.PersonType;
 
 public class LoginWindow extends GenericForwardComposer {
 
-	AnnotateDataBinder binder;
-
-	Textbox usertb;
-	Textbox pwdtb;
-	Button login;
-	Window win;
-	Label msg;
-	Textbox redirecturl;
-
 	private static final long serialVersionUID = 4311810570038057744L;
 
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		win = (Window) comp;
-		// win.
-		binder = new AnnotateDataBinder(comp);
-		binder.loadAll();
 	}
 
 	public void doLogin() {
-		String user = usertb.getValue().toLowerCase();
-		String pwd = pwdtb.getValue();
+		final Textbox txtUserName = (Textbox) Path.getComponent(page, "txtUserName");
+		final Textbox txtPasswd = (Textbox) Path.getComponent(page, "txtPasswd");
+		final Textbox txtRedirectUrl = (Textbox) Path.getComponent(page, "txtRedirectUrl");
+		final Label lblMsg = (Label) Path.getComponent(page, "lblMsg");
+
+		String user = txtUserName.getValue().toLowerCase();
+		String pwd = txtPasswd.getValue();
 
 		if ((user != null && user.isEmpty()) || (pwd != null && pwd.isEmpty())) {
-			msg.setValue("*Need user name and password!");
+			lblMsg.setValue("*Need user name and password!");
 			return;
 		}
 
 		final LoginInfo userDetails = getLoginDetails(user, pwd);
 
 		if (userDetails == null) {
-			msg.setValue("*Wrong username or password!");
+			lblMsg.setValue("*Wrong username or password!");
 			return;
 		}
 
 		session.setAttribute(Constants.SESSION_LOGIN_CRED, userDetails);
 
-		msg.setValue("");
+		lblMsg.setValue("");
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(userDetails.getPersonId());
 		session.setAttribute(Constants.SESSION_PERSON_TYPE, person.getPersonType());
-		if (redirecturl != null && redirecturl.getText() != null && redirecturl.getText().length() > 0) {
-			Executions.sendRedirect(redirecturl.getText());
+		if (txtRedirectUrl != null && txtRedirectUrl.getText() != null && txtRedirectUrl.getText().length() > 0) {
+			Executions.sendRedirect(txtRedirectUrl.getText());
 			return;
 		}
 		if (person.getPersonType() == PersonType.EMPLOYEE) {
@@ -69,7 +59,6 @@ public class LoginWindow extends GenericForwardComposer {
 		} else {
 			Executions.sendRedirect("/pages/user/index.zul");
 		}
-		binder.loadAll();
 	}
 
 	public void onClick$login() throws Exception {

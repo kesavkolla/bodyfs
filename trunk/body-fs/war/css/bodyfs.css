@@ -95,3 +95,11 @@ div.z-grid-header tr.z-columns,div.z-grid-header tr.z-auxhead {
 	background: #C7E5F1 repeat-x 0 0;
 	background-image: url('/img/borderlayout-hm.png');
 }
+
+.bodyfs-toolbar-selected {
+	background-color: #F1B772;
+	color: black;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Verdana;
+}

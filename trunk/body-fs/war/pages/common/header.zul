@@ -1,5 +1,6 @@
 <!-- $Id$ -->
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/bodyfs.css"?>
 <?meta name="keywords" content="Body Feng Shui, Chinese Medicine, Belmont" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<north size="96px" border="0">

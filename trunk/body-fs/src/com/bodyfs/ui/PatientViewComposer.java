@@ -3,6 +3,10 @@
  */
 package com.bodyfs.ui;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
+import net.sf.jsr107cache.Cache;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
@@ -28,6 +32,8 @@ import com.bodyfs.ui.util.CommonUtils;
  * 
  */
 public class PatientViewComposer extends GenericAutowireComposer {
+
+	public static final String QUICK_PATIENT_LIST = "com.bodyfs.quickpatientlist";
 
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
@@ -56,6 +62,8 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
+
+		savePatientQuickList(person);
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());
 		final int totalWeeks = 10;
@@ -106,5 +114,41 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * This method adds the selected patient into the quick patient list. If the
+	 * URL is coming from the customer search then only save the patient in the
+	 * quicklist. This list is saved in memcache.
+	 * 
+	 * @param person
+	 */
+	@SuppressWarnings("unchecked")
+	private synchronized void savePatientQuickList(final Person person) {
+		// Check for the URL parameter if the parameter doesn't exist nothing to
+		// do
+		if (execution.getParameter("savepat") == null || !execution.getParameter("savepat").equals("true")) {
+			return;
+		}
+		// Get the queue object from cache if doesn't exist create a new one
+		final Cache cache = (Cache) SpringUtil.getBean("datacache");
+		ArrayBlockingQueue<String> quicklist = null;
+		if (cache.containsKey(QUICK_PATIENT_LIST)) {
+			quicklist = (ArrayBlockingQueue<String>) cache.get(QUICK_PATIENT_LIST);
+		} else {
+			quicklist = new ArrayBlockingQueue<String>(5);
+		}
+		// If the queue is already full remove one
+		if (quicklist.remainingCapacity() == 0) {
+			quicklist.poll();
+		}
+		final String patStr = person.getId() + ":" + person.getDisplayName();
+		if (quicklist.contains(patStr)) {
+			quicklist.remove(patStr);
+		}
+		// Add this patient in the queue
+		quicklist.offer(patStr);
+		// Save the queue back into the cache
+		cache.put(QUICK_PATIENT_LIST, quicklist);
 	}
 }

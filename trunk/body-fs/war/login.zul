@@ -11,8 +11,6 @@
 				style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<west border="0">
 					<image src="/img/banner6.jpg" hflex="1" width="800px" height="100%" id="logo" />
-					<textbox id="txtRedirectUrl" value="${param.redirect }" if="${not empty param.redirect}"
-						style="display:none" />
 				</west>
 			</borderlayout>
 		</north>
@@ -22,6 +20,8 @@
 					<row>
 						<cell>
 							<space height="300px" />
+							<textbox id="txtRedirectUrl" value="${param.redirect }" if="${not empty param.redirect}"
+								style="display:none" />
 						</cell>
 						<cell>
 							<vbox>

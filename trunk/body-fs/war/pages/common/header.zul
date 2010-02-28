@@ -24,28 +24,8 @@
 			<vbox width="100%">
 				<toolbarbutton label="Customers" image="/img/user_group_colored.png" hflex="1"
 					href="/pages/usermgmt/customersearch.zul" />
-				<div style="font-size:14px; text-align:right;overflow:auto">
-					<n:div
-						style="background-color:#F1B772;color:black;border:1px solid black;margin-left:15px;margin-right:15px;text-align:center;font-weight:bold;font-size:12px">
-						Neel Kamal
-					</n:div>
-					<div
-						style="background-color:lightgray;color:black;border:1px solid black;margin-left:15px;margin-right:15px;text-align:center">
-						Neel Kamal
-					</div>
-					<div
-						style="background-color:lightgray;color:black;border:1px solid black;margin-left:15px;margin-right:15px;text-align:center">
-						Neel Kamal
-					</div>
-					<div
-						style="background-color:lightgray;color:black;border:1px solid black;margin-left:15px;margin-right:15px;text-align:center">
-						Neel Kamal
-					</div>
-					<div
-						style="background-color:lightgray;color:black;border:1px solid black;margin-left:15px;margin-right:15px;text-align:center">
-						Neel Kamal
-					</div>
-				</div>
+				<div style="font-size:14px; text-align:right;overflow:auto"
+					apply="com.bodyfs.ui.QuickPatientListComposer" />
 				<toolbarbutton label="New Patient" image="/img/user_add.png" href="/pages/usermgmt/npi.zul" hflex="1" />
 				<!-- toolbarbutton label="Scheduling" image="/img/ical.png" hflex="1" href="/pages/schedule/calendar.zul" / -->
 				<!-- toolbarbutton label="Settings" image="/img/preferences.png" hflex="1" href="#" /-->

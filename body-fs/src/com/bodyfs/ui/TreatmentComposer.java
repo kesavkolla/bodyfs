@@ -141,8 +141,6 @@ public class TreatmentComposer extends GenericForwardComposer {
 			page.setAttribute("treatment", treatment);
 			binder.loadAll();
 		}
-
-		Clients.evalJavaScript("reloadMarkers()");
 	}
 
 }

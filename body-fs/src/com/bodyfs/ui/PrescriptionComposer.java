@@ -2,15 +2,12 @@
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.zkoss.json.JSONArray;
-import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -20,7 +17,6 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.metainfo.ComponentInfo;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
@@ -29,7 +25,6 @@ import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.Diagnosis;
-import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.ui.util.CommonUtils;
@@ -116,6 +111,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	public void onDiagnosisChange(final ForwardEvent event) {
 		final Combobox cmbDiagnosis = (Combobox) Path.getComponent(event.getPage(), "cmbDiagnosis");
+		final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
 
 		if (cmbDiagnosis.getSelectedIndex() == -1 || cmbDiagnosis.getSelectedItem() == null) {
 			return;
@@ -124,31 +120,5 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final Diagnosis diagnosis = (Diagnosis) cmbDiagnosis.getSelectedItem().getValue();
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		final Collection<HerbFormula> formulas = herbDAO.getFormulas(diagnosis.getFormulas());
-		final List<Long> herbIds = new ArrayList<Long>();
-		final JSONObject retObj = new JSONObject();
-		final JSONArray arrFormulas = new JSONArray();
-		for (final HerbFormula formula : formulas) {
-			for (final Long herbId : formula.getHerbs()) {
-				if (herbIds.indexOf(herbId) == -1) {
-					herbIds.add(herbId);
-				}
-			}
-			final JSONObject obj = new JSONObject();
-			obj.put("name", formula.getName());
-			obj.put("herbs", formula.getHerbs());
-			arrFormulas.add(obj);
-		}
-		final Collection<Herb> herbs = herbDAO.getHerbs(herbIds);
-		final JSONArray arrHerbs = new JSONArray();
-		for (final Herb herb : herbs) {
-			final JSONObject obj = new JSONObject();
-			obj.put("name", herb.getCommonName());
-			obj.put("id", herb.getId());
-			arrHerbs.add(obj);
-		}
-		retObj.put("formulas", arrFormulas);
-		retObj.put("herbs", arrHerbs);
-		Clients.evalJavaScript("DisplayData(" + retObj.toJSONString() + ");");
 	}
-
 }

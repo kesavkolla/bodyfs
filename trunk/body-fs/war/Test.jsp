@@ -3,7 +3,8 @@
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="com.bodyfs.dao.IHerbDAO"%>
-<%@page import="com.bodyfs.dao.impl.HerbDAO"%><html>
+<%@page import="com.bodyfs.dao.impl.HerbDAO"%>
+<%@page import="com.bodyfs.dao.ICounterDAO"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html">
 <title>Insert title here</title>
@@ -12,8 +13,9 @@
 <%
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
-	final IHerbDAO herbDAO = (HerbDAO) ctx.getBean(IHerbDAO.class);
-	out.println(herbDAO.getFormulas());
+	final ICounterDAO counterDAO = ctx.getBean(ICounterDAO.class);
+	counterDAO.createCount(ICounterDAO.DIAGNOSIS_COUNTER, 3);
+	counterDAO.createCount(ICounterDAO.HERBFORUMLA_COUNTER, 1000);
 %>
 </body>
 </html>

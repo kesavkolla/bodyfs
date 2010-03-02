@@ -21,6 +21,8 @@
 							<n:tr valign="top">
 								<n:td>&amp;nbsp;</n:td>
 								<n:td>
+									Select Diagnosis
+									<n:br />
 									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
 										forward="onChange=controller.onDiagnosisChange">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
@@ -28,6 +30,8 @@
 									</combobox>
 								</n:td>
 								<n:td>
+									Select Formula
+									<n:br />
 									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
 										forward="onChange=controller.onFormulaChange">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
@@ -39,10 +43,10 @@
 								<n:td>
 									Portion:
 									<n:br />
-									<textbox id="txtPortion" hflex="1" />
+									<intbox id="txtPortion" hflex="1" constraint="no empty" />
 								</n:td>
 								<n:td>
-									<n:button id="btnAdd">Add</n:button>
+									<button id="btnAdd" label="Add" forward="onClick=controller.onAdd" />
 								</n:td>
 							</n:tr>
 						</n:table>

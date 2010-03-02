@@ -1,21 +1,25 @@
 function initJS() {
+	console.log("init js");
+	console.log($("#btnAdd"));
 	$("#btnAdd").click(AddPortion);
 	$(".imgDelete").live("click", DeleteRow);
 }
 
+/**
+ * This function display the selected herbs
+ * 
+ * @param data
+ * @return
+ */
 function DisplayData(data) {
-	var cmbDiagnosis = zk.Widget.$($("$cmbDiagnosis").attr("id"));
-	$.data(document.body, cmbDiagnosis.getValue(), data);
-	$("$divFormulas").html($.map(data.formulas, function(formula) {
-		return formula.name;
-	}).join("<br>"));
-
 	$("$divHerbs").html(data.herbs.map(function(herb) {
 		return herb.name;
 	}).join("<br />"));
+	$.data(document.body, data);
 }
 
 function AddPortion() {
+	console.log("AddPortion");
 	var cmbDiagnosis = zk.Widget.$($("$cmbDiagnosis").attr("id"));
 	var data = $.data(document.body, cmbDiagnosis.getValue());
 	if (isEmptyObject(data) || isEmptyObject(data.formulas)) {

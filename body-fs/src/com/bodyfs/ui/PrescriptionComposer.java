@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.zkoss.json.JSONArray;
+import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -17,14 +19,17 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.metainfo.ComponentInfo;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.ListModelList;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.Diagnosis;
+import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.ui.util.CommonUtils;
@@ -105,20 +110,66 @@ public class PrescriptionComposer extends GenericForwardComposer {
 	}
 
 	/**
+	 * This is the event handler for Diagnosis combobox. When ever selected
+	 * diagnosis changes retrieve corresponding fomrulas and display them in
+	 * formulas combobox.
 	 * 
 	 * @param event
 	 */
-	@SuppressWarnings("unchecked")
 	public void onDiagnosisChange(final ForwardEvent event) {
 		final Combobox cmbDiagnosis = (Combobox) Path.getComponent(event.getPage(), "cmbDiagnosis");
 		final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
 
+		// If the selected item is null nothing to do
 		if (cmbDiagnosis.getSelectedIndex() == -1 || cmbDiagnosis.getSelectedItem() == null) {
 			return;
 		}
 
+		// Get the selected diagnosis and retrieve it's formulas
 		final Diagnosis diagnosis = (Diagnosis) cmbDiagnosis.getSelectedItem().getValue();
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		final Collection<HerbFormula> formulas = herbDAO.getFormulas(diagnosis.getFormulas());
+
+		// Set these formulas to the formula combobox
+		page.setAttribute("formulalist", formulas);
+		cmbFormulas.setModel(new ListModelList(formulas));
+		cmbFormulas.setSelectedIndex(-1);
+		cmbFormulas.setSelectedItem(null);
+		cmbFormulas.invalidate();
+	}
+
+	/**
+	 * This is event handler on the formulalist combobox. When ever the selected
+	 * formula changes retrieve all the herbs and display them in the Div
+	 * 
+	 * @param event
+	 */
+	@SuppressWarnings("unchecked")
+	public void onFormulaChange(final ForwardEvent event) {
+		final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
+		if (cmbFormulas.getSelectedIndex() == -1 || cmbFormulas.getSelectedItem() == null) {
+			return;
+		}
+		final HerbFormula formula = (HerbFormula) cmbFormulas.getSelectedItem().getValue();
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+		final Collection<Herb> herbs = herbDAO.getHerbs(formula.getHerbs());
+
+		final JSONObject retObject = new JSONObject();
+		{
+			final JSONObject obj = new JSONObject();
+			obj.put("id", formula.getId());
+			obj.put("name", formula.getName());
+			retObject.put("formula", obj);
+		}
+
+		final JSONArray herbsArray = new JSONArray();
+		for (final Herb herb : herbs) {
+			final JSONObject obj = new JSONObject();
+			obj.put("id", herb.getId());
+			obj.put("name", herb.getCommonName());
+			herbsArray.add(obj);
+		}
+		retObject.put("herbs", herbsArray);
+		Clients.evalJavaScript("DisplayData(" + retObject.toJSONString() + ")");
 	}
 }

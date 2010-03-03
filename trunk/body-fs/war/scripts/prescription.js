@@ -1,8 +1,7 @@
 function initJS() {
-	console.log("init js");
-	console.log($("#btnAdd"));
 	$("#btnAdd").click(AddPortion);
 	$(".imgDelete").live("click", DeleteRow);
+	$.data(document.body, "loadedformulas", new Array());
 }
 
 /**
@@ -15,34 +14,35 @@ function DisplayData(data) {
 	$("$divHerbs").html(data.herbs.map(function(herb) {
 		return herb.name;
 	}).join("<br />"));
-	$.data(document.body, data);
+	console.log(data);
+	$.data(document.body, "formuladata", data);
 }
 
 function AddPortion() {
-	console.log("AddPortion");
-	var cmbDiagnosis = zk.Widget.$($("$cmbDiagnosis").attr("id"));
-	var data = $.data(document.body, cmbDiagnosis.getValue());
-	if (isEmptyObject(data) || isEmptyObject(data.formulas)) {
+	var formuladata = $.data(document.body, "formuladata");
+	console.log(formuladata);
+	var loadedArr = $.data(document.body, "loadedformulas")
+	console.log(loadedArr);
+	if ($.inArray(formuladata.formula.id, loadedArr) != -1) {
+		alert("Already added this formula");
 		return;
 	}
-	if (data.loaded) {
-		alert("Already added this diagnosis");
+
+	var portion = $.trim($("$txtPortion").val());
+	if (portion.length <= 0) {
+		alert("Please enter the portion");
 		return;
 	}
-	var formulas = data.formulas;
-	var herbs = data.herbs;
-	var portion = $("$txtPortion").val();
-	for ( var i = 0, len = formulas.length; i < len; i++) {
-		for ( var j = 0, len1 = herbs.length; j < len1; j++) {
-			$("#herbsTable").append(
-					"<tr><td>" + formulas[i].name + "</td>" + "<td>" + herbs[j].name + "</td>"
-							+ "<td><input type='text' value='" + portion + "' /></td>"
-							+ "<td><img src='/img/delete.png' class='imgDelete'/></tr>");
-		}
+
+	for ( var i = 0, len = formuladata.herbs.length; i < len; i++) {
+		$("#herbsTable").append(
+				"<tr><td>" + formuladata.formula.name + "</td>" + "<td>" + formuladata.herbs[i].name + "</td>"
+						+ "<td><input type='text' value='" + portion + "' /></td>"
+						+ "<td><img src='/img/delete.png' class='imgDelete'/></tr>");
 	}
-	$.data(document.body, cmbDiagnosis.getValue(), $.extend(data, {
-		"loaded" : true
-	}));
+
+	loadedArr[loadedArr.length] = formuladata.formula.id;
+	$.data(document.body, "loadedformulas", loadedArr);
 }
 
 function DeleteRow() {

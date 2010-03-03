@@ -46,7 +46,7 @@
 									<intbox id="txtPortion" hflex="1" constraint="no empty" />
 								</n:td>
 								<n:td>
-									<button id="btnAdd" label="Add" forward="onClick=controller.onAdd" />
+									<n:button id="btnAdd">Add</n:button>
 								</n:td>
 							</n:tr>
 						</n:table>

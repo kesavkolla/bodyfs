@@ -51,7 +51,7 @@
 							</n:tr>
 						</n:table>
 						<n:br />
-						<button id="btnSave" label="Save" height="40px" />
+						<button id="btnSave" label="Prescribe" height="40px" />
 						<n:br />
 						<n:br />
 						<n:br />

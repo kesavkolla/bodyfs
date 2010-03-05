@@ -172,6 +172,16 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	}
 
 	@Override
+	public boolean checkFormulaName(final String name) {
+		final Collection<HerbFormula> results = this.jdoTemplate.find(HerbFormula.class, "lowername==pname",
+				"String pname", name.toLowerCase());
+		if (results == null || results.size() <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public int countFormulas() {
 		return counterbDAO.getCount(ICounterDAO.HERBFORUMLA_COUNTER);
 	}
@@ -257,6 +267,11 @@ public class HerbDAO implements IHerbDAO, Serializable {
 				return (Collection<Long>) query.execute(formulaids);
 			};
 		}, true);
+	}
+
+	@Override
+	public HerbFormula getFormulaById(final Long formulaid) {
+		return this.jdoTemplate.getObjectById(HerbFormula.class, formulaid);
 	}
 
 	@Override

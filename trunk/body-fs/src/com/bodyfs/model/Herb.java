@@ -9,8 +9,6 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Text;
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
 public class Herb implements Serializable {
 
@@ -21,35 +19,13 @@ public class Herb implements Serializable {
 	private Long id;
 
 	@Persistent
-	private String pinyin;
+	private String name;
+
 	@Persistent
-	private String latin;
+	private String lowername;
+
 	@Persistent
-	private String taste;
-	@Persistent
-	private String temperature;
-	@Persistent
-	private Text action;
-	@Persistent
-	private String category;
-	@Persistent
-	private String meridians;
-	@Persistent
-	private String contraindications;
-	@Persistent
-	private String txtext;
-	@Persistent
-	private String herbtype;
-	@Persistent
-	private String commonName;
-	@Persistent
-	private String referencePage;
-	@Persistent
-	private String comment;
-	@Persistent
-	private String distributor;
-	@Persistent
-	private String inven;
+	private String description;
 
 	public final Long getId() {
 		return id;
@@ -59,126 +35,41 @@ public class Herb implements Serializable {
 		this.id = id;
 	}
 
-	public final String getPinyin() {
-		return pinyin;
+	public final String getName() {
+		return name;
 	}
 
-	public final void setPinyin(String pinyin) {
-		this.pinyin = pinyin;
-	}
-
-	public final String getLatin() {
-		return latin;
-	}
-
-	public final void setLatin(String latin) {
-		this.latin = latin;
-	}
-
-	public final String getTaste() {
-		return taste;
-	}
-
-	public final void setTaste(String taste) {
-		this.taste = taste;
-	}
-
-	public final String getTemperature() {
-		return temperature;
-	}
-
-	public final void setTemperature(String temperature) {
-		this.temperature = temperature;
-	}
-
-	public final String getAction() {
-		if (action == null) {
-			return null;
+	public final void setName(String Name) {
+		this.name = Name;
+		if (name != null) {
+			this.lowername = name.toLowerCase();
 		}
-		return action.getValue();
 	}
 
-	public final void setAction(final String action) {
-		this.action = new Text(action);
+	public String getLowername() {
+		return lowername;
 	}
 
-	public final String getCategory() {
-		return category;
+	public String getDescription() {
+		return description;
 	}
 
-	public final void setCategory(String category) {
-		this.category = category;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public final String getMeridians() {
-		return meridians;
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("Herb [");
+		if (description != null)
+			builder.append("description=").append(description).append(", ");
+		if (id != null)
+			builder.append("id=").append(id).append(", ");
+		if (name != null)
+			builder.append("name=").append(name);
+		builder.append("]");
+		return builder.toString();
 	}
 
-	public final void setMeridians(String meridians) {
-		this.meridians = meridians;
-	}
-
-	public final String getContraindications() {
-		return contraindications;
-	}
-
-	public final void setContraindications(String contraindications) {
-		this.contraindications = contraindications;
-	}
-
-	public final String getTxtext() {
-		return txtext;
-	}
-
-	public final void setTxtext(String txtext) {
-		this.txtext = txtext;
-	}
-
-	public final String getHerbtype() {
-		return herbtype;
-	}
-
-	public final void setHerbtype(String herbtype) {
-		this.herbtype = herbtype;
-	}
-
-	public final String getCommonName() {
-		return commonName;
-	}
-
-	public final void setCommonName(String commonName) {
-		this.commonName = commonName;
-	}
-
-	public final String getReferencePage() {
-		return referencePage;
-	}
-
-	public final void setReferencePage(String referencePage) {
-		this.referencePage = referencePage;
-	}
-
-	public final String getComment() {
-		return comment;
-	}
-
-	public final void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public final String getDistributor() {
-		return distributor;
-	}
-
-	public final void setDistributor(String distributor) {
-		this.distributor = distributor;
-	}
-
-	public final String getInven() {
-		return inven;
-	}
-
-	public final void setInven(String inven) {
-		this.inven = inven;
-	}
 }

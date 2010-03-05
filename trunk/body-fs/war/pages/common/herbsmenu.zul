@@ -1,8 +1,10 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<hbox>
-		<toolbarbutton label="Diagnoses" href="/pages/herbs/diagnoses.zul?" height="45px" />
-		<toolbarbutton label="Formulas" href="#" height="45px" />
+		<toolbarbutton label="Diagnoses" href="/pages/herbs/diagnoses.zul?" height="45px"
+			sclass="${page.title eq 'Diagnoses' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="Formulas" href="/pages/herbs/formulas.zul" height="45px"
+			sclass="${page.title eq 'Formula Management' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton label="Herbs" href="#" height="45px" />
 	</hbox>
 </zk>

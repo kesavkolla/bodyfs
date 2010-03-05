@@ -92,11 +92,15 @@ public class DiagnosesComposer extends GenericForwardComposer {
 		}
 		final String diagname = txtDiagnosisName.getValue().trim();
 		final Textbox txtDiagnosisId = (Textbox) Path.getComponent(page, "txtDiagnosisId");
+		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
+		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
 
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 
+		boolean isNew = txtDiagnosisId.getValue() == null || txtDiagnosisId.getValue().equals("");
+
 		// For new Diagnoses do the validation of name
-		if (txtDiagnosisId.getValue() == null || txtDiagnosisId.getValue().equals("")) {
+		if (isNew) {
 
 			if (herbDAO.checkDiagnosisName(diagname)) {
 				try {
@@ -106,7 +110,7 @@ public class DiagnosesComposer extends GenericForwardComposer {
 				return;
 			}
 		}
-		final Textbox txtFormulaIds = (Textbox) Path.getComponent(page, "txtFormulaIds");
+
 		if (txtFormulaIds.getValue() == null || txtFormulaIds.getValue().trim().length() <= 0) {
 			try {
 				Messagebox.show("Select atleast one formula per diagnosis", "Error", Messagebox.OK, Messagebox.ERROR);
@@ -115,12 +119,26 @@ public class DiagnosesComposer extends GenericForwardComposer {
 			return;
 		}
 
-		final Textbox txtDescription = (Textbox) Path.getComponent(page, "txtDescription");
-		// Save the diagnois data
-		final Diagnosis diagnosis = new Diagnosis();
-		if (txtDiagnosisId.getValue() != null && txtDiagnosisId.getValue().length() > 0) {
-			diagnosis.setId(new Long(txtDiagnosisId.getValue()));
+		final ListModelList listmodel = (ListModelList) page.getAttribute("mdiagnoses");
+		Diagnosis diagnosis = null;
+		int selDiagnosisIdx = -1;
+		if (isNew) {
+			// If it's new diagnosis create the diagnosis object
+			diagnosis = new Diagnosis();
+		} else {
+			// Retrieve the selected diagnosis object from the diagnosis list
+			// model
+			final Long diagnosisid = new Long(txtDiagnosisId.getValue());
+			for (int i = 0, len = listmodel.getSize(); i < len; i++) {
+				final Diagnosis dg = (Diagnosis) listmodel.get(i);
+				if (dg.getId().equals(diagnosisid)) {
+					diagnosis = dg;
+					selDiagnosisIdx = i;
+					break;
+				}
+			}
 		}
+		// Save the diagnois data
 		diagnosis.setDescription(txtDescription.getValue());
 		diagnosis.setName(txtDiagnosisName.getValue());
 		final List<Long> formulaIds = new ArrayList<Long>();
@@ -133,8 +151,12 @@ public class DiagnosesComposer extends GenericForwardComposer {
 
 		diagnosis.setFormulas(formulaIds);
 		herbDAO.createDiagnosis(diagnosis);
-		final ListModelList listmodel = (ListModelList) page.getAttribute("mdiagnoses");
-		listmodel.add(diagnosis);
+
+		if (isNew) {
+			listmodel.add(diagnosis);
+		} else {
+			listmodel.set(selDiagnosisIdx, diagnosis);
+		}
 
 		final Listbox lstdiagnosis = (Listbox) Path.getComponent(page, "lstdiagnosis");
 		final AnnotateDataBinder binder = (AnnotateDataBinder) lstdiagnosis.getAttribute("binder", true);

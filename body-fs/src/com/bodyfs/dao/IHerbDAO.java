@@ -27,6 +27,21 @@ public interface IHerbDAO {
 	public void createHerb(final Herb herb);
 
 	/**
+	 * Checkes whether the given herb name is already exists or not
+	 * 
+	 * @param name
+	 * @return true if exists false otherwise
+	 */
+	public boolean checkHerbName(final String name);
+
+	/**
+	 * Deletes the herb by given id
+	 * 
+	 * @param id
+	 */
+	public void deleteHerbById(final Long id);
+
+	/**
 	 * Delete all the herbs
 	 */
 	public void deleteAllHerbs();

@@ -1,0 +1,75 @@
+<?page title="Herbs Management" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="/css/diagnoses.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="cntbox" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
+		border-top: none; border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center flex="true" autoscroll="false">
+			<borderlayout>
+				<north size="50px">
+					<include src="/pages/common/herbsmenu.zul" />
+				</north>
+				<center>
+					<vbox hflex="1" vflex="1" style="margin:10px" id="cntbox" apply="com.bodyfs.ui.HerbsComposer">
+						<div id="cntdiv" visible="false" hflex="1" height="175px">
+							<grid hflex="1">
+								<columns>
+									<column width="50px" />
+									<column width="120px" />
+									<column width="80px" />
+								</columns>
+								<rows>
+									<row valign="top">
+										<cell>Name</cell>
+										<cell>
+											<textbox id="txtHerbId" visible="false" />
+											<textbox hflex="1" id="txtHerbName"
+												value="@{txtHerbName.value, save-when=btnCreate.onClick }" />
+										</cell>
+										<cell>Description</cell>
+										<cell>
+											<textbox rows="3" hflex="1" id="txtDescription"
+												value="@{txtDescription.value, save-when=btnCreate.onClick }" />
+										</cell>
+									</row>
+									<row spans="2,2">
+										<cell>
+											<button label="save" id="btnCreate" forward="onClick=cntbox.onCreateHerb" />
+											<button label="cancel" id="btnCancel" />
+										</cell>
+									</row>
+								</rows>
+							</grid>
+						</div>
+						<div style="background-color:#C3390B" hflex="1">
+							<button label="Add" id="btnAdd" forward="onClick=cntbox.onAddHerb" />
+						</div>
+						<listbox id="lstherb" hflex="1" model="@{mherbs }" mold="paging">
+							<listhead>
+								<listheader label="Name" width="30%" sort="none" />
+								<listheader label="Description" sort="none" />
+								<listheader label="" sort="none" />
+							</listhead>
+							<listitem self="@{each='herb' }" value="@{herb }">
+								<listcell label="@{herb.name }" />
+								<listcell label="@{herb.description }" />
+								<listcell>
+									<hbox>
+										<button label="Edit" sclass="btnEdit" forward="onClick=cntbox.onEditHerb" />
+										<button label="Delete" sclass="btnDelete" forward="onClick=cntbox.onDeleteHerb" />
+									</hbox>
+								</listcell>
+							</listitem>
+						</listbox>
+					</vbox>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+	<script type="text/javascript" src="/scripts/herbs.js" defer="true" />
+</zk>

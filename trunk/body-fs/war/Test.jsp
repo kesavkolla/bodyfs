@@ -4,7 +4,9 @@
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="com.bodyfs.dao.IHerbDAO"%>
 <%@page import="com.bodyfs.dao.impl.HerbDAO"%>
-<%@page import="com.bodyfs.model.Herb"%><html>
+<%@page import="com.bodyfs.model.Herb"%>
+<%@page import="com.bodyfs.PMF"%>
+<%@page import="com.bodyfs.model.HerbFormula"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html">
 <title>Insert title here</title>
@@ -13,12 +15,7 @@
 <%
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
-	final IHerbDAO herbDAO = ctx.getBean(IHerbDAO.class);
-	for (int i = 5056; i <= (5056 + 1000); i++) {
-		final Herb herb = herbDAO.getHerbById(new Long(i));
-		herb.setName(herb.getName());
-		herbDAO.createHerb(herb);
-	}
+	PMF.get().getPersistenceManager().newQuery(HerbFormula.class).deletePersistentAll();
 %>
 </body>
 </html>

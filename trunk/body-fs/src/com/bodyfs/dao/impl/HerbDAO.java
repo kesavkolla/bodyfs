@@ -63,6 +63,32 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	}
 
 	@Override
+	public boolean checkHerbName(final String name) {
+		final Collection<Herb> results = this.jdoTemplate.find(Herb.class, "lowername==pname", "String pname", name
+				.toLowerCase());
+		if (results == null || results.size() <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void deleteHerbById(final Long id) {
+		Herb herb = null;
+		try {
+			herb = jdoTemplate.getObjectById(Herb.class, id);
+		} catch (final Exception e) {
+			return;
+		}
+
+		if (herb != null) {
+			jdoTemplate.deletePersistent(herb);
+			this.counterbDAO.decrement(ICounterDAO.HERB_COUNT);
+			this.cache.remove(IHerbDAO.HERBS_CACHE);
+		}
+	}
+
+	@Override
 	public void deleteAllHerbs() {
 		this.jdoTemplate.execute(new JdoCallback<Long>() {
 			@Override
@@ -288,7 +314,12 @@ public class HerbDAO implements IHerbDAO, Serializable {
 
 	@Override
 	public void deleteFormulaById(final Long id) {
-		final HerbFormula formula = jdoTemplate.getObjectById(HerbFormula.class, id);
+		HerbFormula formula = null;
+		try {
+			formula = jdoTemplate.getObjectById(HerbFormula.class, id);
+		} catch (final Exception e) {
+			return;
+		}
 		if (formula != null) {
 			jdoTemplate.deletePersistent(formula);
 			this.counterbDAO.decrement(ICounterDAO.HERBFORUMLA_COUNTER);
@@ -388,7 +419,12 @@ public class HerbDAO implements IHerbDAO, Serializable {
 
 	@Override
 	public void deleteDiagnosisById(final Long id) {
-		final Diagnosis diagnosis = this.jdoTemplate.getObjectById(Diagnosis.class, id);
+		Diagnosis diagnosis = null;
+		try {
+			diagnosis = this.jdoTemplate.getObjectById(Diagnosis.class, id);
+		} catch (final Exception e) {
+			return;
+		}
 		if (diagnosis != null) {
 			this.jdoTemplate.deletePersistent(diagnosis);
 			this.counterbDAO.decrement(ICounterDAO.DIAGNOSIS_COUNTER);

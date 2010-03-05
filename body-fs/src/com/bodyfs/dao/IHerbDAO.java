@@ -79,6 +79,13 @@ public interface IHerbDAO {
 
 	/**
 	 * 
+	 * @param formulaid
+	 * @return retrieves the herbformula object corresponds to the given id
+	 */
+	public HerbFormula getFormulaById(final Long formulaid);
+
+	/**
+	 * 
 	 * @return List of herbformulas for the given list of ids
 	 */
 	public Collection<Long> getFormulasIds(final List<Long> formulaids);
@@ -89,6 +96,14 @@ public interface IHerbDAO {
 	 * @param diagnosis
 	 */
 	public void createFormula(final HerbFormula formula);
+
+	/**
+	 * Checkes whether the given formula name is already exists or not
+	 * 
+	 * @param name
+	 * @return true if exists false otherwise
+	 */
+	public boolean checkFormulaName(final String name);
 
 	/**
 	 * Deletes the formula by given id

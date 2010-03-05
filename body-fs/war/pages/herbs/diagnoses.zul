@@ -1,4 +1,4 @@
-<?page title="Herbs Management" contentType="text/html;charset=UTF-8"?>
+<?page title="Diagnoses" contentType="text/html;charset=UTF-8"?>
 <?link  rel="stylesheet" type="text/css" href="/css/diagnoses.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>

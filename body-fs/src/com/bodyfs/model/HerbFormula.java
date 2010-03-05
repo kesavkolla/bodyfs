@@ -18,13 +18,20 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(identityType = IdentityType.APPLICATION, cacheable = "true", detachable = "true")
 public class HerbFormula implements Serializable {
 	private static final long serialVersionUID = 6300003259517005440L;
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
+
 	@Persistent
 	private String name;
+
+	@Persistent
+	private String lowername;
+
 	@Persistent
 	private String description;
+
 	@Persistent
 	private List<Long> herbs;
 
@@ -42,6 +49,13 @@ public class HerbFormula implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+		if (name != null) {
+			this.lowername = name.toLowerCase();
+		}
+	}
+
+	public String getLowername() {
+		return lowername;
 	}
 
 	public String getDescription() {

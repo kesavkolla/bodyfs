@@ -166,7 +166,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		for (final Herb herb : herbs) {
 			final JSONObject obj = new JSONObject();
 			obj.put("id", herb.getId());
-			obj.put("name", herb.getCommonName());
+			obj.put("name", herb.getName());
 			herbsArray.add(obj);
 		}
 		retObject.put("herbs", herbsArray);

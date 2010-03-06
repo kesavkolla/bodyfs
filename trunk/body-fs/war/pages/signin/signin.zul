@@ -92,7 +92,7 @@ function showConfirmation() {
 											</cell>
 										</row>
 										<row>
-											<radio label="Blating(feeling full easily)" />
+											<radio label="Bloating(feeling full easily)" />
 											<radio label="Gas" />
 										</row>
 										<row>

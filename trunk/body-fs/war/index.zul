@@ -3,7 +3,9 @@
 <?link  rel="stylesheet" type="text/css" href="~./zul/css/ext.css.dsp"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
-	<style>.z-caption-l {background-color:white;font-size:18px;text-align:center;font-weight:bold}</style>
+	<style>
+		.z-caption-l {background-color:white;font-size:18px;text-align:center;font-weight:bold; font-family:Verdana;}
+	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="true" flex="true">
 			<hbox pack="center">

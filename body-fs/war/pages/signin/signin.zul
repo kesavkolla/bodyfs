@@ -30,7 +30,7 @@ function showConfirmation() {
 			<borderlayout hflex="1" vflex="1"
 				style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
 				<west border="0">
-					<image src="/img/banner7.jpg" hflex="1" width="952px" height="95px" id="logo" />
+					<image src="/img/banner7.jpg" hflex="1" width="800px" height="95px" id="logo" />
 				</west>
 			</borderlayout>
 		</north>

@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.Clients;
@@ -24,6 +23,7 @@ import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -49,10 +49,10 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	 */
 	@SuppressWarnings("unchecked")
 	public final String getVisitsDates() {
-		final Long personId = Long.parseLong(Executions.getCurrent().getParameter("id"));
+		final Long patid = CommonUtils.getPatientId();
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final JSONArray arr = new JSONArray();
-		for (final Date date : visitDAO.getPatientVisitDates(personId)) {
+		for (final Date date : visitDAO.getPatientVisitDates(patid)) {
 			final JSONObject obj = new JSONObject();
 			obj.put("value", sdf.format(date));
 			obj.put("date", date.getTime());
@@ -61,10 +61,43 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		return arr.toJSONString();
 	}
 
+	/*
+	@Override
+	public ComponentInfo doBeforeCompose(final Page page, final Component parent, final ComponentInfo compInfo) {
+		final Session session = Sessions.getCurrent(false);
+		final Execution execution = Executions.getCurrent();
+		// Do the sanity checks
+		// If the id is not present in the URL send to customer search
+		final Long patid = CommonUtils.getPatientId();
+		if (patid == null) {
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+				return null;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return null;
+			}
+		}
+
+		// If there are no patient visits send to sign-in page
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		if (visitDAO.countPatientVisits(patid) < 1) {
+			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				execution.sendRedirect("/pages/patient/patientview.zul?id=" + patid);
+				return null;
+			} else {
+				execution.sendRedirect("/pages/user/index.zul");
+				return null;
+			}
+		}
+		page.setAttribute("patid", patid);
+		return super.doBeforeCompose(page, parent, compInfo);
+	}*/
+
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		final Long personid = new Long(execution.getParameter("id"));
+		final Long patid = CommonUtils.getPatientId();
 		// If the visitDate parameter exists in the URL convert to the date
 		Date visitDate = null;
 		if (execution.getParameter("visitDate") != null) {
@@ -75,21 +108,22 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			}
 		}
 
-		comp.getPage().setAttribute("personid", personid);
+		comp.getPage().setAttribute("personid", patid);
 		/*
-		 * This composer is used in two different scenarios
-		 * 1. During the administrative page where admins will see the visit and be able to make changes
-		 * 2. Actual patient signin process
-		 * In the signin process we will always create a new patient visit object for that date
-		 * For admin page if there is no visitDate in URL then we will show the latest visit
+		 * This composer is used in two different scenarios 1. During the
+		 * administrative page where admins will see the visit and be able to
+		 * make changes 2. Actual patient signin process In the signin process
+		 * we will always create a new patient visit object for that date For
+		 * admin page if there is no visitDate in URL then we will show the
+		 * latest visit
 		 */
 		if (visitDate != null || comp.getAttribute("showlast") != null) {
 			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(personid, visitDate);
+			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(patid, visitDate);
 			this.page.setAttribute("patvisit", patvisit);
 		} else {
 			final PatientVisit patvisit = new PatientVisit();
-			patvisit.setPersonId(personid);
+			patvisit.setPersonId(patid);
 			this.page.setAttribute("patvisit", patvisit);
 		}
 	}

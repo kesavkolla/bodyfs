@@ -3,7 +3,7 @@
 	<cron>
 		<url>/login.zul</url>
 		<description>Loads the login.zul. This is to make the app available all the time</description>
-		<schedule>every 2 minutes</schedule>
+		<schedule>every 1 minutes</schedule>
 	</cron>
 	<cron>
 		<url>/cleansession.jsp?days=3</url>

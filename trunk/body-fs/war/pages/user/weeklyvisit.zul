@@ -10,9 +10,7 @@
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
 <?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<style>
-		.clstitle {font-weight:bold;text-decoration:underline }
-	</style>
+	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center vflex="1" hflex="1">
 			<borderlayout style="background:#dd0000;">
@@ -51,7 +49,8 @@
 									<hbox hflex="1">
 										<titlelabel value="Health Goals:" />
 										<titlelabel value="# of Herb Bags Left" />
-										<intbox value="@{patvisit.numOfHearbBags, save-when='btnSave.onClick' }" />
+										<intbox value="@{patvisit.numOfHearbBags, save-when='btnSave.onClick' }"
+											readonly="true" />
 									</hbox>
 									<textbox hflex="1" rows="4"
 										value="@{patvisit.healthGoals, save-when='btnSave.onClick' }" />
@@ -59,16 +58,16 @@
 										<titlelabel value="Energy Level:" />
 										<radiogroup
 											selectedIndex="@{patvisit.energyLevel, save-when='btnSave.onClick' }">
-											<radio label="1" />
-											<radio label="2" />
-											<radio label="3" />
-											<radio label="4" />
-											<radio label="5" />
-											<radio label="6" />
-											<radio label="7" />
-											<radio label="8" />
-											<radio label="9" />
-											<radio label="10" />
+											<radio label="1" disabled="true" />
+											<radio label="2" disabled="true" />
+											<radio label="3" disabled="true" />
+											<radio label="4" disabled="true" />
+											<radio label="5" disabled="true" />
+											<radio label="6" disabled="true" />
+											<radio label="7" disabled="true" />
+											<radio label="8" disabled="true" />
+											<radio label="9" disabled="true" />
+											<radio label="10" disabled="true" />
 										</radiogroup>
 									</hbox>
 									<radiogroup
@@ -81,16 +80,16 @@
 													</cell>
 												</row>
 												<row>
-													<radio label="Blating(feeling full easily)" />
-													<radio label="Gas" />
+													<radio label="Blating(feeling full easily)" disabled="true" />
+													<radio label="Gas" disabled="true" />
 												</row>
 												<row>
-													<radio label="Bleaching/burping" />
-													<radio label="Acid reflux/heart burn" />
+													<radio label="Bleaching/burping" disabled="true" />
+													<radio label="Acid reflux/heart burn" disabled="true" />
 												</row>
 												<row>
-													<radio label="Nausea/Vomitting" />
-													<radio label="Pain/cramping" />
+													<radio label="Nausea/Vomitting" disabled="true" />
+													<radio label="Pain/cramping" disabled="true" />
 												</row>
 											</rows>
 										</grid>
@@ -99,9 +98,9 @@
 										value="Appetite Level (How hungry are you druing meal times &amp; have you desire to eat?)" />
 									<radiogroup
 										selectedIndex="@{patvisit.appetiteLevel, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
-										<radio label="Low" />
-										<radio label="High" />
-										<radio label="Normal" />
+										<radio label="Low" disabled="true" />
+										<radio label="High" disabled="true" />
+										<radio label="Normal" disabled="true" />
 									</radiogroup>
 									<radiogroup
 										selectedIndex="@{patvisit.bowlMovement, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
@@ -111,20 +110,20 @@
 													<titlelabel value="Bowl Movement:" />
 													How often per day?
 													<textbox value="@{patvisit.bowlTimes, save-when='btnSave.onClick' }"
-														hflex="1" />
+														hflex="1" readonly="true" />
 													/day
 												</row>
 												<row>
-													<radio label="Normal" />
-													<radio label="Incomplete" />
-													<radio label="Loose" />
-													<radio label="Blood" />
+													<radio label="Normal" disabled="true" />
+													<radio label="Incomplete" disabled="true" />
+													<radio label="Loose" disabled="true" />
+													<radio label="Blood" disabled="true" />
 												</row>
 												<row>
-													<radio label="Dry" />
-													<radio label="Diarrhea" />
-													<radio label="Mucous" />
-													<radio label="Difficult to push" />
+													<radio label="Dry" disabled="true" />
+													<radio label="Diarrhea" disabled="true" />
+													<radio label="Mucous" disabled="true" />
+													<radio label="Difficult to push" disabled="true" />
 												</row>
 											</rows>
 										</grid>
@@ -137,19 +136,19 @@
 													<titlelabel value="Urination:" />
 													How often per day?
 													<textbox
-														value="@{patvisit.urineTimes, save-when='btnSave.onClick' }" hflex="1" />
+														value="@{patvisit.urineTimes, save-when='btnSave.onClick' }" hflex="1" readonly="true" />
 													/day
 												</row>
 												<row>
-													<radio label="Normal" />
-													<radio label="Dark yellow" />
-													<radio label="Clear" />
-													<radio label="Urgent" />
+													<radio label="Normal" disabled="true" />
+													<radio label="Dark yellow" disabled="true" />
+													<radio label="Clear" disabled="true" />
+													<radio label="Urgent" disabled="true" />
 												</row>
 												<row>
-													<radio label="Frequent" />
-													<radio label="Difficult" />
-													<radio label="Burning" />
+													<radio label="Frequent" disabled="true" />
+													<radio label="Difficult" disabled="true" />
+													<radio label="Burning" disabled="true" />
 												</row>
 											</rows>
 										</grid>
@@ -160,16 +159,16 @@
 											<rows>
 												<row>
 													<titlelabel value="Quality of Sleep:" />
-													<radio label="Good" />
-													<radio label="Bad" />
-													<radio label="Wake up often" />
+													<radio label="Good" disabled="true" />
+													<radio label="Bad" disabled="true" />
+													<radio label="Wake up often" disabled="true" />
 												</row>
 												<row>
 													<cell colspan="2">
-														<radio label="Difficult to fall asleep" />
+														<radio label="Difficult to fall asleep" disabled="true" />
 													</cell>
 													<cell colspan="2">
-														<radio label="Frequent dreams" />
+														<radio label="Frequent dreams" disabled="true" />
 													</cell>
 												</row>
 											</rows>
@@ -177,11 +176,11 @@
 									</radiogroup>
 									<titlelabel value="Any questions or concerns?" hflex="1" />
 									<textbox rows="3" hflex="1"
-										value="@{patvisit.question, save-when='btnSave.onClick' }" />
+										value="@{patvisit.question, save-when='btnSave.onClick' }" readonly="true" />
 									<titlelabel value="Is there any way we can provide better service for you?:"
 										hflex="1" />
 									<textbox rows="3" hflex="1"
-										value="@{patvisit.betterService, save-when='btnSave.onClick' }" />
+										value="@{patvisit.betterService, save-when='btnSave.onClick' }" readonly="true" />
 								</vbox>
 							</row>
 							<row spans="2" align="right">
@@ -231,7 +230,7 @@
 												});
 											}
 											$("$Pagination").find("ul").parent().css("display", "inline");
-											jq("$imgbody").annotateImage({editable: true, useAjax: false});
+											jq("$imgbody").annotateImage({editable: false, useAjax: false});
 											jq("$btnNew").click(function(evt) {
 												$.fn.paginate.setpage(-1);
 											});

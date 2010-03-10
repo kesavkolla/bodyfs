@@ -62,14 +62,30 @@ public class HerbDAO implements IHerbDAO, Serializable {
 		this.cache.remove(IHerbDAO.HERBS_CACHE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkHerbName(final String name) {
-		final Collection<Herb> results = this.jdoTemplate.find(Herb.class, "lowername==pname", "String pname", name
-				.toLowerCase());
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pname", name.toLowerCase());
+		Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM " + Herb.class.getName()
+				+ " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC", vals);
 		if (results == null || results.size() <= 0) {
 			return false;
 		}
-		return true;
+		return results.size() > 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public long getHerbIdByName(String name) {
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pname", name.toLowerCase());
+		Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM " + Herb.class.getName()
+				+ " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC", vals);
+		if (results == null || results.size() <= 0) {
+			return -1L;
+		}
+		return results.iterator().next();
 	}
 
 	@Override
@@ -197,14 +213,30 @@ public class HerbDAO implements IHerbDAO, Serializable {
 		this.cache.remove(IHerbDAO.FORMULAS_CACHE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkFormulaName(final String name) {
-		final Collection<HerbFormula> results = this.jdoTemplate.find(HerbFormula.class, "lowername==pname",
-				"String pname", name.toLowerCase());
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pname", name.toLowerCase());
+		Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM " + HerbFormula.class.getName()
+				+ " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC", vals);
 		if (results == null || results.size() <= 0) {
 			return false;
 		}
-		return true;
+		return results.size() > 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public long getFormulaIdByName(String name) {
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pname", name.toLowerCase());
+		Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM " + HerbFormula.class.getName()
+				+ " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC", vals);
+		if (results == null || results.size() <= 0) {
+			return -1;
+		}
+		return results.iterator().next();
 	}
 
 	@Override

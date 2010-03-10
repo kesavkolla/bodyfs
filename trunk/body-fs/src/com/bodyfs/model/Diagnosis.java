@@ -2,6 +2,7 @@
 package com.bodyfs.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -63,6 +64,14 @@ public class Diagnosis implements Serializable {
 
 	public void setFormulas(List<Long> formulas) {
 		this.formulas = formulas;
+	}
+
+	public void addFormula(final Long formula) {
+		if (this.formulas == null) {
+			this.formulas = new ArrayList<Long>();
+		} else {
+			formulas.add(formula);
+		}
 	}
 
 	public String getLowername() {

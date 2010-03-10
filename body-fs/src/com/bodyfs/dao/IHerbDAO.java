@@ -35,6 +35,14 @@ public interface IHerbDAO {
 	public boolean checkHerbName(final String name);
 
 	/**
+	 * 
+	 * @param name
+	 *            herb name
+	 * @return id of the herb corresponding to the given name
+	 */
+	public long getHerbIdByName(final String name);
+
+	/**
 	 * Deletes the herb by given id
 	 * 
 	 * @param id
@@ -119,6 +127,14 @@ public interface IHerbDAO {
 	 * @return true if exists false otherwise
 	 */
 	public boolean checkFormulaName(final String name);
+
+	/**
+	 * 
+	 * @param name
+	 *            formula name
+	 * @return id of the HerbFormula that corresponds to the given name
+	 */
+	public long getFormulaIdByName(final String name);
 
 	/**
 	 * Deletes the formula by given id

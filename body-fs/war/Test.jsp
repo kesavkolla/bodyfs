@@ -6,7 +6,9 @@
 <%@page import="com.bodyfs.dao.impl.HerbDAO"%>
 <%@page import="com.bodyfs.model.Herb"%>
 <%@page import="com.bodyfs.PMF"%>
-<%@page import="com.bodyfs.model.HerbFormula"%><html>
+<%@page import="com.bodyfs.model.HerbFormula"%>
+<%@page import="com.bodyfs.model.Diagnosis"%>
+<%@page import="com.bodyfs.model.BodyfsCounters"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html">
 <title>Insert title here</title>
@@ -15,7 +17,12 @@
 <%
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
+	/*PMF.get().getPersistenceManager().newQuery(Herb.class).deletePersistentAll();
 	PMF.get().getPersistenceManager().newQuery(HerbFormula.class).deletePersistentAll();
+	PMF.get().getPersistenceManager().newQuery(Diagnosis.class).deletePersistentAll();
+	PMF.get().getPersistenceManager().newQuery(BodyfsCounters.class).deletePersistentAll();*/
+	IHerbDAO herbDAO = ctx.getBean(IHerbDAO.class);
+	out.println(herbDAO.getFormulaIdByName("Huang Qin Tang"));
 %>
 </body>
 </html>

@@ -187,6 +187,7 @@
 				diag = diagnoses.get(diagName);
 			} else {
 				diag = new Diagnosis();
+				diag.setName(diagName);
 				diagnoses.put(diagName, diag);
 			}
 			long formula = herbDAO.getFormulaIdByName(data[1].trim());

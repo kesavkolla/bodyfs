@@ -14,9 +14,10 @@
 				<north size="50px">
 					<include src="/pages/common/herbsmenu.zul" />
 				</north>
-				<center>
-					<vbox hflex="1" vflex="1" style="margin:10px" apply="com.bodyfs.ui.DiagnosesComposer" id="cntbox">
-						<div id="cntdiv" visible="false" hflex="1" height="175px">
+				<center autoscroll="true">
+					<vbox hflex="1" vflex="1" style="margin:10px" apply="com.bodyfs.ui.DiagnosesComposer" id="cntbox"
+						width="90%">
+						<div id="cntdiv" visible="false" hflex="1" height="175px" width="90%">
 							<grid hflex="1">
 								<columns>
 									<column width="50px" />
@@ -73,10 +74,10 @@
 								</rows>
 							</grid>
 						</div>
-						<div style="background-color:#C3390B" hflex="1">
+						<div style="background-color:#C3390B" hflex="1" width="90%">
 							<button label="Add" id="btnAdd" forward="onClick=cntbox.onAddDignosis" />
 						</div>
-						<listbox id="lstdiagnosis" hflex="1" rows="20" model="@{mdiagnoses }">
+						<listbox id="lstdiagnosis" hflex="1" model="@{mdiagnoses }" mold="paging" width="90%">
 							<listhead>
 								<listheader label="Name" width="30%" sort="none" />
 								<listheader label="Description" sort="none" />

@@ -35,10 +35,11 @@ body {
 
 .z-toolbarbutton {
 	background-color: #510000;
+	border: 1px solid #F0C88B;
 }
 
 .z-toolbarbutton-over {
-	border: 1px solid #F0C88B;
+	border: 2px solid #F0C88B;
 }
 
 .z-toolbarbutton-over .z-toolbarbutton-body {

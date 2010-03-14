@@ -60,7 +60,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>auEngine</servlet-name>
 		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<description>EMI Data Loader</description>
+		<servlet-name>emiloader</servlet-name>
+		<servlet-class>com.bodyfs.ui.servlet.EMILoader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>emiloader</servlet-name>
+		<url-pattern>/emiloader</url-pattern>
+	</servlet-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -85,6 +93,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<filter-name>OpenPersistenceManagerInView</filter-name>
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-name>auEngine</servlet-name>
+		<servlet-name>emiloader</servlet-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	<security-constraint>

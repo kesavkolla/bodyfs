@@ -28,6 +28,8 @@ public interface IPersonDAO {
 
 	public Person getByEmail(final String email);
 
+	public Person getByName(final String firstname, final String lastname, final String initial);
+
 	public void deletePerson(final Long id);
 
 	public void deleteAll();

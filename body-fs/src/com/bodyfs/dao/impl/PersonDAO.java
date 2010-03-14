@@ -40,7 +40,6 @@ import com.bodyfs.model.SkinHair;
 public class PersonDAO implements IPersonDAO, Serializable {
 
 	private static final long serialVersionUID = 8672328220267294005L;
-	@SuppressWarnings("unused")
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
@@ -209,6 +208,36 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			e.printStackTrace(System.err);
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public Person getByName(String firstname, String lastname, String initial) {
+		final String filter = "lastName==plastName && firstName==pfirstName"
+				+ ((initial == null) ? "" : " && initial==pinitial");
+		final String params = "String plastName, String pfirstName" + ((initial == null) ? "" : ", String pinitial");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
+		}
+		final Object[] vals = new Object[initial == null ? 2 : 3];
+		vals[0] = lastname;
+		vals[1] = firstname;
+
+		if (initial != null) {
+			vals[2] = initial;
+		}
+		try {
+			final Collection<Person> persons = this.jdoTemplate.find(Person.class, filter, params, vals,
+					"id descending");
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(persons);
+			}
+			if (persons != null && persons.size() > 0) {
+				return persons.iterator().next();
+			}
+		} catch (final Exception e) {
+			return null;
+		}
+		return null;
 	}
 
 }

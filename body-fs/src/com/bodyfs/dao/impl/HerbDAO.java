@@ -168,6 +168,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			public List<Herb> doInJdo(final PersistenceManager pm) throws JDOException {
 				final Query query = pm.newQuery(Herb.class);
 				query.setRange(0, 1000);
+				query.setOrdering("lowername");
 				String cursorStr = null;
 				List<Herb> results = null;
 				loop: for (;;) {
@@ -270,6 +271,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			@Override
 			public Collection<HerbFormula> doInJdo(final PersistenceManager pm) throws JDOException {
 				final Query query = pm.newQuery(HerbFormula.class);
+				query.setOrdering("lowername");
 				query.setRange(0, 1000);
 				String cursorStr = null;
 				List<HerbFormula> results = null;
@@ -405,6 +407,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			public Collection<Diagnosis> doInJdo(final PersistenceManager pm) throws JDOException {
 				final Query query = pm.newQuery(Diagnosis.class);
 				query.setRange(0, 1000);
+				query.setOrdering("lowername");
 				String cursorStr = null;
 				List<Diagnosis> results = null;
 				loop: for (;;) {

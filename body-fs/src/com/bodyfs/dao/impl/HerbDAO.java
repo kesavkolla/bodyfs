@@ -186,7 +186,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 						cursorStr = cursor1.toWebSafeString();
 					}
 					if (results != null && results.size() > 0) {
-						retVal.addAll(results);
+						retVal.addAll(jdoTemplate.detachCopyAll(results));
 					} else {
 						break loop;
 					}
@@ -290,7 +290,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 						cursorStr = cursor1.toWebSafeString();
 					}
 					if (results != null && results.size() > 0) {
-						retVal.addAll(results);
+						retVal.addAll(jdoTemplate.detachCopyAll(results));
 					} else {
 						break loop;
 					}
@@ -425,7 +425,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 						cursorStr = cursor1.toWebSafeString();
 					}
 					if (results != null && results.size() > 0) {
-						retVal.addAll(results);
+						retVal.addAll(jdoTemplate.detachCopyAll(results));
 					} else {
 						break loop;
 					}

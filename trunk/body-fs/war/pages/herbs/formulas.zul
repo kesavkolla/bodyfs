@@ -14,7 +14,7 @@
 				<north size="50px">
 					<include src="/pages/common/herbsmenu.zul" />
 				</north>
-				<center>
+				<center autoscroll="true">
 					<vbox hflex="1" vflex="1" style="margin:10px" id="cntbox" apply="com.bodyfs.ui.FormulasComposer">
 						<div id="cntdiv" visible="false" hflex="1" height="175px">
 							<grid hflex="1">

@@ -10,9 +10,17 @@ body {
 	background: #dd0000;
 }
 
-.z-center,.z-north,.z-east,.z-west,.z-south {
+.z-north,.z-east,.z-west,.z-south {
 	background-color: #660000;
 	color: #F1B772;
+	border: 1px solid #B97449;
+}
+
+.z-center {
+	background-color: #660000;
+	color: black;
+	font-family: Verdana;
+	font-size: 12pt;
 	border: 1px solid #B97449;
 }
 

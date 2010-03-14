@@ -1,7 +1,7 @@
 /* $Id$ */
 package com.bodyfs.ui;
 
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.List;
 
 import net.sf.jsr107cache.Cache;
 
@@ -10,6 +10,9 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Html;
+
+import com.bodyfs.dao.IPersonDAO;
+import com.bodyfs.model.QuickPatient;
 
 /**
  * 
@@ -28,28 +31,28 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		final Cache cache = (Cache) SpringUtil.getBean("datacache");
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		List<QuickPatient> quicklist = null;
+
 		if (!cache.containsKey(PatientViewComposer.QUICK_PATIENT_LIST)) {
-			return;
+			quicklist = personDAO.getQuickList();
+			cache.put(PatientViewComposer.QUICK_PATIENT_LIST, quicklist);
+		} else {
+			quicklist = (List<QuickPatient>) cache.get(PatientViewComposer.QUICK_PATIENT_LIST);
 		}
-		final ArrayBlockingQueue<String> quicklist = (ArrayBlockingQueue<String>) cache
-				.get(PatientViewComposer.QUICK_PATIENT_LIST);
-		if (quicklist.size() <= 0) {
+		if (quicklist == null || quicklist.size() <= 0) {
 			return;
 		}
 		final StringBuilder buffer = new StringBuilder();
 
-		final String[] patData = new String[quicklist.size()];
-		quicklist.toArray(patData);
-		String curId = execution.getParameter("id");
-		for (int i = patData.length - 1; i >= 0; i--) {
-			int idIndex = patData[i].indexOf(":");
-			String patId = patData[i].substring(0, idIndex);
+		final String curId = execution.getParameter("id");
+		for (final QuickPatient qp : quicklist) {
 			buffer.append("<div class='bodyfs-qpatient");
-			if (curId != null && curId.equals(patId)) {
+			if (curId != null && curId.equals(qp.getId().toString())) {
 				buffer.append(" bodyfs-qpatient-selected");
 			}
-			buffer.append("'><a href='/pages/patient/patientview.zul?&id=").append(patId).append("'>").append(
-					patData[i].substring(idIndex + 1)).append("</a></div>");
+			buffer.append("'><a href='/pages/patient/patientview.zul?&id=").append(qp.getId()).append("'>").append(
+					qp.getName()).append("</a></div>");
 		}
 
 		final Div divQuicklist = (Div) comp;

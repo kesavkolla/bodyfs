@@ -25,38 +25,40 @@
 							</rows>
 						</grid>
 						<space orient="vertical" height="20px"></space>
-						<groupbox id="gbox" mold="3d" open="true" closable="false" hflex="1" width="90%">
-							<caption label="" />
-							<hbox pack="center" hflex="1">
-								<div width="800px">
-									<vbox>
-										<div width="100%" align="center">
-											Next Appointment:
-											<label id="nextApppointment" />
-										</div>
-										<div align="center" height="30px">
-											<space bar="true" width="700px" orient="horizontal" />
-										</div>
-										<div width="100%" align="center">
-											Next Re Examination Date:
-											<label id="nextReExam" />
-										</div>
-										<div align="center" height="30px">
-											<space bar="true" width="700px" orient="horizontal" />
-										</div>
-										<div width="100%" align="center" style="">
-											There are
-											<a id="newemails" href="#" />
-											from Body Feng Shui
-										</div>
-										<div align="center" height="30px">
-											<space bar="true" width="700px" orient="horizontal" />
-										</div>
-										<div width="100%" align="center">You have 10 Bags of Herbs remaining.</div>
-									</vbox>
-								</div>
-							</hbox>
-						</groupbox>
+
+						<hbox pack="center" hflex="1">
+							<div width="800px" style="border:1px solid white">
+								<vbox hflex="1">
+									<div id="rpthead"
+										style="text-align:center;background-color:white;font-size:12pt;font-family:Verdana;color:black;font-weight:bold">
+									</div>
+									<div width="100%" align="center">
+										Next Appointment:
+										<label id="nextApppointment" />
+									</div>
+									<div align="center" height="30px">
+										<space bar="true" width="700px" orient="horizontal" />
+									</div>
+									<div width="100%" align="center">
+										Next Re Examination Date:
+										<label id="nextReExam" />
+									</div>
+									<div align="center" height="30px">
+										<space bar="true" width="700px" orient="horizontal" />
+									</div>
+									<div width="100%" align="center" style="">
+										There are
+										<a id="newemails" href="#" />
+										from Body Feng Shui
+									</div>
+									<div align="center" height="30px">
+										<space bar="true" width="700px" orient="horizontal" />
+									</div>
+									<div width="100%" align="center">You have 10 Bags of Herbs remaining.</div>
+								</vbox>
+							</div>
+						</hbox>
+
 					</vbox>
 				</center>
 			</borderlayout>

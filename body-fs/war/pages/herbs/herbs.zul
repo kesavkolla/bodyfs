@@ -14,7 +14,7 @@
 				<north size="50px">
 					<include src="/pages/common/herbsmenu.zul" />
 				</north>
-				<center>
+				<center autoscroll="true">
 					<vbox hflex="1" vflex="1" style="margin:10px" id="cntbox" apply="com.bodyfs.ui.HerbsComposer">
 						<div id="cntdiv" visible="false" hflex="1" height="175px">
 							<grid hflex="1">
@@ -49,7 +49,7 @@
 						<div style="background-color:#C3390B" hflex="1">
 							<button label="Add" id="btnAdd" forward="onClick=cntbox.onAddHerb" />
 						</div>
-						<listbox id="lstherb" hflex="1" model="@{mherbs }" mold="paging">
+						<listbox id="lstherb" model="@{mherbs }" mold="paging" hflex="1">
 							<listhead>
 								<listheader label="Name" width="30%" sort="none" />
 								<listheader label="Description" sort="none" />

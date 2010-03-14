@@ -4,7 +4,9 @@
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
@@ -33,6 +35,7 @@ import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
 import com.bodyfs.model.Person;
+import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
 
@@ -238,6 +241,27 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public List<QuickPatient> getQuickList() {
+		return jdoTemplate.execute(new JdoCallback<List<QuickPatient>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<QuickPatient> doInJdo(final PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery(QuickPatient.class);
+				query.setOrdering("date DESC");
+				query.setRange(0L, 5L);
+				final List<QuickPatient> qlist = (List<QuickPatient>) query.execute();
+				final List<QuickPatient> copylist = new ArrayList<QuickPatient>(qlist);
+				return copylist;
+			}
+		}, true);
+	}
+
+	@Override
+	public void createQuickPatient(final QuickPatient qp) {
+		this.jdoTemplate.makePersistent(qp);
 	}
 
 }

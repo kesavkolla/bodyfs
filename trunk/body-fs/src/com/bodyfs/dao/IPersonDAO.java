@@ -1,6 +1,8 @@
+/* $Id */
 package com.bodyfs.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -16,9 +18,15 @@ import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
 import com.bodyfs.model.Person;
+import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
 
+/**
+ * 
+ * @author Kesav Kumar Kolla
+ * 
+ */
 public interface IPersonDAO {
 	public Person getPerson(Long id);
 
@@ -26,9 +34,31 @@ public interface IPersonDAO {
 
 	public Person createPerson(final Person person);
 
+	/**
+	 * This method searches all the patients by their email address
+	 * 
+	 * @param email person's email address
+	 * @return person corresponds to the email null if not found
+	 */
 	public Person getByEmail(final String email);
 
+	/**
+	 * This method searchs all the patients by their name
+	 * 
+	 * @param firstname persons' firstname
+	 * @param lastname person's lastname
+	 * @param initial person's middle name
+	 * @return person with the match null if not found
+	 */
 	public Person getByName(final String firstname, final String lastname, final String initial);
+
+	/**
+	 * 
+	 * @return list of last 5 patients
+	 */
+	public List<QuickPatient> getQuickList();
+
+	public void createQuickPatient(final QuickPatient qp);
 
 	public void deletePerson(final Long id);
 

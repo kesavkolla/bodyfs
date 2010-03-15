@@ -21,5 +21,6 @@
 		<toolbarbutton label="Profile" image="/img/user_add.png"
 			sclass="${page.title eq 'Create Customer LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" width="100px" />
+		<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px" />
 	</hbox>
 </zk>

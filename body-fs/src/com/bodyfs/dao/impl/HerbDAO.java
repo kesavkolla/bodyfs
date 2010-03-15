@@ -312,6 +312,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			formula.setHerbs(herbids);
 			createFormula(formula);
 		}
+		System.out.println(retVal.get(0).getClass());
 		// Store the diagnoses in the cache
 		this.cache.put(IHerbDAO.FORMULAS_CACHE, retVal);
 		return retVal;

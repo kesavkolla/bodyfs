@@ -77,12 +77,12 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	public LoginInfo verifyLoginDetails(String loginId, String password) {
 		try {
 			final LoginInfo login = this.jdoTemplate.getObjectById(LoginInfo.class, loginId);
-
-			if (login.getPassword().equals(password)) {
+			if (login != null && login.getPassword().equals(password)) {
 				return login;
 			}
 			return null;
 		} catch (final Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

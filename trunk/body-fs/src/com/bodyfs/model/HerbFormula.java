@@ -32,7 +32,7 @@ public class HerbFormula implements Serializable {
 	@Persistent
 	private String description;
 
-	@Persistent
+	@Persistent()
 	private List<Long> herbs;
 
 	public Long getId() {

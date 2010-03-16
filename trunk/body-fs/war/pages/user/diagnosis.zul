@@ -19,7 +19,7 @@
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center flex="true" autoscroll="false">
 			<borderlayout id="patientview">
-				<north size="50px">
+				<north size="75px">
 					<include src="/pages/common/userweeklymenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">

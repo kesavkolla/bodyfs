@@ -298,6 +298,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 				return null;
 			}
 		});
+
 		for (final HerbFormula formula : retVal) {
 			final List<Long> herbids = (List<Long>) getHerbIds(formula.getHerbs());
 			if (LOGGER.isDebugEnabled()) {
@@ -309,10 +310,10 @@ public class HerbDAO implements IHerbDAO, Serializable {
 				continue;
 			}
 			// Save the new Diagnosis in the database
-			formula.setHerbs(herbids);
+
+			formula.setHerbs(new ArrayList<Long>(herbids));
 			createFormula(formula);
 		}
-		System.out.println(retVal.get(0).getClass());
 		// Store the diagnoses in the cache
 		this.cache.put(IHerbDAO.FORMULAS_CACHE, retVal);
 		return retVal;
@@ -445,7 +446,7 @@ public class HerbDAO implements IHerbDAO, Serializable {
 				continue;
 			}
 			// Save the new Diagnosis in the database
-			diagnosis.setFormulas(formulaids);
+			diagnosis.setFormulas(new ArrayList<Long>(formulaids));
 			createDiagnosis(diagnosis);
 		}
 		// Store the diagnoses in the cache

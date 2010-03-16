@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.Clients;
@@ -19,10 +21,12 @@ import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Textbox;
 
+import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.PersonType;
 import com.bodyfs.ui.util.CommonUtils;
 
 /**
@@ -61,43 +65,36 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		return arr.toJSONString();
 	}
 
-	/*
-	@Override
-	public ComponentInfo doBeforeCompose(final Page page, final Component parent, final ComponentInfo compInfo) {
-		final Session session = Sessions.getCurrent(false);
-		final Execution execution = Executions.getCurrent();
-		// Do the sanity checks
-		// If the id is not present in the URL send to customer search
-		final Long patid = CommonUtils.getPatientId();
-		if (patid == null) {
-			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
-				execution.sendRedirect("/pages/usermgmt/customersearch.zul");
-				return null;
-			} else {
-				execution.sendRedirect("/pages/user/index.zul");
-				return null;
-			}
-		}
-
-		// If there are no patient visits send to sign-in page
-		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-		if (visitDAO.countPatientVisits(patid) < 1) {
-			if (((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
-				execution.sendRedirect("/pages/patient/patientview.zul?id=" + patid);
-				return null;
-			} else {
-				execution.sendRedirect("/pages/user/index.zul");
-				return null;
-			}
-		}
-		page.setAttribute("patid", patid);
-		return super.doBeforeCompose(page, parent, compInfo);
-	}*/
-
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
-		super.doAfterCompose(comp);
+
 		final Long patid = CommonUtils.getPatientId();
+		if (patid == null) {
+			if (((PersonType) Sessions.getCurrent(false).getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+				Executions.sendRedirect("/pages/usermgmt/customersearch.zul");
+				return;
+			} else {
+				Executions.sendRedirect("/pages/user/index.zul");
+				return;
+			}
+		}
+
+		// If there are no patient visits send to sign-in page except the request is from the signin
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		if (Executions.getCurrent().getParameter("noskip") == null
+				|| !Executions.getCurrent().getParameter("noskip").equals("true")) {
+			if (visitDAO.countPatientVisits(patid) < 1) {
+
+				if (((PersonType) Sessions.getCurrent(false).getAttribute(Constants.SESSION_PERSON_TYPE)) == PersonType.EMPLOYEE) {
+					Executions.sendRedirect("/pages/patient/patientview.zul?id=" + patid);
+					return;
+				} else {
+					Executions.sendRedirect("/pages/user/index.zul");
+					return;
+				}
+			}
+		}
+		super.doAfterCompose(comp);
 		// If the visitDate parameter exists in the URL convert to the date
 		Date visitDate = null;
 		if (execution.getParameter("visitDate") != null) {
@@ -118,7 +115,6 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 		 * latest visit
 		 */
 		if (visitDate != null || comp.getAttribute("showlast") != null) {
-			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 			final PatientVisit patvisit = visitDAO.getPatientVisitByDate(patid, visitDate);
 			this.page.setAttribute("patvisit", patvisit);
 		} else {
@@ -159,6 +155,20 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			LOGGER.debug("Successfully created treatment with id: " + treatment.getId());
 			Clients.evalJavaScript("showConfirmation()");
 		}
+	}
+
+	/**
+	 * This will save the current signin information and navigates to the diagnosis
+	 * 
+	 * @param event
+	 */
+	public void onNext(final ForwardEvent event) {
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientVisit patvisit = (PatientVisit) page.getAttribute("patvisit");
+		if (patvisit != null) {
+			visitDAO.createPatientVisit(patvisit);
+		}
+		Clients.evalJavaScript("navigateNext()");
 	}
 
 	/**

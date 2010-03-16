@@ -1,0 +1,9 @@
+<?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<hbox>
+		<toolbarbutton label="Create Payments Report" image="/img/report_card.png"
+			href="/pages/payments/paymentscreate.zul" sclass="${page.title eq 'Create Payment' ? 'bodyfs-toolbar-selected' : ''}"/>
+		<toolbarbutton label="Services Management" image="/img/vcard_add.png"
+			href="/pages/payments/changecharges.zul" sclass="${page.title eq 'Change Service Rates' ? 'bodyfs-toolbar-selected' : ''}"/>
+	</hbox>
+</zk>

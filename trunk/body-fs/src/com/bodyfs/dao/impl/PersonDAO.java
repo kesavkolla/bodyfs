@@ -35,6 +35,7 @@ import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
 import com.bodyfs.model.Person;
+import com.bodyfs.model.PersonType;
 import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
@@ -76,6 +77,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	@Override
 	public Collection<Person> getAll() {
 		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class));
+	}
+	
+	@Override
+	public Collection<Person> getAllCustomersInfo() {
+		try {
+			final Collection<Person> results = this.jdoTemplate.find(Person.class, "personType == " + PersonType.EMPLOYEE);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results;
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	@Override

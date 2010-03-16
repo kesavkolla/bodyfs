@@ -31,6 +31,8 @@ public interface IPersonDAO {
 	public Person getPerson(Long id);
 
 	public Collection<Person> getAll();
+	
+	public Collection<Person> getAllCustomersInfo();
 
 	public Person createPerson(final Person person);
 

@@ -25,12 +25,16 @@ public class PaymentBreakDown implements Serializable{
 	@Persistent
 	private String serviceId;
 	
+	@Persistent
+	private String serviceName;
 	
 	@Persistent
-	private Integer perWeek;
+	private Integer perWeek = 0;
 
 	@Persistent
-	private Integer duration;
+	private Integer duration = 0;
+	
+	private Double Cost;
 
 	/**
 	 * @return the id
@@ -73,7 +77,21 @@ public class PaymentBreakDown implements Serializable{
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
+		
+	/**
+	 * @return the serviceName
+	 */
+	public String getServiceName() {
+		return serviceName;
+	}
 
+	/**
+	 * @param serviceName the serviceName to set
+	 */
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	
 	/**
 	 * @return the perWeek
 	 */
@@ -101,6 +119,22 @@ public class PaymentBreakDown implements Serializable{
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
+
+	/**
+	 * @return the cost
+	 */
+	public Double getCost() {
+		return Cost;
+	}
+
+	/**
+	 * @param cost the cost to set
+	 */
+	public void setCost(Double cost) {
+		Cost = cost;
+	}
+	
+	
 
 	
 }

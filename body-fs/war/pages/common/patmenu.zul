@@ -2,9 +2,9 @@
 <zk>
 	<hbox>
 		<toolbarbutton label="Report Card" image="/img/report_card.png"
-			href="/pages/patient/patientview.zul?id=${param.id }" width="100px"
+			href="/pages/patient/patientview.zul?id=${param.id }" width="125px"
 			sclass="${page.title eq 'Patient View' ? 'bodyfs-toolbar-selected' : ''}" />
-		<toolbarbutton label="Sign in" image="/img/vcard_add.png"
+		<toolbarbutton id="tbtnSignin" label="Sign in" image="/img/vcard_add.png"
 			href="/pages/patient/weeklyvisit.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.visitDate ? '':param.visitDate }"
 			width="100px" sclass="${page.title eq 'Weekly patient visit' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png"
@@ -21,6 +21,6 @@
 		<toolbarbutton label="Profile" image="/img/user_add.png"
 			sclass="${page.title eq 'Create Customer LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" width="100px" />
-		<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px" />
 	</hbox>
+	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
 </zk>

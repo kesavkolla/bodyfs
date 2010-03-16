@@ -1,7 +1,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?script type="text/javascript" content="var pageurl = '/pages/signin/signin.zul';"?>
+<?script type="text/javascript" content="var pageurl = '/pages/signin/signin.zul?noskip=true';"?>
 <?script type="text/javascript" src="/scripts/customersearch.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout style="background:#1e1406;" id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">

@@ -13,4 +13,5 @@
 		<toolbarbutton id="tbtnPrescription" label="Prescription" image="/img/prescription.png"
 			href="#" />
 	</hbox>
+	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
 </zk>

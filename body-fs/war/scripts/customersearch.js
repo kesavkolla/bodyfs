@@ -21,7 +21,12 @@ function openPatient(jqobj) {
 	var sclass = widget._sclass;
 	if (sclass) {
 		if (typeof (pageurl) != "undefined" && pageurl.length > 0) {
-			zUtl.go(pageurl + "?id=" + sclass);
+			if (pageurl.indexOf("?") == -1) {
+				zUtl.go(pageurl + "?id=" + sclass);
+				return;
+			} else {
+				zUtl.go(pageurl + "&id=" + sclass);
+			}
 		} else {
 			zUtl.go("/pages/patient/patientview.zul?savepat=true&id=" + sclass);
 		}

@@ -5,7 +5,7 @@
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="patientview">
-				<north size="50px">
+				<north size="75px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true" id="controller"

@@ -19,10 +19,13 @@
 								</n:td>
 								<n:td></n:td>
 								<n:td align="right">
-									<button id="btnPrev" label="Prev" sclass="submitbtn" />
-									<button id="btnDone" label="Done" sclass="submitbtn" />
+									<button id="btnPrev" label="Prev" sclass="submitbtn"
+										forward="onClick=controller.onSave(Prev)" />
+									<button id="btnDone" label="Done" sclass="submitbtn"
+										forward="onClick=controller.onSave(Done)" />
 									<textbox id="txtVisitDates" visible="false"
 										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtPrescription" visible="false" />
 								</n:td>
 							</n:tr>
 							<n:tr>

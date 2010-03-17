@@ -24,6 +24,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Textbox;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
@@ -110,7 +111,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final Collection<Herb> herblist = herbDAO.getHerbs();
 		if (herblist != null) {
 			page.setAttribute("herblist", herblist);
-			final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "herblist");
+			final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
 			cmbHerbs.setAutocomplete(true);
 		}
 	}
@@ -184,6 +185,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 	 * 
 	 * @param event
 	 */
+	@SuppressWarnings("unchecked")
 	public void onFormula1Change(final ForwardEvent event) {
 		final Combobox cmbFormulas1 = (Combobox) Path.getComponent(page, "cmbFormulas1");
 		final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
@@ -199,6 +201,20 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		cmbHerbs.setModel(new ListModelList(herbDAO.getHerbs(selFormula.getHerbs())));
 		cmbHerbs.invalidate();
+	}
+
+	/**
+	 * This will be called when user clicks on either Prev or Done button
+	 * 
+	 * @param event
+	 */
+	public void onSave(final ForwardEvent event) {
+		final Textbox txtPrescription = (Textbox) Path.getComponent(page, "txtPrescription");
+		// If the value of the textbox is empty then save the data
+		if (txtPrescription.getValue() != null && txtPrescription.getValue().length() > 0) {
+			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		}
+		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
 	/**

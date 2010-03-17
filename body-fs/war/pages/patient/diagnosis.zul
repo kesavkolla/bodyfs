@@ -40,8 +40,10 @@
 												<n:input id="btnView" type="button" value="View" />
 											</n:td>
 											<n:td align="right">
-												<button id="btnNext" label="Next" forward="onClick=visitgrid.onNext" />
-												<button id="btnPrev" label="Prev" forward="onClick=visitgrid.onNext" />
+												<button id="btnPrev" label="Prev" sclass="submitbtn"
+													forward="onClick=diagnosisgrid.onSave(Prev)" />
+												<button id="btnNext" label="Next" sclass="submitbtn"
+													forward="onClick=diagnosisgrid.onSave(Next)" />
 												<textbox id="txtVisitDates" visible="false"
 													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
 											</n:td>

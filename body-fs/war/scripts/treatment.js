@@ -8,7 +8,7 @@ function setupPage() {
 	if (!readonly) {
 		initMarkers();
 	}
-	setupPagination();
+	initPage();
 	reloadMarkers(true);
 }
 
@@ -41,7 +41,7 @@ function reloadMarkers(nogrowl) {
 	$(".marker").remove();
 	var wgt = zk.Widget.$($("$txtMarkers").attr("id"));
 	var markerData = [];
-	if (!isEmptyObject(wgt) && wgt.getValue() != "") {
+	if (!$.isEmptyObject(wgt) && wgt.getValue() != "") {
 		markerData = parseJSON(wgt.getValue());
 	}
 	var imgdiv = $("#imgdiv");
@@ -94,48 +94,60 @@ function SaveMarkers() {
  * 
  * @return
  */
-function setupPagination() {
+function initPage() {
 	if (!$.isArray(data)) {
 		return;
 	}
 	if (data.length < 1) {
 		return;
 	}
-	/* Find the start parameter which matches the visitdate */
+
+	/*
+	 * Find the start parameter which matches the visitdate
+	 */
 	if (start.length <= 0) {
-		start = 1;
-	} else {
-		for ( var i = 0, len = data.length; i < len; i++) {
-			if (start == data[i].date) {
-				start = i + 1;
-				break;
-			}
-		}
+		start = data[0].date;
 	}
-	$("$Pagination").paginate( {
-		count : data.length,
-		start : start,
-		display : 8,
-		border : true,
-		border_color : '#000',
-		text_color : '#000',
-		background_color : '#fff',
-		border_hover_color : '#ccc',
-		text_hover_color : '#fff',
-		background_hover_color : '#000',
-		images : false,
-		mouse : 'press',
-		data : data,
-		onChange : function(textValue, selectedObj) {
-			jq("$txtVisitDates").val(selectedObj.date);
-			jq("$txtVisitDates").blur();
-			var wgt = zk.Widget.$(jq("$tbtnDiagnosis").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = zk.Widget(jq("$tbtnTreatment").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = zk.Widget(jq("$tbtnPrescription").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-		}
+
+	/* Add all the dates to the dropdown box */
+	var selVisitDates = $("#selVisitDates");
+	$.each(data, function() {
+		selVisitDates.append('<option value="' + this.date + '" ' + ((start == this.date) ? "selected='true'" : "")
+				+ '">' + this.value + '</option>');
 	});
-	$("$Pagination").find("ul").parent().css("display", "inline");
+
+	/* Handle the click on View */
+	$("#btnView").click(function() {
+		var selVisitDates = $("#selVisitDates")[0];
+		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
+		$("$txtVisitDates").val(selDate).blur();
+		var btnArr = [ "$tbtnSignin", "$tbtnDiagnosis", "$tbtnTreatment", "$tbtnPrescription" ];
+		$.each(btnArr, function(indx, val) {
+			var wgt = zk.Widget.$($(val).attr("id"));
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
+		});
+	});
+
+	/*
+	 * Handle the click on prev/next
+	 */
+	$(".submitbtn").click(function() {
+		SaveMarkers();
+	});
+}
+
+/**
+ * This function redirects to the next/prev page
+ * 
+ * @param direction
+ * @return
+ */
+function navigate(direction) {
+	if (direction == "Next") {
+		var wgt = zk.Widget.$($("$tbtnPrescription").attr("id"));
+		zUtl.go(wgt._href);
+	} else {
+		var wgt = zk.Widget.$($("$tbtnDiagnosis").attr("id"));
+		zUtl.go(wgt._href);
+	}
 }

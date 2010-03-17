@@ -11,62 +11,99 @@
 				<center hflex="1" vflex="1" autoscroll="true" id="controller"
 					apply="com.bodyfs.ui.PrescriptionComposer">
 					<div hflex="1" vflex="1" style="margin-left:10px">
-						<n:table width="100%">
+						<n:table width="90%">
 							<n:tr>
 								<n:td>
+									<n:select id="selVisitDates" />
+									<n:input id="btnView" type="button" value="View" />
+								</n:td>
+								<n:td></n:td>
+								<n:td align="right">
+									<button id="btnPrev" label="Prev" sclass="submitbtn" />
+									<button id="btnDone" label="Done" sclass="submitbtn" />
+									<textbox id="txtVisitDates" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+								</n:td>
+							</n:tr>
+							<n:tr>
+								<n:td colspan="3">
 									<n:br />
 									<n:br />
 								</n:td>
 							</n:tr>
 							<n:tr valign="top">
-								<n:td>&amp;nbsp;</n:td>
 								<n:td>
-									Select Diagnosis
-									<n:br />
+									Diagnosis &amp;nbsp;
 									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
 										forward="onChange=controller.onDiagnosisChange">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
 											value="@{diagnosis }" />
 									</combobox>
-								</n:td>
-								<n:td>
-									Select Formula
 									<n:br />
+									<n:br />
+									Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;
 									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
 										forward="onChange=controller.onFormulaChange">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
+
 								</n:td>
 								<n:td>
-									<div id="divHerbs" width="200px" height="200px" style="border:1px solid red"></div>
-								</n:td>
-								<n:td>
-									Portion:
+									Portion &amp;nbsp;
+									<intbox id="txtPortion" constraint="no empty" />
 									<n:br />
-									<intbox id="txtPortion" hflex="1" constraint="no empty" />
+									<n:br />
+									<space width="50px" />
+									<n:button id="btnAdd">Add</n:button>
 								</n:td>
 								<n:td>
-									<n:button id="btnAdd">Add</n:button>
+									Herb&amp;nbsp;
+									<div id="divHerbs" width="200px" height="200px" style="border:1px solid black"></div>
 								</n:td>
 							</n:tr>
 						</n:table>
 						<n:br />
-						<button id="btnSave" label="Prescribe" height="40px" />
 						<n:br />
 						<n:br />
 						<n:br />
-						<n:table id="herbsTable" width="100%">
+						<n:table id="herbsTable" width="90%">
 							<n:tr align="left">
 								<n:th>Forumula</n:th>
 								<n:th>Herbs</n:th>
 								<n:th>Portion</n:th>
 								<n:th></n:th>
 							</n:tr>
+							<n:tr>
+								<n:td>
+									<combobox id="cmbFormulas1" autodrop="true" mold="rounded" model="@{formulalist }"
+										forward="onChange=controller.onFormula1Change">
+										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
+									</combobox>
+								</n:td>
+								<n:td>
+									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }">
+										<comboitem self="@{each=herb }" label="@{herb.name }" value="@{herb }" />
+									</combobox>
+								</n:td>
+								<n:td>
+									<n:input type="text" id="txtHPortion" />
+								</n:td>
+								<n:td>
+									<n:input type="button" id="btnHAdd" value="Add" />
+								</n:td>
+							</n:tr>
 						</n:table>
+						<script type="text/javascript" defer="false">
+							var data = ${controller$composer.visitsDates};
+
+							var start = "${param.visitDate}";
+
+							zk.afterMount(initJS);
+						</script>
 					</div>
 				</center>
 			</borderlayout>
 		</center>
 	</borderlayout>
-	<script type="text/javascript" defer="true">zk.afterMount(initJS);</script>
+
 </zk>

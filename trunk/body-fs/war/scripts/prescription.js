@@ -2,6 +2,35 @@ function initJS() {
 	$("#btnAdd").click(AddPortion);
 	$(".imgDelete").live("click", DeleteRow);
 	$.data(document.body, "loadedformulas", new Array());
+	initPage();
+}
+
+/**
+ * This function setup the pagination and other initialization tasks
+ * 
+ * @return
+ */
+function initPage() {
+	if (!$.isArray(data)) {
+		return;
+	}
+	if (data.length < 1) {
+		return;
+	}
+
+	/*
+	 * Find the start parameter which matches the visitdate
+	 */
+	if (start.length <= 0) {
+		start = data[0].date;
+	}
+
+	/* Add all the dates to the dropdown box */
+	var selVisitDates = $("#selVisitDates");
+	$.each(data, function() {
+		selVisitDates.append('<option value="' + this.date + '" ' + ((start == this.date) ? "selected='true'" : "")
+				+ '">' + this.value + '</option>');
+	});
 }
 
 /**

@@ -107,6 +107,12 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
 			cmbFormulas.setAutocomplete(true);
 		}
+		final Collection<Herb> herblist = herbDAO.getHerbs();
+		if (herblist != null) {
+			page.setAttribute("herblist", herblist);
+			final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "herblist");
+			cmbHerbs.setAutocomplete(true);
+		}
 	}
 
 	/**
@@ -171,5 +177,47 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		}
 		retObject.put("herbs", herbsArray);
 		Clients.evalJavaScript("DisplayData(" + retObject.toJSONString() + ")");
+	}
+
+	/**
+	 * This is the eventhandling to cmbFormulas1 onchange
+	 * 
+	 * @param event
+	 */
+	public void onFormula1Change(final ForwardEvent event) {
+		final Combobox cmbFormulas1 = (Combobox) Path.getComponent(page, "cmbFormulas1");
+		final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
+		// If the selected item is null then retrieve all the herbs and set to the cmbHerbs
+		if (cmbFormulas1.getSelectedIndex() == -1 || cmbFormulas1.getSelectedItem() == null) {
+			final Collection<Herb> herblist = (Collection<Herb>) page.getAttribute("herblist");
+			cmbHerbs.setModel(new ListModelList(herblist));
+			cmbHerbs.invalidate();
+			return;
+		}
+		// Get the selected formula and retrieve the herbs corresponds to it
+		final HerbFormula selFormula = (HerbFormula) cmbFormulas1.getSelectedItem().getValue();
+		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
+		cmbHerbs.setModel(new ListModelList(herbDAO.getHerbs(selFormula.getHerbs())));
+		cmbHerbs.invalidate();
+	}
+
+	/**
+	 * This method returns the dates of the patient visits for the current
+	 * patient id
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public final String getVisitsDates() {
+		final Long patid = CommonUtils.getPatientId();
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final JSONArray arr = new JSONArray();
+		for (final Date date : visitDAO.getPatientVisitDates(patid)) {
+			final JSONObject obj = new JSONObject();
+			obj.put("value", sdf.format(date));
+			obj.put("date", date.getTime());
+			arr.add(obj);
+		}
+		return arr.toJSONString();
 	}
 }

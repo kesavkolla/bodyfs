@@ -7,12 +7,12 @@ function setupData() {
 	 * Find the start parameter which matches the visitdate
 	 */
 	if (start.length <= 0) {
-		start = data[0];
+		start = data[0].date;
 	}
 	var selVisitDates = $("#selVisitDates");
 	$.each(data, function() {
-		selVisitDates.append('<option value="' + this.date + '" '
-				+ ((start.date == this.date) ? "selected='true'" : "") + '">' + this.value + '</option>');
+		selVisitDates.append('<option value="' + this.date + '" ' + ((start == this.date) ? "selected='true'" : "")
+				+ '">' + this.value + '</option>');
 	});
 
 	/*
@@ -40,6 +40,7 @@ function setupData() {
 
 /**
  * Navigates to the diagnosis page
+ * 
  * @return
  */
 function navigateNext() {

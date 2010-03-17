@@ -3,12 +3,11 @@
 <?component name="titlelabel" extends="label" sclass="clstitle"?>
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
-<?link rel="stylesheet" type="text/css" href="/css/pagination.css"?>
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
-<?script type="text/javascript" src="/scripts/jquery.paginate.min.js"?>
+<?script type="text/javascript" src="/scripts/weeklyvisit.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
@@ -31,9 +30,12 @@
 									<n:table width="100%">
 										<n:tr>
 											<n:td>
-												<div id="Pagination" class="pagination" align="right" width="90%" />
+												<n:select id="selVisitDates" />
+												<n:input id="btnView" type="button" value="View" />
+
 											</n:td>
-											<n:td>
+											<n:td align="right">
+												<button id="btnNext" label="Next" forward="onClick=visitgrid.onNext" />
 												<textbox id="datepage" visible="false"
 													forward="onBlur=visitgrid.onDateChange" />
 											</n:td>
@@ -49,15 +51,15 @@
 									<hbox hflex="1">
 										<titlelabel value="Health Goals:" />
 										<titlelabel value="# of Herb Bags Left" />
-										<intbox value="@{patvisit.numOfHearbBags, save-when='btnSave.onClick' }"
+										<intbox value="@{patvisit.numOfHearbBags, save-when='btnNext.onClick' }"
 											readonly="true" />
 									</hbox>
 									<textbox hflex="1" rows="4"
-										value="@{patvisit.healthGoals, save-when='btnSave.onClick' }" />
+										value="@{patvisit.healthGoals, save-when='btnNext.onClick' }" />
 									<hbox hflex="1">
 										<titlelabel value="Energy Level:" />
 										<radiogroup
-											selectedIndex="@{patvisit.energyLevel, save-when='btnSave.onClick' }">
+											selectedIndex="@{patvisit.energyLevel, save-when='btnNext.onClick' }">
 											<radio label="1" disabled="true" />
 											<radio label="2" disabled="true" />
 											<radio label="3" disabled="true" />
@@ -71,7 +73,7 @@
 										</radiogroup>
 									</hbox>
 									<radiogroup
-										selectedIndex="@{patinfo.digestion, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
+										selectedIndex="@{patinfo.digestion, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
 										<grid>
 											<rows>
 												<row>
@@ -97,19 +99,19 @@
 									<titlelabel
 										value="Appetite Level (How hungry are you druing meal times &amp; have you desire to eat?)" />
 									<radiogroup
-										selectedIndex="@{patvisit.appetiteLevel, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+										selectedIndex="@{patvisit.appetiteLevel, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
 										<radio label="Low" disabled="true" />
 										<radio label="High" disabled="true" />
 										<radio label="Normal" disabled="true" />
 									</radiogroup>
 									<radiogroup
-										selectedIndex="@{patvisit.bowlMovement, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
+										selectedIndex="@{patvisit.bowlMovement, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
 										<grid hflex="1">
 											<rows>
 												<row>
 													<titlelabel value="Bowl Movement:" />
 													How often per day?
-													<textbox value="@{patvisit.bowlTimes, save-when='btnSave.onClick' }"
+													<textbox value="@{patvisit.bowlTimes, save-when='btnNext.onClick' }"
 														hflex="1" readonly="true" />
 													/day
 												</row>
@@ -129,14 +131,14 @@
 										</grid>
 									</radiogroup>
 									<radiogroup
-										selectedIndex="@{patvisit.urine, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.UrinationToRadiogroup' }">
+										selectedIndex="@{patvisit.urine, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.UrinationToRadiogroup' }">
 										<grid hflex="1">
 											<rows>
 												<row>
 													<titlelabel value="Urination:" />
 													How often per day?
 													<textbox
-														value="@{patvisit.urineTimes, save-when='btnSave.onClick' }" hflex="1" readonly="true" />
+														value="@{patvisit.urineTimes, save-when='btnNext.onClick' }" hflex="1" readonly="true" />
 													/day
 												</row>
 												<row>
@@ -154,7 +156,7 @@
 										</grid>
 									</radiogroup>
 									<radiogroup hflex="1"
-										selectedIndex="@{patvisit.sleep, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.QualityOfSleepToRadiogroup' }">
+										selectedIndex="@{patvisit.sleep, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.QualityOfSleepToRadiogroup' }">
 										<grid>
 											<rows>
 												<row>
@@ -176,67 +178,23 @@
 									</radiogroup>
 									<titlelabel value="Any questions or concerns?" hflex="1" />
 									<textbox rows="3" hflex="1"
-										value="@{patvisit.question, save-when='btnSave.onClick' }" readonly="true" />
+										value="@{patvisit.question, save-when='btnNext.onClick' }" readonly="true" />
 									<titlelabel value="Is there any way we can provide better service for you?:"
 										hflex="1" />
 									<textbox rows="3" hflex="1"
-										value="@{patvisit.betterService, save-when='btnSave.onClick' }" readonly="true" />
+										value="@{patvisit.betterService, save-when='btnNext.onClick' }" readonly="true" />
 								</vbox>
 							</row>
 							<row spans="2" align="right">
 								<cell colspan="2">
-									<script type="text/javascript" defer="true">
-										zk.afterMount(function() {
-											//Get the array of past visitdates
-											var data = ${visitgrid$composer.visitsDates};
-											//Get the url parameter of visitdate
-											var start = "${param.visitDate }";
-											if(data.length > 0) {
-												//Find the start parameter which matches the visitdate
-												if(start.length &lt;= 0) {
-													start = 1;
-												} else {
-													for (var i=0, len = data.length; i&lt;len; i++) {
-														if (start == data[i].date) {
-															start = i+1;
-															break;
-														}
-													}
-												}
-												$("$Pagination").paginate({
-													count: data.length
-													, start: start
-													, display: 8
-													, border: true
-													, border_color: '#000'
-													, text_color: '#000'
-													, background_color: '#fff'
-													, border_hover_color: '#ccc'
-													, text_hover_color: '#fff'
-													, background_hover_color: '#000'
-													, images: false
-													, mouse: 'press'
-													, data: data
-													, onChange: function(textValue, selectedObj) {
-														jq("$datepage").val(selectedObj.date);
-														jq("$datepage").blur();
-														var wgt = jq("$tbtnDiagnosis").zk.widget()[0];
-														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-														var wgt = jq("$tbtnTreatment").zk.widget()[0];
-														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-														var wgt = jq("$tbtnPrescription").zk.widget()[0];
-														wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date); 
-													}
-												});
-											}
-											$("$Pagination").find("ul").parent().css("display", "inline");
-											jq("$imgbody").annotateImage({editable: false, useAjax: false});
-											jq("$btnNew").click(function(evt) {
-												$.fn.paginate.setpage(-1);
-											});
-										});
+									<script type="text/javascript" defer="false">
+										var data = ${visitgrid$composer.visitsDates};
+
+										var start = "${param.visitDate }";
+
+										zk.afterMount(function(){setupData();});
+
 									</script>
-									<button id="btnSave" label="Next" forward="onClick=visitgrid.onSave" />
 								</cell>
 							</row>
 						</rows>
@@ -245,5 +203,4 @@
 			</borderlayout>
 		</center>
 	</borderlayout>
-
 </zk>

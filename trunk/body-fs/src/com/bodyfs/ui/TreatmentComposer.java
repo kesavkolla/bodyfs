@@ -111,7 +111,7 @@ public class TreatmentComposer extends GenericForwardComposer {
 			LOGGER.debug(treatment);
 		}
 		visitDAO.createPatientTreatment(treatment);
-		Clients.evalJavaScript("$.jGrowl('Successfully saved the data', {life:3000})");
+		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
 	/**
@@ -141,6 +141,8 @@ public class TreatmentComposer extends GenericForwardComposer {
 			page.setAttribute("treatment", treatment);
 			binder.loadAll();
 		}
+		
+		Clients.evalJavaScript("reloadMarkers(false)");
 	}
 
 }

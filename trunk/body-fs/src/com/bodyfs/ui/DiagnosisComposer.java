@@ -118,7 +118,7 @@ public class DiagnosisComposer extends GenericForwardComposer {
 				visitDate);
 		diagnosis.setDiagnosisData(txtjsondata.getValue());
 		visitDAO.createPatientDiagnosis(diagnosis);
-		Clients.evalJavaScript("$.jGrowl('Successfully saved diagnosis', {life:3000})");
+		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<hbox>
-		<toolbarbutton id="tbtnWeeklyVisit" label="WeeklyVisit" image="/img/vcard_add.png"
+		<toolbarbutton id="tbtnSignin" label="WeeklyVisit" image="/img/vcard_add.png"
 			href="/pages/user/weeklyvisit.zul${empty param.visitDate ? '':'?visitDate='}${empty param.visitDate ? '':param.visitDate }"
 			sclass="${page.title eq 'Weekly patient visit' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png"

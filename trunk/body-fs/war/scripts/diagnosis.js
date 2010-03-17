@@ -6,11 +6,13 @@
 function setupData(reload) {
 	if (reload) {
 		clearFields();
+	} else {
+		initPage();
 	}
 	/* Get the data from the jsondata textfield and setup all the input elements */
 	var wgt = zk.Widget.$($("$jsondata").attr("id"));
 	var data = {};
-	if (isEmptyObject(wgt)) {
+	if ($.isEmptyObject(wgt)) {
 		data = {};
 	} else {
 		data = parseJSON(wgt.getValue());
@@ -21,10 +23,14 @@ function setupData(reload) {
 	objselTongueColor.dropdownchecklist( {
 		width : objselTongueColor.width()
 	});
-	if (data.TongueColor && $.isArray(data.TongueColor)) {
-		$.each(data.TongueColor, function() {
-			objselTongueColor.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.TongueColor) {
+		if ($.isArray(data.TongueColor)) {
+			$.each(data.TongueColor, function() {
+				objselTongueColor.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			objselTongueColor.find("option[value='" + data.TongueColor + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup the tongue coating */
@@ -32,10 +38,14 @@ function setupData(reload) {
 	selTongueCoating.dropdownchecklist( {
 		width : selTongueCoating.width()
 	});
-	if (data.TongueCoating && $.isArray(data.TongueCoating)) {
-		$.each(data.TongueCoating, function() {
-			selTongueCoating.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.TongueCoating) {
+		if ($.isArray(data.TongueCoating)) {
+			$.each(data.TongueCoating, function() {
+				selTongueCoating.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selTongueCoating.find("option[value='" + data.TongueCoating + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup tongue wetness */
@@ -43,10 +53,14 @@ function setupData(reload) {
 	selTongueWetness.dropdownchecklist( {
 		width : selTongueWetness.width()
 	});
-	if (data.TongueWetness && $.isArray(data.TongueWetness)) {
-		$.each(data.TongueWetness, function() {
-			selTongueWetness.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.TongueWetness) {
+		if ($.isArray(data.TongueWetness)) {
+			$.each(data.TongueWetness, function() {
+				selTongueWetness.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selTongueWetness.find("option[value='" + data.TongueWetness + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup tongue shape */
@@ -54,10 +68,14 @@ function setupData(reload) {
 	selTongueShape.dropdownchecklist( {
 		width : selTongueShape.width()
 	});
-	if (data.TongueShape && $.isArray(data.TongueShape)) {
-		$.each(data.TongueShape, function() {
-			selTongueShape.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.TongueShape) {
+		if ($.isArray(data.TongueShape)) {
+			$.each(data.TongueShape, function() {
+				selTongueShape.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selTongueShape.find("option[value='" + data.TongueShape + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup veins underneath */
@@ -65,10 +83,14 @@ function setupData(reload) {
 	selVeinsUnderneath.dropdownchecklist( {
 		width : selVeinsUnderneath.width()
 	});
-	if (data.VeinsUnderneath && $.isArray(data.VeinsUnderneath)) {
-		$.each(data.VeinsUnderneath, function() {
-			selVeinsUnderneath.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.VeinsUnderneath) {
+		if ($.isArray(data.VeinsUnderneath)) {
+			$.each(data.VeinsUnderneath, function() {
+				selVeinsUnderneath.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selVeinsUnderneath.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup pulse right1 */
@@ -76,10 +98,9 @@ function setupData(reload) {
 	selPulseRight1.dropdownchecklist( {
 		width : selPulseRight1.width()
 	});
-	if (data.PulseRight1 && $.isArray(data.PulseRight1)) {
-		$.each(data.PulseRight1, function() {
-			selPulseRight1.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseRight1) {
+		selPulseRight1.find("option[value='" + data.PulseRight1 + "']").attr("selected", "selected").change();
+		selPulseRight1.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup pulse right2 */
@@ -87,10 +108,9 @@ function setupData(reload) {
 	selPulseRight2.dropdownchecklist( {
 		width : selPulseRight2.width()
 	});
-	if (data.PulseRight2 && $.isArray(data.PulseRight2)) {
-		$.each(data.PulseRight2, function() {
-			selPulseRight2.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseRight2) {
+		selPulseRight2.find("option[value='" + data.PulseRight2 + "']").attr("selected", "selected").change();
+		selPulseRight2.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup PulseRight3 */
@@ -98,10 +118,9 @@ function setupData(reload) {
 	selPulseRight3.dropdownchecklist( {
 		width : selPulseRight3.width()
 	});
-	if (data.PulseRight3 && $.isArray(data.PulseRight3)) {
-		$.each(data.PulseRight3, function() {
-			selPulseRight3.find("option[value'" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseRight3) {
+		selPulseRight3.find("option[value'" + data.PulseRight3 + "']").attr("selected", "selected").change();
+		selPulseRight3.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup PulseLeft1 */
@@ -109,10 +128,9 @@ function setupData(reload) {
 	selPulseLeft1.dropdownchecklist( {
 		width : selPulseLeft1.width()
 	});
-	if (data.PulseLeft1 && $.isArray(data.PulseLeft1)) {
-		$.each(data.PulseLeft1, function() {
-			selPulseLeft1.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseLeft1) {
+		selPulseLeft1.find("option[value='" + data.PulseLeft1 + "']").attr("selected", "selected").change();
+		selPulseLeft1.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup PulseLeft2 */
@@ -120,10 +138,9 @@ function setupData(reload) {
 	selPulseLeft2.dropdownchecklist( {
 		width : selPulseLeft2.width()
 	});
-	if (data.PulseLeft2 && $.isArray(data.PulseLeft2)) {
-		$.each(data.PulseLeft2, function() {
-			selPulseLeft2.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseLeft2) {
+		selPulseLeft2.find("option[value='" + data.PulseLeft2 + "']").attr("selected", "selected").change();
+		selPulseLeft2.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup PulseLeft3 */
@@ -131,10 +148,9 @@ function setupData(reload) {
 	selPulseLeft3.dropdownchecklist( {
 		width : selPulseLeft3.width()
 	});
-	if (data.PulseLeft3 && $.isArray(data.PulseLeft3)) {
-		$.each(data.PulseLeft3, function() {
-			selPulseLeft3.find("option[value='" + this + "']").attr("selected", "selected").change();
-		});
+	if (data.PulseLeft3) {
+		selPulseLeft3.find("option[value='" + data.PulseLeft3 + "']").attr("selected", "selected").change();
+		selPulseLeft3.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup notes */
@@ -151,9 +167,76 @@ function setupData(reload) {
 			}
 		}
 	});
+	
+	if (reload) {
+		$.jGrowl("Loaded data for the selected visitdate", {life:2000});
+	}
+}
 
+/**
+ * This fuction clears all the fields selection
+ * 
+ * @return
+ */
+function clearFields() {
+	/* Remove all the radio buttons checked attribute */
+	$(":radio:not([value=-1])").removeAttr("checked");
+	/* Remove all the select box options selected attribute */
+	$("select:not(#selVisitDates)>option").removeAttr("selected");
+	$("option[value=-1]").attr("selected", "selected");
+	/* For the dropdownchecklist resync the options and the textfield */
+	$("select").each(function() {
+		var element = $.data(this, "dropdownchecklist");
+		if ($.isEmptyObject(element)) {
+			return true;
+		}
+		element.dropWrapper.find("input:not([disabled]):not([value=-1])").removeAttr("checked");
+		element._syncSelected();
+	});
+	$("$txtNotes").val("");
+}
+
+/**
+ * This function initializes the page events
+ * 
+ * @return
+ */
+function initPage() {
+	if (!$.isArray(data)) {
+		return;
+	}
+	if (data.length < 1) {
+		return;
+	}
+	
+	/*
+	 * Find the start parameter which matches the visitdate
+	 */
+	if (start.length <= 0) {
+		start = data[0].date;
+	}
+	
+	/* Add all the dates to the dropdown box */
+	var selVisitDates = $("#selVisitDates");
+	$.each(data, function() {
+		selVisitDates.append('<option value="' + this.date + '" '
+				+ ((start == this.date) ? "selected='true'" : "") + '">' + this.value + '</option>');
+	});
+	
+	/* Handle the click on View */
+	$("#btnView").click(function() {
+		var selVisitDates = $("#selVisitDates")[0];
+		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
+		$("$txtVisitDates").val(selDate).blur();
+		var btnArr = [ "$tbtnSignin", "$tbtnDiagnosis", "$tbtnTreatment", "$tbtnPrescription" ];
+		$.each(btnArr, function(indx, val) {
+			var wgt = zk.Widget.$($(val).attr("id"));
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
+		});
+	});
+	
 	/* Handle the save button */
-	$("$btnSave").click(function() {
+	$(".submitbtn").click(function() {
 		/* Get all the form elements those are filled */
 		var elements = $(":input").not(":radio[value=-1]").serializeArray();
 		/* Convert the elements array to single object */
@@ -177,84 +260,20 @@ function setupData(reload) {
 		/* invoke blur so that the data will be sent to server */
 		$("$jsondata").blur();
 	});
-
-	if (!reload) {
-		
-	} else {
-		$.jGrowl("Loaded data for the selected visitdate", {life:2000});
-	}
 }
 
 /**
- * This fuction clears all the fields selection
+ * This function redirects to the next/prev page
  * 
+ * @param direction
  * @return
  */
-function clearFields() {
-	/* Remove all the radio buttons checked attribute */
-	$(":radio:not([value=-1])").removeAttr("checked");
-	/* Remove all the select box options selected attribute */
-	$("select>option").removeAttr("selected");
-	$("option[value=-1]").attr("selected", "selected");
-	/* For the dropdownchecklist resync the options and the textfield */
-	$("select").each(function() {
-		var element = $.data(this, "dropdownchecklist");
-		if (isEmptyObject(element)) {
-			return true;
-		}
-		element.dropWrapper.find("input:not([disabled]):not([value=-1])").removeAttr("checked");
-		element._syncSelected();
-	});
-	$("$txtNotes").val("");
-}
-
-/**
- * This function setup the pagination
- * 
- * @return
- */
-function setupPagination() {
-	if (!$.isArray(data)) {
-		return;
-	}
-	if (data.length < 1) {
-		return;
-	}
-	/* Find the start parameter which matches the visitdate */
-	if (start.length <= 0) {
-		start = 1;
+function navigate(direction) {
+	if(direction == "Next") {
+		var wgt = zk.Widget.$($("$tbtnTreatment").attr("id"));
+		zUtl.go(wgt._href);
 	} else {
-		for ( var i = 0, len = data.length; i < len; i++) {
-			if (start == data[i].date) {
-				start = i + 1;
-				break;
-			}
-		}
+		var wgt = zk.Widget.$($("$tbtnSignin").attr("id"));
+		zUtl.go(wgt._href);
 	}
-	$("$Pagination").paginate( {
-		count : data.length,
-		start : start,
-		display : 8,
-		border : true,
-		border_color : '#000',
-		text_color : '#000',
-		background_color : '#fff',
-		border_hover_color : '#ccc',
-		text_hover_color : '#fff',
-		background_hover_color : '#000',
-		images : false,
-		mouse : 'press',
-		data : data,
-		onChange : function(textValue, selectedObj) {
-			jq("$txtVisitDates").val(selectedObj.date);
-			jq("$txtVisitDates").blur();
-			var wgt = zk.Widget.$(jq("$tbtnDiagnosis").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = zk.Widget.$(jq("$tbtnTreatment").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-			var wgt = zk.Widget.$(jq("$tbtnPrescription").attr("id"));
-			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selectedObj.date);
-		}
-	});
-	$("$Pagination").find("ul").parent().css("display", "inline");
 }

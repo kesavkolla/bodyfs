@@ -1,7 +1,7 @@
 <?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<hbox>
-		<toolbarbutton label="Report Card" image="/img/report_card.png"
+		<toolbarbutton label="Report Card" image="/img/report_card.png" id="tbtnRptCard"
 			href="/pages/patient/patientview.zul?id=${param.id }" width="125px"
 			sclass="${page.title eq 'Patient View' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton id="tbtnSignin" label="Sign in" image="/img/vcard_add.png"

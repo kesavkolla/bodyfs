@@ -7,8 +7,7 @@
  * native JSON parse for new browsers and use new function as a fallback to
  * support old browsers.
  * 
- * @param data
- *            input JSON string
+ * @param data input JSON string
  * @return JSON object
  */
 function parseJSON(data) {
@@ -21,22 +20,6 @@ function parseJSON(data) {
 		data = (new Function("return " + data))();
 	}
 	return data;
-}
-
-/**
- * This method checks whether input is an empty object or not
- * 
- * @param obj
- * @return
- */
-function isEmptyObject(obj) {
-	if (obj === undefined || !obj) {
-		return true;
-	}
-	for ( var i in obj) {
-		return false;
-	}
-	return true;
 }
 
 /**

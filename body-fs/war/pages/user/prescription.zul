@@ -1,0 +1,92 @@
+<?page title="Prescription" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/prescription.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="controller" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
+		width:605px; height: 440px; }
+
+		.marker{ position: absolute; width: 20px; height: 20px; }
+
+		div.z-grid-body { background-color: #660000; }
+
+		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
+		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD;}
+	</style>
+
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout>
+				<north size="75px">
+					<include src="/pages/common/userweeklymenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true" id="controller"
+					apply="com.bodyfs.ui.PrescriptionComposer">
+					<div hflex="1" vflex="1" style="margin-left:10px">
+						<n:table width="90%">
+							<n:tr>
+								<n:td>
+									<n:select id="selVisitDates" />
+									<n:input id="btnView" type="button" value="View" />
+									<n:input id="btnCopy" type="button" value="Copy" />
+								</n:td>
+								<n:td></n:td>
+								<n:td align="right">
+									<button id="btnPrev" label="Prev" sclass="submitbtn"
+										forward="onClick=controller.onSave(Prev)" />
+									<button id="btnDone" label="Done" sclass="submitbtn"
+										forward="onClick=controller.onSave(Done)" />
+									<textbox id="txtVisitDates" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtPrescription" visible="false"
+										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+							</n:tr>
+						</n:table>
+						<space height="20px" width="100%" />
+						<n:div>
+							<n:input type="radio" name="radtmedType" value="Herb" disabled="disabled" />
+							Herb
+							<n:input type="radio" name="radtmedType" value="Powder" disabled="disabled" />
+							Powder
+							<n:input type="radio" name="radtmedType" value="Pill" disabled="disabled" />
+							Pill
+							<n:input type="radio" name="radtmedType" value="Capsul" disabled="disabled" />
+							Capsul
+							<n:input type="radio" name="radtmedType" value="Other" disabled="disabled" />
+							Other
+							<textbox id="txtmedType" visible="false"
+								value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" readonly="true" />
+						</n:div>
+						<space height="20px" width="100%" />
+						<n:table id="herbsTable" width="90%">
+							<n:tr align="left">
+								<n:th>Forumula</n:th>
+								<n:th>Herbs</n:th>
+								<n:th>Portion</n:th>
+								<n:th></n:th>
+							</n:tr>
+							<n:tr>
+								<n:td colspan="4">&amp;nbsp;</n:td>
+							</n:tr>
+						</n:table>
+						<script type="text/javascript" defer="false">
+							var readonly = true;
+
+							var data = ${controller$composer.visitsDates};
+
+							var start = "${param.visitDate}";
+
+							zk.afterMount(initJS);
+						</script>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+
+</zk>

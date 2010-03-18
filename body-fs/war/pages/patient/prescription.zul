@@ -115,6 +115,8 @@
 							</n:tr>
 						</n:table>
 						<script type="text/javascript" defer="false">
+							var readonly = false;
+
 							var data = ${controller$composer.visitsDates};
 
 							var start = "${param.visitDate}";

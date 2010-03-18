@@ -11,7 +11,8 @@
 			href="/pages/user/treatment.zul${empty param.visitDate ? '':'?visitDate='}${empty param.visitDate ? '':param.visitDate }"
 			sclass="${page.title eq 'Treatment' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton id="tbtnPrescription" label="Prescription" image="/img/prescription.png"
-			href="#" />
+			href="/pages/user/prescription.zul${empty param.visitDate ? '':'?visitDate='}${empty param.visitDate ? '':param.visitDate }"
+			sclass="${page.title eq 'Prescription' ? 'bodyfs-toolbar-selected' : ''}" />
 	</hbox>
 	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
 </zk>

@@ -16,11 +16,18 @@ function loadData(growl) {
 	/* Get the prescription herbs data and populate the table */
 	var txtPrescription = zk.Widget.$($("$txtPrescription").attr("id"));
 	var arrHerbs = parseJSON(txtPrescription.getValue());
-	$("#herbsTable > tbody > tr:not(:last):not(:first)").remove()
+	$("#herbsTable > tbody > tr:not(:last):not(:first)").remove();
 	$.each(arrHerbs, function() {
 		$("#herbsTable > tbody > tr:last").before(
-				"<tr><td>" + this.formula + "</td><td>" + this.herb + "</td><td><input type='text' value='"
-						+ this.portion + "'/></td>" + "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
+				"<tr><td>"
+						+ this.formula
+						+ "</td><td>"
+						+ this.herb
+						+ "</td><td><input type='text' value='"
+						+ this.portion
+						+ "'/></td>"
+						+ ((readonly) ? "<td>&nbsp;</td></tr>"
+								: "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>"));
 	});
 
 	/* populate the radio buttons */

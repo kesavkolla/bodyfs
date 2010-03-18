@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 
@@ -86,5 +87,21 @@ public interface IPatientVisitDAO {
 	 *         and visit date
 	 */
 	public PatientTreatment getPatientTreatmentByDate(final Long patientId, final Date visitDate);
+
+	/**
+	 * Persists the given PatientPrescription object
+	 * 
+	 * @param prescription
+	 * @return
+	 */
+	public PatientPrescription createPatientPrescription(final PatientPrescription prescription);
+
+	/**
+	 * 
+	 * @param patientId
+	 * @param visitDate
+	 * @return Patient Prescription object that corresponds to the given patient id and visit date
+	 */
+	public PatientPrescription getPatientPrescriptionByDate(final Long patientId, final Date visitDate);
 
 }

@@ -16,6 +16,7 @@ import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 
@@ -134,6 +135,34 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 		}
 		if (treatments != null && treatments.size() > 0) {
 			return treatments.iterator().next();
+		}
+		return null;
+	}
+
+	@Override
+	public PatientPrescription createPatientPrescription(final PatientPrescription prescription) {
+		return this.jdoTemplate.makePersistent(prescription);
+	}
+
+	@Override
+	public PatientPrescription getPatientPrescriptionByDate(final Long patientId, final Date visitDate) {
+		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
+		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
+		}
+		final Object[] vals = new Object[visitDate == null ? 1 : 2];
+		vals[0] = patientId;
+		if (visitDate != null) {
+			vals[1] = visitDate;
+		}
+		final Collection<PatientPrescription> prescriptions = this.jdoTemplate.find(PatientPrescription.class, filter,
+				params, vals, "visitDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(prescriptions);
+		}
+		if (prescriptions != null && prescriptions.size() > 0) {
+			return prescriptions.iterator().next();
 		}
 		return null;
 	}

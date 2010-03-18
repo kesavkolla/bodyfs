@@ -21,6 +21,7 @@ import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.ListModelList;
@@ -32,6 +33,7 @@ import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.Diagnosis;
 import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
+import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.ui.util.CommonUtils;
 
@@ -94,7 +96,10 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Patid: " + patid + "\tvisitDate:" + visitDate);
 		}
+		page.setAttribute("patid", patid);
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientPrescription prescription = visitDAO.getPatientPrescriptionByDate(patid, visitDate);
+		page.setAttribute("prescription", prescription);
 		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
 		final List<Diagnosis> diagnoses = herbDAO.getDiagnoses();
 		if (diagnoses != null) {
@@ -209,11 +214,10 @@ public class PrescriptionComposer extends GenericForwardComposer {
 	 * @param event
 	 */
 	public void onSave(final ForwardEvent event) {
-		final Textbox txtPrescription = (Textbox) Path.getComponent(page, "txtPrescription");
 		// If the value of the textbox is empty then save the data
-		if (txtPrescription.getValue() != null && txtPrescription.getValue().length() > 0) {
-			final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-		}
+		final PatientPrescription prescription = (PatientPrescription) page.getAttribute("prescription");
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		visitDAO.createPatientPrescription(prescription);
 		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
@@ -235,5 +239,36 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			arr.add(obj);
 		}
 		return arr.toJSONString();
+	}
+
+	/**
+	 * This event handler handles the click on pagination of dates When ever a
+	 * new date is selected the corresponding patient diagnosis data is
+	 * retrieved and set to the jsodata
+	 * 
+	 * @param evt
+	 */
+	public void onDateChange(final ForwardEvent evt) {
+		final Textbox datebox = (Textbox) evt.getOrigin().getTarget();
+		if (datebox == null || datebox.getValue() == null) {
+			return;
+		}
+		final Date visitDate = new Date(new Long(datebox.getValue()));
+
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		final PatientPrescription prescription = visitDAO.getPatientPrescriptionByDate((Long) page
+				.getAttribute("patid"), visitDate);
+		if (prescription == null) {
+			return;
+		}
+		final Component controller = evt.getTarget();
+		final DataBinder binder = (DataBinder) controller.getAttribute("binder");
+		if (binder != null) {
+			controller.setAttribute("prescription", prescription);
+			page.setAttribute("prescription", prescription);
+			binder.loadAll();
+		}
+
+		Clients.evalJavaScript("loadData(true)");
 	}
 }

@@ -2,8 +2,10 @@
 <zk>
 	<hbox>
 		<toolbarbutton label="Create Payments Report" image="/img/report_card.png"
-			href="/pages/payments/paymentscreate.zul" sclass="${page.title eq 'Create Payment' ? 'bodyfs-toolbar-selected' : ''}"/>
-		<toolbarbutton label="Services Management" image="/img/vcard_add.png"
-			href="/pages/payments/changecharges.zul" sclass="${page.title eq 'Change Service Rates' ? 'bodyfs-toolbar-selected' : ''}"/>
+			href="/pages/payments/paymentscreate.zul"
+			sclass="${page.title eq 'Create Payment' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="Services Management" image="/img/vcard_add.png" href="/pages/payments/services.zul"
+			sclass="${page.title eq 'Service Management' ? 'bodyfs-toolbar-selected' : ''}" />
 	</hbox>
+	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
 </zk>

@@ -1,94 +1,86 @@
 <?page title="Create Payment" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-<?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
-<zk>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="createpayment" apply="com.bodyfs.ui.PaymentsCtrlComposer">
-				<north size="50px">
+				<north size="75px">
 					<include src="/pages/common/paymentmenu.zul" />
 				</north>
 				<center autoscroll="true" flex="true">
-					<vbox style="margin-left:10px">
-						<space orient="vertical" height="20px" />
-						<groupbox id="gbox" mold="3d" open="true" closable="false" hflex="1" width="90%">
-							<caption label="" />
-							<hbox pack="center" hflex="1">
-								<div width="800px">
-									<vbox>
-										<div width="100%" align="left">
-											Treatement Plan Length :
-											<textbox id="planLength" />
-										</div>
-										<div width="100%" align="left">
-											Add a service : 
-											<listbox id="serviceList"  mold="select" rows="1" >
-												<listitem self="@{each='service'}" value="@{service}" label="@{service.ServiceName}"/>
-											</listbox>
-											<button id="addService" label="add"></button>
-										</div>
-										<div width="100%" align="left">
-											<listbox id="servicesBreakDownListBox" >
-												<listhead>
-													<listheader width="100px" />
-													<listheader width="100px" />
-													<listheader width="10px" />
-												</listhead>
-												<listitem self="@{each='serviceItem'}" value="@{serviceItem }">
-													<listcell>
-														<textbox value="@{serviceItem.perWeek }" forward="onChange=createpayment.onUpdateSummary"/>
-														<label value="@{serviceItem.serviceName }"/>
-														<label value=" per week for "/>
-													</listcell>
-													<listcell>
-														<textbox value="@{serviceItem.duration }" forward="onChange=createpayment.onUpdateSummary"/>
-														<label value=" Weeks."/>
-													</listcell>
-													<listcell image="/img/annotation-delete.png" forward="onClick=createpayment.onDeleteService()"/>
-												</listitem>
-											</listbox>
-										</div>
-										<div align="center" height="30px">
-											<space bar="true" width="700px" orient="horizontal" />
-										</div>
-										<div width="100%" align="left" style="">
-											Summary:
-											<listbox id="ServicesSummaryListBox" >
-												<listhead>
-													<listheader label="Sessions and Service" />
-													<listheader label="Charge per Service" />
-													<listheader label="TotalCost" width="70px" />
-												</listhead>
-												<listitem self="@{each='serviceSummaryItem'}" value="@{serviceSummaryItem }">
-													<listcell>
-														<label value="@{serviceSummaryItem.totalSessions }" /> : 
-														<label value="@{serviceSummaryItem.serviceName }" />
-													</listcell>
-													<listcell>
-														<label value="@{serviceSummaryItem.serviceCharge }" />
-													</listcell>
-													<listcell>
-														<label value="@{serviceSummaryItem.cost }" />
-													</listcell>
-												</listitem>
-											</listbox>
-										</div>
-										<div align="center" height="30px">
-											<space bar="true" width="700px" orient="horizontal" />
-										</div>
-										<div width="100%" align="left">
-											<button id="print" label="print"></button>
-											<combobox id="customers" autodrop="true" mold="rounded">
-												<comboitem self="@{each=customer}" label="@{customer.displayName}" value="@{customer.id}"/>
-											</combobox>
-											<button id="save" label="save"></button>
-											<button label="cancel"></button>
-										</div>
-									</vbox>
-								</div>
-							</hbox>
-						</groupbox>
-					</vbox>
+					<div style="margin-left:10px">
+						<space orient="horizontal" height="20px" />
+
+						Treatement Plan Length :
+						<textbox id="planLength" />
+						<space orient="vertical" width="50px" />
+						Add a service :
+						<listbox id="serviceList" mold="select" rows="1" width="200px">
+							<listitem self="@{each='service'}" value="@{service}" label="@{service.ServiceName}" />
+						</listbox>
+						<button id="addService" label="add"></button>
+						<space orient="horizontal" height="20px" />
+						<listbox id="servicesBreakDownListBox" width="90%" rows="10">
+							<listhead>
+								<listheader width="100px" />
+								<listheader width="100px" />
+								<listheader width="10px" />
+							</listhead>
+							<listitem self="@{each='serviceItem'}" value="@{serviceItem }">
+								<listcell>
+									<textbox value="@{serviceItem.perWeek }"
+										forward="onChange=createpayment.onUpdateSummary" />
+									<label value="@{serviceItem.serviceName }" />
+									<label value=" per week for " />
+								</listcell>
+								<listcell>
+									<textbox value="@{serviceItem.duration }"
+										forward="onChange=createpayment.onUpdateSummary" />
+									<label value=" Weeks." />
+								</listcell>
+								<listcell image="/img/annotation-delete.png"
+									forward="onClick=createpayment.onDeleteService()" />
+							</listitem>
+						</listbox>
+						<space orient="horizontal" height="20px" />
+
+						<n:div style="font-size:large">Summary:</n:div>
+						<space orient="horizontal" height="20px" />
+						<listbox id="ServicesSummaryListBox" width="90%" rows="10">
+							<listhead>
+								<listheader label="Sessions and Service" />
+								<listheader label="Charge per Service" />
+								<listheader label="TotalCost" width="70px" />
+							</listhead>
+							<listitem self="@{each='serviceSummaryItem'}" value="@{serviceSummaryItem }">
+								<listcell>
+									<label value="@{serviceSummaryItem.totalSessions }" />
+									:
+									<label value="@{serviceSummaryItem.serviceName }" />
+								</listcell>
+								<listcell>
+									<label value="@{serviceSummaryItem.serviceCharge }" />
+								</listcell>
+								<listcell>
+									<label value="@{serviceSummaryItem.cost }" />
+								</listcell>
+							</listitem>
+						</listbox>
+						<space orient="horizontal" height="20px" />
+						<n:div>
+							<n:span>Customer Name:</n:span>
+							<combobox id="customers" autodrop="true" mold="rounded">
+								<comboitem self="@{each=customer}" label="@{customer.displayName}"
+									value="@{customer.id}" />
+							</combobox>
+						</n:div>
+						<space orient="horizontal" height="20px" />
+						<div width="100%" align="left">
+							<button id="print" label="print"></button>
+							<button id="save" label="save"></button>
+							<button label="cancel"></button>
+						</div>
+					</div>
 				</center>
 			</borderlayout>
 		</center>

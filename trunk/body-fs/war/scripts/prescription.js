@@ -4,6 +4,42 @@ function initJS() {
 	$(".imgDelete").live("click", DeleteRow);
 	$.data(document.body, "loadedformulas", new Array());
 	initPage();
+	loadData(false);
+}
+
+/**
+ * This function loads the data from the textfields to the grids
+ * 
+ * @return
+ */
+function loadData(growl) {
+	/* Get the prescription herbs data and populate the table */
+	var txtPrescription = zk.Widget.$($("$txtPrescription").attr("id"));
+	var arrHerbs = parseJSON(txtPrescription.getValue());
+	$("#herbsTable > tbody > tr:not(:last):not(:first)").remove()
+	$.each(arrHerbs, function() {
+		$("#herbsTable > tbody > tr:last").before(
+				"<tr><td>" + this.formula + "</td><td>" + this.herb + "</td><td><input type='text' value='"
+						+ this.portion + "'/></td>" + "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
+	});
+
+	/* populate the radio buttons */
+	var txtmedType = $("$txtmedType").hide().val();
+	$("input[name='radtmedType']").removeAttr("checked");
+	if (txtmedType.length > 0) {
+		var selRad = $("input[name='radtmedType'][value='" + txtmedType + "']");
+		if (selRad.length > 0) {
+			selRad.attr("checked", "checked");
+		} else {
+			$("input[name='radtmedType'][value='Other']").attr("checked", "checked");
+			$("$txtmedType").show();
+		}
+	}
+	if (growl) {
+		$.jGrowl("Loaded data for the selected visitdate", {
+			life : 2000
+		});
+	}
 }
 
 /**
@@ -36,7 +72,10 @@ function initPage() {
 	/* handle click on done and prev button and save the values */
 	$(".submitbtn").click(function() {
 		var prescArr = new Array();
-		/* Get all the table rows and prepare an object with formula, herb & portion */
+		/*
+		 * Get all the table rows and prepare an object with formula, herb &
+		 * portion
+		 */
 		$("#herbsTable > tbody > tr:not(:last):not(:first)").each(function(indx, row) {
 			var obj = {
 				"formula" : this.cells[0].innerHTML,
@@ -46,6 +85,27 @@ function initPage() {
 			prescArr.push(obj);
 		});
 		$("$txtPrescription").val($.toJSON(prescArr)).blur();
+	});
+
+	/* Handle click on radio buttons to hide/show textbox for other */
+	$("input[name='radtmedType']").click(function() {
+		if ($(this).val() == "Other") {
+			$("$txtmedType").show();
+		} else {
+			$("$txtmedType").val($(this).val()).hide().blur();
+		}
+	});
+
+	/* Handle the click on View */
+	$("#btnView").click(function() {
+		var selVisitDates = $("#selVisitDates")[0];
+		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
+		$("$txtVisitDates").val(selDate).blur();
+		var btnArr = [ "$tbtnSignin", "$tbtnDiagnosis", "$tbtnTreatment", "$tbtnPrescription" ];
+		$.each(btnArr, function(indx, val) {
+			var wgt = zk.Widget.$($(val).attr("id"));
+			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
+		});
 	});
 }
 
@@ -62,6 +122,11 @@ function DisplayData(data) {
 	$.data(document.body, "formuladata", data);
 }
 
+/**
+ * This function gets triggerd when user clicks on add portion on the top
+ * 
+ * @return
+ */
 function AddPortion() {
 	var formuladata = $.data(document.body, "formuladata");
 
@@ -75,7 +140,7 @@ function AddPortion() {
 		$("#herbsTable > tbody > tr:last").before(
 				"<tr><td>" + formuladata.formula.name + "</td>" + "<td>" + formuladata.herbs[i].name + "</td>"
 						+ "<td><input type='text' value='" + portion + "' /></td>"
-						+ "<td><img src='/img/delete.png' class='imgDelete'/></tr>");
+						+ "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
 	}
 }
 
@@ -84,7 +149,8 @@ function DeleteRow() {
 }
 
 /**
- * This function will be called when user click on Add portion in the formula table below
+ * This function will be called when user click on Add portion in the formula
+ * table below
  * 
  * @return
  */
@@ -111,7 +177,7 @@ function AddHPortion() {
 	$("#herbsTable > tbody > tr:last").before(
 			"<tr><td>" + formulaName + "</td>" + "<td>" + cmbHerbs.getValue() + "</td>"
 					+ "<td><input type='text' value='" + txtHPortion.val() + "' /></td>"
-					+ "<td><img src='/img/delete.png' class='imgDelete'/></tr>");
+					+ "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
 }
 
 /**

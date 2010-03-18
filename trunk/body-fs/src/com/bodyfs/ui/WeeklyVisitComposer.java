@@ -24,6 +24,7 @@ import org.zkoss.zul.Textbox;
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.model.PatientDiagnosis;
+import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
 import com.bodyfs.model.PersonType;
@@ -152,6 +153,12 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			treatment.setPersonId(patvisit.getPersonId());
 			treatment.setVisitDate(patvisit.getVisitDate());
 			visitDAO.createPatientTreatment(treatment);
+
+			// create an empty prescription for this visit
+			final PatientPrescription prescription = new PatientPrescription();
+			prescription.setPersonId(patvisit.getPersonId());
+			prescription.setVisitDate(patvisit.getVisitDate());
+			visitDAO.createPatientPrescription(prescription);
 			LOGGER.debug("Successfully created treatment with id: " + treatment.getId());
 			Clients.evalJavaScript("showConfirmation()");
 		}

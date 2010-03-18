@@ -238,225 +238,191 @@
 									</groupbox>
 								</cell>
 								<cell valign="top">
-									<n:ol>
-										<n:table width="100%">
-											<n:col width="*" />
-											<n:col width="100px" />
-											<n:tr>
-												<n:td>
-													<n:li>Abdominal, rib-side or breast distention and or pain</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radPain" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radPain" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Irritability</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radIrritability" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radIrritability" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Emotional depression</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radEmotional" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radEmotional" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Fatigue, especially after eating or eating sweets</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radFatigue" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radFatigue" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Dizziness when standing up</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radDizziness" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radDizziness" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Easy bruising</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radBruising" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radBruising" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>
-														A bitter taste in the mouth primarily in the morning on awaking
-													</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radTaste" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radTaste" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Increased or rapid hungering</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radHunger" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radHunger" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Mouth and/or tongue sores</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radSores" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radSores" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>
-														Loss of astringing and securing of nasal mucus, urine,feces,
-														vaginal discharge and/or menses
-													</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radMenses" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radMenses" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Night sweats</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radNightSweats" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radNightSweats" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Hot flashes heat in the five hearts and centers</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radHeat" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radHeat" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Nocturia</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radNocturia" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radNocturia" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Cold Feet (as opposed to cold hands and feet)</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radColdFeet" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radColdFeet" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Decreased visual acuity at night</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radVisualAcuity" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radVisualAcuity" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:li>Heat palpations</n:li>
-												</n:td>
-												<n:td>
-													<n:input type="radio" name="radHeatPalpations" value="Yes">
-														<n:span class="z-radio-cnt">Yes</n:span>
-													</n:input>
-													<n:input type="radio" name="radHeatPalpations" value="No">
-														<n:span class="z-radio-cnt">No</n:span>
-													</n:input>
-												</n:td>
-											</n:tr>
-										</n:table>
-									</n:ol>
+									<n:table width="100%">
+										<n:col width="*" />
+										<n:col width="100px" />
+										<n:tr>
+											<n:td>1. Abdominal, rib-side or breast distention and or pain</n:td>
+											<n:td>
+												<n:input type="radio" name="radPain" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radPain" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>2. Irritability</n:td>
+											<n:td>
+												<n:input type="radio" name="radIrritability" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radIrritability" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>3. Emotional depression</n:td>
+											<n:td>
+												<n:input type="radio" name="radEmotional" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radEmotional" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>4. Fatigue, especially after eating or eating sweets</n:td>
+											<n:td>
+												<n:input type="radio" name="radFatigue" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radFatigue" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>5. Dizziness when standing up</n:td>
+											<n:td>
+												<n:input type="radio" name="radDizziness" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radDizziness" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>6. Easy bruising</n:td>
+											<n:td>
+												<n:input type="radio" name="radBruising" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radBruising" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												7. A bitter taste in the mouth primarily in the morning on awaking
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radTaste" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radTaste" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>8. Increased or rapid hungering</n:td>
+											<n:td>
+												<n:input type="radio" name="radHunger" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHunger" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>9. Mouth and/or tongue sores</n:td>
+											<n:td>
+												<n:input type="radio" name="radSores" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radSores" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												10. Loss of astringing and securing of nasal mucus, urine,feces, vaginal
+												discharge and/or menses
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radMenses" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radMenses" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>11. Night sweats</n:td>
+											<n:td>
+												<n:input type="radio" name="radNightSweats" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radNightSweats" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>12. Hot flashes heat in the five hearts and centers</n:td>
+											<n:td>
+												<n:input type="radio" name="radHeat" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHeat" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>13. Nocturia</n:td>
+											<n:td>
+												<n:input type="radio" name="radNocturia" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radNocturia" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>14. Cold Feet (as opposed to cold hands and feet)</n:td>
+											<n:td>
+												<n:input type="radio" name="radColdFeet" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radColdFeet" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>15. Decreased visual acuity at night</n:td>
+											<n:td>
+												<n:input type="radio" name="radVisualAcuity" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radVisualAcuity" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>16. Heat palpations</n:td>
+											<n:td>
+												<n:input type="radio" name="radHeatPalpations" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHeatPalpations" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+									</n:table>
 								</cell>
 							</row>
 							<row>

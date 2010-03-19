@@ -49,15 +49,15 @@
 						</n:table>
 						<space height="20px" width="100%" />
 						<n:div>
-							<n:input type="radio" name="radtmedType" value="Herb" disabled="disabled" />
+							<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" disabled="disabled" />
 							Herb
-							<n:input type="radio" name="radtmedType" value="Powder" disabled="disabled" />
+							<n:input type="checkbox" name="chkPowder" value="Powder" disabled="disabled" />
 							Powder
-							<n:input type="radio" name="radtmedType" value="Pill" disabled="disabled" />
+							<n:input type="checkbox" name="chkPill" value="Pill" disabled="disabled" />
 							Pill
-							<n:input type="radio" name="radtmedType" value="Capsul" disabled="disabled" />
+							<n:input type="checkbox" name="chkCapsul" value="Capsul" disabled="disabled" />
 							Capsul
-							<n:input type="radio" name="radtmedType" value="Other" disabled="disabled" />
+							<n:input type="checkbox" name="chkOther" value="Other" disabled="disabled" />
 							Other
 							<textbox id="txtmedType" visible="false"
 								value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" readonly="true" />

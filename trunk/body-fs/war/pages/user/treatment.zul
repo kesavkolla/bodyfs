@@ -55,20 +55,23 @@
 							</row>
 							<row valign="top">
 								<cell>
-									<groupbox>
+									<groupbox closable="false" mold="3d">
 										<caption label="Diagnosis-plan" />
 										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
 											value="@{treatment.diagnosisPlan }" readonly="true" />
 									</groupbox>
-									<groupbox>
+									<groupbox closable="false">
 										<caption label="Massage Notes" />
 										<textbox id="txtMassageNotes" style="width:100%" rows="5"
 											value="@{treatment.massageNotes }" readonly="true" />
 									</groupbox>
-									<groupbox>
+									<groupbox closable="false">
 										<caption label="Additional Notes" />
 										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
 											value="@{treatment.additionalNotes }" readonly="true" />
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="" />
 									</groupbox>
 								</cell>
 								<cell>

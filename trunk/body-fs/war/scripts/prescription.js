@@ -30,17 +30,23 @@ function loadData(growl) {
 								: "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>"));
 	});
 
-	/* populate the radio buttons */
-	var txtmedType = $("$txtmedType").hide().val();
-	$("input[name='radtmedType']").removeAttr("checked");
-	if (txtmedType.length > 0) {
-		var selRad = $("input[name='radtmedType'][value='" + txtmedType + "']");
-		if (selRad.length > 0) {
-			selRad.attr("checked", "checked");
-		} else {
-			$("input[name='radtmedType'][value='Other']").attr("checked", "checked");
-			$("$txtmedType").show();
-		}
+	/* populate the checkboxes */
+	var arrmedType = $("$txtmedType").val().split(",");
+
+	$("input[name|='chk']").removeAttr("checked");
+	if (arrmedType.length > 0) {
+		$.each(arrmedType, function(indx, value) {
+			/* If the value is Herbal Treatment check the chkHerb */
+			if (value == "Herbal Treatment") {
+				$("input[name='chkHerb']").attr("checked", "checked");
+			} else {
+				/*
+				 * Find the checkbox with the name that matches with chkName and
+				 * make it selected
+				 */
+				$("input[name='chk" + value + "']").attr("checked", "checked");
+			}
+		});
 	}
 	if (growl) {
 		$.jGrowl("Loaded data for the selected visitdate", {
@@ -94,13 +100,39 @@ function initPage() {
 		$("$txtPrescription").val($.toJSON(prescArr)).blur();
 	});
 
-	/* Handle click on radio buttons to hide/show textbox for other */
-	$("input[name='radtmedType']").click(function() {
-		if ($(this).val() == "Other") {
-			$("$txtmedType").show();
+	/* Handle click on other checkbox to hide/show textbox for other */
+	$("input[name|='chk']").click(function() {
+		var txtmedType = $("$txtmedType");
+		var arrmedType = txtmedType.val().split(",");
+
+		/* If the checkbox is checked then add it's value to the txtmedType */
+		if ($(this).attr("checked") != "") {
+			/* if this value is already in the array then nothing to do */
+			if ($.inArray($(this).val(), arrmedType) != -1) {
+				return;
+			} else {
+				/* add the value to the array */
+				arrmedType[arrmedType.length] = $(this).val();
+			}
 		} else {
-			$("$txtmedType").val($(this).val()).hide().blur();
+			/* Handle the uncheck */
+			/* If the value is not already in the array nothing to do */
+			if ($.inArray($(this).val(), arrmedType) == -1) {
+				return;
+			} else {
+				var removeItem = $(this).val();
+				/* remove this item from the arrmedType */
+				arrmedType = $.map(arrmedType, function(item) {
+					if (item == removeItem) {
+						return null;
+					} else {
+						return item;
+					}
+				});
+			}
 		}
+		txtmedType.val(arrmedType.join(","));
+		txtmedType.blur();
 	});
 
 	/* Handle the click on View */

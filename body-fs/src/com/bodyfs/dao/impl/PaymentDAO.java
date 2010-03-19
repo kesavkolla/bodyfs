@@ -55,6 +55,19 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		}
 	}
 
+	@Override
+	public MasterService getServiceByName(String name) {
+		if (name == null || name.trim().length() <= 0) {
+			return null;
+		}
+		final Collection<MasterService> services = jdoTemplate.find(MasterService.class, "lowername==pname",
+				"String pname", name.toLowerCase());
+		if (services == null || services.size() <= 0) {
+			return null;
+		}
+		return services.iterator().next();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkService(String serviceName) {

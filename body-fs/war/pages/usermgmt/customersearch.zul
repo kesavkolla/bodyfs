@@ -5,9 +5,13 @@
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
-			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer" style="margin-left:10px">
+			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
+				<north>
+					<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;"
+						height="20px" />
+				</north>
 				<center border="20" autoscroll="true">
-					<vbox hflex="true" vflex="1">
+					<vbox hflex="true" vflex="1" style="margin-left:10px">
 						<space />
 						<hbox>
 							Quick Search:

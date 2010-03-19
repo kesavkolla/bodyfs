@@ -16,10 +16,10 @@ import org.zkoss.zul.api.Combobox;
 import org.zkoss.zul.api.Listbox;
 import org.zkoss.zul.api.Listitem;
 
-import com.bodyfs.dao.IPaymentsDAO;
+import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
-import com.bodyfs.model.payments.MasterServices;
+import com.bodyfs.model.payments.MasterService;
 import com.bodyfs.model.payments.PaymentBreakDown;
 import com.bodyfs.model.payments.TotalCustomerServicesBreakDown;
 
@@ -32,7 +32,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -831489659737220006L;
 
-	ArrayList<MasterServices> masterServicesList = new ArrayList<MasterServices>();
+	ArrayList<MasterService> masterServicesList = new ArrayList<MasterService>();
 
 	ArrayList<PaymentBreakDown> paymentBreakDownList = new ArrayList<PaymentBreakDown>();
 
@@ -53,7 +53,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		final IPaymentsDAO payDao = (IPaymentsDAO) SpringUtil.getBean("paymentDAO");
+		final IPaymentDAO payDao = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
 
 		ArrayList<Person> allCustomers = new ArrayList<Person>();
@@ -74,11 +74,11 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 	}
 
 	public void onClick$addService() {
-		MasterServices service = (MasterServices) serviceList.getSelectedItemApi().getValue();
-		System.out.println("getting" + ((MasterServices) serviceList.getSelectedItemApi().getValue()).getServiceId());
+		MasterService service = (MasterService) serviceList.getSelectedItemApi().getValue();
+		System.out.println("getting" + ((MasterService) serviceList.getSelectedItemApi().getValue()).getId());
 		PaymentBreakDown brkDownService = new PaymentBreakDown();
 
-		brkDownService.setServiceId(service.getServiceId());
+		brkDownService.setId(service.getId());
 		brkDownService.setServiceName(service.getServiceName());
 		brkDownService.setCost(service.getCharge());
 		brkDownService.setPerWeek(0);

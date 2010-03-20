@@ -10,13 +10,13 @@
 				</north>
 
 				<center autoscroll="true" flex="true" apply="com.bodyfs.ui.MasterServiceComposer" id="controller">
-					<div hflex="1" style="margin-left:10px; margin-right:10px">
+					<div hflex="1" style="margin:10px">
 						<space orient="horizontal" height="30px" />
-						<listbox id="lstservice" model="@{serviceslist }" width="90%" rows="15">
+						<listbox id="lstservice" model="@{serviceslist }" width="600px">
 							<listhead>
 								<listheader label="Service" width="30%" sort="none" />
-								<listheader label="Cost" sort="none" />
-								<listheader label="" />
+								<listheader label="Cost" sort="none" width="200px" />
+								<listheader label="" width="150px" />
 							</listhead>
 							<listitem self="@{each='service' }" value="@{service }">
 								<listcell label="@{service.serviceName }" />
@@ -32,6 +32,7 @@
 											forward="onClick=controller.onSaveService" />
 										<button label="Delete" sclass="btnDelete"
 											forward="onClick=controller.onDeleteService" />
+										<space width="40px" />
 									</hbox>
 								</listcell>
 							</listitem>

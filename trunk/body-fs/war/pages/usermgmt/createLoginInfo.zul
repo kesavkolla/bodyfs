@@ -5,12 +5,12 @@
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
 			<borderlayout style="background:#dd0000;">
-				<north size="50px">
+				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" vflex="1" hflex="1">
 					<grid id="logingrid" fixedLayout="true" apply="com.bodyfs.ui.CreateLoginComposer" width="90%"
-						style="margin-left:20px;margin-top:20px">
+						style="margin:10px">
 						<columns>
 							<column width="100px" />
 							<column width="150px" />

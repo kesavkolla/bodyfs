@@ -11,8 +11,16 @@
 <?script type="text/javascript" src="/scripts/diagnosis.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
-		div.z-grid-body { background-color: #660000; } tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000;
-		border-top: none; border-left: 1px solid white; border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
+		div.z-grid-body { background-color: #660000; font-size:14px }
+
+		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
+		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
+
+		fieldset {border:1px solid black;}
+
+		.z-fieldset legend { color: white; font-weight: bold; font-size:14px;}
+
+		.ui-dropdownchecklist-text { font-weight: normal; font-size: 12px; font-family: Verdana;}
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center flex="true" autoscroll="false">
@@ -242,7 +250,9 @@
 										<n:col width="*" />
 										<n:col width="100px" />
 										<n:tr>
-											<n:td>1. Abdominal, rib-side or breast distention and or pain</n:td>
+											<n:td>
+												<n:li>Abdominal, rib-side or breast distention and or pain</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radPain" value="Yes" disabled="disabled">
 													<n:span class="z-radio-cnt">Yes</n:span>
@@ -254,7 +264,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>2. Irritability</n:td>
+											<n:td>
+												<n:li>Irritability</n:li>
+											</n:td>
 											<td>
 												<n:input type="radio" name="radIrritability" value="Yes"
 													disabled="disabled">
@@ -267,7 +279,9 @@
 											</td>
 										</n:tr>
 										<n:tr>
-											<n:td>3. Emotional depression</n:td>
+											<n:td>
+												<n:li>Emotional depression</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radEmotional" value="Yes"
 													disabled="disabled">
@@ -280,7 +294,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>4. Fatigue, especially after eating or eating sweets</n:td>
+											<n:td>
+												<n:li>Fatigue, especially after eating or eating sweets</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radFatigue" value="Yes"
 													disabled="disabled">
@@ -294,7 +310,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>5. Dizziness when standing up</n:td>
+											<n:td>
+												<n:li>Dizziness when standing up</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radDizziness" value="Yes"
 													disabled="disabled">
@@ -307,7 +325,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>6. Easy bruising</n:td>
+											<n:td>
+												<n:li>Easy bruising</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radBruising" value="Yes"
 													disabled="disabled">
@@ -321,7 +341,9 @@
 										</n:tr>
 										<n:tr>
 											<n:td>
-												7. A bitter taste in the mouth primarily in the morning on awaking
+												<n:li>
+													A bitter taste in the mouth primarily in the morning on awaking
+												</n:li>
 											</n:td>
 											<n:td>
 												<n:input type="radio" name="radTaste" value="Yes" disabled="disabled">
@@ -333,7 +355,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>8. Increased or rapid hungering</n:td>
+											<n:td>
+												<n:li>Increased or rapid hungering</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radHunger" value="Yes"
 													disabled="disabled">
@@ -345,7 +369,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>9. Mouth and/or tongue sores</n:td>
+											<n:td>
+												<n:li>Mouth and/or tongue sores</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radSores" value="Yes" disabled="disabled">
 													<n:span class="z-radio-cnt">Yes</n:span>
@@ -357,8 +383,10 @@
 										</n:tr>
 										<n:tr>
 											<n:td>
-												10. Loss of astringing and securing of nasal mucus, urine,feces, vaginal
-												discharge and/or menses
+												<n:li>
+													Loss of astringing and securing of nasal mucus, urine,feces, vaginal
+													discharge and/or menses
+												</n:li>
 											</n:td>
 											<n:td>
 												<n:input type="radio" name="radMenses" value="Yes"
@@ -371,7 +399,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>11. Night sweats</n:td>
+											<n:td>
+												<n:li>Night sweats</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radNightSweats" value="Yes"
 													disabled="disabled">
@@ -384,7 +414,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>12. Hot flashes heat in the five hearts and centers</n:td>
+											<n:td>
+												<n:li>Hot flashes heat in the five hearts and centers</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radHeat" value="Yes" disabled="disabled">
 													<n:span class="z-radio-cnt">Yes</n:span>
@@ -395,7 +427,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>13. Nocturia</n:td>
+											<n:td>
+												<n:li>Nocturia</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radNocturia" value="Yes"
 													disabled="disabled">
@@ -408,7 +442,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>14. Cold Feet (as opposed to cold hands and feet)</n:td>
+											<n:td>
+												<n:li>Cold Feet (as opposed to cold hands and feet)</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radColdFeet" value="Yes"
 													disabled="disabled">
@@ -421,7 +457,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>15. Decreased visual acuity at night</n:td>
+											<n:td>
+												<n:li>Decreased visual acuity at night</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radVisualAcuity" value="Yes"
 													disabled="disabled">
@@ -434,7 +472,9 @@
 											</n:td>
 										</n:tr>
 										<n:tr>
-											<n:td>16. Heat palpations</n:td>
+											<n:td>
+												<n:li>Heat palpations</n:li>
+											</n:td>
 											<n:td>
 												<n:input type="radio" name="radHeatPalpations" value="Yes"
 													disabled="disabled">

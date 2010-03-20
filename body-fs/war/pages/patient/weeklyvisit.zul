@@ -13,7 +13,7 @@
 	<borderlayout id="main" style="background:#1e1406;margin:0px" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center vflex="1" hflex="1">
 			<borderlayout style="background:#dd0000;margin:0px">
-				<north size="75px">
+				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="false" hflex="1" vflex="1">
@@ -44,7 +44,7 @@
 							</row>
 							<row valign="top">
 								<cell valign="top">
-									<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" hflex="1" />
+									<image src="/img/body-image3.jpg" id="imgbody" height="450px" hflex="1" />
 								</cell>
 								<vbox vflex="1" hflex="1">
 									<hbox hflex="1">

@@ -5,9 +5,14 @@
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl"
 		forward="onBookmarkChange=npigrid.onBookmarkChange">
 		<center vflex="1" hflex="1">
-			<borderlayout id="npigrid" apply="com.bodyfs.ui.NPIComposer">
+			<borderlayout id="npigrid" apply="com.bodyfs.ui.NPIComposer" style="background-color:#660000">
+				<north size="20px">
+					<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;"
+						height="20px">
+					</div>
+				</north>
 				<center autoscroll="true" hflex="1" vflex="1">
-					<include id="npiinclude" src="npi1.zul" hflex="1" vflex="1" width="98%" />
+					<include id="npiinclude" src="npi1.zul" hflex="1" vflex="1" style="margin:10px;" />
 				</center>
 			</borderlayout>
 		</center>

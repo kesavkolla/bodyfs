@@ -1,4 +1,5 @@
 <?page title="Create Payment" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
 <?script type="text/javascript" src="/scripts/paymentscreate.js"?>
@@ -56,14 +57,13 @@
 						<n:div>
 							<n:span>Customer Name:</n:span>
 							<combobox id="cmbCustomers" autodrop="true" mold="rounded" readonly="true"
-								model="@{patients }" forward="onChange=controller.onPatientChange">
-								<comboitem self="@{each=customer}" label="@{customer.displayName}"
-									value="@{customer.id}" />
+								model="@{patients }">
+								<comboitem self="@{each=customer}" label="@{customer.displayName}" value="@{customer}" />
 							</combobox>
 							<n:input type="button" id="btnPrint" value="Print" />
 							<button id="btnSave" label="Save" forward="onClick=controller.onSave" />
 							<n:input type="button" value="Cancel" id="btnCancel" />
-							<textbox id="txtSummaryData" value="@{txtSummaryData.value, save-when=btnSave.onClick }"
+							<textbox id="txtPaymentData" value="@{txtPaymentData.value, save-when=btnSave.onClick }"
 								visible="false" />
 						</n:div>
 						<script type="text/javascript" defer="false">

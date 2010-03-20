@@ -10,7 +10,7 @@ function initPage() {
 	$("#btnCalculate").click(calculateService);
 	$("#btnPrint").click(printSummary);
 	$("#btnCancel").click(resetAll);
-	$("#btnSave").click(prepareSave);
+	$("$btnSave").click(prepareSave);
 }
 
 /**
@@ -264,7 +264,7 @@ function prepareSave(evt) {
 		var serviceid = $(this).attr("serviceid");
 		arrServices.push({"serviceid": serviceid, "count":count, "weeks": week});
 	});
-	$("$txtSummaryData").val(arrServices.join(",")).blur();
+	$("$txtPaymentData").val($.toJSON(arrServices)).blur();
 	return true;
 }
 

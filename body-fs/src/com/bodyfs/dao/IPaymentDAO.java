@@ -2,9 +2,11 @@
 package com.bodyfs.dao;
 
 import java.util.Collection;
+import java.util.Date;
 
 import com.bodyfs.model.payments.CustomerPayments;
 import com.bodyfs.model.payments.MasterService;
+import com.bodyfs.model.payments.PatientPaymentPlan;
 
 /**
  * 
@@ -67,14 +69,27 @@ public interface IPaymentDAO {
 	 */
 	public MasterService getServiceByName(final String name);
 
-	/*
-	 * Payments.
+	/**
+	 * Retrieves all the plans that have been made for a given patient
+	 * 
+	 * @param patientId
+	 * @return
 	 */
+	public Collection<PatientPaymentPlan> getAllPlans(final Long patientId);
 
-	// Payment breakDowns
-
-	/*
-	 * Total Services details for customer.
+	/**
+	 * Retrieves the plan for the patient for the given date
+	 * 
+	 * @param patientId
+	 * @param paymentDate
+	 * @return
 	 */
+	public PatientPaymentPlan getPlanByDate(final Long patientId, final Date paymentDate);
 
+	/**
+	 * Creates a new plan and persists in the database
+	 * 
+	 * @param plan
+	 */
+	public void createPaymentPlan(final PatientPaymentPlan plan);
 }

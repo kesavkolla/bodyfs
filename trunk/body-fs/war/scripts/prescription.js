@@ -19,14 +19,14 @@ function loadData(growl) {
 	$("#herbsTable > tbody > tr:not(:last):not(:first)").remove();
 	$.each(arrHerbs, function() {
 		$("#herbsTable > tbody > tr:last").before(
-				"<tr><td>"
+				"<tr><td class='bordercell'>"
 						+ this.formula
-						+ "</td><td>"
+						+ "</td><td class='bordercell'>"
 						+ this.herb
-						+ "</td><td><input type='text' value='"
+						+ "</td><td class='bordercell'><input type='text' class='portion' value='"
 						+ this.portion
-						+ "'/></td>"
-						+ ((readonly) ? "<td>&nbsp;</td></tr>"
+						+ "'/></td>&nbsp;"
+						+ ((readonly) ? "<td></td></tr>"
 								: "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>"));
 	});
 
@@ -156,7 +156,7 @@ function initPage() {
  */
 function DisplayData(data) {
 	$("$divHerbs").html(data.herbs.map(function(herb) {
-		return herb.name;
+		return "<span style='width:100%;border:1px solid black'>" + herb.name + "</span>";
 	}).join("<br />"));
 	$.data(document.body, "formuladata", data);
 }
@@ -177,9 +177,10 @@ function AddPortion() {
 
 	for ( var i = 0, len = formuladata.herbs.length; i < len; i++) {
 		$("#herbsTable > tbody > tr:last").before(
-				"<tr><td>" + formuladata.formula.name + "</td>" + "<td>" + formuladata.herbs[i].name + "</td>"
-						+ "<td><input type='text' value='" + portion + "' /></td>"
-						+ "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
+				"<tr><td class='bordercell'>" + formuladata.formula.name + "</td>" + "<td class='bordercell'>"
+						+ formuladata.herbs[i].name + "</td>"
+						+ "<td class='bordercell'><input type='text' class='portion' value='" + portion
+						+ "' /></td><td><img src='/img/delete.png' class='imgDelete'/></td>" + "</tr>");
 	}
 }
 
@@ -214,9 +215,9 @@ function AddHPortion() {
 	var formulaName = (cmbFormulas1.getValue() == undefined || cmbFormulas1.getValue() == "") ? "" : cmbFormulas1
 			.getValue();
 	$("#herbsTable > tbody > tr:last").before(
-			"<tr><td>" + formulaName + "</td>" + "<td>" + cmbHerbs.getValue() + "</td>"
-					+ "<td><input type='text' value='" + txtHPortion.val() + "' /></td>"
-					+ "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
+			"<tr><td class='bordercell'>" + formulaName + "</td>" + "<td class='bordercell'>" + cmbHerbs.getValue()
+					+ "</td>" + "<td class='bordercell'><input type='text' class='portion' value='" + txtHPortion.val()
+					+ "' /></td><td><img src='/img/delete.png' class='imgDelete'/></td>" + "</tr>");
 }
 
 /**

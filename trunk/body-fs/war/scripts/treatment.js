@@ -131,9 +131,49 @@ function initPage() {
 	/*
 	 * Handle the click on prev/next
 	 */
-	$(".submitbtn").click(function() {
+	$(".submitbtn").click(function(evt) {
+		/* Validate whether the checkbox and text fields are appropriate */
+		validateServices(evt);
 		SaveMarkers();
 	});
+}
+
+/**
+ * This function validates the selection of services
+ * 
+ * @return
+ */
+function validateServices(evt) {
+	/*
+	 * at least one service should be selected if checkbox is selected the
+	 * textfield should have value
+	 */
+	var isSelected = false;
+	var isError = false;
+	$("input:checkbox").each(function() {
+		if ($(this).attr("checked") != undefined) {
+			isSelected = true;
+			/* then id of checkbox is chxService and id of textbox is txtService */
+			var txtService = $("#txt" + $(this).attr("id").substring(3));
+			if (isNaN(parseInt(txtService.val()))) {
+				isError = true;
+				alert("Provide value for the service");
+				txtService.focus();
+			}
+			return false;
+		}
+	});
+	if (isError) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		return;
+	}
+	if (!isSelected) {
+		alert("Select atleast one service for this treatment");
+		evt.preventDefault();
+		evt.stopPropagation();
+		return;
+	}
 }
 
 /**

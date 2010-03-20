@@ -3,9 +3,11 @@ package com.bodyfs.ui;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
+import org.zkoss.json.parser.JSONParser;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ForwardEvent;
@@ -20,8 +22,7 @@ import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.payments.MasterService;
-import com.bodyfs.model.payments.PaymentBreakDown;
-import com.bodyfs.model.payments.TotalCustomerServicesBreakDown;
+import com.bodyfs.model.payments.PatientPaymentPlan;
 
 /**
  * 
@@ -31,12 +32,6 @@ import com.bodyfs.model.payments.TotalCustomerServicesBreakDown;
 public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -831489659737220006L;
-
-	ArrayList<MasterService> masterServicesList = new ArrayList<MasterService>();
-
-	ArrayList<PaymentBreakDown> paymentBreakDownList = new ArrayList<PaymentBreakDown>();
-
-	ArrayList<TotalCustomerServicesBreakDown> paymentSummaryList = new ArrayList<TotalCustomerServicesBreakDown>();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -63,7 +58,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	public void onSave(final ForwardEvent evt) {
 		final Combobox cmbCustomers = (Combobox) Path.getComponent(page, "cmbCustomers");
-		if (cmbCustomers.getSelectedIndex() < 1) {
+		if (cmbCustomers.getSelectedIndex() < 0 || cmbCustomers.getSelectedItem() == null) {
 			try {
 				Messagebox.show("Select the customer for saving the pyament plan", "Error", Messagebox.OK,
 						Messagebox.ERROR);
@@ -71,8 +66,8 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 			}
 			return;
 		}
-		final Textbox txtSummaryData = (Textbox) Path.getComponent(page, "txtSummaryData");
-		if (txtSummaryData.getValue() == null || txtSummaryData.getValue().length() <= 0) {
+		final Textbox txtPaymentData = (Textbox) Path.getComponent(page, "txtPaymentData");
+		if (txtPaymentData.getValue() == null || txtPaymentData.getValue().length() <= 0) {
 			try {
 				Messagebox
 						.show("add services before saving the pyament plan", "Error", Messagebox.OK, Messagebox.ERROR);
@@ -80,11 +75,22 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 			}
 			return;
 		}
-
+		// create the payment plan and save it
 		final Person patient = (Person) cmbCustomers.getSelectedItem().getValue();
-	}
+		final PatientPaymentPlan plan = new PatientPaymentPlan();
+		plan.setPersonId(patient.getId());
+		// parse the json data in the txtPaymentData
+		final JSONParser parser = new JSONParser();
+		final JSONArray arrData = (JSONArray) parser.parse(txtPaymentData.getValue());
+		final List<String> planItems = new ArrayList<String>(arrData.size());
+		for (int i = 0, len = arrData.size(); i < len; i++) {
+			final JSONObject obj = (JSONObject) arrData.get(i);
+			planItems.add(obj.toJSONString());
+		}
 
-	public void onPatientChange(final ForwardEvent event) {
-
+		plan.setPlanItems(planItems);
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		paymentDAO.createPaymentPlan(plan);
+		Clients.evalJavaScript("$.jGrowl('Sucessfully saved the plan', {life:2000});");
 	}
 }

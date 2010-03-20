@@ -3,6 +3,7 @@ package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import com.bodyfs.PMF;
 import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.model.payments.CustomerPayments;
 import com.bodyfs.model.payments.MasterService;
+import com.bodyfs.model.payments.PatientPaymentPlan;
 
 /**
  * @author kesav
@@ -85,6 +87,30 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	@Override
 	public void deleteService(MasterService service) {
 		this.jdoTemplate.deletePersistent(service);
+	}
+
+	@Override
+	public void createPaymentPlan(final PatientPaymentPlan plan) {
+		jdoTemplate.makePersistent(plan);
+	}
+
+	@Override
+	public Collection<PatientPaymentPlan> getAllPlans(final Long patientId) {
+		return jdoTemplate.find(PatientPaymentPlan.class, "personId ==" + patientId);
+	}
+
+	@Override
+	public PatientPaymentPlan getPlanByDate(final Long patientId, final Date paymentDate) {
+		final Collection<PatientPaymentPlan> results = jdoTemplate.find(PatientPaymentPlan.class,
+				"personId==pid && paymentDate==pdate", "java.lang.Long pid, java.util.Date pdate", patientId,
+				paymentDate);
+		if (results == null || results.size() <= 0) {
+			return null;
+		}
+		final PatientPaymentPlan plan = results.iterator().next();
+		// eagerly loading
+		plan.getPlanItems();
+		return plan;
 	}
 
 }

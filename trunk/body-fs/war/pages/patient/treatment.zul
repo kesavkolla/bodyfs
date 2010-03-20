@@ -73,6 +73,46 @@
 										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
 											value="@{treatment.additionalNotes, save-when='btnPrev.onClick, btnNext.onClick' }" />
 									</groupbox>
+									<n:table width="100%">
+										<n:tbody>
+											<n:col width="100px" />
+											<n:col width="*" />
+											<n:col width="100px" />
+											<n:col width="*" />
+											<n:tr>
+												<n:td>
+													<n:input type="checkbox" id="chkAccupuncture" />
+													Accupuncture
+												</n:td>
+												<n:td>
+													<n:input type="text" id="txtAccupuncture" />
+												</n:td>
+												<n:td>
+													<n:input type="checkbox" id="chkCupping" />
+													Cupping
+												</n:td>
+												<n:td>
+													<n:input type="text" id="txtCupping" />
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>
+													<n:input type="checkbox" id="chkMassage" />
+													Message
+												</n:td>
+												<n:td>
+													<n:input type="text" id="txtMassage" />
+												</n:td>
+												<n:td>
+													<n:input type="checkbox" id="chkReExam" />
+													Re-Exam
+												</n:td>
+												<n:td>
+													<n:input type="text" id="txtReExam" />
+												</n:td>
+											</n:tr>
+										</n:tbody>
+									</n:table>
 								</cell>
 								<cell>
 									<textbox id="txtMarkers" visible="false"

@@ -2,19 +2,19 @@
 package com.bodyfs.ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import org.zkoss.json.JSONArray;
+import org.zkoss.json.JSONObject;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.api.Button;
-import org.zkoss.zul.api.Combobox;
-import org.zkoss.zul.api.Listbox;
-import org.zkoss.zul.api.Listitem;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
@@ -38,110 +38,53 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	ArrayList<TotalCustomerServicesBreakDown> paymentSummaryList = new ArrayList<TotalCustomerServicesBreakDown>();
 
-	AnnotateDataBinder binder;
-
-	Listbox serviceList;
-	Listbox servicesBreakDownListBox;
-	Listbox ServicesSummaryListBox;
-	Button addService;
-
-	Button Print;
-	Button save;
-
-	Combobox customers;
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		final IPaymentDAO payDao = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final Collection<MasterService> services = paymentDAO.getMasterServicesList();
+		page.setAttribute("services", services);
+		page.setAttribute("patients", personDao.getAll());
 
-		ArrayList<Person> allCustomers = new ArrayList<Person>();
-		allCustomers.addAll(personDao.getAllCustomersInfo());
-
-		binder = new AnnotateDataBinder(comp);
-		masterServicesList.addAll(payDao.getMasterServicesList());
-		binder.loadAll();
-
-		serviceList.setModel(new ListModelList(masterServicesList));
-		if (masterServicesList.size() > 0) {
-			serviceList.setSelectedIndex(0);
+		// create JSON Array object of services
+		final JSONArray arrServices = new JSONArray();
+		for (final MasterService service : services) {
+			final JSONObject obj = new JSONObject();
+			obj.put("id", service.getId());
+			obj.put("serviceName", service.getServiceName());
+			obj.put("charge", service.getCharge());
+			arrServices.add(obj);
 		}
-		serviceList.invalidate();
-
-		customers.setModel(new ListModelList(allCustomers));
-		customers.invalidate();
+		page.setAttribute("arrServices", arrServices.toJSONString());
+		Clients.evalJavaScript("saveServices(" + arrServices.toJSONString() + ");");
 	}
 
-	public void onClick$addService() {
-		MasterService service = (MasterService) serviceList.getSelectedItemApi().getValue();
-		System.out.println("getting" + ((MasterService) serviceList.getSelectedItemApi().getValue()).getId());
-		PaymentBreakDown brkDownService = new PaymentBreakDown();
-
-		brkDownService.setId(service.getId());
-		brkDownService.setServiceName(service.getServiceName());
-		brkDownService.setCost(service.getCharge());
-		brkDownService.setPerWeek(0);
-		brkDownService.setDuration(0);
-		paymentBreakDownList.add(brkDownService);
-		servicesBreakDownListBox.setModel(new ListModelList(paymentBreakDownList));
-		servicesBreakDownListBox.invalidate();
-	}
-
-	public void onDeleteService(final ForwardEvent event) {
-
-		Listitem item = (Listitem) event.getTarget().getParent();
-		PaymentBreakDown brkDownService = (PaymentBreakDown) item.getValue();
-		System.out.println((Listitem) event.getTarget().getParent());
-		paymentBreakDownList.remove(brkDownService);
-		servicesBreakDownListBox.setModel(new ListModelList(paymentBreakDownList));
-		servicesBreakDownListBox.invalidate();
-	}
-
-	public void onUpdateSummary(final ForwardEvent event) {
-		System.out.println("PaymentsCtrlComposer.updateSummary()");
-		paymentSummaryList = new ArrayList<TotalCustomerServicesBreakDown>();
-		for (PaymentBreakDown service : paymentBreakDownList) {
-			addServiceToSummary(paymentSummaryList, service);
-		}
-		ServicesSummaryListBox.setModel(new ListModelList(paymentSummaryList));
-		ServicesSummaryListBox.invalidate();
-
-	}
-
-	private void addServiceToSummary(ArrayList<TotalCustomerServicesBreakDown> paymentSummaryList,
-			PaymentBreakDown service) {
-		boolean isNewService = true;
-		int sessionsToAdd = service.getPerWeek() * service.getDuration();
-		Double serviceCost = sessionsToAdd * service.getCost();
-		for (TotalCustomerServicesBreakDown serviceTotals : paymentSummaryList) {
-			if (serviceTotals.getServiceId().equals(service.getServiceId())) {
-				serviceTotals.setTotalSessions(serviceTotals.getTotalSessions() + sessionsToAdd);
-				serviceTotals.setCost(serviceTotals.getCost() + serviceCost);
-				isNewService = false;
+	public void onSave(final ForwardEvent evt) {
+		final Combobox cmbCustomers = (Combobox) Path.getComponent(page, "cmbCustomers");
+		if (cmbCustomers.getSelectedIndex() < 1) {
+			try {
+				Messagebox.show("Select the customer for saving the pyament plan", "Error", Messagebox.OK,
+						Messagebox.ERROR);
+			} catch (final Exception e) {
 			}
+			return;
+		}
+		final Textbox txtSummaryData = (Textbox) Path.getComponent(page, "txtSummaryData");
+		if (txtSummaryData.getValue() == null || txtSummaryData.getValue().length() <= 0) {
+			try {
+				Messagebox
+						.show("add services before saving the pyament plan", "Error", Messagebox.OK, Messagebox.ERROR);
+			} catch (final Exception e) {
+			}
+			return;
 		}
 
-		if (isNewService) {
-			TotalCustomerServicesBreakDown serviceTotals = new TotalCustomerServicesBreakDown();
-			serviceTotals.setCost(serviceCost);
-			serviceTotals.setServiceCharge(service.getCost());
-			serviceTotals.setServiceId(service.getServiceId());
-			serviceTotals.setServiceName(service.getServiceName());
-			serviceTotals.setTotalSessions(sessionsToAdd);
-
-			paymentSummaryList.add(serviceTotals);
-		}
+		final Person patient = (Person) cmbCustomers.getSelectedItem().getValue();
 	}
 
-	public void onSave(final Event evt) {
-
-		Long customerID = Long.parseLong(customers.getValue());
+	public void onPatientChange(final ForwardEvent event) {
 
 	}
-
-	public void onCancel(final Event evt) {
-		Executions.sendRedirect("/pages/patient/patientview.zul?id=" + page.getAttribute("patid"));
-	}
-
 }

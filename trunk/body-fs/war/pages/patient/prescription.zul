@@ -11,6 +11,8 @@
 		.portion { background-color: #660000; border:none;}
 
 		.bordercell {border:1px solid black;}
+
+		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000; }
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
@@ -50,7 +52,7 @@
 								<n:td>
 									<n:span style="font-weight: bold">Diagnosis &amp;nbsp;</n:span>
 									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
-										forward="onChange=controller.onDiagnosisChange">
+										forward="onChange=controller.onDiagnosisChange" readonly="true">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
 											value="@{diagnosis }" />
 									</combobox>
@@ -58,10 +60,61 @@
 									<n:br />
 									<n:span style="font-weight:bold">Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;</n:span>
 									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
-										forward="onChange=controller.onFormulaChange">
+										forward="onChange=controller.onFormulaChange" readonly="true">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
-
+									<n:br />
+									<n:table width="100%">
+										<n:col width="100px" />
+										<n:col width="*" />
+										<n:tr>
+											<n:td>
+												<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" />
+												<n:span style="font-weight:bold;">Herb</n:span>
+											</n:td>
+											<n:td>
+												<n:input type="text" id="txtHerb" style="width:30px;" />
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:input type="checkbox" name="chkPowder" value="Powder" />
+												<n:span style="font-weight:bold">Powder</n:span>
+											</n:td>
+											<n:td>
+												<n:input type="text" id="txtPowder" style="width:30px;" />
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:input type="checkbox" name="chkPill" value="Pill" />
+												<n:span style="font-weight:bold">Pill</n:span>
+											</n:td>
+											<n:td>
+												<n:input type="text" id="txtPill" style="width:30px;" />
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:input type="checkbox" name="chkCapsul" value="Capsul" />
+												<n:span style="font-weight:bold">Capsul</n:span>
+											</n:td>
+											<n:td>
+												<n:input type="text" id="txtCapsul" style="width:30px;" />
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:input type="checkbox" name="chkOther" value="Other" />
+												<n:span style="font-weight:bold">Other</n:span>
+											</n:td>
+											<n:td>
+												<n:input type="text" id="txtOther" style="width:30px;" />
+												<textbox id="txtmedType" visible="false"
+													value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" />
+											</n:td>
+										</n:tr>
+									</n:table>
 								</n:td>
 								<n:td>
 									<n:span style="font-weight: bold">Portion &amp;nbsp;</n:span>
@@ -73,25 +126,12 @@
 								</n:td>
 								<n:td>
 									<n:span style="font-weight: bold">Herb&amp;nbsp;</n:span>
-									<div id="divHerbs" width="200px" height="200px" style="border:1px solid black"></div>
+									<div id="divHerbs" width="200px" height="200px"
+										style="border:1px solid black;overflow:auto">
+									</div>
 								</n:td>
 							</n:tr>
 						</n:table>
-						<space height="20px" width="100%" />
-						<n:div>
-							<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" />
-							<n:span style="font-weight:bold">Herb</n:span>
-							<n:input type="checkbox" name="chkPowder" value="Powder" />
-							Powder
-							<n:input type="checkbox" name="chkPill" value="Pill" />
-							Pill
-							<n:input type="checkbox" name="chkCapsul" value="Capsul" />
-							Capsul
-							<n:input type="checkbox" name="chkOther" value="Other" />
-							Other
-							<textbox id="txtmedType" visible="false"
-								value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" />
-						</n:div>
 						<space height="20px" width="100%" />
 						<n:table id="herbsTable">
 							<n:tr align="left">
@@ -103,12 +143,13 @@
 							<n:tr>
 								<n:td class="bordercell">
 									<combobox id="cmbFormulas1" autodrop="true" mold="rounded" model="@{formulalist }"
-										forward="onChange=controller.onFormula1Change">
+										forward="onChange=controller.onFormula1Change" readonly="true" sclass="blendcombo">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
 								</n:td>
 								<n:td class="bordercell">
-									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }">
+									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }"
+										readonly="true" sclass="blendcombo">
 										<comboitem self="@{each=herb }" label="@{herb.name }" value="@{herb }" />
 									</combobox>
 								</n:td>

@@ -4,6 +4,8 @@ body {
 	background-color: #660000;
 	font-family: Verdana;
 	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
 }
 
 .z-borderlayout {
@@ -96,7 +98,7 @@ div.z-listbox-header tr.z-listhead,div.z-listbox-header tr.z-auxhead { 1 1
 }
 
 div.z-listheader-cnt {
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .z-toolbar {

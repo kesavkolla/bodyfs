@@ -6,10 +6,16 @@
 <?script type="text/javascript" src="/scripts/prescription.js"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="controller" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+
+		.portion { background-color: #660000; border:none;}
+
+		.bordercell {border:1px solid black;}
+	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="patientview">
-				<north size="75px">
+				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true" id="controller"
@@ -42,7 +48,7 @@
 							</n:tr>
 							<n:tr valign="top">
 								<n:td>
-									Diagnosis &amp;nbsp;
+									<n:span style="font-weight: bold">Diagnosis &amp;nbsp;</n:span>
 									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
 										forward="onChange=controller.onDiagnosisChange">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
@@ -50,7 +56,7 @@
 									</combobox>
 									<n:br />
 									<n:br />
-									Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;
+									<n:span style="font-weight:bold">Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;</n:span>
 									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
 										forward="onChange=controller.onFormulaChange">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
@@ -58,7 +64,7 @@
 
 								</n:td>
 								<n:td>
-									Portion &amp;nbsp;
+									<n:span style="font-weight: bold">Portion &amp;nbsp;</n:span>
 									<intbox id="txtPortion" constraint="no empty" />
 									<n:br />
 									<n:br />
@@ -66,7 +72,7 @@
 									<n:button id="btnAdd">Add</n:button>
 								</n:td>
 								<n:td>
-									Herb&amp;nbsp;
+									<n:span style="font-weight: bold">Herb&amp;nbsp;</n:span>
 									<div id="divHerbs" width="200px" height="200px" style="border:1px solid black"></div>
 								</n:td>
 							</n:tr>
@@ -74,7 +80,7 @@
 						<space height="20px" width="100%" />
 						<n:div>
 							<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" />
-							Herb
+							<n:span style="font-weight:bold">Herb</n:span>
 							<n:input type="checkbox" name="chkPowder" value="Powder" />
 							Powder
 							<n:input type="checkbox" name="chkPill" value="Pill" />
@@ -87,27 +93,28 @@
 								value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" />
 						</n:div>
 						<space height="20px" width="100%" />
-						<n:table id="herbsTable" width="90%">
+						<n:table id="herbsTable">
 							<n:tr align="left">
-								<n:th>Forumula</n:th>
-								<n:th>Herbs</n:th>
-								<n:th>Portion</n:th>
+								<n:th class="bordercell">Forumula</n:th>
+								<n:th class="bordercell">Herbs</n:th>
+								<n:th class="bordercell">Portion</n:th>
 								<n:th></n:th>
 							</n:tr>
 							<n:tr>
-								<n:td>
+								<n:td class="bordercell">
 									<combobox id="cmbFormulas1" autodrop="true" mold="rounded" model="@{formulalist }"
 										forward="onChange=controller.onFormula1Change">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
 								</n:td>
-								<n:td>
+								<n:td class="bordercell">
 									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }">
 										<comboitem self="@{each=herb }" label="@{herb.name }" value="@{herb }" />
 									</combobox>
 								</n:td>
-								<n:td>
-									<n:input type="text" id="txtHPortion" />
+								<n:td class="bordercell">
+									<n:input type="text" id="txtHPortion" class="portion" />
+									&amp;nbsp;
 								</n:td>
 								<n:td>
 									<n:input type="button" id="btnHAdd" value="Add" />

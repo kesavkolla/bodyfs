@@ -8,12 +8,11 @@
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
-				<north size="75px">
+				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" flex="true">
-					<div hflex="1" vflex="1" width="100%">
-						<space height="20px" orient="vertical" width="100%" />
+					<div hflex="1" vflex="1" width="100%" style="margin:10px">
 						<toolbar width="90%" id="dateBar">
 							<custom-attributes patid="${param.id }" />
 							<zk forEach="${mpiview$composer.examDates }">

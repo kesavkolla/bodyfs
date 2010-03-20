@@ -2,11 +2,11 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<style>.z-center{font-weight:bold;}</style>
+	<style>.z-center{font-size:14px;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
-				<north size="75px">
+				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center autoscroll="true" flex="true">
@@ -40,7 +40,7 @@
 									<n:tr>
 										<n:td>When is the next examination due</n:td>
 										<n:td>
-											<label id="nextApppointment" style="font-weight:bold" />
+											<label id="nextApppointment" style="font-size:14px" />
 										</n:td>
 									</n:tr>
 									<n:tr>

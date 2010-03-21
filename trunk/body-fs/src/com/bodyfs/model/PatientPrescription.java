@@ -40,9 +40,6 @@ public class PatientPrescription implements Serializable {
 	@Persistent
 	private List<String> herbData;
 
-	@Persistent
-	private String medType;
-
 	public Long getId() {
 		return id;
 	}
@@ -73,14 +70,6 @@ public class PatientPrescription implements Serializable {
 
 	public void setHerbData(List<String> herbData) {
 		this.herbData = herbData;
-	}
-
-	public String getMedType() {
-		return medType;
-	}
-
-	public void setMedType(String medType) {
-		this.medType = medType;
 	}
 
 	/**
@@ -137,8 +126,6 @@ public class PatientPrescription implements Serializable {
 			builder.append("personId=").append(personId).append(", ");
 		if (visitDate != null)
 			builder.append("visitDate=").append(visitDate);
-		if (medType != null)
-			builder.append("medType=").append(medType);
 		builder.append("]");
 		return builder.toString();
 	}

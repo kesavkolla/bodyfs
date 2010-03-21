@@ -31,7 +31,8 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	private static final long serialVersionUID = -2181026768481723335L;
 	private static final Log LOGGER = LogFactory.getLog(PaymentDAO.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
-	private static final String SERVICE_CACHE = IPaymentDAO.class.getName() + ".MasterServices";
+	private static final String ALL_SERVICE_CACHE = IPaymentDAO.class.getName() + ".AllMasterServices";
+	private static final String MASTER_SERVICE_CACHE = IPaymentDAO.class.getName() + ".MasterServices";
 
 	private Cache cache;
 
@@ -47,25 +48,39 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 
 	public void addMasterService(final MasterService service) {
 		final MasterService payment1 = this.jdoTemplate.makePersistent(service);
-		if (cache.containsKey(SERVICE_CACHE)) {
-			cache.remove(SERVICE_CACHE);
+		if (cache.containsKey(ALL_SERVICE_CACHE)) {
+			cache.remove(ALL_SERVICE_CACHE);
+		}
+		if (cache.containsKey(MASTER_SERVICE_CACHE)) {
+			cache.remove(MASTER_SERVICE_CACHE);
 		}
 		LOGGER.debug("Created herb with id: " + payment1);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Collection<MasterService> getMasterServicesList() {
-		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(MasterService.class, "hidden==false"));
+		if (cache.containsKey(MASTER_SERVICE_CACHE)) {
+			return (Collection<MasterService>) cache.get(MASTER_SERVICE_CACHE);
+		}
+		final Collection<MasterService> results = this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(
+				MasterService.class, "hidden==false"));
+		if (results != null) {
+			cache.put(MASTER_SERVICE_CACHE, results);
+		}
+		return results;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<MasterService> getAllServices() {
-		if (cache.containsKey(SERVICE_CACHE)) {
-			return (Collection<MasterService>) cache.get(SERVICE_CACHE);
+		if (cache.containsKey(ALL_SERVICE_CACHE)) {
+			return (Collection<MasterService>) cache.get(ALL_SERVICE_CACHE);
 		}
 		final Collection<MasterService> results = this.jdoTemplate.detachCopyAll(this.jdoTemplate
 				.find(MasterService.class));
-		cache.put(SERVICE_CACHE, results);
+		if (results != null) {
+			cache.put(ALL_SERVICE_CACHE, results);
+		}
 		return results;
 	}
 
@@ -108,8 +123,11 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	@Override
 	public void deleteService(MasterService service) {
 		this.jdoTemplate.deletePersistent(service);
-		if (cache.containsKey(SERVICE_CACHE)) {
-			cache.remove(SERVICE_CACHE);
+		if (cache.containsKey(ALL_SERVICE_CACHE)) {
+			cache.remove(ALL_SERVICE_CACHE);
+		}
+		if (cache.containsKey(MASTER_SERVICE_CACHE)) {
+			cache.remove(MASTER_SERVICE_CACHE);
 		}
 	}
 

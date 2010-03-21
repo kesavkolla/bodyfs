@@ -44,24 +44,32 @@
 										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
 									<textbox id="txtPrescription" visible="false"
 										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
+									<textbox id="txtServices" visible="false" readonly="true"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
 								</n:td>
 							</n:tr>
 						</n:table>
 						<space height="20px" width="100%" />
-						<n:div>
-							<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" disabled="disabled" />
-							Herb
-							<n:input type="checkbox" name="chkPowder" value="Powder" disabled="disabled" />
-							Powder
-							<n:input type="checkbox" name="chkPill" value="Pill" disabled="disabled" />
-							Pill
-							<n:input type="checkbox" name="chkCapsul" value="Capsul" disabled="disabled" />
-							Capsul
-							<n:input type="checkbox" name="chkOther" value="Other" disabled="disabled" />
-							Other
-							<textbox id="txtmedType" visible="false"
-								value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" readonly="true" />
-						</n:div>
+						<n:table id="tblServices">
+							<n:col width="*" />
+							<n:tbody>
+								<zk forEach="${controller$composer.servicesList }">
+									<n:tr>
+										<n:td>
+											<n:input type="checkbox" id="chk${each.id }"
+												servicename="${each.serviceName }" disabled="disabled" />
+											<n:span style="font-weight:bold">${each.serviceName }</n:span>
+										</n:td>
+										<n:td>
+											<n:input type="text" size="2" id="txt${each.id }" serviceid="${each.id }"
+												readonly="readonly" />
+											<n:input type="text" size="10" id="txtOther" style="display:none"
+												if="${each.serviceName == 'Other' }" readonly="readonly" />
+										</n:td>
+									</n:tr>
+								</zk>
+							</n:tbody>
+						</n:table>
 						<space height="20px" width="100%" />
 						<n:table id="herbsTable" width="90%">
 							<n:tr align="left">

@@ -2,6 +2,7 @@
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
+import org.zkoss.json.parser.JSONParser;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -30,11 +32,14 @@ import org.zkoss.zul.Textbox;
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.model.Diagnosis;
 import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PersonType;
+import com.bodyfs.model.payments.MasterService;
+import com.bodyfs.model.payments.PatientService;
 import com.bodyfs.ui.util.CommonUtils;
 
 /**
@@ -105,20 +110,34 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		if (diagnoses != null) {
 			page.setAttribute("diagnosislist", diagnoses);
 			final Combobox cmbDiagnosis = (Combobox) Path.getComponent(page, "cmbDiagnosis");
-			cmbDiagnosis.setAutocomplete(true);
+			if (cmbDiagnosis != null) {
+				cmbDiagnosis.setAutocomplete(true);
+			}
 		}
 		final Collection<HerbFormula> formulalist = herbDAO.getFormulas();
 		if (formulalist != null) {
 			page.setAttribute("formulalist", formulalist);
 			final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
-			cmbFormulas.setAutocomplete(true);
+			if (cmbFormulas != null) {
+				cmbFormulas.setAutocomplete(true);
+			}
 		}
 		final Collection<Herb> herblist = herbDAO.getHerbs();
 		if (herblist != null) {
 			page.setAttribute("herblist", herblist);
 			final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
-			cmbHerbs.setAutocomplete(true);
+			if (cmbHerbs != null) {
+				cmbHerbs.setAutocomplete(true);
+			}
 		}
+
+		// setup the service data
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<PatientService> services = paymentDAO.getServicesByVisitDate(prescription.getPersonId(),
+				prescription.getVisitDate());
+		final String serviceData = getServiceData(services, getServicesList());
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		txtServices.setValue(serviceData);
 	}
 
 	/**
@@ -218,6 +237,10 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final PatientPrescription prescription = (PatientPrescription) page.getAttribute("prescription");
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		visitDAO.createPatientPrescription(prescription);
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		if (txtServices.getValue() != null && txtServices.getValue().length() > 0) {
+			saveServiceDate(txtServices.getValue(), prescription.getVisitDate(), prescription.getPersonId());
+		}
 		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
@@ -269,6 +292,88 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			binder.loadAll();
 		}
 
+		// setup the service data
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<PatientService> services = paymentDAO.getServicesByVisitDate(prescription.getPersonId(),
+				prescription.getVisitDate());
+		final String serviceData = getServiceData(services, getServicesList());
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		txtServices.setValue(serviceData);
+
 		Clients.evalJavaScript("loadData(true)");
+	}
+
+	/**
+	 * Retrieves the list of services that are related to Herbs
+	 * 
+	 * @return
+	 */
+	public Collection<MasterService> getServicesList() {
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<MasterService> services = paymentDAO.getAllServices();
+		final List<MasterService> herbServices = new ArrayList<MasterService>();
+		for (final MasterService service : services) {
+			if (service.isHidden() || service.getServiceName().equals("Herbal Treatment")) {
+				herbServices.add(service);
+			}
+		}
+		return herbServices;
+	}
+
+	/**
+	 * This will parse the servicedata from json object and convert it to the PatientService object and persists the
+	 * services
+	 * 
+	 * @param serviceData
+	 * @param visitDate
+	 * @param patientId
+	 */
+	private void saveServiceDate(final String serviceData, final Date visitDate, final Long patientId) {
+		final JSONParser parser = new JSONParser();
+		final JSONArray arrServices = (JSONArray) parser.parse(serviceData);
+		if (arrServices.size() <= 0) {
+			return;
+		}
+		final List<PatientService> services = new ArrayList<PatientService>(arrServices.size());
+		for (int i = 0, len = arrServices.size(); i < len; i++) {
+			final JSONObject obj = (JSONObject) arrServices.get(i);
+			final PatientService pService = new PatientService();
+			pService.setPersonId(patientId);
+			pService.setVisitDate(visitDate);
+			pService.setServiceId(Long.parseLong(obj.get("id").toString()));
+			pService.setNumServices(Float.parseFloat(obj.get("count").toString()));
+			services.add(pService);
+		}
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		paymentDAO.createVisitServices(services);
+	}
+
+	/**
+	 * 
+	 * @param services
+	 * @param servicesList
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private String getServiceData(final Collection<PatientService> services,
+			final Collection<MasterService> servicesList) {
+		final JSONArray arrServices = new JSONArray();
+		for (final PatientService service : services) {
+			// Check this service exists in servicesList
+			boolean exists = false;
+			for (final MasterService mservice : servicesList) {
+				if (service.getServiceId().equals(mservice.getId())) {
+					exists = true;
+					break;
+				}
+			}
+			if (exists) {
+				final JSONObject obj = new JSONObject();
+				obj.put("id", service.getServiceId());
+				obj.put("count", service.getNumServices());
+				arrServices.add(obj);
+			}
+		}
+		return arrServices.toJSONString();
 	}
 }

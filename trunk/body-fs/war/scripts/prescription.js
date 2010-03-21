@@ -30,24 +30,21 @@ function loadData(growl) {
 								: "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>"));
 	});
 
-	/* populate the checkboxes */
-	var arrmedType = $("$txtmedType").val().split(",");
-
-	$("input[name|='chk']").removeAttr("checked");
-	if (arrmedType.length > 0) {
-		$.each(arrmedType, function(indx, value) {
-			/* If the value is Herbal Treatment check the chkHerb */
-			if (value == "Herbal Treatment") {
-				$("input[name='chkHerb']").attr("checked", "checked");
-			} else {
-				/*
-				 * Find the checkbox with the name that matches with chkName and
-				 * make it selected
-				 */
-				$("input[name='chk" + value + "']").attr("checked", "checked");
-			}
-		});
+	/* laod the service data */
+	var txtServices = zk.Widget.$($("$txtServices").attr("id"));
+	var serviceData = [];
+	if (txtServices.getValue() != "") {
+		serviceData = parseJSON(txtServices.getValue());
 	}
+	$("#tblServices input:checkbox").attr("checked", false);
+	$("#tblServices input:text").val("");
+
+	for ( var i = 0, len = serviceData.length; i < len; i++) {
+		var data = serviceData[i];
+		$("#tblServices input#chk" + data.id).attr("checked", true);
+		$("#tblServices input#txt" + data.id).val(data.count);
+	}
+
 	if (growl) {
 		$.jGrowl("Loaded data for the selected visitdate", {
 			life : 2000
@@ -82,6 +79,15 @@ function initPage() {
 				+ '">' + this.value + '</option>');
 	});
 
+	/* handle click on other checkbox */
+	$("#tblServices input[servicename='Other']").click(function() {
+		if ($(this).attr("checked")) {
+			$("#txtOther").show();
+		} else {
+			$("#txtOther").val("").hide();
+		}
+	});
+
 	/* handle click on done and prev button and save the values */
 	$(".submitbtn").click(function() {
 		var prescArr = new Array();
@@ -98,41 +104,20 @@ function initPage() {
 			prescArr.push(obj);
 		});
 		$("$txtPrescription").val($.toJSON(prescArr)).blur();
-	});
 
-	/* Handle click on other checkbox to hide/show textbox for other */
-	$("input[name|='chk']").click(function() {
-		var txtmedType = $("$txtmedType");
-		var arrmedType = txtmedType.val().split(",");
-
-		/* If the checkbox is checked then add it's value to the txtmedType */
-		if ($(this).attr("checked") != "") {
-			/* if this value is already in the array then nothing to do */
-			if ($.inArray($(this).val(), arrmedType) != -1) {
-				return;
-			} else {
-				/* add the value to the array */
-				arrmedType[arrmedType.length] = $(this).val();
-			}
-		} else {
-			/* Handle the uncheck */
-			/* If the value is not already in the array nothing to do */
-			if ($.inArray($(this).val(), arrmedType) == -1) {
-				return;
-			} else {
-				var removeItem = $(this).val();
-				/* remove this item from the arrmedType */
-				arrmedType = $.map(arrmedType, function(item) {
-					if (item == removeItem) {
-						return null;
-					} else {
-						return item;
-					}
+		var arrServices = new Array();
+		/* Save the selected services */
+		$("#tblServices > tbody > tr").each(function() {
+			var chkService = $(this).find("input:checkbox");
+			if (chkService.attr("checked")) {
+				var txtService = $(this).find("input:text");
+				arrServices.push( {
+					"id" : txtService.attr("serviceid"),
+					"count" : txtService.val()
 				});
 			}
-		}
-		txtmedType.val(arrmedType.join(","));
-		txtmedType.blur();
+		});
+		$("$txtServices").val($.toJSON(arrServices)).blur();
 	});
 
 	/* Handle the click on View */

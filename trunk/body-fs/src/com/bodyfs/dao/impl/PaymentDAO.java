@@ -192,10 +192,9 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 
 	@Override
 	public Collection<PatientService> getServicesByDateRange(long patientId, final Date startDate, final Date endDate) {
-		jdoTemplate.find(PatientService.class, "personId == pid && visitDate >= pstart && visitDate <= pend",
-				"java.lang.Long pid, java.util.Date pstart, java.util.Date pend", startDate,
+		return jdoTemplate.find(PatientService.class, "personId == pid && visitDate >= pstart && visitDate <= pend",
+				"java.lang.Long pid, java.util.Date pstart, java.util.Date pend", patientId, startDate,
 				(endDate == null ? new Date() : endDate));
-		return null;
 	}
 
 }

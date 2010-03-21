@@ -3,6 +3,7 @@
 <?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/payments.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">

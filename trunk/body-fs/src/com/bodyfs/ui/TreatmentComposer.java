@@ -2,13 +2,18 @@
 package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
+import org.zkoss.json.parser.JSONParser;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -18,8 +23,11 @@ import org.zkoss.zul.Textbox;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PersonType;
+import com.bodyfs.model.payments.MasterService;
+import com.bodyfs.model.payments.PatientService;
 import com.bodyfs.ui.util.CommonUtils;
 
 /**
@@ -74,6 +82,14 @@ public class TreatmentComposer extends GenericForwardComposer {
 		}
 		final PatientTreatment treatment = visitDAO.getPatientTreatmentByDate(patid, visitDate);
 		this.page.setAttribute("treatment", treatment);
+
+		// Get the patient services that are part of this visit
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<PatientService> services = paymentDAO.getServicesByVisitDate(treatment.getPersonId(),
+				treatment.getVisitDate());
+		final String serviceData = getServiceData(services, getServicesList());
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		txtServices.setValue(serviceData);
 	}
 
 	/**
@@ -111,6 +127,10 @@ public class TreatmentComposer extends GenericForwardComposer {
 			LOGGER.debug(treatment);
 		}
 		visitDAO.createPatientTreatment(treatment);
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		if (txtServices.getValue() != null && txtServices.getValue().length() > 0) {
+			saveServiceDate(txtServices.getValue(), treatment.getVisitDate(), treatment.getPersonId());
+		}
 		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 
@@ -141,8 +161,77 @@ public class TreatmentComposer extends GenericForwardComposer {
 			page.setAttribute("treatment", treatment);
 			binder.loadAll();
 		}
-		
+
+		// Get the patient services that are part of this visit
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<PatientService> services = paymentDAO.getServicesByVisitDate(treatment.getPersonId(),
+				treatment.getVisitDate());
+		final String serviceData = getServiceData(services, getServicesList());
+		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
+		txtServices.setValue(serviceData);
+
 		Clients.evalJavaScript("reloadMarkers(false)");
+	}
+
+	/**
+	 * Retrieves the list of all the services that are available
+	 * 
+	 * @return
+	 */
+	public Collection<MasterService> getServicesList() {
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		return paymentDAO.getMasterServicesList();
+	}
+
+	/**
+	 * This will parse the servicedata from json object and convert it to the PatientService object and persists the
+	 * services
+	 * 
+	 * @param serviceData
+	 * @param visitDate
+	 * @param patientId
+	 */
+	private void saveServiceDate(final String serviceData, final Date visitDate, final Long patientId) {
+		final JSONParser parser = new JSONParser();
+		final JSONArray arrServices = (JSONArray) parser.parse(serviceData);
+		if (arrServices.size() <= 0) {
+			return;
+		}
+		final List<PatientService> services = new ArrayList<PatientService>(arrServices.size());
+		for (int i = 0, len = arrServices.size(); i < len; i++) {
+			final JSONObject obj = (JSONObject) arrServices.get(i);
+			final PatientService pService = new PatientService();
+			pService.setPersonId(patientId);
+			pService.setVisitDate(visitDate);
+			pService.setServiceId(Long.parseLong(obj.get("id").toString()));
+			pService.setNumServices(Float.parseFloat(obj.get("count").toString()));
+			services.add(pService);
+		}
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		paymentDAO.createVisitServices(services);
+	}
+
+	@SuppressWarnings("unchecked")
+	private String getServiceData(final Collection<PatientService> services,
+			final Collection<MasterService> servicesList) {
+		final JSONArray arrServices = new JSONArray();
+		for (final PatientService service : services) {
+			// Check this service exists in servicesList
+			boolean exists = false;
+			for (final MasterService mservice : servicesList) {
+				if (service.getServiceId().equals(mservice.getId())) {
+					exists = true;
+					break;
+				}
+			}
+			if (exists) {
+				final JSONObject obj = new JSONObject();
+				obj.put("id", service.getServiceId());
+				obj.put("count", service.getNumServices());
+				arrServices.add(obj);
+			}
+		}
+		return arrServices.toJSONString();
 	}
 
 }

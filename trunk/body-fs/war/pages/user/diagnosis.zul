@@ -267,7 +267,7 @@
 											<n:td>
 												<n:li>Irritability</n:li>
 											</n:td>
-											<td>
+											<n:td>
 												<n:input type="radio" name="radIrritability" value="Yes"
 													disabled="disabled">
 													<n:span class="z-radio-cnt">Yes</n:span>
@@ -276,7 +276,7 @@
 													disabled="disabled">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
-											</td>
+											</n:td>
 										</n:tr>
 										<n:tr>
 											<n:td>

@@ -3,10 +3,12 @@ package com.bodyfs.dao;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import com.bodyfs.model.payments.CustomerPayments;
 import com.bodyfs.model.payments.MasterService;
 import com.bodyfs.model.payments.PatientPaymentPlan;
+import com.bodyfs.model.payments.PatientService;
 
 /**
  * 
@@ -100,4 +102,31 @@ public interface IPaymentDAO {
 	 * @return
 	 */
 	public Collection<Date> getPaymentPlanDates(final Long patientId);
+
+	/**
+	 * Retrieve all the services that are part of the given visit date
+	 * 
+	 * @param patientId patient id
+	 * @param visitDate visit date
+	 * @return collection of all services
+	 */
+	public Collection<PatientService> getServicesByVisitDate(final Long patientId, final Date visitDate);
+
+	/**
+	 * Persists given list of services
+	 * 
+	 * @param services
+	 */
+	public void createVisitServices(final List<PatientService> services);
+
+	/**
+	 * Retrieves all the service objects for the given patient that were performed in a given date range
+	 * 
+	 * @param patientId
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public Collection<PatientService> getServicesByDateRange(final long patientId, final Date startDate,
+			final Date endDate);
 }

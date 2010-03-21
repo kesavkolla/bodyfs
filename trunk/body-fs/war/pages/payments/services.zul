@@ -30,9 +30,9 @@
 									<hbox>
 										<button label="Save" sclass="btnSave"
 											forward="onClick=controller.onSaveService" />
-										<button label="Delete" sclass="btnDelete"
+										<!-- button label="Delete" sclass="btnDelete"
 											forward="onClick=controller.onDeleteService" />
-										<space width="40px" />
+											<space width="40px" / -->
 									</hbox>
 								</listcell>
 							</listitem>

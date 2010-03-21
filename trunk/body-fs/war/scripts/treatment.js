@@ -55,6 +55,23 @@ function reloadMarkers(nogrowl) {
 		}
 		imgdiv.append(marker);
 	});
+
+	/* laod the service data */
+	var txtServices = zk.Widget.$($("$txtServices").attr("id"));
+	var serviceData = [];
+	if (txtServices.getValue() != "") {
+		serviceData = parseJSON(txtServices.getValue());
+	}
+
+	$("#tblServices input:checkbox").attr("checked", false);
+	$("#tblServices input:text").val("");
+
+	for ( var i = 0, len = serviceData.length; i < len; i++) {
+		var data = serviceData[i];
+		$("#tblServices input#chk" + data.id).attr("checked", true);
+		$("#tblServices input#txt" + data.id).val(data.count);
+	}
+
 	if (!nogrowl) {
 		$.jGrowl("Loaded data for the selected visitdate", {
 			life : 2000
@@ -133,17 +150,18 @@ function initPage() {
 	 */
 	$(".submitbtn").click(function(evt) {
 		/* Validate whether the checkbox and text fields are appropriate */
-		validateServices(evt);
 		SaveMarkers();
+		SaveServiceData(evt);
 	});
 }
 
 /**
- * This function validates the selection of services
+ * This function validates the selection of services and also populates the
+ * txtServices
  * 
  * @return
  */
-function validateServices(evt) {
+function SaveServiceData(evt) {
 	/*
 	 * at least one service should be selected if checkbox is selected the
 	 * textfield should have value
@@ -151,11 +169,11 @@ function validateServices(evt) {
 	var isSelected = false;
 	var isError = false;
 	$("input:checkbox").each(function() {
-		if ($(this).attr("checked") != undefined) {
+		if ($(this).attr("checked")) {
 			isSelected = true;
 			/* then id of checkbox is chxService and id of textbox is txtService */
 			var txtService = $("#txt" + $(this).attr("id").substring(3));
-			if (isNaN(parseInt(txtService.val()))) {
+			if (isNaN(parseFloat(txtService.val()))) {
 				isError = true;
 				alert("Provide value for the service");
 				txtService.focus();
@@ -174,6 +192,19 @@ function validateServices(evt) {
 		evt.stopPropagation();
 		return;
 	}
+	var arrServices = new Array();
+	/* Save the selected services */
+	$("#tblServices > tbody > tr").each(function() {
+		var chkService = $(this).find("input:checkbox");
+		if (chkService.attr("checked")) {
+			var txtService = $(this).find("input:text");
+			arrServices.push( {
+				"id" : txtService.attr("serviceid"),
+				"count" : txtService.val()
+			});
+		}
+	});
+	$("$txtServices").val($.toJSON(arrServices)).blur();
 }
 
 /**

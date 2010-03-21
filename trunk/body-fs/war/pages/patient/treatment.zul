@@ -73,50 +73,30 @@
 										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
 											value="@{treatment.additionalNotes, save-when='btnPrev.onClick, btnNext.onClick' }" />
 									</groupbox>
-									<n:table width="100%">
+									<n:table id="tblServices">
 										<n:tbody>
-											<n:col width="100px" />
-											<n:col width="*" />
-											<n:col width="100px" />
-											<n:col width="*" />
-											<n:tr>
-												<n:td>
-													<n:input type="checkbox" id="chkAccupuncture" />
-													Accupuncture
-												</n:td>
-												<n:td>
-													<n:input type="text" id="txtAccupuncture" />
-												</n:td>
-												<n:td>
-													<n:input type="checkbox" id="chkCupping" />
-													Cupping
-												</n:td>
-												<n:td>
-													<n:input type="text" id="txtCupping" />
-												</n:td>
-											</n:tr>
-											<n:tr>
-												<n:td>
-													<n:input type="checkbox" id="chkMassage" />
-													Message
-												</n:td>
-												<n:td>
-													<n:input type="text" id="txtMassage" />
-												</n:td>
-												<n:td>
-													<n:input type="checkbox" id="chkReExam" />
-													Re-Exam
-												</n:td>
-												<n:td>
-													<n:input type="text" id="txtReExam" />
-												</n:td>
-											</n:tr>
+											<zk forEach="${treatmentgrid$composer.servicesList }">
+												<zk if="${each.serviceName != 'Herbal Treatment' }">
+													<n:tr>
+														<n:td>
+															<n:input type="checkbox" id="chk${each.id }" />
+															${each.serviceName }
+														</n:td>
+														<n:td>
+															<n:input type="textbox" size="5" id="txt${each.id }"
+																serviceid="${each.id }" />
+														</n:td>
+													</n:tr>
+												</zk>
+											</zk>
 										</n:tbody>
 									</n:table>
 								</cell>
 								<cell>
 									<textbox id="txtMarkers" visible="false"
 										value="@{treatment.markers, save-when='btnPrev.onClick, btnNext.onClick' }" />
+									<textbox id="txtServices"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnNext.onClick' }" visible="false" />
 									<n:div id="imgdiv" />
 								</cell>
 							</row>

@@ -57,7 +57,7 @@
 							</row>
 							<row valign="top">
 								<cell>
-									<groupbox closable="false" mold="3d">
+									<groupbox closable="false">
 										<caption label="Diagnosis-plan" />
 										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
 											value="@{treatment.diagnosisPlan }" readonly="true" />
@@ -75,10 +75,31 @@
 									<groupbox closable="false">
 										<caption label="" />
 									</groupbox>
+									<n:table id="tblServices">
+										<n:tbody>
+											<zk forEach="${treatmentgrid$composer.servicesList }">
+												<zk if="${each.serviceName != 'Herbal Treatment' }">
+													<n:tr>
+														<n:td>
+															<n:input type="checkbox" id="chk${each.id }"
+																readonly="readonly" disabled="disabled" />
+															${each.serviceName }
+														</n:td>
+														<n:td>
+															<n:input type="textbox" size="5" id="txt${each.id }"
+																serviceid="${each.id }" readonly="readonly" />
+														</n:td>
+													</n:tr>
+												</zk>
+											</zk>
+										</n:tbody>
+									</n:table>
 								</cell>
 								<cell>
 									<textbox id="txtMarkers" visible="false" value="@{treatment.markers }"
 										readonly="true" />
+									<textbox id="txtServices"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnNext.onClick' }" visible="false" readonly="true" />
 									<n:div id="imgdiv" />
 								</cell>
 							</row>

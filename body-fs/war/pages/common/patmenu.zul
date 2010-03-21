@@ -18,9 +18,9 @@
 			sclass="${page.title eq 'Prescription' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
 		<toolbarbutton label="EMI" image="/img/chart.png" href="/pages/patient/mpi.zul?id=${param.id }"
 			sclass="${page.title eq 'EMI Data' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
-		<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" width="80px"
-			href="/pages/patient/payments.zul?id=${param.id }"
-			sclass="${page.title eq 'Payments' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" />
+		<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png"
+			href="/pages/patient/payments.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.paymentDate ? '':param.paymentDate }"
+			sclass="${page.title eq 'Payments' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
 		<toolbarbutton label="Profile" image="/img/user_add.png"
 			sclass="${page.title eq 'Create Customer LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" orient="vertical" width="80px" />

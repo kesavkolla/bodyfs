@@ -101,16 +101,37 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 
 	@Override
 	public PatientPaymentPlan getPlanByDate(final Long patientId, final Date paymentDate) {
-		final Collection<PatientPaymentPlan> results = jdoTemplate.find(PatientPaymentPlan.class,
-				"personId==pid && paymentDate==pdate", "java.lang.Long pid, java.util.Date pdate", patientId,
-				paymentDate);
-		if (results == null || results.size() <= 0) {
-			return null;
+		final String filter = "personId==pid" + ((paymentDate == null) ? "" : " && paymentDate==pdate");
+		final String params = "java.lang.Long pid" + ((paymentDate == null) ? "" : ", java.util.Date pdate");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("filter: " + filter + "\tparams:" + params);
 		}
-		final PatientPaymentPlan plan = results.iterator().next();
-		// eagerly loading
-		plan.getPlanItems();
-		return plan;
+		final Object[] vals = new Object[paymentDate == null ? 1 : 2];
+		vals[0] = patientId;
+		if (paymentDate != null) {
+			vals[1] = paymentDate;
+		}
+		final Collection<PatientPaymentPlan> plans = this.jdoTemplate.find(PatientPaymentPlan.class, filter, params,
+				vals, "paymentDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(plans);
+		}
+		if (plans != null && plans.size() > 0) {
+			final PatientPaymentPlan plan = plans.iterator().next();
+			// eagerly loading
+			plan.getPlanItems();
+			return plan;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Date> getPaymentPlanDates(final Long patientId) {
+		final Map<String, Object> vals = new HashMap<String, Object>();
+		vals.put("pid", patientId);
+		return jdoTemplate.find("SELECT paymentDate FROM " + PatientPaymentPlan.class.getName()
+				+ " WHERE personId==pid PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
 	}
 
 }

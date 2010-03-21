@@ -44,10 +44,16 @@ function calculateService() {
 		/* Get the service and make it part of cumulative service list */
 		var serviceid = $(this).attr("serviceid");
 		if (cumulativeList[serviceid] == undefined) {
-			cumulativeList[serviceid] = {"total": (week * count), "week": week};
+			cumulativeList[serviceid] = {
+				"total" : (week * count),
+				"week" : week
+			};
 		} else {
 			var tmpval = cumulativeList[serviceid];
-			cumulativeList[serviceid] = {"total": tmpval.total + (week * count), "week": tmpval.week + week};
+			cumulativeList[serviceid] = {
+				"total" : tmpval.total + (week * count),
+				"week" : tmpval.week + week
+			};
 		}
 	});
 
@@ -55,7 +61,7 @@ function calculateService() {
 	var maxWeek = -1;
 	var totalCost = 0;
 	$("#tblServicesSummary > tbody").html("");
-	for(var serviceid in cumulativeList) {
+	for ( var serviceid in cumulativeList) {
 		maxWeek = Math.max(maxWeek, cumulativeList[serviceid].week);
 		var service = getServiceById(serviceid);
 		/* create the summary row and append to the summary table */
@@ -73,6 +79,7 @@ function calculateService() {
 	$("#planLength").val(maxWeek);
 	$("#totalCost").html(totalCost);
 }
+
 
 /**
  * This function will be called when user clicks on Add button
@@ -225,8 +232,8 @@ function getSelectedService(services, selServiceName) {
  */
 function getServiceById(serviceid) {
 	var services = $.data(document.body, "servicelist");
-	for (var i=0, len = services.length; i<len; i++) {
-		if(services[i].id == serviceid) {
+	for ( var i = 0, len = services.length; i < len; i++) {
+		if (services[i].id == serviceid) {
 			return services[i];
 		}
 	}

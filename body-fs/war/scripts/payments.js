@@ -5,7 +5,7 @@
  */
 function setupData(reload) {
 	if (reload) {
-		//clearFields();
+		// clearFields();
 	} else {
 		initPage();
 	}
@@ -126,6 +126,11 @@ function initPage() {
 		var selPaymenttDates = $("#selPaymenttDates")[0];
 		var selDate = selPaymenttDates.options[selPaymenttDates.selectedIndex].value;
 		$("$txtPaymentDate").val(selDate).blur();
+	});
+
+	$("#btnPrint").click(function() {
+		$.param.querystring()
+		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()));
 	});
 }
 

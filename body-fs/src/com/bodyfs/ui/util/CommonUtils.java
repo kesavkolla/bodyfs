@@ -1,6 +1,8 @@
 /* $Id$ */
 package com.bodyfs.ui.util;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -27,6 +29,27 @@ public class CommonUtils {
 		String id = Executions.getCurrent().getParameter("id");
 		if (id != null && !id.equals("")) {
 			return new Long(id);
+		}
+		final Session session = Sessions.getCurrent(false);
+		if (session != null) {
+			final LoginInfo logininfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
+			if (logininfo != null
+					&& ((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
+				return logininfo.getPersonId();
+			}
+
+			final Long patid = (Long) session.getAttribute("patid");
+			if (patid != null) {
+				return patid;
+			}
+		}
+		return null;
+	}
+
+	public static Long getPatientId(final HttpServletRequest request) {
+		String id = request.getParameter("id");
+		if (id != null && id.trim().length() > 0) {
+			return Long.parseLong(id);
 		}
 		final Session session = Sessions.getCurrent(false);
 		if (session != null) {

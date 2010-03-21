@@ -18,16 +18,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Print Invoice</title>
-<style type="text/css">
-body {
-	font-family: Arial;
-	font-size: 12pt;
-}
-
-.label {
-	font-weight: bolder;
-}
-</style>
 <link rel="stylesheet" href="/css/ui.daterangepicker.css" type="text/css" />
 <link rel="stylesheet" href="/css/redmond/jquery-ui-1.7.2.custom.css" type="text/css" title="ui-theme" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -53,6 +43,21 @@ jQuery(function($) {
 	});
 });
 </script>
+<style type="text/css">
+body {
+	font-family: Arial;
+	font-size: 12pt;
+}
+
+* {
+	font-size: 12pt;
+	font-family: Arial;
+}
+
+.label {
+	font-weight: bolder;
+}
+</style>
 </head>
 <body>
 <div><img src="/img/invbanner.jpeg" alt="logo" title="logo" /></div>

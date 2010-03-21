@@ -64,57 +64,28 @@
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
 									<n:br />
-									<n:table width="100%">
-										<n:col width="100px" />
+									<n:table id="tblServices">
 										<n:col width="*" />
-										<n:tr>
-											<n:td>
-												<n:input type="checkbox" name="chkHerb" value="Herbal Treatment" />
-												<n:span style="font-weight:bold;">Herb</n:span>
-											</n:td>
-											<n:td>
-												<n:input type="text" id="txtHerb" style="width:30px;" />
-											</n:td>
-										</n:tr>
-										<n:tr>
-											<n:td>
-												<n:input type="checkbox" name="chkPowder" value="Powder" />
-												<n:span style="font-weight:bold">Powder</n:span>
-											</n:td>
-											<n:td>
-												<n:input type="text" id="txtPowder" style="width:30px;" />
-											</n:td>
-										</n:tr>
-										<n:tr>
-											<n:td>
-												<n:input type="checkbox" name="chkPill" value="Pill" />
-												<n:span style="font-weight:bold">Pill</n:span>
-											</n:td>
-											<n:td>
-												<n:input type="text" id="txtPill" style="width:30px;" />
-											</n:td>
-										</n:tr>
-										<n:tr>
-											<n:td>
-												<n:input type="checkbox" name="chkCapsul" value="Capsul" />
-												<n:span style="font-weight:bold">Capsul</n:span>
-											</n:td>
-											<n:td>
-												<n:input type="text" id="txtCapsul" style="width:30px;" />
-											</n:td>
-										</n:tr>
-										<n:tr>
-											<n:td>
-												<n:input type="checkbox" name="chkOther" value="Other" />
-												<n:span style="font-weight:bold">Other</n:span>
-											</n:td>
-											<n:td>
-												<n:input type="text" id="txtOther" style="width:30px;" />
-												<textbox id="txtmedType" visible="false"
-													value="@{prescription.medType, save-when='btnPrev.onClick, btnDone.onClick' }" />
-											</n:td>
-										</n:tr>
+										<n:tbody>
+											<zk forEach="${controller$composer.servicesList }">
+												<n:tr>
+													<n:td>
+														<n:input type="checkbox" id="chk${each.id }"
+															servicename="${each.serviceName }" />
+														<n:span style="font-weight:bold">${each.serviceName }</n:span>
+													</n:td>
+													<n:td>
+														<n:input type="text" size="2" id="txt${each.id }"
+															serviceid="${each.id }" />
+														<n:input type="text" size="10" id="txtOther"
+															style="display:none" if="${each.serviceName == 'Other' }" />
+													</n:td>
+												</n:tr>
+											</zk>
+										</n:tbody>
 									</n:table>
+									<textbox id="txtServices" visible="false"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
 								</n:td>
 								<n:td>
 									<n:span style="font-weight: bold">Portion &amp;nbsp;</n:span>

@@ -5,7 +5,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import net.sf.jsr107cache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +20,7 @@ import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.model.payments.CustomerPayments;
 import com.bodyfs.model.payments.MasterService;
 import com.bodyfs.model.payments.PatientPaymentPlan;
+import com.bodyfs.model.payments.PatientService;
 
 /**
  * @author kesav
@@ -27,6 +31,13 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	private static final long serialVersionUID = -2181026768481723335L;
 	private static final Log LOGGER = LogFactory.getLog(PaymentDAO.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
+	private static final String SERVICE_CACHE = IPaymentDAO.class.getName() + ".MasterServices";
+
+	private Cache cache;
+
+	public void setCache(final Cache cache) {
+		this.cache = cache;
+	}
 
 	@Override
 	public void createPayment(final CustomerPayments payment) {
@@ -36,6 +47,9 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 
 	public void addMasterService(final MasterService service) {
 		final MasterService payment1 = this.jdoTemplate.makePersistent(service);
+		if (cache.containsKey(SERVICE_CACHE)) {
+			cache.remove(SERVICE_CACHE);
+		}
 		LOGGER.debug("Created herb with id: " + payment1);
 	}
 
@@ -43,9 +57,16 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(MasterService.class, "hidden==false"));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<MasterService> getAllServices() {
-		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(MasterService.class));
+		if (cache.containsKey(SERVICE_CACHE)) {
+			return (Collection<MasterService>) cache.get(SERVICE_CACHE);
+		}
+		final Collection<MasterService> results = this.jdoTemplate.detachCopyAll(this.jdoTemplate
+				.find(MasterService.class));
+		cache.put(SERVICE_CACHE, results);
+		return results;
 	}
 
 	public MasterService getMasterServicebyId(final String ServiceId) {
@@ -87,6 +108,9 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	@Override
 	public void deleteService(MasterService service) {
 		this.jdoTemplate.deletePersistent(service);
+		if (cache.containsKey(SERVICE_CACHE)) {
+			cache.remove(SERVICE_CACHE);
+		}
 	}
 
 	@Override
@@ -132,6 +156,28 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		vals.put("pid", patientId);
 		return jdoTemplate.find("SELECT paymentDate FROM " + PatientPaymentPlan.class.getName()
 				+ " WHERE personId==pid PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
+	}
+
+	@Override
+	public void createVisitServices(final List<PatientService> services) {
+		if (services == null || services.size() <= 0) {
+			return;
+		}
+		jdoTemplate.makePersistentAll(services);
+	}
+
+	@Override
+	public Collection<PatientService> getServicesByVisitDate(Long patientId, Date visitDate) {
+		return jdoTemplate.find(PatientService.class, "personId == pid && visitDate == pdate",
+				"java.lang.Long pid, java.util.Date pdate", patientId, visitDate);
+	}
+
+	@Override
+	public Collection<PatientService> getServicesByDateRange(long patientId, final Date startDate, final Date endDate) {
+		jdoTemplate.find(PatientService.class, "personId == pid && visitDate >= pstart && visitDate <= pend",
+				"java.lang.Long pid, java.util.Date pstart, java.util.Date pend", startDate,
+				(endDate == null ? new Date() : endDate));
+		return null;
 	}
 
 }

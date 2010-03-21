@@ -29,4 +29,8 @@
 		<property name="cache" ref="datacache" />
 	</bean>
 
+	<bean id="paymentDAO" class="com.bodyfs.dao.impl.PaymentDAO">
+		<property name="cache" ref="datacache" />
+	</bean>
+
 </beans>

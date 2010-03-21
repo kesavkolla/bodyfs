@@ -92,4 +92,12 @@ public interface IPaymentDAO {
 	 * @param plan
 	 */
 	public void createPaymentPlan(final PatientPaymentPlan plan);
+
+	/**
+	 * Retrieves the list of plan dates for the given paitent id
+	 * 
+	 * @param patientId
+	 * @return
+	 */
+	public Collection<Date> getPaymentPlanDates(final Long patientId);
 }

@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -58,6 +59,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	public void onSave(final ForwardEvent evt) {
 		final Combobox cmbCustomers = (Combobox) Path.getComponent(page, "cmbCustomers");
+		final Intbox planLength = (Intbox) Path.getComponent(page, "planLength");
 		if (cmbCustomers.getSelectedIndex() < 0 || cmbCustomers.getSelectedItem() == null) {
 			try {
 				Messagebox.show("Select the customer for saving the pyament plan", "Error", Messagebox.OK,
@@ -79,6 +81,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		final Person patient = (Person) cmbCustomers.getSelectedItem().getValue();
 		final PatientPaymentPlan plan = new PatientPaymentPlan();
 		plan.setPersonId(patient.getId());
+		plan.setPlanLength(planLength.getValue());
 		// parse the json data in the txtPaymentData
 		final JSONParser parser = new JSONParser();
 		final JSONArray arrData = (JSONArray) parser.parse(txtPaymentData.getValue());

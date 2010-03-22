@@ -17,21 +17,28 @@
 							<column />
 						</columns>
 						<rows>
-							<row spans="3,,,,2">
+							<row spans="2,,,,3">
 								<div></div>
 								Login ID:
 								<textbox id="loginid" hflex="1"
 									value="@{logininfo.userid, save-when='btnSave.onClick'}" />
 								<label id="loginmsg" style="color:red" />
-								<checkbox id="admin" label="Admin"
-									checked="@{person.personType, converter='com.bodyfs.ui.util.PersonTypeToAdmin', save-when='btnSave.onClick' }" />
+								
 							</row>
-							<row spans="3,,,3">
+							<row spans="2,,,,3">
 								<div></div>
 								password:
 								<textbox id="password" hflex="1"
 									value="@{logininfo.password, save-when='btnSave.onClick'}" />
-								<div></div>
+								Diagnosis Code:
+								<listbox mold="select" rows="1" selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
+									<listitem value="" label="Pain in Joint, Multiple Sites" />
+									<listitem value="719.49" label="Pain in Joint, Multiple Sites" />
+									<listitem value="723.1" label="Pain in Neck" />
+									<listitem value="724.5" label="Pain in Back (postural)" />
+									<listitem value="789" label="Pain Abdominal (unspecified sites)" />
+									<listitem value="724.2" label="Pain, lumbar region" />
+								</listbox>
 							</row>
 							<row hflex="true">
 								First Name:

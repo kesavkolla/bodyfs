@@ -14,7 +14,7 @@
 					<div hflex="1" style="margin:10px" vflex="1">
 						<space orient="horizontal" height="20px" />
 						Treatement Plan Length :
-						<n:input type="text" id="planLength" />
+						<intbox constraint="no negative,no zero" id="planLength"/>
 						<space orient="vertical" width="50px" />
 						Add a service :
 						<combobox mold="rounded" width="150px" id="cmbServices" autodrop="true" model="@{services }"

@@ -34,7 +34,12 @@ public class CreateLoginComposer extends GenericForwardComposer {
 		final ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
 		final Person person = personDao.getPerson(patid);
 		LoginInfo login = loginDAO.getLoginDetails(patid);
-		final GeneralInfo ginfo = personDao.getGeneralInfo(patid);
+		final GeneralInfo ginfo = personDao.getGeneralInfo(patid) != null? personDao.getGeneralInfo(patid) : new GeneralInfo();
+		
+		if (ginfo.getPersonId() == null) {
+			ginfo.setPersonId(patid);
+		}
+		
 		if (login == null) {
 			login = new LoginInfo();
 			login.setPersonId(person.getId());

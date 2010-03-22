@@ -28,6 +28,9 @@ public class PatientPaymentPlan implements Serializable {
 
 	@Persistent
 	private Long personId;
+	
+	@Persistent
+	private Integer planLength;
 
 	@Persistent
 	private Date paymentDate = Calendar.getInstance().getTime();
@@ -65,6 +68,21 @@ public class PatientPaymentPlan implements Serializable {
 
 	public void setPlanItems(List<String> planItems) {
 		this.planItems = planItems;
+	}
+	
+	
+	/**
+	 * @return the planLength
+	 */
+	public Integer getPlanLength() {
+		return planLength;
+	}
+
+	/**
+	 * @param planLength the planLength to set
+	 */
+	public void setPlanLength(Integer planLength) {
+		this.planLength = planLength;
 	}
 
 	@Override

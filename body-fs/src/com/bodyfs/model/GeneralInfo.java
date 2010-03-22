@@ -108,6 +108,9 @@ public class GeneralInfo implements Serializable {
 
 	@Persistent
 	private String physicianphone;
+	
+	@Persistent
+	private String diagnosisCode;
 
 	@Persistent
 	private String othertherapies;
@@ -350,6 +353,22 @@ public class GeneralInfo implements Serializable {
 
 	public final void setOthertherapies(String othertherapies) {
 		this.othertherapies = othertherapies;
+	}
+	
+	
+
+	/**
+	 * @return the diagnosisCode
+	 */
+	public String getDiagnosisCode() {
+		return diagnosisCode;
+	}
+
+	/**
+	 * @param diagnosisCode the diagnosisCode to set
+	 */
+	public void setDiagnosisCode(String diagnosisCode) {
+		this.diagnosisCode = diagnosisCode;
 	}
 
 	/**

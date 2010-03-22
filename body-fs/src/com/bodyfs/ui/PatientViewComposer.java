@@ -3,6 +3,9 @@
  */
 package com.bodyfs.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import net.sf.jsr107cache.Cache;
 
 import org.apache.commons.logging.Log;
@@ -22,9 +25,11 @@ import org.zkoss.zul.api.Progressmeter;
 import org.zkoss.zul.api.Window;
 
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.QuickPatient;
+import com.bodyfs.model.payments.PatientPaymentPlan;
 import com.bodyfs.ui.util.CommonUtils;
 
 /**
@@ -39,6 +44,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
 	private Label week;
+	private Label totalWeeks;
 	private Label nextApppointment;
 	private Label nextReExam;
 	private A newemails;
@@ -62,7 +68,8 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
-
+		
+		
 		// If the savepat is true then create entry for the quickpatient
 		if (execution.getParameter("savepat") != null && execution.getParameter("savepat").equals("true")) {
 			final QuickPatient qp = new QuickPatient();
@@ -78,12 +85,15 @@ public class PatientViewComposer extends GenericAutowireComposer {
 
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());
-		final int totalWeeks = 10;
+		final int totalPlanLength = getTotalPlansLength(person.getId());
 		final Div rpthead = (Div) Path.getComponent(this.page, "rpthead");
 		rpthead.appendChild(new Html("Report Card: " + person.getFirstName() + " " + person.getLastName()));
 
 		if (week != null) {
 			week.setValue(numweek + "");
+		}
+		if (totalWeeks != null) {
+			totalWeeks.setValue(totalPlanLength + "");
 		}
 		if (nextApppointment != null) {
 			nextApppointment.setValue("12/12/2009 - 3:15 pm");
@@ -96,12 +106,23 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		}
 		if (pm != null) {
 			if (numweek > 0) {
-				int percent = Math.round(numweek * 100 / totalWeeks);
+				int percent = Math.round(numweek * 100 / totalPlanLength);
 				pm.setValue(percent);
 			} else {
 				pm.setValue(0);
 			}
 		}
+	}
+	
+	private int getTotalPlansLength(Long personID) {
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		Collection<PatientPaymentPlan> allPlans = paymentDAO.getAllPlans(personID);
+		int total = 0; 
+		for (PatientPaymentPlan patientPaymentPlan : allPlans) {
+			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0 ;
+		}
+		
+		return total;
 	}
 
 	@SuppressWarnings("unchecked")

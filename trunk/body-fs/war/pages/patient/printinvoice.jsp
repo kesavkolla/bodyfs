@@ -57,9 +57,15 @@ body {
 .label {
 	font-weight: bolder;
 }
+
+table {
+	border: 2px solid black;
+	border-collapse: collapse;
+}
 </style>
 </head>
 <body>
+<div style="width: 950px; margin-left: auto; margin-right: auto">
 <div><img src="/img/invbanner.jpeg" alt="logo" title="logo" /></div>
 <br />
 <%
@@ -72,6 +78,7 @@ body {
  %> <input type="hidden" name="id" value="<%=request.getParameter("id")%>" /> <%
  	}
  %> <input type="submit" value="Go" /></form>
+</div>
 </body>
 </html>
 <%
@@ -106,7 +113,8 @@ body {
 	final Collection<PatientService> patServices = paymentDAO.getServicesByDateRange(patid, startDate, endDate);
 	final Collection<MasterService> serviceList = paymentDAO.getAllServices();
 %>
-<table width="950px" style="border: 2px solid black; border-collapse: collapse" border="1" cellpadding="10">
+
+<table width="950px" border="1" cellpadding="10">
 	<tr>
 		<td><span class="label">Patient Name: </span><%=person.getDisplayName()%> <br />
 		<span class="label">Address:</span><%=getAddress(ginfo)%><br />
@@ -118,7 +126,7 @@ body {
 </table>
 <br />
 <br />
-<table width="950px" style="border: 2px solid black; border-collapse: collapse" border="1" cellpadding="10">
+<table width="950px" border="1" cellpadding="10">
 	<thead>
 		<tr>
 			<th>Service Date</th>
@@ -143,8 +151,33 @@ body {
 </table>
 <br />
 <br />
+<table width="425px" style="margin-left: auto;" border="1" cellpadding="10">
+	<tr>
+		<td>Sub Total</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Sales Tax</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Total Payments</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Previous Balance</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Total Due</td>
+		<td></td>
+	</tr>
+</table>
+<br />
+<br />
 <div style="text-align: center; width: 950px">
 <button onclick="window.print()">Print</button>
+</div>
 </div>
 </body>
 </html>
@@ -181,7 +214,7 @@ body {
 				buffer.append("<tr>");
 				buffer.append("<td>").append(sdf.format(patientService.getVisitDate())).append("</td>");
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
-				buffer.append("<td>9780</td>");
+				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append("1.0").append("</td>");
 				buffer.append("<td>").append("45.0").append("</td>");
 				buffer.append("<td>").append("45.0").append("</tr>");
@@ -192,7 +225,7 @@ body {
 				buffer.append("<tr>");
 				buffer.append("<td>").append(sdf.format(patientService.getVisitDate())).append("</td>");
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
-				buffer.append("<td>9781</td>");
+				buffer.append("<td>97811</td>");
 				buffer.append("<td>").append(qty).append("</td>");
 				buffer.append("<td>").append("35").append("</td>");
 				buffer.append("<td>").append((qty * 35)).append("</tr>");
@@ -202,7 +235,7 @@ body {
 				buffer.append("<tr>");
 				buffer.append("<td>").append(sdf.format(patientService.getVisitDate())).append("</td>");
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
-				buffer.append("<td>9780</td>");
+				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
 				buffer.append("<td>").append(mservice.getCharge()).append("</td>");
 				buffer.append("<td>").append(total).append("</tr>");
@@ -212,17 +245,25 @@ body {
 			return;
 		}
 
-		if (mservice.getServiceName().equalsIgnoreCase("pill")) {
-			buffer.append("<tr>");
-			buffer.append("<td>").append(sdf.format(patientService.getVisitDate())).append("</td>");
-			buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
+		buffer.append("<tr>");
+		buffer.append("<td>").append(sdf.format(patientService.getVisitDate())).append("</td>");
+		buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
+		if (mservice.getServiceName().equalsIgnoreCase("Re-Exam")) {
+			buffer.append("<td>97810</td>");
+		} else if (mservice.getServiceName().equalsIgnoreCase("Herbal Treatment")) {
 			buffer.append("<td>99070</td>");
-			buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
-			buffer.append("<td>").append(mservice.getCharge()).append("</td>");
-			buffer.append("<td>").append(total).append("</tr>");
-			buffer.append("</tr>");
-			out.println(buffer.toString());
-			return;
+		} else if (mservice.getServiceName().equalsIgnoreCase("Powder")) {
+			buffer.append("<td>99070</td>");
+		} else if (mservice.getServiceName().equalsIgnoreCase("Capsul")) {
+			buffer.append("<td>99070</td>");
+		} else {
+			buffer.append("<td>99070</td>");
 		}
+
+		buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
+		buffer.append("<td>").append(mservice.getCharge()).append("</td>");
+		buffer.append("<td>").append(total).append("</tr>");
+		buffer.append("</tr>");
+		out.println(buffer.toString());
 
 	}%>

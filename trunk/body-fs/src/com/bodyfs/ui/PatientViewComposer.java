@@ -3,7 +3,6 @@
  */
 package com.bodyfs.ui;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.jsr107cache.Cache;
@@ -68,8 +67,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
-		
-		
+
 		// If the savepat is true then create entry for the quickpatient
 		if (execution.getParameter("savepat") != null && execution.getParameter("savepat").equals("true")) {
 			final QuickPatient qp = new QuickPatient();
@@ -113,15 +111,15 @@ public class PatientViewComposer extends GenericAutowireComposer {
 			}
 		}
 	}
-	
+
 	private int getTotalPlansLength(Long personID) {
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		Collection<PatientPaymentPlan> allPlans = paymentDAO.getAllPlans(personID);
-		int total = 0; 
+		int total = 0;
 		for (PatientPaymentPlan patientPaymentPlan : allPlans) {
-			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0 ;
+			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0;
 		}
-		
+
 		return total;
 	}
 

@@ -1,0 +1,36 @@
+<?page title="Create Customer LoginInfo" contentType="text/html;charset=UTF-8" id="createlogin"?>
+<?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="win" border="normal" title="Login" position="center" width="800px" mode="modal" apply="com.bodyfs.ui.CreateLoginComposer" closable="true" sizable="true">
+		<grid id="main" fixedLayout="true">
+			<columns>
+				<column width="100px" />
+				<column width="150px"/>
+				<column />
+			</columns>
+			<rows>
+				<row spans="3">
+					<div>Create Login ID for <label id="titleLabel"/></div>
+				</row>
+				<row>
+					Login ID:
+					<textbox id="loginid" value="@{login.userid }"/>
+					<label id="loginmsg" style="color:red"/>
+				</row>
+				<row>
+					password:
+					<textbox id="password" value="@{login.password }"/>
+				</row>
+				<row spans="3">
+					<hbox pack="center">
+						<button label="create" forward="onClick=win.onSave"/>
+						<button label="cancel" onClick="win.detach()"/>
+					</hbox>
+				</row>
+			</rows>
+			
+		</grid>
+	</window>	
+	
+</zk>

@@ -1,0 +1,206 @@
+<?page title="Weekly patient visit" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="visitgrid" ?>
+<?component name="titlelabel" extends="label" sclass="clstitle"?>
+<?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
+<?script type="text/javascript" src="/scripts/jquery.fix.js"?>
+<?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
+<?script type="text/javascript" src="/scripts/weeklyvisit.js"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center vflex="1" hflex="1">
+			<borderlayout style="background:#dd0000;">
+				<north size="90px">
+					<include src="/pages/common/userweeklymenu.zul" />
+				</north>
+				<center autoscroll="false" hflex="1" vflex="1">
+					<grid id="visitgrid" hflex="1" vflex="1" style="margin:10px;"
+						apply="com.bodyfs.ui.WeeklyVisitComposer">
+						<custom-attributes showlast="true" />
+						<columns>
+							<column width="50%"></column>
+							<column width="50%"></column>
+						</columns>
+						<rows>
+							<row>
+								<cell colspan="2">
+									<n:table width="100%">
+										<n:tr>
+											<n:td>
+												<n:select id="selVisitDates" />
+												<n:input id="btnView" type="button" value="View" />
+
+											</n:td>
+											<n:td align="right">
+												<button id="btnNext" label="Next" forward="onClick=visitgrid.onNext" />
+												<textbox id="datepage" visible="false"
+													forward="onBlur=visitgrid.onDateChange" />
+											</n:td>
+										</n:tr>
+									</n:table>
+								</cell>
+							</row>
+							<row valign="top">
+								<cell valign="top">
+									<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" hflex="1" />
+								</cell>
+								<vbox vflex="1" hflex="1">
+									<hbox hflex="1">
+										<titlelabel value="Health Goals:" />
+										<titlelabel value="# of Herb Bags Left" />
+										<intbox value="@{patvisit.numOfHearbBags, save-when='btnNext.onClick' }"
+											readonly="true" />
+									</hbox>
+									<textbox hflex="1" rows="4"
+										value="@{patvisit.healthGoals, save-when='btnNext.onClick' }" />
+									<hbox hflex="1">
+										<titlelabel value="Energy Level:" />
+										<radiogroup
+											selectedIndex="@{patvisit.energyLevel, save-when='btnNext.onClick' }">
+											<radio label="1" disabled="true" />
+											<radio label="2" disabled="true" />
+											<radio label="3" disabled="true" />
+											<radio label="4" disabled="true" />
+											<radio label="5" disabled="true" />
+											<radio label="6" disabled="true" />
+											<radio label="7" disabled="true" />
+											<radio label="8" disabled="true" />
+											<radio label="9" disabled="true" />
+											<radio label="10" disabled="true" />
+										</radiogroup>
+									</hbox>
+									<radiogroup
+										selectedIndex="@{patinfo.digestion, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
+										<grid>
+											<rows>
+												<row>
+													<cell colspan="2">
+														<titlelabel value="Digestion:" />
+													</cell>
+												</row>
+												<row>
+													<radio label="Blating(feeling full easily)" disabled="true" />
+													<radio label="Gas" disabled="true" />
+												</row>
+												<row>
+													<radio label="Bleaching/burping" disabled="true" />
+													<radio label="Acid reflux/heart burn" disabled="true" />
+												</row>
+												<row>
+													<radio label="Nausea/Vomitting" disabled="true" />
+													<radio label="Pain/cramping" disabled="true" />
+												</row>
+											</rows>
+										</grid>
+									</radiogroup>
+									<titlelabel
+										value="Appetite Level (How hungry are you druing meal times &amp; have you desire to eat?)" />
+									<radiogroup
+										selectedIndex="@{patvisit.appetiteLevel, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+										<radio label="Low" disabled="true" />
+										<radio label="High" disabled="true" />
+										<radio label="Normal" disabled="true" />
+									</radiogroup>
+									<radiogroup
+										selectedIndex="@{patvisit.bowlMovement, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BowlMovementToRadiogroup' }">
+										<grid hflex="1">
+											<rows>
+												<row>
+													<titlelabel value="Bowl Movement:" />
+													How often per day?
+													<textbox value="@{patvisit.bowlTimes, save-when='btnNext.onClick' }"
+														hflex="1" readonly="true" />
+													/day
+												</row>
+												<row>
+													<radio label="Normal" disabled="true" />
+													<radio label="Incomplete" disabled="true" />
+													<radio label="Loose" disabled="true" />
+													<radio label="Blood" disabled="true" />
+												</row>
+												<row>
+													<radio label="Dry" disabled="true" />
+													<radio label="Diarrhea" disabled="true" />
+													<radio label="Mucous" disabled="true" />
+													<radio label="Difficult to push" disabled="true" />
+												</row>
+											</rows>
+										</grid>
+									</radiogroup>
+									<radiogroup
+										selectedIndex="@{patvisit.urine, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.UrinationToRadiogroup' }">
+										<grid hflex="1">
+											<rows>
+												<row>
+													<titlelabel value="Urination:" />
+													How often per day?
+													<textbox
+														value="@{patvisit.urineTimes, save-when='btnNext.onClick' }" hflex="1" readonly="true" />
+													/day
+												</row>
+												<row>
+													<radio label="Normal" disabled="true" />
+													<radio label="Dark yellow" disabled="true" />
+													<radio label="Clear" disabled="true" />
+													<radio label="Urgent" disabled="true" />
+												</row>
+												<row>
+													<radio label="Frequent" disabled="true" />
+													<radio label="Difficult" disabled="true" />
+													<radio label="Burning" disabled="true" />
+												</row>
+											</rows>
+										</grid>
+									</radiogroup>
+									<radiogroup hflex="1"
+										selectedIndex="@{patvisit.sleep, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.QualityOfSleepToRadiogroup' }">
+										<grid>
+											<rows>
+												<row>
+													<titlelabel value="Quality of Sleep:" />
+													<radio label="Good" disabled="true" />
+													<radio label="Bad" disabled="true" />
+													<radio label="Wake up often" disabled="true" />
+												</row>
+												<row>
+													<cell colspan="2">
+														<radio label="Difficult to fall asleep" disabled="true" />
+													</cell>
+													<cell colspan="2">
+														<radio label="Frequent dreams" disabled="true" />
+													</cell>
+												</row>
+											</rows>
+										</grid>
+									</radiogroup>
+									<titlelabel value="Any questions or concerns?" hflex="1" />
+									<textbox rows="3" hflex="1"
+										value="@{patvisit.question, save-when='btnNext.onClick' }" readonly="true" />
+									<titlelabel value="Is there any way we can provide better service for you?:"
+										hflex="1" />
+									<textbox rows="3" hflex="1"
+										value="@{patvisit.betterService, save-when='btnNext.onClick' }" readonly="true" />
+								</vbox>
+							</row>
+							<row spans="2" align="right">
+								<cell colspan="2">
+									<script type="text/javascript" defer="false">
+										var data = ${visitgrid$composer.visitsDates};
+
+										var start = "${param.visitDate }";
+
+										zk.afterMount(function(){setupData();});
+
+									</script>
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+</zk>

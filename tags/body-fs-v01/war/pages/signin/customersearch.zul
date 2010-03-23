@@ -1,0 +1,100 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?script type="text/javascript" content="var pageurl = '/pages/signin/signin.zul?noskip=true';"?>
+<?script type="text/javascript" src="/scripts/customersearch.js"?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<borderlayout style="background:#1e1406;" id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
+		<north size="96px" border="0">
+			<borderlayout hflex="1" vflex="1"
+				style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+				<west border="0">
+					<image src="/img/banner7.jpg" hflex="1" width="952px" height="95px" id="logo" />
+				</west>
+			</borderlayout>
+		</north>
+		<center>
+			<vbox hflex="true" vflex="1">
+				<space />
+				<hbox>
+					Quick Search:
+					<textbox id="smrtTextbox" maxlength="400" focus="true" width="400px" />
+					<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
+					<checkbox id="typePre" />
+					pre
+					<checkbox id="typeCurrent" checked="true" />
+					current
+					<checkbox id="typePost" />
+					post
+				</hbox>
+				<panel id="optionsPanel" framable="true" title="More" maximizable="false" minimizable="false"
+					border="normal" collapsible="true" closable="false" hflex="true" open="false">
+					<panelchildren>
+						<div id="extendedSearch">
+							<grid id="extendedSearchGrid" fixedLayout="true">
+								<columns>
+									<column width="100px" />
+									<column width="175px" />
+									<column width="100px" />
+									<column width="175px" />
+									<column width="100px" />
+									<column />
+								</columns>
+								<rows>
+									<row>
+										First Name:
+										<textbox id="firstName" value="@{person.firstName }" maxlength="100"
+											zclass="req-string" />
+										Last Name:
+										<textbox id="lastName" value="@{person.lastName }" maxlength="100"
+											zclass="req-string" />
+										Zip:
+										<textbox id="zip" value="@{person.zip }" maxlength="100" zclass="req-string" />
+									</row>
+									<row spans="2,,,,">
+										<label value="Date Of Treatement" />
+										From Date:
+										<datebox id="trmtfromDate" maxlength="100" buttonVisible="true" />
+										To Date:
+										<datebox id="trmttoDate" maxlength="100" />
+									</row>
+								</rows>
+							</grid>
+
+							<button id="refineSearch" label="Refine Current Results" style="float:center" />
+							<button id="newSearch" label="New Search" style="float:center" />
+						</div>
+					</panelchildren>
+				</panel>
+				<div id="results" height="100%" style="position:realtive;bottom:0;right:0">
+					<listbox id="persons" fixedLayout="true" model="@{ customersearch$composer.results }"
+						vflex="true">
+						<listhead>
+							<listheader label="" width="20px" />
+							<listheader label="First Name" />
+							<listheader label="Last Name" />
+							<listheader label="email" />
+							<listheader label="Type" tooltiptext="pre,current or post Customers" />
+						</listhead>
+						<listitem self="@{each='person'}" value="@{person }" class="@{person.id }">
+							<listcell image="/img/link_go.png" class="@{person.id }">
+								<attribute w:name="onClick">openPatient(jq(this));</attribute>
+							</listcell>
+							<listcell label="@{person.firstName}" />
+							<listcell label="@{person.lastName}" />
+							<listcell label="@{person.email}" />
+							<listcell label="@{person.personTypeStr}" />
+						</listitem>
+					</listbox>
+				</div>
+			</vbox>
+		</center>
+		<south size="20px">
+			<div>&#169;Body Feng Shui</div>
+		</south>
+	</borderlayout>
+	<script type="text/javascript" defer="true">
+
+		zk.afterMount(function() {setupResultsClick();});
+	</script>
+</zk>

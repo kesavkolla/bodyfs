@@ -1,0 +1,144 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #660000;
+	font-family: Verdana;
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.z-borderlayout {
+	background: #dd0000;
+}
+
+.z-north,.z-east,.z-west,.z-south {
+	background-color: #660000;
+	color: #F1B772;
+	border: 1px solid #B97449;
+}
+
+.z-center {
+	background-color: #660000;
+	color: black;
+	font-family: Verdana;
+	font-size: 12px;
+	border: 1px solid #B97449;
+}
+
+.z-west-noborder,.z-center-noborder,.z-east-noborder,.z-north-noborder,.z-south-noborder {
+	border: 0;
+}
+
+.lg-label {
+	font-size: 14px;
+	color: #F1B772;
+}
+
+.z-toolbarbutton {
+	background-color: #510000;
+	border: 1px solid #F0C88B;
+}
+
+.z-toolbarbutton-over {
+	border: 2px solid #F0C88B;
+}
+
+.z-toolbarbutton-over .z-toolbarbutton-body {
+	border-left: 1px solid #F0C88B;
+	border-right: 1px solid #F0C88B;
+}
+
+.z-toolbarbutton-cnt {
+	font-size: 12px;
+	font-family: "Verdana";
+	font-weight: none;
+}
+
+.z-west-header,.z-center-header,.z-east-header,.z-north-header,.z-south-header {
+	color: #F1B772;
+	background: transparent repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+	background-color: black;
+	border-bottom: 1px solid #660000;
+}
+
+.z-borderlayout-icon {
+	background-image: url('/img/borderlayout-btn.png')
+}
+
+.z-east-splt,.z-west-splt,.z-north-splt,.z-south-splt {
+	background: black left;
+	background-image: url('/img/splt-h.png');
+}
+
+.z-east-colpsd,.z-west-colpsd,.z-south-colpsd,.z-north-colpsd {
+	background-color: #E1F0F2;
+	width: 22px;
+	height: 22px;
+	border: 1px solid #F0C88B;
+	overflow: hidden;
+	position: absolute;
+}
+
+.z-east-colpsd-over,.z-west-colpsd-over,.z-south-colpsd-over,.z-north-colpsd-over {
+	cursor: pointer;
+	background-color: #EEFCFF;
+}
+
+.z-panel-icon {
+	background-image: url('/img/btn.gif');
+}
+
+div.z-listbox-header tr.z-listhead,div.z-listbox-header tr.z-auxhead { 1 1
+	background1: #C7E5F1 repeat-x 0 0; 1 1
+	background-image1: url('/img/borderlayout-hm.png');
+	background: #FFFFFF repeat-x 0 0;
+	color: black;
+}
+
+div.z-listheader-cnt {
+	font-weight: bold;
+}
+
+.z-toolbar {
+	background: none;
+	border-bottom: none;
+}
+
+div.z-grid-header tr.z-columns,div.z-grid-header tr.z-auxhead {
+	background: #C7E5F1 repeat-x 0 0;
+	background-image: url('/img/borderlayout-hm.png');
+}
+
+.bodyfs-toolbar-selected {
+	background-color: #F1B772;
+	color: black;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Verdana;
+}
+
+.bodyfs-qpatient {
+	background-color: lightgray;
+	color: black;
+	border: 1px solid black;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 5px;
+	text-align: center;
+	font-family: Verdana;
+	font-size: 12px;
+	text-align: center;
+}
+
+.bodyfs-qpatient a {
+	text-decoration: none;
+	display: inline;
+	color: black;
+}
+
+.bodyfs-qpatient-selected {
+	background-color: #F1B772;
+	font-weight: bold;
+}

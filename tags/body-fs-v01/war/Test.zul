@@ -1,0 +1,11 @@
+<?page title="Test" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<zscript>
+	ListModel strset = new com.bodyfs.ui.FakeListModel(100);
+</zscript>
+	<listbox id="list" width="200px" rows="10" model="&#36;{strset}" preloadSize="10">
+		<listhead>
+			<listheader label="Load on Demend" sort="none" />
+		</listhead>
+	</listbox>
+</zk>

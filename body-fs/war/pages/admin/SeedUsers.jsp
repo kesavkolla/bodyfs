@@ -21,8 +21,8 @@
 			.getServletContext());
 	final IPersonDAO personDAO = ctx.getBean(IPersonDAO.class);
 	final Person person = new Person();
-	person.setFirstName("Kesav Kumar");
-	person.setLastName("Kolla");
+	person.setFirstName("Administrator");
+	person.setLastName("BodyFengShui");
 	person.setEmail("kesavkolla+bodyfs@gmail.com");
 	person.setDateOfBirth(sdf.parse("08/14/1973"));
 	person.setGender(Gender.MALE);
@@ -34,8 +34,8 @@
 
 	final LoginInfo login = new LoginInfo();
 	login.setPersonId(person.getId());
-	login.setUserid("kesav");
-	login.setPassword("kesav123");
+	login.setUserid("admin");
+	login.setPassword("hliferocks");
 	final ILoginDAO loginDAO = ctx.getBean(ILoginDAO.class);
 	loginDAO.createNewLogin(login);
 	out.println("Created login");

@@ -131,6 +131,13 @@ function initPage() {
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
 		});
 	});
+
+	/* Handle the click on Copy */
+	$("#btnCopy").click(function() {
+		var selVisitDates = $("#selVisitDates")[0];
+		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
+		$("$txtVisitDatesCopy").val(selDate).blur();
+	});
 }
 
 /**

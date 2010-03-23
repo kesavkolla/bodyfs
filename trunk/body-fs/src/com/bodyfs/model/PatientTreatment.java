@@ -131,4 +131,16 @@ public class PatientTreatment implements Serializable {
 		return builder.toString();
 	}
 
+	/**
+	 * This will copy the data part to the new object. This will not copy personid and visitdate
+	 * 
+	 * @param treatment
+	 */
+	public void copy(final PatientTreatment treatment) {
+		treatment.setAdditionalNotes(this.getAdditionalNotes());
+		treatment.setDiagnosisPlan(this.getDiagnosisPlan());
+		treatment.setMarkers(this.getMarkers());
+		treatment.setMassageNotes(this.getMassageNotes());
+	}
+
 }

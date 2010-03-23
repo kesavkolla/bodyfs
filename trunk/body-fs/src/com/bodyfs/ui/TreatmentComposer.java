@@ -159,8 +159,11 @@ public class TreatmentComposer extends GenericForwardComposer {
 		if (binder != null) {
 			treatmentgrid.setAttribute("treatment", treatment);
 			binder.loadAll();
-			// if the textfield is copy one don't save the treatment it's just for copyindata
-			if (!datebox.getId().equals("txtVisitDatesCopy")) {
+			// if the textfield is copy one don't save the treatment just copy the data from this new one to old object
+			if (datebox.getId().equals("txtVisitDatesCopy")) {
+				final PatientTreatment origTreatment = (PatientTreatment) page.getAttribute("treatment");
+				treatment.copy(origTreatment);
+			} else {
 				page.setAttribute("treatment", treatment);
 			}
 		}

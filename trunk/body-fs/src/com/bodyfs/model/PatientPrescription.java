@@ -130,4 +130,8 @@ public class PatientPrescription implements Serializable {
 		return builder.toString();
 	}
 
+	public void copy(final PatientPrescription prescription) {
+		prescription.setHerbData(this.getHerbData());
+	}
+
 }

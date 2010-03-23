@@ -38,6 +38,8 @@
 										forward="onClick=controller.onSave(Done)" />
 									<textbox id="txtVisitDates" visible="false"
 										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtVisitDatesCopy" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
 									<textbox id="txtPrescription" visible="false"
 										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
 								</n:td>

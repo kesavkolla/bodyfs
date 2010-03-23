@@ -288,7 +288,13 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final DataBinder binder = (DataBinder) controller.getAttribute("binder");
 		if (binder != null) {
 			controller.setAttribute("prescription", prescription);
-			page.setAttribute("prescription", prescription);
+			// If the change happened on copy box then copy the new prescription data to old object
+			if (datebox.getId().equals("txtVisitDatesCopy")) {
+				final PatientPrescription origprescirption = (PatientPrescription) page.getAttribute("prescription");
+				prescription.copy(origprescirption);
+			} else {
+				page.setAttribute("prescription", prescription);
+			}
 			binder.loadAll();
 		}
 

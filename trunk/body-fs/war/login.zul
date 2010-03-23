@@ -2,8 +2,8 @@
 <?link  rel="stylesheet" type="text/css" href="/css/bodyfs.css"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
-		div.z-grid { border: none} div.z-grid-body { background-color: #660000; font-weight:bold;} tr.z-row td.z-row-inner, tr.z-row
-		.z-cell { background: #660000; border:none; }
+		div.z-grid { border: none} div.z-grid-body { background-color: #660000; font-weight:bold;} tr.z-row
+		td.z-row-inner, tr.z-row .z-cell { background: #660000; border:none; }
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" apply="com.bodyfs.ui.LoginWindow">
 		<north size="96px" border="0">

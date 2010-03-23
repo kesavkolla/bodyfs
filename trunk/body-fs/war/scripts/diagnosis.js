@@ -235,6 +235,13 @@ function initPage() {
 		});
 	});
 	
+	/* Handle click on copy button */
+	$("#btnCopy").click(function() {
+		var selVisitDates = $("#selVisitDates")[0];
+		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
+		$("$txtVisitDatesCopy").val(selDate).blur();		
+	});
+
 	/* Handle the save button */
 	$(".submitbtn").click(function() {
 		/* Get all the form elements those are filled */

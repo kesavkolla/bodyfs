@@ -40,6 +40,7 @@
 											<n:td>
 												<n:select id="selVisitDates" />
 												<n:input id="btnView" type="button" value="View" />
+												<n:input id="btnCopy" type="button" value="Copy" />
 											</n:td>
 											<n:td align="right">
 												<button id="btnPrev" label="Prev" sclass="submitbtn"
@@ -47,6 +48,8 @@
 												<button id="btnNext" label="Next" sclass="submitbtn"
 													forward="onClick=diagnosisgrid.onSave(Next)" />
 												<textbox id="txtVisitDates" visible="false"
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
+												<textbox id="txtVisitDatesCopy" visible="false"
 													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
 											</n:td>
 										</n:tr>

@@ -206,7 +206,6 @@ table {
 			final SimpleDateFormat sdf, final JspWriter out) throws IOException {
 		final StringBuilder buffer = new StringBuilder();
 		final double total = mservice.getCharge() * patientService.getNumServices();
-		System.out.println(mservice.getServiceName());
 		//Accupuncture codes 97810 + 97811
 		if (mservice.getServiceName().equalsIgnoreCase("Acupuncture")
 				|| mservice.getServiceName().equalsIgnoreCase("cupping")) {

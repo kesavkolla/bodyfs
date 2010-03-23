@@ -28,7 +28,7 @@ public class PatientPaymentPlan implements Serializable {
 
 	@Persistent
 	private Long personId;
-	
+
 	@Persistent
 	private Integer planLength;
 
@@ -69,8 +69,7 @@ public class PatientPaymentPlan implements Serializable {
 	public void setPlanItems(List<String> planItems) {
 		this.planItems = planItems;
 	}
-	
-	
+
 	/**
 	 * @return the planLength
 	 */

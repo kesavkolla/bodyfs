@@ -51,7 +51,7 @@
 							<n:tr valign="top">
 								<n:td>
 									<n:span style="font-weight: bold">Diagnosis &amp;nbsp;</n:span>
-									<combobox id="cmbDiagnosis" autodrop="true" mold="rounded" model="@{diagnosislist }"
+									<combobox id="cmbDiagnosis" autodrop="true" model="@{diagnosislist }"
 										forward="onChange=controller.onDiagnosisChange" readonly="true">
 										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
 											value="@{diagnosis }" />
@@ -59,25 +59,28 @@
 									<n:br />
 									<n:br />
 									<n:span style="font-weight:bold">Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;</n:span>
-									<combobox id="cmbFormulas" autodrop="true" mold="rounded" model="@{formulalist }"
+									<combobox id="cmbFormulas" autodrop="true" model="@{formulalist }"
 										forward="onChange=controller.onFormulaChange" readonly="true">
 										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
 									</combobox>
 									<n:br />
-									<n:table id="tblServices">
+									<n:br />
+									<n:table id="tblServices" cellspacing="0" cellpadding="0">
 										<n:col width="*" />
 										<n:tbody>
 											<zk forEach="${controller$composer.servicesList }">
 												<n:tr>
-													<n:td>
+													<n:td valign="top">
 														<n:input type="checkbox" id="chk${each.id }"
 															servicename="${each.serviceName }" />
 														<n:span style="font-weight:bold">${each.serviceName }</n:span>
+														&amp;nbsp;
 													</n:td>
-													<n:td>
-														<n:input type="text" size="2" id="txt${each.id }"
-															serviceid="${each.id }" />
-														<n:input type="text" size="10" id="txtOther"
+													<n:td valign="top">
+														<n:input type="text" size="10" id="txt${each.id }"
+															serviceid="${each.id }" class="z-textbox" />
+														<n:br />
+														<n:input type="text" size="10" id="txtOther" class="z-textbox"
 															style="display:none" if="${each.serviceName == 'Other' }" />
 													</n:td>
 												</n:tr>

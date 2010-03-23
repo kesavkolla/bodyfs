@@ -158,8 +158,11 @@ public class TreatmentComposer extends GenericForwardComposer {
 		final DataBinder binder = (DataBinder) treatmentgrid.getAttribute("binder");
 		if (binder != null) {
 			treatmentgrid.setAttribute("treatment", treatment);
-			page.setAttribute("treatment", treatment);
 			binder.loadAll();
+			// if the textfield is copy one don't save the treatment it's just for copyindata
+			if (!datebox.getId().equals("txtVisitDatesCopy")) {
+				page.setAttribute("treatment", treatment);
+			}
 		}
 
 		// Get the patient services that are part of this visit

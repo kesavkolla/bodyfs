@@ -76,7 +76,7 @@ function calculateService() {
 	}
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
-	$("#planLength").val(maxWeek);
+	$("$planLength").val(maxWeek).blur();
 	$("#totalCost").html(totalCost);
 }
 
@@ -137,7 +137,7 @@ function printSummary() {
 	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;</span>");
 	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;</span><br /><br />");
 	/* show the treatment plan length */
-	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("#planLength").val() + "</span>&nbsp;weeks<br /><br />");
+	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("$planLength").val() + "</span>&nbsp;weeks<br /><br />");
 	/* prepare the summary breakdown */
 	$("#tblServicesBreakDown > tbody > tr").each(function() {
 		var count = parseInt($(this).find("input[class='txtCnt']").val());
@@ -205,7 +205,7 @@ function DeleteRow() {
 function resetAll() {
 	$("#tblServicesBreakDown > tbody").html("");
 	$("#tblServicesSummary > tbody").html("");
-	$("#planLength").val("");
+	$("$planLength").val("");
 	$("#totalCost").html("&nbsp;");
 }
 

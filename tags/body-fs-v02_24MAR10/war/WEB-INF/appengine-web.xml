@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>body-fs-test</application>
+	<version>2</version>
+
+	<!-- Configure java.util.logging -->
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+	</system-properties>
+	<sessions-enabled>true</sessions-enabled>
+
+	<static-files>
+		<include path="*.ico" expiration="100d" />
+		<include path="/img/*" expiration="100d" />
+		<include path="/scripts/*" expiration="100d" />
+		<include path="/css/**" expiration="100d" />
+		<include path="/**.txt" expiration="100d" />
+		<exclude path="/**.zul" />
+		<exclude path="/**.zhtml" />
+		<exclude path="/**.dsp" />
+	</static-files>
+	<resource-files>
+		<include path="/**.zul" />
+		<include path="/**.zhtml" />
+		<include path="/**.dsp" />
+	</resource-files>
+</appengine-web-app>

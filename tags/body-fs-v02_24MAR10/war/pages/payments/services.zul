@@ -1,0 +1,58 @@
+<?page title="Service Management" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout id="createpayment">
+				<north size="75px">
+					<include src="/pages/common/paymentmenu.zul" />
+				</north>
+
+				<center autoscroll="true" flex="true" apply="com.bodyfs.ui.MasterServiceComposer" id="controller">
+					<div hflex="1" style="margin:10px">
+						<space orient="horizontal" height="30px" />
+						<listbox id="lstservice" model="@{serviceslist }" width="600px">
+							<listhead>
+								<listheader label="Service" width="30%" sort="none" />
+								<listheader label="Cost" sort="none" width="200px" />
+								<listheader label="" width="150px" />
+							</listhead>
+							<listitem self="@{each='service' }" value="@{service }">
+								<listcell label="@{service.serviceName }" />
+								<listcell>
+									$
+									<doublebox value="@{service.charge }" constraint="no negative,no zero"
+										format="###.##" />
+									<checkbox checked="@{service.hidden}" />
+								</listcell>
+								<listcell>
+									<hbox>
+										<button label="Save" sclass="btnSave"
+											forward="onClick=controller.onSaveService" />
+										<!-- button label="Delete" sclass="btnDelete"
+											forward="onClick=controller.onDeleteService" />
+											<space width="40px" / -->
+									</hbox>
+								</listcell>
+							</listitem>
+						</listbox>
+						<space orient="horizontal" height="20px" />
+						<div>
+							Add a New Service:
+							<textbox id="txtService" value="@{txtService.value, save-when=btnAdd.onClick }" width="100" />
+							<space orient="vertical" width="20px" />
+							Cost:
+							<doublebox id="txtCharge" value="@{txtCharge.value, save-when=btnAdd.onClick }"
+								constraint="no negative,no zero" format="###.##" />
+							<space orient="vertical" width="20px" />
+							Hidden:
+							<checkbox id="chkHidden" checked="@{chkHidden.checked, save-when=btnAdd.onClick }" />
+							<button id="btnAdd" label="Add" forward="onClick=controller.onAdd" />
+						</div>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+</zk>

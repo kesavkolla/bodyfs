@@ -1,0 +1,124 @@
+<?page title="Treatment" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery.fix.js"?>
+<?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
+<?script type="text/javascript" src="/scripts/jquery.offset.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/treatment.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="treatmentgrid" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<style>
+		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
+		width:605px; height: 440px; }
+
+		.marker{ position: absolute; width: 20px; height: 20px; }
+
+		div.z-grid-body { background-color: #660000; }
+
+		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
+		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD;}
+
+		.z-fieldset legend { color: white; font-weight: bold; font-size:14px;}
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center flex="true" autoscroll="false">
+			<borderlayout>
+				<north size="90px">
+					<include src="/pages/common/userweeklymenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true">
+					<grid id="treatmentgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
+						apply="com.bodyfs.ui.TreatmentComposer">
+						<columns>
+							<column width="40%" />
+						</columns>
+						<rows>
+							<row spans="2">
+								<cell>
+									<n:table width="100%">
+										<n:tr>
+											<n:td>
+												<n:select id="selVisitDates" />
+												<n:input id="btnView" type="button" value="View" />
+											</n:td>
+											<n:td align="right">
+												<button id="btnPrev" label="Prev"
+													forward="onClick=treatmentgrid.onSave(Prev)" />
+												<button id="btnNext" label="Next"
+													forward="onClick=treatmentgrid.onSave(Next)" />
+												<textbox id="txtVisitDates" visible="false"
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=treatmentgrid.onDateChange" />
+											</n:td>
+										</n:tr>
+									</n:table>
+								</cell>
+							</row>
+							<row valign="top">
+								<cell>
+									<groupbox closable="false">
+										<caption label="Diagnosis-plan" />
+										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
+											value="@{treatment.diagnosisPlan }" readonly="true" />
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="Massage Notes" />
+										<textbox id="txtMassageNotes" style="width:100%" rows="5"
+											value="@{treatment.massageNotes }" readonly="true" />
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="Additional Notes" />
+										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
+											value="@{treatment.additionalNotes }" readonly="true" />
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="" />
+									</groupbox>
+									<n:table id="tblServices">
+										<n:tbody>
+											<zk forEach="${treatmentgrid$composer.servicesList }">
+												<zk if="${each.serviceName != 'Herbal Treatment' }">
+													<n:tr>
+														<n:td>
+															<n:input type="checkbox" id="chk${each.id }"
+																readonly="readonly" disabled="disabled" />
+															${each.serviceName }
+														</n:td>
+														<n:td>
+															<n:input type="textbox" size="5" id="txt${each.id }"
+																serviceid="${each.id }" readonly="readonly" />
+														</n:td>
+													</n:tr>
+												</zk>
+											</zk>
+										</n:tbody>
+									</n:table>
+								</cell>
+								<cell>
+									<textbox id="txtMarkers" visible="false" value="@{treatment.markers }"
+										readonly="true" />
+									<textbox id="txtServices"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnNext.onClick' }" visible="false" readonly="true" />
+									<n:div id="imgdiv" />
+								</cell>
+							</row>
+							<row>
+								<cell></cell>
+								<cell>
+									<script type="text/javascript" defer="false">
+										var data = ${treatmentgrid$composer.visitsDates};
+
+										var readonly = true;
+
+										var start = "${param.visitDate}"; zk.afterMount(function() { setupPage(); });
+									</script>
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+</zk>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.bodyfs" scoped-proxy="targetClass" annotation-config="true">
+		<context:exclude-filter type="regex" expression="com.bodyfs.controllers.*" />
+		<context:exclude-filter type="regex" expression="com.bodyfs.ui.*" />
+		<context:exclude-filter type="regex" expression="com.bodyfs.model.*" />
+	</context:component-scan>
+
+	<bean id="persistenceManagerFactory" class="com.bodyfs.PMF" factory-method="get" />
+
+	<bean id="openPersistenceManagerInView" class="org.springframework.orm.jdo.support.OpenPersistenceManagerInViewInterceptor">
+		<property name="persistenceManagerFactory">
+			<ref bean="persistenceManagerFactory" />
+		</property>
+	</bean>
+	<bean id="cacheManager" class="net.sf.jsr107cache.CacheManager" factory-method="getInstance" scope="singleton" />
+	<bean id="cacheFactory" factory-bean="cacheManager" factory-method="getCacheFactory" scope="singleton" />
+	<bean id="datacache" factory-bean="cacheFactory" factory-method="createCache" scope="singleton" name="datacache">
+		<constructor-arg value="#{ T(java.util.Collections).emptyMap() }" index="0" type="java.util.Map" />
+	</bean>
+	<bean id="herbDAO" class="com.bodyfs.dao.impl.HerbDAO">
+		<property name="cache" ref="datacache" />
+	</bean>
+
+	<bean id="paymentDAO" class="com.bodyfs.dao.impl.PaymentDAO">
+		<property name="cache" ref="datacache" />
+	</bean>
+
+</beans>

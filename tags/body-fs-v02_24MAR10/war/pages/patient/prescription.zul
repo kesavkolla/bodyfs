@@ -1,0 +1,156 @@
+<?page title="Prescription" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/prescription.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="controller" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+
+		.portion { background-color: #660000; border:none;}
+
+		.bordercell {border:1px solid black;}
+
+		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000; }
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout id="patientview">
+				<north size="90px">
+					<include src="/pages/common/patmenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true" id="controller"
+					apply="com.bodyfs.ui.PrescriptionComposer">
+					<div hflex="1" vflex="1" style="margin-left:10px">
+						<n:table width="90%">
+							<n:tr>
+								<n:td>
+									<n:select id="selVisitDates" />
+									<n:input id="btnView" type="button" value="View" />
+									<n:input id="btnCopy" type="button" value="Copy" />
+								</n:td>
+								<n:td></n:td>
+								<n:td align="right">
+									<button id="btnPrev" label="Prev" sclass="submitbtn"
+										forward="onClick=controller.onSave(Prev)" />
+									<button id="btnDone" label="Done" sclass="submitbtn"
+										forward="onClick=controller.onSave(Done)" />
+									<textbox id="txtVisitDates" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtVisitDatesCopy" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtPrescription" visible="false"
+										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+							</n:tr>
+							<n:tr>
+								<n:td colspan="3">
+									<n:br />
+									<n:br />
+								</n:td>
+							</n:tr>
+							<n:tr valign="top">
+								<n:td>
+									<n:span style="font-weight: bold">Diagnosis &amp;nbsp;</n:span>
+									<combobox id="cmbDiagnosis" autodrop="true" model="@{diagnosislist }"
+										forward="onChange=controller.onDiagnosisChange" readonly="true">
+										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
+											value="@{diagnosis }" />
+									</combobox>
+									<n:br />
+									<n:br />
+									<n:span style="font-weight:bold">Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;</n:span>
+									<combobox id="cmbFormulas" autodrop="true" model="@{formulalist }"
+										forward="onChange=controller.onFormulaChange" readonly="true">
+										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
+									</combobox>
+									<n:br />
+									<n:br />
+									<n:table id="tblServices" cellspacing="0" cellpadding="0">
+										<n:col width="*" />
+										<n:tbody>
+											<zk forEach="${controller$composer.servicesList }">
+												<n:tr>
+													<n:td valign="top">
+														<n:input type="checkbox" id="chk${each.id }"
+															servicename="${each.serviceName }" />
+														<n:span style="font-weight:bold">${each.serviceName }</n:span>
+														&amp;nbsp;
+													</n:td>
+													<n:td valign="top">
+														<n:input type="text" size="10" id="txt${each.id }"
+															serviceid="${each.id }" class="z-textbox" />
+														<n:br />
+														<n:input type="text" size="10" id="txtOther" class="z-textbox"
+															style="display:none" if="${each.serviceName == 'Other' }" />
+													</n:td>
+												</n:tr>
+											</zk>
+										</n:tbody>
+									</n:table>
+									<textbox id="txtServices" visible="false"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+								<n:td>
+									<n:span style="font-weight: bold">Portion &amp;nbsp;</n:span>
+									<intbox id="txtPortion" constraint="no empty" />
+									<n:br />
+									<n:br />
+									<space width="50px" />
+									<n:button id="btnAdd">Add</n:button>
+								</n:td>
+								<n:td>
+									<n:span style="font-weight: bold">Herb&amp;nbsp;</n:span>
+									<div id="divHerbs" width="200px" height="200px"
+										style="border:1px solid black;overflow:auto">
+									</div>
+								</n:td>
+							</n:tr>
+						</n:table>
+						<space height="20px" width="100%" />
+						<n:table id="herbsTable">
+							<n:tr align="left">
+								<n:th class="bordercell">Forumula</n:th>
+								<n:th class="bordercell">Herbs</n:th>
+								<n:th class="bordercell">Portion</n:th>
+								<n:th></n:th>
+							</n:tr>
+							<n:tr>
+								<n:td class="bordercell">
+									<combobox id="cmbFormulas1" autodrop="true" mold="rounded" model="@{formulalist }"
+										forward="onChange=controller.onFormula1Change" readonly="true" sclass="blendcombo">
+										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
+									</combobox>
+								</n:td>
+								<n:td class="bordercell">
+									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }"
+										readonly="true" sclass="blendcombo">
+										<comboitem self="@{each=herb }" label="@{herb.name }" value="@{herb }" />
+									</combobox>
+								</n:td>
+								<n:td class="bordercell">
+									<n:input type="text" id="txtHPortion" class="portion" />
+									&amp;nbsp;
+								</n:td>
+								<n:td>
+									<n:input type="button" id="btnHAdd" value="Add" />
+								</n:td>
+							</n:tr>
+						</n:table>
+						<script type="text/javascript" defer="false">
+							var readonly = false;
+
+							var data = ${controller$composer.visitsDates};
+
+							var start = "${param.visitDate}";
+
+							zk.afterMount(initJS);
+						</script>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+
+</zk>

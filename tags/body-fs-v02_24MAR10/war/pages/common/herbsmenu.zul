@@ -1,0 +1,12 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<hbox>
+		<toolbarbutton label="Diagnoses" href="/pages/herbs/diagnoses.zul?" height="45px" width="80px"
+			sclass="${page.title eq 'Diagnoses' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="Formulas" href="/pages/herbs/formulas.zul" height="45px" width="80px"
+			sclass="${page.title eq 'Formula Management' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="Herbs" href="/pages/herbs/herbs.zul" height="45px" width="80px"
+			sclass="${page.title eq 'Herbs Management' ? 'bodyfs-toolbar-selected' : ''}" />
+	</hbox>
+	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
+</zk>

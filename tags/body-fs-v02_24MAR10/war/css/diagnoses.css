@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+span.tag {
+	float: left;
+	font-family: "Lucida Grande", "Verdana";
+	font-size: 10px;
+}
+
+span.tag label {
+	background-color: white;
+	color: black;
+	/*  border: 1px solid transparent;*/
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin: 3px 0 3px 5px;
+	padding: 1px 21px 1px 1px;
+	position: relative;
+	display: inline-block;
+	min-width: 20px;
+	height: 20px;
+}
+
+span.tag small {
+	color: black;
+	border: none;
+	font-size: 8px;
+	font-weight: bold;
+	line-height: 12px;
+	position: absolute;
+	right: 3px;
+	bottom: 0;
+	z-index: 199;
+	height: 100%;
+	line-height: 22px;
+	cursor: pointer;
+}

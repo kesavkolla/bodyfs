@@ -13,6 +13,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Text;
+
 /**
  * 
  * @author kesav
@@ -128,6 +130,9 @@ public class PatientVisit implements Serializable {
 
 	@Persistent
 	private String othersign;
+
+	@Persistent
+	private Text annotations;
 
 	@Persistent
 	private Date visitDate = Calendar.getInstance().getTime();
@@ -346,6 +351,14 @@ public class PatientVisit implements Serializable {
 
 	public final void setOthersign(final String othersign) {
 		this.othersign = othersign;
+	}
+
+	public String getAnnotations() {
+		return (annotations == null) ? null : annotations.getValue();
+	}
+
+	public void setAnnotations(final String annotations) {
+		this.annotations = (annotations == null) ? null : new Text(annotations);
 	}
 
 	public final Date getVisitDate() {

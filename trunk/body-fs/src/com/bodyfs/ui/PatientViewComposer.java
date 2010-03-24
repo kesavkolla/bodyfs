@@ -103,7 +103,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 			newemails.setLabel("3 New emails");
 		}
 		if (pm != null) {
-			if (numweek > 0) {
+			if (numweek > 0 && totalPlanLength > 0) {
 				int percent = Math.round(numweek * 100 / totalPlanLength);
 				pm.setValue(percent);
 			} else {
@@ -120,6 +120,17 @@ public class PatientViewComposer extends GenericAutowireComposer {
 			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0;
 		}
 
+		return total;
+	}
+	
+	private double getAmmountInAccount(Long personID) {
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		Collection<PatientPaymentPlan> allPlans = paymentDAO.getAllPlans(personID);
+		int total = 0; 
+		for (PatientPaymentPlan patientPaymentPlan : allPlans) {
+			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0 ;
+		}
+		
 		return total;
 	}
 

@@ -13,7 +13,7 @@
  * @return
  */
 function showConfirmation() {
-	jq.alert('Successfully saved the information you may now close the window', {
+	jq.alert('Successfully saved the information', {
 		title : 'Success',
 		mode : 'modal',
 		OK : function() {

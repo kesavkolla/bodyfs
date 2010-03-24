@@ -80,7 +80,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					results.add(person);
 					continue;
 				}
-				if (person.getPersonType() == PersonType.USER || person.getPersonType() == PersonType.EMPLOYEE) {
+				if (person.getPersonType() == PersonType.USER) {
 					results.add(person);
 				}
 			}
@@ -124,8 +124,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					continue;
 				else if (!typePost.isChecked() && person.getPersonType() == PersonType.POST_USER)
 					continue;
-				else if (!typeCurrent.isChecked()
-						&& (person.getPersonType() == PersonType.USER || person.getPersonType() == PersonType.EMPLOYEE))
+				else if (!typeCurrent.isChecked() && (person.getPersonType() == PersonType.USER))
 					continue;
 				resultSet.add(person);
 			}
@@ -164,7 +163,6 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 			}
 			if (typeCurrent.isChecked()) {
 				qry.append(" personType = '" + PersonType.USER + "' OR");
-				qry.append(" personType = '" + PersonType.EMPLOYEE + "' OR");
 			}
 			if (typePost.isChecked()) {
 				qry.append(" personType = '" + PersonType.POST_USER + "' OR");

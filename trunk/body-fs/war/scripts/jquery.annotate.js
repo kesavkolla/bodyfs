@@ -204,9 +204,6 @@
 		element.html(html);
 	};
 	
-	$.fn.annotateImage.saveAsJSON = function(image) {
-	}
-
 	$.fn.annotateImage.createHiddenField = function(name, value) {
 		return '&lt;input type="hidden" name="' + name + '" value="' + value + '" /&gt;<br />';
 	};

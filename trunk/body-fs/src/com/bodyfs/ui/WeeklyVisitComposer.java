@@ -203,6 +203,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			visitgrid.setAttribute("patvisit", visit);
 			binder.loadAll();
 		}
+		Clients.evalJavaScript("redrawAnnotations()");
 	}
 
 	/**

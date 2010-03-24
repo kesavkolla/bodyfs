@@ -16,8 +16,7 @@ function setupData() {
 	});
 
 	/*
-	 * Handle the click on the view button. Get the selected date and reload the
-	 * data
+	 * Handle the click on the view button. Get the selected date and reload the data
 	 */
 	$("#btnView").click(function() {
 		var selVisitDates = $("#selVisitDates")[0];
@@ -32,10 +31,58 @@ function setupData() {
 		});
 	});
 
-	jq("$imgbody").annotateImage( {
-		editable : true,
+	/* setup annotations */
+	var annonimage = jq("$imgbody").annotateImage( {
+		editable : false,
 		useAjax : false
 	});
+	$.data(document.body, "annonimage", annonimage);
+
+	/* if there are annotations setup the notes */
+	var txtAnnotations = zk.Widget.$($("$txtAnnotations"));
+	if (txtAnnotations.getValue().length > 0) {
+		var notes = parseJSON(txtAnnotations.getValue());
+		notes = $.map(notes, function(data, indx) {
+			if (data.editable) {
+				data.editable = false;
+			}
+			if (data.id) {
+				data.id = indx;
+			}
+			return data;
+		});
+		annonimage.notes = notes;
+		$.fn.annotateImage.load(annonimage);
+	}
+}
+
+/**
+ * This will be called when ever the selection date changed. This will clear all the image notes and recreate the new
+ * ones
+ * 
+ */
+function redrawAnnotations() {
+	var annonimage = $.data(document.body, "annonimage");
+	if (annonimage == undefined) {
+		return;
+	}
+	$.fn.annotateImage.clear(annonimage);
+	var txtAnnotations = zk.Widget.$($("$txtAnnotations"));
+	/* if there are annotations setup the notes */
+	if (txtAnnotations.getValue().length > 0) {
+		var notes = parseJSON(txtAnnotations.getValue());
+		notes = $.map(notes, function(data, indx) {
+			if (data.editable) {
+				data.editable = false;
+			}
+			if (data.id) {
+				data.id = null;
+			}
+			return data;
+		});
+		annonimage.notes = notes;
+		$.fn.annotateImage.load(annonimage);
+	}
 }
 
 /**

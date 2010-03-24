@@ -4,6 +4,7 @@
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
@@ -181,6 +182,8 @@
 										hflex="1" />
 									<textbox rows="3" hflex="1"
 										value="@{patvisit.betterService, save-when='btnNext.onClick' }" />
+									<textbox id="txtAnnotations" visible="false"
+										value="@{patvisit.annotations, save-when='btnNext.onClick' }" />
 								</vbox>
 							</row>
 							<row spans="2" align="right">

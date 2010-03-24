@@ -7,21 +7,7 @@
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
-<?script type="text/javascript" content="
-/**
- * 
- * @return
- */
-function showConfirmation() {
-	jq.alert('Successfully saved the information', {
-		title : 'Success',
-		mode : 'modal',
-		OK : function() {
-			zUtl.go('/pages/signin/customersearch.zul');
-		}
-	});
-}
-"?>
+<?script type="text/javascript" src="/scripts/signin.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout style="background:#1e1406;" id="signin">
@@ -188,18 +174,17 @@ function showConfirmation() {
 							<titlelabel value="Any questions or concerns?" hflex="1" />
 							<textbox rows="3" hflex="1" value="@{patvisit.question, save-when='btnSave.onClick' }" />
 							<titlelabel value="Is there any way we can provide better service for you?:" hflex="1" />
+							<textbox id="txtAnnotations" visible="false"
+								value="@{patvisit.annotations, save-when='btnSave.onClick' }" />
 							<textbox rows="3" hflex="1" value="@{patvisit.betterService, save-when='btnSave.onClick' }" />
 						</vbox>
 					</row>
 					<row spans="2" align="center">
 						<cell colspan="2">
-							<script type="text/javascript" defer="true">
+							<script type="text/javascript" defer="false">
+								var annoimg;
 
-								zk.afterMount(function() {
-
-								jq("$imgbody").annotateImage({editable: true, useAjax: false});
-
-								});
+								zk.afterMount(function() { initPage();});
 							</script>
 							<button id="btnSave" label="Save" forward="onClick=visitgrid.onSave" width="150px"
 								height="60px" />

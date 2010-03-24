@@ -109,15 +109,19 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkService(String serviceName) {
-		final Map<String, Object> vals = new HashMap<String, Object>();
-		vals.put("pname", serviceName.toLowerCase());
-		Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM "
-				+ MasterService.class.getName() + " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC",
-				vals);
-		if (results == null || results.size() <= 0) {
+		try {
+			final Map<String, Object> vals = new HashMap<String, Object>();
+			vals.put("pname", serviceName.toLowerCase());
+			Collection<Long> results = (Collection<Long>) jdoTemplate.find("SELECT id FROM "
+					+ MasterService.class.getName()
+					+ " WHERE lowername==pname PARAMETERS String pname ORDER BY id DESC", vals);
+			if (results == null || results.size() <= 0) {
+				return false;
+			}
+			return results.size() > 0;
+		} catch (final Exception e) {
 			return false;
 		}
-		return results.size() > 0;
 	}
 
 	@Override

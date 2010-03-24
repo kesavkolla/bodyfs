@@ -120,12 +120,15 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					resultSet.add(person);
 					continue;
 				}
-				if (!typePre.isChecked() && person.getPersonType() == PersonType.PRE_USER)
+				if (person.getPersonType() == PersonType.EMPLOYEE) 
+					continue;
+				else if (!typePre.isChecked() && person.getPersonType() == PersonType.PRE_USER)
 					continue;
 				else if (!typePost.isChecked() && person.getPersonType() == PersonType.POST_USER)
 					continue;
 				else if (!typeCurrent.isChecked() && (person.getPersonType() == PersonType.USER))
 					continue;
+				
 				resultSet.add(person);
 			}
 		}

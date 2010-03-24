@@ -89,7 +89,7 @@
 			</row>
 			<row spans="2,2,4">
 				Is it getting worse?
-				<textbox hflex="1" />
+				<textbox hflex="1" value="@{ginfo.gettingworse, save-when='btnNext.onClick' }" />
 				<hbox hflex="1">
 					Does it bother your
 					<checkbox label="Sleep" checked="@{ginfo.botherSleep, save-when='btnNext.onClick' }" />

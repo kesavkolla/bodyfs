@@ -1,6 +1,5 @@
 /**
- * This function initializes all the scripts for this page. This is called after
- * zk's mount is finished
+ * This function initializes all the scripts for this page. This is called after zk's mount is finished
  * 
  * @return
  */
@@ -152,6 +151,15 @@ function initPage() {
 		$("$txtVisitDatesCopy").val(selDate).blur();
 	});
 
+	/* disable/enable copy */
+	$("#selVisitDates").change(function() {
+		if (this.selectedIndex == 0) {
+			$("#btnCopy").removeAttr('disabled');
+		} else {
+			$("#btnCopy").attr('disabled', 'disabled');
+		}
+	});
+
 	/*
 	 * Handle the click on prev/next
 	 */
@@ -163,15 +171,13 @@ function initPage() {
 }
 
 /**
- * This function validates the selection of services and also populates the
- * txtServices
+ * This function validates the selection of services and also populates the txtServices
  * 
  * @return
  */
 function SaveServiceData(evt) {
 	/*
-	 * at least one service should be selected if checkbox is selected the
-	 * textfield should have value
+	 * at least one service should be selected if checkbox is selected the textfield should have value
 	 */
 	var isSelected = false;
 	var isError = false;

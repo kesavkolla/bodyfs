@@ -8,6 +8,7 @@
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
 <?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
 <?script type="text/javascript" src="/scripts/signin.js"?>
+<?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout style="background:#1e1406;" id="signin">
@@ -29,9 +30,13 @@
 				<rows>
 					<row>
 						<cell colspan="2">
-							<n:table width="100%">
+							<n:table>
 								<n:tr>
 									<n:td>
+										Sigin in Date (temp)
+										<datebox id="visitdate"
+											value="@{patvisit.visitDate, save-when='btnSave.onClick' }" constraint="no future,no today"
+											format="MM/dd/yyyy" timeZone="${c:timezone('PST')}" hflex="true" />
 										<div id="Pagination" class="pagination" align="right" width="90%" />
 									</n:td>
 									<n:td>

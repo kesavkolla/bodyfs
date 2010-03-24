@@ -43,6 +43,10 @@ public class LoginWindow extends GenericForwardComposer {
 			lblMsg.setValue("*Wrong username or password!");
 			return;
 		}
+		
+		if(session.getAttribute(Constants.SESSION_LOGIN_CRED) != null) {
+			session.invalidate();
+		}
 
 		session.setAttribute(Constants.SESSION_LOGIN_CRED, userDetails);
 

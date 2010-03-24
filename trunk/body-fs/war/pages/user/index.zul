@@ -19,7 +19,7 @@
 										Weeks
 									</cell>
 									<cell>
-										<hbox pack="end" hflex="1">10 weeks</hbox>
+										<hbox pack="end" hflex="1"><label id="totalWeeks" /> weeks</hbox>
 									</cell>
 								</row>
 							</rows>
@@ -37,12 +37,12 @@
 									<n:tr>
 										<n:td>When is the next examination due</n:td>
 										<n:td>
-											<label id="nextApppointment" />
+											<label id="nextApppointment" style="font-size:14px"/>
 										</n:td>
 									</n:tr>
 									<n:tr>
 										<n:td style="border-right:2px solid #949393">
-											How much is lef on your account
+											How much is left on your account
 										</n:td>
 										<n:td></n:td>
 									</n:tr>

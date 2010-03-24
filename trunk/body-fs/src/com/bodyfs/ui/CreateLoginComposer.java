@@ -59,7 +59,7 @@ public class CreateLoginComposer extends GenericForwardComposer {
 
 	public void onSave(final Event evt) {
 		final Person person = (Person) page.getAttribute("person");
-		if (person.getPersonType() == null) {
+		if (person.getPersonType() == PersonType.PRE_USER) {
 			person.setPersonType(PersonType.USER);
 		}
 		IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");

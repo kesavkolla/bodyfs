@@ -119,7 +119,7 @@ function setupData(reload) {
 		width : selPulseRight3.width()
 	});
 	if (data.PulseRight3) {
-		selPulseRight3.find("option[value'" + data.PulseRight3 + "']").attr("selected", "selected").change();
+		selPulseRight3.find("option[value='" + data.PulseRight3 + "']").attr("selected", "selected").change();
 		selPulseRight3.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 

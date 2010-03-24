@@ -17,8 +17,7 @@ function showConfirmation() {
 		title : 'Success',
 		mode : 'modal',
 		OK : function() {
-			window.open('', '_self', '');
-			window.close();
+			zUtl.go("/pages/signin/customersearch.zul");
 		}
 	});
 }

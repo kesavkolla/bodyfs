@@ -92,8 +92,7 @@ function initPage() {
 	$(".submitbtn").click(function() {
 		var prescArr = new Array();
 		/*
-		 * Get all the table rows and prepare an object with formula, herb &
-		 * portion
+		 * Get all the table rows and prepare an object with formula, herb & portion
 		 */
 		$("#herbsTable > tbody > tr:not(:last):not(:first)").each(function(indx, row) {
 			var obj = {
@@ -130,6 +129,15 @@ function initPage() {
 			var wgt = zk.Widget.$($(val).attr("id"));
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
 		});
+	});
+
+	/* disable/enable copy */
+	$("#selVisitDates").change(function() {
+		if (this.selectedIndex == 0) {
+			$("#btnCopy").removeAttr('disabled');
+		} else {
+			$("#btnCopy").attr('disabled', 'disabled');
+		}
 	});
 
 	/* Handle the click on Copy */
@@ -181,8 +189,7 @@ function DeleteRow() {
 }
 
 /**
- * This function will be called when user click on Add portion in the formula
- * table below
+ * This function will be called when user click on Add portion in the formula table below
  * 
  * @return
  */

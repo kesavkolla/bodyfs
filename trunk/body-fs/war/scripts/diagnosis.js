@@ -208,21 +208,21 @@ function initPage() {
 	if (data.length < 1) {
 		return;
 	}
-	
+
 	/*
 	 * Find the start parameter which matches the visitdate
 	 */
 	if (start.length <= 0) {
 		start = data[0].date;
 	}
-	
+
 	/* Add all the dates to the dropdown box */
 	var selVisitDates = $("#selVisitDates");
 	$.each(data, function() {
 		selVisitDates.append('<option value="' + this.date + '" '
 				+ ((start == this.date) ? "selected='true'" : "") + '">' + this.value + '</option>');
 	});
-	
+
 	/* Handle the click on View */
 	$("#btnView").click(function() {
 		var selVisitDates = $("#selVisitDates")[0];
@@ -234,12 +234,21 @@ function initPage() {
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
 		});
 	});
-	
+
 	/* Handle click on copy button */
 	$("#btnCopy").click(function() {
 		var selVisitDates = $("#selVisitDates")[0];
 		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
 		$("$txtVisitDatesCopy").val(selDate).blur();		
+	});
+
+	/* disable/enable copy */
+	$("#selVisitDates").change(function() {
+		if (this.selectedIndex == 0) {
+			$("#btnCopy").removeAttr('disabled');
+		} else {
+			$("#btnCopy").attr('disabled', 'disabled');
+		}
 	});
 
 	/* Handle the save button */

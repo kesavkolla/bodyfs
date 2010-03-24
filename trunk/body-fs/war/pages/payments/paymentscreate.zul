@@ -14,7 +14,7 @@
 					<div hflex="1" style="margin:10px" vflex="1">
 						<space orient="horizontal" height="20px" />
 						Treatement Plan Length :
-						<intbox constraint="no negative,no zero" id="planLength"/>
+						<intbox constraint="no negative,no zero" id="planLength" />
 						<space orient="vertical" width="50px" />
 						Add a service :
 						<combobox mold="rounded" width="150px" id="cmbServices" autodrop="true" model="@{services }"
@@ -31,6 +31,7 @@
 							</n:table>
 						</n:div>
 						<space orient="horizontal" height="10px" />
+						Discount: <n:input type="text" id="txtDiscount" /> %
 						<n:input type="button" value="Calculate" id="btnCalculate" />
 						<space orient="horizontal" height="10px" />
 						<n:div style="font-size:large">Summary:</n:div>
@@ -40,9 +41,10 @@
 								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;">
 								<n:thead>
 									<n:tr>
-										<n:th>Sessions and Service</n:th>
-										<n:th>Charge per Service</n:th>
-										<n:th>Total Cost</n:th>
+										<n:th align="left">Service</n:th>
+										<n:th align="left"># of Session</n:th>
+										<n:th align="left">Charge per session</n:th>
+										<n:th align="left">Total</n:th>
 									</n:tr>
 								</n:thead>
 								<n:tbody></n:tbody>

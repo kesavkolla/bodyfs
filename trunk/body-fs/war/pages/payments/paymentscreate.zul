@@ -52,7 +52,7 @@
 						</n:div>
 						<space orient="horizontal" height="10px" />
 						<n:div style="width:90%;text-align:right;">
-							<n:span style="font-weight:bold">Total cost:</n:span>
+							<n:span style="font-weight:bold">Total cost:$</n:span>
 							<n:span id="totalCost">&amp;nbsp;&amp;nbsp;</n:span>
 						</n:div>
 						<space orient="horizontal" height="20px" />

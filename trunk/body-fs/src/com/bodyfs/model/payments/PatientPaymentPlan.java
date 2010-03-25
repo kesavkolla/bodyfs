@@ -33,6 +33,9 @@ public class PatientPaymentPlan implements Serializable {
 	private Integer planLength;
 
 	@Persistent
+	private float discount;
+
+	@Persistent
 	private Date paymentDate = Calendar.getInstance().getTime();
 
 	public Long getPersonId() {
@@ -84,10 +87,18 @@ public class PatientPaymentPlan implements Serializable {
 		this.planLength = planLength;
 	}
 
+	public float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("PatientPaymentPlan [");
+		builder.append("PatientPaymentPlan [discount=").append(discount).append(", ");
 		if (id != null)
 			builder.append("id=").append(id).append(", ");
 		if (paymentDate != null)
@@ -95,7 +106,9 @@ public class PatientPaymentPlan implements Serializable {
 		if (personId != null)
 			builder.append("personId=").append(personId).append(", ");
 		if (planItems != null)
-			builder.append("planItems=").append(planItems);
+			builder.append("planItems=").append(planItems).append(", ");
+		if (planLength != null)
+			builder.append("planLength=").append(planLength);
 		builder.append("]");
 		return builder.toString();
 	}

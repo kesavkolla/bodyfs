@@ -68,8 +68,8 @@ function calculateService() {
 		buffer.push("<tr>");
 		buffer.push("<td style='height:25px'>" + service.serviceName + "</td>");
 		buffer.push("<td>" + cumulativeList[serviceid].total + "</td>");
-		buffer.push("<td>" + service.charge + "</td>");
-		buffer.push("<td>" + service.charge * cumulativeList[serviceid].total + "</td>");
+		buffer.push("<td>$" + service.charge + "</td>");
+		buffer.push("<td>$" + service.charge * cumulativeList[serviceid].total + "</td>");
 		buffer.push("</tr>")
 		$("#tblServicesSummary > tbody").append(buffer.join());
 		totalCost += service.charge * cumulativeList[serviceid].total;
@@ -158,11 +158,11 @@ function printSummary() {
 		buffer.push("<tr><td>");
 		buffer.push(cell1[1]);
 		buffer.push("</td><td><span style='display:inline-block;width:20px'>&nbsp;</td>");
-		buffer.push("<td>");
+		buffer.push("<td>$");
 		buffer.push(cost);
 		buffer.push("&nbsp;X&nbsp;");
 		buffer.push(cell1[0]);
-		buffer.push("&nbsp;=&nbsp;");
+		buffer.push("&nbsp;=&nbsp;$");
 		buffer.push(total);
 		buffer.push("</td></tr>");
 	});
@@ -170,8 +170,13 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>&nbsp;</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>&nbsp;</td><td></td></tr>");
-	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>&nbsp;</td><td></td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("$txtDiscount").val() + "</td><td></td></tr>");
+	var discount = $("$txtDiscount").val();
+	var totalCost = parseFloat($("#totalCost").html());
+	if(!isNaN(parseFloat(discount))) {
+		totalCost -= (totalCost * discount) / 100); 
+	}
+	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + totalCost + "</td><td></td></tr>");
 	buffer.push("</table>");
 	buffer.push("</div>");
 	/* prepare print button */

@@ -15,7 +15,9 @@
 <%@page import="com.bodyfs.model.payments.MasterService"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bodyfs.Constants"%>
-<%@page import="java.io.IOException"%><html>
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="com.bodyfs.model.payments.PatientPaymentPlan"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Print Invoice</title>
@@ -110,9 +112,15 @@ table {
 	Date endDate = null;
 	if (arrDates.length > 1) {
 		endDate = sdf.parse(arrDates[1].trim());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(endDate);
+		cal.add(Calendar.DATE, 1);
+		endDate = cal.getTime();
 	}
 	final Collection<PatientService> patServices = paymentDAO.getServicesByDateRange(patid, startDate, endDate);
 	final Collection<MasterService> serviceList = paymentDAO.getAllServices();
+	final Collection<PatientPaymentPlan> plan = paymentDAO.getAllPlans(patid);
+	float discount = plan.iterator().next().getDiscount();
 %>
 
 <table width="950px" border="1" cellpadding="10">
@@ -140,12 +148,13 @@ table {
 	</thead>
 	<tbody>
 		<%
+			double totalCharge = 0;
 			for (final PatientService patService : patServices) {
 				final MasterService mservice = getService(patService.getServiceId(), serviceList);
 				if (mservice == null) {
 					continue;
 				}
-				printService(patService, mservice, sdf, out);
+				totalCharge += printService(patService, mservice, sdf, out);
 			}
 		%>
 	</tbody>
@@ -154,8 +163,12 @@ table {
 <br />
 <table width="425px" style="margin-left: auto;" border="1" cellpadding="10">
 	<tr>
+		<td>Discount %</td>
+		<td><%=discount%>%</td>
+	</tr>
+	<tr>
 		<td>Sub Total</td>
-		<td></td>
+		<td>$<%=(totalCharge * (1 - discount / 100.0))%></td>
 	</tr>
 	<tr>
 		<td>Sales Tax</td>
@@ -202,7 +215,7 @@ table {
 		return null;
 	}
 
-	private void printService(final PatientService patientService, final MasterService mservice,
+	private double printService(final PatientService patientService, final MasterService mservice,
 			final SimpleDateFormat sdf, final JspWriter out) throws IOException {
 		final StringBuilder buffer = new StringBuilder();
 		final double total = mservice.getCharge() * patientService.getNumServices();
@@ -237,12 +250,12 @@ table {
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
 				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
-				buffer.append("<td>").append(mservice.getCharge()).append("</td>");
-				buffer.append("<td>").append(total).append("</tr>");
+				buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
+				buffer.append("<td>$").append(total).append("</tr>");
 				buffer.append("</tr>");
 			}
 			out.println(buffer.toString());
-			return;
+			return total;
 		}
 
 		buffer.append("<tr>");
@@ -261,9 +274,10 @@ table {
 		}
 
 		buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
-		buffer.append("<td>").append(mservice.getCharge()).append("</td>");
-		buffer.append("<td>").append(total).append("</tr>");
+		buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
+		buffer.append("<td>$").append(total).append("</tr>");
 		buffer.append("</tr>");
 		out.println(buffer.toString());
+		return total;
 
 	}%>

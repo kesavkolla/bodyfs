@@ -60,7 +60,7 @@
 							<n:span style="font-weight:bold">Discount %</n:span>
 							<n:span id="spndiscount">&amp;nbsp;&amp;nbsp;</n:span>
 							<n:br />
-							<n:span style="font-weight:bold">Totaal payable:$</n:span>
+							<n:span style="font-weight:bold">Total payable:$</n:span>
 							<n:span id="spnpayable">&amp;nbsp;&amp;nbsp;</n:span>
 						</n:div>
 						<space orient="horizontal" height="20px" />

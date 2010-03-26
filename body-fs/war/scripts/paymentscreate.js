@@ -170,7 +170,7 @@ function printSummary() {
 		buffer.push(cost);
 		buffer.push("&nbsp;X&nbsp;");
 		buffer.push(cell1[0]);
-		buffer.push("&nbsp;=&nbsp;$");
+		buffer.push("&nbsp;=&nbsp;");
 		buffer.push(total);
 		buffer.push("</td></tr>");
 	});
@@ -178,13 +178,13 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("$txtDiscount").val() + "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>$" + $("$txtDiscount").val() + "</td><td></td></tr>");
 	var discount = $("$txtDiscount").val();
 	var totalCost = parseFloat($("#totalCost").html());
 	if(!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100); 
 	}
-	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + totalCost + "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>$" + totalCost + "</td><td></td></tr>");
 	buffer.push("</table>");
 	buffer.push("</div>");
 	/* prepare print button */

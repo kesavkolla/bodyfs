@@ -23,7 +23,10 @@
 										Weeks
 									</cell>
 									<cell>
-										<hbox pack="end" hflex="1"><label id="totalWeeks" /> weeks</hbox>
+										<hbox pack="end" hflex="1">
+											<label id="totalWeeks" />
+											weeks
+										</hbox>
 									</cell>
 								</row>
 							</rows>
@@ -44,17 +47,12 @@
 										</n:td>
 									</n:tr>
 									<n:tr>
-										<n:td style="border-right:2px solid #949393">
-											How much is left on your account
-										</n:td>
+										<n:td>How much is left on your account</n:td>
 										<n:td></n:td>
 									</n:tr>
 									<n:tr>
 										<n:td>How many sessions have you used</n:td>
 										<n:td></n:td>
-									</n:tr>
-									<n:tr>
-										<n:td colspan="2">Leave notice when the patient is at $250 on account</n:td>
 									</n:tr>
 									<n:tr>
 										<n:td>Missed appointment notifications</n:td>
@@ -76,8 +74,6 @@
 		$("#rptcnt tr:even").css({'background-color':'#E6F8FF'});
 
 		$("#rptcnt tr:odd").css({'background-color':'white'});
-
-		$("#rptcnt td:even").css({'border-right':'2px solid #949393'});
 
 	</script>
 </zk>

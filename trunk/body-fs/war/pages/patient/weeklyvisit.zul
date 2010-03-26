@@ -72,7 +72,7 @@
 										</radiogroup>
 									</hbox>
 									<radiogroup
-										selectedIndex="@{patinfo.digestion, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
+										selectedIndex="@{patvisit.digestion, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
 										<grid>
 											<rows>
 												<row>
@@ -81,7 +81,7 @@
 													</cell>
 												</row>
 												<row>
-													<radio label="Blating(feeling full easily)" />
+													<radio label="Bloating(feeling full easily)" />
 													<radio label="Gas" />
 												</row>
 												<row>

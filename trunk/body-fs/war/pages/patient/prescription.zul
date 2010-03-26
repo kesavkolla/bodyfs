@@ -28,7 +28,7 @@
 								<n:td>
 									<n:select id="selVisitDates" />
 									<n:input id="btnView" type="button" value="View" />
-									<n:input id="btnCopy" type="button" value="Copy" />
+									<n:input id="btnCopy" type="button" value="Copy" disabled="disabled" />
 								</n:td>
 								<n:td></n:td>
 								<n:td align="right">

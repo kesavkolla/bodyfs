@@ -89,10 +89,10 @@
 															<zk
 																if="${each.serviceName != 'Acupuncture' &amp;&amp; each.serviceName != 'Cupping' &amp;&amp; each.serviceName != 'Re-Exam'}">
 																<n:select id="txt${each.id }" serviceid="${each.id }">
-																	<n:option value="3">15 mins</n:option>
-																	<n:option value="6">30 mins</n:option>
-																	<n:option value="9">45 mins</n:option>
-																	<n:option value="12">60 mins</n:option>
+																	<n:option value="1">15 mins</n:option>
+																	<n:option value="2">30 mins</n:option>
+																	<n:option value="3">45 mins</n:option>
+																	<n:option value="4">60 mins</n:option>
 																</n:select>
 															</zk>
 															<zk

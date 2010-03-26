@@ -73,7 +73,7 @@
 								</radiogroup>
 							</hbox>
 							<radiogroup
-								selectedIndex="@{patinfo.digestion, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
+								selectedIndex="@{patvisit.digestion, save-when='btnSave.onClick', converter='com.bodyfs.ui.util.DigestionToRadiogroup' }">
 								<grid>
 									<rows>
 										<row>
@@ -191,6 +191,8 @@
 
 								zk.afterMount(function() { initPage();});
 							</script>
+							<button id="btnCancel" label="Cancel" width="150px" height="60px" />
+							<space orient="vertical" width="10px" />
 							<button id="btnSave" label="Save" forward="onClick=visitgrid.onSave" width="150px"
 								height="60px" />
 						</cell>

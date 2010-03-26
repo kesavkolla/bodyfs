@@ -14,6 +14,11 @@ function initPage() {
 			$("$txtAnnotations").val("").blur();
 		}
 	});
+
+	$("$btnCancel").click(function() {
+		zUtl.go('/pages/signin/customersearch.zul');
+		return false;
+	});
 }
 
 /**

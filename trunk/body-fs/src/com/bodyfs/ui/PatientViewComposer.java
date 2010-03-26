@@ -44,7 +44,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
 	private Label week;
 	private Label totalWeeks;
-	private Label nextApppointment;
 	private Label nextReExam;
 	private A newemails;
 	private Progressmeter pm;
@@ -93,9 +92,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		if (totalWeeks != null) {
 			totalWeeks.setValue(totalPlanLength + "");
 		}
-		if (nextApppointment != null) {
-			nextApppointment.setValue("12/12/2009 - 3:15 pm");
-		}
 		if (nextReExam != null) {
 			nextReExam.setValue("12/12/2009");
 		}
@@ -122,15 +118,16 @@ public class PatientViewComposer extends GenericAutowireComposer {
 
 		return total;
 	}
-	
+
+	@SuppressWarnings("unused")
 	private double getAmmountInAccount(Long personID) {
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		Collection<PatientPaymentPlan> allPlans = paymentDAO.getAllPlans(personID);
-		int total = 0; 
+		int total = 0;
 		for (PatientPaymentPlan patientPaymentPlan : allPlans) {
-			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0 ;
+			total += patientPaymentPlan.getPlanLength() != null ? patientPaymentPlan.getPlanLength() : 0;
 		}
-		
+
 		return total;
 	}
 

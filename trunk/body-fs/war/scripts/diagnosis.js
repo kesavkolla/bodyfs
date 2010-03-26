@@ -79,17 +79,32 @@ function setupData(reload) {
 	}
 
 	/* setup veins underneath */
-	var selVeinsUnderneath = $("#selVeinsUnderneath");
-	selVeinsUnderneath.dropdownchecklist( {
-		width : selVeinsUnderneath.width()
+	var selVeinsUnderneathLeft = $("#selVeinsUnderneathLeft");
+	selVeinsUnderneathLeft.dropdownchecklist( {
+		width : selVeinsUnderneathLeft.width()
 	});
 	if (data.VeinsUnderneath) {
 		if ($.isArray(data.VeinsUnderneath)) {
 			$.each(data.VeinsUnderneath, function() {
-				selVeinsUnderneath.find("option[value='" + this + "']").attr("selected", "selected").change();
+				selVeinsUnderneathLeft.find("option[value='" + this + "']").attr("selected", "selected").change();
 			});
 		} else {
-			selVeinsUnderneath.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
+			selVeinsUnderneathLeft.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
+		}
+	}
+	
+	/* setup veins underneath */
+	var selVeinsUnderneathRight = $("#selVeinsUnderneathRight");
+	selVeinsUnderneathRight.dropdownchecklist( {
+		width : selVeinsUnderneathRight.width()
+	});
+	if (data.VeinsUnderneath) {
+		if ($.isArray(data.VeinsUnderneath)) {
+			$.each(data.VeinsUnderneath, function() {
+				selVeinsUnderneathRight.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selVeinsUnderneathRight.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
 		}
 	}
 

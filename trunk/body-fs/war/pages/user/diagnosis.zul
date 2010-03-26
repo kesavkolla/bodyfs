@@ -114,13 +114,40 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Veins Underneath</n:td>
+												<n:td>Veins Underneath : left</n:td>
 												<n:td>
-													<n:select id="selVeinsUnderneath" name="selVeinsUnderneath"
-														style="width:200px" multiple="multiple" disabled="disabled">
-														<n:option>Scale of One to 10</n:option>
-														<n:option>Right Side</n:option>
-														<n:option>Left Side</n:option>
+													<n:select id="selVeinsUnderneathLeft" name="selVeinsUnderneathLeft"
+														style="width:200px">
+														<n:option value="-1">select scale</n:option>
+														<n:option>1</n:option>
+														<n:option>2</n:option>
+														<n:option>3</n:option>
+														<n:option>4</n:option>
+														<n:option>5</n:option>
+														<n:option>6</n:option>
+														<n:option>7</n:option>
+														<n:option>8</n:option>
+														<n:option>9</n:option>
+														<n:option>10</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Veins Underneath : right</n:td>
+												<n:td>
+													<n:select id="selVeinsUnderneathRight" name="selVeinsUnderneathRight"
+														style="width:200px">
+														<n:option value="-1">select scale</n:option>
+														<n:option>1</n:option>
+														<n:option>2</n:option>
+														<n:option>3</n:option>
+														<n:option>4</n:option>
+														<n:option>5</n:option>
+														<n:option>6</n:option>
+														<n:option>7</n:option>
+														<n:option>8</n:option>
+														<n:option>9</n:option>
+														<n:option>10</n:option>
 													</n:select>
 												</n:td>
 											</n:tr>

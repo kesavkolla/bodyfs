@@ -82,12 +82,23 @@
 												<zk if="${each.serviceName != 'Herbal Treatment' }">
 													<n:tr>
 														<n:td>
-															<n:input type="checkbox" id="chk${each.id }" />
+															<n:input type="checkbox" id="chk${each.id }"  />
 															${each.serviceName }
 														</n:td>
 														<n:td>
-															<n:input type="textbox" size="5" id="txt${each.id }"
-																serviceid="${each.id }" />
+															<zk if="${each.serviceName != 'Acupuncture' &amp;&amp; each.serviceName != 'Cupping' &amp;&amp; each.serviceName != 'Re-Exam'}">
+															<n:select id="txt${each.id }" 
+																serviceid="${each.id }">
+																<n:option value="3">15 mins</n:option>
+																<n:option value="6">30 mins</n:option>
+																<n:option value="9">45 mins</n:option>
+																<n:option value="12">60 mins</n:option>
+															</n:select>
+															</zk>
+															<zk if="${each.serviceName == 'Acupuncture' || each.serviceName == 'Cupping' || each.serviceName == 'Re-Exam'}">
+																<n:input type="text" size="5" id="txt${each.id }"
+                													serviceid="${each.id }" value="2" style="display:none" />
+															</zk>
 														</n:td>
 													</n:tr>
 												</zk>

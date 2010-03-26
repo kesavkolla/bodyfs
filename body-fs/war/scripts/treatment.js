@@ -229,7 +229,7 @@ function SaveServiceData(evt) {
 		}
 	});
 	$("$txtServices").val($.toJSON(arrServices)).blur();
-	alert($.toJSON(arrServices));
+	//alert($.toJSON(arrServices));
 }
 
 /**

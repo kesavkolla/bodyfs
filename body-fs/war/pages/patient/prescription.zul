@@ -79,11 +79,30 @@
 														&amp;nbsp;
 													</n:td>
 													<n:td valign="top">
-														<n:input type="text" size="10" id="txt${each.id }"
-															serviceid="${each.id }" class="z-textbox" />
-														<n:br />
-														<n:input type="text" size="10" id="txtOther" class="z-textbox"
-															style="display:none" if="${each.serviceName == 'Other' }" />
+														<zk	if="${each.serviceName == 'Herbal Treatment'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }">
+																	<n:option value="0.33">1</n:option>
+																	<n:option value="0.66">2</n:option>
+																	<n:option value="1">3</n:option>
+																	<n:option value="1.33">4</n:option>
+																	<n:option value="1.66">5</n:option>
+																	<n:option value="2">6</n:option>
+																	<n:option value="2.33">7</n:option>
+																	<n:option value="2.66">8</n:option>
+																	<n:option value="3">9</n:option>
+																	<n:option value="3.33">10</n:option>
+															</n:select>
+														</zk>
+														<zk	if="${each.serviceName != 'Herbal Treatment'}">	
+															
+															<n:input type="text" size="10" id="txt${each.id }"
+																serviceid="${each.id }" class="z-textbox"  style="display: none" value="1"/>
+															<n:br />
+															<zk	if="${each.serviceName == 'Other'}">	
+																Desc:<n:input type="text" size="10" id="txtOther" class="z-textbox"
+																	style="display:none" if="${each.serviceName == 'Other' }" />
+															</zk>
+														</zk>
 													</n:td>
 												</n:tr>
 											</zk>

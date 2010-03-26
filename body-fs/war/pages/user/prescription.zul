@@ -61,11 +61,32 @@
 											<n:span style="font-weight:bold">${each.serviceName }</n:span>
 										</n:td>
 										<n:td>
-											<n:input type="text" size="2" id="txt${each.id }" serviceid="${each.id }"
-												readonly="readonly" />
-											<n:input type="text" size="10" id="txtOther" style="display:none"
-												if="${each.serviceName == 'Other' }" readonly="readonly" />
+											<zk	if="${each.serviceName == 'Herbal Treatment'}">
+												<n:select id="txt${each.id }" serviceid="${each.id }" disabled="disabled">
+														<n:option value="0.33">1</n:option>
+														<n:option value="0.66">2</n:option>
+														<n:option value="1">3</n:option>
+														<n:option value="1.33">4</n:option>
+														<n:option value="1.66">5</n:option>
+														<n:option value="2">6</n:option>
+														<n:option value="2.33">7</n:option>
+														<n:option value="2.66">8</n:option>
+														<n:option value="3">9</n:option>
+														<n:option value="3.33">10</n:option>
+												</n:select>
+											</zk>
+											<zk	if="${each.serviceName != 'Herbal Treatment'}">	
+												
+												<n:input type="text" size="10" id="txt${each.id }"
+													serviceid="${each.id }" class="z-textbox"  style="display: none" value="1"/>
+												<n:br />
+												<zk	if="${each.serviceName == 'Other'}">	
+													Desc:<n:input type="text" size="10" id="txtOther" class="z-textbox"
+														style="display:none" if="${each.serviceName == 'Other' }"  readonly="readonly"/>
+												</zk>
+											</zk>
 										</n:td>
+										
 									</n:tr>
 								</zk>
 							</n:tbody>

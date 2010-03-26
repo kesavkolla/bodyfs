@@ -32,6 +32,9 @@ public class PatientService implements Serializable {
 
 	@Persistent
 	private Long serviceId;
+	
+	@Persistent
+	private String comments;
 
 	@Persistent
 	private float numServices;
@@ -74,6 +77,21 @@ public class PatientService implements Serializable {
 
 	public void setNumServices(float numServices) {
 		this.numServices = numServices;
+	}
+	
+	
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	@Override

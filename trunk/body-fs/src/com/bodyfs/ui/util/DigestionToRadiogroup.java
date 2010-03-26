@@ -28,7 +28,6 @@ public class DigestionToRadiogroup implements TypeConverter, Serializable {
 		if (selectedIndex == -1) {
 			return null;
 		}
-		System.out.println(PatientVisit.Digestion.values()[selectedIndex]);
 		return PatientVisit.Digestion.values()[selectedIndex];
 	}
 

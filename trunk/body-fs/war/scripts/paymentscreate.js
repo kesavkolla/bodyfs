@@ -77,7 +77,15 @@ function calculateService() {
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
 	$("$planLength").val(maxWeek).blur();
+	
+	/* populate the totals */
 	$("#totalCost").html(totalCost);
+	$("#spndiscount").html($("$txtDiscount").val());
+	var discount = $("$txtDiscount").val();
+	if(!isNaN(parseFloat(discount))) {
+		totalCost -= (totalCost * discount / 100); 
+	}
+	$("#spnpayable").html(totalCost);
 }
 
 
@@ -169,12 +177,12 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
-	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>&nbsp;</td><td>" + $("#totalCost").html() + "</td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
 	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("$txtDiscount").val() + "</td><td></td></tr>");
 	var discount = $("$txtDiscount").val();
 	var totalCost = parseFloat($("#totalCost").html());
 	if(!isNaN(parseFloat(discount))) {
-		totalCost -= (totalCost * discount) / 100); 
+		totalCost -= (totalCost * discount / 100); 
 	}
 	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + totalCost + "</td><td></td></tr>");
 	buffer.push("</table>");

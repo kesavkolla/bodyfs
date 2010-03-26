@@ -31,7 +31,9 @@
 							</n:table>
 						</n:div>
 						<space orient="horizontal" height="10px" />
-						Discount: <n:input type="text" id="txtDiscount" /> %
+						Discount:
+						<doublebox constraint="no negative" id="txtDiscount" />
+						%
 						<n:input type="button" value="Calculate" id="btnCalculate" />
 						<space orient="horizontal" height="10px" />
 						<n:div style="font-size:large">Summary:</n:div>
@@ -54,6 +56,12 @@
 						<n:div style="width:90%;text-align:right;">
 							<n:span style="font-weight:bold">Total cost:$</n:span>
 							<n:span id="totalCost">&amp;nbsp;&amp;nbsp;</n:span>
+							<n:br />
+							<n:span style="font-weight:bold">Discount %</n:span>
+							<n:span id="spndiscount">&amp;nbsp;&amp;nbsp;</n:span>
+							<n:br />
+							<n:span style="font-weight:bold">Totaal payable:$</n:span>
+							<n:span id="spnpayable">&amp;nbsp;&amp;nbsp;</n:span>
 						</n:div>
 						<space orient="horizontal" height="20px" />
 						<n:div>

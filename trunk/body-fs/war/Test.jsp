@@ -3,7 +3,8 @@
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="com.bodyfs.dao.IPatientVisitDAO"%>
-<%@page import="com.bodyfs.model.PatientVisit"%><html>
+<%@page import="com.bodyfs.model.PatientVisit"%>
+<%@page import="com.bodyfs.model.PatientDiagnosis"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html">
 <title>Insert title here</title>
@@ -13,8 +14,9 @@
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
 	final IPatientVisitDAO visitDAO = ctx.getBean(IPatientVisitDAO.class);
-	final PatientVisit visit = visitDAO.getPatientVisitByDate(1L, null);
-	out.println(visit.getAnnotations());
+	final PatientDiagnosis diag = visitDAO.getPatientDiagnosisByDate(620L, null);
+	diag.setDiagnosisData("");
+	visitDAO.createPatientDiagnosis(diag);
 %>
 </body>
 </html>

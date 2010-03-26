@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -90,6 +91,8 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 			final JSONObject obj = (JSONObject) arrData.get(i);
 			planItems.add(obj.toJSONString());
 		}
+		final Doublebox txtDiscount = (Doublebox) Path.getComponent(page, "txtDiscount");
+		plan.setDiscount(txtDiscount.getValue().floatValue());
 
 		plan.setPlanItems(planItems);
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");

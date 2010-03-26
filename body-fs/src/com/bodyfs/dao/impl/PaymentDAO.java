@@ -185,6 +185,7 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		if (services == null || services.size() <= 0) {
 			return;
 		}
+		jdoTemplate.deletePersistentAll(getServicesByVisitDate(services.get(0).getPersonId(), services.get(0).getVisitDate()));
 		jdoTemplate.makePersistentAll(services);
 	}
 

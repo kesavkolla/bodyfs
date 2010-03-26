@@ -129,14 +129,22 @@ function initPage() {
 			var wgt = zk.Widget.$($(val).attr("id"));
 			wgt._href = $.param.querystring(wgt._href, "visitDate=" + selDate);
 		});
+		$("#btnCopy").attr("disabled", "disabled");
 	});
 
 	/* disable/enable copy */
 	$("#selVisitDates").change(function() {
-		if (this.selectedIndex == 0) {
-			$("#btnCopy").removeAttr('disabled');
+		var selDate = $(this).val();
+		var latestdate = $("#selVisitDates")[0].options[0].value;
+		var visitdate = $("$txtVisitDates").val();
+		if (visitdate < latestdate) {
+			$("#btnCopy").attr("disabled", "disabled");
+			return;
+		}
+		if ($(this).val() < latestdate) {
+			$("#btnCopy").removeAttr("disabled");
 		} else {
-			$("#btnCopy").attr('disabled', 'disabled');
+			$("#btnCopy").attr("disabled", "disabled");
 		}
 	});
 

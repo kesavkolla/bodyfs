@@ -40,7 +40,7 @@
 											<n:td>
 												<n:select id="selVisitDates" />
 												<n:input id="btnView" type="button" value="View" />
-												<n:input id="btnCopy" type="button" value="Copy" />
+												<n:input id="btnCopy" type="button" value="Copy" disabled="disabled" />
 											</n:td>
 											<n:td align="right">
 												<button id="btnPrev" label="Prev" sclass="submitbtn"
@@ -98,7 +98,8 @@
 												<n:td>Tongue Wetness</n:td>
 												<n:td>
 													<n:select id="selTongueWetness" name="selTongueWetness"
-														style="width:200px" multiple="multiple">
+														style="width:200px">
+														<n:option value="-1">select tongue wetness</n:option>
 														<n:option>Dry</n:option>
 														<n:option>Moist</n:option>
 														<n:option>Cracks</n:option>
@@ -109,7 +110,8 @@
 												<n:td>Tongue Shape</n:td>
 												<n:td>
 													<n:select id="selTongueShape" name="selTongueShape"
-														style="width:200px" multiple="multiple">
+														style="width:200px">
+														<n:option value="-1">select tongue shape</n:option>
 														<n:option>Normal</n:option>
 														<n:option>Teeth Marks</n:option>
 														<n:option>Thin</n:option>
@@ -118,7 +120,7 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Veins Underneath : left</n:td>
+												<n:td>Veins Left (Scale 1-10)</n:td>
 												<n:td>
 													<n:select id="selVeinsUnderneathLeft" name="selVeinsUnderneathLeft"
 														style="width:200px">
@@ -137,21 +139,21 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Veins Underneath : right</n:td>
+												<n:td>Veins Right (Scale 1-10)</n:td>
 												<n:td>
-													<n:select id="selVeinsUnderneathRight" name="selVeinsUnderneathRight"
-														style="width:200px">
+													<n:select id="selVeinsUnderneathRight"
+														name="selVeinsUnderneathRight" style="width:200px">
 														<n:option value="-1">select scale</n:option>
-														<n:option>1</n:option>
-														<n:option>2</n:option>
-														<n:option>3</n:option>
-														<n:option>4</n:option>
-														<n:option>5</n:option>
-														<n:option>6</n:option>
-														<n:option>7</n:option>
-														<n:option>8</n:option>
-														<n:option>9</n:option>
-														<n:option>10</n:option>
+														<n:option value="1">1</n:option>
+														<n:option value="2">2</n:option>
+														<n:option value="3">3</n:option>
+														<n:option value="4">4</n:option>
+														<n:option value="5">5</n:option>
+														<n:option value="6">6</n:option>
+														<n:option value="7">7</n:option>
+														<n:option value="8">8</n:option>
+														<n:option value="9">9</n:option>
+														<n:option value="10">10</n:option>
 													</n:select>
 												</n:td>
 											</n:tr>

@@ -54,13 +54,8 @@ function setupData(reload) {
 		width : selTongueWetness.width()
 	});
 	if (data.TongueWetness) {
-		if ($.isArray(data.TongueWetness)) {
-			$.each(data.TongueWetness, function() {
-				selTongueWetness.find("option[value='" + this + "']").attr("selected", "selected").change();
-			});
-		} else {
-			selTongueWetness.find("option[value='" + data.TongueWetness + "']").attr("selected", "selected").change();
-		}
+		selTongueWetness.find("option[value='" + data.TongueWetness + "']").attr("selected", "selected").change();
+		selTongueWetness.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup tongue shape */
@@ -69,13 +64,8 @@ function setupData(reload) {
 		width : selTongueShape.width()
 	});
 	if (data.TongueShape) {
-		if ($.isArray(data.TongueShape)) {
-			$.each(data.TongueShape, function() {
-				selTongueShape.find("option[value='" + this + "']").attr("selected", "selected").change();
-			});
-		} else {
-			selTongueShape.find("option[value='" + data.TongueShape + "']").attr("selected", "selected").change();
-		}
+		selTongueShape.find("option[value='" + data.TongueShape + "']").attr("selected", "selected").change();
+		selTongueShape.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup veins underneath */
@@ -83,29 +73,19 @@ function setupData(reload) {
 	selVeinsUnderneathLeft.dropdownchecklist( {
 		width : selVeinsUnderneathLeft.width()
 	});
-	if (data.VeinsUnderneath) {
-		if ($.isArray(data.VeinsUnderneath)) {
-			$.each(data.VeinsUnderneath, function() {
-				selVeinsUnderneathLeft.find("option[value='" + this + "']").attr("selected", "selected").change();
-			});
-		} else {
-			selVeinsUnderneathLeft.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
-		}
+	if (data.VeinsUnderneathLeft) {
+		selVeinsUnderneathLeft.find("option[value='" + data.VeinsUnderneathLeft + "']").attr("selected", "selected").change();
+		selVeinsUnderneathLeft.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
-	
+
 	/* setup veins underneath */
 	var selVeinsUnderneathRight = $("#selVeinsUnderneathRight");
 	selVeinsUnderneathRight.dropdownchecklist( {
 		width : selVeinsUnderneathRight.width()
 	});
-	if (data.VeinsUnderneath) {
-		if ($.isArray(data.VeinsUnderneath)) {
-			$.each(data.VeinsUnderneath, function() {
-				selVeinsUnderneathRight.find("option[value='" + this + "']").attr("selected", "selected").change();
-			});
-		} else {
-			selVeinsUnderneathRight.find("option[value='" + data.VeinsUnderneath + "']").attr("selected", "selected").change();
-		}
+	if (data.VeinsUnderneathRight) {
+		selVeinsUnderneathRight.find("option[value='" + data.VeinsUnderneathRight + "']").attr("selected", "selected").change();
+		selVeinsUnderneathRight.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
 
 	/* setup pulse right1 */
@@ -185,6 +165,7 @@ function setupData(reload) {
 	
 	if (reload) {
 		$.jGrowl("Loaded data for the selected visitdate", {life:2000});
+		$("#btnCopy").attr("disabled", "disabled");
 	}
 }
 
@@ -259,10 +240,17 @@ function initPage() {
 
 	/* disable/enable copy */
 	$("#selVisitDates").change(function() {
-		if (this.selectedIndex == 0) {
-			$("#btnCopy").removeAttr('disabled');
+		var selDate = $(this).val();
+		var latestdate = $("#selVisitDates")[0].options[0].value;
+		var visitdate = $("$txtVisitDates").val();
+		if (visitdate < latestdate) {
+			$("#btnCopy").attr("disabled", "disabled");
+			return;
+		}
+		if ($(this).val() < latestdate) {
+			$("#btnCopy").removeAttr("disabled");
 		} else {
-			$("#btnCopy").attr('disabled', 'disabled');
+			$("#btnCopy").attr("disabled", "disabled");
 		}
 	});
 
@@ -273,11 +261,12 @@ function initPage() {
 		/* Convert the elements array to single object */
 		var o = {};
 		$.each(elements, function() {
+			console.log(this.name);
 			var name = this.name.substring(3);
-			if (this.value == "") {
+			if (this.value == "" || this.value == "-1") {
 				return true;
 			}
-			if (o[name]) {
+			if (o[name] && o[name] != this.value) {
 				if (!o[name].push) {
 					o[name] = [ o[name] ];
 				}

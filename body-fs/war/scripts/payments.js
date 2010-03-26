@@ -42,8 +42,7 @@ function setupData(reload) {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This
- * will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This will summarize all the services.
  * 
  * @return
  */
@@ -82,9 +81,10 @@ function populateSummary() {
 		/* create the summary row and append to the summary table */
 		var buffer = new Array();
 		buffer.push("<tr>");
-		buffer.push("<td style='height:25px'>" + cumulativeList[serviceid].total + ":" + service.serviceName + "</td>");
-		buffer.push("<td>" + service.charge + "</td>");
-		buffer.push("<td>" + service.charge * cumulativeList[serviceid].total + "</td>");
+		buffer.push("<td style='height:25px'>" + service.serviceName + "</td>");
+		buffer.push("<td>" + cumulativeList[serviceid].total + "</td>");
+		buffer.push("<td>$" + service.charge + "</td>");
+		buffer.push("<td>$" + service.charge * cumulativeList[serviceid].total + "</td>");
 		buffer.push("</tr>")
 		$("#tblServicesSummary > tbody").append(buffer.join());
 		totalCost += service.charge * cumulativeList[serviceid].total;
@@ -128,9 +128,10 @@ function initPage() {
 		$("$txtPaymentDate").val(selDate).blur();
 	});
 
-	$("#btnPrint").click(function() {
+	$("$btnPrint").click(function() {
 		$.param.querystring()
 		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()));
+		return false;
 	});
 }
 

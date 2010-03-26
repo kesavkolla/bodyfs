@@ -25,10 +25,10 @@
 				<!-- toolbarbutton label="Calendar" image="/img/ical.png" hflex="1" href="#" / -->
 				<toolbarbutton label="EMI" image="/img/chart.png" hflex="1" href="/pages/user/emi.zul"
 					zclass="${page.title eq 'EMI Data' ? 'bodyfs-toolbar-selected' : '' }" />
-				<toolbarbutton label="Measurements" image="/img/database.png" hflex="1" href="#" />
+				<!-- toolbarbutton label="Measurements" image="/img/database.png" hflex="1" href="#" /-->
 				<toolbarbutton label="WeeklyVisit" image="/img/vcard_add.png" hflex="1"
 					href="/pages/user/weeklyvisit.zul" />
-				<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1" href="#" />
+				<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1" href="/pages/user/payments.zul" />
 			</vbox>
 			<script type="text/javascript" defer="true">
 				zk.afterMount(function() { $("$logo").click(function() {

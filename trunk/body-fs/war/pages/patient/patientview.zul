@@ -12,25 +12,21 @@
 				<center autoscroll="true" flex="true">
 					<vbox style="margin-left:10px">
 						<space orient="vertical" height="20px" />
-						<grid hflex="1" width="90%">
-							<rows>
-								<row spans="2">
+						<n:table width="800px" style="margin-left:auto;margin-right:auto">
+							<n:tr>
+								<n:td colspan="2">
 									<progressmeter id="pm" hflex="1" width="100%" />
-								</row>
-								<row style="background-color:none">
-									<cell>
-										<label id="week" />
-										Weeks
-									</cell>
-									<cell>
-										<hbox pack="end" hflex="1">
-											<label id="totalWeeks" />
-											weeks
-										</hbox>
-									</cell>
-								</row>
-							</rows>
-						</grid>
+								</n:td>
+							</n:tr>
+							<n:tr>
+								<n:td></n:td>
+								<n:td align="right" style="font-weight:bold">
+									<label id="totalWeeks" style="font-weight:bold" />
+									sessions
+								</n:td>
+							</n:tr>
+						</n:table>
+
 						<space orient="vertical" height="20px"></space>
 						<hbox pack="center" hflex="1">
 							<n:div style="border:1px solid white;margin-left:auto;margin-right:auto;width:800px;">

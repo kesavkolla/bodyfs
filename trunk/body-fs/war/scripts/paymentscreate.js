@@ -82,8 +82,8 @@ function calculateService() {
 	$("#totalCost").html(totalCost);
 	$("#spndiscount").html($("$txtDiscount").val());
 	var discount = $("$txtDiscount").val();
-	if(!isNaN(parseFloat(discount))) {
-		totalCost -= (totalCost * discount / 100); 
+	if (!isNaN(parseFloat(discount))) {
+		totalCost -= (totalCost * discount / 100);
 	}
 	$("#spnpayable").html(totalCost);
 }

@@ -92,6 +92,13 @@ function populateSummary() {
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
 	$("#totalCost").html(totalCost);
+	$("#spndiscount").html($("$txtDiscount").val());
+	var discount = $("$txtDiscount").val();
+	if (!isNaN(parseFloat(discount))) {
+		totalCost -= (totalCost * discount / 100);
+	}
+	$("#spnpayable").html(totalCost);
+
 }
 
 /**

@@ -94,6 +94,8 @@ public class PaymentComposer extends GenericForwardComposer {
 		if (plan != null) {
 			final Textbox txtPaymentData = (Textbox) Path.getComponent(this.page, "txtPaymentData");
 			txtPaymentData.setText(getPlanItems(plan));
+			final Textbox txtDiscount = (Textbox) Path.getComponent(page, "txtDiscount");
+			txtDiscount.setText("" + plan.getDiscount());
 		}
 
 	}

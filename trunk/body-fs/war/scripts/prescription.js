@@ -37,12 +37,12 @@ function loadData(growl) {
 		serviceData = parseJSON(txtServices.getValue());
 	}
 	$("#tblServices input:checkbox").attr("checked", false);
-	$("#tblServices input:text").val("");
+	$("#tblServices input:text").val("1");
 
 	for ( var i = 0, len = serviceData.length; i < len; i++) {
 		var data = serviceData[i];
 		$("#tblServices input#chk" + data.id).attr("checked", true);
-		$("#tblServices input#txt" + data.id).val(data.count);
+		$("#tblServices #txt" + data.id).val(data.count);
 	}
 
 	if (growl) {
@@ -110,6 +110,9 @@ function initPage() {
 			var chkService = $(this).find("input:checkbox");
 			if (chkService.attr("checked")) {
 				var txtService = $(this).find("input:text");
+				if(txtService.attr("serviceid") == null) {
+					txtService = $(this).find("select");
+				}
 				arrServices.push( {
 					"id" : txtService.attr("serviceid"),
 					"count" : txtService.val()
@@ -117,6 +120,7 @@ function initPage() {
 			}
 		});
 		$("$txtServices").val($.toJSON(arrServices)).blur();
+		//alert($.toJSON(arrServices));
 	});
 
 	/* Handle the click on View */

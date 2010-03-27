@@ -14,8 +14,7 @@ function initPage() {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This
- * will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This will summarize all the services.
  * 
  * @return
  */
@@ -58,11 +57,11 @@ function calculateService() {
 	});
 
 	/* Now populate the summary table with each total and cost */
-	var maxWeek = -1;
+	var maxSession = -1;
 	var totalCost = 0;
 	$("#tblServicesSummary > tbody").html("");
 	for ( var serviceid in cumulativeList) {
-		maxWeek = Math.max(maxWeek, cumulativeList[serviceid].week);
+		maxSession = Math.max(maxSession, cumulativeList[serviceid].total);
 		var service = getServiceById(serviceid);
 		/* create the summary row and append to the summary table */
 		var buffer = new Array();
@@ -72,12 +71,12 @@ function calculateService() {
 		buffer.push("<td>$" + service.charge + "</td>");
 		buffer.push("<td>$" + service.charge * cumulativeList[serviceid].total + "</td>");
 		buffer.push("</tr>")
-		$("#tblServicesSummary > tbody").append(buffer.join());
+		$("#tblServicesSummary > tbody").append(buffer.join(""));
 		totalCost += service.charge * cumulativeList[serviceid].total;
 	}
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
-	$("$planLength").val(maxWeek).blur();
+	$("$planLength").val(maxSession).blur();
 	
 	/* populate the totals */
 	$("#totalCost").html(totalCost);
@@ -110,13 +109,22 @@ function addService() {
 	var selService = getSelectedService(services, cmbServices.getValue());
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
-	buffer.push("<tr serviceid='" + selService.id + "'>");
-	buffer.push("<td><input type='text' class='txtCnt' value='1'/></td>");
-	buffer.push("<td>" + selService.serviceName + " per weeks for</td>");
-	buffer.push("<td><input type='text' class='txtWeek' value='1' /></td>");
-	buffer.push("<td><img src='/img/delete.png' class='imgDelete'/></td>");
-	buffer.push("</tr>");
-	$("#tblServicesBreakDown > tbody").append(buffer.join());
+	if(selService.serviceName != "Re-Exam") {
+		buffer.push("<tr serviceid='" + selService.id + "'>");
+		buffer.push("<td><input type='text' class='txtCnt' size='3' value='1'/><span class='space' /></td>");
+		buffer.push("<td>" + selService.serviceName + " per week for</td>");
+		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
+		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+		buffer.push("</tr>");
+	} else {
+		buffer.push("<tr serviceid='" + selService.id + "'>");
+		buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
+		buffer.push("Number of Re-Exams during treatment</td>");
+		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /></td>");
+		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+		buffer.push("</tr>");		
+	}
+	$("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
 }
@@ -198,8 +206,8 @@ function printSummary() {
 }
 
 /**
- * This function is called from the afterCompose. This will keep the services
- * object into the jQuery data. That will be used later on.
+ * This function is called from the afterCompose. This will keep the services object into the jQuery data. That will be
+ * used later on.
  */
 function saveServices(services) {
 	$.data(document.body, "servicelist", services);
@@ -224,8 +232,8 @@ function resetAll() {
 }
 
 /**
- * This function loops through all the services and find the service that
- * matches with the service that is selected in combobox
+ * This function loops through all the services and find the service that matches with the service that is selected in
+ * combobox
  * 
  * @return
  */
@@ -255,9 +263,8 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and
- * also make sure patient is selected. This will create a json object of all the
- * services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
+ * will create a json object of all the services and then it will be passed to the server.
  * 
  * @return
  */
@@ -290,8 +297,7 @@ function prepareSave(evt) {
 }
 
 /**
- * This function will be called when ever patient combobox is changed and that
- * patient's plan is retrieved and displayed
+ * This function will be called when ever patient combobox is changed and that patient's plan is retrieved and displayed
  * 
  * @return
  */
@@ -303,13 +309,28 @@ function loadServices(data) {
 	$.each(data, function() {
 		var service = getServiceById(this.serviceid);
 		var buffer = new Array();
-		buffer.push("<tr serviceid='" + this.serviceid + "'>");
-		buffer.push("<td><input type='text' class='txtCnt' value='" + this.count + "'/></td>");
-		buffer.push("<td>" + service.serviceName + " per weeks for</td>");
-		buffer.push("<td><input type='text' class='txtWeek' value='" + this.weeks + "' /></td>");
-		buffer.push("<td><img src='/img/delete.png' class='imgDelete'/></td>");
-		buffer.push("</tr>");
-		$("#tblServicesBreakDown > tbody").append(buffer.join());
+		if(service.serviceName != "Re-Exam") {
+			buffer.push("<tr serviceid='" + this.serviceid + "'>");
+			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + this.count +"'/><span class='space' /></td>");
+			buffer.push("<td>" + service.serviceName + " per week for</td>");
+			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value=" + this.weeks + "' /> weeks</td>");
+			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+			buffer.push("</tr>");
+		} else {
+			buffer.push("<tr serviceid='" + this.serviceid + "'>");
+			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
+			buffer.push("Number of Re-Exams during treatment</td>");
+			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + this.weeks + "' /></td>");
+			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+			buffer.push("</tr>");		
+		}
+		/*buffer.push("<tr serviceid='" + this.serviceid + "'>");
+		buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + this.count + "'/><span class='space' /></td>");
+		buffer.push("<td>" + service.serviceName + " per week for</td>");
+		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + this.weeks + "' /> weeks</td>");
+		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+		buffer.push("</tr>");*/
+		$("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	});
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");

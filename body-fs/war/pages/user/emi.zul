@@ -4,7 +4,8 @@
 <?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
 <?script type="text/javascript" src="/scripts/mpi.js"?>
-<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client" xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.z-center { color: white;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="mpiview" apply="com.bodyfs.ui.MPIViewComposer">
@@ -29,10 +30,11 @@
 									event.stopPropagation(); } return false; }
 								</attribute>
 							</button>
+							<n:button id="btnPrint" onclick="printChart()">Print</n:button>
 						</toolbar>
 						<space height="20px" orient="vertical" width="100%" />
 						<space />
-						<div id="mpiChart" hflex="1" vflex="1" />
+						<n:div id="mpiChart" style="width:600px;height:100%;margin-left:auto;margin-right:auto;" />
 					</div>
 				</center>
 			</borderlayout>

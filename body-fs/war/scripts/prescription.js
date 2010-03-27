@@ -38,6 +38,7 @@ function loadData(growl) {
 	}
 	$("#tblServices input:checkbox").attr("checked", false);
 	$("#tblServices input:text").val("1");
+	$("#tblServices select").val("1");
 
 	for ( var i = 0, len = serviceData.length; i < len; i++) {
 		var data = serviceData[i];

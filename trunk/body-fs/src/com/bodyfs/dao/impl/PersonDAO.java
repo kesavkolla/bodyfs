@@ -80,6 +80,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 	
 	@Override
+	public Collection<Person> getAllCustomers() {
+		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class, "personType != '" + PersonType.EMPLOYEE +"'"));
+	}
+	
+	@Override
 	public Collection<Person> getAllCustomersInfo() {
 		try {
 			final Collection<Person> results = this.jdoTemplate.find(Person.class, "personType == " + PersonType.EMPLOYEE);

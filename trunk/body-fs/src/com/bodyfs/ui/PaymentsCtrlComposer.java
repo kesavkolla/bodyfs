@@ -43,7 +43,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Collection<MasterService> services = paymentDAO.getMasterServicesList();
 		page.setAttribute("services", services);
-		page.setAttribute("patients", personDao.getAll());
+		page.setAttribute("patients", personDao.getAllCustomers());
 
 		// create JSON Array object of services
 		final JSONArray arrServices = new JSONArray();

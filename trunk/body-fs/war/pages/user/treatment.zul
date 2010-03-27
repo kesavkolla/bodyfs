@@ -87,7 +87,7 @@
 														</n:td>
 														<n:td>
 															<zk if="${each.serviceName != 'Acupuncture' &amp;&amp; each.serviceName != 'Cupping' &amp;&amp; each.serviceName != 'Re-Exam'}">
-															<n:select id="txt${each.id }" readonly="true"  
+															<n:select id="txt${each.id }" disabled="disabled"  
 																serviceid="${each.id }">
 																<n:option value="1">15 mins</n:option>
 																<n:option value="2">30 mins</n:option>

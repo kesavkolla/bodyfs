@@ -33,6 +33,8 @@ public interface IPersonDAO {
 	public Collection<Person> getAll();
 	
 	public Collection<Person> getAllCustomersInfo();
+	
+	public Collection<Person> getAllCustomers();
 
 	public Person createPerson(final Person person);
 

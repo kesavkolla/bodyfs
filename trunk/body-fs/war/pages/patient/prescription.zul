@@ -93,7 +93,15 @@
 																	<n:option value="3.33">10</n:option>
 															</n:select>
 														</zk>
-														<zk	if="${each.serviceName != 'Herbal Treatment'}">	
+														<zk	if="${each.serviceName == 'Powder'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }">
+																	<n:option value="0.25">0.25 bottle</n:option>
+																	<n:option value="0.50">0.5 bottle</n:option>
+																	<n:option value="1">1 bottle</n:option>
+																	<n:option value="2">2 bottle</n:option>
+															</n:select>
+														</zk>
+														<zk	if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">	
 															
 															<n:input type="text" size="10" id="txt${each.id }"
 																serviceid="${each.id }" class="z-textbox"  style="display: none" value="1"/>

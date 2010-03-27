@@ -34,6 +34,7 @@ function setupData(reload) {
 		buffer.push("</tr>");
 		$("#tblServicesBreakDown > tbody").append(buffer.join());
 	});
+
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
 
@@ -90,15 +91,18 @@ function populateSummary() {
 		$("#tblServicesSummary > tbody").append(buffer.join());
 		totalCost += service.charge * cumulativeList[serviceid].total;
 	}
+	$("#tblServicesSummary > tbody > tr > td:nth-child(4)").formatCurrency()
+	$("#tblServicesSummary > tbody > tr > td:nth-child(3)").formatCurrency()
+
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
-	$("#totalCost").html(totalCost);
+	$("#totalCost").html(totalCost).formatCurrency();
 	$("#spndiscount").html($("$txtDiscount").val());
 	var discount = $("$txtDiscount").val();
 	if (!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100);
 	}
-	$("#spnpayable").html(totalCost);
+	$("#spnpayable").html(totalCost).formatCurrency();
 
 }
 

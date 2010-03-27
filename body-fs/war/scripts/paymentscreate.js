@@ -279,7 +279,7 @@ function getServiceById(serviceid) {
  */
 function prepareSave(evt) {
 	/* do the validations */
-	if(isNaN(parseFloat($("#totalCost").html()))) {
+	if(isNaN(parseFloat($("#totalCost").html().substring(1)))) {
 		alert("Click Caculate button before saving");
 		evt.stopPropagation();
 		evt.preventDefault();

@@ -14,7 +14,8 @@ function initPage() {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This
+ * will summarize all the services.
  * 
  * @return
  */
@@ -68,24 +69,26 @@ function calculateService() {
 		buffer.push("<tr>");
 		buffer.push("<td style='height:25px'>" + service.serviceName + "</td>");
 		buffer.push("<td>" + cumulativeList[serviceid].total + "</td>");
-		buffer.push("<td>$" + service.charge + "</td>");
-		buffer.push("<td>$" + service.charge * cumulativeList[serviceid].total + "</td>");
+		buffer.push("<td>" + service.charge + "</td>");
+		buffer.push("<td>" + service.charge * cumulativeList[serviceid].total + "</td>");
 		buffer.push("</tr>")
 		$("#tblServicesSummary > tbody").append(buffer.join(""));
 		totalCost += service.charge * cumulativeList[serviceid].total;
 	}
+	$("#tblServicesSummary > tbody > tr > td:nth-child(4)").formatCurrency()
+	$("#tblServicesSummary > tbody > tr > td:nth-child(3)").formatCurrency()
 	$("#tblServicesSummary > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesSummary > tbody > tr:odd").addClass("z-listbox-odd");
 	$("$planLength").val(maxSession).blur();
-	
+
 	/* populate the totals */
-	$("#totalCost").html(totalCost);
+	$("#totalCost").html(totalCost).formatCurrency();
 	$("#spndiscount").html($("$txtDiscount").val());
 	var discount = $("$txtDiscount").val();
 	if (!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100);
 	}
-	$("#spnpayable").html(totalCost);
+	$("#spnpayable").html(totalCost).formatCurrency();
 }
 
 
@@ -124,7 +127,7 @@ function addService() {
 		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
 		buffer.push("</tr>");		
 	}
-	$("#tblServicesBreakDown > tbody").append(buffer.join(""));
+	var row = $("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
 }
@@ -136,10 +139,16 @@ function addService() {
  */
 function printSummary() {
 	/* check whether it's ready to show the print page or not */
-	if(isNaN(parseFloat($("#totalCost").html()))) {
+	if(isNaN(parseFloat($("#totalCost").html().substring(1)))) {
 		alert("Click Caculate button before printing");
 		return;
 	}
+	/* Get the customer name */
+	var custName = zk.Widget.$($("$cmbCustomers").attr("id")).getValue();
+	/* date in mm/dd/yyyy format */
+	var today = new Date();
+	today = (today.getMonth() +1) + "/" + today.getDate() + "/" + today.getYear();
+	
 	var buffer = new Array();
 	/* Construct the print page content */
 	buffer.push("<html><head><style type='text/css'>body {font-family: 'Monotype Corsiva'; font-size:18px;}</style><body>");
@@ -151,8 +160,8 @@ function printSummary() {
 	/* prepare header content */
 	buffer.push("<div style='margin-left:20px'>");
 	buffer.push("<br /><br />")
-	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;</span>");
-	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;</span><br /><br />");
+	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;" + custName + "</span>");
+	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;" + today + "</span><br /><br />");
 	/* show the treatment plan length */
 	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("$planLength").val() + "</span>&nbsp;weeks<br /><br />");
 	/* prepare the summary breakdown */
@@ -161,7 +170,11 @@ function printSummary() {
 		var week = parseInt($(this).find("input[class='txtWeek']").val());
 		var serviceid = $(this).attr("serviceid");
 		var service = getServiceById(serviceid);
-		buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Session per week for " + week + "&nbsp; week" + (week > 1 ? "s":""));
+		if(service.serviceName != "Re-Exam") {
+			buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Session per week for " + week + "&nbsp; week" + (week > 1 ? "s":""));
+		} else {
+			buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
+		}
 		buffer.push("<br />");
 	});
 	buffer.push("<p></p>");
@@ -175,7 +188,7 @@ function printSummary() {
 		buffer.push("<tr><td>");
 		buffer.push(cell1[1]);
 		buffer.push("</td><td><span style='display:inline-block;width:20px'>&nbsp;</td>");
-		buffer.push("<td>$");
+		buffer.push("<td>");
 		buffer.push(cost);
 		buffer.push("&nbsp;X&nbsp;");
 		buffer.push(cell1[0]);
@@ -187,13 +200,8 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>$" + $("$txtDiscount").val() + "</td><td></td></tr>");
-	var discount = $("$txtDiscount").val();
-	var totalCost = parseFloat($("#totalCost").html());
-	if(!isNaN(parseFloat(discount))) {
-		totalCost -= (totalCost * discount / 100); 
-	}
-	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>$" + totalCost + "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("#spndiscount").html() + "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable").html() + "</td><td></td></tr>");
 	buffer.push("</table>");
 	buffer.push("</div>");
 	/* prepare print button */
@@ -206,8 +214,8 @@ function printSummary() {
 }
 
 /**
- * This function is called from the afterCompose. This will keep the services object into the jQuery data. That will be
- * used later on.
+ * This function is called from the afterCompose. This will keep the services
+ * object into the jQuery data. That will be used later on.
  */
 function saveServices(services) {
 	$.data(document.body, "servicelist", services);
@@ -232,8 +240,8 @@ function resetAll() {
 }
 
 /**
- * This function loops through all the services and find the service that matches with the service that is selected in
- * combobox
+ * This function loops through all the services and find the service that
+ * matches with the service that is selected in combobox
  * 
  * @return
  */
@@ -263,8 +271,9 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
- * will create a json object of all the services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and
+ * also make sure patient is selected. This will create a json object of all the
+ * services and then it will be passed to the server.
  * 
  * @return
  */
@@ -294,45 +303,4 @@ function prepareSave(evt) {
 	});
 	$("$txtPaymentData").val($.toJSON(arrServices)).blur();
 	return true;
-}
-
-/**
- * This function will be called when ever patient combobox is changed and that patient's plan is retrieved and displayed
- * 
- * @return
- */
-function loadServices(data) {
-	resetAll();
-	if (!$.isArray(data) || data.length <= 0) {
-		return;
-	}
-	$.each(data, function() {
-		var service = getServiceById(this.serviceid);
-		var buffer = new Array();
-		if(service.serviceName != "Re-Exam") {
-			buffer.push("<tr serviceid='" + this.serviceid + "'>");
-			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + this.count +"'/><span class='space' /></td>");
-			buffer.push("<td>" + service.serviceName + " per week for</td>");
-			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value=" + this.weeks + "' /> weeks</td>");
-			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-			buffer.push("</tr>");
-		} else {
-			buffer.push("<tr serviceid='" + this.serviceid + "'>");
-			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
-			buffer.push("Number of Re-Exams during treatment</td>");
-			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + this.weeks + "' /></td>");
-			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-			buffer.push("</tr>");		
-		}
-		/*buffer.push("<tr serviceid='" + this.serviceid + "'>");
-		buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + this.count + "'/><span class='space' /></td>");
-		buffer.push("<td>" + service.serviceName + " per week for</td>");
-		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + this.weeks + "' /> weeks</td>");
-		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-		buffer.push("</tr>");*/
-		$("#tblServicesBreakDown > tbody").append(buffer.join(""));
-	});
-	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
-	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
-	$("#btnCalculate").click();
 }

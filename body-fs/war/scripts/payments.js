@@ -42,7 +42,8 @@ function setupData(reload) {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This
+ * will summarize all the services.
  * 
  * @return
  */
@@ -135,11 +136,13 @@ function initPage() {
 		$("$txtPaymentDate").val(selDate).blur();
 	});
 
-	$("$btnPrint").click(function() {
-		$.param.querystring()
-		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()));
-		return false;
-	});
+	$("$btnPrint").click(
+			function() {
+				$.param.querystring()
+				window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()), 'PaymentsWindow',
+						'width=1000,height=600');
+				return false;
+			});
 }
 
 /**

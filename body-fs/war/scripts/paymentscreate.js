@@ -14,7 +14,8 @@ function initPage() {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This
+ * will summarize all the services.
  * 
  * @return
  */
@@ -197,8 +198,8 @@ function printSummary() {
 }
 
 /**
- * This function is called from the afterCompose. This will keep the services object into the jQuery data. That will be
- * used later on.
+ * This function is called from the afterCompose. This will keep the services
+ * object into the jQuery data. That will be used later on.
  */
 function saveServices(services) {
 	$.data(document.body, "servicelist", services);
@@ -223,8 +224,8 @@ function resetAll() {
 }
 
 /**
- * This function loops through all the services and find the service that matches with the service that is selected in
- * combobox
+ * This function loops through all the services and find the service that
+ * matches with the service that is selected in combobox
  * 
  * @return
  */
@@ -254,8 +255,9 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
- * will create a json object of all the services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and
+ * also make sure patient is selected. This will create a json object of all the
+ * services and then it will be passed to the server.
  * 
  * @return
  */
@@ -288,7 +290,8 @@ function prepareSave(evt) {
 }
 
 /**
- * This function will be called when ever patient combobox is changed and that patient's plan is retrieved and displayed
+ * This function will be called when ever patient combobox is changed and that
+ * patient's plan is retrieved and displayed
  * 
  * @return
  */

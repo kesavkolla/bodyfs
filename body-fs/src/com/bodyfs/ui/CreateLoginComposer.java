@@ -34,12 +34,13 @@ public class CreateLoginComposer extends GenericForwardComposer {
 		final ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
 		final Person person = personDao.getPerson(patid);
 		LoginInfo login = loginDAO.getLoginDetails(patid);
-		final GeneralInfo ginfo = personDao.getGeneralInfo(patid) != null? personDao.getGeneralInfo(patid) : new GeneralInfo();
-		
+		final GeneralInfo ginfo = personDao.getGeneralInfo(patid) != null ? personDao.getGeneralInfo(patid)
+				: new GeneralInfo();
+
 		if (ginfo.getPersonId() == null) {
 			ginfo.setPersonId(patid);
 		}
-		
+
 		if (login == null) {
 			login = new LoginInfo();
 			login.setPersonId(person.getId());
@@ -47,7 +48,7 @@ public class CreateLoginComposer extends GenericForwardComposer {
 			login.setPassword(person.getFirstName().toLowerCase().split(" ")[0] + "123");
 		} else {
 			final Textbox loginid = (Textbox) Path.getComponent(page, "loginid");
-			loginid.setDisabled(true);
+			loginid.setReadonly(true);
 			final Button btnSave = (Button) Path.getComponent(page, "btnSave");
 			btnSave.setLabel("Update");
 		}

@@ -3,13 +3,8 @@ package com.bodyfs.dao.impl;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.jdo.JDOException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.jdo.JdoCallback;
 import org.springframework.orm.jdo.JdoTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -76,7 +71,7 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	@Override
 	public LoginInfo verifyLoginDetails(String loginId, String password) {
 		try {
-			final LoginInfo login = this.jdoTemplate.getObjectById(LoginInfo.class, loginId);
+			final LoginInfo login = this.jdoTemplate.getObjectById(LoginInfo.class, loginId.toLowerCase());
 			if (login != null && login.getPassword().equals(password)) {
 				return login;
 			}
@@ -89,22 +84,13 @@ public class LoginDAO implements ILoginDAO, Serializable {
 
 	@Override
 	public void createNewLogin(LoginInfo login) {
+		login.setUserid(login.getUserid().toLowerCase());
 		this.jdoTemplate.makePersistent(login);
 	}
 
 	@Override
 	public Collection<LoginInfo> getAll() {
-		return this.jdoTemplate.execute(new JdoCallback<Collection<LoginInfo>>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public Collection<LoginInfo> doInJdo(PersistenceManager pm) throws JDOException {
-				final Query query = pm.newQuery(LoginInfo.class);
-				Collection<LoginInfo> lst = (Collection<LoginInfo>) query.execute();
-				// lst.size();
-				return lst;
-			}
-
-		});
+		return jdoTemplate.find(LoginInfo.class);
 	}
 
 	@Override

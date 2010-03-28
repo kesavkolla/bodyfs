@@ -84,7 +84,7 @@
 				</vbox>
 			</row>
 			<row spans="2,2">
-				How loang have you had this condition?
+				How long have you had this condition?
 				<textbox value="@{ginfo.condition, save-when='btnNext.onClick' }" hflex="1" />
 			</row>
 			<row spans="2,2,4">

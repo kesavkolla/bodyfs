@@ -2,7 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">
-	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" style="padding-left:5px;background-color:white">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" width="97%"  style="padding-left:5px;background-color:white">
 		<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px; color:black">
 			<panelchildren>
 				<hbox width="100%">
@@ -87,7 +87,7 @@
 			<panelchildren>
 				<hbox width="100%">
 					<vbox>
-						<checkbox label="Glasses (What age:   )" checked="@{ent.glasses, save-when='btnNext.onClick' }" />
+						<div><checkbox label="Glasses" checked="@{ent.glasses, save-when='btnNext.onClick' }" />  -  Age:<textbox value="@{ent.glassesAge, save-when='btnNext.onClick' }"></textbox></div> 
 						<checkbox label="Eye strain" checked="@{ent.eyestrain, save-when='btnNext.onClick' }" />
 						<checkbox label="Eye pain" checked="@{ent.eyepain, save-when='btnNext.onClick' }" />
 						<checkbox label="Red eyes" checked="@{ent.redeyes, save-when='btnNext.onClick' }" />
@@ -206,8 +206,10 @@
 			</panelchildren>
 		</panel>
 		<hbox width="100%" pack="end">
-			<button label="Prev" forward="onClick=npigrid.onNext(npi2)" />
-			<button label="Next" id="btnNext" forward="onClick=npigrid.onNext(npi4)" />
+			<button label="Prev" forward="onClick=npigrid.onNext(npi2)" width="100px"
+								height="50px"/>
+			<button label="Next" id="btnNext" forward="onClick=npigrid.onNext(npi4)" width="100px"
+								height="50px"/>
 		</hbox>
 	</window>
 </zk>

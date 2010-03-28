@@ -31,6 +31,9 @@ public class ENT implements Serializable {
 
 	@Persistent
 	private Boolean glasses;
+	
+	@Persistent
+	private String glassesAge;
 
 	@Persistent
 	private String age;
@@ -450,6 +453,21 @@ public class ENT implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	
+	/**
+	 * @return the glassesAge
+	 */
+	public String getGlassesAge() {
+		return glassesAge;
+	}
+
+	/**
+	 * @param glassesAge the glassesAge to set
+	 */
+	public void setGlassesAge(String glassesAge) {
+		this.glassesAge = glassesAge;
 	}
 
 	/**

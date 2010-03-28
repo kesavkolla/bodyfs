@@ -133,8 +133,10 @@
 			<row spans="8">
 				<hbox hflex="1">
 					<separator hflex="1" />
-					<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" />
-					<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi2)" />
+					<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" width="100px"
+								height="50px"/>
+					<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi2)" width="100px"
+								height="50px"/>
 				</hbox>
 			</row>
 		</rows>

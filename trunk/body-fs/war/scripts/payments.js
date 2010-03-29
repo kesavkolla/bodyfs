@@ -32,7 +32,7 @@ function setupData(reload) {
 		buffer.push("<td>" + service.serviceName + " per weeks for</td>");
 		buffer.push("<td><input type='text' class='txtWeek' readonly='readonly' value='" + this.weeks + "' /></td>");
 		buffer.push("</tr>");
-		$("#tblServicesBreakDown > tbody").append(buffer.join());
+		$("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	});
 
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
@@ -88,7 +88,7 @@ function populateSummary() {
 		buffer.push("<td>$" + service.charge + "</td>");
 		buffer.push("<td>$" + service.charge * cumulativeList[serviceid].total + "</td>");
 		buffer.push("</tr>")
-		$("#tblServicesSummary > tbody").append(buffer.join());
+		$("#tblServicesSummary > tbody").append(buffer.join(""));
 		totalCost += service.charge * cumulativeList[serviceid].total;
 	}
 	$("#tblServicesSummary > tbody > tr > td:nth-child(4)").formatCurrency()

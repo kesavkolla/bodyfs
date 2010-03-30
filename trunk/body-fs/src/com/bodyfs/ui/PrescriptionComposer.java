@@ -33,10 +33,12 @@ import com.bodyfs.Constants;
 import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPaymentDAO;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Diagnosis;
 import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.PatientPrescription;
+import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.model.payments.MasterService;
 import com.bodyfs.model.payments.PatientService;
@@ -381,5 +383,17 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			}
 		}
 		return arrServices.toJSONString();
+	}
+
+	/**
+	 * Retrieves the current patient's display name
+	 * 
+	 * @return
+	 */
+	public final String getPatientName() {
+		final Long patid = CommonUtils.getPatientId();
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		final Person person = personDAO.getPerson(patid);
+		return person.getDisplayName();
 	}
 }

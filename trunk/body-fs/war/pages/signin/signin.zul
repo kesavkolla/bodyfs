@@ -35,8 +35,8 @@
 									<n:td>
 										Sigin in Date (temp)
 										<datebox id="visitdate"
-											value="@{patvisit.visitDate, save-when='btnSave.onClick' }" constraint="no future,no today"
-											format="MM/dd/yyyy" timeZone="${c:timezone('PST')}" hflex="true" />
+											value="@{patvisit.visitDate, save-when='btnSave.onClick' }" format="MM/dd/yyyy"
+											timeZone="${c:timezone('PST')}" hflex="true" />
 										<div id="Pagination" class="pagination" align="right" width="90%" />
 									</n:td>
 									<n:td>

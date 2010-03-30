@@ -97,6 +97,34 @@ public interface IPersonDAO {
 	public void createNeuropsychological(final Neuropsychological np);
 
 	public void createGenitourinary(final Genitourinary gen);
+	
+	public Genitourinary getGenitourinary(final Long personId);
+	
+	public Gynecology getGynecology(final Long personId);
+	
+	public Neuropsychological getNeuropsychological(final Long personId);
 
 	public void createGynecology(final Gynecology gy);
+
+	public SkinHair getSkinHair(Long personId);
+
+	public Musculoskeletal getMusculoskeletal(Long personId);
+
+	public Gastrointestinal getGastrointestinal(Long personId);
+
+	public Cardiovascular getCardiovascular(Long personId);
+
+	public Respiratory getRespiratory(Long personId);
+
+	public FamilyMedHistory getFamilyMedicalHistory(Long personId);
+
+	public PastMedicalHistory getPastMedicalHistory(Long personId);
+
+	public Diet getDiet(Long personId);
+
+	public Lifestyle getLifestyle(Long personId);
+
+	public GeneralSymptoms getGeneralSymptoms(Long personId);
+
+	public ENT getENT(Long personId);
 }

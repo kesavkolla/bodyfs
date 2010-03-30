@@ -1,0 +1,207 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npiview2"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIViewComposer" width="97%" style="padding-left:5px;background-color:white">
+		<panel title="Health Insurance Info" border="normal" style="margin-bottom:10px">
+			<panelchildren>
+				<grid fixedLayout="true" style="border:0px" hflex="1" vflex="1">
+					<rows>
+						<row>
+							Insurance Co. Name
+							<textbox readonly="true" hflex="1" />
+							Policy #
+							<textbox readonly="true" hflex="1" />
+						</row>
+						<row>
+							<vbox>
+								<label value="Address" />
+								<label value="City,State, Zip" />
+							</vbox>
+							<textbox  readonly="true" rows="2" hflex="1" />
+							Phone
+							<textbox  readonly="true" hflex="1" />
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel title="Family Medical History" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%" height="100%">
+					<vbox>
+						<!-- <checkbox label="Allergies (list)" checked="@{fmh.allergies, save-when='btnNext.onClick' }" />
+							<textbox value="@{fmh.allergy1, save-when='btnNext.onClick' }" />
+							<textbox value="@{fmh.allergy2, save-when='btnNext.onClick' }" /> -->
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Arteriosclerosis"
+							checked="@{fmh.arteriosclerosis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Asthma" checked="@{fmh.asthma, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Alcoholism" checked="@{fmh.alcoholism, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Cancer (type)" checked="@{fmh.cancerType, save-when='btnNext.onClick' }" />
+						<textbox  readonly="true" value="@{fmh.cancer, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Depression" checked="@{fmh.depression, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diabetes" checked="@{fmh.diabetes, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Heart disease" checked="@{fmh.heartdisease, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="High blood pressure"
+							checked="@{fmh.highbloodpressure, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Seizures" checked="@{fmh.seizures, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Stroke" checked="@{fmh.stroke, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Your Past Medical History" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%" height="100%">
+				(Check any of the following conditions you currently have, or have had in past. Please also check if you
+				feel any of the following are significant part of your medical history.)
+				</hbox>
+				<hbox width="100%" height="100%">
+					<vbox>
+						<checkbox disabled="true" label="AIDS/HIV" checked="@{pmh.aids, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Alcoholism" checked="@{pmh.alcoholism, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Allergies" checked="@{pmh.allergies, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Appendicitis" checked="@{pmh.appendicitis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Arteriosclerosis"
+							checked="@{pmh.arteriosclerosis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Asthma" checked="@{pmh.asthma, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Birth trauma" checked="@{pmh.birthtrauma, save-when='btnNext.onClick' }" />
+						(your own birth)
+						<checkbox disabled="true" label="Cancer" checked="@{pmh.cancer, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Chicken pox" checked="@{pmh.chickenpox, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diabetes" checked="@{pmh.diabetes, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Emphysema" checked="@{pmh.emphysema, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Epilepsy" checked="@{pmh.epilepsy, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Goiter" checked="@{pmh.goiter, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Gout" checked="@{pmh.gout, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Heart disease" checked="@{pmh.heartdisease, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Hepatitis" checked="@{pmh.hepatitis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Herpes" checked="@{pmh.herpes, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="High blood pressure"
+							checked="@{pmh.highbloodpressure, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Measles" checked="@{pmh.measles, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Multiple Sclerosis"
+							checked="@{pmh.multipleSclerosis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Mumps" checked="@{pmh.mumps, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Pacemaker" checked="@{pmh.pacemaker, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Pleurisy" checked="@{pmh.pleurisy, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Pneumonia" checked="@{pmh.pneumonia, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Polio" checked="@{pmh.polio, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Rheumatic fever" checked="@{pmh.rheumaticfever, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Scarlet fever" checked="@{pmh.scarletfever, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Seizures" checked="@{pmh.seizures, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Stroke" checked="@{pmh.stroke, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Surgery (list)" checked="@{pmh.surgery, save-when='btnNext.onClick' }" />
+						<textbox  readonly="true" rows="3" value="@{pmh.surgeryList, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Thyroid disorders"
+							checked="@{pmh.thyroiddisorders, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Major trauma" checked="@{pmh.majortrauma, save-when='btnNext.onClick' }" />
+						(Car, fall, etc-list)
+						<textbox  readonly="true" rows="3" value="@{pmh.carfalletc, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Tuberculosis" checked="@{pmh.tuberculosis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Typhoid fever" checked="@{pmh.typhoidfever, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Ulcers" checked="@{pmh.ulcers, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Venereal disease"
+							checked="@{pmh.venerealdisease, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Whooping cough" checked="@{pmh.whoopingcough, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Other (Specify)" />
+						<textbox  readonly="true" rows="4" value="@{pmh.other, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Your Diet" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%">
+					Appetite
+					<radiogroup id="appetite"
+						selectedIndex="@{yd.appetite, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+						<vbox>
+							<radio label="Low" />
+							<radio label="High" />
+						</vbox>
+					</radiogroup>
+					<vbox>
+						<checkbox disabled="true" label="Coffee/Tea" checked="@{yd.coffeeTea, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Soft Drinks/Fruit Juices" checked="@{yd.drinks, save-when='btnNext.onClick' }" />
+					</vbox>
+					Protein Intake
+					<radiogroup id="protein"
+						selectedIndex="@{yd.protein, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+						<vbox>
+							<radio label="Low" />
+							<radio label="High" />
+						</vbox>
+					</radiogroup>
+					<vbox>
+						<checkbox disabled="true" label="Artificial" checked="@{yd.sweeteners, save-when='btnNext.onClick' }" />
+						Sweeteners
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Sugar" checked="@{yd.sugar, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Salty foods" checked="@{yd.saltyfoods, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Thirst for water:
+						<hbox>
+							# glasses per day:
+							<textbox  readonly="true" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Average Daily Menu" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						Morning
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.morning, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.msnack, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Noon
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.noon, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.nsnack, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Evening
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.evening, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.esnack, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<hbox width="100%" pack="end">
+			<button label="Prev" forward="onClick=npigrid.onNext(npiview1)" width="100px"
+								height="50px"/>
+			<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npiview3)" width="100px"
+								height="50px"/>
+		</hbox>
+	</window>
+</zk>

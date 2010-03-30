@@ -10,6 +10,10 @@ function initPage() {
 		var plan = plans[i];
 		appendPlan(plan);
 	}
+	$("$btnPrint").click(function() {
+		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()), 'PaymentsWindow', 'width=1000,height=600');
+		return false;
+	});
 }
 
 /**
@@ -101,7 +105,7 @@ function appendPlan(plan) {
 	buffer.push('</div>');
 	buffer.push('<button id="btnPrint' + plan.id + '">Print</button>');
 	if(!plan.active) {
-		buffer.push('<button id="btnSave' + plan.id + '">Save</button>');
+		/* buffer.push('<button id="btnSave' + plan.id + '">Save</button>'); */
 		buffer.push('<button id="btnActive' + plan.id + '">Activate</button>');
 		buffer.push('<button id="btnArchive' + plan.id + '">Archive</button>');
 	}
@@ -127,11 +131,13 @@ function appendPlan(plan) {
 		});
 		$("#btnCalculate" + plan.id).click(function(evt) {
 			calculateService(plan.id);
-		});
-		$("#btnSave" + plan.id).click(function(evt) {
 			prepareSave(plan.id);
 			$("$txtAction").val("Save:" + plan.id).blur();
 		});
+		/*
+		 * $("#btnSave" + plan.id).click(function(evt) { prepareSave(plan.id); $("$txtAction").val("Save:" +
+		 * plan.id).blur(); });
+		 */
 		$("#btnActive" + plan.id).click(function(evt) {
 			$("$txtAction").val("Activate:" + plan.id).blur();
 		});
@@ -140,12 +146,11 @@ function appendPlan(plan) {
 			$("$txtAction").val("Archive:" + plan.id).blur();
 		});
 	}
-	
+
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This
- * will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This will summarize all the services.
  * 
  * @return
  */
@@ -214,7 +219,7 @@ function calculateService(id) {
 	/* populate the totals */
 	$("#spntotal" + id).html(totalCost).formatCurrency();
 	$("#spndiscount" + id).html($("#txtDiscount" + id).val());
-	var discount = $("$txtDiscount").val();
+	var discount = $("#txtDiscount" + id).val();
 	if (!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100);
 	}
@@ -389,9 +394,8 @@ function addServiceDropdown(buffer, plan) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and
- * also make sure patient is selected. This will create a json object of all the
- * services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
+ * will create a json object of all the services and then it will be passed to the server.
  * 
  * @return
  */
@@ -427,8 +431,8 @@ function DeleteRow() {
 }
 
 /**
- * This function loops through all the services and find the service that
- * matches with the service that is selected in combobox
+ * This function loops through all the services and find the service that matches with the service that is selected in
+ * combobox
  * 
  * @return
  */

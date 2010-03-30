@@ -142,7 +142,17 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 
 	@Override
 	public Collection<PatientPaymentPlan> getAllPlans(final Long patientId) {
-		return jdoTemplate.find(PatientPaymentPlan.class, "personId ==" + patientId);
+		return jdoTemplate.find(PatientPaymentPlan.class, "personId ==" + patientId + " && archive == false",
+				"paymentDate desc");
+	}
+
+	@Override
+	public PatientPaymentPlan getPlayById(Long plaind) {
+		try {
+			return jdoTemplate.getObjectById(PatientPaymentPlan.class, plaind);
+		} catch (final Exception e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -171,13 +181,36 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		return null;
 	}
 
+	@Override
+	public void makeFinal(final Long planid) {
+		// Get all non active plans and make them archive
+		final Collection<PatientPaymentPlan> plans = jdoTemplate.find(PatientPaymentPlan.class,
+				"archive==false  && active==false ");
+		for (final PatientPaymentPlan plan : plans) {
+			if (plan.getId().equals(planid)) {
+				plan.setActive(true);
+				plan.setArchive(false);
+			} else {
+				plan.setArchive(true);
+			}
+			jdoTemplate.makePersistent(plan);
+		}
+	}
+
+	@Override
+	public void archivePlan(Long planid) {
+		final PatientPaymentPlan plan = jdoTemplate.getObjectById(PatientPaymentPlan.class, planid);
+		plan.setArchive(true);
+		jdoTemplate.makePersistent(plan);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Date> getPaymentPlanDates(final Long patientId) {
 		final Map<String, Object> vals = new HashMap<String, Object>();
 		vals.put("pid", patientId);
 		return jdoTemplate.find("SELECT paymentDate FROM " + PatientPaymentPlan.class.getName()
-				+ " WHERE personId==pid PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
+				+ " WHERE personId==pid && archive == false PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
 	}
 
 	@Override
@@ -185,7 +218,8 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 		if (services == null || services.size() <= 0) {
 			return;
 		}
-		jdoTemplate.deletePersistentAll(getServicesByVisitDate(services.get(0).getPersonId(), services.get(0).getVisitDate()));
+		jdoTemplate.deletePersistentAll(getServicesByVisitDate(services.get(0).getPersonId(), services.get(0)
+				.getVisitDate()));
 		jdoTemplate.makePersistentAll(services);
 	}
 

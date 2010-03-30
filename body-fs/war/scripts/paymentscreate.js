@@ -112,7 +112,7 @@ function addService() {
 	var selService = getSelectedService(services, cmbServices.getValue());
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
-	if(selService.serviceName != "Re-Exam") {
+	if (selService.serviceName != "Re-Exam") {
 		buffer.push("<tr serviceid='" + selService.id + "'>");
 		buffer.push("<td><input type='text' class='txtCnt' size='3' value='1'/><span class='space' /></td>");
 		buffer.push("<td>" + selService.serviceName + " per week for</td>");
@@ -125,7 +125,7 @@ function addService() {
 		buffer.push("Number of Re-Exams during treatment</td>");
 		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /></td>");
 		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-		buffer.push("</tr>");		
+		buffer.push("</tr>");
 	}
 	var row = $("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
@@ -139,7 +139,7 @@ function addService() {
  */
 function printSummary() {
 	/* check whether it's ready to show the print page or not */
-	if(isNaN(parseFloat($("#totalCost").html().substring(1)))) {
+	if (isNaN(parseFloat($("#totalCost").html().substring(1)))) {
 		alert("Click Caculate button before printing");
 		return;
 	}
@@ -147,36 +147,43 @@ function printSummary() {
 	var custName = zk.Widget.$($("$cmbCustomers").attr("id")).getValue();
 	/* date in mm/dd/yyyy format */
 	var today = new Date();
-	today = (today.getMonth() +1) + "/" + today.getDate() + "/" + today.getYear();
-	
+	today = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+
 	var buffer = new Array();
 	/* Construct the print page content */
-	buffer.push("<html><head><style type='text/css'>body {font-family: 'Monotype Corsiva'; font-size:18px;}</style><body>");
+	buffer
+			.push("<html><head><style type='text/css'>body {font-family: 'Monotype Corsiva'; font-size:18px;}</style><body>");
 	/* prepare logo */
-	buffer.push("<div style='width:100%;background-image: url(/img/top_bg.jpg); height: 96px; background-repeat: repeat no-repeat;'>");
+	buffer
+			.push("<div style='width:100%;background-image: url(/img/top_bg.jpg); height: 96px; background-repeat: repeat no-repeat;'>");
 	buffer.push("<img style='height: 95px; width: 100%;' src='/img/banner7.jpg' />");
 	buffer.push("</div>");
 	buffer.push("<div style='text-align:center;font-weight:bold;font-size:20px'>Your Corrective Care Program</div>");
 	/* prepare header content */
 	buffer.push("<div style='margin-left:20px'>");
 	buffer.push("<br /><br />")
-	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;" + custName + "</span>");
-	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;" + today + "</span><br /><br />");
+	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
+			+ custName + "</span>");
+	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
+			+ today + "</span><br /><br />");
 	/* show the treatment plan length */
-	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("$planLength").val() + "</span>&nbsp;weeks<br /><br />");
+	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("$planLength").val()
+			+ "</span>&nbsp;weeks<br /><br />");
 	/* prepare the summary breakdown */
-	$("#tblServicesBreakDown > tbody > tr").each(function() {
-		var count = parseInt($(this).find("input[class='txtCnt']").val());
-		var week = parseInt($(this).find("input[class='txtWeek']").val());
-		var serviceid = $(this).attr("serviceid");
-		var service = getServiceById(serviceid);
-		if(service.serviceName != "Re-Exam") {
-			buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Session per week for " + week + "&nbsp; week" + (week > 1 ? "s":""));
-		} else {
-			buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
-		}
-		buffer.push("<br />");
-	});
+	$("#tblServicesBreakDown > tbody > tr").each(
+			function() {
+				var count = parseInt($(this).find("input[class='txtCnt']").val());
+				var week = parseInt($(this).find("input[class='txtWeek']").val());
+				var serviceid = $(this).attr("serviceid");
+				var service = getServiceById(serviceid);
+				if (service.serviceName != "Re-Exam") {
+					buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Session per week for " + week
+							+ "&nbsp; week" + (week > 1 ? "s" : ""));
+				} else {
+					buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
+				}
+				buffer.push("<br />");
+			});
 	buffer.push("<p></p>");
 	buffer.push("<span style='font-weight:bold'>Total Treatments:</span><br /><br />");
 	buffer.push("<table>");
@@ -200,14 +207,16 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("#spndiscount").html() + "</td><td></td></tr>");
-	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable").html() + "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("#spndiscount").html()
+			+ "</td><td></td></tr>");
+	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable").html()
+			+ "</td><td></td></tr>");
 	buffer.push("</table>");
 	buffer.push("</div>");
 	/* prepare print button */
 	buffer.push("<div style='text-align:center'><button onclick='window.print();'>Print</button></div>");
 	buffer.push("</body></html>");
-	var printWindow =  window.open('','PrintWindow','width=600,height=600');
+	var printWindow = window.open('', 'PrintWindow', 'width=600,height=600');
 	printWindow.document.open();
 	printWindow.document.write(buffer.join("\n"));
 	printWindow.document.close();

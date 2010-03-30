@@ -92,7 +92,9 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 			planItems.add(obj.toJSONString());
 		}
 		final Doublebox txtDiscount = (Doublebox) Path.getComponent(page, "txtDiscount");
-		plan.setDiscount(txtDiscount.getValue().floatValue());
+		if (txtDiscount.getValue() != null) {
+			plan.setDiscount(txtDiscount.getValue().floatValue());
+		}
 
 		plan.setPlanItems(planItems);
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");

@@ -89,6 +89,14 @@ public interface IPaymentDAO {
 	public PatientPaymentPlan getPlanByDate(final Long patientId, final Date paymentDate);
 
 	/**
+	 * Retrieves the plan for the give id
+	 * 
+	 * @param plaind
+	 * @return
+	 */
+	public PatientPaymentPlan getPlayById(final Long plaind);
+
+	/**
 	 * Creates a new plan and persists in the database
 	 * 
 	 * @param plan
@@ -102,6 +110,20 @@ public interface IPaymentDAO {
 	 * @return
 	 */
 	public Collection<Date> getPaymentPlanDates(final Long patientId);
+
+	/**
+	 * Makes the given plan final and all other non final plans to archive
+	 * 
+	 * @param planid
+	 */
+	public void makeFinal(final Long planid);
+
+	/**
+	 * Archives the given plan
+	 * 
+	 * @param planid
+	 */
+	public void archivePlan(final Long planid);
 
 	/**
 	 * Retrieve all the services that are part of the given visit date

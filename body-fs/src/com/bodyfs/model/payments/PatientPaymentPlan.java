@@ -38,6 +38,15 @@ public class PatientPaymentPlan implements Serializable {
 	@Persistent
 	private Date paymentDate = Calendar.getInstance().getTime();
 
+	@Persistent
+	private Boolean archive = false;
+
+	@Persistent
+	private Boolean active = false;
+
+	@Persistent
+	private List<String> planItems;
+
 	public Long getPersonId() {
 		return personId;
 	}
@@ -45,9 +54,6 @@ public class PatientPaymentPlan implements Serializable {
 	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
-
-	@Persistent
-	private List<String> planItems;
 
 	public Long getId() {
 		return id;
@@ -95,10 +101,31 @@ public class PatientPaymentPlan implements Serializable {
 		this.discount = discount;
 	}
 
+	public Boolean getArchive() {
+		return archive;
+	}
+
+	public void setArchive(Boolean archive) {
+		this.archive = archive;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("PatientPaymentPlan [discount=").append(discount).append(", ");
+		builder.append("PatientPaymentPlan [");
+		if (active != null)
+			builder.append("active=").append(active).append(", ");
+		if (archive != null)
+			builder.append("archive=").append(archive).append(", ");
+		builder.append("discount=").append(discount).append(", ");
 		if (id != null)
 			builder.append("id=").append(id).append(", ");
 		if (paymentDate != null)

@@ -111,7 +111,7 @@ function initPage() {
 			var chkService = $(this).find("input:checkbox");
 			if (chkService.attr("checked")) {
 				var txtService = $(this).find("input:text");
-				if(txtService.attr("serviceid") == null) {
+				if (txtService.attr("serviceid") == null) {
 					txtService = $(this).find("select");
 				}
 				arrServices.push( {
@@ -121,8 +121,8 @@ function initPage() {
 			}
 		});
 		$("$txtServices").val($.toJSON(arrServices)).blur();
-		//alert($.toJSON(arrServices));
-	});
+		// alert($.toJSON(arrServices));
+		});
 
 	/* Handle the click on View */
 	$("#btnView").click(function() {
@@ -158,6 +158,11 @@ function initPage() {
 		var selVisitDates = $("#selVisitDates")[0];
 		var selDate = selVisitDates.options[selVisitDates.selectedIndex].value;
 		$("$txtVisitDatesCopy").val(selDate).blur();
+	});
+
+	/* Handle the click on print */
+	$("#btnPrint").click(function() {
+		printPrescription();
 	});
 }
 
@@ -230,6 +235,58 @@ function AddHPortion() {
 			"<tr><td class='bordercell'>" + formulaName + "</td>" + "<td class='bordercell'>" + cmbHerbs.getValue()
 					+ "</td>" + "<td class='bordercell'><input type='text' class='portion' value='" + txtHPortion.val()
 					+ "' /></td><td><img src='/img/delete.png' class='imgDelete'/></td>" + "</tr>");
+}
+
+/**
+ * This function prints the current prescription
+ * 
+ * @return
+ */
+function printPrescription() {
+	/* Check whether any formulas exist or not */
+	if ($("#herbsTable > tbody > tr:not(:last):not(:first)").length <= 0) {
+		alert("There are no herbs for printing");
+	}
+	var buffer = new Array();
+	/* Construct the print page content */
+	buffer
+			.push("<html><head><style type='text/css'>body {font-family: 'Monotype Corsiva'; font-size:18px;}</style><body>");
+	/* prepare logo */
+	buffer
+			.push("<div style='width:100%;background-image: url(/img/top_bg.jpg); height: 96px; background-repeat: repeat no-repeat;'>");
+	buffer.push("<img style='height: 95px; width: 100%;' src='/img/banner7.jpg' />");
+	buffer.push("</div>");
+	buffer.push("<br />");
+	buffer.push("<div>");
+	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
+			+ custname + "</span>");
+	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
+			+ $('#selVisitDates option:selected').text() + "</span><br /><br />");
+	buffer.push("</div>");
+	buffer.push("<table width='100%'>");
+	buffer.push('<tr align="left">');
+	buffer.push('<th class="bordercell">Forumula</th>');
+	buffer.push('<th class="bordercell">Herbs</th>');
+	buffer.push('<th class="bordercell">Portion</th>');
+	buffer.push('<th></th>');
+	buffer.push('</tr><tbody>');
+	$("#herbsTable > tbody > tr:not(:last):not(:first)").each(function() {
+		buffer.push("<tr>");
+		$(this).find("td:not(:last)").each(function() {
+			buffer.push("<td>");
+			buffer.push($(this).html());
+			buffer.push("</td>");
+		});
+		buffer.push("</tr>");
+	});
+	buffer.push("</tbody></table>");
+	/* prepare print button */
+	buffer.push("<div style='text-align:center'><button onclick='window.print();'>Print</button></div>");
+	buffer.push("</body></html>");
+	var printWindow = window.open('', 'PrintWindow', 'width=600,height=600');
+	printWindow.document.open();
+	printWindow.document.write(buffer.join("\n"));
+	printWindow.document.close();
 }
 
 /**

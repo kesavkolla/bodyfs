@@ -257,12 +257,14 @@ function printPrescription() {
 	buffer.push("<img style='height: 95px; width: 100%;' src='/img/banner7.jpg' />");
 	buffer.push("</div>");
 	buffer.push("<br />");
+	/* Add the customer name and date */
 	buffer.push("<div>");
 	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
 			+ custname + "</span>");
 	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
 			+ $('#selVisitDates option:selected').text() + "</span><br /><br />");
 	buffer.push("</div>");
+	/* add the herbs table don' need to add the header and last row. Also no need to add the delete image icon */
 	buffer.push("<table width='100%'>");
 	buffer.push('<tr align="left">');
 	buffer.push('<th class="bordercell">Forumula</th>');

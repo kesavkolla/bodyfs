@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: NPIComposer.java 107 2009-12-19 17:48:18Z amitagrawal84 $
  */
 package com.bodyfs.ui;
 
@@ -39,10 +39,10 @@ import com.bodyfs.model.SkinHair;
  * 
  */
 @SuppressWarnings("unchecked")
-public class NPIComposer extends GenericForwardComposer {
+public class NPIViewComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
-	private static Log LOGGER = LogFactory.getLog(NPIComposer.class);
+	private static Log LOGGER = LogFactory.getLog(NPIViewComposer.class);
 
 	public static final String SESSION_PERSON = "session.person";
 	public static final String SESSION_GENERALINFO = "session.ginfo";
@@ -81,70 +81,14 @@ public class NPIComposer extends GenericForwardComposer {
 		if (pageid != null && !pageid.equals("")) {
 			npiinclude.setSrc("/pages/usermgmt/" + pageid + ".zul");
 		} else {
-			npiinclude.setSrc("/pages/usermgmt/npi1.zul");
+			npiinclude.setSrc("/pages/usermgmt/npiview.zul");
 		}
 	}
 
 	public void onSaveNPI(final ForwardEvent event) {
 		final Person person = (Person) sessionScope.get(SESSION_PERSON);
-		if (person == null) {
-			cleanSession();
-			return;
-		}
-		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		person.setPersonType(PersonType.PRE_USER);
-		personDAO.createPerson(person);
-		final GeneralInfo ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
-		final FamilyMedHistory fmh = (FamilyMedHistory)sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
-		final PastMedicalHistory pmh = (PastMedicalHistory)sessionScope.get(SESSION_PASTMEDICALHISTORY);
-		final Diet yd = (Diet)sessionScope.get(SESSION_PATIENTDIET);
-		final Lifestyle yls = (Lifestyle)sessionScope.get(SESSION_LIFESTYLE);
-		final GeneralSymptoms gs = (GeneralSymptoms)sessionScope.get(SESSION_GENERALSYMPTOMS);
-		final ENT ent = (ENT)sessionScope.get(SESSION_ENT);
-		final Respiratory rp = (Respiratory)sessionScope.get(SESSION_RESPIRATORY);
-		final Cardiovascular cv = (Cardiovascular)sessionScope.get(SESSION_CARDIO);
-		final Gastrointestinal gi = (Gastrointestinal)sessionScope.get(SESSION_GASTRO);
-		final Musculoskeletal ms = (Musculoskeletal)sessionScope.get(SESSION_MUSCULO);
-		final SkinHair sh = (SkinHair)sessionScope.get(SESSION_SKINHAIR);
-		final Neuropsychological np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
-		final Genitourinary gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
-		final Gynecology gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
-		
-		ginfo.setPersonId(person.getId());
-		fmh.setPersonId(person.getId());
-		pmh.setPersonId(person.getId());
-		yd.setPersonId(person.getId());
-		yls.setPersonId(person.getId());
-		gs.setPersonId(person.getId());
-		ent.setPersonId(person.getId());
-		rp.setPersonId(person.getId());
-		cv.setPersonId(person.getId());
-		gi.setPersonId(person.getId());
-		ms.setPersonId(person.getId());
-		sh.setPersonId(person.getId());
-		np.setPersonId(person.getId());
-		gen.setPersonId(person.getId());
-		gy.setPersonId(person.getId());
-		
-		personDAO.createGeneralInfo(ginfo);
-		personDAO.createFamilyMedicalHistory(fmh);
-		personDAO.createPastMedicalHistory(pmh);
-		personDAO.createPatientDiet(yd);
-		personDAO.createLifeStyle(yls);
-		personDAO.createGeneralSymptoms(gs);
-		personDAO.createENT(ent);
-		personDAO.createRespiratory(rp);
-		personDAO.createCardiovascular(cv);
-		personDAO.createGastrointestinal(gi);
-		personDAO.createMusculoskeletal(ms);
-		personDAO.createSkinHair(sh);
-		personDAO.createNeuropsychological(np);
-		personDAO.createGenitourinary(gen);
-		personDAO.createGynecology(gy);
-		
-		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
-		execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+		execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
 	}
 
 	public void cleanSession() {
@@ -168,8 +112,9 @@ public class NPIComposer extends GenericForwardComposer {
 	}
 
 	public void onCancel(final ForwardEvent event) {
+		final Person person = (Person) sessionScope.get(SESSION_PERSON);
 		cleanSession();
-		execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+		execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
 	}
 
 	private void setupPerson() {

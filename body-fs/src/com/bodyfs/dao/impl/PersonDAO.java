@@ -112,6 +112,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(fmh);
 		}
 	}
+	
+	@Override
+	public FamilyMedHistory getFamilyMedicalHistory(final Long personId) {
+		try {
+			final Collection<FamilyMedHistory> results = this.jdoTemplate.find(FamilyMedHistory.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
 
 	@Override
 	public void createPastMedicalHistory(final PastMedicalHistory pmh) {
@@ -119,7 +134,23 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(pmh);
 		}
 	}
+	
+	@Override
+	public PastMedicalHistory getPastMedicalHistory(final Long personId) {
+		try {
+			final Collection<PastMedicalHistory> results = this.jdoTemplate.find(PastMedicalHistory.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
 
+	}
+	
+	
 	@Override
 	public void createPatientDiet(final Diet yd) {
 		if (yd.isDirty()) {
@@ -127,6 +158,22 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Diet getDiet(final Long personId) {
+		try {
+			final Collection<Diet> results = this.jdoTemplate.find(Diet.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createLifeStyle(final Lifestyle yls) {
 		if (yls.isDirty()) {
@@ -134,13 +181,47 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Lifestyle getLifestyle(final Long personId) {
+		try {
+			final Collection<Lifestyle> results = this.jdoTemplate.find(Lifestyle.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	
 	@Override
 	public void createGeneralSymptoms(final GeneralSymptoms gs) {
 		if (gs.isDirty()) {
 			this.jdoTemplate.makePersistent(gs);
 		}
 	}
+	
+	
+	@Override
+	public GeneralSymptoms getGeneralSymptoms(final Long personId) {
+		try {
+			final Collection<GeneralSymptoms> results = this.jdoTemplate.find(GeneralSymptoms.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
 
+	}
+	
+	
 	@Override
 	public void createENT(final ENT ent) {
 		if (ent.isDirty()) {
@@ -148,6 +229,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public ENT getENT(final Long personId) {
+		try {
+			final Collection<ENT> results = this.jdoTemplate.find(ENT.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
 	@Override
 	public void createRespiratory(final Respiratory rp) {
 		if (rp.isDirty()) {
@@ -155,6 +251,22 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Respiratory getRespiratory(final Long personId) {
+		try {
+			final Collection<Respiratory> results = this.jdoTemplate.find(Respiratory.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createCardiovascular(final Cardiovascular cv) {
 		if (cv.isDirty()) {
@@ -162,6 +274,22 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Cardiovascular getCardiovascular(final Long personId) {
+		try {
+			final Collection<Cardiovascular> results = this.jdoTemplate.find(Cardiovascular.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createGastrointestinal(final Gastrointestinal gi) {
 		if (gi.isDirty()) {
@@ -169,6 +297,22 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Gastrointestinal getGastrointestinal(final Long personId) {
+		try {
+			final Collection<Gastrointestinal> results = this.jdoTemplate.find(Gastrointestinal.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createMusculoskeletal(final Musculoskeletal ms) {
 		if (ms.isDirty()) {
@@ -176,6 +320,22 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Musculoskeletal getMusculoskeletal(final Long personId) {
+		try {
+			final Collection<Musculoskeletal> results = this.jdoTemplate.find(Musculoskeletal.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createSkinHair(final SkinHair sh) {
 		if (sh.isDirty()) {
@@ -183,6 +343,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public SkinHair getSkinHair(final Long personId) {
+		try {
+			final Collection<SkinHair> results = this.jdoTemplate.find(SkinHair.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
 	@Override
 	public void createNeuropsychological(final Neuropsychological np) {
 		if (np.isDirty()) {
@@ -190,6 +365,23 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Neuropsychological getNeuropsychological(final Long personId) {
+		try {
+			final Collection<Neuropsychological> results = this.jdoTemplate.find(Neuropsychological.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	
 	@Override
 	public void createGenitourinary(final Genitourinary gen) {
 		if (gen.isDirty()) {
@@ -197,6 +389,37 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
+	
+	@Override
+	public Genitourinary getGenitourinary(final Long personId) {
+		try {
+			final Collection<Genitourinary> results = this.jdoTemplate.find(Genitourinary.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	@Override
+	public Gynecology getGynecology(final Long personId) {
+		try {
+			final Collection<Gynecology> results = this.jdoTemplate.find(Gynecology.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
 	@Override
 	public void createGynecology(final Gynecology gy) {
 		if (gy.isDirty()) {

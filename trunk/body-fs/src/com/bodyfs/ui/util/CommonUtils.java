@@ -45,6 +45,18 @@ public class CommonUtils {
 		}
 		return null;
 	}
+	
+	public static boolean getIsAdminUser() {
+		
+		final Session session = Sessions.getCurrent(false);
+		if (session != null) {
+			final LoginInfo logininfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
+			if (logininfo != null && ((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public static Long getPatientId(final HttpServletRequest request) {
 		String id = request.getParameter("id");

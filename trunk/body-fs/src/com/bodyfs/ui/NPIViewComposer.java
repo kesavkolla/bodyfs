@@ -32,6 +32,7 @@ import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
+import com.bodyfs.ui.util.CommonUtils;
 
 /**
  * 
@@ -73,22 +74,38 @@ public class NPIViewComposer extends GenericForwardComposer {
 	public void onNext(final ForwardEvent event) {
 		final String pageId = event.getData().toString();
 		desktop.setBookmark(pageId);
-		npiinclude.setSrc("/pages/usermgmt/" + pageId + ".zul");
+		if(CommonUtils.getIsAdminUser())
+			npiinclude.setSrc("/pages/usermgmt/" + pageId + ".zul");
+		else 
+			npiinclude.setSrc("/pages/user/" + pageId + ".zul");
 	}
 
 	public void onBookmarkChange(final BookmarkEvent event) {
 		final String pageid = event.getBookmark();
-		if (pageid != null && !pageid.equals("")) {
-			npiinclude.setSrc("/pages/usermgmt/" + pageid + ".zul");
+		if(CommonUtils.getIsAdminUser()) {
+			if (pageid != null && !pageid.equals("")) {
+				npiinclude.setSrc("/pages/usermgmt/" + pageid + ".zul");
+			} else {
+				npiinclude.setSrc("/pages/usermgmt/npiview.zul");
+			}
 		} else {
-			npiinclude.setSrc("/pages/usermgmt/npiview.zul");
+			if (pageid != null && !pageid.equals("")) {
+				npiinclude.setSrc("/pages/user/" + pageid + ".zul");
+			} else {
+				npiinclude.setSrc("/pages/user/npiview.zul");
+			}
 		}
 	}
 
 	public void onSaveNPI(final ForwardEvent event) {
 		final Person person = (Person) sessionScope.get(SESSION_PERSON);
 		cleanSession();
-		execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		if(CommonUtils.getIsAdminUser()) {
+			execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		} else {
+			execution.sendRedirect("index.zul");
+		}
+		
 	}
 
 	public void cleanSession() {
@@ -114,14 +131,18 @@ public class NPIViewComposer extends GenericForwardComposer {
 	public void onCancel(final ForwardEvent event) {
 		final Person person = (Person) sessionScope.get(SESSION_PERSON);
 		cleanSession();
-		execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		if(CommonUtils.getIsAdminUser()) {
+			execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		} else {
+			execution.sendRedirect("index.zul");
+		}
 	}
 
 	private void setupPerson() {
 		Long patid = null;
 		
 		try {
-		patid = new Long(execution.getParameter("id"));
+		patid = CommonUtils.getPatientId();
 		} catch (NumberFormatException ex ){
 			patid = null;
 		}

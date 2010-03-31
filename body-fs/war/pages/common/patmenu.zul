@@ -25,7 +25,7 @@
 			sclass="${page.title eq 'Create Customer LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" orient="vertical" width="80px" />
 		<toolbarbutton label="Patient NPI" image="/img/user_add.png"
-			sclass="${page.title eq 'New Patient Intake' ? 'bodyfs-toolbar-selected' : ''}"
+			sclass="${page.title eq 'NPI View' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/npiview.zul?id=${param.id }" orient="vertical" width="80px" />
 	</hbox>
 	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>

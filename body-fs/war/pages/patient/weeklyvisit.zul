@@ -6,8 +6,9 @@
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
 <?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/Math.uuid.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
-<?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
+<?script type="text/javascript" src="/scripts/jquery-annotate.js"?>
 <?script type="text/javascript" src="/scripts/weeklyvisit.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>

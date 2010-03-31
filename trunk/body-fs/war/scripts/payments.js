@@ -10,7 +10,10 @@ function initPage() {
 		var plan = plans[i];
 		appendPlan(plan);
 	}
-	$("$btnPrint").click(function() {
+	if ( plans.length <= 0 ) {
+		$("#btnPrint").attr("disabled", "disabled");
+	}
+	$("#btnPrint").click(function() {
 		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()), 'PaymentsWindow', 'width=1000,height=600');
 		return false;
 	});

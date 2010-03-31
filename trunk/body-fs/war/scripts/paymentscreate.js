@@ -310,6 +310,6 @@ function prepareSave(evt) {
 		var serviceid = $(this).attr("serviceid");
 		arrServices.push({"serviceid": serviceid, "count":count, "weeks": week});
 	});
-	$("$txtPaymentData").val($.toJSON(arrServices)).blur();
+	$("$txtPaymentData").val(toJSON(arrServices)).blur();
 	return true;
 }

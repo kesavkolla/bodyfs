@@ -36,7 +36,6 @@ function setupData() {
 		editable : false,
 		useAjax : false
 	});
-	$.data(document.body, "annonimage", annonimage);
 
 	/* if there are annotations setup the notes */
 	var txtAnnotations = zk.Widget.$($("$txtAnnotations"));
@@ -46,13 +45,9 @@ function setupData() {
 			if (data.editable) {
 				data.editable = false;
 			}
-			if (data.id) {
-				data.id = indx;
-			}
 			return data;
 		});
-		annonimage.notes = notes;
-		$.fn.annotateImage.load(annonimage);
+		$("$imgbody").annotateImage("load", notes);
 	}
 }
 
@@ -62,12 +57,8 @@ function setupData() {
  * 
  */
 function redrawAnnotations() {
-	var annonimage = $.data(document.body, "annonimage");
-	if (annonimage == undefined) {
-		return;
-	}
-	$.fn.annotateImage.clear(annonimage);
-	var txtAnnotations = zk.Widget.$($("$txtAnnotations"));
+	$("$imgbody").annotateImage("clear");
+	var txtAnnotations = zk.Widget.$($("$txtAnnotations").attr("id"));
 	/* if there are annotations setup the notes */
 	if (txtAnnotations.getValue().length > 0) {
 		var notes = parseJSON(txtAnnotations.getValue());
@@ -75,13 +66,9 @@ function redrawAnnotations() {
 			if (data.editable) {
 				data.editable = false;
 			}
-			if (data.id) {
-				data.id = null;
-			}
 			return data;
 		});
-		annonimage.notes = notes;
-		$.fn.annotateImage.load(annonimage);
+		$("$imgbody").annotateImage("load", notes);
 	}
 }
 

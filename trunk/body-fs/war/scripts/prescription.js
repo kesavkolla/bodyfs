@@ -103,7 +103,7 @@ function initPage() {
 			};
 			prescArr.push(obj);
 		});
-		$("$txtPrescription").val($.toJSON(prescArr)).blur();
+		$("$txtPrescription").val(toJSON(prescArr)).blur();
 
 		var arrServices = new Array();
 		/* Save the selected services */
@@ -120,8 +120,8 @@ function initPage() {
 				});
 			}
 		});
-		$("$txtServices").val($.toJSON(arrServices)).blur();
-		// alert($.toJSON(arrServices));
+		$("$txtServices").val(toJSON(arrServices)).blur();
+		// alert(toJSON(arrServices));
 		});
 
 	/* Handle the click on View */

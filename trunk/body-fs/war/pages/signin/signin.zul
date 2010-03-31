@@ -4,9 +4,11 @@
 <?link rel="stylesheet" type="text/css" href="/css/redmond/jquery-ui-1.7.2.custom.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/annotation.css"?>
 <?script type="text/javascript" src="/scripts/jquery.fix.js"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
 <?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/Math.uuid.js"?>
 <?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
-<?script type="text/javascript" src="/scripts/jquery.annotate.js"?>
+<?script type="text/javascript" src="/scripts/jquery-annotate.js"?>
 <?script type="text/javascript" src="/scripts/signin.js"?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">

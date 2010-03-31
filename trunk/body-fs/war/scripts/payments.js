@@ -419,7 +419,7 @@ function prepareSave(id) {
 	var planlen = $("#txtPlanLength" + id).val();
 	var discount = $("#txtDiscount" + id).val();
 	var obj = {'planLength': planlen, 'discount': discount, 'planItems': arrServices};
-	$("$txtPaymentData").val($.toJSON(obj)).blur();
+	$("$txtPaymentData").val(toJSON(obj)).blur();
 	return true;
 }
 

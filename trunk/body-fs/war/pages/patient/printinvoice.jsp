@@ -117,9 +117,15 @@ table {
 		cal.add(Calendar.DATE, 1);
 		endDate = cal.getTime();
 	}
+	final Collection<PatientPaymentPlan> plan = paymentDAO.getAllPlans(patid);
+	if (plan.size() <= 0) {
+		out.println("<b>Can not find any payment plnas for this date range</b>");
+		out.println("</body></html>");
+		return;
+	}
+
 	final Collection<PatientService> patServices = paymentDAO.getServicesByDateRange(patid, startDate, endDate);
 	final Collection<MasterService> serviceList = paymentDAO.getAllServices();
-	final Collection<PatientPaymentPlan> plan = paymentDAO.getAllPlans(patid);
 	float discount = plan.iterator().next().getDiscount();
 %>
 

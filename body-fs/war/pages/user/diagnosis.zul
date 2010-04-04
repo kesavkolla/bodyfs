@@ -136,7 +136,7 @@
 												<n:td>Veins Underneath : right</n:td>
 												<n:td>
 													<n:select id="selVeinsUnderneathRight" name="selVeinsUnderneathRight"
-														style="width:200px">
+														style="width:200px" >
 														<n:option value="-1">select scale</n:option>
 														<n:option>1</n:option>
 														<n:option>2</n:option>
@@ -157,10 +157,9 @@
 										<caption label="Pulse" />
 										<n:table width="100%">
 											<n:tr>
-												<n:td>Right</n:td>
-												<n:td>
-													<n:select id="selPulseRight1" style="width:75px"
-														disabled="disabled">
+												<n:td><n:b>Right - </n:b></n:td>
+												<n:td>Cun 
+													<n:select id="selPulseRight1" style="width:75px" disabled="disabled">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -169,15 +168,14 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>
-													<n:select id="selPulseRight2" style="width:75px"
-														disabled="disabled">
+												<n:td>Guan 
+													<n:select id="selPulseRight2" style="width:75px" disabled="disabled">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -186,15 +184,14 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>
-													<n:select id="selPulseRight3" style="width:75px"
-														disabled="disabled">
+												<n:td>Chi 
+													<n:select id="selPulseRight3" style="width:75px" disabled="disabled">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -203,7 +200,7 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
@@ -211,10 +208,9 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Left</n:td>
-												<n:td>
-													<n:select id="selPulseLeft1" style="width:75px"
-														disabled="disabled">
+												<n:td><n:b>Left - </n:b></n:td>
+												<n:td>Cun 
+													<n:select id="selPulseLeft1" style="width:75px" disabled="disabled">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -223,15 +219,14 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>
-													<n:select id="selPulseLeft2" style="width:75px"
-														disabled="disabled">
+												<n:td>Guan
+													<n:select id="selPulseLeft2" style="width:75px" disabled="disabled">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -240,15 +235,14 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>
-													<n:select id="selPulseLeft3" style="width:75px"
-														disabled="disabled">
+												<n:td>Chi 
+													<n:select id="selPulseLeft3" style="width:75px" >
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -257,7 +251,7 @@
 														<n:option>Bowstring</n:option>
 														<n:option>Choppy</n:option>
 														<n:option>Deep</n:option>
-														<n:option>Slip</n:option>
+														<n:option>Slippery</n:option>
 														<n:option>Surging</n:option>
 														<n:option>Rapid</n:option>
 														<n:option>Normal</n:option>
@@ -269,7 +263,7 @@
 									<groupbox>
 										<caption label="Notes" />
 										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%"
-											readonly="readonly" />
+											disabled="true" />
 									</groupbox>
 								</cell>
 								<cell valign="top">

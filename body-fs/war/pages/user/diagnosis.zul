@@ -442,7 +442,7 @@
 										</n:tr>
 										<n:tr>
 											<n:td>
-												<n:li>Hot flashes heat in the five hearts and centers</n:li>
+												<n:li>Hot flashes heart in the five hearts and centers</n:li>
 											</n:td>
 											<n:td>
 												<n:input type="radio" name="radHeat" value="Yes" disabled="disabled">
@@ -500,7 +500,7 @@
 										</n:tr>
 										<n:tr>
 											<n:td>
-												<n:li>Heat palpations</n:li>
+												<n:li>Heart palpations</n:li>
 											</n:td>
 											<n:td>
 												<n:input type="radio" name="radHeatPalpations" value="Yes"

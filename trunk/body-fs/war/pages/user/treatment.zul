@@ -58,9 +58,14 @@
 							<row valign="top">
 								<cell>
 									<groupbox closable="false">
-										<caption label="Diagnosis-plan" />
+										<caption label="Diagnosis" />
 										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
 											value="@{treatment.diagnosisPlan }" readonly="true" />
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="plan" />
+										<textbox id="txtPlan" style="width:100%" rows="5"
+											value="@{treatment.plan }" readonly="true" />
 									</groupbox>
 									<groupbox closable="false">
 										<caption label="Massage Notes" />

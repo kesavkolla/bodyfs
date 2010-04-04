@@ -35,7 +35,11 @@ public class PatientTreatment implements Serializable {
 
 	@Persistent
 	private Text diagnosisPlan;
+	
+	@Persistent
+	private Text plan;
 
+	
 	@Persistent
 	private Text massageNotes;
 
@@ -106,6 +110,24 @@ public class PatientTreatment implements Serializable {
 	public final void setMarkers(String markers) {
 		if (markers != null && (markers = markers.trim()).length() > 0) {
 			this.markers = new Text(markers);
+		}
+	}
+	
+	
+
+	/**
+	 * @return the plan
+	 */
+	public final String getPlan() {
+		return plan == null ? null : plan.getValue();
+	}
+
+	/**
+	 * @param plan the plan to set
+	 */
+	public final void setPlan(String plan) {
+		if (plan != null && (plan = plan.trim()).length() > 0) {
+			this.plan = new Text(plan);
 		}
 	}
 

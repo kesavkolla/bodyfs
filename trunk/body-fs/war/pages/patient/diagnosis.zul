@@ -30,7 +30,7 @@
 					<include src="/pages/common/patmenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">
-					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin:10px"
+					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
 						apply="com.bodyfs.ui.DiagnosisComposer">
 						<rows>
 							<row spans="2">
@@ -163,8 +163,11 @@
 										<caption label="Pulse" />
 										<n:table width="100%">
 											<n:tr>
-												<n:td><n:b>Right - </n:b></n:td>
-												<n:td>Cun 
+												<n:td>
+													<n:b>Right -</n:b>
+												</n:td>
+												<n:td>
+													Cun
 													<n:select id="selPulseRight1" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
@@ -180,7 +183,8 @@
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>Guan 
+												<n:td>
+													Guan
 													<n:select id="selPulseRight2" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
@@ -196,7 +200,8 @@
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>Chi 
+												<n:td>
+													Chi
 													<n:select id="selPulseRight3" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
@@ -214,8 +219,11 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td><n:b>Left - </n:b></n:td>
-												<n:td>Cun 
+												<n:td>
+													<n:b>Left -</n:b>
+												</n:td>
+												<n:td>
+													Cun
 													<n:select id="selPulseLeft1" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
@@ -231,7 +239,8 @@
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>Guan
+												<n:td>
+													Guan
 													<n:select id="selPulseLeft2" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
@@ -247,7 +256,8 @@
 														<n:option>Normal</n:option>
 													</n:select>
 												</n:td>
-												<n:td>Chi 
+												<n:td>
+													Chi
 													<n:select id="selPulseLeft3" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>

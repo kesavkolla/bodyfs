@@ -74,7 +74,7 @@ public class GeneralInfo implements Serializable {
 	private String condition;
 
 	@Persistent
-	private Boolean gettingworse;
+	private String gettingworse;
 
 	@Persistent
 	private Boolean botherSleep;
@@ -251,11 +251,11 @@ public class GeneralInfo implements Serializable {
 		this.condition = condition;
 	}
 
-	public final Boolean getGettingworse() {
+	public final String getGettingworse() {
 		return gettingworse;
 	}
 
-	public final void setGettingworse(Boolean gettingworse) {
+	public final void setGettingworse(String gettingworse) {
 		this.gettingworse = gettingworse;
 	}
 

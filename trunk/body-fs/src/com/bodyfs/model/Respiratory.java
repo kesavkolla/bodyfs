@@ -57,7 +57,7 @@ public class Respiratory implements Serializable {
 	private String thickorthin;
 
 	@Persistent
-	private Boolean colorofphlegm;
+	private String colorofphlegm;
 
 	@Persistent
 	private Boolean coughingupblood;
@@ -156,11 +156,11 @@ public class Respiratory implements Serializable {
 		this.thickorthin = thickorthin;
 	}
 
-	public final Boolean getColorofphlegm() {
+	public final String getColorofphlegm() {
 		return colorofphlegm;
 	}
 
-	public final void setColorofphlegm(Boolean colorofphlegm) {
+	public final void setColorofphlegm(String colorofphlegm) {
 		this.colorofphlegm = colorofphlegm;
 	}
 

@@ -30,6 +30,7 @@ import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.GeneralSymptoms;
 import com.bodyfs.model.Genitourinary;
 import com.bodyfs.model.Gynecology;
+import com.bodyfs.model.HealthInsurance;
 import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
@@ -291,6 +292,30 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 	
 	@Override
+	public void createHealthInsurance(final HealthInsurance hi) {
+		if (hi.isDirty()) {
+			this.jdoTemplate.makePersistent(hi);
+		}
+	}
+
+	
+	@Override
+	public HealthInsurance getHealthInsurance(final Long personId) {
+		try {
+			final Collection<HealthInsurance> results = this.jdoTemplate.find(HealthInsurance.class, "personId ==" + personId);
+			if (results.size() <= 0) {
+				return null;
+			}
+			return results.iterator().next();
+		} catch (final Throwable e) {
+			e.printStackTrace(System.err);
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	
+	@Override
 	public void createGastrointestinal(final Gastrointestinal gi) {
 		if (gi.isDirty()) {
 			this.jdoTemplate.makePersistent(gi);
@@ -358,6 +383,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
+	
 	@Override
 	public void createNeuropsychological(final Neuropsychological np) {
 		if (np.isDirty()) {

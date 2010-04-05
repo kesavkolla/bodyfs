@@ -13,6 +13,7 @@ import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.GeneralSymptoms;
 import com.bodyfs.model.Genitourinary;
 import com.bodyfs.model.Gynecology;
+import com.bodyfs.model.HealthInsurance;
 import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
@@ -127,4 +128,9 @@ public interface IPersonDAO {
 	public GeneralSymptoms getGeneralSymptoms(Long personId);
 
 	public ENT getENT(Long personId);
+	
+	public void createHealthInsurance(final HealthInsurance hi);
+	
+	public HealthInsurance getHealthInsurance(final Long personId);
+
 }

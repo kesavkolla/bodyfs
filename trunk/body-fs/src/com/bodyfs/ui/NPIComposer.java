@@ -23,6 +23,7 @@ import com.bodyfs.model.GeneralInfo;
 import com.bodyfs.model.GeneralSymptoms;
 import com.bodyfs.model.Genitourinary;
 import com.bodyfs.model.Gynecology;
+import com.bodyfs.model.HealthInsurance;
 import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
@@ -61,6 +62,7 @@ public class NPIComposer extends GenericForwardComposer {
 	public static final String SESSION_NEURO = "session.np";
 	public static final String SESSION_GENITOURINARY = "session.gen";
 	public static final String SESSION_GYNAE = "session.gy";
+	public static final String SESSION_HEALTHINSURANCE = "session.hi";
 	
 	private Include npiinclude;
 
@@ -109,6 +111,7 @@ public class NPIComposer extends GenericForwardComposer {
 		final Neuropsychological np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
 		final Genitourinary gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
 		final Gynecology gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
+		final HealthInsurance hi = (HealthInsurance)sessionScope.get(SESSION_HEALTHINSURANCE);
 		
 		ginfo.setPersonId(person.getId());
 		fmh.setPersonId(person.getId());
@@ -125,6 +128,7 @@ public class NPIComposer extends GenericForwardComposer {
 		np.setPersonId(person.getId());
 		gen.setPersonId(person.getId());
 		gy.setPersonId(person.getId());
+		hi.setPersonId(person.getId());
 		
 		personDAO.createGeneralInfo(ginfo);
 		personDAO.createFamilyMedicalHistory(fmh);
@@ -141,6 +145,7 @@ public class NPIComposer extends GenericForwardComposer {
 		personDAO.createNeuropsychological(np);
 		personDAO.createGenitourinary(gen);
 		personDAO.createGynecology(gy);
+		personDAO.createHealthInsurance(hi);
 		
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
@@ -164,6 +169,7 @@ public class NPIComposer extends GenericForwardComposer {
 		sessionScope.remove(SESSION_NEURO);
 		sessionScope.remove(SESSION_GENITOURINARY);
 		sessionScope.remove(SESSION_GYNAE);
+		sessionScope.remove(SESSION_HEALTHINSURANCE);
 		
 	}
 
@@ -199,6 +205,8 @@ public class NPIComposer extends GenericForwardComposer {
 		Neuropsychological np = null;
 		Genitourinary gen = null;
 		Gynecology gy = null;
+		HealthInsurance hi = null;
+	
 		if (sessionScope.get(SESSION_PERSON) == null) {
 			if(patid ==  null) {
 				
@@ -218,6 +226,7 @@ public class NPIComposer extends GenericForwardComposer {
 				np = new Neuropsychological();
 				gen = new Genitourinary();
 				gy = new Gynecology();
+				hi = new HealthInsurance();
 			} else {
 				person = personDAO.getPerson(patid);
 				ginfo = personDAO.getGeneralInfo(patid);
@@ -235,6 +244,7 @@ public class NPIComposer extends GenericForwardComposer {
 				np = personDAO.getNeuropsychological(patid);
 				gen = personDAO.getGenitourinary(patid);
 				gy = personDAO.getGynecology(patid);
+				hi = personDAO.getHealthInsurance(patid);
 			}
 			sessionScope.put(SESSION_PERSON, person);
 			sessionScope.put(SESSION_GENERALINFO, ginfo);
@@ -252,6 +262,7 @@ public class NPIComposer extends GenericForwardComposer {
 			sessionScope.put(SESSION_NEURO,np);
 			sessionScope.put(SESSION_GENITOURINARY, gen);
 			sessionScope.put(SESSION_GYNAE,gy);
+			sessionScope.put(SESSION_HEALTHINSURANCE,hi);
 			
 		} else {
 			person = (Person) sessionScope.get(SESSION_PERSON);
@@ -271,6 +282,7 @@ public class NPIComposer extends GenericForwardComposer {
 			np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
 			gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
 			gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
+			hi = (HealthInsurance) sessionScope.get(SESSION_HEALTHINSURANCE);
 		}
 		page.setAttribute("person", person);
 		page.setAttribute("ginfo", ginfo);
@@ -289,6 +301,8 @@ public class NPIComposer extends GenericForwardComposer {
 		page.setAttribute("np", np);
 		page.setAttribute("gen", gen);
 		page.setAttribute("gy", gy);
+		page.setAttribute("hi", hi);
+		
 		
 	}
 }

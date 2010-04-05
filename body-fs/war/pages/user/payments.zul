@@ -22,6 +22,7 @@
 						</n:div>
 						<n:br />
 						<n:br />
+
 						<textbox id="txtAction" value="" forward="onBlur=controller.onAction" visible="false" />
 						<textbox id="txtPaymentData" value="" visible="false" />
 						<n:script type="text/javascript">

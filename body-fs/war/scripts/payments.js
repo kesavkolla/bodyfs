@@ -14,7 +14,7 @@ function initPage() {
 		$("#btnPrint").attr("disabled", "disabled");
 	}
 	$("#btnPrint").click(function() {
-		window.open($.param.querystring("printinvoice.jsp", $.deparam.querystring()), 'PaymentsWindow', 'width=1000,height=600');
+		window.open($.param.querystring("/pages/patient/printinvoice.jsp", $.deparam.querystring()), 'PaymentsWindow', 'width=1000,height=600');
 		return false;
 	});
 }

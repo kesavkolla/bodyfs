@@ -243,6 +243,10 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		if (txtServices.getValue() != null && txtServices.getValue().length() > 0) {
 			saveServiceDate(txtServices.getValue(), prescription.getVisitDate(), prescription.getPersonId());
 		}
+		// Remove the patient from the queue
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		personDAO.deleteQuickPatient(prescription.getPersonId());
+
 		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
 

@@ -17,6 +17,7 @@ public class QuickPatient implements Serializable {
 
 	@Persistent
 	private Date date = new Date();
+
 	@Persistent
 	private String name;
 

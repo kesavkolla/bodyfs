@@ -28,6 +28,9 @@
 	<bean id="herbDAO" class="com.bodyfs.dao.impl.HerbDAO">
 		<property name="cache" ref="datacache" />
 	</bean>
+	<bean id="personDAO" class="com.bodyfs.dao.impl.PersonDAO">
+		<property name="cache" ref="datacache" />
+	</bean>
 
 	<bean id="paymentDAO" class="com.bodyfs.dao.impl.PaymentDAO">
 		<property name="cache" ref="datacache" />

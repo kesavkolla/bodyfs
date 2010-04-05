@@ -2,6 +2,7 @@
 package com.bodyfs.ui.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
@@ -45,13 +46,14 @@ public class CommonUtils {
 		}
 		return null;
 	}
-	
+
 	public static boolean getIsAdminUser() {
-		
+
 		final Session session = Sessions.getCurrent(false);
 		if (session != null) {
 			final LoginInfo logininfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
-			if (logininfo != null && ((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
+			if (logininfo != null
+					&& ((PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
 				return false;
 			}
 		}
@@ -74,6 +76,17 @@ public class CommonUtils {
 			final Long patid = (Long) session.getAttribute("patid");
 			if (patid != null) {
 				return patid;
+			}
+		} else {
+			final HttpSession hsession = request.getSession(false);
+			if (hsession != null) {
+				final LoginInfo logininfo = (LoginInfo) hsession.getAttribute(Constants.SESSION_LOGIN_CRED);
+				if (logininfo != null) {
+					if (logininfo != null
+							&& ((PersonType) hsession.getAttribute(Constants.SESSION_PERSON_TYPE)) != PersonType.EMPLOYEE) {
+						return logininfo.getPersonId();
+					}
+				}
 			}
 		}
 		return null;

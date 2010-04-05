@@ -1,4 +1,4 @@
-<?page title="Create Customer LoginInfo" contentType="text/html;charset=UTF-8" id="createlogin"?>
+<?page title="Create Patient LoginInfo" contentType="text/html;charset=UTF-8" id="createlogin"?>
 <?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
 <zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xmlns:w="http://www.zkoss.org/2005/zk/client">

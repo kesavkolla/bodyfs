@@ -1,5 +1,5 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-<?page title="Search Customers" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
+<?page title="Search Patients" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?script type="text/javascript" src="/scripts/customersearch.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client">
@@ -72,7 +72,7 @@
 									<listheader label="First Name" />
 									<listheader label="Last Name" />
 									<listheader label="email" />
-									<listheader label="Type" tooltiptext="pre,current or post Customers" />
+									<listheader label="Type" tooltiptext="pre,current or post Patients" />
 								</listhead>
 								<listitem self="@{each='person'}" value="@{person }" class="@{person.id }">
 									<listcell image="/img/link_go.png" class="@{person.id }">

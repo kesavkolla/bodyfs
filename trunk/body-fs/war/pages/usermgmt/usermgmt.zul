@@ -4,7 +4,7 @@
 	<borderlayout id="main" style="background:#dd0000;" apply="com.bodyfs.ui.UserMgmtComposer">
 		<north size="50px">
 			<hbox>
-				<toolbarbutton label="Search Customers" image="/img/user_group_colored.png"
+				<toolbarbutton label="Search Patients" image="/img/user_group_colored.png"
 					forward="onClick=main.onHandleClick(custSearch)" id="btnSearch" />
 				<toolbarbutton label="New Patient" image="/img/user_add.png" forward="onClick=main.onHandleClick(npi)"
 					id="btnNPI" />

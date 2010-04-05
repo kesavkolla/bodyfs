@@ -22,7 +22,7 @@
 		collapsible="false" style="border-right:7px solid #2A1A00">
 		<div>
 			<vbox width="100%">
-				<toolbarbutton label="Customers" image="/img/user_group_colored.png" hflex="1"
+				<toolbarbutton label="Patients" image="/img/user_group_colored.png" hflex="1"
 					href="/pages/usermgmt/customersearch.zul" />
 				<div style="font-size:14px; text-align:right;overflow:auto"
 					apply="com.bodyfs.ui.QuickPatientListComposer" />

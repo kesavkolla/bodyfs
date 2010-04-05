@@ -68,7 +68,7 @@
 						</n:div>
 						<space orient="horizontal" height="20px" />
 						<n:div>
-							<n:span>Customer Name:</n:span>
+							<n:span>Patient Name:</n:span>
 							<combobox id="cmbCustomers" autodrop="true" mold="rounded" readonly="true"
 								model="@{patients }">
 								<comboitem self="@{each=customer}" label="@{customer.displayName}" value="@{customer}" />

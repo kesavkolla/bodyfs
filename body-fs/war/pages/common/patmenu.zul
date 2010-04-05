@@ -22,7 +22,7 @@
 			href="/pages/patient/payments.zul?id=${param.id }${empty param.visitDate ? '':'&amp;visitDate='}${empty param.paymentDate ? '':param.paymentDate }"
 			sclass="${page.title eq 'Payments' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
 		<toolbarbutton label="Profile" image="/img/user_add.png"
-			sclass="${page.title eq 'Create Customer LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
+			sclass="${page.title eq 'Create Patient LoginInfo' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/createLoginInfo.zul?id=${param.id }" orient="vertical" width="80px" />
 		<toolbarbutton label="Patient NPI" image="/img/user_add.png"
 			sclass="${page.title eq 'NPI View' ? 'bodyfs-toolbar-selected' : ''}"

@@ -46,7 +46,7 @@ public class FamilyMedHistory implements Serializable {
 	private Boolean alcoholism;
 
 	@Persistent
-	private Boolean cancer;
+	private String cancer;
 
 	@Persistent
 	private String cancerType;
@@ -128,11 +128,11 @@ public class FamilyMedHistory implements Serializable {
 		this.alcoholism = alcoholism;
 	}
 
-	public final Boolean getCancer() {
+	public final String getCancer() {
 		return cancer;
 	}
 
-	public final void setCancer(Boolean cancer) {
+	public final void setCancer(String cancer) {
 		this.cancer = cancer;
 	}
 

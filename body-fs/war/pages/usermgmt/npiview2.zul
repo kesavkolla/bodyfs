@@ -9,18 +9,18 @@
 					<rows>
 						<row>
 							Insurance Co. Name
-							<textbox readonly="true" hflex="1" />
+							<textbox readonly="true" hflex="1" value="@{hi.insuranceName, save-when='btnNext.onClick, btnPrev.onClick' }" />
 							Policy #
-							<textbox readonly="true" hflex="1" />
+							<textbox readonly="true" hflex="1" value="@{hi.policy, save-when='btnNext.onClick, btnPrev.onClick' }" />
 						</row>
 						<row>
 							<vbox>
 								<label value="Address" />
 								<label value="City,State, Zip" />
 							</vbox>
-							<textbox  readonly="true" rows="2" hflex="1" />
+							<textbox readonly="true" rows="2" hflex="1" value="@{hi.address, save-when='btnNext.onClick, btnPrev.onClick' }" />
 							Phone
-							<textbox  readonly="true" hflex="1" />
+							<textbox readonly="true" hflex="1" value="@{hi.phone, save-when='btnNext.onClick, btnPrev.onClick' }" />
 						</row>
 					</rows>
 				</grid>

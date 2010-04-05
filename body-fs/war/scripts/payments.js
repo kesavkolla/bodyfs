@@ -100,7 +100,7 @@ function appendPlan(plan) {
 	buffer.push('<span style="font-weight:bold">Total cost:</span>');
 	buffer.push('<span id="spntotal' + plan.id + '">&nbsp;&nbsp;</span>');
 	buffer.push('<br />');
-	buffer.push('<span style="font-weight:bold">Discount %</span>');
+	buffer.push('<span style="font-weight:bold">Discount </span>');
 	buffer.push('<span id="spndiscount' + plan.id + '">&nbsp;&nbsp;</span>');
 	buffer.push('<br />');
 	buffer.push('<span style="font-weight:bold">Total payable:</span>');
@@ -221,11 +221,15 @@ function calculateService(id) {
 
 	/* populate the totals */
 	$("#spntotal" + id).html(totalCost).formatCurrency();
-	$("#spndiscount" + id).html($("#txtDiscount" + id).val());
 	var discount = $("#txtDiscount" + id).val();
+	var totalDiscount = (totalCost * discount / 100);
+	
 	if (!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100);
 	}
+	
+	$("#spndiscount" + id).html(totalDiscount).formatCurrency();
+	
 	$("#spnpayable" + id).html(totalCost).formatCurrency();
 }
 
@@ -317,7 +321,7 @@ function printSummary(id) {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#spntotal" + id).html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("#spndiscount" + id).html()
+	buffer.push("<tr><td style='font-weight:bold;'>Discount</td><td>" + $("#spndiscount" + id).html()
 			+ "</td><td></td></tr>");
 	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable" + id).html()
 			+ "</td><td></td></tr>");

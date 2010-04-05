@@ -83,11 +83,14 @@ function calculateService() {
 
 	/* populate the totals */
 	$("#totalCost").html(totalCost).formatCurrency();
-	$("#spndiscount").html($("$txtDiscount").val());
 	var discount = $("$txtDiscount").val();
+	var totalDiscount = (totalCost * discount / 100);
+	
 	if (!isNaN(parseFloat(discount))) {
 		totalCost -= (totalCost * discount / 100);
 	}
+	$("#spndiscount").html(totalDiscount).formatCurrency();
+	
 	$("#spnpayable").html(totalCost).formatCurrency();
 }
 
@@ -207,7 +210,7 @@ function printSummary() {
 	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount%</td><td>" + $("#spndiscount").html()
+	buffer.push("<tr><td style='font-weight:bold;'>Discount</td><td>" + $("#spndiscount").html()
 			+ "</td><td></td></tr>");
 	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable").html()
 			+ "</td><td></td></tr>");

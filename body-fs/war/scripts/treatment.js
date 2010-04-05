@@ -196,7 +196,7 @@ function SaveServiceData(evt) {
 			var txtService = $("#txt" + $(this).attr("id").substring(3));
 			if (isNaN(parseFloat(txtService.val()))) {
 				isError = true;
-				alert("Provide value for the service" );
+				alert("Provide value for the service");
 				txtService.focus();
 			}
 			return false;
@@ -219,7 +219,7 @@ function SaveServiceData(evt) {
 		var chkService = $(this).find("input:checkbox");
 		if (chkService.attr("checked")) {
 			var txtService = $(this).find("input:text");
-			if(txtService.attr("serviceid") == null) {
+			if (txtService.attr("serviceid") == null) {
 				txtService = $(this).find("select");
 			}
 			arrServices.push( {
@@ -228,8 +228,8 @@ function SaveServiceData(evt) {
 			});
 		}
 	});
-	$("$txtServices").val($.toJSON(arrServices)).blur();
-	//alert($.toJSON(arrServices));
+	$("$txtServices").val(toJSON(arrServices)).blur();
+	// alert($.toJSON(arrServices));
 }
 
 /**

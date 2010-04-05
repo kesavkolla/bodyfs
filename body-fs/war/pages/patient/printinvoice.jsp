@@ -17,7 +17,9 @@
 <%@page import="com.bodyfs.Constants"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="com.bodyfs.model.payments.PatientPaymentPlan"%><html>
+<%@page import="com.bodyfs.model.payments.PatientPaymentPlan"%>
+<%@page import="org.zkoss.zk.ui.Sessions"%>
+<%@page import="org.zkoss.zk.ui.Session"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Print Invoice</title>
@@ -77,8 +79,8 @@ table {
 %>
 <form id="frmDate" action="">Select the date: <input type="text" value="Choose a Date" id="dateRange" size="25"
 	name="dateRange" /> <%
- 	if (request.getParameter("id") != null) {
- %> <input type="hidden" name="id" value="<%=request.getParameter("id")%>" /> <%
+ 	if (CommonUtils.getPatientId(request) != null) {
+ %> <input type="hidden" name="id" value="<%=CommonUtils.getPatientId(request)%>" /> <%
  	}
  %> <input type="submit" value="Go" /></form>
 </div>

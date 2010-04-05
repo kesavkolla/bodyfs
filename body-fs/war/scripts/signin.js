@@ -14,6 +14,7 @@ function initPage() {
 		} else {
 			$("$txtAnnotations").val("").blur();
 		}
+		return true;
 	});
 
 	$("$btnCancel").click(function() {

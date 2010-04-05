@@ -2,7 +2,6 @@
 package com.bodyfs.dao;
 
 import java.util.Collection;
-import java.util.List;
 
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -32,9 +31,9 @@ public interface IPersonDAO {
 	public Person getPerson(Long id);
 
 	public Collection<Person> getAll();
-	
+
 	public Collection<Person> getAllCustomersInfo();
-	
+
 	public Collection<Person> getAllCustomers();
 
 	public Person createPerson(final Person person);
@@ -59,11 +58,23 @@ public interface IPersonDAO {
 
 	/**
 	 * 
-	 * @return list of last 5 patients
+	 * @return list of all patients in queue
 	 */
-	public List<QuickPatient> getQuickList();
+	public Collection<QuickPatient> getQuickList();
 
+	/**
+	 * Creates a patient in the work queue
+	 * 
+	 * @param qp
+	 */
 	public void createQuickPatient(final QuickPatient qp);
+
+	/**
+	 * Deletes the patient from the queue
+	 * 
+	 * @param id
+	 */
+	public void deleteQuickPatient(final Long id);
 
 	public void deletePerson(final Long id);
 
@@ -98,11 +109,11 @@ public interface IPersonDAO {
 	public void createNeuropsychological(final Neuropsychological np);
 
 	public void createGenitourinary(final Genitourinary gen);
-	
+
 	public Genitourinary getGenitourinary(final Long personId);
-	
+
 	public Gynecology getGynecology(final Long personId);
-	
+
 	public Neuropsychological getNeuropsychological(final Long personId);
 
 	public void createGynecology(final Gynecology gy);
@@ -128,9 +139,9 @@ public interface IPersonDAO {
 	public GeneralSymptoms getGeneralSymptoms(Long personId);
 
 	public ENT getENT(Long personId);
-	
+
 	public void createHealthInsurance(final HealthInsurance hi);
-	
+
 	public HealthInsurance getHealthInsurance(final Long personId);
 
 }

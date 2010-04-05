@@ -5,8 +5,6 @@ package com.bodyfs.ui;
 
 import java.util.Collection;
 
-import net.sf.jsr107cache.Cache;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
@@ -27,7 +25,6 @@ import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Person;
-import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.payments.PatientPaymentPlan;
 import com.bodyfs.ui.util.CommonUtils;
 
@@ -37,8 +34,6 @@ import com.bodyfs.ui.util.CommonUtils;
  * 
  */
 public class PatientViewComposer extends GenericAutowireComposer {
-
-	public static final String QUICK_PATIENT_LIST = "com.bodyfs.quickpatientlist";
 
 	private static final long serialVersionUID = 1503608767014635637L;
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
@@ -66,19 +61,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(id);
-
-		// If the savepat is true then create entry for the quickpatient
-		if (execution.getParameter("savepat") != null && execution.getParameter("savepat").equals("true")) {
-			final QuickPatient qp = new QuickPatient();
-			qp.setId(person.getId());
-			qp.setName(person.getDisplayName());
-			personDAO.createQuickPatient(qp);
-			// remove cache
-			final Cache cache = (Cache) SpringUtil.getBean("datacache");
-			if (cache.containsKey(QUICK_PATIENT_LIST)) {
-				cache.remove(QUICK_PATIENT_LIST);
-			}
-		}
 
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());

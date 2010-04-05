@@ -4,13 +4,13 @@
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.jdo.JDOException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import net.sf.jsr107cache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +40,7 @@ import com.bodyfs.model.PersonType;
 import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
+import com.bodyfs.ui.QuickPatientListComposer;
 
 @Repository(value = "personDAO")
 public class PersonDAO implements IPersonDAO, Serializable {
@@ -47,6 +48,12 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	private static final long serialVersionUID = 8672328220267294005L;
 	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
+
+	private Cache cache;
+
+	public void setCache(final Cache cache) {
+		this.cache = cache;
+	}
 
 	@Override
 	public Person createPerson(final Person person) {
@@ -79,16 +86,18 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	public Collection<Person> getAll() {
 		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class));
 	}
-	
+
 	@Override
 	public Collection<Person> getAllCustomers() {
-		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class, "personType != '" + PersonType.EMPLOYEE +"'"));
+		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class, "personType != '"
+				+ PersonType.EMPLOYEE + "'"));
 	}
-	
+
 	@Override
 	public Collection<Person> getAllCustomersInfo() {
 		try {
-			final Collection<Person> results = this.jdoTemplate.find(Person.class, "personType == " + PersonType.EMPLOYEE);
+			final Collection<Person> results = this.jdoTemplate.find(Person.class, "personType == "
+					+ PersonType.EMPLOYEE);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -113,11 +122,12 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(fmh);
 		}
 	}
-	
+
 	@Override
 	public FamilyMedHistory getFamilyMedicalHistory(final Long personId) {
 		try {
-			final Collection<FamilyMedHistory> results = this.jdoTemplate.find(FamilyMedHistory.class, "personId ==" + personId);
+			final Collection<FamilyMedHistory> results = this.jdoTemplate.find(FamilyMedHistory.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -135,11 +145,12 @@ public class PersonDAO implements IPersonDAO, Serializable {
 			this.jdoTemplate.makePersistent(pmh);
 		}
 	}
-	
+
 	@Override
 	public PastMedicalHistory getPastMedicalHistory(final Long personId) {
 		try {
-			final Collection<PastMedicalHistory> results = this.jdoTemplate.find(PastMedicalHistory.class, "personId ==" + personId);
+			final Collection<PastMedicalHistory> results = this.jdoTemplate.find(PastMedicalHistory.class,
+					"personId ==" + personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -150,8 +161,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void createPatientDiet(final Diet yd) {
 		if (yd.isDirty()) {
@@ -159,7 +169,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Diet getDiet(final Long personId) {
 		try {
@@ -174,7 +183,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createLifeStyle(final Lifestyle yls) {
 		if (yls.isDirty()) {
@@ -182,7 +191,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Lifestyle getLifestyle(final Long personId) {
 		try {
@@ -197,20 +205,19 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void createGeneralSymptoms(final GeneralSymptoms gs) {
 		if (gs.isDirty()) {
 			this.jdoTemplate.makePersistent(gs);
 		}
 	}
-	
-	
+
 	@Override
 	public GeneralSymptoms getGeneralSymptoms(final Long personId) {
 		try {
-			final Collection<GeneralSymptoms> results = this.jdoTemplate.find(GeneralSymptoms.class, "personId ==" + personId);
+			final Collection<GeneralSymptoms> results = this.jdoTemplate.find(GeneralSymptoms.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -221,8 +228,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void createENT(final ENT ent) {
 		if (ent.isDirty()) {
@@ -230,7 +236,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public ENT getENT(final Long personId) {
 		try {
@@ -245,6 +250,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
+
 	@Override
 	public void createRespiratory(final Respiratory rp) {
 		if (rp.isDirty()) {
@@ -252,7 +258,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Respiratory getRespiratory(final Long personId) {
 		try {
@@ -267,7 +272,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createCardiovascular(final Cardiovascular cv) {
 		if (cv.isDirty()) {
@@ -275,11 +280,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Cardiovascular getCardiovascular(final Long personId) {
 		try {
-			final Collection<Cardiovascular> results = this.jdoTemplate.find(Cardiovascular.class, "personId ==" + personId);
+			final Collection<Cardiovascular> results = this.jdoTemplate.find(Cardiovascular.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -290,7 +295,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createHealthInsurance(final HealthInsurance hi) {
 		if (hi.isDirty()) {
@@ -298,11 +303,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public HealthInsurance getHealthInsurance(final Long personId) {
 		try {
-			final Collection<HealthInsurance> results = this.jdoTemplate.find(HealthInsurance.class, "personId ==" + personId);
+			final Collection<HealthInsurance> results = this.jdoTemplate.find(HealthInsurance.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -313,8 +318,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void createGastrointestinal(final Gastrointestinal gi) {
 		if (gi.isDirty()) {
@@ -322,11 +326,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Gastrointestinal getGastrointestinal(final Long personId) {
 		try {
-			final Collection<Gastrointestinal> results = this.jdoTemplate.find(Gastrointestinal.class, "personId ==" + personId);
+			final Collection<Gastrointestinal> results = this.jdoTemplate.find(Gastrointestinal.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -337,7 +341,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createMusculoskeletal(final Musculoskeletal ms) {
 		if (ms.isDirty()) {
@@ -345,11 +349,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Musculoskeletal getMusculoskeletal(final Long personId) {
 		try {
-			final Collection<Musculoskeletal> results = this.jdoTemplate.find(Musculoskeletal.class, "personId ==" + personId);
+			final Collection<Musculoskeletal> results = this.jdoTemplate.find(Musculoskeletal.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -360,7 +364,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createSkinHair(final SkinHair sh) {
 		if (sh.isDirty()) {
@@ -368,7 +372,6 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public SkinHair getSkinHair(final Long personId) {
 		try {
@@ -383,7 +386,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createNeuropsychological(final Neuropsychological np) {
 		if (np.isDirty()) {
@@ -391,11 +394,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Neuropsychological getNeuropsychological(final Long personId) {
 		try {
-			final Collection<Neuropsychological> results = this.jdoTemplate.find(Neuropsychological.class, "personId ==" + personId);
+			final Collection<Neuropsychological> results = this.jdoTemplate.find(Neuropsychological.class,
+					"personId ==" + personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -406,8 +409,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void createGenitourinary(final Genitourinary gen) {
 		if (gen.isDirty()) {
@@ -415,11 +417,11 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 	}
 
-	
 	@Override
 	public Genitourinary getGenitourinary(final Long personId) {
 		try {
-			final Collection<Genitourinary> results = this.jdoTemplate.find(Genitourinary.class, "personId ==" + personId);
+			final Collection<Genitourinary> results = this.jdoTemplate.find(Genitourinary.class, "personId =="
+					+ personId);
 			if (results.size() <= 0) {
 				return null;
 			}
@@ -430,7 +432,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public Gynecology getGynecology(final Long personId) {
 		try {
@@ -445,7 +447,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void createGynecology(final Gynecology gy) {
 		if (gy.isDirty()) {
@@ -514,19 +516,19 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
-	public List<QuickPatient> getQuickList() {
-		return jdoTemplate.execute(new JdoCallback<List<QuickPatient>>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public List<QuickPatient> doInJdo(final PersistenceManager pm) throws JDOException {
-				final Query query = pm.newQuery(QuickPatient.class);
-				query.setOrdering("date DESC");
-				query.setRange(0L, 5L);
-				final List<QuickPatient> qlist = (List<QuickPatient>) query.execute();
-				final List<QuickPatient> copylist = new ArrayList<QuickPatient>(qlist);
-				return copylist;
+	public Collection<QuickPatient> getQuickList() {
+		return jdoTemplate.detachCopyAll(jdoTemplate.find(QuickPatient.class, null, "date DESC"));
+	}
+
+	public void deleteQuickPatient(final Long id) {
+		try {
+			final QuickPatient qp = jdoTemplate.getObjectById(QuickPatient.class, id);
+			if (qp != null) {
+				jdoTemplate.deletePersistent(qp);
+				cache.remove(QuickPatientListComposer.QUICK_PATIENT_LIST);
 			}
-		}, true);
+		} catch (final Exception e) {
+		}
 	}
 
 	@Override

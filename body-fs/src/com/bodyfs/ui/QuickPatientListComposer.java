@@ -1,7 +1,7 @@
 /* $Id$ */
 package com.bodyfs.ui;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.jsr107cache.Cache;
 
@@ -24,6 +24,7 @@ import com.bodyfs.model.QuickPatient;
  */
 public class QuickPatientListComposer extends GenericForwardComposer {
 
+	public static final String QUICK_PATIENT_LIST = "com.bodyfs.quickpatientlist";
 	private static final long serialVersionUID = 2301671317724738233L;
 
 	@SuppressWarnings("unchecked")
@@ -32,13 +33,13 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		final Cache cache = (Cache) SpringUtil.getBean("datacache");
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		List<QuickPatient> quicklist = null;
+		Collection<QuickPatient> quicklist = null;
 
-		if (!cache.containsKey(PatientViewComposer.QUICK_PATIENT_LIST)) {
+		if (!cache.containsKey(QUICK_PATIENT_LIST)) {
 			quicklist = personDAO.getQuickList();
-			cache.put(PatientViewComposer.QUICK_PATIENT_LIST, quicklist);
+			cache.put(QUICK_PATIENT_LIST, quicklist);
 		} else {
-			quicklist = (List<QuickPatient>) cache.get(PatientViewComposer.QUICK_PATIENT_LIST);
+			quicklist = (Collection<QuickPatient>) cache.get(QUICK_PATIENT_LIST);
 		}
 		if (quicklist == null || quicklist.size() <= 0) {
 			return;
@@ -51,7 +52,7 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 			if (curId != null && curId.equals(qp.getId().toString())) {
 				buffer.append(" bodyfs-qpatient-selected");
 			}
-			buffer.append("'><a href='/pages/patient/patientview.zul?&id=").append(qp.getId()).append("'>").append(
+			buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId()).append("'>").append(
 					qp.getName()).append("</a></div>");
 		}
 

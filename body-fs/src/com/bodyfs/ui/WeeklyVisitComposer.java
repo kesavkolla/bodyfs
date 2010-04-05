@@ -6,6 +6,8 @@ package com.bodyfs.ui;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import net.sf.jsr107cache.Cache;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.json.JSONArray;
@@ -23,11 +25,14 @@ import org.zkoss.zul.Textbox;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
+import com.bodyfs.model.QuickPatient;
 import com.bodyfs.ui.util.CommonUtils;
 
 /**
@@ -160,6 +165,20 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			prescription.setVisitDate(patvisit.getVisitDate());
 			visitDAO.createPatientPrescription(prescription);
 			LOGGER.debug("Successfully created treatment with id: " + treatment.getId());
+
+			// add the patient to queue
+			final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+			final Person person = personDAO.getPerson(patvisit.getPersonId());
+			final QuickPatient qp = new QuickPatient();
+			qp.setId(person.getId());
+			qp.setName(person.getDisplayName());
+			personDAO.createQuickPatient(qp);
+			// remove cache
+			final Cache cache = (Cache) SpringUtil.getBean("datacache");
+			if (cache.containsKey(QuickPatientListComposer.QUICK_PATIENT_LIST)) {
+				cache.remove(QuickPatientListComposer.QUICK_PATIENT_LIST);
+			}
+
 			Clients.evalJavaScript("showConfirmation()");
 		}
 	}

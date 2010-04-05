@@ -17,6 +17,11 @@
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true" id="controller" apply="com.bodyfs.ui.PaymentComposer">
 					<n:div style="margin:10px;width:90%" id="mainDiv">
+						<n:div style="width:90%;text-align:right;">
+							<n:input type="button" id="btnPrint" value="Print Invoice" />
+						</n:div>
+						<n:br />
+						<n:br />
 						<textbox id="txtAction" value="" forward="onBlur=controller.onAction" visible="false" />
 						<textbox id="txtPaymentData" value="" visible="false" />
 						<n:script type="text/javascript">

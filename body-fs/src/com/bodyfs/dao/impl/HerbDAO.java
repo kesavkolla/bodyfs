@@ -46,6 +46,10 @@ public class HerbDAO implements IHerbDAO, Serializable {
 	@Autowired
 	private ICounterDAO counterbDAO;
 
+	public void setCounterbDAO(final ICounterDAO counterbDAO) {
+		this.counterbDAO = counterbDAO;
+	}
+
 	private Cache cache;
 
 	public void setCache(final Cache cache) {

@@ -17,7 +17,6 @@ import org.springframework.orm.jdo.JdoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bodyfs.PMF;
-import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.IMPIDao;
 import com.bodyfs.model.MPIData;
 
@@ -31,7 +30,7 @@ import com.bodyfs.model.MPIData;
 public class MPIDao implements IMPIDao, Serializable {
 
 	private static final long serialVersionUID = 6676627217684586323L;
-	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
+	private static final Log LOGGER = LogFactory.getLog(MPIDao.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
 	@Override

@@ -8,5 +8,5 @@ package com.bodyfs.model;
  * 
  */
 public enum PersonType {
-	PRE_USER, USER, EMPLOYEE, POST_USER
+	PRE_USER, USER, EMPLOYEE, POST_USER, SIA_AGENT
 }

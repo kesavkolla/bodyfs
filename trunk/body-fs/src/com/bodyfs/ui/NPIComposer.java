@@ -13,7 +13,6 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 
 import com.bodyfs.dao.IPersonDAO;
-import com.bodyfs.dao.impl.PersonDAO;
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
 import com.bodyfs.model.ENT;
@@ -28,7 +27,6 @@ import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
-import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.model.Respiratory;
@@ -47,7 +45,7 @@ public class NPIComposer extends GenericForwardComposer {
 
 	public static final String SESSION_PERSON = "session.person";
 	public static final String SESSION_GENERALINFO = "session.ginfo";
-	
+
 	public static final String SESSION_FAMILYMEDICALHISTORY = "session.fmh";
 	public static final String SESSION_PASTMEDICALHISTORY = "session.pmh";
 	public static final String SESSION_PATIENTDIET = "session.yd";
@@ -63,7 +61,7 @@ public class NPIComposer extends GenericForwardComposer {
 	public static final String SESSION_GENITOURINARY = "session.gen";
 	public static final String SESSION_GYNAE = "session.gy";
 	public static final String SESSION_HEALTHINSURANCE = "session.hi";
-	
+
 	private Include npiinclude;
 
 	@Override
@@ -97,22 +95,22 @@ public class NPIComposer extends GenericForwardComposer {
 		person.setPersonType(PersonType.PRE_USER);
 		personDAO.createPerson(person);
 		final GeneralInfo ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
-		final FamilyMedHistory fmh = (FamilyMedHistory)sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
-		final PastMedicalHistory pmh = (PastMedicalHistory)sessionScope.get(SESSION_PASTMEDICALHISTORY);
-		final Diet yd = (Diet)sessionScope.get(SESSION_PATIENTDIET);
-		final Lifestyle yls = (Lifestyle)sessionScope.get(SESSION_LIFESTYLE);
-		final GeneralSymptoms gs = (GeneralSymptoms)sessionScope.get(SESSION_GENERALSYMPTOMS);
-		final ENT ent = (ENT)sessionScope.get(SESSION_ENT);
-		final Respiratory rp = (Respiratory)sessionScope.get(SESSION_RESPIRATORY);
-		final Cardiovascular cv = (Cardiovascular)sessionScope.get(SESSION_CARDIO);
-		final Gastrointestinal gi = (Gastrointestinal)sessionScope.get(SESSION_GASTRO);
-		final Musculoskeletal ms = (Musculoskeletal)sessionScope.get(SESSION_MUSCULO);
-		final SkinHair sh = (SkinHair)sessionScope.get(SESSION_SKINHAIR);
-		final Neuropsychological np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
-		final Genitourinary gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
-		final Gynecology gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
-		final HealthInsurance hi = (HealthInsurance)sessionScope.get(SESSION_HEALTHINSURANCE);
-		
+		final FamilyMedHistory fmh = (FamilyMedHistory) sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
+		final PastMedicalHistory pmh = (PastMedicalHistory) sessionScope.get(SESSION_PASTMEDICALHISTORY);
+		final Diet yd = (Diet) sessionScope.get(SESSION_PATIENTDIET);
+		final Lifestyle yls = (Lifestyle) sessionScope.get(SESSION_LIFESTYLE);
+		final GeneralSymptoms gs = (GeneralSymptoms) sessionScope.get(SESSION_GENERALSYMPTOMS);
+		final ENT ent = (ENT) sessionScope.get(SESSION_ENT);
+		final Respiratory rp = (Respiratory) sessionScope.get(SESSION_RESPIRATORY);
+		final Cardiovascular cv = (Cardiovascular) sessionScope.get(SESSION_CARDIO);
+		final Gastrointestinal gi = (Gastrointestinal) sessionScope.get(SESSION_GASTRO);
+		final Musculoskeletal ms = (Musculoskeletal) sessionScope.get(SESSION_MUSCULO);
+		final SkinHair sh = (SkinHair) sessionScope.get(SESSION_SKINHAIR);
+		final Neuropsychological np = (Neuropsychological) sessionScope.get(SESSION_NEURO);
+		final Genitourinary gen = (Genitourinary) sessionScope.get(SESSION_GENITOURINARY);
+		final Gynecology gy = (Gynecology) sessionScope.get(SESSION_GYNAE);
+		final HealthInsurance hi = (HealthInsurance) sessionScope.get(SESSION_HEALTHINSURANCE);
+
 		ginfo.setPersonId(person.getId());
 		fmh.setPersonId(person.getId());
 		pmh.setPersonId(person.getId());
@@ -129,7 +127,7 @@ public class NPIComposer extends GenericForwardComposer {
 		gen.setPersonId(person.getId());
 		gy.setPersonId(person.getId());
 		hi.setPersonId(person.getId());
-		
+
 		personDAO.createGeneralInfo(ginfo);
 		personDAO.createFamilyMedicalHistory(fmh);
 		personDAO.createPastMedicalHistory(pmh);
@@ -146,7 +144,7 @@ public class NPIComposer extends GenericForwardComposer {
 		personDAO.createGenitourinary(gen);
 		personDAO.createGynecology(gy);
 		personDAO.createHealthInsurance(hi);
-		
+
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
 		execution.sendRedirect("/pages/usermgmt/customersearch.zul");
@@ -170,7 +168,7 @@ public class NPIComposer extends GenericForwardComposer {
 		sessionScope.remove(SESSION_GENITOURINARY);
 		sessionScope.remove(SESSION_GYNAE);
 		sessionScope.remove(SESSION_HEALTHINSURANCE);
-		
+
 	}
 
 	public void onCancel(final ForwardEvent event) {
@@ -180,20 +178,19 @@ public class NPIComposer extends GenericForwardComposer {
 
 	private void setupPerson() {
 		Long patid = null;
-		
+
 		try {
-		patid = new Long(execution.getParameter("id"));
-		} catch (NumberFormatException ex ){
+			patid = new Long(execution.getParameter("id"));
+		} catch (NumberFormatException ex) {
 			patid = null;
 		}
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		
-		
+
 		Person person = null;
 		GeneralInfo ginfo = null;
 		FamilyMedHistory fmh = null;
 		PastMedicalHistory pmh = null;
-		Diet yd =null;
+		Diet yd = null;
 		Lifestyle yls = null;
 		GeneralSymptoms gs = null;
 		Respiratory rp = null;
@@ -206,10 +203,10 @@ public class NPIComposer extends GenericForwardComposer {
 		Genitourinary gen = null;
 		Gynecology gy = null;
 		HealthInsurance hi = null;
-	
+
 		if (sessionScope.get(SESSION_PERSON) == null) {
-			if(patid ==  null) {
-				
+			if (patid == null) {
+
 				person = new Person();
 				ginfo = new GeneralInfo();
 				fmh = new FamilyMedHistory();
@@ -249,44 +246,44 @@ public class NPIComposer extends GenericForwardComposer {
 			sessionScope.put(SESSION_PERSON, person);
 			sessionScope.put(SESSION_GENERALINFO, ginfo);
 			sessionScope.put(SESSION_FAMILYMEDICALHISTORY, fmh);
-			sessionScope.put(SESSION_PASTMEDICALHISTORY,pmh);
-			sessionScope.put(SESSION_PATIENTDIET,yd);
-			sessionScope.put(SESSION_LIFESTYLE,yls);
-			sessionScope.put(SESSION_GENERALSYMPTOMS,gs);
-			sessionScope.put(SESSION_ENT,ent);
-			sessionScope.put(SESSION_RESPIRATORY,rp);
-			sessionScope.put(SESSION_CARDIO,cv);
-			sessionScope.put(SESSION_GASTRO,gi);
+			sessionScope.put(SESSION_PASTMEDICALHISTORY, pmh);
+			sessionScope.put(SESSION_PATIENTDIET, yd);
+			sessionScope.put(SESSION_LIFESTYLE, yls);
+			sessionScope.put(SESSION_GENERALSYMPTOMS, gs);
+			sessionScope.put(SESSION_ENT, ent);
+			sessionScope.put(SESSION_RESPIRATORY, rp);
+			sessionScope.put(SESSION_CARDIO, cv);
+			sessionScope.put(SESSION_GASTRO, gi);
 			sessionScope.put(SESSION_MUSCULO, ms);
-			sessionScope.put(SESSION_SKINHAIR,sh);
-			sessionScope.put(SESSION_NEURO,np);
+			sessionScope.put(SESSION_SKINHAIR, sh);
+			sessionScope.put(SESSION_NEURO, np);
 			sessionScope.put(SESSION_GENITOURINARY, gen);
-			sessionScope.put(SESSION_GYNAE,gy);
-			sessionScope.put(SESSION_HEALTHINSURANCE,hi);
-			
+			sessionScope.put(SESSION_GYNAE, gy);
+			sessionScope.put(SESSION_HEALTHINSURANCE, hi);
+
 		} else {
 			person = (Person) sessionScope.get(SESSION_PERSON);
 			ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
-			
-			fmh = (FamilyMedHistory)sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
-			pmh = (PastMedicalHistory)sessionScope.get(SESSION_PASTMEDICALHISTORY);
-			yd = (Diet)sessionScope.get(SESSION_PATIENTDIET);
-			yls = (Lifestyle)sessionScope.get(SESSION_LIFESTYLE);
-			gs = (GeneralSymptoms)sessionScope.get(SESSION_GENERALSYMPTOMS);
-			ent = (ENT)sessionScope.get(SESSION_ENT);
-			rp = (Respiratory)sessionScope.get(SESSION_RESPIRATORY);
-			cv = (Cardiovascular)sessionScope.get(SESSION_CARDIO);
-			gi = (Gastrointestinal)sessionScope.get(SESSION_GASTRO);
-			ms = (Musculoskeletal)sessionScope.get(SESSION_MUSCULO);
-			sh = (SkinHair)sessionScope.get(SESSION_SKINHAIR);
-			np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
-			gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
-			gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
+
+			fmh = (FamilyMedHistory) sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
+			pmh = (PastMedicalHistory) sessionScope.get(SESSION_PASTMEDICALHISTORY);
+			yd = (Diet) sessionScope.get(SESSION_PATIENTDIET);
+			yls = (Lifestyle) sessionScope.get(SESSION_LIFESTYLE);
+			gs = (GeneralSymptoms) sessionScope.get(SESSION_GENERALSYMPTOMS);
+			ent = (ENT) sessionScope.get(SESSION_ENT);
+			rp = (Respiratory) sessionScope.get(SESSION_RESPIRATORY);
+			cv = (Cardiovascular) sessionScope.get(SESSION_CARDIO);
+			gi = (Gastrointestinal) sessionScope.get(SESSION_GASTRO);
+			ms = (Musculoskeletal) sessionScope.get(SESSION_MUSCULO);
+			sh = (SkinHair) sessionScope.get(SESSION_SKINHAIR);
+			np = (Neuropsychological) sessionScope.get(SESSION_NEURO);
+			gen = (Genitourinary) sessionScope.get(SESSION_GENITOURINARY);
+			gy = (Gynecology) sessionScope.get(SESSION_GYNAE);
 			hi = (HealthInsurance) sessionScope.get(SESSION_HEALTHINSURANCE);
 		}
 		page.setAttribute("person", person);
 		page.setAttribute("ginfo", ginfo);
-		
+
 		page.setAttribute("fmh", fmh);
 		page.setAttribute("pmh", pmh);
 		page.setAttribute("yd", yd);
@@ -302,7 +299,6 @@ public class NPIComposer extends GenericForwardComposer {
 		page.setAttribute("gen", gen);
 		page.setAttribute("gy", gy);
 		page.setAttribute("hi", hi);
-		
-		
+
 	}
 }

@@ -13,7 +13,6 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 
 import com.bodyfs.dao.IPersonDAO;
-import com.bodyfs.dao.impl.PersonDAO;
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
 import com.bodyfs.model.ENT;
@@ -28,9 +27,7 @@ import com.bodyfs.model.Lifestyle;
 import com.bodyfs.model.Musculoskeletal;
 import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
-import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.Person;
-import com.bodyfs.model.PersonType;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
 import com.bodyfs.ui.util.CommonUtils;
@@ -48,7 +45,7 @@ public class NPIViewComposer extends GenericForwardComposer {
 
 	public static final String SESSION_PERSON = "session.person";
 	public static final String SESSION_GENERALINFO = "session.ginfo";
-	
+
 	public static final String SESSION_FAMILYMEDICALHISTORY = "session.fmh";
 	public static final String SESSION_PASTMEDICALHISTORY = "session.pmh";
 	public static final String SESSION_PATIENTDIET = "session.yd";
@@ -64,7 +61,7 @@ public class NPIViewComposer extends GenericForwardComposer {
 	public static final String SESSION_GENITOURINARY = "session.gen";
 	public static final String SESSION_GYNAE = "session.gy";
 	public static final String SESSION_HEALTHINSURANCE = "session.hi";
-	
+
 	private Include npiinclude;
 
 	@Override
@@ -76,15 +73,15 @@ public class NPIViewComposer extends GenericForwardComposer {
 	public void onNext(final ForwardEvent event) {
 		final String pageId = event.getData().toString();
 		desktop.setBookmark(pageId);
-		if(CommonUtils.getIsAdminUser())
+		if (CommonUtils.getIsAdminUser())
 			npiinclude.setSrc("/pages/usermgmt/" + pageId + ".zul");
-		else 
+		else
 			npiinclude.setSrc("/pages/user/" + pageId + ".zul");
 	}
 
 	public void onBookmarkChange(final BookmarkEvent event) {
 		final String pageid = event.getBookmark();
-		if(CommonUtils.getIsAdminUser()) {
+		if (CommonUtils.getIsAdminUser()) {
 			if (pageid != null && !pageid.equals("")) {
 				npiinclude.setSrc("/pages/usermgmt/" + pageid + ".zul");
 			} else {
@@ -102,12 +99,13 @@ public class NPIViewComposer extends GenericForwardComposer {
 	public void onSaveNPI(final ForwardEvent event) {
 		final Person person = (Person) sessionScope.get(SESSION_PERSON);
 		cleanSession();
-		if(CommonUtils.getIsAdminUser()) {
-			execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		LOGGER.debug("Saving NPI");
+		if (CommonUtils.getIsAdminUser()) {
+			execution.sendRedirect("/pages/patient/patientview.zul?id=" + person.getId());
 		} else {
 			execution.sendRedirect("index.zul");
 		}
-		
+
 	}
 
 	public void cleanSession() {
@@ -128,14 +126,14 @@ public class NPIViewComposer extends GenericForwardComposer {
 		sessionScope.remove(SESSION_GENITOURINARY);
 		sessionScope.remove(SESSION_GYNAE);
 		sessionScope.remove(SESSION_HEALTHINSURANCE);
-		
+
 	}
 
 	public void onCancel(final ForwardEvent event) {
 		final Person person = (Person) sessionScope.get(SESSION_PERSON);
 		cleanSession();
-		if(CommonUtils.getIsAdminUser()) {
-			execution.sendRedirect("/pages/patient/patientview.zul?id="+person.getId());
+		if (CommonUtils.getIsAdminUser()) {
+			execution.sendRedirect("/pages/patient/patientview.zul?id=" + person.getId());
 		} else {
 			execution.sendRedirect("index.zul");
 		}
@@ -143,20 +141,19 @@ public class NPIViewComposer extends GenericForwardComposer {
 
 	private void setupPerson() {
 		Long patid = null;
-		
+
 		try {
-		patid = CommonUtils.getPatientId();
-		} catch (NumberFormatException ex ){
+			patid = CommonUtils.getPatientId();
+		} catch (NumberFormatException ex) {
 			patid = null;
 		}
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		
-		
+
 		Person person = null;
 		GeneralInfo ginfo = null;
 		FamilyMedHistory fmh = null;
 		PastMedicalHistory pmh = null;
-		Diet yd =null;
+		Diet yd = null;
 		Lifestyle yls = null;
 		GeneralSymptoms gs = null;
 		Respiratory rp = null;
@@ -169,10 +166,10 @@ public class NPIViewComposer extends GenericForwardComposer {
 		Genitourinary gen = null;
 		Gynecology gy = null;
 		HealthInsurance hi = null;
-	
+
 		if (sessionScope.get(SESSION_PERSON) == null) {
-			if(patid ==  null) {
-				
+			if (patid == null) {
+
 				person = new Person();
 				ginfo = new GeneralInfo();
 				fmh = new FamilyMedHistory();
@@ -212,44 +209,44 @@ public class NPIViewComposer extends GenericForwardComposer {
 			sessionScope.put(SESSION_PERSON, person);
 			sessionScope.put(SESSION_GENERALINFO, ginfo);
 			sessionScope.put(SESSION_FAMILYMEDICALHISTORY, fmh);
-			sessionScope.put(SESSION_PASTMEDICALHISTORY,pmh);
-			sessionScope.put(SESSION_PATIENTDIET,yd);
-			sessionScope.put(SESSION_LIFESTYLE,yls);
-			sessionScope.put(SESSION_GENERALSYMPTOMS,gs);
-			sessionScope.put(SESSION_ENT,ent);
-			sessionScope.put(SESSION_RESPIRATORY,rp);
-			sessionScope.put(SESSION_CARDIO,cv);
-			sessionScope.put(SESSION_GASTRO,gi);
+			sessionScope.put(SESSION_PASTMEDICALHISTORY, pmh);
+			sessionScope.put(SESSION_PATIENTDIET, yd);
+			sessionScope.put(SESSION_LIFESTYLE, yls);
+			sessionScope.put(SESSION_GENERALSYMPTOMS, gs);
+			sessionScope.put(SESSION_ENT, ent);
+			sessionScope.put(SESSION_RESPIRATORY, rp);
+			sessionScope.put(SESSION_CARDIO, cv);
+			sessionScope.put(SESSION_GASTRO, gi);
 			sessionScope.put(SESSION_MUSCULO, ms);
-			sessionScope.put(SESSION_SKINHAIR,sh);
-			sessionScope.put(SESSION_NEURO,np);
+			sessionScope.put(SESSION_SKINHAIR, sh);
+			sessionScope.put(SESSION_NEURO, np);
 			sessionScope.put(SESSION_GENITOURINARY, gen);
-			sessionScope.put(SESSION_GYNAE,gy);
-			sessionScope.put(SESSION_HEALTHINSURANCE,hi);
-			
+			sessionScope.put(SESSION_GYNAE, gy);
+			sessionScope.put(SESSION_HEALTHINSURANCE, hi);
+
 		} else {
 			person = (Person) sessionScope.get(SESSION_PERSON);
 			ginfo = (GeneralInfo) sessionScope.get(SESSION_GENERALINFO);
-			
-			fmh = (FamilyMedHistory)sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
-			pmh = (PastMedicalHistory)sessionScope.get(SESSION_PASTMEDICALHISTORY);
-			yd = (Diet)sessionScope.get(SESSION_PATIENTDIET);
-			yls = (Lifestyle)sessionScope.get(SESSION_LIFESTYLE);
-			gs = (GeneralSymptoms)sessionScope.get(SESSION_GENERALSYMPTOMS);
-			ent = (ENT)sessionScope.get(SESSION_ENT);
-			rp = (Respiratory)sessionScope.get(SESSION_RESPIRATORY);
-			cv = (Cardiovascular)sessionScope.get(SESSION_CARDIO);
-			gi = (Gastrointestinal)sessionScope.get(SESSION_GASTRO);
-			ms = (Musculoskeletal)sessionScope.get(SESSION_MUSCULO);
-			sh = (SkinHair)sessionScope.get(SESSION_SKINHAIR);
-			np = (Neuropsychological)sessionScope.get(SESSION_NEURO);
-			gen = (Genitourinary)sessionScope.get(SESSION_GENITOURINARY);
-			gy = (Gynecology)sessionScope.get(SESSION_GYNAE);
+
+			fmh = (FamilyMedHistory) sessionScope.get(SESSION_FAMILYMEDICALHISTORY);
+			pmh = (PastMedicalHistory) sessionScope.get(SESSION_PASTMEDICALHISTORY);
+			yd = (Diet) sessionScope.get(SESSION_PATIENTDIET);
+			yls = (Lifestyle) sessionScope.get(SESSION_LIFESTYLE);
+			gs = (GeneralSymptoms) sessionScope.get(SESSION_GENERALSYMPTOMS);
+			ent = (ENT) sessionScope.get(SESSION_ENT);
+			rp = (Respiratory) sessionScope.get(SESSION_RESPIRATORY);
+			cv = (Cardiovascular) sessionScope.get(SESSION_CARDIO);
+			gi = (Gastrointestinal) sessionScope.get(SESSION_GASTRO);
+			ms = (Musculoskeletal) sessionScope.get(SESSION_MUSCULO);
+			sh = (SkinHair) sessionScope.get(SESSION_SKINHAIR);
+			np = (Neuropsychological) sessionScope.get(SESSION_NEURO);
+			gen = (Genitourinary) sessionScope.get(SESSION_GENITOURINARY);
+			gy = (Gynecology) sessionScope.get(SESSION_GYNAE);
 			hi = (HealthInsurance) sessionScope.get(SESSION_HEALTHINSURANCE);
 		}
 		page.setAttribute("person", person);
 		page.setAttribute("ginfo", ginfo);
-		
+
 		page.setAttribute("fmh", fmh);
 		page.setAttribute("pmh", pmh);
 		page.setAttribute("yd", yd);
@@ -265,7 +262,6 @@ public class NPIViewComposer extends GenericForwardComposer {
 		page.setAttribute("gen", gen);
 		page.setAttribute("gy", gy);
 		page.setAttribute("hi", hi);
-		
-		
+
 	}
 }

@@ -18,6 +18,7 @@ import org.zkoss.zk.ui.sys.SessionsCtrl;
 
 import com.bodyfs.Constants;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.model.PersonType;
 
 /**
  * 
@@ -41,11 +42,22 @@ public class ApplicationFilter implements Filter {
 			filterChain.doFilter(request, response);
 			return;
 		}
+		
 		StringBuffer url = new StringBuffer(req.getRequestURI().length());
+		final HttpSession session = req.getSession(false);
+		PersonType personType = null;
+		if(session != null ) {
+			personType  = (PersonType) session.getAttribute(Constants.SESSION_PERSON_TYPE);
+		}
 		if (req.getRequestURI().endsWith("login.zul") || req.getRequestURI().endsWith("index.zul")
 				|| req.getRequestURI().endsWith("login.zu") || req.getRequestURI().endsWith("logout.zul")) {
 			url.append(req.getContextPath()).append("/login.zul");
-		} else {
+		} else if(req.getRequestURI().contains("/signin/") && (personType == null || personType != PersonType.SIA_AGENT)) {
+			url.append(req.getContextPath()).append("/login.zul");
+			res.sendRedirect(url.toString());
+			return;
+		}		
+		else {
 			url.append(req.getContextPath()).append("/login.zul");
 			url.append("?redirect=").append(req.getRequestURI());
 			if (req.getQueryString() != null && req.getQueryString().length() > 0) {
@@ -53,11 +65,11 @@ public class ApplicationFilter implements Filter {
 			}
 		}
 
-		final HttpSession session = req.getSession(false);
 		if (session == null) {
 			res.sendRedirect(url.toString());
 			return;
 		}
+		
 		final LoginInfo userInfo = (LoginInfo) session.getAttribute(Constants.SESSION_LOGIN_CRED);
 		if (userInfo == null) {
 			res.sendRedirect(url.toString());

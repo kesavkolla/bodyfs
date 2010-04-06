@@ -198,9 +198,9 @@ public class Person implements Serializable {
 			return "post user";
 		else if (personType.equals(PersonType.USER))
 			return "current user";
-		else if (personType.equals(PersonType.EMPLOYEE))
+		else if (personType.equals(PersonType.EMPLOYEE) || personType.equals(PersonType.SIA_AGENT))
 			return "admin";
-
+		
 		return "";
 	}
 

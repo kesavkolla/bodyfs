@@ -120,7 +120,7 @@
 						<checkbox label="Venereal disease"
 							checked="@{pmh.venerealdisease, save-when='btnNext.onClick, btnPrev.onClick' }" />
 						<checkbox label="Whooping cough" checked="@{pmh.whoopingcough, save-when='btnNext.onClick, btnPrev.onClick' }" />
-						<checkbox label="Other (Specify)" />
+						<checkbox label="Other (Specify)" checked="@{pmh.otherChk, save-when='btnNext.onClick, btnPrev.onClick' }" />
 						<textbox rows="4" value="@{pmh.other, save-when='btnNext.onClick, btnPrev.onClick' }" />
 					</vbox>
 				</hbox>
@@ -161,7 +161,7 @@
 						Thirst for water:
 						<hbox>
 							# glasses per day:
-							<textbox />
+							<textbox rows="4" value="@{yd.water, save-when='btnNext.onClick, btnPrev.onClick' }" />
 						</hbox>
 					</vbox>
 				</hbox>

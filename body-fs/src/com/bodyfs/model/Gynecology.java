@@ -39,7 +39,7 @@ public class Gynecology implements Serializable {
 	private Boolean durationofflow;
 
 	@Persistent
-	private Boolean duration;
+	private String duration;
 
 	@Persistent
 	private Boolean irregularperiods;
@@ -132,11 +132,11 @@ public class Gynecology implements Serializable {
 		this.durationofflow = durationofflow;
 	}
 
-	public final Boolean getDuration() {
+	public final String getDuration() {
 		return duration;
 	}
 
-	public final void setDuration(Boolean duration) {
+	public final void setDuration(String duration) {
 		this.duration = duration;
 	}
 

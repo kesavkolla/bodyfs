@@ -145,7 +145,10 @@ public class PastMedicalHistory implements Serializable {
 
 	@Persistent
 	private Boolean whoopingcough;
-
+	
+	@Persistent
+	private String otherChk;
+	
 	@Persistent
 	private String other;
 
@@ -494,6 +497,21 @@ public class PastMedicalHistory implements Serializable {
 
 	public final void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	
+	/**
+	 * @return the otherChk
+	 */
+	public String getOtherChk() {
+		return otherChk;
+	}
+
+	/**
+	 * @param otherChk the otherChk to set
+	 */
+	public void setOtherChk(String otherChk) {
+		this.otherChk = otherChk;
 	}
 
 	/**

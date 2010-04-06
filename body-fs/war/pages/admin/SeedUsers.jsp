@@ -20,8 +20,10 @@
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
 	final IPersonDAO personDAO = ctx.getBean(IPersonDAO.class);
-	final Person person = new Person();
-	person.setFirstName("Administrator");
+	final ILoginDAO loginDAO = ctx.getBean(ILoginDAO.class);
+	
+	Person person = new Person();
+	/*person.setFirstName("Administrator");
 	person.setLastName("BodyFengShui");
 	person.setEmail("kesavkolla+bodyfs@gmail.com");
 	person.setDateOfBirth(sdf.parse("08/14/1973"));
@@ -31,12 +33,30 @@
 
 	personDAO.createPerson(person);
 	out.println("Create person with id <b>" + person.getId() + "</b><br />");
-
-	final LoginInfo login = new LoginInfo();
-	login.setPersonId(person.getId());
+	*/
+	LoginInfo login = new LoginInfo();
+	/*login.setPersonId(person.getId());
 	login.setUserid("admin");
 	login.setPassword("hliferocks");
-	final ILoginDAO loginDAO = ctx.getBean(ILoginDAO.class);
+	loginDAO.createNewLogin(login);
+	out.println("Created login");
+	*/
+	person = new Person();
+	person.setFirstName("Signin");
+	person.setLastName("Agent");
+	person.setEmail("info@bodyfs.com");
+	person.setDateOfBirth(sdf.parse("08/14/1973"));
+	person.setGender(Gender.MALE);
+	person.setSSN("111-11-1111");
+	person.setPersonType(PersonType.SIA_AGENT);
+
+	personDAO.createPerson(person);
+	out.println("Create person with id <b>" + person.getId() + "</b><br />");
+
+	login = new LoginInfo();
+	login.setPersonId(person.getId());
+	login.setUserid("patient");
+	login.setPassword("bodyfengshui");
 	loginDAO.createNewLogin(login);
 	out.println("Created login");
 %>

@@ -60,6 +60,8 @@ public class LoginWindow extends GenericForwardComposer {
 		}
 		if (person.getPersonType() == PersonType.EMPLOYEE) {
 			Executions.sendRedirect("/index.zul");
+		} else if (person.getPersonType() == PersonType.SIA_AGENT) {
+			Executions.sendRedirect("/pages/signin/customersearch.zul");
 		} else {
 			Executions.sendRedirect("/pages/user/index.zul");
 		}

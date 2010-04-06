@@ -157,6 +157,9 @@ function initPage() {
 		var selDate = $(this).val();
 		var latestdate = $("#selVisitDates")[0].options[0].value;
 		var visitdate = $("$txtVisitDates").val();
+		if (visitdate == "") {
+			visitdate = latestdate;
+		}
 		if (visitdate < latestdate) {
 			$("#btnCopy").attr("disabled", "disabled");
 			return;

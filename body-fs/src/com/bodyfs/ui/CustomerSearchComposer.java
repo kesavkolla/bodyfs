@@ -120,7 +120,7 @@ public class CustomerSearchComposer extends GenericForwardComposer {
 					resultSet.add(person);
 					continue;
 				}
-				if (person.getPersonType() == PersonType.EMPLOYEE) 
+				if (person.getPersonType() == PersonType.EMPLOYEE || person.getPersonType() == PersonType.SIA_AGENT ) 
 					continue;
 				else if (!typePre.isChecked() && person.getPersonType() == PersonType.PRE_USER)
 					continue;

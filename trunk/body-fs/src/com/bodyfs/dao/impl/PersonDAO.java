@@ -520,6 +520,7 @@ public class PersonDAO implements IPersonDAO, Serializable {
 		return jdoTemplate.detachCopyAll(jdoTemplate.find(QuickPatient.class, null, "date DESC"));
 	}
 
+	@Override
 	public void deleteQuickPatient(final Long id) {
 		try {
 			final QuickPatient qp = jdoTemplate.getObjectById(QuickPatient.class, id);

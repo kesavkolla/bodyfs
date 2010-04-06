@@ -20,6 +20,12 @@
 				<west border="0">
 					<image src="/img/banner7.jpg" hflex="1" width="800px" height="95px" id="logo" />
 				</west>
+				<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+					<hbox style="padding-top:20px;">
+						<a href="/logout.zul" sclass="lg-label">Logout</a>
+						<space />
+					</hbox>
+				</east>
 			</borderlayout>
 		</north>
 		<center>
@@ -35,7 +41,7 @@
 							<n:table>
 								<n:tr>
 									<n:td>
-										Sigin in Date (temp)
+										Sign-in Date (temp)
 										<datebox id="visitdate"
 											value="@{patvisit.visitDate, save-when='btnSave.onClick' }" format="MM/dd/yyyy"
 											timeZone="${c:timezone('PST')}" hflex="true" />
@@ -50,7 +56,7 @@
 					</row>
 					<row valign="top">
 						<cell valign="top">
-							<image src="/img/bakers-union-body.gif" id="imgbody" height="450px" width="485px" />
+							<image src="/img/bakers-union-body.gif" id="imgbody" height="420px" width="420px" />
 						</cell>
 						<vbox vflex="1" hflex="1">
 							<hbox hflex="1">

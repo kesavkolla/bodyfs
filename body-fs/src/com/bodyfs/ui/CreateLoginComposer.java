@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import com.bodyfs.dao.ILoginDAO;
@@ -59,6 +60,16 @@ public class CreateLoginComposer extends GenericForwardComposer {
 	}
 
 	public void onSave(final Event evt) {
+		ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
+		final LoginInfo logininfo = (LoginInfo) page.getAttribute("logininfo");
+		if (logininfo.getUserid().trim().length() <= 0 || loginDAO.isLoginIdExists(logininfo.getUserid())) {
+			try {
+				Messagebox.show("Userid already exists select another id", "Save Error", Messagebox.OK,
+						Messagebox.ERROR);
+			} catch (final Exception e) {
+			}
+			return;
+		}
 		final Person person = (Person) page.getAttribute("person");
 		if (person.getPersonType() == PersonType.PRE_USER) {
 			person.setPersonType(PersonType.USER);
@@ -67,8 +78,7 @@ public class CreateLoginComposer extends GenericForwardComposer {
 		personDao.createPerson(person);
 		final GeneralInfo ginfo = (GeneralInfo) page.getAttribute("ginfo");
 		personDao.createGeneralInfo(ginfo);
-		ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
-		final LoginInfo logininfo = (LoginInfo) page.getAttribute("logininfo");
+
 		loginDAO.createNewLogin(logininfo);
 		Executions.sendRedirect("/pages/patient/patientview.zul?id=" + page.getAttribute("patid"));
 	}

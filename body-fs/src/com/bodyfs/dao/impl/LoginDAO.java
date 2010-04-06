@@ -3,13 +3,10 @@ package com.bodyfs.dao.impl;
 import java.io.Serializable;
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.jdo.JdoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bodyfs.PMF;
-import com.bodyfs.controllers.PersonController;
 import com.bodyfs.dao.ILoginDAO;
 import com.bodyfs.model.LoginInfo;
 import com.bodyfs.ui.util.CustSearchOptions;
@@ -18,43 +15,10 @@ import com.bodyfs.ui.util.CustSearchOptions;
 public class LoginDAO implements ILoginDAO, Serializable {
 
 	private static final long serialVersionUID = 6501061341246752560L;
-	private static final Log LOGGER = LogFactory.getLog(PersonController.class);
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
-	/**
-	 * This method should be used for development purposes and disabled during
-	 * the time of deployment
-	 */
-	public void initLogins() {
-
-		if (this.getAll().size() > 0) {
-			LOGGER.error("LOgin exists");
-			return;
-		}
-		LoginInfo login1 = new LoginInfo();
-		login1.setUserid("amit");
-		login1.setPassword("1111");
-		this.createNewLogin(login1);
-		// pm.makePersistent(login1);
-		LOGGER.error("Login 1 created");
-		LoginInfo login2 = new LoginInfo();
-		login2.setUserid("kesav");
-		login2.setPassword("2222");
-		this.createNewLogin(login2);
-		LOGGER.debug("Login 2 created");
-
-		LoginInfo login3 = new LoginInfo();
-		login3.setUserid("neel");
-		login3.setPassword("1111");
-		this.createNewLogin(login3);
-		LOGGER.debug("Login 3 created");
-
-		// resultSet = pm.detachCopyAll(resultSet);
-		// extendedSearch.setVisible(false);
-	}
-
 	@Override
-	public LoginInfo getLoginDetails(Long personId) {
+	public LoginInfo getLoginDetails(final Long personId) {
 		try {
 			final Collection<LoginInfo> results = this.jdoTemplate.find(LoginInfo.class, "personId==pid", "String pid",
 					personId);
@@ -69,9 +33,9 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	}
 
 	@Override
-	public LoginInfo verifyLoginDetails(String loginId, String password) {
+	public LoginInfo verifyLoginDetails(final String loginId, final String password) {
 		try {
-			final LoginInfo login = this.jdoTemplate.getObjectById(LoginInfo.class, loginId.toLowerCase());
+			final LoginInfo login = this.jdoTemplate.getObjectById(LoginInfo.class, loginId.trim().toLowerCase());
 			if (login != null && login.getPassword().equals(password)) {
 				return login;
 			}
@@ -83,8 +47,21 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	}
 
 	@Override
-	public void createNewLogin(LoginInfo login) {
-		login.setUserid(login.getUserid().toLowerCase());
+	public boolean isLoginIdExists(final String loginId) {
+		if (loginId == null) {
+			return true;
+		}
+		try {
+			final LoginInfo logininfo = jdoTemplate.getObjectById(LoginInfo.class, loginId.trim().toLowerCase());
+			return (logininfo != null);
+		} catch (final Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public void createNewLogin(final LoginInfo login) {
+		login.setUserid(login.getUserid().trim().toLowerCase());
 		this.jdoTemplate.makePersistent(login);
 	}
 
@@ -94,7 +71,7 @@ public class LoginDAO implements ILoginDAO, Serializable {
 	}
 
 	@Override
-	public Collection<LoginInfo> getByOptions(CustSearchOptions options) {
+	public Collection<LoginInfo> getByOptions(final CustSearchOptions options) {
 		// return this.jdoTemplate.find(queryString);
 		return null;
 	}

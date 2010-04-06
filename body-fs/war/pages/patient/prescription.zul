@@ -9,7 +9,7 @@
 
 		.portion { background-color: #660000; border:none;}
 
-		.bordercell {border:1px solid black;}
+		.bordercell {border:1px solid rgb(192, 192, 192);}
 
 		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000; }
 	</style>
@@ -132,7 +132,7 @@
 								<n:td>
 									<n:span style="font-weight: bold">Herb&amp;nbsp;</n:span>
 									<div id="divHerbs" width="200px" height="200px"
-										style="border:1px solid black;overflow:auto">
+										style="border:1px solid rgb(192, 192, 192);overflow:auto">
 									</div>
 								</n:td>
 							</n:tr>

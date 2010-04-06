@@ -2,7 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
-	<style>.z-center{font-size:14px;}</style>
+	<style>.z-center{font-size:14px;color:black;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="patientview" apply="com.bodyfs.ui.PatientViewComposer">

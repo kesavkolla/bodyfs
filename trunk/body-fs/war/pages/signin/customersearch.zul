@@ -11,6 +11,12 @@
 				<west border="0">
 					<image src="/img/banner7.jpg" hflex="1" width="952px" height="95px" id="logo" />
 				</west>
+				<east border="0" style="background-image: url(/img/top_bg.jpg);background-repeat: repeat-x;">
+					<hbox style="padding-top:20px;">
+						<a href="/logout.zul" sclass="lg-label">Logout</a>
+						<space />
+					</hbox>
+				</east>
 			</borderlayout>
 		</north>
 		<center>

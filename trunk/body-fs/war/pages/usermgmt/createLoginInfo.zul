@@ -20,10 +20,10 @@
 							<row spans="2,,,,3">
 								<div></div>
 								Login ID:
-								<textbox id="loginid" hflex="1"
+								<textbox id="loginid" hflex="1" constraint="no empty"
 									value="@{logininfo.userid, save-when='btnSave.onClick'}" />
 								<label id="loginmsg" style="color:red" />
-								
+
 							</row>
 							<row spans="2,,,,3">
 								<div></div>
@@ -31,7 +31,8 @@
 								<textbox id="password" hflex="1"
 									value="@{logininfo.password, save-when='btnSave.onClick'}" />
 								Diagnosis Code:
-								<listbox mold="select" rows="1" selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
+								<listbox mold="select" rows="1"
+									selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
 									<listitem value="" label="Pain in Joint, Multiple Sites" />
 									<listitem value="719.49" label="Pain in Joint, Multiple Sites" />
 									<listitem value="723.1" label="Pain in Neck" />
@@ -43,13 +44,13 @@
 							<row hflex="true">
 								First Name:
 								<textbox id="firstName" value="@{person.firstName, save-when='btnSave.onClick' }"
-									maxlength="100" hflex="1" zclass="req-string" />
+									maxlength="100" hflex="1" constraint="no empty" />
 								Initial:
 								<textbox id="initial" value="@{person.initial, save-when='btnSave.onClick' }"
 									maxlength="100" hflex="1" />
 								LastName:
 								<textbox id="lastName" value="@{person.lastName, save-when='btnSave.onClick' }"
-									maxlength="100" hflex="1" />
+									maxlength="100" hflex="1" constraint="no empty" />
 							</row>
 							<row>
 								SSN:

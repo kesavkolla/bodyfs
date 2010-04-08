@@ -60,7 +60,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		pageScope.put("CURRENT_PATIENT_ID", id);
 		this.sessionScope.put("patid", pageScope.get("CURRENT_PATIENT_ID"));
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		final Person person = personDAO.getPerson(id);
+		final Person person = personDAO.getPerson(id, true);
 
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());

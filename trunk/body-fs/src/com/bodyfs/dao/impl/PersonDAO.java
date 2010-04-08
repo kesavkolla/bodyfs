@@ -83,6 +83,20 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	}
 
 	@Override
+	public Person getPerson(final Long id, final boolean cache) {
+		if (!cache) {
+			return getPerson(id);
+		}
+		final Person cperson = (Person) this.cache.get(CACHED_PERSON);
+		if (cperson == null || !cperson.getId().equals(id)) {
+			final Person nperson = getPerson(id);
+			this.cache.put(CACHED_PERSON, nperson);
+			return nperson;
+		}
+		return cperson;
+	}
+
+	@Override
 	public Collection<Person> getAll() {
 		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class));
 	}

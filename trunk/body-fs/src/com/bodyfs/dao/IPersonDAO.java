@@ -28,8 +28,30 @@ import com.bodyfs.model.SkinHair;
  * 
  */
 public interface IPersonDAO {
+
+	public static final String CACHED_PERSON = IPersonDAO.class.getName() + ".person";
+
+	/**
+	 * 
+	 * @param id
+	 * @return Person object corresponds to the id
+	 */
 	public Person getPerson(Long id);
 
+	/**
+	 * Retrieves the person from cache if exists otherwise adds to the cache
+	 * 
+	 * @param id
+	 * @param cache
+	 * @return
+	 */
+	public Person getPerson(final Long id, final boolean cache);
+
+	/**
+	 * All person objects
+	 * 
+	 * @return
+	 */
 	public Collection<Person> getAll();
 
 	public Collection<Person> getAllCustomersInfo();

@@ -1,5 +1,6 @@
 <?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
-<zk>
+<?xel-method prefix="user" name="displayname" class="com.bodyfs.ui.util.CommonUtils" signature="java.lang.String getDisplayName()"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<hbox>
 		<toolbarbutton label="Report Card" image="/img/report_card.png" id="tbtnRptCard"
 			href="/pages/patient/patientview.zul?id=${param.id }" orient="vertical"
@@ -28,5 +29,10 @@
 			sclass="${page.title eq 'NPI View' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/npiview.zul?id=${param.id }" orient="vertical" width="80px" />
 	</hbox>
-	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
+	<n:div width="100%"
+		style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;text-align:right;font-size:12pt;font-weight:bold;"
+		height="20px">
+		${user:displayname() }
+		<n:span style="width:20px;display:inline-block" />
+	</n:div>
 </zk>

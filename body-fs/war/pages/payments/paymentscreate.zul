@@ -27,7 +27,7 @@
 						<space orient="vertical" width="50px" />
 						<n:input type="button" id="btnAdd" value="Add" />
 						<space orient="horizontal" height="20px" />
-						<n:div style="overflow:auto;background-color:white;height:300px;width:90%">
+						<n:div style="overflow:auto;background-color:white;height:300px;width:90%;color:black;">
 							<n:table id="tblServicesBreakDown" align="top" cellspacing="0" cellpadding="0"
 								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;">
 								<n:tbody></n:tbody>
@@ -43,7 +43,7 @@
 						<space orient="horizontal" height="10px" />
 						<n:div style="overflow:auto;background-color:white;height:300px;width:90%">
 							<n:table id="tblServicesSummary" width="100%" align="top" cellspacing="0" cellpadding="0"
-								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;">
+								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;color:black;">
 								<n:thead>
 									<n:tr>
 										<n:th align="left">Service</n:th>

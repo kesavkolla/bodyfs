@@ -20,8 +20,8 @@
 							</n:tr>
 							<n:tr>
 								<n:td></n:td>
-								<n:td align="right" style="font-weight:bold">
-									<label id="totalWeeks" style="font-weight:bold" />
+								<n:td align="right" style="font-weight:bold;color:rgb(192,192,192);">
+									<label id="totalWeeks" style="font-weight:bold;" />
 									sessions
 								</n:td>
 							</n:tr>

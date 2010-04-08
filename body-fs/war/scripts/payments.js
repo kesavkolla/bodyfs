@@ -38,7 +38,7 @@ function appendPlan(plan) {
 	buffer.push("<br /><br />");
 
 	/* Add all the plan items in a table */
-	buffer.push('<div style="background-color:white">');
+	buffer.push('<div style="background-color:white;color:black;">');
 	buffer.push('<table id="tblServicesList' + plan.id + '"><tbody>');
 	for ( var i = 0, len = plan.planItems.length; i < len; i++) {
 		var service = getServiceById(plan.planItems[i].serviceid);
@@ -81,7 +81,7 @@ function appendPlan(plan) {
 	buffer.push('<br /><br />');
 	buffer.push('<div style="font-size:large">Summary:</div>');
 	buffer.push('<br />');
-	buffer.push('<div style="background-color:white">');
+	buffer.push('<div style="background-color:white;color:black;">');
 	buffer.push('<table id="tblServicesSummary' + plan.id + '" width="100%" align="top" cellspacing="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;vertical-align:top;">');
 	buffer.push('<thead>');
 	buffer.push('<tr>');

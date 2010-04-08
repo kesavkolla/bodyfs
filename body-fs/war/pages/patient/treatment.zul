@@ -11,7 +11,7 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<style>
 		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
-		width:605px; height: 440px; }
+		width:440px; height: 430px; }
 
 		.marker{ position: absolute; width: 20px; height: 20px; }
 

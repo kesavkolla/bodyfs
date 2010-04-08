@@ -7,11 +7,12 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
 
-		.portion { background-color: #660000; border:none;}
+		.portion { background-color: #660000; border:none; color:rgb(192,192,192);}
 
 		.bordercell {border:1px solid rgb(192, 192, 192);}
 
-		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000; }
+		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000;
+		color:rgb(192,192,192); }
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">

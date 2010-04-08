@@ -177,7 +177,7 @@ function initPage() {
  */
 function DisplayData(data) {
 	$("$divHerbs").html(data.herbs.map(function(herb) {
-		return "<span style='width:100%;border:1px solid black'>" + herb.name + "</span>";
+		return "<span style='width:100%;display:inline-block;'>" + herb.name + "</span>";
 	}).join("<br />"));
 	$.data(document.body, "formuladata", data);
 }

@@ -11,7 +11,8 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:w="http://www.zkoss.org/2005/zk/client">
 	<style>
 		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
-		width:605px; height: 440px; }
+		width:440px; height: 430px; }
+
 
 		.marker{ position: absolute; width: 20px; height: 20px; }
 
@@ -64,8 +65,8 @@
 									</groupbox>
 									<groupbox closable="false">
 										<caption label="plan" />
-										<textbox id="txtPlan" style="width:100%" rows="5"
-											value="@{treatment.plan }" readonly="true" />
+										<textbox id="txtPlan" style="width:100%" rows="5" value="@{treatment.plan }"
+											readonly="true" />
 									</groupbox>
 									<groupbox closable="false">
 										<caption label="Massage Notes" />
@@ -91,18 +92,20 @@
 															${each.serviceName }
 														</n:td>
 														<n:td>
-															<zk if="${each.serviceName != 'Acupuncture' &amp;&amp; each.serviceName != 'Cupping' &amp;&amp; each.serviceName != 'Re-Exam'}">
-															<n:select id="txt${each.id }" disabled="disabled"  
-																serviceid="${each.id }">
-																<n:option value="1">15 mins</n:option>
-																<n:option value="2">30 mins</n:option>
-																<n:option value="3">45 mins</n:option>
-																<n:option value="4">60 mins</n:option>
-															</n:select>
+															<zk
+																if="${each.serviceName != 'Acupuncture' &amp;&amp; each.serviceName != 'Cupping' &amp;&amp; each.serviceName != 'Re-Exam'}">
+																<n:select id="txt${each.id }" disabled="disabled"
+																	serviceid="${each.id }">
+																	<n:option value="1">15 mins</n:option>
+																	<n:option value="2">30 mins</n:option>
+																	<n:option value="3">45 mins</n:option>
+																	<n:option value="4">60 mins</n:option>
+																</n:select>
 															</zk>
-															<zk if="${each.serviceName == 'Acupuncture' || each.serviceName == 'Cupping' || each.serviceName == 'Re-Exam'}">
+															<zk
+																if="${each.serviceName == 'Acupuncture' || each.serviceName == 'Cupping' || each.serviceName == 'Re-Exam'}">
 																<n:input type="text" size="5" id="txt${each.id }"
-                													serviceid="${each.id }" value="2" style="display:none" />
+																	serviceid="${each.id }" value="2" style="display:none" />
 															</zk>
 														</n:td>
 													</n:tr>

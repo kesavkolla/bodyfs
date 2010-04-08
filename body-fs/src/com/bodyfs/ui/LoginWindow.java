@@ -28,29 +28,33 @@ public class LoginWindow extends GenericForwardComposer {
 		final Textbox txtPasswd = (Textbox) Path.getComponent(page, "txtPasswd");
 		final Textbox txtRedirectUrl = (Textbox) Path.getComponent(page, "txtRedirectUrl");
 		final Label lblMsg = (Label) Path.getComponent(page, "lblMsg");
+		final Label lblStar = (Label) Path.getComponent(page, "lblStar");
 
 		String user = txtUserName.getValue().toLowerCase();
 		String pwd = txtPasswd.getValue();
 
 		if ((user != null && user.isEmpty()) || (pwd != null && pwd.isEmpty())) {
-			lblMsg.setValue("*Need user name and password!");
+			lblStar.setVisible(true);
+			lblMsg.setValue("Need user name and password!");
 			return;
 		}
 
 		final LoginInfo userDetails = getLoginDetails(user, pwd);
 
 		if (userDetails == null) {
-			lblMsg.setValue("*Wrong username or password!");
+			lblStar.setVisible(true);
+			lblMsg.setValue("Wrong username or password!");
 			return;
 		}
-		
-		if(session.getAttribute(Constants.SESSION_LOGIN_CRED) != null) {
+
+		if (session.getAttribute(Constants.SESSION_LOGIN_CRED) != null) {
 			session.invalidate();
 		}
 
 		session.setAttribute(Constants.SESSION_LOGIN_CRED, userDetails);
 
 		lblMsg.setValue("");
+		lblStar.setVisible(false);
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Person person = personDAO.getPerson(userDetails.getPersonId());
 		session.setAttribute(Constants.SESSION_PERSON_TYPE, person.getPersonType());

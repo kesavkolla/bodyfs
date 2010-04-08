@@ -54,7 +54,8 @@
 									</n:tr>
 									<n:tr>
 										<n:td colspan="2">
-											<label id="lblMsg" style="color:red" />
+											<label style="color:red" id="lblStar" visible="false">*</label>
+											<label id="lblMsg" style="color:white" />
 										</n:td>
 									</n:tr>
 								</n:table>

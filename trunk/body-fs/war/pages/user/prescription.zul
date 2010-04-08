@@ -7,15 +7,12 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="controller" ?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
-		#imgdiv{ background: url('/img/accupuncture.jpg'); background-repeat: no-repeat; position: relative;
-		width:605px; height: 440px; }
+		.portion { background-color: #660000; border:none; color:rgb(192,192,192);}
 
-		.marker{ position: absolute; width: 20px; height: 20px; }
+		.bordercell {border:1px solid rgb(192, 192, 192);}
 
-		div.z-grid-body { background-color: #660000; }
-
-		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
-		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD;}
+		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000;
+		color:rgb(192,192,192); }
 	</style>
 
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
@@ -61,40 +58,44 @@
 											<n:span style="font-weight:bold">${each.serviceName }</n:span>
 										</n:td>
 										<n:td>
-											<zk	if="${each.serviceName == 'Herbal Treatment'}">
-												<n:select id="txt${each.id }" serviceid="${each.id }" disabled="disabled">
-														<n:option value="0.33">1</n:option>
-														<n:option value="0.66">2</n:option>
-														<n:option value="1">3</n:option>
-														<n:option value="1.33">4</n:option>
-														<n:option value="1.66">5</n:option>
-														<n:option value="2">6</n:option>
-														<n:option value="2.33">7</n:option>
-														<n:option value="2.66">8</n:option>
-														<n:option value="3">9</n:option>
-														<n:option value="3.33">10</n:option>
+											<zk if="${each.serviceName == 'Herbal Treatment'}">
+												<n:select id="txt${each.id }" serviceid="${each.id }"
+													disabled="disabled">
+													<n:option value="0.33">1</n:option>
+													<n:option value="0.66">2</n:option>
+													<n:option value="1">3</n:option>
+													<n:option value="1.33">4</n:option>
+													<n:option value="1.66">5</n:option>
+													<n:option value="2">6</n:option>
+													<n:option value="2.33">7</n:option>
+													<n:option value="2.66">8</n:option>
+													<n:option value="3">9</n:option>
+													<n:option value="3.33">10</n:option>
 												</n:select>
 											</zk>
-											<zk	if="${each.serviceName == 'Powder'}">
-												<n:select id="txt${each.id }" serviceid="${each.id }" disabled="disabled">
-														<n:option value="0.25">0.25 bottle</n:option>
-														<n:option value="0.50">0.5 bottle</n:option>
-														<n:option value="1">1 bottle</n:option>
-														<n:option value="2">2 bottle</n:option>
+											<zk if="${each.serviceName == 'Powder'}">
+												<n:select id="txt${each.id }" serviceid="${each.id }"
+													disabled="disabled">
+													<n:option value="0.25">0.25 bottle</n:option>
+													<n:option value="0.50">0.5 bottle</n:option>
+													<n:option value="1">1 bottle</n:option>
+													<n:option value="2">2 bottle</n:option>
 												</n:select>
 											</zk>
-											<zk	if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">	
-												
+											<zk
+												if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
+
 												<n:input type="text" size="10" id="txt${each.id }"
-													serviceid="${each.id }" class="z-textbox"  style="display: none" value="1"/>
+													serviceid="${each.id }" class="z-textbox" style="display: none" value="1" />
 												<n:br />
-												<zk	if="${each.serviceName == 'Other'}">	
-													Desc:<n:input type="text" size="10" id="txtOther" class="z-textbox"
-														style="display:none" if="${each.serviceName == 'Other' }"  readonly="readonly"/>
+												<zk if="${each.serviceName == 'Other'}">
+													Desc:
+													<n:input type="text" size="10" id="txtOther" class="z-textbox"
+														style="display:none" if="${each.serviceName == 'Other' }" readonly="readonly" />
 												</zk>
 											</zk>
 										</n:td>
-										
+
 									</n:tr>
 								</zk>
 							</n:tbody>

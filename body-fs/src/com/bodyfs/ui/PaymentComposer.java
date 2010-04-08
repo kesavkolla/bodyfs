@@ -119,7 +119,7 @@ public class PaymentComposer extends GenericForwardComposer {
 	public final String getPatientName() {
 		final Long patid = CommonUtils.getPatientId();
 		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
-		final Person person = personDAO.getPerson(patid);
+		final Person person = personDAO.getPerson(patid, true);
 		return person.getDisplayName();
 	}
 

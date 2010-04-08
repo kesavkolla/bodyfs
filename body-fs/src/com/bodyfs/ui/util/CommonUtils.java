@@ -7,9 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zkplus.spring.SpringUtil;
 
 import com.bodyfs.Constants;
+import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.LoginInfo;
+import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
 
 /**
@@ -90,5 +93,22 @@ public class CommonUtils {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @return display name of the patient
+	 */
+	public static String getDisplayName() {
+		final Long patid = getPatientId();
+		if (patid == null) {
+			return "";
+		}
+		final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+		if (personDAO == null) {
+			return "";
+		}
+		final Person person = personDAO.getPerson(patid, true);
+		return person.getDisplayName();
 	}
 }

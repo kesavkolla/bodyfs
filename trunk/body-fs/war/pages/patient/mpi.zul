@@ -38,6 +38,8 @@
 						<space height="20px" orient="vertical" width="100%" />
 						<space />
 						<n:div id="mpiChart" style="width:600px;height:100%;margin-left:auto;margin-right:auto;" />
+						<n:div style="text-align:right"><n:button id="btnLegends" onclick="showLegends()">EMI-Legends</n:button></n:div>
+						
 					</div>
 				</center>
 			</borderlayout>

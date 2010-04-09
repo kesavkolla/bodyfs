@@ -86,6 +86,15 @@ function printChart() {
 	printWindow.document.close();
 }
 
+/**
+ * Show Legends
+ */
+function showLegends() {
+	alert("amit")
+	var printWindow = window.open('/EmiLegends.jsp', 'EMI-Legends', 'width=600,height=400');
+	
+}
+
 /*
  * dataLabels : [ 'LU-1', 'LU-2', 'P-1', 'P-2', 'HT-1', 'HT-2', 'SI-1', 'SI-2', 'TH-1', 'TH-2', 'LI-1', 'LI-2', 'SP-1',
  * 'SP-2', 'LIV-1', 'LIV-2', 'KI-1', 'KI-2', 'BL-1', 'BL-2', 'GB-1', 'GB-2', 'ST-1', 'ST-2' ],

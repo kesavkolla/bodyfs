@@ -9,13 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Div;
-import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.api.A;
 import org.zkoss.zul.api.Progressmeter;
@@ -65,8 +62,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());
 		final int totalPlanLength = getTotalPlansLength(person.getId());
-		final Div rpthead = (Div) Path.getComponent(this.page, "rpthead");
-		rpthead.appendChild(new Html("Report Card: " + person.getFirstName() + " " + person.getLastName()));
 
 		if (week != null) {
 			week.setValue(numweek + "");
@@ -83,7 +78,7 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		if (pm != null) {
 			if (numweek > 0 && totalPlanLength > 0) {
 				int percent = Math.round(numweek * 100 / totalPlanLength);
-				pm.setValue(percent);
+				pm.setValue(percent > 100 ? 100 : percent);
 			} else {
 				pm.setValue(0);
 			}

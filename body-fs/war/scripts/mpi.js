@@ -90,9 +90,7 @@ function printChart() {
  * Show Legends
  */
 function showLegends() {
-	alert("amit")
 	var printWindow = window.open('/EmiLegends.jsp', 'EMI-Legends', 'width=600,height=400');
-	
 }
 
 /*

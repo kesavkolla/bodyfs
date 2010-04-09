@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +39,9 @@ public class MPIViewComposer extends GenericForwardComposer {
 	private static final long serialVersionUID = -5433027915228714749L;
 	private static Log LOGGER = LogFactory.getLog(MPIViewComposer.class);
 	private transient static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	static {
+		sdf.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+	}
 
 	public static String format(final Date date) {
 		return sdf.format(date);

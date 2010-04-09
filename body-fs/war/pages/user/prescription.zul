@@ -14,7 +14,6 @@
 		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000;
 		color:rgb(192,192,192); }
 	</style>
-
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout>
@@ -29,7 +28,6 @@
 								<n:td>
 									<n:select id="selVisitDates" />
 									<n:input id="btnView" type="button" value="View" />
-									<n:input id="btnCopy" type="button" value="Copy" />
 								</n:td>
 								<n:td></n:td>
 								<n:td align="right">
@@ -39,81 +37,93 @@
 										forward="onClick=controller.onSave(Done)" />
 									<textbox id="txtVisitDates" visible="false"
 										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtVisitDatesCopy" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
 									<textbox id="txtPrescription" visible="false"
 										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
-									<textbox id="txtServices" visible="false" readonly="true"
-										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
 								</n:td>
 							</n:tr>
-						</n:table>
-						<space height="20px" width="100%" />
-						<n:table id="tblServices">
-							<n:col width="*" />
-							<n:tbody>
-								<zk forEach="${controller$composer.servicesList }">
-									<n:tr>
-										<n:td>
-											<n:input type="checkbox" id="chk${each.id }"
-												servicename="${each.serviceName }" disabled="disabled" />
-											<n:span style="font-weight:bold">${each.serviceName }</n:span>
-										</n:td>
-										<n:td>
-											<zk if="${each.serviceName == 'Herbal Treatment'}">
-												<n:select id="txt${each.id }" serviceid="${each.id }"
-													disabled="disabled">
-													<n:option value="0.33">1</n:option>
-													<n:option value="0.66">2</n:option>
-													<n:option value="1">3</n:option>
-													<n:option value="1.33">4</n:option>
-													<n:option value="1.66">5</n:option>
-													<n:option value="2">6</n:option>
-													<n:option value="2.33">7</n:option>
-													<n:option value="2.66">8</n:option>
-													<n:option value="3">9</n:option>
-													<n:option value="3.33">10</n:option>
-												</n:select>
-											</zk>
-											<zk if="${each.serviceName == 'Powder'}">
-												<n:select id="txt${each.id }" serviceid="${each.id }"
-													disabled="disabled">
-													<n:option value="0.25">0.25 bottle</n:option>
-													<n:option value="0.50">0.5 bottle</n:option>
-													<n:option value="1">1 bottle</n:option>
-													<n:option value="2">2 bottle</n:option>
-												</n:select>
-											</zk>
-											<zk
-												if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
+							<n:tr valign="top">
+								<n:td>
+									<n:br />
+									<n:br />
+									<n:table id="tblServices" cellspacing="0" cellpadding="0">
+										<n:col width="*" />
+										<n:tbody>
+											<zk forEach="${controller$composer.servicesList }">
+												<n:tr>
+													<n:td valign="top">
+														<n:input type="checkbox" id="chk${each.id }"
+															servicename="${each.serviceName }" disabled="disabled" />
+														<n:span style="font-weight:bold">${each.serviceName }</n:span>
+														&amp;nbsp;
+													</n:td>
+													<n:td valign="top">
+														<zk if="${each.serviceName == 'Herbal Treatment'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }"
+																disabled="disabled">
+																<n:option value="0.33">1</n:option>
+																<n:option value="0.66">2</n:option>
+																<n:option value="1">3</n:option>
+																<n:option value="1.33">4</n:option>
+																<n:option value="1.66">5</n:option>
+																<n:option value="2">6</n:option>
+																<n:option value="2.33">7</n:option>
+																<n:option value="2.66">8</n:option>
+																<n:option value="3">9</n:option>
+																<n:option value="3.33">10</n:option>
+															</n:select>
+														</zk>
+														<zk if="${each.serviceName == 'Powder'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }"
+																disabled="disabled">
+																<n:option value="0.25">0.25 bottle</n:option>
+																<n:option value="0.50">0.5 bottle</n:option>
+																<n:option value="1">1 bottle</n:option>
+																<n:option value="2">2 bottle</n:option>
+															</n:select>
+														</zk>
+														<zk
+															if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
 
-												<n:input type="text" size="10" id="txt${each.id }"
-													serviceid="${each.id }" class="z-textbox" style="display: none" value="1" />
-												<n:br />
-												<zk if="${each.serviceName == 'Other'}">
-													Desc:
-													<n:input type="text" size="10" id="txtOther" class="z-textbox"
-														style="display:none" if="${each.serviceName == 'Other' }" readonly="readonly" />
-												</zk>
+															<n:input type="text" size="10" id="txt${each.id }"
+																serviceid="${each.id }" class="z-textbox" style="display: none" value="1" />
+															<n:br />
+															<zk if="${each.serviceName == 'Other'}">
+																Desc:
+																<n:input type="text" size="10" id="txtOther"
+																	class="z-textbox" style="display:none" if="${each.serviceName == 'Other' }" />
+															</zk>
+														</zk>
+													</n:td>
+												</n:tr>
 											</zk>
-										</n:td>
-
-									</n:tr>
-								</zk>
-							</n:tbody>
-						</n:table>
-						<space height="20px" width="100%" />
-						<n:table id="herbsTable" width="90%">
-							<n:tr align="left">
-								<n:th>Forumula</n:th>
-								<n:th>Herbs</n:th>
-								<n:th>Portion</n:th>
-								<n:th></n:th>
+										</n:tbody>
+									</n:table>
+									<textbox id="txtServices" visible="false"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+								<n:td>
+									<n:br />
+									<n:br />
+									<space width="50px" />
+								</n:td>
+								<n:td></n:td>
 							</n:tr>
-							<n:tr>
-								<n:td colspan="4">&amp;nbsp;</n:td>
+						</n:table>
+						<space height="20px" width="100%" />
+						<n:table id="herbsTable">
+							<n:tr align="left">
+								<n:th class="bordercell">Forumula</n:th>
+								<n:th class="bordercell">Herbs</n:th>
+								<n:th class="bordercell">Portion</n:th>
+								<n:th></n:th>
 							</n:tr>
 						</n:table>
 						<script type="text/javascript" defer="false">
-							var readonly = true;
+							var custname = "${controller$composer.patientName }";
+
+							var readonly = false;
 
 							var data = ${controller$composer.visitsDates};
 

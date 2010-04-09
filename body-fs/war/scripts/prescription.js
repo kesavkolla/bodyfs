@@ -139,6 +139,9 @@ function initPage() {
 
 	/* disable/enable copy */
 	$("#selVisitDates").change(function() {
+		if ($("#btnCopy").length <= 0) {
+			return;
+		}
 		var selDate = $(this).val();
 		var latestdate = $("#selVisitDates")[0].options[0].value;
 		var visitdate = $("$txtVisitDates").val();

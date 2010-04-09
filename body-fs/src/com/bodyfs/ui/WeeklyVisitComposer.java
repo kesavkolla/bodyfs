@@ -172,6 +172,7 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 			final QuickPatient qp = new QuickPatient();
 			qp.setId(person.getId());
 			qp.setName(person.getDisplayName());
+			qp.setDate(patvisit.getVisitDate());
 			personDAO.createQuickPatient(qp);
 			// remove cache
 			final Cache cache = (Cache) SpringUtil.getBean("datacache");

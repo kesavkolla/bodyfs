@@ -30,9 +30,6 @@
 			href="/pages/usermgmt/npiview.zul?id=${param.id }" orient="vertical" width="80px" />
 	</hbox>
 	<n:div width="100%"
-		style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;text-align:right;font-size:12pt;font-weight:bold;"
-		height="20px">
-		${user:displayname() }
-		<n:span style="width:20px;display:inline-block" />
-	</n:div>
+		style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;text-align:center;font-size:12pt;color:white;"
+		height="20px">${user:displayname() }</n:div>
 </zk>

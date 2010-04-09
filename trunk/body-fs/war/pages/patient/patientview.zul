@@ -30,9 +30,10 @@
 						<space orient="vertical" height="20px"></space>
 						<hbox pack="center" hflex="1">
 							<n:div style="border:1px solid white;margin-left:auto;margin-right:auto;width:800px;">
-								<div id="rpthead"
+								<n:div id="rpthead"
 									style="text-align:center;background-color:white;font-size:14pt;font-weight:bold">
-								</div>
+									Report Card
+								</n:div>
 								<n:table cellspacing="0" cellpadding="10" id="rptcnt">
 									<n:col width="70%" />
 									<n:col width="*" />

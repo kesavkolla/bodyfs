@@ -2,6 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.z-center{font-size:14px;color:black;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
 		<center autoscroll="false" flex="true">
 			<borderlayout id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
@@ -17,18 +18,19 @@
 							<n:tr>
 								<n:td></n:td>
 								<n:td align="right" style="font-weight:bold;color:rgb(192,192,192);">
-									<label id="totalWeeks" style="font-weight:bold" />
+									<label id="totalWeeks" style="font-weight:bold;" />
 									sessions
 								</n:td>
 							</n:tr>
 						</n:table>
-						<space orient="vertical" height="20px"></space>
 
+						<space orient="vertical" height="20px"></space>
 						<hbox pack="center" hflex="1">
 							<n:div style="border:1px solid white;margin-left:auto;margin-right:auto;width:800px;">
-								<div id="rpthead"
+								<n:div id="rpthead"
 									style="text-align:center;background-color:white;font-size:14pt;font-weight:bold">
-								</div>
+									Report Card
+								</n:div>
 								<n:table cellspacing="0" cellpadding="10" id="rptcnt">
 									<n:col width="70%" />
 									<n:col width="*" />

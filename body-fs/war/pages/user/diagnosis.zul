@@ -31,7 +31,7 @@
 					<include src="/pages/common/userweeklymenu.zul" />
 				</north>
 				<center hflex="1" vflex="1" autoscroll="true">
-					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="95%"
+					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
 						apply="com.bodyfs.ui.DiagnosisComposer">
 						<rows>
 							<row spans="2">
@@ -56,7 +56,7 @@
 							</row>
 							<row valign="top">
 								<cell>
-									<groupbox>
+									<groupbox closable="false">
 										<textbox id="jsondata" visible="false" value="" />
 										<caption label="Tongue" />
 										<n:table width="100%">
@@ -64,7 +64,7 @@
 												<n:td>Tongue Color</n:td>
 												<n:td>
 													<n:select id="selTongueColor" name="selTongueColor"
-														style="width:200px" multiple="multiple" disabled="disabled">
+														style="width:200px" multiple="multiple">
 														<n:option value="Pink">Pink</n:option>
 														<n:option value="Dusky">Dusky</n:option>
 														<n:option value="Pale">Pale</n:option>
@@ -81,7 +81,7 @@
 												<n:td>Tongue Coating</n:td>
 												<n:td>
 													<n:select id="selTongueCoating" name="selTongueCoating"
-														style="width:200px" multiple="multiple" disabled="disabled">
+														style="width:200px" multiple="multiple">
 														<n:option>Thin White</n:option>
 														<n:option>Thin Yellow</n:option>
 														<n:option>Thick White</n:option>
@@ -96,7 +96,8 @@
 												<n:td>Tongue Wetness</n:td>
 												<n:td>
 													<n:select id="selTongueWetness" name="selTongueWetness"
-														style="width:200px" multiple="multiple" disabled="disabled">
+														style="width:200px">
+														<n:option value="-1">select tongue wetness</n:option>
 														<n:option>Dry</n:option>
 														<n:option>Moist</n:option>
 														<n:option>Cracks</n:option>
@@ -107,7 +108,8 @@
 												<n:td>Tongue Shape</n:td>
 												<n:td>
 													<n:select id="selTongueShape" name="selTongueShape"
-														style="width:200px" multiple="multiple" disabled="disabled">
+														style="width:200px">
+														<n:option value="-1">select tongue shape</n:option>
 														<n:option>Normal</n:option>
 														<n:option>Teeth Marks</n:option>
 														<n:option>Thin</n:option>
@@ -116,7 +118,7 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Veins Underneath : left</n:td>
+												<n:td>Veins Left (1-10)</n:td>
 												<n:td>
 													<n:select id="selVeinsUnderneathLeft" name="selVeinsUnderneathLeft"
 														style="width:200px">
@@ -135,27 +137,27 @@
 												</n:td>
 											</n:tr>
 											<n:tr>
-												<n:td>Veins Underneath : right</n:td>
+												<n:td>Veins Right (1-10)</n:td>
 												<n:td>
 													<n:select id="selVeinsUnderneathRight"
 														name="selVeinsUnderneathRight" style="width:200px">
 														<n:option value="-1">select scale</n:option>
-														<n:option>1</n:option>
-														<n:option>2</n:option>
-														<n:option>3</n:option>
-														<n:option>4</n:option>
-														<n:option>5</n:option>
-														<n:option>6</n:option>
-														<n:option>7</n:option>
-														<n:option>8</n:option>
-														<n:option>9</n:option>
-														<n:option>10</n:option>
+														<n:option value="1">1</n:option>
+														<n:option value="2">2</n:option>
+														<n:option value="3">3</n:option>
+														<n:option value="4">4</n:option>
+														<n:option value="5">5</n:option>
+														<n:option value="6">6</n:option>
+														<n:option value="7">7</n:option>
+														<n:option value="8">8</n:option>
+														<n:option value="9">9</n:option>
+														<n:option value="10">10</n:option>
 													</n:select>
 												</n:td>
 											</n:tr>
 										</n:table>
 									</groupbox>
-									<groupbox>
+									<groupbox closable="false">
 										<caption label="Pulse" />
 										<n:table width="100%">
 											<n:tr>
@@ -164,8 +166,7 @@
 												</n:td>
 												<n:td>
 													Cun
-													<n:select id="selPulseRight1" style="width:75px"
-														disabled="disabled">
+													<n:select id="selPulseRight1" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -182,8 +183,7 @@
 												</n:td>
 												<n:td>
 													Guan
-													<n:select id="selPulseRight2" style="width:75px"
-														disabled="disabled">
+													<n:select id="selPulseRight2" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -200,8 +200,7 @@
 												</n:td>
 												<n:td>
 													Chi
-													<n:select id="selPulseRight3" style="width:75px"
-														disabled="disabled">
+													<n:select id="selPulseRight3" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -223,8 +222,7 @@
 												</n:td>
 												<n:td>
 													Cun
-													<n:select id="selPulseLeft1" style="width:75px"
-														disabled="disabled">
+													<n:select id="selPulseLeft1" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -241,8 +239,7 @@
 												</n:td>
 												<n:td>
 													Guan
-													<n:select id="selPulseLeft2" style="width:75px"
-														disabled="disabled">
+													<n:select id="selPulseLeft2" style="width:75px">
 														<n:option value="-1">select pulse</n:option>
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
@@ -277,10 +274,9 @@
 											</n:tr>
 										</n:table>
 									</groupbox>
-									<groupbox>
+									<groupbox closable="false">
 										<caption label="Notes" />
-										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%"
-											disabled="true" />
+										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%" />
 									</groupbox>
 								</cell>
 								<cell valign="top">
@@ -292,13 +288,12 @@
 												<n:li>Abdominal, rib-side or breast distention and or pain</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radPain" value="Yes" disabled="disabled">
+												<n:input type="radio" name="radPain" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radPain" value="No" disabled="disabled">
+												<n:input type="radio" name="radPain" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
-
 											</n:td>
 										</n:tr>
 										<n:tr>
@@ -306,12 +301,10 @@
 												<n:li>Irritability</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radIrritability" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radIrritability" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radIrritability" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radIrritability" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -321,12 +314,10 @@
 												<n:li>Emotional depression</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radEmotional" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radEmotional" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radEmotional" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radEmotional" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -336,15 +327,12 @@
 												<n:li>Fatigue, especially after eating or eating sweets</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radFatigue" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radFatigue" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radFatigue" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radFatigue" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
-
 											</n:td>
 										</n:tr>
 										<n:tr>
@@ -352,12 +340,10 @@
 												<n:li>Dizziness when standing up</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radDizziness" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radDizziness" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radDizziness" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radDizziness" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -367,12 +353,10 @@
 												<n:li>Easy bruising</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radBruising" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radBruising" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radBruising" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radBruising" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -384,10 +368,10 @@
 												</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radTaste" value="Yes" disabled="disabled">
+												<n:input type="radio" name="radTaste" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radTaste" value="No" disabled="disabled">
+												<n:input type="radio" name="radTaste" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -397,11 +381,10 @@
 												<n:li>Increased or rapid hungering</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radHunger" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radHunger" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radHunger" value="No" disabled="disabled">
+												<n:input type="radio" name="radHunger" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -411,10 +394,10 @@
 												<n:li>Mouth and/or tongue sores</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radSores" value="Yes" disabled="disabled">
+												<n:input type="radio" name="radSores" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radSores" value="No" disabled="disabled">
+												<n:input type="radio" name="radSores" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -427,11 +410,10 @@
 												</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radMenses" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radMenses" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radMenses" value="No" disabled="disabled">
+												<n:input type="radio" name="radMenses" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -441,12 +423,10 @@
 												<n:li>Night sweats</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radNightSweats" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radNightSweats" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radNightSweats" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radNightSweats" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -456,10 +436,10 @@
 												<n:li>Hot flashes heart in the five hearts and centers</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radHeat" value="Yes" disabled="disabled">
+												<n:input type="radio" name="radHeat" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radHeat" value="No" disabled="disabled">
+												<n:input type="radio" name="radHeat" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -469,12 +449,10 @@
 												<n:li>Nocturia</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radNocturia" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radNocturia" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radNocturia" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radNocturia" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -484,12 +462,10 @@
 												<n:li>Cold Feet (as opposed to cold hands and feet)</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radColdFeet" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radColdFeet" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radColdFeet" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radColdFeet" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -499,12 +475,10 @@
 												<n:li>Decreased visual acuity at night</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radVisualAcuity" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radVisualAcuity" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radVisualAcuity" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radVisualAcuity" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>
@@ -514,12 +488,10 @@
 												<n:li>Heart palpations</n:li>
 											</n:td>
 											<n:td>
-												<n:input type="radio" name="radHeatPalpations" value="Yes"
-													disabled="disabled">
+												<n:input type="radio" name="radHeatPalpations" value="Yes">
 													<n:span class="z-radio-cnt">Yes</n:span>
 												</n:input>
-												<n:input type="radio" name="radHeatPalpations" value="No"
-													disabled="disabled">
+												<n:input type="radio" name="radHeatPalpations" value="No">
 													<n:span class="z-radio-cnt">No</n:span>
 												</n:input>
 											</n:td>

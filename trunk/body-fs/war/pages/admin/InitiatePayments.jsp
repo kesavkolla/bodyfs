@@ -13,35 +13,81 @@
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
 	final IPaymentDAO paymentDAO = ctx.getBean(IPaymentDAO.class);
-	MasterService service = new MasterService();
-	service.setServiceName("a");
-	service.setCharge(new Double(100));
-	paymentDAO.addMasterService(service);
-	out.println("Create person with id <b>" + service.getId() + "</b><br />");
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Cupping");
+		service.setCharge(115.0);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
 
-	service = new MasterService();
-	service.setServiceName("b");
-	service.setCharge(new Double(100));
-	paymentDAO.addMasterService(service);
-	out.println("Create person with id <b>" + service.getId() + "</b><br />");
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Acupuncture");
+		service.setCharge(80.0);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
 
-	service = new MasterService();
-	service.setServiceName("c");
-	service.setCharge(new Double(100));
-	paymentDAO.addMasterService(service);
-	out.println("Create person with id <b>" + service.getId() + "</b><br />");
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Massage");
+		service.setCharge(35.0);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
 
-	service = new MasterService();
-	service.setServiceName("d");
-	service.setCharge(new Double(100));
-	paymentDAO.addMasterService(service);
-	out.println("Create person with id <b>" + service.getId() + "</b><br />");
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Re-Exam");
+		service.setCharge(75.0);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
 
-	service = new MasterService();
-	service.setServiceName("e");
-	service.setCharge(new Double(100));
-	paymentDAO.addMasterService(service);
-	out.println("Create person with id <b>" + service.getId() + "</b><br />");
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Herbal Treatment");
+		service.setCharge(12.0);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
+
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Powder");
+		service.setCharge(12.0);
+		service.setHidden(true);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
+
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Pill");
+		service.setCharge(12.0);
+		service.setHidden(true);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
+
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Capsule");
+		service.setCharge(36.0);
+		service.setHidden(true);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
+
+	{
+		final MasterService service = new MasterService();
+		service.setServiceName("Other");
+		service.setCharge(12.0);
+		service.setHidden(true);
+		paymentDAO.addMasterService(service);
+		out.println("Added service with id: " + service.getId());
+	}
 %>
 </body>
 

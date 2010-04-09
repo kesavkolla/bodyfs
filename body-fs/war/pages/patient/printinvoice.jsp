@@ -19,7 +19,8 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="com.bodyfs.model.payments.PatientPaymentPlan"%>
 <%@page import="org.zkoss.zk.ui.Sessions"%>
-<%@page import="org.zkoss.zk.ui.Session"%><html>
+<%@page import="org.zkoss.zk.ui.Session"%>
+<%@page import="java.text.DecimalFormat"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Print Invoice</title>
@@ -102,6 +103,7 @@ table {
 	//Get the spring context
 	final WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
 			.getServletContext());
+	final DecimalFormat numFormat = new DecimalFormat("#,##0.0#");
 	final IPersonDAO personDAO = ctx.getBean(IPersonDAO.class);
 	final IPaymentDAO paymentDAO = ctx.getBean(IPaymentDAO.class);
 
@@ -118,6 +120,8 @@ table {
 		cal.setTime(endDate);
 		cal.add(Calendar.DATE, 1);
 		endDate = cal.getTime();
+	} else {
+		endDate = startDate;
 	}
 	final Collection<PatientPaymentPlan> plan = paymentDAO.getAllPlans(patid);
 	if (plan.size() <= 0) {
@@ -162,7 +166,7 @@ table {
 				if (mservice == null) {
 					continue;
 				}
-				totalCharge += printService(patService, mservice, sdf, out);
+				totalCharge += printService(patService, mservice, sdf, numFormat, out);
 			}
 		%>
 	</tbody>
@@ -176,7 +180,7 @@ table {
 	</tr>
 	<tr>
 		<td>Sub Total</td>
-		<td>$<%=(totalCharge * (1 - discount / 100.0))%></td>
+		<td>$<%=numFormat.format(totalCharge * (1 - discount / 100.0))%></td>
 	</tr>
 	<tr>
 		<td>Sales Tax</td>
@@ -224,7 +228,7 @@ table {
 	}
 
 	private double printService(final PatientService patientService, final MasterService mservice,
-			final SimpleDateFormat sdf, final JspWriter out) throws IOException {
+			final SimpleDateFormat sdf, final DecimalFormat numFormat, final JspWriter out) throws IOException {
 		final StringBuilder buffer = new StringBuilder();
 		final double total = mservice.getCharge() * patientService.getNumServices();
 		//Accupuncture codes 97810 + 97811
@@ -259,7 +263,7 @@ table {
 				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
 				buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
-				buffer.append("<td>$").append(total).append("</tr>");
+				buffer.append("<td>$").append(numFormat.format(total)).append("</tr>");
 				buffer.append("</tr>");
 			}
 			out.println(buffer.toString());
@@ -283,7 +287,7 @@ table {
 
 		buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
 		buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
-		buffer.append("<td>$").append(total).append("</tr>");
+		buffer.append("<td>$").append(numFormat.format(total)).append("</tr>");
 		buffer.append("</tr>");
 		out.println(buffer.toString());
 		return total;

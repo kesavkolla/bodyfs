@@ -67,7 +67,7 @@
 											value="@{treatment.diagnosisPlan, save-when='btnPrev.onClick, btnNext.onClick' }" />
 									</groupbox>
 									<groupbox closable="false">
-										<caption label="plan" />
+										<caption label="Plan" />
 										<textbox id="txtPlan" style="width:100%" rows="5"
 											value="@{treatment.plan, save-when='btnPrev.onClick, btnNext.onClick' }" />
 									</groupbox>

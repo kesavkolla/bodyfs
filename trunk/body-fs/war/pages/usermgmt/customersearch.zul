@@ -2,7 +2,8 @@
 <?page title="Search Patients" contentType="text/html;charset=UTF-8" id="searchCustomers"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?script type="text/javascript" src="/scripts/customersearch.js"?>
-<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client" xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.titletxt { font-weight: bold;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center>
 			<borderlayout id="customersearch" apply="com.bodyfs.ui.CustomerSearchComposer">
@@ -14,15 +15,15 @@
 					<vbox hflex="true" vflex="1" style="margin-left:10px">
 						<space />
 						<hbox>
-							Quick Search:
+							<n:span class="titletxt">Quick Search:</n:span>
 							<textbox id="smrtTextbox" maxlength="400" focus="true" width="400px" />
 							<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
 							<checkbox id="typePre" />
-							pre
+							<n:span class="titletxt">pre</n:span>
 							<checkbox id="typeCurrent" checked="true" />
-							current
+							<n:span class="titletxt">current</n:span>
 							<checkbox id="typePost" />
-							post
+							<n:span class="titletxt">post</n:span>
 						</hbox>
 						<panel id="optionsPanel" framable="true" title="More" maximizable="false" minimizable="false"
 							border="normal" collapsible="true" closable="false" width="96%" open="false">

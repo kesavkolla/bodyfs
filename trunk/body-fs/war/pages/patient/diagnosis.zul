@@ -16,7 +16,7 @@
 		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
 		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
 
-		fieldset {border:1px solid black;}
+		fieldset {border:1px solid rgb(192,192,192);}
 
 		.z-fieldset legend { color: rgb(192, 192, 192); font-weight: bold; font-size:14px;}
 

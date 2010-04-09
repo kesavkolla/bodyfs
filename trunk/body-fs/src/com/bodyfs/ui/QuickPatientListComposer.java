@@ -52,8 +52,8 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 			if (curId != null && curId.equals(qp.getId().toString())) {
 				buffer.append(" bodyfs-qpatient-selected");
 			}
-			buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId()).append("'>").append(
-					qp.getName()).append("</a></div>");
+			buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId()).append("&visitDate=")
+					.append(qp.getDate().getTime()).append("'>").append(qp.getName()).append("</a></div>");
 		}
 
 		final Div divQuicklist = (Div) comp;

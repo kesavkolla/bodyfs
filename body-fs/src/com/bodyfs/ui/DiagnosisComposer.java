@@ -3,6 +3,7 @@ package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,6 +38,9 @@ public class DiagnosisComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 6365381701330204030L;
 	private transient static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	static {
+		sdf.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+	}
 	private static Log LOGGER = LogFactory.getLog(DiagnosisComposer.class);
 
 	@Override

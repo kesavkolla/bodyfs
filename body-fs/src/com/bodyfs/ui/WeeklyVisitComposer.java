@@ -5,6 +5,7 @@ package com.bodyfs.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import net.sf.jsr107cache.Cache;
 
@@ -45,6 +46,9 @@ public class WeeklyVisitComposer extends GenericForwardComposer {
 	private static transient final long serialVersionUID = 3816734829122660780L;
 
 	private transient static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	static {
+		sdf.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+	}
 	private transient static Log LOGGER = LogFactory.getLog(WeeklyVisitComposer.class);
 
 	public static String format(final Date date) {

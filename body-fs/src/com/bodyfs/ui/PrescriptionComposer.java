@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,6 +54,9 @@ public class PrescriptionComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -6226037505168911819L;
 	private transient static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	static {
+		sdf.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+	}
 	private static Log LOGGER = LogFactory.getLog(PrescriptionComposer.class);
 
 	@Override

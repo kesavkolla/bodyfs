@@ -4,6 +4,7 @@ package com.bodyfs.ui.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,7 @@ public class EMILoader extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
+		sdf.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 	}
 
 	@Override

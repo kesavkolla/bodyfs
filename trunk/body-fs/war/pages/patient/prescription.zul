@@ -6,7 +6,6 @@
 <?script type="text/javascript" src="/scripts/prescription.js"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
-
 		.portion { background-color: #660000; border:none; color:rgb(192,192,192);}
 
 		.bordercell {border:1px solid rgb(192, 192, 192);}

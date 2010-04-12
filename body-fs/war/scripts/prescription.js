@@ -39,6 +39,7 @@ function loadData(growl) {
 	$("#tblServices input:checkbox").attr("checked", false);
 	$("#tblServices input:text").val("1");
 	$("#tblServices select").val("1");
+	$("#txtOther").val("");
 
 	for ( var i = 0, len = serviceData.length; i < len; i++) {
 		var data = serviceData[i];
@@ -83,6 +84,7 @@ function initPage() {
 	/* handle click on other checkbox */
 	$("#tblServices input[servicename='Other']").click(function() {
 		if ($(this).attr("checked")) {
+			
 			$("#txtOther").show();
 		} else {
 			$("#txtOther").val("").hide();

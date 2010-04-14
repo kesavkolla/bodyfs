@@ -1,0 +1,259 @@
+<?page title="NPI View" contentType="text/html;charset=UTF-8" id="npiview4"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIViewComposer" width="97%" style="padding-left:5px;background-color:white">
+		<panel title="Gastrointestinal" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Nausea" checked="@{gi.nausea, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Vomiting" checked="@{gi.vomiting, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Acid regurgitation"
+							checked="@{gi.acidregurgitation, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Gas" checked="@{gi.gas, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Hiccup" checked="@{gi.hiccup, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Bloating" checked="@{gi.bloating, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Bad breath" checked="@{gi.badbreath, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diarrhea" checked="@{gi.diarrhea, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Constipation" checked="@{gi.constipation, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Black stools" checked="@{gi.blackstools, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Bloody stools" checked="@{gi.bloodystools, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Mucous in stools" checked="@{gi.mucousinstools, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Henorrhoid" checked="@{gi.henorrhoid, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Itchy anus" checked="@{gi.itchyanus, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Intestinal pain or cramping"
+							checked="@{gi.cramping, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Burning anus" checked="@{gi.burninganus, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Rectal pain" checked="@{gi.rectalpain, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Anal fissures" checked="@{gi.analfissures, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Laxative use" checked="@{gi.laxativeusel, save-when='btnNext.onClick' }" />
+						<hbox>
+							What kind?Depression
+							<textbox  readonly="true" value="@{gi.depression, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							How often?
+							<textbox  readonly="true" value="@{gi.dpresseionfreq, save-when='btnNext.onClick' }" />
+						</hbox>
+					</vbox>
+					<vbox>
+						Bowel movements:
+	
+						<hbox>
+							Frequency
+							<textbox  readonly="true" value="@{gi.bowelfreq, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							Color
+							<textbox  readonly="true" value="@{gi.color, save-when='btnNext.onClick' }" />
+						</hbox>
+					</vbox>
+					<vbox>
+	
+	
+						<hbox>
+							Texture/form
+							<textbox  readonly="true" value="@{gi.texture, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							Odor
+							<textbox  readonly="true" value="@{gi.odor, save-when='btnNext.onClick' }" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Musculoskeletal" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Neck/shoulder pain" checked="@{ms.neckpain, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Muscle pain" checked="@{ms.musclepain, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Upper back pain" checked="@{ms.upperbackpain, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Low back pain" checked="@{ms.lowbackpain, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Joint pain" checked="@{ms.jointpain, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Rib pain" checked="@{ms.ribpain, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Limited range of motion"
+							checked="@{ms.limitedrangeofmotion, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Limited use" checked="@{ms.limiteduse, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Other(Describe)
+						<textbox  readonly="true" value="@{ms.other, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Skin and Hair" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Rashes" checked="@{sh.rashes, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Hives" checked="@{sh.hives, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Ulcerations" checked="@{sh.ulcerations, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Eczema" checked="@{sh.eczema, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Psoriasis" checked="@{sh.psoriasis, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Acne" checked="@{sh.acne, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Dandruff" checked="@{sh.dandruff, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Itching" checked="@{sh.itching, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Hair loss" checked="@{sh.hairloss, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Change in hair/skin texture"
+							checked="@{sh.skintexture, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Fungal infections" checked="@{sh.fungalinfections, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Other hair or skin problems
+						<textbox  readonly="true" rows="2" hflex="1" value="@{sh.other, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Neuropsychological" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Seizures" checked="@{np.seizures, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Numbness" checked="@{np.numbness, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Tics" checked="@{np.tics, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Poor memory" checked="@{np.poormemory, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Depression" checked="@{np.depression, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Anxiety" checked="@{np.anxiety, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Irritability" checked="@{np.irritability, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Easily stressed" checked="@{np.easilystressed, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Abuse survivor" checked="@{np.abusesurvivor, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Considered/attempted" checked="@{np.suicide, save-when='btnNext.onClick' }" />
+						suicide
+						<checkbox disabled="true" label="Seeing a therapist" checked="@{np.seeingatherapist, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						Other (Specify)
+						<textbox  readonly="true" rows="2" hflex="1" value="@{np.Other, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Genitourinary" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Pain on urination" checked="@{gen.painonurination, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Frequent urination"
+							checked="@{gen.frequenturination, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Urgent urination" checked="@{gen.urgenturination, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Blood in urine" checked="@{gen.bloodinurine, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Unable to hold urinne"
+							checked="@{gen.unabletoholdurinne, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Incomplete urination"
+							checked="@{gen.incompleteurination, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Venereal disease" checked="@{gen.venerealdisease, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Bedwetting" checked="@{gen.bedwetting, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Wake to urinate" checked="@{gen.waketourinate, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Increased libido" checked="@{gen.increasedlibido, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Decreased libido" checked="@{gen.decreasedlibido, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Kidney stone" checked="@{gen.kidneystone, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Impotence" checked="@{gen.impotence, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Premature ejaculation"
+							checked="@{gen.prematureejaculation, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Nocturnal emission"
+							checked="@{gen.nocturnalemission, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Gynecology" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Age menses began" checked="@{gy.agemensesbegan, save-when='btnNext.onClick' }" />
+						<textbox  readonly="true" value="@{gy.lengthofcycle, save-when='btnNext.onClick' }" />
+						Length of cycle(day1 to day1)
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Duration of flow" checked="@{gy.durationofflow, save-when='btnNext.onClick' }" />
+						<textbox  readonly="true" value="@{gy.duration, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Irregular periods" checked="@{gy.irregularperiods, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Painful periods" checked="@{gy.painfulperiods, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="PMS" checked="@{gy.pms, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Vaginal discharge" checked="@{gy.vaginaldischarge, save-when='btnNext.onClick' }" />
+						<hbox>
+							(color)
+							<textbox  readonly="true" value="@{gy.color, save-when='btnNext.onClick' }" />
+						</hbox>
+						<checkbox disabled="true" label="Vaginal sores" checked="@{gy.vaginalsores, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Vaginal odor" checked="@{gy.vaginalodor, save-when='btnNext.onClick' }" />
+						<checkbox disabled="true" label="Clots" checked="@{gy.clots, save-when='btnNext.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Breast lumps" checked="@{gy.breastlumps, save-when='btnNext.onClick' }" />
+						<hbox>
+							# Pregnancies
+							<intbox value="@{gy.pregnancies, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							# Live births
+							<intbox value="@{gy.livebirths, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							# Premature births
+							<intbox value="@{gy.prematurebirths, save-when='btnNext.onClick' }" />
+						</hbox>
+						<hbox>
+							# Age at menopause
+							<intbox value="@{gy.agearmenopause, save-when='btnNext.onClick' }" />
+						</hbox>
+					</vbox>
+					<vbox>
+						Date of last PAP
+						<textbox  readonly="true" value="@{gy.dateoflastPAP, save-when='btnNext.onClick' }" />
+						Date last period began
+						<textbox  readonly="true" value="@{gy.datelastperiodbegan, save-when='btnNext.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Other" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<textbox  readonly="true" hflex="1" rows="4" value="@{gy.other, save-when='btnNext.onClick' }" />
+			</panelchildren>
+		</panel>
+		<hbox width="100%" pack="end">
+			<button label="Prev" forward="onClick=npigrid.onNext(npiview3)" width="100px"
+								height="50px"/>
+			<button id="btnNext" label="Finish" forward="onClick=npigrid.onSaveNPI" width="100px"
+								height="50px"/>
+		</hbox>
+	</window>
+</zk>

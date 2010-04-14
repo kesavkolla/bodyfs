@@ -1,0 +1,140 @@
+<?page title="Prescription" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/prescription.js"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="controller" ?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		.portion { background-color: #660000; border:none; color:rgb(192,192,192);}
+
+		.bordercell {border:1px solid rgb(192, 192, 192);}
+
+		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000;
+		color:rgb(192,192,192); }
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout>
+				<north size="90px">
+					<include src="/pages/common/userweeklymenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true" id="controller"
+					apply="com.bodyfs.ui.PrescriptionComposer">
+					<div hflex="1" vflex="1" style="margin-left:10px">
+						<n:table width="90%">
+							<n:tr>
+								<n:td>
+									<n:select id="selVisitDates" />
+									<n:input id="btnView" type="button" value="View" />
+								</n:td>
+								<n:td></n:td>
+								<n:td align="right">
+									<button id="btnPrev" label="Prev" sclass="submitbtn"
+										forward="onClick=controller.onSave(Prev)" />
+									<button id="btnDone" label="Done" sclass="submitbtn"
+										forward="onClick=controller.onSave(Done)" />
+									<textbox id="txtVisitDates" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtVisitDatesCopy" visible="false"
+										value="${execution.parameterMap.visitDate[0] }" forward="onBlur=controller.onDateChange" />
+									<textbox id="txtPrescription" visible="false"
+										value="@{prescription.jsonHerbData, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+							</n:tr>
+							<n:tr valign="top">
+								<n:td>
+									<n:br />
+									<n:br />
+									<n:table id="tblServices" cellspacing="0" cellpadding="0">
+										<n:col width="*" />
+										<n:tbody>
+											<zk forEach="${controller$composer.servicesList }">
+												<n:tr>
+													<n:td valign="top">
+														<n:input type="checkbox" id="chk${each.id }"
+															servicename="${each.serviceName }" disabled="disabled" />
+														<n:span style="font-weight:bold">${each.serviceName }</n:span>
+														&amp;nbsp;
+													</n:td>
+													<n:td valign="top">
+														<zk if="${each.serviceName == 'Herbal Treatment'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }"
+																disabled="disabled">
+																<n:option value="0.33">1</n:option>
+																<n:option value="0.66">2</n:option>
+																<n:option value="1">3</n:option>
+																<n:option value="1.33">4</n:option>
+																<n:option value="1.66">5</n:option>
+																<n:option value="2">6</n:option>
+																<n:option value="2.33">7</n:option>
+																<n:option value="2.66">8</n:option>
+																<n:option value="3">9</n:option>
+																<n:option value="3.33">10</n:option>
+															</n:select>
+														</zk>
+														<zk if="${each.serviceName == 'Powder'}">
+															<n:select id="txt${each.id }" serviceid="${each.id }"
+																disabled="disabled">
+																<n:option value="0.25">0.25 bottle</n:option>
+																<n:option value="0.50">0.5 bottle</n:option>
+																<n:option value="1">1 bottle</n:option>
+																<n:option value="2">2 bottle</n:option>
+															</n:select>
+														</zk>
+														<zk
+															if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
+
+															<n:input type="text" size="10" id="txt${each.id }"
+																serviceid="${each.id }" class="z-textbox" style="display: none" value="1" />
+															<n:br />
+															<zk if="${each.serviceName == 'Other'}">
+																Desc:
+																<n:input type="text" size="10" id="txtOther"
+																	class="z-textbox" style="display:none" if="${each.serviceName == 'Other' }" />
+															</zk>
+														</zk>
+													</n:td>
+												</n:tr>
+											</zk>
+										</n:tbody>
+									</n:table>
+									<textbox id="txtServices" visible="false"
+										value="@{txtServices.value, save-when='btnPrev.onClick, btnDone.onClick' }" />
+								</n:td>
+								<n:td>
+									<n:br />
+									<n:br />
+									<space width="50px" />
+								</n:td>
+								<n:td></n:td>
+							</n:tr>
+						</n:table>
+						<space height="20px" width="100%" />
+						<n:table id="herbsTable">
+							<n:tr align="left">
+								<n:th class="bordercell">Forumula</n:th>
+								<n:th class="bordercell">Herbs</n:th>
+								<n:th class="bordercell">Portion</n:th>
+								<n:th></n:th>
+							</n:tr>
+						</n:table>
+						<script type="text/javascript" defer="false">
+							var custname = "${controller$composer.patientName }";
+
+							var readonly = false;
+
+							var data = ${controller$composer.visitsDates};
+
+							var start = "${param.visitDate}";
+
+							zk.afterMount(initJS);
+						</script>
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+
+</zk>

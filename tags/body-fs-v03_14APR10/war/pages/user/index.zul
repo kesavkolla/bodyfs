@@ -1,0 +1,73 @@
+<?page title="Body Feng Shi" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?link rel="stylesheet" type="text/css" href="/css/ui.slider.extras.css"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>.z-center{font-size:14px;color:black;}</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center autoscroll="false" flex="true">
+			<borderlayout id="patientview" apply="com.bodyfs.ui.PatientViewComposer">
+				<center autoscroll="true" flex="true">
+					<vbox style="margin-left:10px">
+						<space orient="vertical" height="20px" />
+						<n:table width="800px" style="margin-left:auto;margin-right:auto">
+							<n:tr>
+								<n:td colspan="2">
+									<progressmeter id="pm" hflex="1" width="100%" />
+								</n:td>
+							</n:tr>
+							<n:tr>
+								<n:td></n:td>
+								<n:td align="right" style="font-weight:bold;color:rgb(192,192,192);">
+									<label id="totalWeeks" style="font-weight:bold;" />
+									sessions
+								</n:td>
+							</n:tr>
+						</n:table>
+
+						<space orient="vertical" height="20px"></space>
+						<hbox pack="center" hflex="1">
+							<n:div style="border:1px solid white;margin-left:auto;margin-right:auto;width:800px;">
+								<n:div id="rpthead"
+									style="text-align:center;background-color:white;font-size:14pt;font-weight:bold">
+									Report Card
+								</n:div>
+								<n:table cellspacing="0" cellpadding="10" id="rptcnt">
+									<n:col width="70%" />
+									<n:col width="*" />
+									<n:tr>
+										<n:td>When is the next examination due</n:td>
+										<n:td>
+											<label id="nextApppointment" style="font-size:14px" />
+										</n:td>
+									</n:tr>
+									<n:tr>
+										<n:td>How much is left on your account</n:td>
+										<n:td></n:td>
+									</n:tr>
+									<n:tr>
+										<n:td>How many sessions have you used</n:td>
+										<n:td></n:td>
+									</n:tr>
+									<n:tr>
+										<n:td>Missed appointment notifications</n:td>
+										<n:td></n:td>
+									</n:tr>
+								</n:table>
+							</n:div>
+						</hbox>
+					</vbox>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+	<script type="text/javascript" defer="true">
+
+		$("#rptcnt").css({'margin-left':'auto', 'margin-right':'auto', 'margin-top':'10px', 'margin-bottom':'10px',
+		'width': '95%'});
+
+		$("#rptcnt tr:even").css({'background-color':'#C6BBC8'});
+
+		$("#rptcnt tr:odd").css({'background-color':'white'});
+
+	</script>
+</zk>

@@ -1,0 +1,215 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi2"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIComposer" width="97%"  style="padding-left:5px;background-color:white">
+		<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox label="Alcohol" checked="@{yls.alcohol, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Tobacco" checked="@{yls.tobacco, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Marijuana" checked="@{yls.marijuana, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Drugs" checked="@{yls.drugs, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Stress" checked="@{yls.stress, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Occupational hazards"
+							checked="@{yls.occupationalhazards, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						Regular Exercise
+						<hbox>
+							Type
+							<textbox value="@{yls.exercise1Type, save-when='btnNext.onClick, btnPrev.onClick' }" />
+							Frequency
+							<textbox value="@{yls.freq1, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						</hbox>
+						<hbox>
+							Type
+							<textbox value="@{yls.exercise2Type, save-when='btnNext.onClick, btnPrev.onClick' }" />
+							Frequency
+							<textbox value="@{yls.freq2, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="General Symptoms" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox label="Poor appetite" checked="@{gs.poorappetite, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Heavy appetite" checked="@{gs.heavyappetite, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Strongly like cold drinks"
+							checked="@{gs.cooldrinks, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Strongly like hot drinks"
+							checked="@{gs.hotdrinks, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Recent weight loss/gain" checked="@{gs.weight, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Poor Sleep" checked="@{gs.poorsleep, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Heavy sleep" checked="@{gs.heavysleep, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Dream-disturbed sleep"
+							checked="@{gs.disturbedsleep, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Fatigue" checked="@{gs.fatigue, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Lack of Strength" checked="@{gs.lackofStrength, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Bodily heaviness"
+							checked="@{gs.bodilyheaviness, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Cold hands or feet"
+							checked="@{gs.coldhandsorfeet, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Poor circulation"
+							checked="@{gs.poorcirculation, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Shortness of breath"
+							checked="@{gs.shortnessofbreath, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Fever" checked="@{gs.fever, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Chills" checked="@{gs.chills, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Night sweat" checked="@{gs.nightsweat, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Sweat easily" checked="@{gs.sweateasily, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Muscle cramps" checked="@{gs.musclecramps, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Vertigo or dizziness" checked="@{gs.vertigo, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Bleed or bruise easily" checked="@{gs.bleed, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Pecular taste (Describe)"
+							checked="@{gs.peculartaste, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Head, Eyes, Ears, Nose, Throat" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<div><checkbox label="Glasses" checked="@{ent.glasses, save-when='btnNext.onClick, btnPrev.onClick' }" />  -  Age:<textbox value="@{ent.glassesAge, save-when='btnNext.onClick, btnPrev.onClick' }"></textbox></div> 
+						<checkbox label="Eye strain" checked="@{ent.eyestrain, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Eye pain" checked="@{ent.eyepain, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Red eyes" checked="@{ent.redeyes, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Itchy eyes" checked="@{ent.itchyeyes, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Spots in eyes" checked="@{ent.spotsineyes, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Poor vision" checked="@{ent.poorvision, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Blurred vision" checked="@{ent.blurredvision, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Night blindness" checked="@{ent.nightblindness, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Myopia or Presbyopia"
+							checked="@{ent.myopiaorPresbyopia, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Glaucoma" checked="@{ent.glaucoma, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Cataracts" checked="@{ent.cataracts, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Teeth problems" checked="@{ent.teethproblems, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Grinding teeth" checked="@{ent.grindingteeth, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="TMJ" checked="@{ent.tmj, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Facial pain" checked="@{ent.facialpain, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Gum problems" checked="@{ent.gumproblems, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Sores on lips or tongue" checked="@{ent.sores, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Dry mouth" checked="@{ent.drymouth, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Excessive saliva"
+							checked="@{ent.excessivesaliva, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Sinus problems" checked="@{ent.sinusproblems, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Excessive phlegm Color:"
+							checked="@{ent.phlegmColor, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Recurrent sore throat"
+							checked="@{ent.recurrentsorethroat, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Swollen glands" checked="@{ent.swollenglands, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Lumps in throat" checked="@{ent.lumpsinthroat, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Enlarged thyroid"
+							checked="@{ent.enlargedthyroid, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Nosebleeds" checked="@{ent.nosebleeds, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Ringing in ears (High or Low?)"
+							checked="@{ent.ringinginears, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Poor hearing" checked="@{ent.poorhearing, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Earaches" checked="@{ent.earaches, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Headaches" checked="@{ent.headaches, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Migraines" checked="@{ent.migraines, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Concussions" checked="@{ent.concussions, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						Other head or neck problems
+						<textbox rows="3" hflex="1" value="@{ent.Other, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Respiratory" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox label="Difficulty breathing when"
+							checked="@{rp.difficultybreathingwhen, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						lying down
+						<checkbox label="Shortness of breath"
+							checked="@{rp.shortnessofbreath, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Tight chest" checked="@{rp.tightchest, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Asthama/wheezing"
+							checked="@{rp.asthamawheezing, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Difficult inhalation? exhalation ?"
+							checked="@{rp.difficultinhalation, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Cough" checked="@{rp.cough, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Wet or Dry?" checked="@{rp.wetorDry, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Thick or thin?" checked="@{rp.thickorthin, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						Color of phlegm
+						<textbox rows="2" hflex="1" value="@{rp.colorofphlegm, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Coughing up blood"
+							checked="@{rp.coughingupblood, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Pneumonia" checked="@{rp.pneumonia, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Cardiovascular" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox label="High blood pressure"
+							checked="@{cv.highbloodpressure, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Blood clots" checked="@{cv.bloodclots, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Low blood pressure"
+							checked="@{cv.lowbloodpressure, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Fainting" checked="@{cv.fainting, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Chest pain" checked="@{cv.chestpain, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Difficulty breathing"
+							checked="@{cv.difficultybreathing, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Tachycardia" checked="@{cv.tachycardia, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Heart palpitations"
+							checked="@{cv.heartpalpitations, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+					<vbox>
+						<checkbox label="Phlebitis" checked="@{cv.phlebitis, save-when='btnNext.onClick, btnPrev.onClick' }" />
+						<checkbox label="Irregular heartbeat"
+							checked="@{cv.irregularheartbeat, save-when='btnNext.onClick, btnPrev.onClick' }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<hbox width="100%" pack="end">
+			<button label="Prev" id="btnPrev"  forward="onClick=npigrid.onNext(npi2)" width="100px"
+								height="50px"/>
+			<button label="Next" id="btnNext" forward="onClick=npigrid.onNext(npi4)" width="100px"
+								height="50px"/>
+		</hbox>
+	</window>
+</zk>

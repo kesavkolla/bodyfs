@@ -1,0 +1,144 @@
+<?page title="New Patient Intake" contentType="text/html;charset=UTF-8" id="npi1"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
+<?xel-method prefix="c" name="timezone" class="java.util.TimeZone" signature="java.util.TimeZone getTimeZone(java.lang.String)"?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<grid id="npigrid" fixedLayout="true" apply="com.bodyfs.ui.NPIComposer" width="97%"
+		style="margin-left:5px;background-color:white">
+		<rows>
+			<row hflex="true">
+				First Name:
+				<textbox id="firstName" value="@{person.firstName, save-when='btnNext.onClick' }" constraint="no empty"
+					maxlength="100" hflex="1" zclass="req-string" />
+				Initial:
+				<textbox id="initial" value="@{person.initial, save-when='btnNext.onClick' }" maxlength="100" hflex="1" />
+				LastName:
+				<textbox id="lastName" value="@{person.lastName, save-when='btnNext.onClick' }" constraint="no empty"
+					maxlength="100" hflex="1" />
+
+				Birthdate:
+				<datebox id="dob" value="@{person.dateOfBirth, save-when='btnNext.onClick' }"
+					constraint="no empty,no future,no today" format="MM/dd/yyyy" timeZone="${c:timezone('PST')}" hflex="true" />
+			</row>
+			<row>
+				SSN:
+				<textbox id="ssn" value="@{person.SSN, save-when='btnNext.onClick' }"
+					constraint="/\d{3}-?\d{2}-?\d{4}/: Invalid SSN Format" maxlength="11" hflex="1" />
+				Marital Status:
+				<checkbox label="Married" checked="@{person.married, save-when='btnNext.onClick' }" />
+				Gender:
+				<radiogroup id="gender"
+					selectedIndex="@{person.gender, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.GenderToRadiogroup' }">
+					<radio label="M" />
+					<radio label="F" />
+				</radiogroup>
+				Email:
+				<textbox value="@{person.email, save-when='btnNext.onClick' }"
+					constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
+			</row>
+			<row valign="top">
+				Address
+				<textbox value="@{ginfo.street, save-when='btnNext.onClick' }" hflex="1" />
+				City:
+				<textbox value="@{ginfo.city, save-when='btnNext.onClick' }" hflex="1" />
+				State:
+				<textbox value="@{ginfo.state, save-when='btnNext.onClick' }" hflex="1" />
+				Zipcode:
+				<textbox value="@{ginfo.zipcode, save-when='btnNext.onClick' }" hflex="1" />
+			</row>
+			<row spans=",,,,2,2">
+				Height:
+				<textbox value="@{ginfo.height, save-when='btnNext.onClick' }" hflex="1" />
+				Weight:
+				<textbox value="@{ginfo.weight, save-when='btnNext.onClick' }" hflex="1" />
+				Emergency Contact's Name &amp; Phone
+				<textbox value="@{ginfo.emergencycontact, save-when='btnNext.onClick' }" hflex="1" />
+			</row>
+			<row>
+				Home Phone:
+				<textbox value="@{ginfo.homePhone, save-when='btnNext.onClick' }" hflex="1" />
+				Work Phone:
+				<textbox value="@{ginfo.workPhone, save-when='btnNext.onClick' }" hflex="1" />
+				Cell Phone:
+				<textbox value="@{ginfo.cellPhone, save-when='btnNext.onClick' }" hflex="1" />
+				Referred By:
+				<textbox value="@{ginfo.referredBy, save-when='btnNext.onClick' }" hflex="1" />
+			</row>
+			<row spans="2,2,2,2">
+				Reason for visit today
+				<textbox value="@{ginfo.reasonforvisit, save-when='btnNext.onClick' }" hflex="2" rows="2" />
+				<vbox>
+					Have you had accupunture before ?
+					<radiogroup
+						selectedIndex="@{ginfo.accupunture, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
+						<radio label="Yes" />
+						<radio label="No" />
+					</radiogroup>
+				</vbox>
+				<vbox>
+					Chinese herbal medicine?
+					<radiogroup
+						selectedIndex="@{ginfo.chineseherbalmedicine, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
+						<radio label="Yes" />
+						<radio label="No" />
+					</radiogroup>
+				</vbox>
+			</row>
+			<row spans="2,2">
+				How long have you had this condition?
+				<textbox value="@{ginfo.condition, save-when='btnNext.onClick' }" hflex="1" />
+			</row>
+			<row spans="2,2,4">
+				Is it getting worse?
+				<textbox hflex="1" value="@{ginfo.gettingworse, save-when='btnNext.onClick' }" />
+				<hbox hflex="1">
+					Does it bother your
+					<checkbox label="Sleep" checked="@{ginfo.botherSleep, save-when='btnNext.onClick' }" />
+					<checkbox label="Work" checked="@{ginfo.botherWork, save-when='btnNext.onClick' }" />
+					<checkbox label="Other" checked="@{ginfo.botherOther, save-when='btnNext.onClick' }" />
+					<textbox hflex="1" value="@{ginfo.botherReason, save-when='btnNext.onClick' }" />
+				</hbox>
+			</row>
+			<row spans="2,6">
+				What seemed to be the initial cause?
+				<textbox rows="3" cols="40" value="@{ginfo.initialcause, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="2,6">
+				What seems to make it better?
+				<textbox rows="3" cols="40" value="@{ginfo.makeitbetter, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="2,6">
+				What seems to make it worse?
+				<textbox rows="3" cols="40" value="@{ginfo.makeitworse, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="2,2,2,2">
+				Are you under the care of physician now?
+				<radiogroup hflex="1"
+					selectedIndex="@{ginfo.physiciancare, save-when='btnNext.onClick', converter='com.bodyfs.ui.util.BoolToInt' }">
+					<radio label="Yes" />
+					<radio label="No" />
+				</radiogroup>
+				If Yes, for what?
+				<textbox hflex="1" value="@{ginfo.carereason, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="2,2,2,2">
+				Physician's name
+				<textbox hflex="1" value="@{ginfo.physicianname, save-when='btnNext.onClick' }" />
+				Physician's phone
+				<textbox hflex="1" value="@{ginfo.physicianphone, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="2,6">
+				Other concurrent therapies
+				<textbox rows="3" cols="40" value="@{ginfo.othertherapies, save-when='btnNext.onClick' }" />
+			</row>
+			<row spans="8">
+				<hbox hflex="1">
+					<separator hflex="1" />
+					<button id="btnCancel" label="Cancel" forward="onClick=npigrid.onCancel" width="100px"
+								height="50px"/>
+					<button id="btnNext" label="Next" forward="onClick=npigrid.onNext(npi2)" width="100px"
+								height="50px"/>
+				</hbox>
+			</row>
+		</rows>
+	</grid>
+</zk>

@@ -1,0 +1,523 @@
+<?page title="Diagnosis" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="/css/ui.dropdownchecklist.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
+<?script type="text/javascript" src="/scripts/jquery.fix.js"?>
+<?script type="text/javascript" src="/scripts/jquery-ui-1.7.2.custom.min.js"?>
+<?script type="text/javascript" src="/scripts/jquery-util.js"?>
+<?script type="text/javascript" src="/scripts/jquery.offset.js"?>
+<?script type="text/javascript" src="/scripts/jquery.ba-bbq.min.js"?>
+<?script type="text/javascript" src="/scripts/ui.dropdownchecklist-min.js"?>
+<?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
+<?script type="text/javascript" src="/scripts/diagnosis.js"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style>
+		div.z-grid-body { background-color: #660000; font-size:14px }
+
+		tr.z-row td.z-row-inner, tr.z-row .z-cell { background: #660000; border-top: none; border-left: 1px solid white;
+		border-right: 1px solid #CCC; border-bottom: 1px solid #DDD; }
+
+		fieldset {border:1px solid rgb(192,192,192);}
+
+		.z-fieldset legend { color: rgb(192, 192, 192); font-weight: bold; font-size:14px;}
+
+		.ui-dropdownchecklist-text { font-weight: normal; font-size: 12px; font-family: Verdana;}
+
+		.ui-dropdownchecklist-wrapper { color: black;}
+	</style>
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
+		<center flex="true" autoscroll="false">
+			<borderlayout id="patientview">
+				<north size="90px">
+					<include src="/pages/common/patmenu.zul" />
+				</north>
+				<center hflex="1" vflex="1" autoscroll="true">
+					<grid id="diagnosisgrid" hflex="1" vflex="1" style="margin-top:10px;margin-left:10px" width="96%"
+						apply="com.bodyfs.ui.DiagnosisComposer">
+						<rows>
+							<row spans="2">
+								<cell>
+									<n:table width="100%">
+										<n:tr>
+											<n:td>
+												<n:select id="selVisitDates" />
+												<n:input id="btnView" type="button" value="View" />
+												<n:input id="btnCopy" type="button" value="Copy" disabled="disabled" />
+											</n:td>
+											<n:td align="right">
+												<button id="btnPrev" label="Prev" sclass="submitbtn"
+													forward="onClick=diagnosisgrid.onSave(Prev)" />
+												<button id="btnNext" label="Next" sclass="submitbtn"
+													forward="onClick=diagnosisgrid.onSave(Next)" />
+												<textbox id="txtVisitDates" visible="false"
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
+												<textbox id="txtVisitDatesCopy" visible="false"
+													value="${execution.parameterMap.visitDate[0] }" forward="onBlur=diagnosisgrid.onDateChange" />
+											</n:td>
+										</n:tr>
+									</n:table>
+								</cell>
+							</row>
+							<row valign="top">
+								<cell>
+									<groupbox closable="false">
+										<textbox id="jsondata" visible="false" value="" />
+										<caption label="Tongue" />
+										<n:table width="100%">
+											<n:tr>
+												<n:td>Tongue Color</n:td>
+												<n:td>
+													<n:select id="selTongueColor" name="selTongueColor"
+														style="width:200px" multiple="multiple">
+														<n:option value="Pink">Pink</n:option>
+														<n:option value="Dusky">Dusky</n:option>
+														<n:option value="Pale">Pale</n:option>
+														<n:option value="Purple">Purple</n:option>
+														<n:option value="Pale Dusky">Pale Dusky</n:option>
+														<n:option value="Red">Red</n:option>
+														<n:option value="Red Tip">Red Tip</n:option>
+														<n:option value="Pale Sides">Pale Sides</n:option>
+														<n:option value="Purple Spots">Purple Spots</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Coating</n:td>
+												<n:td>
+													<n:select id="selTongueCoating" name="selTongueCoating"
+														style="width:200px" multiple="multiple">
+														<n:option>Thin White</n:option>
+														<n:option>Thin Yellow</n:option>
+														<n:option>Thick White</n:option>
+														<n:option>Thick Yellow</n:option>
+														<n:option>Grey</n:option>
+														<n:option>No Coat</n:option>
+														<n:option>Cracks</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Wetness</n:td>
+												<n:td>
+													<n:select id="selTongueWetness" name="selTongueWetness"
+														style="width:200px">
+														<n:option value="-1">select tongue wetness</n:option>
+														<n:option>Dry</n:option>
+														<n:option>Moist</n:option>
+														<n:option>Cracks</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Tongue Shape</n:td>
+												<n:td>
+													<n:select id="selTongueShape" name="selTongueShape"
+														style="width:200px">
+														<n:option value="-1">select tongue shape</n:option>
+														<n:option>Normal</n:option>
+														<n:option>Teeth Marks</n:option>
+														<n:option>Thin</n:option>
+														<n:option>Shading</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Veins Left (1-10)</n:td>
+												<n:td>
+													<n:select id="selVeinsUnderneathLeft" name="selVeinsUnderneathLeft"
+														style="width:200px">
+														<n:option value="-1">select scale</n:option>
+														<n:option>1</n:option>
+														<n:option>2</n:option>
+														<n:option>3</n:option>
+														<n:option>4</n:option>
+														<n:option>5</n:option>
+														<n:option>6</n:option>
+														<n:option>7</n:option>
+														<n:option>8</n:option>
+														<n:option>9</n:option>
+														<n:option>10</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>Veins Right (1-10)</n:td>
+												<n:td>
+													<n:select id="selVeinsUnderneathRight"
+														name="selVeinsUnderneathRight" style="width:200px">
+														<n:option value="-1">select scale</n:option>
+														<n:option value="1">1</n:option>
+														<n:option value="2">2</n:option>
+														<n:option value="3">3</n:option>
+														<n:option value="4">4</n:option>
+														<n:option value="5">5</n:option>
+														<n:option value="6">6</n:option>
+														<n:option value="7">7</n:option>
+														<n:option value="8">8</n:option>
+														<n:option value="9">9</n:option>
+														<n:option value="10">10</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+										</n:table>
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="Pulse" />
+										<n:table width="100%">
+											<n:tr>
+												<n:td>
+													<n:b>Right -</n:b>
+												</n:td>
+												<n:td>
+													Cun
+													<n:select id="selPulseRight1" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													Guan
+													<n:select id="selPulseRight2" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													Chi
+													<n:select id="selPulseRight3" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+											<n:tr>
+												<n:td>
+													<n:b>Left -</n:b>
+												</n:td>
+												<n:td>
+													Cun
+													<n:select id="selPulseLeft1" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													Guan
+													<n:select id="selPulseLeft2" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+												<n:td>
+													Chi
+													<n:select id="selPulseLeft3" style="width:75px">
+														<n:option value="-1">select pulse</n:option>
+														<n:option>Fine</n:option>
+														<n:option>Forceless</n:option>
+														<n:option>Tight</n:option>
+														<n:option>Floating</n:option>
+														<n:option>Bowstring</n:option>
+														<n:option>Choppy</n:option>
+														<n:option>Deep</n:option>
+														<n:option>Slippery</n:option>
+														<n:option>Surging</n:option>
+														<n:option>Rapid</n:option>
+														<n:option>Normal</n:option>
+													</n:select>
+												</n:td>
+											</n:tr>
+										</n:table>
+									</groupbox>
+									<groupbox closable="false">
+										<caption label="Notes" />
+										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%" />
+									</groupbox>
+								</cell>
+								<cell valign="top">
+									<n:table width="100%">
+										<n:col width="*" />
+										<n:col width="100px" />
+										<n:tr>
+											<n:td>
+												<n:li>Abdominal, rib-side or breast distention and or pain</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radPain" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radPain" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Irritability</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radIrritability" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radIrritability" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Emotional depression</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radEmotional" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radEmotional" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Fatigue, especially after eating or eating sweets</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radFatigue" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radFatigue" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Dizziness when standing up</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radDizziness" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radDizziness" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Easy bruising</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radBruising" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radBruising" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>
+													A bitter taste in the mouth primarily in the morning on awaking
+												</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radTaste" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radTaste" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Increased or rapid hungering</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radHunger" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHunger" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Mouth and/or tongue sores</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radSores" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radSores" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>
+													Loss of astringing and securing of nasal mucus, urine,feces, vaginal
+													discharge and/or menses
+												</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radMenses" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radMenses" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Night sweats</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radNightSweats" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radNightSweats" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Hot flashes heart in the five hearts and centers</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radHeat" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHeat" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Nocturia</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radNocturia" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radNocturia" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Cold Feet (as opposed to cold hands and feet)</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radColdFeet" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radColdFeet" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Decreased visual acuity at night</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radVisualAcuity" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radVisualAcuity" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+										<n:tr>
+											<n:td>
+												<n:li>Heart palpations</n:li>
+											</n:td>
+											<n:td>
+												<n:input type="radio" name="radHeatPalpations" value="Yes">
+													<n:span class="z-radio-cnt">Yes</n:span>
+												</n:input>
+												<n:input type="radio" name="radHeatPalpations" value="No">
+													<n:span class="z-radio-cnt">No</n:span>
+												</n:input>
+											</n:td>
+										</n:tr>
+									</n:table>
+								</cell>
+							</row>
+							<row>
+								<cell></cell>
+								<cell>
+									<script type="text/javascript" defer="false">
+										var data = ${diagnosisgrid$composer.visitsDates};
+
+										var start = "${param.visitDate}";
+
+										zk.afterMount(function() { setupData(); });
+									</script>
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</center>
+			</borderlayout>
+		</center>
+	</borderlayout>
+</zk>

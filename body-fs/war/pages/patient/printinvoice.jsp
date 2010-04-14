@@ -31,22 +31,24 @@
 <script type="text/javascript" src="/scripts/daterangepicker.jQuery.js"></script>
 <script type="text/javascript">
 jQuery(function($) {
-	$("#dateRange").daterangepicker({
-		datepickerOptions: {
-			changeMonth: true
-			, changeYear: true
-			, maxDate: '+0D'
- 		}
-		, dateFormat: "mm/dd/yy"
-		, latestDate: "today"
-		, closeOnSelect: true
-	});
-	$("#frmDate").submit(function() {
-		if($("#dateRange").val() == "Choose a Date") {
-			alert("Please specfify the date range");
-			return false;
-		}
-	});
+	if($("#dateRange").length > 0) {
+		$("#dateRange").daterangepicker({
+			datepickerOptions: {
+				changeMonth: true
+				, changeYear: true
+				, maxDate: '+0D'
+	 		}
+			, dateFormat: "mm/dd/yy"
+			, latestDate: "today"
+			, closeOnSelect: true
+		});
+		$("#frmDate").submit(function() {
+			if($("#dateRange").val() == "Choose a Date") {
+				alert("Please specfify the date range");
+				return false;
+			}
+		});
+	}
 });
 </script>
 <style type="text/css">

@@ -24,6 +24,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<description>The servlet loads the DSP pages.</description>
 		<servlet-name>dspLoader</servlet-name>
 		<servlet-class>org.zkoss.web.servlet.dsp.InterpreterServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dspLoader</servlet-name>
@@ -69,6 +70,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>emiloader</servlet-name>
 		<url-pattern>/emiloader</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/app-config.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/app/*</url-pattern>
+	</servlet-mapping>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -94,6 +112,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-name>auEngine</servlet-name>
 		<servlet-name>emiloader</servlet-name>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	<security-constraint>
@@ -113,6 +132,4 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<session-timeout>120</session-timeout>
 	</session-config>
 </web-app>
-
-
 

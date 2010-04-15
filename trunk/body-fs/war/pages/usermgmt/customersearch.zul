@@ -77,7 +77,7 @@
 								</listhead>
 								<listitem self="@{each='person'}" value="@{person }" class="@{person.id }">
 									<listcell image="/img/link_go.png" class="@{person.id }">
-										<attribute w:name="onClick">openPatient(jq(this));</attribute>
+										<!-- attribute w:name="onClick">openPatient(jq(this));</attribute -->
 									</listcell>
 									<listcell label="@{person.firstName}" />
 									<listcell label="@{person.lastName}" />

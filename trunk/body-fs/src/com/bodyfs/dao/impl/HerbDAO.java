@@ -303,8 +303,20 @@ public class HerbDAO implements IHerbDAO, Serializable {
 			}
 		});
 
+		// Get all herbsids
+		final List<Long> allherbids = new ArrayList<Long>(countHerbs());
+		for (final Herb herb : getHerbs()) {
+			allherbids.add(herb.getId());
+		}
+		// For each formaul make sure the herbs exists
 		for (final HerbFormula formula : retVal) {
-			final List<Long> herbids = (List<Long>) getHerbIds(formula.getHerbs());
+			final List<Long> herbids = new ArrayList<Long>(formula.getHerbs().size());
+			// Loop through all formula's herbids and check whether it exists in allherbids list
+			for (final Long herbid : formula.getHerbs()) {
+				if (allherbids.contains(herbid)) {
+					herbids.add(herbid);
+				}
+			}
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Formula Herb ids: " + formula.getHerbs());
 				LOGGER.debug("Returned from database: " + herbids);
@@ -439,8 +451,20 @@ public class HerbDAO implements IHerbDAO, Serializable {
 				return null;
 			}
 		});
+		// Get all the formula ids
+		final List<Long> allformulaids = new ArrayList<Long>(countFormulas());
+		for (final HerbFormula formula : getFormulas()) {
+			allformulaids.add(formula.getId());
+		}
+		// Check each diagnosis for the formulas
 		for (final Diagnosis diagnosis : retVal) {
-			final List<Long> formulaids = (List<Long>) getFormulasIds(diagnosis.getFormulas());
+			final List<Long> formulaids = new ArrayList<Long>(diagnosis.getFormulas().size());
+			// Loop through all diagnosis formulas and check whether that exists in allformulaids
+			for (final Long formulaid : diagnosis.getFormulas()) {
+				if (allformulaids.contains(formulaid)) {
+					formulaids.add(formulaid);
+				}
+			}
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Diagnosis Formula ids: " + diagnosis.getFormulas());
 				LOGGER.debug("Returned from database: " + formulaids);

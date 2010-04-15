@@ -123,7 +123,7 @@
 						<script type="text/javascript" defer="false">
 							var custname = "${controller$composer.patientName }";
 
-							var readonly = false;
+							var readonly = true;
 
 							var data = ${controller$composer.visitsDates};
 

@@ -10,8 +10,9 @@
 
 		.bordercell {border:1px solid rgb(192, 192, 192);}
 
-		.blendcombo .z-combobox-rounded-readonly { background-image: none; background-color: #660000;
-		color:rgb(192,192,192); }
+		.blendcombo {background-color: #660000; color:rgb(192,192,192);}
+
+		select { width: 150px}
 	</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
@@ -53,18 +54,15 @@
 							<n:tr valign="top">
 								<n:td>
 									<n:span style="font-weight: bold">Diagnosis &amp;nbsp;</n:span>
-									<combobox id="cmbDiagnosis" autodrop="true" model="@{diagnosislist }"
-										forward="onChange=controller.onDiagnosisChange" readonly="true">
-										<comboitem self="@{each=diagnosis }" label="@{diagnosis.name }"
-											value="@{diagnosis }" />
-									</combobox>
+									<n:select id="selDiagnoses">
+										<n:option value="-1"></n:option>
+									</n:select>
 									<n:br />
 									<n:br />
 									<n:span style="font-weight:bold">Formula &amp;nbsp;&amp;nbsp;&amp;nbsp;</n:span>
-									<combobox id="cmbFormulas" autodrop="true" model="@{formulalist }"
-										forward="onChange=controller.onFormulaChange" readonly="true">
-										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
-									</combobox>
+									<n:select id="selFormulas">
+										<n:option value="-1"></n:option>
+									</n:select>
 									<n:br />
 									<n:br />
 									<n:table id="tblServices" cellspacing="0" cellpadding="0">
@@ -101,7 +99,8 @@
 																<n:option value="2">2 bottle</n:option>
 															</n:select>
 														</zk>
-														<zk	if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
+														<zk
+															if="${each.serviceName != 'Herbal Treatment' &amp;&amp; each.serviceName != 'Powder'}">
 															<n:input type="text" size="10" id="txt${each.id }"
 																serviceid="${each.id }" class="z-textbox" style="display: none" value="1" />
 															<n:br />
@@ -129,9 +128,9 @@
 								</n:td>
 								<n:td>
 									<n:span style="font-weight: bold">Herb&amp;nbsp;</n:span>
-									<div id="divHerbs" width="200px" height="200px"
-										style="border:1px solid rgb(192, 192, 192);overflow:auto">
-									</div>
+									<n:div id="divHerbs"
+										style="width:200px;height:200px;border:1px solid rgb(192, 192, 192);overflow:auto">
+									</n:div>
 								</n:td>
 							</n:tr>
 						</n:table>
@@ -145,16 +144,14 @@
 							</n:tr>
 							<n:tr>
 								<n:td class="bordercell">
-									<combobox id="cmbFormulas1" autodrop="true" mold="rounded" model="@{formulalist }"
-										forward="onChange=controller.onFormula1Change" readonly="true" sclass="blendcombo">
-										<comboitem self="@{each=formula }" label="@{formula.name }" value="@{formula }" />
-									</combobox>
+									<n:select id="selFormulas1" class="blendcombo">
+										<n:option value="-1"></n:option>
+									</n:select>
 								</n:td>
 								<n:td class="bordercell">
-									<combobox id="cmbHerbs" autodrop="true" mold="rounded" model="@{herblist }"
-										readonly="true" sclass="blendcombo">
-										<comboitem self="@{each=herb }" label="@{herb.name }" value="@{herb }" />
-									</combobox>
+									<n:select id="selHerbs" class="blendcombo">
+										<n:option value="-1"></n:option>
+									</n:select>
 								</n:td>
 								<n:td class="bordercell">
 									<n:input type="text" id="txtHPortion" class="portion" />

@@ -2,8 +2,8 @@ function initJS() {
 	$("#btnAdd").click(AddPortion);
 	$("#btnHAdd").click(AddHPortion);
 	$(".imgDelete").live("click", DeleteRow);
-	$.data(document.body, "loadedformulas", new Array());
 	initPage();
+	populateDropdowns();
 	loadData(false);
 }
 
@@ -13,22 +13,28 @@ function initJS() {
  * @return
  */
 function loadData(growl) {
+	resetDropdowns();
 	/* Get the prescription herbs data and populate the table */
 	var txtPrescription = zk.Widget.$($("$txtPrescription").attr("id"));
 	var arrHerbs = parseJSON(txtPrescription.getValue());
 	$("#herbsTable > tbody > tr:not(:last):not(:first)").remove();
+	var buffer = new Array();
 	$.each(arrHerbs, function() {
-		$("#herbsTable > tbody > tr:last").before(
-				"<tr><td class='bordercell'>"
-						+ this.formula
-						+ "</td><td class='bordercell'>"
-						+ this.herb
-						+ "</td><td class='bordercell'><input type='text' class='portion' value='"
-						+ this.portion
-						+ "'/></td>&nbsp;"
-						+ ((readonly) ? "<td></td></tr>"
-								: "<td><img src='/img/delete.png' class='imgDelete'/></td></tr>"));
+		buffer.push("<tr><td class='bordercell'>" + this.formula + "</td>");
+		buffer.push("<td class='bordercell'>" + this.herb + "</td>");
+		buffer.push("<td class='bordercell'><input type='text' class='portion' value='" + this.portion + "'/></td>");
+		if (readonly) {
+			buffer.push("<td>&nbsp;</td>");
+		} else {
+			buffer.push("<td><img src='/img/delete.png' class='imgDelete'/></td>");
+		}
+		buffer.push("</tr>");
 	});
+	if (readonly) {
+		$("#herbsTable > tbody > tr:first").after(buffer.join(''));
+	} else {
+		$("#herbsTable > tbody > tr:last").before(buffer.join(''));
+	}
 
 	/* laod the service data */
 	var txtServices = zk.Widget.$($("$txtServices").attr("id"));
@@ -84,7 +90,7 @@ function initPage() {
 	/* handle click on other checkbox */
 	$("#tblServices input[servicename='Other']").click(function() {
 		if ($(this).attr("checked")) {
-			
+
 			$("#txtOther").show();
 		} else {
 			$("#txtOther").val("").hide();
@@ -95,7 +101,8 @@ function initPage() {
 	$(".submitbtn").click(function() {
 		var prescArr = new Array();
 		/*
-		 * Get all the table rows and prepare an object with formula, herb & portion
+		 * Get all the table rows and prepare an object with formula, herb &
+		 * portion
 		 */
 		$("#herbsTable > tbody > tr:not(:last):not(:first)").each(function(indx, row) {
 			var obj = {
@@ -123,8 +130,7 @@ function initPage() {
 			}
 		});
 		$("$txtServices").val(toJSON(arrServices)).blur();
-		// alert(toJSON(arrServices));
-		});
+	});
 
 	/* Handle the click on View */
 	$("#btnView").click(function() {
@@ -175,39 +181,29 @@ function initPage() {
 }
 
 /**
- * This function display the selected herbs
- * 
- * @param data
- * @return
- */
-function DisplayData(data) {
-	$("$divHerbs").html(data.herbs.map(function(herb) {
-		return "<span style='width:100%;display:inline-block;'>" + herb.name + "</span>";
-	}).join("<br />"));
-	$.data(document.body, "formuladata", data);
-}
-
-/**
  * This function gets triggerd when user clicks on add portion on the top
  * 
  * @return
  */
 function AddPortion() {
-	var formuladata = $.data(document.body, "formuladata");
-
 	var portion = $.trim($("$txtPortion").val());
 	if (portion.length <= 0) {
 		alert("Please enter the portion");
-		return;
+		return true;
 	}
-
-	for ( var i = 0, len = formuladata.herbs.length; i < len; i++) {
-		$("#herbsTable > tbody > tr:last").before(
-				"<tr><td class='bordercell'>" + formuladata.formula.name + "</td>" + "<td class='bordercell'>"
-						+ formuladata.herbs[i].name + "</td>"
-						+ "<td class='bordercell'><input type='text' class='portion' value='" + portion
-						+ "' /></td><td><img src='/img/delete.png' class='imgDelete'/></td>" + "</tr>");
+	if ($("#divHerbs > span").length < 0) {
+		alert("Please select herbs to add");
+		return true;
 	}
+	/* for each herb in div herbs add a row in herbstable */
+	var buffer = new Array();
+	$("#divHerbs > span").each(function(indx, item) {
+		buffer.push('<tr><td class="bordercell">' + $(item).attr('formula') + '</td>');
+		buffer.push('<td class="bordercell">' + $(item).text() + '</td>');
+		buffer.push('<td class="bordercell"><input type="text" class="portion" value="' + portion + '" /></td>');
+		buffer.push("<td><img src='/img/delete.png' class='imgDelete'/></td></tr>");
+	});
+	$("#herbsTable > tbody > tr:last").before(buffer.join(''));
 }
 
 function DeleteRow() {
@@ -215,16 +211,32 @@ function DeleteRow() {
 }
 
 /**
- * This function will be called when user click on Add portion in the formula table below
+ * This function will reset all the herb related dropdown boxes to value -1.
+ * This will be called when ever the visitdate change.
+ * 
+ * @return
+ */
+function resetDropdowns() {
+	$("#selDiagnoses").val("-1");
+	$("#selFormulas").val("-1");
+	$("$txtPortion").val("");
+	$("#divHerbs").html("");
+	$("#selFormulas1").val("-1");
+	$("#selHerbs").val("-1");
+}
+
+/**
+ * This function will be called when user click on Add portion in the formula
+ * table below
  * 
  * @return
  */
 function AddHPortion() {
 	/* Validate whether user selected any value in the herbs */
-	var cmbHerbs = zk.Widget.$($("$cmbHerbs").attr("id"));
-
-	if (cmbHerbs.getValue() == undefined || cmbHerbs.getValue() == "") {
-		alert("Select atleast one herb to add");
+	var selHerb = parseInt($("#selHerbs").val());
+	if (selHerb == -1) {
+		alert("Select herb to add");
+		$("#selHerbs").focus();
 		return;
 	}
 
@@ -236,11 +248,12 @@ function AddHPortion() {
 		return;
 	}
 
-	var cmbFormulas1 = zk.Widget.$($("$cmbFormulas1").attr("id"));
-	var formulaName = (cmbFormulas1.getValue() == undefined || cmbFormulas1.getValue() == "") ? "" : cmbFormulas1
-			.getValue();
+	var herb = getHerbs(selHerb);
+	var formulaid = parseInt($("#selFormulas1").val());
+	var formula = formulaid == -1 ? null : getFormulas(formulaid);
+	var formulaname = formula == null ? "" : formula.name;
 	$("#herbsTable > tbody > tr:last").before(
-			"<tr><td class='bordercell'>" + formulaName + "</td>" + "<td class='bordercell'>" + cmbHerbs.getValue()
+			"<tr><td class='bordercell'>" + formulaname + "</td>" + "<td class='bordercell'>" + herb.name
 					+ "</td>" + "<td class='bordercell'><input type='text' class='portion' value='" + txtHPortion.val()
 					+ "' /></td><td><img src='/img/delete.png' class='imgDelete'/></td>" + "</tr>");
 }
@@ -272,7 +285,10 @@ function printPrescription() {
 	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
 			+ $('#selVisitDates option:selected').text() + "</span><br /><br />");
 	buffer.push("</div>");
-	/* add the herbs table don' need to add the header and last row. Also no need to add the delete image icon */
+	/*
+	 * add the herbs table don' need to add the header and last row. Also no
+	 * need to add the delete image icon
+	 */
 	buffer.push("<table width='100%'>");
 	buffer.push('<tr align="left">');
 	buffer.push('<th class="bordercell">Forumula</th>');
@@ -313,4 +329,247 @@ function navigate(direction) {
 		var wgt = zk.Widget.$($("$tbtnRptCard").attr("id"));
 		zUtl.go(wgt._href);
 	}
+}
+
+/**
+ * This function populates the diagnoses, formulas and herb related dropdown
+ * lists
+ * 
+ * @return
+ */
+function populateDropdowns() {
+	/* Load Herbs */
+	if ($('body').data('Herbs') == undefined) {
+		$.ajax( {
+			type : 'GET',
+			url : '/app/herb/all',
+			dataType : "json",
+			async : false,
+			success : function(data1) {
+				$('body').data('Herbs', data1);
+			}
+		});
+	}
+	
+	/* Load Formulas */
+	if ($('body').data('Formulas') == undefined) {
+		$.ajax( {
+			type : 'GET',
+			url : '/app/herb/formulas',
+			dataType : "json",
+			async : false,
+			success : function(data1) {
+				$('body').data('Formulas', data1);
+			}
+		});
+	}
+
+	/* Load Diagnoses */
+	if ($('body').data('Diagnoses') == undefined) {
+		$.ajax( {
+			type : 'GET',
+			url : '/app/herb/diagnoses',
+			dataType : "json",
+			async : false,
+			success : function(data1) {
+				$('body').data('Diagnoses', data1);
+			}
+		});
+	}
+	var diagnoses = $('body').data('Diagnoses');
+	var buffer = new Array();
+	$.each(diagnoses, function(indx, element) {
+		buffer.push('<option value="' + diagnoses[indx].id + '">' + diagnoses[indx].name + '</option>');
+	});
+	$("#selDiagnoses").append(buffer.join(""));
+
+
+	/* Attach event handler for diagnoses */
+	$("#selDiagnoses").change(diagnosesChange);
+
+	/* Attach event handler for formulas */
+	$("#selFormulas").change(formulaChange);
+
+	/* Populate selFormulas1 */
+	var formulas = $('body').data('Formulas');
+	var buffer = new Array();
+	buffer.push('<option value="-1"></option>');
+	$.each(formulas, function(indx, item) {
+		buffer.push('<option value="' + item.id + '">' + item.name + '</option>');
+	});
+	$("#selFormulas1").html(buffer.join('')).change(formula1Change);
+
+	/* Popuate selHerbs */
+	var herbs = $('body').data('Herbs');
+	var buffer = new Array();
+	buffer.push('<option value="-1"></option>');
+	$.each(herbs, function(indx, item) {
+		buffer.push('<option value="' + item.id + '">' + item.name + '</option>');
+	});
+	$("#selHerbs").html(buffer.join(''));
+}
+
+/**
+ * This function will be called from diagnoses select change event This function
+ * finds the formulas for the selected diagnosis and populates the formulas
+ * dropdown
+ * 
+ * @return
+ */
+function diagnosesChange() {
+	var selVal = parseInt($(this).val());
+	if (selVal == -1) {
+		$("#selFormulas").html('<option value="-1"></option>');
+		return true;
+	} else {
+		/* Get the diagnosis object corresponds to the selected id */
+		var selDiagnosis = getDiagnosis(selVal);
+		if (selDiagnosis.formulas.length <= 0) {
+			$("#selFormulas").html('<option value="-1"></option>');
+			return true;
+		}
+		/* Get formula objects */
+		var formulas = getFormulas(selDiagnosis.formulas);
+		if (formulas == null) {
+			$("#selFormulas").html('<option value="-1"></option>');
+			return true;
+		}
+		formulas = $.makeArray(formulas);
+		var buffer = new Array();
+		buffer.push('<option value="-1"></option>');
+		$.each(formulas, function(indx, item) {
+			buffer.push('<option value="' + item.id + '">' + item.name + '</option>');
+		});
+		$("#selFormulas").html(buffer.join(''));
+		return true;
+	}
+}
+
+/**
+ * This function will be called from formulas dropdown change event. This will
+ * finds herbs corresponds to the selected formula and populate divHerbs
+ * 
+ * @return
+ */
+function formulaChange() {
+	var selVal = parseInt($(this).val());
+	if (selVal == -1) {
+		$("#divHerbs").html("");
+		return true;
+	}
+	/* Get the selected formula */
+	var formula = getFormulas(selVal);
+	if (formula == null) {
+		$("#divHerbs").html("");
+		return true;
+	}
+	/* Loop through all the herbs and add to the divHerbs */
+	var buffer = new Array();
+	var herbs = getHerbs(formula.herbs);
+	if (herbs == null) {
+		$("#divHerbs").html("");
+		return true;
+	}
+	herbs = $.makeArray(herbs);
+	$.each(herbs, function(indx, item) {
+		buffer.push("<span style='width:100%;display:inline-block;' formula='" + formula.name + "'>" + item.name + "</span>");
+	});
+	$("#divHerbs").html(buffer.join('<br />'));
+	return true;
+}
+
+/**
+ * This function gets invoked from the selFormulas1 change event. This will
+ * populate the selHerbs with corresponding selection
+ * 
+ * @return
+ */
+function formula1Change() {
+	var selVal = parseInt($(this).val());
+	var buffer = new Array();
+	buffer.push('<option value="-1"></option>');
+	if (selVal == -1) {
+		/* Add all herbs back */
+		var herbs = $('body').data('Herbs');
+		$.each(herbs, function(indx, item) {
+			buffer.push('<option value="' + item.id + '">' + item.name + '</option>');
+		});
+		$("#selHerbs").html(buffer.join(''));
+		return true;
+	}
+	var formula = getFormulas(selVal);
+	if (formula == null) {
+		$("#selHerbs").html(buffer.join(''));
+		return true;
+	}
+	var herbs = getHerbs(formula.herbs);
+	if (herbs == null) {
+		$("#selHerbs").html(buffer.join(''));
+		return true;
+	}
+	herbs = $.makeArray(herbs);
+	$.each(herbs, function(indx, item) {
+		buffer.push('<option value="' + item.id + '">' + item.name + '</option>');
+	});
+	$("#selHerbs").html(buffer.join(''));
+	return true;
+}
+
+/**
+ * This function returns the diagnosis object by it's id
+ * 
+ * @param id
+ * @return diagnosis object
+ */
+function getDiagnosis(id) {
+	var diagnoses = $('body').data('Diagnoses');
+	for ( var i = 0, len = diagnoses.length; i < len; i++) {
+		if (diagnoses[i].id == id) {
+			return diagnoses[i];
+		}
+	}
+	return null;
+}
+
+/**
+ * Returns formula object corresponds to given id. multiple ids can be passed in
+ * as array and return will be multiple formula objects
+ * 
+ * @param id formula id or array of ids
+ * @return
+ */
+function getFormulas(id) {
+	var retFormulas = new Array();
+	var formulas = $('body').data('Formulas');
+	var ids = $.makeArray(id);
+	for ( var i = 0, len = formulas.length; i < len; i++) {
+		if (ids.indexOf(formulas[i].id) != -1) {
+			retFormulas.push(formulas[i]);
+			if (ids.length == retFormulas.length) {
+				break;
+			}
+		}
+	}
+	return retFormulas.length == 0 ? null : retFormulas.length == 1 ? retFormulas[0] : retFormulas;
+}
+
+/**
+ * This function finds the herbs objects for the given herb ids
+ * 
+ * @param id id or array of ids
+ * @return
+ */
+function getHerbs(id) {
+	var ids = $.makeArray(id);
+	var retHerbs = new Array();
+	var herbs = $('body').data('Herbs');
+	for ( var i = 0, len = herbs.length; i < len; i++) {
+		if (ids.indexOf(herbs[i].id) != -1) {
+			retHerbs.push(herbs[i]);
+			if (ids.length == retHerbs.length) {
+				break;
+			}
+		}
+	}
+	return retHerbs.length == 0 ? null : retHerbs.length == 1 ? retHerbs[0] : retHerbs;
 }

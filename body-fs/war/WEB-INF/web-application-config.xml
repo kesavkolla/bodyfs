@@ -4,15 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
-	<context:annotation-config />
-
-	<context:component-scan base-package="com.bodyfs" scoped-proxy="targetClass" annotation-config="true">
-		<context:exclude-filter type="regex" expression="com.bodyfs.controllers.*" />
-		<context:exclude-filter type="regex" expression="com.bodyfs.ui.*" />
-		<context:exclude-filter type="regex" expression="com.bodyfs.model.*" />
-	</context:component-scan>
-
 	<bean id="persistenceManagerFactory" class="com.bodyfs.PMF" factory-method="get" />
 
 	<bean id="openPersistenceManagerInView" class="org.springframework.orm.jdo.support.OpenPersistenceManagerInViewInterceptor">
@@ -25,15 +16,20 @@
 	<bean id="datacache" factory-bean="cacheFactory" factory-method="createCache" scope="singleton" name="datacache">
 		<constructor-arg value="#{ T(java.util.Collections).emptyMap() }" index="0" type="java.util.Map" />
 	</bean>
-	<bean id="herbDAO" class="com.bodyfs.dao.impl.HerbDAO">
-		<property name="cache" ref="datacache" />
-	</bean>
-	<bean id="personDAO" class="com.bodyfs.dao.impl.PersonDAO">
-		<property name="cache" ref="datacache" />
-	</bean>
 
-	<bean id="paymentDAO" class="com.bodyfs.dao.impl.PaymentDAO">
+	<!-- DAO beans -->
+	<bean id="counterDAO" class="com.bodyfs.dao.impl.CounterDAO" scope="singleton" lazy-init="true" />
+	<bean id="herbDAO" class="com.bodyfs.dao.impl.HerbDAO" scope="singleton" lazy-init="true">
+		<property name="counterbDAO" ref="counterDAO" />
 		<property name="cache" ref="datacache" />
 	</bean>
-
+	<bean id="loginDAO" class="com.bodyfs.dao.impl.LoginDAO" scope="singleton" lazy-init="true" />
+	<bean id="MPIDao" class="com.bodyfs.dao.impl.MPIDao" scope="singleton" lazy-init="true" />
+	<bean id="patientVisitDAO" class="com.bodyfs.dao.impl.PatientVisitDAO" scope="singleton" lazy-init="true" />
+	<bean id="paymentDAO" class="com.bodyfs.dao.impl.PaymentDAO" scope="singleton" lazy-init="true">
+		<property name="cache" ref="datacache" />
+	</bean>
+	<bean id="personDAO" class="com.bodyfs.dao.impl.PersonDAO" scope="singleton" lazy-init="true">
+		<property name="cache" ref="datacache" />
+	</bean>
 </beans>

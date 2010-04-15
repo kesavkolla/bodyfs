@@ -26,18 +26,12 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Textbox;
 
 import com.bodyfs.Constants;
-import com.bodyfs.dao.IHerbDAO;
 import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
-import com.bodyfs.model.Diagnosis;
-import com.bodyfs.model.Herb;
-import com.bodyfs.model.HerbFormula;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
@@ -111,31 +105,6 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final PatientPrescription prescription = visitDAO.getPatientPrescriptionByDate(patid, visitDate);
 		page.setAttribute("prescription", prescription);
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
-		final List<Diagnosis> diagnoses = herbDAO.getDiagnoses();
-		if (diagnoses != null) {
-			page.setAttribute("diagnosislist", diagnoses);
-			final Combobox cmbDiagnosis = (Combobox) Path.getComponent(page, "cmbDiagnosis");
-			if (cmbDiagnosis != null) {
-				cmbDiagnosis.setAutocomplete(true);
-			}
-		}
-		final Collection<HerbFormula> formulalist = herbDAO.getFormulas();
-		if (formulalist != null) {
-			page.setAttribute("formulalist", formulalist);
-			final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
-			if (cmbFormulas != null) {
-				cmbFormulas.setAutocomplete(true);
-			}
-		}
-		final Collection<Herb> herblist = herbDAO.getHerbs();
-		if (herblist != null) {
-			page.setAttribute("herblist", herblist);
-			final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
-			if (cmbHerbs != null) {
-				cmbHerbs.setAutocomplete(true);
-			}
-		}
 
 		// setup the service data
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
@@ -144,93 +113,6 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		final String serviceData = getServiceData(services, getServicesList());
 		final Textbox txtServices = (Textbox) Path.getComponent(page, "txtServices");
 		txtServices.setValue(serviceData);
-	}
-
-	/**
-	 * This is the event handler for Diagnosis combobox. When ever selected
-	 * diagnosis changes retrieve corresponding fomrulas and display them in
-	 * formulas combobox.
-	 * 
-	 * @param event
-	 */
-	public void onDiagnosisChange(final ForwardEvent event) {
-		final Combobox cmbDiagnosis = (Combobox) Path.getComponent(event.getPage(), "cmbDiagnosis");
-		final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
-
-		// If the selected item is null nothing to do
-		if (cmbDiagnosis.getSelectedIndex() == -1 || cmbDiagnosis.getSelectedItem() == null) {
-			return;
-		}
-
-		// Get the selected diagnosis and retrieve it's formulas
-		final Diagnosis diagnosis = (Diagnosis) cmbDiagnosis.getSelectedItem().getValue();
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
-		final Collection<HerbFormula> formulas = herbDAO.getFormulas(diagnosis.getFormulas());
-
-		// Set these formulas to the formula combobox
-		page.setAttribute("formulalist", formulas);
-		cmbFormulas.setModel(new ListModelList(formulas));
-		cmbFormulas.setSelectedIndex(-1);
-		cmbFormulas.setSelectedItem(null);
-		cmbFormulas.invalidate();
-	}
-
-	/**
-	 * This is event handler on the formulalist combobox. When ever the selected
-	 * formula changes retrieve all the herbs and display them in the Div
-	 * 
-	 * @param event
-	 */
-	@SuppressWarnings("unchecked")
-	public void onFormulaChange(final ForwardEvent event) {
-		final Combobox cmbFormulas = (Combobox) Path.getComponent(page, "cmbFormulas");
-		if (cmbFormulas.getSelectedIndex() == -1 || cmbFormulas.getSelectedItem() == null) {
-			return;
-		}
-		final HerbFormula formula = (HerbFormula) cmbFormulas.getSelectedItem().getValue();
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
-		final Collection<Herb> herbs = herbDAO.getHerbs(formula.getHerbs());
-
-		final JSONObject retObject = new JSONObject();
-		{
-			final JSONObject obj = new JSONObject();
-			obj.put("id", formula.getId());
-			obj.put("name", formula.getName());
-			retObject.put("formula", obj);
-		}
-
-		final JSONArray herbsArray = new JSONArray();
-		for (final Herb herb : herbs) {
-			final JSONObject obj = new JSONObject();
-			obj.put("id", herb.getId());
-			obj.put("name", herb.getName());
-			herbsArray.add(obj);
-		}
-		retObject.put("herbs", herbsArray);
-		Clients.evalJavaScript("DisplayData(" + retObject.toJSONString() + ")");
-	}
-
-	/**
-	 * This is the eventhandling to cmbFormulas1 onchange
-	 * 
-	 * @param event
-	 */
-	@SuppressWarnings("unchecked")
-	public void onFormula1Change(final ForwardEvent event) {
-		final Combobox cmbFormulas1 = (Combobox) Path.getComponent(page, "cmbFormulas1");
-		final Combobox cmbHerbs = (Combobox) Path.getComponent(page, "cmbHerbs");
-		// If the selected item is null then retrieve all the herbs and set to the cmbHerbs
-		if (cmbFormulas1.getSelectedIndex() == -1 || cmbFormulas1.getSelectedItem() == null) {
-			final Collection<Herb> herblist = (Collection<Herb>) page.getAttribute("herblist");
-			cmbHerbs.setModel(new ListModelList(herblist));
-			cmbHerbs.invalidate();
-			return;
-		}
-		// Get the selected formula and retrieve the herbs corresponds to it
-		final HerbFormula selFormula = (HerbFormula) cmbFormulas1.getSelectedItem().getValue();
-		final IHerbDAO herbDAO = (IHerbDAO) SpringUtil.getBean("herbDAO");
-		cmbHerbs.setModel(new ListModelList(herbDAO.getHerbs(selFormula.getHerbs())));
-		cmbHerbs.invalidate();
 	}
 
 	/**

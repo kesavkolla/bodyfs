@@ -23,16 +23,12 @@
 		<center>
 			<vbox hflex="true" vflex="1" style="margin:10px">
 				<space />
-				<hbox>
-					<n:span class="titletxt">Quick Search:</n:span>
-					<textbox id="smrtTextbox" maxlength="400" focus="true" width="400px" />
-					<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
-					<checkbox id="typePre" />
-					<n:span class="titletxt">pre</n:span>
-					<checkbox id="typeCurrent" checked="true" />
-					<n:span class="titletxt">current</n:span>
-					<checkbox id="typePost" />
-					<n:span class="titletxt">post</n:span>
+				<hbox pack="start">
+						<toolbarbutton label="New Patient" image="/img/user_add.png" href="/pages/signin/npi.zul" hflex="1" />
+								<n:span class="titletxt">Quick Search:</n:span>
+								<textbox id="smrtTextbox" maxlength="400" focus="true" width="400px" />
+								<button label="Enter" id="smrtSrch" style="float: left; padding-left: 10px" />
+						
 				</hbox>
 				<panel id="optionsPanel" framable="true" title="More" maximizable="false" minimizable="false"
 					border="normal" collapsible="true" closable="false" hflex="true" open="false">

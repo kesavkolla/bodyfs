@@ -73,15 +73,15 @@ public class NPIComposer extends GenericForwardComposer {
 	public void onNext(final ForwardEvent event) {
 		final String pageId = event.getData().toString();
 		desktop.setBookmark(pageId);
-		npiinclude.setSrc("/pages/usermgmt/" + pageId + ".zul");
+		npiinclude.setSrc("/pages/signin/" + pageId + ".zul");
 	}
 
 	public void onBookmarkChange(final BookmarkEvent event) {
 		final String pageid = event.getBookmark();
 		if (pageid != null && !pageid.equals("")) {
-			npiinclude.setSrc("/pages/usermgmt/" + pageid + ".zul");
+			npiinclude.setSrc("/pages/signin/" + pageid + ".zul");
 		} else {
-			npiinclude.setSrc("/pages/usermgmt/npi1.zul");
+			npiinclude.setSrc("/pages/signin/npi1.zul");
 		}
 	}
 
@@ -147,7 +147,7 @@ public class NPIComposer extends GenericForwardComposer {
 
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
-		execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+		execution.sendRedirect("/pages/signin/customersearch.zul");
 	}
 
 	public void cleanSession() {
@@ -173,7 +173,7 @@ public class NPIComposer extends GenericForwardComposer {
 
 	public void onCancel(final ForwardEvent event) {
 		cleanSession();
-		execution.sendRedirect("/pages/usermgmt/customersearch.zul");
+		execution.sendRedirect("/pages/signin/customersearch.zul");
 	}
 
 	private void setupPerson() {

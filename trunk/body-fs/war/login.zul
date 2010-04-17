@@ -1,5 +1,12 @@
 <?page title="Welcome - Body Feng Shui, CA" contentType="text/html;charset=UTF-8"?>
 <?link  rel="stylesheet" type="text/css" href="/css/bodyfs.css"?>
+<?script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"?>
+<?script type="text/javascript" content="
+CFInstall.check({
+     mode: 'overlay',
+     destination: window.location.href;
+   });
+"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>
 		div.z-grid { border: none} div.z-grid-body { background-color: #660000; font-weight:bold;} tr.z-row

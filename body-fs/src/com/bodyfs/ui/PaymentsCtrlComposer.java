@@ -38,7 +38,9 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
+		System.out.println("doAfterCompose1");
 		super.doAfterCompose(comp);
+		System.out.println("doAfterCompose2");
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
 		final Collection<MasterService> services = paymentDAO.getMasterServicesList();
@@ -56,6 +58,13 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		}
 		page.setAttribute("arrServices", arrServices.toJSONString());
 		Clients.evalJavaScript("saveServices(" + arrServices.toJSONString() + ");");
+	}
+
+	public Collection<MasterService> getServices() {
+		System.out.println("getServices");
+		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
+		final Collection<MasterService> services = paymentDAO.getMasterServicesList();
+		return services;
 	}
 
 	public void onSave(final ForwardEvent evt) {

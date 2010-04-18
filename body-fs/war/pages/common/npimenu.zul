@@ -1,0 +1,16 @@
+<?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<hbox>
+		<toolbarbutton label="Medical History" orient="vertical" image="/img/report_card.png" href="/pages/npi/npi.zul"
+			sclass="${page.title eq 'Medical History' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="Program Goals" orient="vertical" image="/img/vcard_add.png" href="/pages/npi/goals.zul"
+			sclass="${page.title eq 'Program Goals' ? 'bodyfs-toolbar-selected' : ''}" />
+		<toolbarbutton label="EMI" image="/img/chart.png" href="/pages/npi/emi.zul"
+			sclass="${page.title eq 'EMI Data' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
+		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png" href="/pages/npi/diagnosis.zul"
+			sclass="${page.title eq 'Diagnosis' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
+		<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" href="/pages/npi/paymentscreate.zul"
+			sclass="${page.title eq 'Payments' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
+	</hbox>
+	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
+</zk>

@@ -29,7 +29,7 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 7682118330339432960L;
 
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
+	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	@SearchableId
 	private Long id;
 

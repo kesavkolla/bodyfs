@@ -24,7 +24,6 @@
 						<n:select id="selServices"></n:select>
 						<space orient="vertical" width="50px" />
 						<n:input type="button" id="btnAdd" value="Add" />
-						<space orient="vertical" width="50px" />
 						<button id="btnSave" label="Save" forward="onClick=controller.onSave" />
 						<space orient="horizontal" height="20px" />
 						<n:div style="overflow:auto;background-color:white;height:300px;width:90%;color:black;">

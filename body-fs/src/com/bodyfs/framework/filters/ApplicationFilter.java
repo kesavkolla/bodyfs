@@ -37,7 +37,7 @@ public class ApplicationFilter implements Filter {
 
 		final HttpServletRequest req = (HttpServletRequest) request;
 		final HttpServletResponse res = (HttpServletResponse) response;
-		if (req.getHeader("User-Agent").contains("")) {
+		if (req.getHeader("User-Agent") != null && req.getHeader("User-Agent").contains("chromeframe")) {
 			res.addHeader("X-UA-Compatible", "chrome=1");
 		}
 

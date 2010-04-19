@@ -4,6 +4,12 @@
  * @return
  */
 function initPage() {
+	var buffer = new Array();
+	buffer.push('<option value="-1"></option>');
+	$.each(arrServices, function() {
+		buffer.push('<option value="' + this.id + '">' + this.serviceName + '</option>');
+	});
+	$("#selServices").html(buffer.join(''));
 	$(".imgDelete").live("click", DeleteRow);
 	/* handle the click on add button */
 	$("#btnAdd").click(addService);
@@ -14,8 +20,7 @@ function initPage() {
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This
- * will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This will summarize all the services.
  * 
  * @return
  */
@@ -101,18 +106,18 @@ function calculateService() {
  * @return
  */
 function addService() {
-	var services = $.data(document.body, "servicelist");
+	var services = arrServices;
 	/* Check whether services does exist and is array */
 	if (!$.isArray(services) || services.length <= 0) {
 		return;
 	}
 	/* If user hasen't select any service alert him */
-	var cmbServices = zk.Widget.$($("$cmbServices").attr("id"));
-	if (cmbServices.getValue() == undefined) {
+	var selServiceid = parseInt($("#selServices").val());
+	if (selServiceid == -1) {
 		alert("Please select a service to add");
 		return;
 	}
-	var selService = getSelectedService(services, cmbServices.getValue());
+	var selService = getServiceById(selServiceid);
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
 	if (selService.serviceName != "Re-Exam") {
@@ -147,7 +152,12 @@ function printSummary() {
 		return;
 	}
 	/* Get the customer name */
-	var custName = zk.Widget.$($("$cmbCustomers").attr("id")).getValue();
+	var custName = "";
+	if (window.patname == undefined) {
+		custName = zk.Widget.$($("$cmbCustomers").attr("id")).getValue();
+	} else {
+		custName = patname;
+	}
 	/* date in mm/dd/yyyy format */
 	var today = new Date();
 	today = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -225,14 +235,6 @@ function printSummary() {
 	printWindow.document.close();
 }
 
-/**
- * This function is called from the afterCompose. This will keep the services
- * object into the jQuery data. That will be used later on.
- */
-function saveServices(services) {
-	$.data(document.body, "servicelist", services);
-}
-
 function DeleteRow() {
 	$(this).parents("tr").remove();
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
@@ -252,28 +254,13 @@ function resetAll() {
 }
 
 /**
- * This function loops through all the services and find the service that
- * matches with the service that is selected in combobox
- * 
- * @return
- */
-function getSelectedService(services, selServiceName) {
-	for ( var i = 0, len = services.length; i < len; i++) {
-		if (services[i].serviceName == selServiceName) {
-			return services[i];
-		}
-	}
-	return {};
-}
-
-/**
  * This function retrieves the service by it's id from the data cache
  * 
  * @param serviceid
  * @return
  */
 function getServiceById(serviceid) {
-	var services = $.data(document.body, "servicelist");
+	var services = arrServices;
 	for ( var i = 0, len = services.length; i < len; i++) {
 		if (services[i].id == serviceid) {
 			return services[i];
@@ -283,26 +270,28 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and
- * also make sure patient is selected. This will create a json object of all the
- * services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
+ * will create a json object of all the services and then it will be passed to the server.
  * 
  * @return
  */
 function prepareSave(evt) {
 	/* do the validations */
-	if(isNaN(parseFloat($("#totalCost").html().substring(1)))) {
+	if (isNaN(parseFloat($("#totalCost").html().substring(1)))) {
 		alert("Click Caculate button before saving");
 		evt.stopPropagation();
 		evt.preventDefault();
 		return false;
 	}
-	var cmbCustomers = zk.Widget.$($("$cmbCustomers").attr("id"));
-	if (cmbCustomers.getValue() == undefined) {
-		alert("select the patient before saving");
-		evt.stopPropagation();
-		evt.preventDefault();
-		return false;
+
+	if (window.patname == undefined) {
+		var cmbCustomers = zk.Widget.$($("$cmbCustomers").attr("id"));
+		if (cmbCustomers.getValue() == undefined) {
+			alert("select the patient before saving");
+			evt.stopPropagation();
+			evt.preventDefault();
+			return false;
+		}
 	}
 
 	/* prepare the json data object */
@@ -311,7 +300,11 @@ function prepareSave(evt) {
 		var count = parseInt($(this).find("input[class='txtCnt']").val());
 		var week = parseInt($(this).find("input[class='txtWeek']").val());
 		var serviceid = $(this).attr("serviceid");
-		arrServices.push({"serviceid": serviceid, "count":count, "weeks": week});
+		arrServices.push( {
+			"serviceid" : serviceid,
+			"count" : count,
+			"weeks" : week
+		});
 	});
 	$("$txtPaymentData").val(toJSON(arrServices)).blur();
 	return true;

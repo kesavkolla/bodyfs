@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
 
+import com.bodyfs.dao.IPatientVisitDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -37,6 +38,7 @@ import com.bodyfs.model.PersonType;
 import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
+import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
  * 
@@ -162,8 +164,12 @@ public class NPIComposer extends GenericForwardComposer {
 		if (cache.containsKey(QuickPatientListComposer.QUICK_PATIENT_LIST)) {
 			cache.remove(QuickPatientListComposer.QUICK_PATIENT_LIST);
 		}
-
-
+		
+		final NPIPatientDiagnosis diagnosis = new NPIPatientDiagnosis();
+		diagnosis.setPersonId(person.getId());
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
+		visitDAO.createNPIPatientDiagnosis(diagnosis);
+		
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
 		execution.sendRedirect("/pages/signin/customersearch.zul");

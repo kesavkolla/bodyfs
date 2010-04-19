@@ -8,6 +8,7 @@ import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
  * This interface provides methods that are rleated to patient visit
@@ -103,5 +104,18 @@ public interface IPatientVisitDAO {
 	 * @return Patient Prescription object that corresponds to the given patient id and visit date
 	 */
 	public PatientPrescription getPatientPrescriptionByDate(final Long patientId, final Date visitDate);
-
+	
+	/**
+	 * NPI Diagnosis
+	 * @param patDiagnosis
+	 * @return
+	 */
+	public NPIPatientDiagnosis createNPIPatientDiagnosis(final NPIPatientDiagnosis patDiagnosis);
+	
+	/**
+	 * 
+	 * @param patientId
+	 * @return
+	 */
+	public NPIPatientDiagnosis getPatientNPIDiagnosisByDate(final Long patientId); 
 }

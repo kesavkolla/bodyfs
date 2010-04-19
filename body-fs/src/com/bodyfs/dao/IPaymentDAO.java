@@ -139,7 +139,7 @@ public interface IPaymentDAO {
 	 * 
 	 * @param services
 	 */
-	public void createVisitServices(final List<PatientService> services);
+	public void createVisitServices(final List<PatientService> services, final Collection<MasterService> srvicelist);
 
 	/**
 	 * Retrieves all the service objects for the given patient that were performed in a given date range

@@ -2,7 +2,7 @@
 <zk>
 	<hbox>
 		<toolbarbutton label="Medical History" orient="vertical" image="/img/report_card.png"
-			href="/pages/npi/npi.zul?id=${param.id }"
+			href="/pages/npi/npiview.zul?id=${param.id }"
 			sclass="${page.title eq 'Patients Medical History' ? 'bodyfs-toolbar-selected' : ''}" />
 		<toolbarbutton label="Program Goals" orient="vertical" image="/img/vcard_add.png"
 			href="/pages/npi/goals.zul?id=${param.id }"

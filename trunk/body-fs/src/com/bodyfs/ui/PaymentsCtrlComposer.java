@@ -41,6 +41,8 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
 		page.setAttribute("patients", personDao.getAllCustomers());
+		final Long patid = CommonUtils.getPatientId();
+		page.setAttribute("patid", patid);
 	}
 
 	public Collection<MasterService> getServices() {
@@ -55,7 +57,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		Long patid = null;
 		// If this is coming from npi then get the patient id from the URL
 		if (cmbCustomers == null) {
-			patid = CommonUtils.getPatientId();
+			patid = (Long) page.getAttribute("patid");
 		} else {
 			if (cmbCustomers.getSelectedIndex() < 0 || cmbCustomers.getSelectedItem() == null) {
 				try {
@@ -98,6 +100,16 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		plan.setPlanItems(planItems);
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		paymentDAO.createPaymentPlan(plan);
-		Clients.evalJavaScript("$.jGrowl('Sucessfully saved the plan', {life:2000});");
+
+		if (cmbCustomers == null) {
+			if (evt.getData().toString().equalsIgnoreCase("Done")) {
+				final IPersonDAO personDAO = (IPersonDAO) SpringUtil.getBean("personDAO");
+				personDAO.deleteQuickPatient(patid);
+			}
+			Clients.evalJavaScript("navigate('" + evt.getData() + "')");
+		} else {
+			Clients.evalJavaScript("$.jGrowl('Sucessfully saved the plan', {life:2000});");
+		}
+
 	}
 }

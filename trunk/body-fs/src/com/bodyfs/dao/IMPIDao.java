@@ -38,4 +38,12 @@ public interface IMPIDao {
 	 * @return all the examdates for the given user id
 	 */
 	public Collection<Date> getExamDates(final Long id);
+
+	/**
+	 * This method returns the first MPIData of the patient
+	 * 
+	 * @param patid
+	 * @return
+	 */
+	public MPIData getFirstMPI(final Long patid);
 }

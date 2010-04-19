@@ -16,11 +16,12 @@ function initPage() {
 	$("#btnCalculate").click(calculateService);
 	$("#btnPrint").click(printSummary);
 	$("#btnCancel").click(resetAll);
-	$("$btnSave").click(prepareSave);
+	$(".submtbtn").click(prepareSave);
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This
+ * will summarize all the services.
  * 
  * @return
  */
@@ -270,8 +271,9 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
- * will create a json object of all the services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and
+ * also make sure patient is selected. This will create a json object of all the
+ * services and then it will be passed to the server.
  * 
  * @return
  */
@@ -308,4 +310,21 @@ function prepareSave(evt) {
 	});
 	$("$txtPaymentData").val(toJSON(arrServices)).blur();
 	return true;
+}
+
+
+/**
+ * Navigates to prev/next page
+ * 
+ * @param direction
+ * @return
+ */
+function navigate(direction) {
+	if (direction == "Done") {
+		var wgt = zk.Widget.$($("$tbtnMedHistory").attr("id"));
+		zUtl.go(wgt._href);
+	} else {
+		var wgt = zk.Widget.$($("$tbtnDiagnosis").attr("id"));
+		zUtl.go(wgt._href);
+	}
 }

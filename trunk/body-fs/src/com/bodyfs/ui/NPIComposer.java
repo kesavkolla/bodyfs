@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
@@ -38,6 +37,7 @@ import com.bodyfs.model.PersonType;
 import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
+import com.bodyfs.model.npi.NPIGoals;
 import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
@@ -152,7 +152,7 @@ public class NPIComposer extends GenericForwardComposer {
 		personDAO.createGenitourinary(gen);
 		personDAO.createGynecology(gy);
 		personDAO.createHealthInsurance(hi);
-		
+
 		final QuickPatient qp = new QuickPatient();
 		qp.setId(person.getId());
 		qp.setName(person.getDisplayName());
@@ -164,12 +164,16 @@ public class NPIComposer extends GenericForwardComposer {
 		if (cache.containsKey(QuickPatientListComposer.QUICK_PATIENT_LIST)) {
 			cache.remove(QuickPatientListComposer.QUICK_PATIENT_LIST);
 		}
-		
+
 		final NPIPatientDiagnosis diagnosis = new NPIPatientDiagnosis();
 		diagnosis.setPersonId(person.getId());
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		visitDAO.createNPIPatientDiagnosis(diagnosis);
-		
+
+		final NPIGoals goals = new NPIGoals();
+		goals.setPersonId(person.getId());
+		visitDAO.createNPIGoals(goals);
+
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();
 		execution.sendRedirect("/pages/signin/customersearch.zul");

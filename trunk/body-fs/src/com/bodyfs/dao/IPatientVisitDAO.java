@@ -8,6 +8,7 @@ import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.npi.NPIGoals;
 import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
@@ -104,18 +105,35 @@ public interface IPatientVisitDAO {
 	 * @return Patient Prescription object that corresponds to the given patient id and visit date
 	 */
 	public PatientPrescription getPatientPrescriptionByDate(final Long patientId, final Date visitDate);
-	
+
 	/**
 	 * NPI Diagnosis
+	 * 
 	 * @param patDiagnosis
 	 * @return
 	 */
 	public NPIPatientDiagnosis createNPIPatientDiagnosis(final NPIPatientDiagnosis patDiagnosis);
-	
+
 	/**
 	 * 
 	 * @param patientId
 	 * @return
 	 */
-	public NPIPatientDiagnosis getPatientNPIDiagnosisByDate(final Long patientId); 
+	public NPIPatientDiagnosis getPatientNPIDiagnosisByDate(final Long patientId);
+
+	/**
+	 * Persists the npi goals object
+	 * 
+	 * @param goals
+	 * @return
+	 */
+	public NPIGoals createNPIGoals(final NPIGoals goals);
+
+	/**
+	 * Retrieves the NPI goals object by the given patient id
+	 * 
+	 * @param patid
+	 * @return
+	 */
+	public NPIGoals getNNPIGoalsByPatientId(final Long patid);
 }

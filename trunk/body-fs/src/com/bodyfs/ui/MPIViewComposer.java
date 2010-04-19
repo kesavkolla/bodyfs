@@ -93,7 +93,13 @@ public class MPIViewComposer extends GenericForwardComposer {
 		final IMPIDao mpiDao = (IMPIDao) SpringUtil.getBean("MPIDao");
 		final Long id = CommonUtils.getPatientId();
 		if (id != null) {
-			final MPIData mpi = mpiDao.getDataByDate(id, null);
+			// If the URL contains npi then it's an npi page then get the first MPIData
+			MPIData mpi = null;
+			if (comp.getPage().getRequestPath().contains("/npi")) {
+				mpi = mpiDao.getFirstMPI(id);
+			} else {
+				mpi = mpiDao.getDataByDate(id, null);
+			}
 			if (mpi != null) {
 				comp.getPage().setAttribute("mpi", mpi);
 				comp.getPage().setAttribute("mpidata", convertMPI(mpi));

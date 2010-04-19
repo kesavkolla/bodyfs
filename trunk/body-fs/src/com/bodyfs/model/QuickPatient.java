@@ -20,6 +20,25 @@ public class QuickPatient implements Serializable {
 
 	@Persistent
 	private String name;
+	
+	@Persistent
+	private Boolean isNewPatient = false;
+	
+	
+
+	/**
+	 * @return the isNewPatient
+	 */
+	public Boolean getIsNewPatient() {
+		return isNewPatient;
+	}
+
+	/**
+	 * @param isNewPatient the isNewPatient to set
+	 */
+	public void setIsNewPatient(Boolean isNewPatient) {
+		this.isNewPatient = isNewPatient;
+	}
 
 	@Persistent
 	public Date getDate() {

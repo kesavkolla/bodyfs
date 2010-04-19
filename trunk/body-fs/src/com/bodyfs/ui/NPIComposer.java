@@ -3,11 +3,16 @@
  */
 package com.bodyfs.ui;
 
+import java.util.Date;
+
+import net.sf.jsr107cache.Cache;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
@@ -29,6 +34,7 @@ import com.bodyfs.model.Neuropsychological;
 import com.bodyfs.model.PastMedicalHistory;
 import com.bodyfs.model.Person;
 import com.bodyfs.model.PersonType;
+import com.bodyfs.model.QuickPatient;
 import com.bodyfs.model.Respiratory;
 import com.bodyfs.model.SkinHair;
 
@@ -144,6 +150,19 @@ public class NPIComposer extends GenericForwardComposer {
 		personDAO.createGenitourinary(gen);
 		personDAO.createGynecology(gy);
 		personDAO.createHealthInsurance(hi);
+		
+		final QuickPatient qp = new QuickPatient();
+		qp.setId(person.getId());
+		qp.setName(person.getDisplayName());
+		qp.setDate(new Date());
+		qp.setIsNewPatient(true);
+		personDAO.createQuickPatient(qp);
+		// remove cache
+		final Cache cache = (Cache) SpringUtil.getBean("datacache");
+		if (cache.containsKey(QuickPatientListComposer.QUICK_PATIENT_LIST)) {
+			cache.remove(QuickPatientListComposer.QUICK_PATIENT_LIST);
+		}
+
 
 		LOGGER.error("Person saved with Id:" + person.getId());
 		cleanSession();

@@ -1,0 +1,783 @@
+<?page title="Patients Medical History" contentType="text/html;charset=UTF-8" id="npiview2"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="npigrid" ?>
+<zk xmlns:a="http://www.zkoss.org/2005/zk/annotation" xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="npigrid" apply="com.bodyfs.ui.NPIViewComposer" width="97%" style="padding-left:5px;background-color:white">
+		<panel title="General Information" border="normal" style="margin-bottom:10px">
+			<panelchildren>
+				<grid fixedLayout="true" style="border:0px" hflex="1" vflex="1">
+					<rows>
+						<row hflex="true">
+							First Name:
+							<textbox readonly="true"  id="firstName" value="@{person.firstName}" constraint="no empty"
+								maxlength="100" hflex="1" zclass="req-string" />
+							Initial:
+							<textbox readonly="true"  id="initial" value="@{person.initial}" maxlength="100" hflex="1" />
+							LastName:
+							<textbox readonly="true"  id="lastName" value="@{person.lastName}" constraint="no empty"
+								maxlength="100" hflex="1" />
+			
+							Birthdate:
+							<datebox disabled="true" id="dob" value="@{person.dateOfBirth}"
+								constraint="no empty,no future,no today" format="MM/dd/yyyy" timeZone="${c:timezone('PST')}" hflex="true" />
+						</row>
+						<row>
+							SSN:
+							<textbox readonly="true"  id="ssn" value="@{person.SSN}"
+								constraint="/\d{3}-?\d{2}-?\d{4}/: Invalid SSN Format" maxlength="11" hflex="1" />
+							Marital Status:
+							<checkbox disabled="true" label="Married" checked="@{person.married}" />
+							Gender:
+							<radiogroup id="gender"
+								selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup' }">
+								<radio label="M" />
+								<radio label="F" />
+							</radiogroup>
+							Email:
+							<textbox  readonly="true"  value="@{person.email}"
+								constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
+						</row>
+						<row valign="top">
+							Address
+							<textbox readonly="true"  value="@{ginfo.street}" hflex="1" />
+							City:
+							<textbox readonly="true"  value="@{ginfo.city}" hflex="1" />
+							State:
+							<textbox readonly="true"  value="@{ginfo.state}" hflex="1" />
+							Zipcode:
+							<textbox readonly="true"  value="@{ginfo.zipcode}" hflex="1" />
+						</row>
+						<row spans=",,,,2,2">
+							Height:
+							<textbox readonly="true"  value="@{ginfo.height}" hflex="1" />
+							Weight:
+							<textbox readonly="true"  value="@{ginfo.weight}" hflex="1" />
+							Emergency Contact's Name &amp; Phone
+							<textbox readonly="true"  value="@{ginfo.emergencycontact}" hflex="1" />
+						</row>
+						<row>
+							Home Phone:
+							<textbox readonly="true"  value="@{ginfo.homePhone}" hflex="1" />
+							Work Phone:
+							<textbox readonly="true"  value="@{ginfo.workPhone}" hflex="1" />
+							Cell Phone:
+							<textbox readonly="true"  value="@{ginfo.cellPhone}" hflex="1" />
+							Referred By:
+							<textbox readonly="true"  value="@{ginfo.referredBy}" hflex="1" />
+						</row>
+						<row spans="2,2,2,2">
+							Reason for visit today
+							<textbox readonly="true"  value="@{ginfo.reasonforvisit}" hflex="2" rows="2" />
+							<vbox>
+								Have you had accupunture before ?
+								<radiogroup
+									selectedIndex="@{ginfo.accupunture, converter='com.bodyfs.ui.util.BoolToInt' }">
+									<radio label="Yes" />
+									<radio label="No" />
+								</radiogroup>
+							</vbox>
+							<vbox>
+								Chinese herbal medicine?
+								<radiogroup
+									selectedIndex="@{ginfo.chineseherbalmedicine, converter='com.bodyfs.ui.util.BoolToInt' }">
+									<radio label="Yes" />
+									<radio label="No" />
+								</radiogroup>
+							</vbox>
+						</row>
+						<row spans="2,2">
+							How long have you had this condition?
+							<textbox readonly="true"  value="@{ginfo.condition}" hflex="1" />
+						</row>
+						<row spans="2,2,4">
+							Is it getting worse?
+							<textbox readonly="true" hflex="1" value="@{ginfo.gettingworse}" />
+							<hbox hflex="1">
+								Does it bother your
+								<checkbox disabled="true" label="Sleep" checked="@{ginfo.botherSleep}" />
+								<checkbox disabled="true" label="Work" checked="@{ginfo.botherWork}" />
+								<checkbox disabled="true" label="Other" checked="@{ginfo.botherOther}" />
+								<textbox  readonly="true" hflex="1" value="@{ginfo.botherReason}" />
+							</hbox>
+						</row>
+						<row spans="2,6">
+							What seemed to be the initial cause?
+							<textbox readonly="true" rows="3" cols="40" value="@{ginfo.initialcause}" />
+						</row>
+						<row spans="2,6">
+							What seems to make it better?
+							<textbox readonly="true" rows="3" cols="40" value="@{ginfo.makeitbetter}" />
+						</row>
+						<row spans="2,6">
+							What seems to make it worse?
+							<textbox readonly="true" rows="3" cols="40" value="@{ginfo.makeitworse}" />
+						</row>
+						<row spans="2,2,2,2">
+						Are you under the care of physician now?
+						<radiogroup hflex="1"
+							selectedIndex="@{ginfo.physiciancare, converter='com.bodyfs.ui.util.BoolToInt' }">
+							<radio label="Yes" />
+							<radio label="No" />
+						</radiogroup>
+						If Yes, for what?
+						<textbox readonly="true" hflex="1" value="@{ginfo.carereason}" />
+						</row>
+						<row spans="2,2,2,2">
+							Physician's name
+							<textbox readonly="true"  hflex="1" value="@{ginfo.physicianname}" />
+							Physician's phone
+							<textbox readonly="true"  hflex="1" value="@{ginfo.physicianphone}" />
+						</row>
+						<row spans="2,6">
+							Other concurrent therapies
+							<textbox readonly="true"  rows="3" cols="40" value="@{ginfo.othertherapies}" />
+						</row>
+					</rows>
+				</grid>
+				
+			</panelchildren>
+		</panel>
+		<panel title="Health Insurance Info" border="normal" style="margin-bottom:10px">
+			<panelchildren>
+				<grid fixedLayout="true" style="border:0px" hflex="1" vflex="1">
+					<rows>
+						<row>
+							Insurance Co. Name
+							<textbox readonly="true" hflex="1" value="@{hi.insuranceName }" />
+							Policy #
+							<textbox readonly="true" hflex="1" value="@{hi.policy }" />
+						</row>
+						<row>
+							<vbox>
+								<label value="Address" />
+								<label value="City,State, Zip" />
+							</vbox>
+							<textbox readonly="true" rows="2" hflex="1" value="@{hi.address }" />
+							Phone
+							<textbox readonly="true" hflex="1" value="@{hi.phone }" />
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel title="Family Medical History" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%" height="100%">
+					<vbox>
+						<!-- <checkbox label="Allergies (list)" checked="@{fmh.allergies }" />
+							<textbox value="@{fmh.allergy1 }" />
+							<textbox value="@{fmh.allergy2 }" /> -->
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Arteriosclerosis"
+							checked="@{fmh.arteriosclerosis }" />
+						<checkbox disabled="true" label="Asthma" checked="@{fmh.asthma }" />
+						<checkbox disabled="true" label="Alcoholism" checked="@{fmh.alcoholism }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Cancer (type)" checked="@{fmh.cancerType }" />
+						<textbox  readonly="true" value="@{fmh.cancer }" />
+						<checkbox disabled="true" label="Depression" checked="@{fmh.depression }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diabetes" checked="@{fmh.diabetes }" />
+						<checkbox disabled="true" label="Heart disease" checked="@{fmh.heartdisease }" />
+						<checkbox disabled="true" label="High blood pressure"
+							checked="@{fmh.highbloodpressure }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Seizures" checked="@{fmh.seizures }" />
+						<checkbox disabled="true" label="Stroke" checked="@{fmh.stroke }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Your Past Medical History" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%" height="100%">
+				(Check any of the following conditions you currently have, or have had in past. Please also check if you
+				feel any of the following are significant part of your medical history.)
+				</hbox>
+				<hbox width="100%" height="100%">
+					<vbox>
+						<checkbox disabled="true" label="AIDS/HIV" checked="@{pmh.aids }" />
+						<checkbox disabled="true" label="Alcoholism" checked="@{pmh.alcoholism }" />
+						<checkbox disabled="true" label="Allergies" checked="@{pmh.allergies }" />
+						<checkbox disabled="true" label="Appendicitis" checked="@{pmh.appendicitis }" />
+						<checkbox disabled="true" label="Arteriosclerosis"
+							checked="@{pmh.arteriosclerosis }" />
+						<checkbox disabled="true" label="Asthma" checked="@{pmh.asthma }" />
+						<checkbox disabled="true" label="Birth trauma" checked="@{pmh.birthtrauma }" />
+						(your own birth)
+						<checkbox disabled="true" label="Cancer" checked="@{pmh.cancer }" />
+						<checkbox disabled="true" label="Chicken pox" checked="@{pmh.chickenpox }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diabetes" checked="@{pmh.diabetes }" />
+						<checkbox disabled="true" label="Emphysema" checked="@{pmh.emphysema }" />
+						<checkbox disabled="true" label="Epilepsy" checked="@{pmh.epilepsy }" />
+						<checkbox disabled="true" label="Goiter" checked="@{pmh.goiter }" />
+						<checkbox disabled="true" label="Gout" checked="@{pmh.gout }" />
+						<checkbox disabled="true" label="Heart disease" checked="@{pmh.heartdisease }" />
+						<checkbox disabled="true" label="Hepatitis" checked="@{pmh.hepatitis }" />
+						<checkbox disabled="true" label="Herpes" checked="@{pmh.herpes }" />
+						<checkbox disabled="true" label="High blood pressure"
+							checked="@{pmh.highbloodpressure }" />
+						<checkbox disabled="true" label="Measles" checked="@{pmh.measles }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Multiple Sclerosis"
+							checked="@{pmh.multipleSclerosis }" />
+						<checkbox disabled="true" label="Mumps" checked="@{pmh.mumps }" />
+						<checkbox disabled="true" label="Pacemaker" checked="@{pmh.pacemaker }" />
+						<checkbox disabled="true" label="Pleurisy" checked="@{pmh.pleurisy }" />
+						<checkbox disabled="true" label="Pneumonia" checked="@{pmh.pneumonia }" />
+						<checkbox disabled="true" label="Polio" checked="@{pmh.polio }" />
+						<checkbox disabled="true" label="Rheumatic fever" checked="@{pmh.rheumaticfever }" />
+						<checkbox disabled="true" label="Scarlet fever" checked="@{pmh.scarletfever }" />
+						<checkbox disabled="true" label="Seizures" checked="@{pmh.seizures }" />
+						<checkbox disabled="true" label="Stroke" checked="@{pmh.stroke }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Surgery (list)" checked="@{pmh.surgery }" />
+						<textbox  readonly="true" rows="3" value="@{pmh.surgeryList }" />
+						<checkbox disabled="true" label="Thyroid disorders"
+							checked="@{pmh.thyroiddisorders }" />
+						<checkbox disabled="true" label="Major trauma" checked="@{pmh.majortrauma }" />
+						(Car, fall, etc-list)
+						<textbox  readonly="true" rows="3" value="@{pmh.carfalletc }" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Tuberculosis" checked="@{pmh.tuberculosis }" />
+						<checkbox disabled="true" label="Typhoid fever" checked="@{pmh.typhoidfever }" />
+						<checkbox disabled="true" label="Ulcers" checked="@{pmh.ulcers }" />
+						<checkbox disabled="true" label="Venereal disease"
+							checked="@{pmh.venerealdisease }" />
+						<checkbox disabled="true" label="Whooping cough" checked="@{pmh.whoopingcough }" />
+						<checkbox disabled="true" label="Other (Specify)" checked="@{pmh.otherChk }" />
+						<textbox  readonly="true" rows="4" value="@{pmh.other }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Your Diet" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%">
+					Appetite
+					<radiogroup id="appetite"
+						selectedIndex="@{yd.appetite, converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+						<vbox>
+							<radio label="Low" />
+							<radio label="High" />
+						</vbox>
+					</radiogroup>
+					<vbox>
+						<checkbox disabled="true" label="Coffee/Tea" checked="@{yd.coffeeTea }" />
+						<checkbox disabled="true" label="Soft Drinks/Fruit Juices" checked="@{yd.drinks }" />
+					</vbox>
+					Protein Intake
+					<radiogroup id="protein"
+						selectedIndex="@{yd.protein, converter='com.bodyfs.ui.util.HighLowToRadiogroup' }">
+						<vbox>
+							<radio label="Low" />
+							<radio label="High" />
+						</vbox>
+					</radiogroup>
+					<vbox>
+						<checkbox disabled="true" label="Artificial" checked="@{yd.sweeteners }" />
+						Sweeteners
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Sugar" checked="@{yd.sugar }" />
+						<checkbox disabled="true" label="Salty foods" checked="@{yd.saltyfoods }" />
+					</vbox>
+					<vbox>
+						Thirst for water:
+						<hbox>
+							# glasses per day:
+							<textbox readonly="true" rows="4" value="@{yd.water }" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Average Daily Menu" border="normal" style="margin-bottom:10px;color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						Morning
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.morning }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.msnack }" />
+					</vbox>
+					<vbox>
+						Noon
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.noon }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.nsnack }" />
+					</vbox>
+					<vbox>
+						Evening
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.evening }" />
+					</vbox>
+					<vbox>
+						Snack
+						<textbox  readonly="true" rows="3" hflex="1" value="@{yd.esnack }" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Your Lifestyle" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Alcohol" checked="@{yls.alcohol}" />
+						<checkbox disabled="true" label="Tobacco" checked="@{yls.tobacco}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Marijuana" checked="@{yls.marijuana}" />
+						<checkbox disabled="true" label="Drugs" checked="@{yls.drugs}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Stress" checked="@{yls.stress}" />
+						<checkbox disabled="true" label="Occupational hazards"
+							checked="@{yls.occupationalhazards}" />
+					</vbox>
+					<vbox>
+						Regular Exercise
+						<hbox>
+							Type
+							<textbox  readonly="true" value="@{yls.exercise1Type}" />
+							Frequency
+							<textbox  readonly="true" value="@{yls.freq1}" />
+						</hbox>
+						<hbox>
+							Type
+							<textbox  readonly="true" value="@{yls.exercise2Type}" />
+							Frequency
+							<textbox  readonly="true" value="@{yls.freq2}" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="General Symptoms" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Poor appetite" checked="@{gs.poorappetite}" />
+						<checkbox disabled="true" label="Heavy appetite" checked="@{gs.heavyappetite}" />
+						<checkbox disabled="true" label="Strongly like cold drinks"
+							checked="@{gs.cooldrinks}" />
+						<checkbox disabled="true" label="Strongly like hot drinks"
+							checked="@{gs.hotdrinks}" />
+						<checkbox disabled="true" label="Recent weight loss/gain" checked="@{gs.weight}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Poor Sleep" checked="@{gs.poorsleep}" />
+						<checkbox disabled="true" label="Heavy sleep" checked="@{gs.heavysleep}" />
+						<checkbox disabled="true" label="Dream-disturbed sleep"
+							checked="@{gs.disturbedsleep}" />
+						<checkbox disabled="true" label="Fatigue" checked="@{gs.fatigue}" />
+						<checkbox disabled="true" label="Lack of Strength" checked="@{gs.lackofStrength}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Bodily heaviness"
+							checked="@{gs.bodilyheaviness}" />
+						<checkbox disabled="true" label="Cold hands or feet"
+							checked="@{gs.coldhandsorfeet}" />
+						<checkbox disabled="true" label="Poor circulation"
+							checked="@{gs.poorcirculation}" />
+						<checkbox disabled="true" label="Shortness of breath"
+							checked="@{gs.shortnessofbreath}" />
+						<checkbox disabled="true" label="Fever" checked="@{gs.fever}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Chills" checked="@{gs.chills}" />
+						<checkbox disabled="true" label="Night sweat" checked="@{gs.nightsweat}" />
+						<checkbox disabled="true" label="Sweat easily" checked="@{gs.sweateasily}" />
+						<checkbox disabled="true" label="Muscle cramps" checked="@{gs.musclecramps}" />
+						<checkbox disabled="true" label="Vertigo or dizziness" checked="@{gs.vertigo}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Bleed or bruise easily" checked="@{gs.bleed}" />
+						<checkbox disabled="true" label="Pecular taste (Describe)"
+							checked="@{gs.peculartaste}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Head, Eyes, Ears, Nose, Throat" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<div><checkbox disabled="true" label="Glasses" checked="@{ent.glasses}" />  -  Age:<textbox  readonly="true" value="@{ent.glassesAge}"></textbox></div> 
+						<checkbox disabled="true" label="Eye strain" checked="@{ent.eyestrain}" />
+						<checkbox disabled="true" label="Eye pain" checked="@{ent.eyepain}" />
+						<checkbox disabled="true" label="Red eyes" checked="@{ent.redeyes}" />
+						<checkbox disabled="true" label="Itchy eyes" checked="@{ent.itchyeyes}" />
+						<checkbox disabled="true" label="Spots in eyes" checked="@{ent.spotsineyes}" />
+						<checkbox disabled="true" label="Poor vision" checked="@{ent.poorvision}" />
+						<checkbox disabled="true" label="Blurred vision" checked="@{ent.blurredvision}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Night blindness" checked="@{ent.nightblindness}" />
+						<checkbox disabled="true" label="Myopia or Presbyopia"
+							checked="@{ent.myopiaorPresbyopia}" />
+						<checkbox disabled="true" label="Glaucoma" checked="@{ent.glaucoma}" />
+						<checkbox disabled="true" label="Cataracts" checked="@{ent.cataracts}" />
+						<checkbox disabled="true" label="Teeth problems" checked="@{ent.teethproblems}" />
+						<checkbox disabled="true" label="Grinding teeth" checked="@{ent.grindingteeth}" />
+						<checkbox disabled="true" label="TMJ" checked="@{ent.tmj}" />
+						<checkbox disabled="true" label="Facial pain" checked="@{ent.facialpain}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Gum problems" checked="@{ent.gumproblems}" />
+						<checkbox disabled="true" label="Sores on lips or tongue" checked="@{ent.sores}" />
+						<checkbox disabled="true" label="Dry mouth" checked="@{ent.drymouth}" />
+						<checkbox disabled="true" label="Excessive saliva"
+							checked="@{ent.excessivesaliva}" />
+						<checkbox disabled="true" label="Sinus problems" checked="@{ent.sinusproblems}" />
+						<checkbox disabled="true" label="Excessive phlegm Color:"
+							checked="@{ent.phlegmColor}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Recurrent sore throat"
+							checked="@{ent.recurrentsorethroat}" />
+						<checkbox disabled="true" label="Swollen glands" checked="@{ent.swollenglands}" />
+						<checkbox disabled="true" label="Lumps in throat" checked="@{ent.lumpsinthroat}" />
+						<checkbox disabled="true" label="Enlarged thyroid"
+							checked="@{ent.enlargedthyroid}" />
+						<checkbox disabled="true" label="Nosebleeds" checked="@{ent.nosebleeds}" />
+						<checkbox disabled="true" label="Ringing in ears (High or Low?)"
+							checked="@{ent.ringinginears}" />
+						<checkbox disabled="true" label="Poor hearing" checked="@{ent.poorhearing}" />
+						<checkbox disabled="true" label="Earaches" checked="@{ent.earaches}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Headaches" checked="@{ent.headaches}" />
+						<checkbox disabled="true" label="Migraines" checked="@{ent.migraines}" />
+						<checkbox disabled="true" label="Concussions" checked="@{ent.concussions}" />
+						Other head or neck problems
+						<textbox  readonly="true" rows="3" hflex="1" value="@{ent.Other}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Respiratory" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Difficulty breathing when"
+							checked="@{rp.difficultybreathingwhen}" />
+						lying down
+						<checkbox disabled="true" label="Shortness of breath"
+							checked="@{rp.shortnessofbreath}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Tight chest" checked="@{rp.tightchest}" />
+						<checkbox disabled="true" label="Asthama/wheezing"
+							checked="@{rp.asthamawheezing}" />
+						<checkbox disabled="true" label="Difficult inhalation? exhalation ?"
+							checked="@{rp.difficultinhalation}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Cough" checked="@{rp.cough}" />
+						<checkbox disabled="true" label="Wet or Dry?" checked="@{rp.wetorDry}" />
+						<checkbox disabled="true" label="Thick or thin?" checked="@{rp.thickorthin}" />
+					</vbox>
+					<vbox>
+						Color of phlegm
+						<textbox  readonly="true" rows="2" hflex="1" value="@{rp.colorofphlegm}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Coughing up blood"
+							checked="@{rp.coughingupblood}" />
+						<checkbox disabled="true" label="Pneumonia" checked="@{rp.pneumonia}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Cardiovascular" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="High blood pressure"
+							checked="@{cv.highbloodpressure}" />
+						<checkbox disabled="true" label="Blood clots" checked="@{cv.bloodclots}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Low blood pressure"
+							checked="@{cv.lowbloodpressure}" />
+						<checkbox disabled="true" label="Fainting" checked="@{cv.fainting}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Chest pain" checked="@{cv.chestpain}" />
+						<checkbox disabled="true" label="Difficulty breathing"
+							checked="@{cv.difficultybreathing}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Tachycardia" checked="@{cv.tachycardia}" />
+						<checkbox disabled="true" label="Heart palpitations"
+							checked="@{cv.heartpalpitations}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Phlebitis" checked="@{cv.phlebitis}" />
+						<checkbox disabled="true" label="Irregular heartbeat"
+							checked="@{cv.irregularheartbeat}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Gastrointestinal" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Nausea" checked="@{gi.nausea}" />
+						<checkbox disabled="true" label="Vomiting" checked="@{gi.vomiting}" />
+						<checkbox disabled="true" label="Acid regurgitation"
+							checked="@{gi.acidregurgitation}" />
+						<checkbox disabled="true" label="Gas" checked="@{gi.gas}" />
+						<checkbox disabled="true" label="Hiccup" checked="@{gi.hiccup}" />
+						<checkbox disabled="true" label="Bloating" checked="@{gi.bloating}" />
+						<checkbox disabled="true" label="Bad breath" checked="@{gi.badbreath}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Diarrhea" checked="@{gi.diarrhea}" />
+						<checkbox disabled="true" label="Constipation" checked="@{gi.constipation}" />
+						<checkbox disabled="true" label="Black stools" checked="@{gi.blackstools}" />
+						<checkbox disabled="true" label="Bloody stools" checked="@{gi.bloodystools}" />
+						<checkbox disabled="true" label="Mucous in stools" checked="@{gi.mucousinstools}" />
+						<checkbox disabled="true" label="Henorrhoid" checked="@{gi.henorrhoid}" />
+						<checkbox disabled="true" label="Itchy anus" checked="@{gi.itchyanus}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Intestinal pain or cramping"
+							checked="@{gi.cramping}" />
+						<checkbox disabled="true" label="Burning anus" checked="@{gi.burninganus}" />
+						<checkbox disabled="true" label="Rectal pain" checked="@{gi.rectalpain}" />
+						<checkbox disabled="true" label="Anal fissures" checked="@{gi.analfissures}" />
+						<checkbox disabled="true" label="Laxative use" checked="@{gi.laxativeusel}" />
+						<hbox>
+							What kind?Depression
+							<textbox  readonly="true" value="@{gi.depression}" />
+						</hbox>
+						<hbox>
+							How often?
+							<textbox  readonly="true" value="@{gi.dpresseionfreq}" />
+						</hbox>
+					</vbox>
+					<vbox>
+						Bowel movements:
+	
+						<hbox>
+							Frequency
+							<textbox  readonly="true" value="@{gi.bowelfreq}" />
+						</hbox>
+						<hbox>
+							Color
+							<textbox  readonly="true" value="@{gi.color}" />
+						</hbox>
+					</vbox>
+					<vbox>
+	
+	
+						<hbox>
+							Texture/form
+							<textbox  readonly="true" value="@{gi.texture}" />
+						</hbox>
+						<hbox>
+							Odor
+							<textbox  readonly="true" value="@{gi.odor}" />
+						</hbox>
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Musculoskeletal" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Neck/shoulder pain" checked="@{ms.neckpain}" />
+						<checkbox disabled="true" label="Muscle pain" checked="@{ms.musclepain}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Upper back pain" checked="@{ms.upperbackpain}" />
+						<checkbox disabled="true" label="Low back pain" checked="@{ms.lowbackpain}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Joint pain" checked="@{ms.jointpain}" />
+						<checkbox disabled="true" label="Rib pain" checked="@{ms.ribpain}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Limited range of motion"
+							checked="@{ms.limitedrangeofmotion}" />
+						<checkbox disabled="true" label="Limited use" checked="@{ms.limiteduse}" />
+					</vbox>
+					<vbox>
+						Other(Describe)
+						<textbox  readonly="true" value="@{ms.other}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Skin and Hair" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Rashes" checked="@{sh.rashes}" />
+						<checkbox disabled="true" label="Hives" checked="@{sh.hives}" />
+						<checkbox disabled="true" label="Ulcerations" checked="@{sh.ulcerations}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Eczema" checked="@{sh.eczema}" />
+						<checkbox disabled="true" label="Psoriasis" checked="@{sh.psoriasis}" />
+						<checkbox disabled="true" label="Acne" checked="@{sh.acne}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Dandruff" checked="@{sh.dandruff}" />
+						<checkbox disabled="true" label="Itching" checked="@{sh.itching}" />
+						<checkbox disabled="true" label="Hair loss" checked="@{sh.hairloss}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Change in hair/skin texture"
+							checked="@{sh.skintexture}" />
+						<checkbox disabled="true" label="Fungal infections" checked="@{sh.fungalinfections}" />
+					</vbox>
+					<vbox>
+						Other hair or skin problems
+						<textbox  readonly="true" rows="2" hflex="1" value="@{sh.other}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Neuropsychological" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Seizures" checked="@{np.seizures}" />
+						<checkbox disabled="true" label="Numbness" checked="@{np.numbness}" />
+						<checkbox disabled="true" label="Tics" checked="@{np.tics}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Poor memory" checked="@{np.poormemory}" />
+						<checkbox disabled="true" label="Depression" checked="@{np.depression}" />
+						<checkbox disabled="true" label="Anxiety" checked="@{np.anxiety}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Irritability" checked="@{np.irritability}" />
+						<checkbox disabled="true" label="Easily stressed" checked="@{np.easilystressed}" />
+						<checkbox disabled="true" label="Abuse survivor" checked="@{np.abusesurvivor}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Considered/attempted" checked="@{np.suicide}" />
+						suicide
+						<checkbox disabled="true" label="Seeing a therapist" checked="@{np.seeingatherapist}" />
+					</vbox>
+					<vbox>
+						Other (Specify)
+						<textbox  readonly="true" rows="2" hflex="1" value="@{np.Other}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Genitourinary" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Pain on urination" checked="@{gen.painonurination}" />
+						<checkbox disabled="true" label="Frequent urination"
+							checked="@{gen.frequenturination}" />
+						<checkbox disabled="true" label="Urgent urination" checked="@{gen.urgenturination}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Blood in urine" checked="@{gen.bloodinurine}" />
+						<checkbox disabled="true" label="Unable to hold urinne"
+							checked="@{gen.unabletoholdurinne}" />
+						<checkbox disabled="true" label="Incomplete urination"
+							checked="@{gen.incompleteurination}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Venereal disease" checked="@{gen.venerealdisease}" />
+						<checkbox disabled="true" label="Bedwetting" checked="@{gen.bedwetting}" />
+						<checkbox disabled="true" label="Wake to urinate" checked="@{gen.waketourinate}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Increased libido" checked="@{gen.increasedlibido}" />
+						<checkbox disabled="true" label="Decreased libido" checked="@{gen.decreasedlibido}" />
+						<checkbox disabled="true" label="Kidney stone" checked="@{gen.kidneystone}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Impotence" checked="@{gen.impotence}" />
+						<checkbox disabled="true" label="Premature ejaculation"
+							checked="@{gen.prematureejaculation}" />
+						<checkbox disabled="true" label="Nocturnal emission"
+							checked="@{gen.nocturnalemission}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Gynecology" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<hbox width="100%">
+					<vbox>
+						<checkbox disabled="true" label="Age menses began" checked="@{gy.agemensesbegan}" />
+						<textbox  readonly="true" value="@{gy.lengthofcycle}" />
+						Length of cycle(day1 to day1)
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Duration of flow" checked="@{gy.durationofflow}" />
+						<textbox  readonly="true" value="@{gy.duration}" />
+						<checkbox disabled="true" label="Irregular periods" checked="@{gy.irregularperiods}" />
+						<checkbox disabled="true" label="Painful periods" checked="@{gy.painfulperiods}" />
+						<checkbox disabled="true" label="PMS" checked="@{gy.pms}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Vaginal discharge" checked="@{gy.vaginaldischarge}" />
+						<hbox>
+							(color)
+							<textbox  readonly="true" value="@{gy.color}" />
+						</hbox>
+						<checkbox disabled="true" label="Vaginal sores" checked="@{gy.vaginalsores}" />
+						<checkbox disabled="true" label="Vaginal odor" checked="@{gy.vaginalodor}" />
+						<checkbox disabled="true" label="Clots" checked="@{gy.clots}" />
+					</vbox>
+					<vbox>
+						<checkbox disabled="true" label="Breast lumps" checked="@{gy.breastlumps}" />
+						<hbox>
+							# Pregnancies
+							<intbox value="@{gy.pregnancies}" />
+						</hbox>
+						<hbox>
+							# Live births
+							<intbox value="@{gy.livebirths}" />
+						</hbox>
+						<hbox>
+							# Premature births
+							<intbox value="@{gy.prematurebirths}" />
+						</hbox>
+						<hbox>
+							# Age at menopause
+							<intbox value="@{gy.agearmenopause}" />
+						</hbox>
+					</vbox>
+					<vbox>
+						Date of last PAP
+						<textbox  readonly="true" value="@{gy.dateoflastPAP}" />
+						Date last period began
+						<textbox  readonly="true" value="@{gy.datelastperiodbegan}" />
+					</vbox>
+				</hbox>
+			</panelchildren>
+		</panel>
+		<panel title="Other" border="normal" style="margin-bottom:10px; color:black">
+			<panelchildren>
+				<textbox  readonly="true" hflex="1" rows="4" value="@{gy.other}" />
+			</panelchildren>
+		</panel>		
+	</window>
+</zk>

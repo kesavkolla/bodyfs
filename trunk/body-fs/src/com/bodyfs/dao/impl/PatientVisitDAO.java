@@ -18,6 +18,7 @@ import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
  * 
@@ -104,12 +105,35 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 		}
 		return null;
 	}
+	
+	@Override
+	public NPIPatientDiagnosis getPatientNPIDiagnosisByDate(final Long patientId) {
+		final String filter = "personId==pid";
+		final String params = "String pid" ;
+		final Object[] vals = new Object[1];
+		vals[0] = patientId;
+		final Collection<NPIPatientDiagnosis> diagnosis = this.jdoTemplate.find(NPIPatientDiagnosis.class, filter, params,
+				vals, "visitDate descending");
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(diagnosis);
+		}
+		if (diagnosis != null && diagnosis.size() > 0) {
+			return diagnosis.iterator().next();
+		}
+		return null;
+	}
 
 	@Override
 	public PatientDiagnosis createPatientDiagnosis(final PatientDiagnosis patDiagnosis) {
 		return this.jdoTemplate.makePersistent(patDiagnosis);
 	}
+	
+	@Override
+	public NPIPatientDiagnosis createNPIPatientDiagnosis(final NPIPatientDiagnosis patDiagnosis) {
+		return this.jdoTemplate.makePersistent(patDiagnosis);
+	}
 
+	
 	@Override
 	public PatientTreatment createPatientTreatment(final PatientTreatment patTreatment) {
 		return this.jdoTemplate.makePersistent(patTreatment);

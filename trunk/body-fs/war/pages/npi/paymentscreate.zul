@@ -1,4 +1,5 @@
 <?page title="Create Payment" contentType="text/html;charset=UTF-8"?>
+<?xel-method prefix="user" name="displayname" class="com.bodyfs.ui.util.CommonUtils" signature="java.lang.String getDisplayName()"?>
 <?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?script type="text/javascript" src="/scripts/jquery.jgrowl_compressed.js"?>
@@ -20,11 +21,7 @@
 						<intbox constraint="no negative,no zero" id="planLength" />
 						<space orient="vertical" width="50px" />
 						Add a service :
-						<n:select>
-							<zk forEach="${controller$composer.services }">
-								<n:option value="${each.id}">${each.serviceName }</n:option>
-							</zk>
-						</n:select>
+						<n:select id="selServices"></n:select>
 						<space orient="vertical" width="50px" />
 						<n:input type="button" id="btnAdd" value="Add" />
 						<space orient="vertical" width="50px" />
@@ -75,11 +72,16 @@
 							<textbox id="txtPaymentData" value="@{txtPaymentData.value, save-when=btnSave.onClick }"
 								visible="false" />
 						</n:div>
-						<script type="text/javascript" defer="false">
-							var arrServices = "";
+						<n:script type="text/javascript">
+							var arrServices = new Array();
+							<zk forEach="${controller$composer.services }">
+								arrServices.push({'id': ${each.id }, 'serviceName':'${each.serviceName }', 'charge':
+								${each.charge }});
+							</zk>
+							var patname = "${user:displayname()}";
 
 							zk.afterMount(initPage);
-						</script>
+						</n:script>
 					</div>
 				</center>
 			</borderlayout>

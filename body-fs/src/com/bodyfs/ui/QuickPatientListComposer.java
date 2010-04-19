@@ -48,12 +48,17 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 
 		final String curId = execution.getParameter("id");
 		for (final QuickPatient qp : quicklist) {
-			buffer.append("<div class='bodyfs-qpatient");
+			buffer.append("<div class='bodyfs-qpatient" );
 			if (curId != null && curId.equals(qp.getId().toString())) {
 				buffer.append(" bodyfs-qpatient-selected");
 			}
-			buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId()).append("&visitDate=")
-					.append(qp.getDate().getTime()).append("'>").append(qp.getName()).append("</a></div>");
+			if (!qp.getIsNewPatient()) {
+				buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId()).append("&visitDate=")
+						.append(qp.getDate().getTime()).append("'>").append(qp.getName()).append("</a></div>");
+			} else {
+				buffer.append("' style='background-image:url(\"/img/plus.png\"); background-repeat: no-repeat'><a href='/pages/npi/npiview.zul?&id=").append(qp.getId()).append("&visitDate=")
+						.append(qp.getDate().getTime()).append("'>").append(qp.getName()).append("</a></div>");
+			}
 		}
 
 		final Div divQuicklist = (Div) comp;

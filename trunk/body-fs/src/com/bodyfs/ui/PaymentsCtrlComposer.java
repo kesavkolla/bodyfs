@@ -9,8 +9,10 @@ import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
 import org.zkoss.json.parser.JSONParser;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.metainfo.ComponentInfo;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
@@ -35,29 +37,19 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -831489659737220006L;
 
-	@SuppressWarnings("unchecked")
+	@Override
+	public ComponentInfo doBeforeCompose(final Page page, final Component parent, final ComponentInfo compInfo) {
+		System.out.println("Before compose");
+		return super.doBeforeCompose(page, parent, compInfo);
+	}
+
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		System.out.println("doAfterCompose1");
 		super.doAfterCompose(comp);
 		System.out.println("doAfterCompose2");
-		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		final IPersonDAO personDao = (IPersonDAO) SpringUtil.getBean("personDAO");
-		final Collection<MasterService> services = paymentDAO.getMasterServicesList();
-		page.setAttribute("services", services);
 		page.setAttribute("patients", personDao.getAllCustomers());
-
-		// create JSON Array object of services
-		final JSONArray arrServices = new JSONArray();
-		for (final MasterService service : services) {
-			final JSONObject obj = new JSONObject();
-			obj.put("id", service.getId());
-			obj.put("serviceName", service.getServiceName());
-			obj.put("charge", service.getCharge());
-			arrServices.add(obj);
-		}
-		page.setAttribute("arrServices", arrServices.toJSONString());
-		Clients.evalJavaScript("saveServices(" + arrServices.toJSONString() + ");");
 	}
 
 	public Collection<MasterService> getServices() {

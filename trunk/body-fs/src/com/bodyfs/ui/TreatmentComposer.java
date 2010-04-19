@@ -218,7 +218,7 @@ public class TreatmentComposer extends GenericForwardComposer {
 			services.add(pService);
 		}
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
-		paymentDAO.createVisitServices(services);
+		paymentDAO.createVisitServices(services, getServicesList());
 	}
 
 	@SuppressWarnings("unchecked")

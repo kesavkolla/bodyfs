@@ -2,16 +2,22 @@
 package com.bodyfs.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jdo.JDOException;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 import net.sf.jsr107cache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.orm.jdo.JdoCallback;
 import org.springframework.orm.jdo.JdoTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -214,12 +220,23 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	}
 
 	@Override
-	public void createVisitServices(final List<PatientService> services) {
+	public void createVisitServices(final List<PatientService> services, final Collection<MasterService> servicelist) {
 		if (services == null || services.size() <= 0) {
 			return;
 		}
-		jdoTemplate.deletePersistentAll(getServicesByVisitDate(services.get(0).getPersonId(), services.get(0)
-				.getVisitDate()));
+		this.jdoTemplate.execute(new JdoCallback<Long>() {
+			public Long doInJdo(final PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery(PatientService.class);
+				query.setFilter("personId == pid && visitDate == pdate && sids.contains(serviceId)");
+				query.declareParameters("Long pid, java.util.Date pdate, java.util.List sids");
+				final List<Long> serviceid = new ArrayList<Long>(servicelist.size());
+				for (final MasterService svc : servicelist) {
+					serviceid.add(svc.getId());
+				}
+				return query.deletePersistentAll(services.get(0).getPersonId(), services.get(0).getVisitDate(),
+						serviceid);
+			};
+		}, true);
 		jdoTemplate.makePersistentAll(services);
 	}
 

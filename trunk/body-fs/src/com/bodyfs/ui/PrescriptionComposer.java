@@ -213,7 +213,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 		MasterService otherService = null;
 		for (final MasterService service : services) {
 			if (service.isHidden() || service.getServiceName().equals("Herbal Treatment")) {
-				if(!service.getServiceName().equals("Other")) {
+				if (!service.getServiceName().equals("Other")) {
 					herbServices.add(service);
 				} else {
 					otherService = service;
@@ -251,7 +251,7 @@ public class PrescriptionComposer extends GenericForwardComposer {
 			services.add(pService);
 		}
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
-		paymentDAO.createVisitServices(services);
+		paymentDAO.createVisitServices(services, getServicesList());
 	}
 
 	/**

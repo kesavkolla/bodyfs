@@ -18,6 +18,7 @@ import com.bodyfs.model.PatientDiagnosis;
 import com.bodyfs.model.PatientPrescription;
 import com.bodyfs.model.PatientTreatment;
 import com.bodyfs.model.PatientVisit;
+import com.bodyfs.model.npi.NPIGoals;
 import com.bodyfs.model.npi.NPIPatientDiagnosis;
 
 /**
@@ -105,35 +106,27 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public NPIPatientDiagnosis getPatientNPIDiagnosisByDate(final Long patientId) {
-		final String filter = "personId==pid";
-		final String params = "String pid" ;
-		final Object[] vals = new Object[1];
-		vals[0] = patientId;
-		final Collection<NPIPatientDiagnosis> diagnosis = this.jdoTemplate.find(NPIPatientDiagnosis.class, filter, params,
-				vals, "visitDate descending");
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug(diagnosis);
+		try {
+			return jdoTemplate.find(NPIPatientDiagnosis.class, "personId == pid", "Long pid", patientId).iterator()
+					.next();
+		} catch (final Exception e) {
+			return null;
 		}
-		if (diagnosis != null && diagnosis.size() > 0) {
-			return diagnosis.iterator().next();
-		}
-		return null;
 	}
 
 	@Override
 	public PatientDiagnosis createPatientDiagnosis(final PatientDiagnosis patDiagnosis) {
 		return this.jdoTemplate.makePersistent(patDiagnosis);
 	}
-	
+
 	@Override
 	public NPIPatientDiagnosis createNPIPatientDiagnosis(final NPIPatientDiagnosis patDiagnosis) {
 		return this.jdoTemplate.makePersistent(patDiagnosis);
 	}
 
-	
 	@Override
 	public PatientTreatment createPatientTreatment(final PatientTreatment patTreatment) {
 		return this.jdoTemplate.makePersistent(patTreatment);
@@ -170,7 +163,7 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 	@Override
 	public PatientPrescription getPatientPrescriptionByDate(final Long patientId, final Date visitDate) {
 		final String filter = "personId==pid" + ((visitDate == null) ? "" : " && visitDate==pdate");
-		final String params = "String pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
+		final String params = "Long pid" + ((visitDate == null) ? "" : ", java.util.Date pdate");
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("filter: " + filter + "\tparams:" + params);
 		}
@@ -190,4 +183,17 @@ public class PatientVisitDAO implements IPatientVisitDAO, Serializable {
 		return null;
 	}
 
+	@Override
+	public NPIGoals createNPIGoals(final NPIGoals goals) {
+		return jdoTemplate.makePersistent(goals);
+	}
+
+	@Override
+	public NPIGoals getNNPIGoalsByPatientId(final Long patid) {
+		try {
+			return jdoTemplate.find(NPIGoals.class, "personId == pid", "Long pid", patid).iterator().next();
+		} catch (final Exception e) {
+			return null;
+		}
+	}
 }

@@ -80,4 +80,20 @@ public class MPIDao implements IMPIDao, Serializable {
 			}
 		});
 	}
+
+	@Override
+	public MPIData getFirstMPI(final Long patid) {
+		return this.jdoTemplate.execute(new JdoCallback<MPIData>() {
+			@Override
+			public MPIData doInJdo(final PersistenceManager pm) throws JDOException {
+				final Query query = pm.newQuery(MPIData.class);
+				query.setUnique(true);
+				query.setOrdering("examDate asc");
+				query.setRange(0L, 1L);
+				query.setFilter("personId==pid");
+				query.declareParameters(Long.class.getName() + " pid");
+				return (MPIData) query.execute(patid);
+			}
+		});
+	}
 }

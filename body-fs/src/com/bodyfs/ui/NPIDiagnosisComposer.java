@@ -23,7 +23,6 @@ import org.zkoss.zul.Textbox;
 
 import com.bodyfs.Constants;
 import com.bodyfs.dao.IPatientVisitDAO;
-import com.bodyfs.model.Diagnosis;
 import com.bodyfs.model.PersonType;
 import com.bodyfs.model.npi.NPIPatientDiagnosis;
 import com.bodyfs.ui.util.CommonUtils;
@@ -58,30 +57,27 @@ public class NPIDiagnosisComposer extends GenericForwardComposer {
 				return null;
 			}
 		}
-
 		// If there are no patient visits send to sign-in page
 		page.setAttribute("patid", patid);
+
 		return super.doBeforeCompose(page, parent, compInfo);
 	}
 
 	@Override
 	public void doAfterCompose(final Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		final Long patid = (Long) page.getAttribute("patid");
-
-		Date visitDate = null;
-		if (execution.getParameter("visitDate") != null) {
-			try {
-				visitDate = new Date(new Long(execution.getParameter("visitDate")));
-			} catch (final Throwable t) {
-				visitDate = null;
-			}
-		}
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Patid: " + patid + "\tvisitDate:" + visitDate);
-		}
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-		
+		NPIPatientDiagnosis diagnosis = visitDAO.getPatientNPIDiagnosisByDate((Long) page.getAttribute("patid"));
+		if (diagnosis == null) {
+			diagnosis = new NPIPatientDiagnosis();
+			diagnosis.setPersonId((Long) page.getAttribute("patid"));
+			diagnosis.setVisitDate(new Date());
+		}
+		page.setAttribute("diagnosis", diagnosis);
+		final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
+		if (diagnosis.getDiagnosisData() != null) {
+			txtjsondata.setText(diagnosis.getDiagnosisData());
+		}
 	}
 
 	/**
@@ -91,16 +87,13 @@ public class NPIDiagnosisComposer extends GenericForwardComposer {
 	 */
 	public void onSave(final ForwardEvent event) {
 		final Textbox txtjsondata = (Textbox) Path.getComponent(this.page, "jsondata");
-		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
-		NPIPatientDiagnosis diagnosis = visitDAO.getPatientNPIDiagnosisByDate((Long) page.getAttribute("patid"));
-		if(diagnosis == null) {
-			diagnosis = new NPIPatientDiagnosis();
-			diagnosis.setPersonId((Long) page.getAttribute("patid"));
-			
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(txtjsondata.getValue());
 		}
-		diagnosis.setVisitDate(new Date());
+		final NPIPatientDiagnosis diagnosis = (NPIPatientDiagnosis) page.getAttribute("diagnosis");
 		diagnosis.setDiagnosisData(txtjsondata.getValue());
+		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		visitDAO.createNPIPatientDiagnosis(diagnosis);
+		Clients.evalJavaScript("navigate('" + event.getData() + "')");
 	}
-	
 }

@@ -1,20 +1,25 @@
 <?page title="Patientmenu" contentType="text/html;charset=UTF-8"?>
-<zk>
+<?xel-method prefix="user" name="displayname" class="com.bodyfs.ui.util.CommonUtils" signature="java.lang.String getDisplayName()"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<hbox>
-		<toolbarbutton label="Medical History" orient="vertical" image="/img/report_card.png"
+		<toolbarbutton label="Medical History" orient="vertical" image="/img/report_card.png" id="tbtnMedHistory"
 			href="/pages/npi/npiview.zul?id=${param.id }"
 			sclass="${page.title eq 'Patients Medical History' ? 'bodyfs-toolbar-selected' : ''}" />
-		<toolbarbutton label="Program Goals" orient="vertical" image="/img/vcard_add.png"
+		<toolbarbutton label="Program Goals" orient="vertical" image="/img/vcard_add.png" id="tbtnGoals"
 			href="/pages/npi/goals.zul?id=${param.id }"
 			sclass="${page.title eq 'Program Goals' ? 'bodyfs-toolbar-selected' : ''}" />
-		<toolbarbutton label="EMI" image="/img/chart.png" href="/pages/npi/emi.zul?id=${param.id }"
+		<toolbarbutton label="EMI" image="/img/chart.png" href="/pages/npi/emi.zul?id=${param.id }" id="tbtnEMI"
 			sclass="${page.title eq 'EMI Data' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
-		<toolbarbutton id="tbtnDiagnosis" label="Diagnosis" image="/img/diagnosis.png"
+		<toolbarbutton label="Diagnosis" image="/img/diagnosis.png" id="tbtnDiagnosis"
 			href="/pages/npi/diagnosis.zul?id=${param.id }"
 			sclass="${page.title eq 'Diagnosis' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
-		<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png"
+		<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" id="tbtnPayments"
 			href="/pages/npi/paymentscreate.zul?id=${param.id }"
 			sclass="${page.title eq 'Payments' ? 'bodyfs-toolbar-selected' : ''}" orient="vertical" width="80px" />
 	</hbox>
-	<div width="100%" style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;" height="20px"></div>
+	<n:div width="100%"
+		style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;text-align:center;font-size:12pt;color:white;"
+		height="20px">
+		${user:displayname() }
+	</n:div>
 </zk>

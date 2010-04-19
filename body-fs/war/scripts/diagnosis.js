@@ -150,7 +150,7 @@ function setupData(reload) {
 
 	/* setup notes */
 	if (data.Notes) {
-		$("$txtNotes").val(data.Notes);
+		$("#txtNotes").val(data.Notes);
 	}
 
 	/* setup radio buttons */
@@ -189,7 +189,7 @@ function clearFields() {
 		element.dropWrapper.find("input:not([disabled]):not([value=-1])").removeAttr("checked");
 		element._syncSelected();
 	});
-	$("$txtNotes").val("");
+	$("#txtNotes").val("");
 }
 
 /**

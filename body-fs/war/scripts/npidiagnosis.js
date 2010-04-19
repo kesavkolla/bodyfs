@@ -150,7 +150,7 @@ function setupData(reload) {
 
 	/* setup notes */
 	if (data.Notes) {
-		$("$txtNotes").val(data.Notes);
+		$("#txtNotes").val(data.Notes);
 	}
 
 	/* setup radio buttons */
@@ -189,7 +189,7 @@ function clearFields() {
 		element.dropWrapper.find("input:not([disabled]):not([value=-1])").removeAttr("checked");
 		element._syncSelected();
 	});
-	$("$txtNotes").val("");
+	$("#txtNotes").val("");
 }
 
 /**
@@ -198,17 +198,14 @@ function clearFields() {
  * @return
  */
 function initPage() {
-	
-	
-	
 	/* Handle the save button */
 	$(".submitbtn").click(function() {
 		/* Get all the form elements those are filled */
 		var elements = $(":input").not(":radio[value=-1]").serializeArray();
+		console.log(elements);
 		/* Convert the elements array to single object */
 		var o = {};
 		$.each(elements, function() {
-			console.log(this.name);
 			var name = this.name.substring(3);
 			if (this.value == "" || this.value == "-1") {
 				return true;
@@ -237,10 +234,10 @@ function initPage() {
  */
 function navigate(direction) {
 	if(direction == "Next") {
-		//var wgt = zk.Widget.$($("$tbtnTreatment").attr("id"));
-		//zUtl.go(wgt._href);
+		 var wgt = zk.Widget.$($("$tbtnPayments").attr("id"));
+		zUtl.go(wgt._href);
 	} else {
-		//var wgt = zk.Widget.$($("$tbtnSignin").attr("id"));
-		//zUtl.go(wgt._href);
+		var wgt = zk.Widget.$($("$tbtnEMI").attr("id"));
+		zUtl.go(wgt._href);
 	}
 }

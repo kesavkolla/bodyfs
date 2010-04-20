@@ -24,8 +24,10 @@
 						<n:select id="selServices"></n:select>
 						<space orient="vertical" width="50px" />
 						<n:input type="button" id="btnAdd" value="Add" />
-						<button id="btnPrev" label="Prev" forward="onClick=controller.onSave(Prev)" sclass="submtbtn" />
-						<button id="btnSave" label="Done" forward="onClick=controller.onSave(Done)" sclass="submtbtn" />
+						<button id="btnPrev" label="Prev" forward="onClick=controller.onSaveNPI(Prev)"
+							sclass="submtbtn" />
+						<button id="btnSave" label="Done" forward="onClick=controller.onSaveNPI(Done)"
+							sclass="submtbtn" />
 						<space orient="horizontal" height="20px" />
 						<n:div style="overflow:auto;background-color:white;height:300px;width:90%;color:black;">
 							<n:table id="tblServicesBreakDown" align="top" cellspacing="0" cellpadding="0"
@@ -79,6 +81,8 @@
 								${each.charge }});
 							</zk>
 							var patname = "${user:displayname()}";
+
+							var plan = ${controller$composer.NPIPlan };
 
 							zk.afterMount(initPage);
 						</n:script>

@@ -17,11 +17,14 @@ function initPage() {
 	$("#btnPrint").click(printSummary);
 	$("#btnCancel").click(resetAll);
 	$(".submtbtn").click(prepareSave);
+	
+	if (!$.isEmptyObject(plan)) {
+		populatePlan();
+	}
 }
 
 /**
- * This function will be triggered when user clicks on calculate button. This
- * will summarize all the services.
+ * This function will be triggered when user clicks on calculate button. This will summarize all the services.
  * 
  * @return
  */
@@ -139,6 +142,45 @@ function addService() {
 	var row = $("#tblServicesBreakDown > tbody").append(buffer.join(""));
 	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
 	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
+}
+
+/**
+ * 
+ * @return
+ */
+function populatePlan() {
+	$("$txtDiscount").val(plan.discount);
+	$("$planLength").val(plan.planLength);
+	var buffer = new Array();
+	$.each(plan.planItems, function(indx, val) {
+		var item = $.parseJSON(val);
+		var selService = getServiceById(item.serviceid);
+		/* prepare the row and append to the tblServicesBreakDown table */
+		if (selService.serviceName != "Re-Exam") {
+			buffer.push("<tr serviceid='" + selService.id + "'>");
+			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + item.count
+					+ "'/><span class='space' /></td>");
+			buffer.push("<td>" + selService.serviceName + " per week for</td>");
+			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + item.weeks
+					+ "' /> weeks</td>");
+			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+			buffer.push("</tr>");
+		} else {
+			buffer.push("<tr serviceid='" + selService.id + "'>");
+			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='"
+					+ item.count + "'/>");
+			buffer.push("Number of Re-Exams during treatment</td>");
+			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + item.weeks
+					+ "' /></td>");
+			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+			buffer.push("</tr>");
+		}
+	});
+	$("#tblServicesBreakDown > tbody").append(buffer.join(""));
+	$("#tblServicesBreakDown > tbody > tr:even").removeClass("z-listbox-odd");
+	$("#tblServicesBreakDown > tbody > tr:odd").addClass("z-listbox-odd");
+	calculateService();
+
 }
 
 /**
@@ -271,9 +313,8 @@ function getServiceById(serviceid) {
 }
 
 /**
- * This funciton will check whether calculation is happened before saving and
- * also make sure patient is selected. This will create a json object of all the
- * services and then it will be passed to the server.
+ * This funciton will check whether calculation is happened before saving and also make sure patient is selected. This
+ * will create a json object of all the services and then it will be passed to the server.
  * 
  * @return
  */
@@ -321,8 +362,7 @@ function prepareSave(evt) {
  */
 function navigate(direction) {
 	if (direction == "Done") {
-		var wgt = zk.Widget.$($("$tbtnMedHistory").attr("id"));
-		zUtl.go(wgt._href);
+		zUtl.go('/pages/usermgmt/customersearch.zul');
 	} else {
 		var wgt = zk.Widget.$($("$tbtnDiagnosis").attr("id"));
 		zUtl.go(wgt._href);

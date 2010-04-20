@@ -4,6 +4,7 @@ package com.bodyfs.dao.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -213,10 +214,14 @@ public class PaymentDAO implements IPaymentDAO, Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Date> getPaymentPlanDates(final Long patientId) {
-		final Map<String, Object> vals = new HashMap<String, Object>();
-		vals.put("pid", patientId);
-		return jdoTemplate.find("SELECT paymentDate FROM " + PatientPaymentPlan.class.getName()
-				+ " WHERE personId==pid && archive == false PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
+		try {
+			final Map<String, Object> vals = new HashMap<String, Object>();
+			vals.put("pid", patientId);
+			return jdoTemplate.find("SELECT paymentDate FROM " + PatientPaymentPlan.class.getName()
+					+ " WHERE personId==pid && archive == false PARAMETERS Long pid  ORDER BY paymentDate DESC", vals);
+		} catch (final Exception e) {
+			return Collections.EMPTY_LIST;
+		}
 	}
 
 	@Override

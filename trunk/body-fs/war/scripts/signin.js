@@ -28,11 +28,6 @@ function initPage() {
  * @return
  */
 function showConfirmation() {
-	jq.alert('Successfully saved the information', {
-		title : 'Success',
-		mode : 'modal',
-		OK : function() {
-			zUtl.go('/pages/signin/customersearch.zul');
-		}
-	});
+	alert('Successfully saved the information');
+	zUtl.go('/pages/signin/customersearch.zul');
 }

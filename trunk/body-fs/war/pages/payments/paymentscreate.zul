@@ -70,7 +70,7 @@
 								model="@{patients }">
 								<comboitem self="@{each=customer}" label="@{customer.displayName}" value="@{customer}" />
 							</combobox>
-							<button id="btnSave" label="Save" forward="onClick=controller.onSave" />
+							<button id="btnSave" label="Save" forward="onClick=controller.onSave" sclass="submtbtn" />
 							<n:input type="button" id="btnPrint" value="Print" />
 							<n:input type="button" value="Cancel" id="btnCancel" />
 							<textbox id="txtPaymentData" value="@{txtPaymentData.value, save-when=btnSave.onClick }"

@@ -190,7 +190,14 @@ public class TreatmentComposer extends GenericForwardComposer {
 	 */
 	public Collection<MasterService> getServicesList() {
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
-		return paymentDAO.getMasterServicesList();
+		Collection<MasterService> mServices = new ArrayList<MasterService>();
+		for (MasterService masterService : paymentDAO.getMasterServicesList()) {
+			if(masterService.getServiceName().equals("Herbal Treatment")) {
+				continue;
+			}
+			mServices.add(masterService);
+		}
+		return mServices;
 	}
 
 	/**
@@ -229,7 +236,7 @@ public class TreatmentComposer extends GenericForwardComposer {
 			// Check this service exists in servicesList
 			boolean exists = false;
 			for (final MasterService mservice : servicesList) {
-				if (service.getServiceId().equals(mservice.getId())) {
+				if (service.getServiceId().equals(mservice.getId()) && !mservice.getServiceName().equals("Herbal Treatment")) {
 					exists = true;
 					break;
 				}

@@ -18,7 +18,9 @@
 						</columns>
 						<rows>
 							<row spans="2,,,,3">
-								<div></div>
+								<div>Account Number: 
+									<label id="accntNum" value="@{person.id}" />
+								</div>
 								Login ID:
 								<textbox id="loginid" hflex="1" constraint="no empty"
 									value="@{logininfo.userid, save-when='btnSave.onClick'}" />

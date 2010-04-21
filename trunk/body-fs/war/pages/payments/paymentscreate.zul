@@ -82,6 +82,7 @@
 								arrServices.push({'id': ${each.id }, 'serviceName':'${each.serviceName }', 'charge':
 								${each.charge }});
 							</zk>
+							var plan = {};
 
 							zk.afterMount(initPage);
 						</n:script>

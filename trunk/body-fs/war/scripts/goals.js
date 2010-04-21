@@ -50,8 +50,8 @@ function setupData() {
 	if (data.programs.length == 4) {
 		var rows = $("#tblPrograms > tbody > tr");
 		for ( var i = 0; i < 4; i++) {
-			$(rows[i]).find("td:nth-child(1)").find("input").val(data.programs[i].ccare);
-			$(rows[i]).find("td:nth-child(2)").find("input").val(data.programs[i].mcare);
+			$(rows[i]).find("td:nth-child(2)").find("input").val(data.programs[i].ccare);
+			$(rows[i]).find("td:nth-child(3)").find("input").val(data.programs[i].mcare);
 		}
 	}
 }
@@ -112,16 +112,16 @@ function prepareSave() {
 		if (index > 3) {
 			return false;
 		}
-		var ccare = $.trim($(this).find("td:nth-child(1)").find("input").val());
-		var mcare = $.trim($(this).find("td:nth-child(2)").find("input").val());
-		var program = $.trim($(this).find("td:first input").val());
+		var ccare = $.trim($(this).find("td:nth-child(2)").find("input").val());
+		var mcare = $.trim($(this).find("td:nth-child(3)").find("input").val());
+		var program = $.trim($(this).find("td:first").text());
 
-		var time = $.trim($(this).find("td:nth-child(2)").find("input").val());
 		programs.push( {
 			'program' : program,
 			'ccare' : ccare,
 			'mcare' : mcare
 		});
+		console.log(programs);
 	});
 
 	var retObj = {

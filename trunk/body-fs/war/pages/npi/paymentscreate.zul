@@ -1,4 +1,4 @@
-<?page title="Create Payment" contentType="text/html;charset=UTF-8"?>
+<?page title="Payments" contentType="text/html;charset=UTF-8"?>
 <?xel-method prefix="user" name="displayname" class="com.bodyfs.ui.util.CommonUtils" signature="java.lang.String getDisplayName()"?>
 <?link rel="stylesheet" type="text/css" href="/css/jquery.jgrowl.css"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>

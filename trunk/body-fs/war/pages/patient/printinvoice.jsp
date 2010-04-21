@@ -112,13 +112,14 @@ table {
 	final Person person = personDAO.getPerson(patid);
 	final GeneralInfo ginfo = personDAO.getGeneralInfo(patid);
 	final String[] arrDates = request.getParameter("dateRange").split("-");
-	final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-	final Date startDate = sdf.parse(arrDates[0].trim() + " 00:00:00");
+	final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	final SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	final Date startDate = sdf1.parse(arrDates[0].trim() + " 00:00:00");
 	Date endDate = null;
 	if (arrDates.length > 1) {
-		endDate = sdf.parse(arrDates[1].trim() + " 23:59:59");
+		endDate = sdf1.parse(arrDates[1].trim() + " 23:59:59");
 	} else {
-		endDate = sdf.parse(arrDates[0].trim() + " 23:59:59");
+		endDate = sdf1.parse(arrDates[0].trim() + " 23:59:59");
 	}
 	final Collection<PatientPaymentPlan> plan = paymentDAO.getAllPlans(patid);
 	if (plan.size() <= 0) {

@@ -124,7 +124,14 @@ function addService() {
 	var selService = getServiceById(selServiceid);
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
-	if (selService.serviceName != "Re-Exam") {
+	if (selService.serviceName == "Herbal Treatment") {
+		buffer.push("<tr serviceid='" + selService.id + "'>");
+		buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
+		buffer.push(selService.serviceName + " per week for</td>");
+		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
+		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+		buffer.push("</tr>");
+	} else if (selService.serviceName != "Re-Exam") {
 		buffer.push("<tr serviceid='" + selService.id + "'>");
 		buffer.push("<td><input type='text' class='txtCnt' size='3' value='1'/><span class='space' /></td>");
 		buffer.push("<td>" + selService.serviceName + " per week for</td>");
@@ -156,7 +163,17 @@ function populatePlan() {
 		var item = $.parseJSON(val);
 		var selService = getServiceById(item.serviceid);
 		/* prepare the row and append to the tblServicesBreakDown table */
-		if (selService.serviceName != "Re-Exam") {
+		if (selService.serviceName == "Herbal Treatment") {
+			
+			buffer.push("<tr serviceid='" + selService.id + "'>");
+			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='"
+					+ item.count + "'/>");
+			buffer.push(selService.serviceName + " per week for</td>");
+			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + item.weeks
+					+ "' /> weeks</td>");
+			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
+			buffer.push("</tr>");
+		} else if (selService.serviceName != "Re-Exam") {
 			buffer.push("<tr serviceid='" + selService.id + "'>");
 			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + item.count
 					+ "'/><span class='space' /></td>");
@@ -201,6 +218,10 @@ function printSummary() {
 	} else {
 		custName = patname;
 	}
+	
+	if(custName == undefined) {
+		custName = "";
+	}
 	/* date in mm/dd/yyyy format */
 	var today = new Date();
 	today = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -218,13 +239,13 @@ function printSummary() {
 	/* prepare header content */
 	buffer.push("<div style='margin-left:20px'>");
 	buffer.push("<br /><br />")
-	buffer.push("For:<span style='display:inline-block;width:150px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
+	buffer.push("Name:<span style='display:inline-block;width:300px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
 			+ custName + "</span>");
 	buffer.push("Date:<span style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;&nbsp;"
 			+ today + "</span><br /><br />");
 	/* show the treatment plan length */
 	buffer.push("Treatment Plan Length: <span style='border-bottom:1px solid black;'>" + $("$planLength").val()
-			+ "</span>&nbsp;weeks<br /><br />");
+			+ "</span>&nbsp;sessions<br /><br />");
 	/* prepare the summary breakdown */
 	$("#tblServicesBreakDown > tbody > tr").each(
 			function() {
@@ -232,9 +253,12 @@ function printSummary() {
 				var week = parseInt($(this).find("input[class='txtWeek']").val());
 				var serviceid = $(this).attr("serviceid");
 				var service = getServiceById(serviceid);
-				if (service.serviceName != "Re-Exam") {
-					buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Session per week for " + week
-							+ "&nbsp; week" + (week > 1 ? "s" : ""));
+				if (service.serviceName == "Herbal Treatment") {
+					buffer.push(service.serviceName + "&nbsp; per week for " + week
+							+ "&nbsp; session" + (week > 1 ? "s" : ""));
+				} else if (service.serviceName != "Re-Exam") {
+					buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Treatment per week for " + week
+							+ "&nbsp; session" + (week > 1 ? "s" : ""));
 				} else {
 					buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
 				}
@@ -248,24 +272,22 @@ function printSummary() {
 		var cell1 = $(this).find("td:first").html().split(":");
 		var cost = $(this).find("td:nth-child(2)").html();
 		var total = $(this).find("td:last").html();
-		buffer.push("<tr><td>");
-		buffer.push(cell1[1]);
-		buffer.push("</td><td><span style='display:inline-block;width:20px'>&nbsp;</td>");
+		buffer.push("<tr>");
 		buffer.push("<td>");
 		buffer.push(cost);
 		buffer.push("&nbsp;X&nbsp;");
 		buffer.push(cell1[0]);
-		buffer.push("&nbsp;=&nbsp;");
+		buffer.push("&nbsp;&nbsp;</td><td style='text-align: right;'>");
 		buffer.push(total);
 		buffer.push("</td></tr>");
 	});
-	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
-	buffer.push("<tr><td span='3'>&nbsp;</td></tr>");
+	buffer.push("<tr><td colspan='3'>&nbsp;</td></tr>");
+	buffer.push("<tr><td colspan='3' style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;</td></tr>");
 	/* prepare the final totals */
-	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td>" + $("#totalCost").html() + "</td></tr>");
-	buffer.push("<tr><td style='font-weight:bold;'>Discount</td><td>" + $("#spndiscount").html()
+	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td style='text-align: right;'>" + $("#totalCost").html() + "</td></tr>");
+	buffer.push("<tr><td style='font-weight:bold;'>Discount</td><td style='text-align: right;'>" + $("#spndiscount").html()
 			+ "</td><td></td></tr>");
-	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td>" + $("#spnpayable").html()
+	buffer.push("<tr><td style='font-color:blue;font-weight:bold;'>Total Payable</td><td style='text-align: right;'>" + $("#spnpayable").html()
 			+ "</td><td></td></tr>");
 	buffer.push("</table>");
 	buffer.push("</div>");

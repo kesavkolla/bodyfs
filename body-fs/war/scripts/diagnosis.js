@@ -17,7 +17,7 @@ function setupData(reload) {
 	} else {
 		data = parseJSON(wgt.getValue());
 	}
-
+	alert(data);
 	/* setup the tongue color */
 	var objselTongueColor = $("#selTongueColor");
 	objselTongueColor.dropdownchecklist( {
@@ -87,25 +87,42 @@ function setupData(reload) {
 		selVeinsUnderneathRight.find("option[value='" + data.VeinsUnderneathRight + "']").attr("selected", "selected").change();
 		selVeinsUnderneathRight.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
-
+	
+	
+		
+	
+	//nnnnnnnnnnnnnnnnnnnnnnn
+	
 	/* setup pulse right1 */
 	var selPulseRight1 = $("#selPulseRight1");
 	selPulseRight1.dropdownchecklist( {
 		width : selPulseRight1.width()
 	});
 	if (data.PulseRight1) {
-		selPulseRight1.find("option[value='" + data.PulseRight1 + "']").attr("selected", "selected").change();
-		selPulseRight1.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseRight1)) {
+			$.each(data.PulseRight1, function() {
+				selPulseRight1.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseRight3.find("option[value='" + data.PulseRight1 + "']").attr("selected", "selected").change();
+		}
 	}
-
+	
+	//nnnnnnnnnnnnnnnnnnnnnn
+	
 	/* setup pulse right2 */
 	var selPulseRight2 = $("#selPulseRight2");
 	selPulseRight2.dropdownchecklist( {
 		width : selPulseRight2.width()
 	});
 	if (data.PulseRight2) {
-		selPulseRight2.find("option[value='" + data.PulseRight2 + "']").attr("selected", "selected").change();
-		selPulseRight2.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseRight2)) {
+			$.each(data.PulseRight1, function() {
+				selPulseRight2.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseRight2.find("option[value='" + data.PulseRight2 + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup PulseRight3 */
@@ -114,10 +131,14 @@ function setupData(reload) {
 		width : selPulseRight3.width()
 	});
 	if (data.PulseRight3) {
-		selPulseRight3.find("option[value='" + data.PulseRight3 + "']").attr("selected", "selected").change();
-		selPulseRight3.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseRight3)) {
+			$.each(data.PulseRight3, function() {
+				selPulseRight3.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseRight3.find("option[value='" + data.PulseRight3 + "']").attr("selected", "selected").change();
+		}
 	}
-
 	/* setup PulseLeft1 */
 	var selPulseLeft1 = $("#selPulseLeft1");
 	selPulseLeft1.dropdownchecklist( {
@@ -261,6 +282,7 @@ function initPage() {
 	$(".submitbtn").click(function() {
 		/* Get all the form elements those are filled */
 		var elements = $(":input").not(":radio[value=-1]").serializeArray();
+		alert("amit");
 		/* Convert the elements array to single object */
 		var o = {};
 		$.each(elements, function() {

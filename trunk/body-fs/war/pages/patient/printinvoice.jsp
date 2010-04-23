@@ -173,28 +173,16 @@ table {
 <br />
 <table width="425px" style="margin-left: auto;" border="1" cellpadding="10">
 	<tr>
-		<td>Discount %</td>
-		<td><%=discount%>%</td>
-	</tr>
-	<tr>
 		<td>Sub Total</td>
-		<td>$<%=numFormat.format(totalCharge * (1 - discount / 100.0))%></td>
+		<td style='text-align: right;'>$<%=numFormat.format(totalCharge)%></td>
 	</tr>
 	<tr>
-		<td>Sales Tax</td>
-		<td></td>
+		<td>Discount %</td>
+		<td style='text-align: right;'><%=discount%>%</td>
 	</tr>
 	<tr>
 		<td>Total Payments</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Previous Balance</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Total Due</td>
-		<td></td>
+		<td style='text-align: right;'>$<%=numFormat.format(totalCharge * (1 - discount / 100.0))%></td>
 	</tr>
 </table>
 <br />
@@ -243,8 +231,8 @@ table {
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
 				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append("1.0").append("</td>");
-				buffer.append("<td>").append("45.0").append("</td>");
-				buffer.append("<td>").append("45.0").append("</tr>");
+				buffer.append("<td style='text-align: right;'>").append("45.0").append("</td>");
+				buffer.append("<td style='text-align: right;'>").append("45.0").append("</tr>");
 				buffer.append("</tr>");
 
 				//(total - 45)/35 will give the quantity of remaining
@@ -254,8 +242,8 @@ table {
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
 				buffer.append("<td>97811</td>");
 				buffer.append("<td>").append(qty).append("</td>");
-				buffer.append("<td>").append("35").append("</td>");
-				buffer.append("<td>").append((qty * 35)).append("</tr>");
+				buffer.append("<td style='text-align: right;'>").append("35.0").append("</td>");
+				buffer.append("<td style='text-align: right;'>").append((qty * 35)).append("</tr>");
 				buffer.append("</tr>");
 
 			} else {
@@ -264,8 +252,8 @@ table {
 				buffer.append("<td>").append(mservice.getServiceName()).append("</td>");
 				buffer.append("<td>97810</td>");
 				buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
-				buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
-				buffer.append("<td>$").append(numFormat.format(total)).append("</tr>");
+				buffer.append("<td style='text-align: right;'>").append(mservice.getCharge()).append("</td>");
+				buffer.append("<td style='text-align: right;'>").append(numFormat.format(total)).append("</tr>");
 				buffer.append("</tr>");
 			}
 			out.println(buffer.toString());
@@ -288,8 +276,8 @@ table {
 		}
 
 		buffer.append("<td>").append(patientService.getNumServices()).append("</td>");
-		buffer.append("<td>$").append(mservice.getCharge()).append("</td>");
-		buffer.append("<td>$").append(numFormat.format(total)).append("</tr>");
+		buffer.append("<td style='text-align: right;'>").append(mservice.getCharge()).append("</td>");
+		buffer.append("<td style='text-align: right;'>").append(numFormat.format(total)).append("</tr>");
 		buffer.append("</tr>");
 		out.println(buffer.toString());
 		return total;

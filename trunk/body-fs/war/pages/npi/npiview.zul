@@ -15,8 +15,9 @@
 						<n:div style="text-align:right;width:95%">
 							<n:button id="btnNext">Next</n:button>
 						</n:div>
-						<include id="npiinclude" src="npiview1.zul" hflex="1" vflex="1" style="margin:10px;" />
+						<include id="npiinclude" src="npiview1.zul" hflex="1" vflex="1" style="margin:10px;" width="100%"/>
 					</div>
+					
 				</center>
 			</borderlayout>
 		</center>

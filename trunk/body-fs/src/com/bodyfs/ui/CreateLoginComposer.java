@@ -62,13 +62,16 @@ public class CreateLoginComposer extends GenericForwardComposer {
 	public void onSave(final Event evt) {
 		ILoginDAO loginDAO = (ILoginDAO) SpringUtil.getBean("loginDAO");
 		final LoginInfo logininfo = (LoginInfo) page.getAttribute("logininfo");
-		if (logininfo.getUserid().trim().length() <= 0 || loginDAO.isLoginIdExists(logininfo.getUserid())) {
-			try {
-				Messagebox.show("Userid already exists select another id", "Save Error", Messagebox.OK,
-						Messagebox.ERROR);
-			} catch (final Exception e) {
+		final Button btnSave = (Button) Path.getComponent(page, "btnSave");
+		if (btnSave !=null && !btnSave.getLabel().equals("Update")) {
+			if (logininfo.getUserid().trim().length() <= 0 || loginDAO.isLoginIdExists(logininfo.getUserid())) {
+				try {
+					Messagebox.show("Userid already exists select another id", "Save Error", Messagebox.OK,
+							Messagebox.ERROR);
+				} catch (final Exception e) {
+				}
+				return;
 			}
-			return;
 		}
 		final Person person = (Person) page.getAttribute("person");
 		if (person.getPersonType() == PersonType.PRE_USER) {

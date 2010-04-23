@@ -211,8 +211,12 @@ table {
 		}
 		final StringBuilder buffer = new StringBuilder();
 		if (ginfo.getStreet() != null) {
-			buffer.append(ginfo.getStreet());
+			buffer.append(ginfo.getStreet() +"<br />");
 		}
+		buffer.append(" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ");
+		buffer.append(ginfo.getCity()== null ? " " : ginfo.getCity());
+		buffer.append(ginfo.getState()== null ? "" : ", "+ginfo.getState());
+		buffer.append(ginfo.getZipcode()== null ? "" : " - "+ginfo.getZipcode() );
 		return buffer.toString();
 	}
 

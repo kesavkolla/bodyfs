@@ -55,8 +55,8 @@
 								</cell>
 							</row>
 							<row valign="top">
-								<cell>
-									<groupbox closable="false">
+								<cell >
+									<groupbox closable="false" visible="false">
 										<textbox id="jsondata" visible="false" value="" />
 										<caption label="Tongue" />
 										<n:table width="100%">
@@ -157,7 +157,7 @@
 											</n:tr>
 										</n:table>
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Pulse" />
 										<n:table width="100%">
 											<n:tr>
@@ -274,12 +274,10 @@
 											</n:tr>
 										</n:table>
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Notes" />
 										<n:textarea name="txtNotes" id="txtNotes" rows="4" style="width:100%" />
 									</groupbox>
-								</cell>
-								<cell valign="top">
 									<n:table width="100%">
 										<n:col width="*" />
 										<n:col width="100px" />
@@ -389,6 +387,12 @@
 												</n:input>
 											</n:td>
 										</n:tr>
+									</n:table>
+								</cell>
+								<cell valign="top">
+									<n:table width="100%">
+										<n:col width="*" />
+										<n:col width="100px" />
 										<n:tr>
 											<n:td>
 												<n:li>Mouth and/or tongue sores</n:li>

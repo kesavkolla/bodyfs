@@ -193,192 +193,159 @@ div.WordSection1
 </style>
 </head>
 
-<body lang=EN-IN style='tab-interval:36.0pt'>
+<body lang=3DEN-IN style=3D'tab-interval:36.0pt'>
 
-<div class=WordSection1>
+<div class=3DWordSection1>
 
-<h3 style='margin-left:54.0pt;text-indent:0cm'><span lang=EN-US
-style='font-size:20.0pt;mso-bidi-font-size:12.0pt;text-decoration:none;
-text-underline:none'>What The Letters on the <o:p></o:p></span></h3>
+<h3 style=3D'margin-left:54.0pt;text-indent:0cm'><span lang=3DEN-US
+style=3D'font-size:20.0pt;mso-bidi-font-size:12.0pt;text-decoration:none;
+text-underline:none'>What the Letters on the <o:p></o:p></span></h3>
 
-<h3><span lang=EN-US style='font-size:20.0pt;mso-bidi-font-size:12.0pt;
+<h3><span lang=3DEN-US style=3D'font-size:20.0pt;mso-bidi-font-size:12.0pt;
 text-decoration:none;text-underline:none'>Bottom of the Graph Mean<o:p></o:p></span></h3>
 
-<p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>            </span></span><b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt'>ST</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt'>: meridian to and
-from the <b>ST</b>omach. If this is not corrected, it will cause various
-stomach problems, leg aches and/or pain, bloating, appetite disorders, fatigue,
-eye disorders, jaw pain, breast disorders etc.<b><o:p></o:p></b></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></sp=
+an><b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>LU</span></b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'> =3D meridian
+(energy pathways) to and from the <b>LU</b>ngs. If this is not corrected, it
+will cause allergies, immune system problems, headaches, neck pain, cough,
+asthma, skin problems, shoulder, arm pain, numbness, tingling, thyroid
+problems, etc.</span><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>GB</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'>:
-meridian to and from the <b>G</b>all <b>B</b>ladder which regulates the
-digestion of fats. If this is not corrected, it will cause shoulder, hip, knee,
-ankle tightness/pain, eye/ear disorders, headache, dizziness, gallbladder disorders,
-etc.<o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>P</b>
+=3D meridian to and from the muscles surrounding the heart.<span
+style=3D'mso-spacerun:yes'>&nbsp; </span>If this is not corrected it will cause
+sleep problems, blood circulation problems, sexual / reproductive hormone
+problems, palpitations, menstrual / menopausal problems, depression, anxiet=
+y,
+nausea, vomiting, etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;
+</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><span style='mso-tab-count:1'>            </span>BL</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt'> = meridian to
-and from the <b>BL</b>adder. If this is not corrected, it will cause neck, back
-tightness/pain, sciatica, headaches, bladder malfunction, prostate disorders,
-eye disorders, etc.<o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>HT</b>
+=3D meridian to and from the <b>H</b>ear<b>T</b>.<span
+style=3D'mso-spacerun:yes'>&nbsp; </span>If this is not corrected, it will cause
+sleep problems, palpitations, heart disease, depression, anxiety, vivid
+dreaming, headache, poor memory, abnormal sweating, speech problems, etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal style='tab-stops:177.0pt'><b><span lang=EN-US
-style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'><span
-style='mso-tab-count:1'>                                                           </span><o:p></o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>KI </span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'>=
-meridian to and from the system which regulates hormones and also the <b>KI</b>dney.
-If this is not corrected, it will cause lower back pain, general severe pain,
-hearing disorders, bone disorders, arthritis, osteoporosis, respiratory
-malfunction, sexual malfunction, coldness in body, aversion to cold, hormone
-problems etc.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b
+style=3D'mso-bidi-font-weight:normal'>SI<span style=3D'mso-bidi-font-weight:bold'>
+=3D </span></b><span style=3D'mso-bidi-font-weight:bold'>meridian to and from the </span>S<span
+style=3D'mso-bidi-font-weight:bold'>mall </span>I<span style=3D'mso-bidi-font-weight:
+bold'>ntestine, which changes food to vital nutrients.<span
+style=3D'mso-spacerun:yes'>&nbsp; </span>If this is not corrected it will cause
+neck, shoulder pain/stiffness, lower abdominal pain, hearing problems, TMJ,
+facial pain, etc.<o:p></o:p></span></span></p>
 
-<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt;mso-bidi-font-weight:
+bold'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><span style='mso-tab-count:1'>            </span>LIV</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt'> = meridian to
-and from the <b>LIV</b>er whose main function is to detox.<span
-style='mso-spacerun:yes'>  </span>If this is not corrected, it will cause one
-to be more emotional, muscle spasms/cramps, headache/migraine, knee pain,
-allergy, PMS etc.<o:p></o:p></span></p>
-
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><o:p>&nbsp;</o:p></span></b></p>
-
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>SP</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'> =
-meridian to and from the <b>SP</b>leen which filters the blood. If this is not
-corrected, it will cause hormone problems, menopausal / menstrual problems,
-blood sugar problems, lack of energy, digestive complaints, <span
-style='mso-tab-count:1'>   </span>indigestion, leg/knee pain, worry, easily
-bruised, edema, etc.</span><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p></o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:
-12.0pt;color:red'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoNormal><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:
-12.0pt;color:red'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoBodyText><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext'><span style='mso-tab-count:1'>            </span>LI </span><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;
-font-weight:normal'>= meridian to and from the </span><span lang=EN-US
-style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext'>L</span><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;
-font-weight:normal'>arge </span><span lang=EN-US style='font-size:11.0pt;
-mso-bidi-font-size:12.0pt;color:windowtext'>I</span><span lang=EN-US
-style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;font-weight:
-normal'>ntestine, which is responsible for a regular (1 X day) bowel
-movement.<span style='mso-spacerun:yes'>  </span>If this is not corrected it
-will cause sinus headaches, constipation, diarrhea, shoulder, arm problems,
-etc.</span><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:12.0pt;
-color:windowtext;font-weight:normal'><o:p></o:p></span></p>
-
-<p class=MsoBodyText><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext;font-weight:normal'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoBodyText><span lang=EN-US style='font-size:5.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext;font-weight:normal'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>TH </span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'>=
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt;mso-bidi-font-weight:bold'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>TH
+</b></span><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>=3D
 meridian to and from the system which regulates the balance of water in the
 body (the body is made up primarily of water and the balances are very
 delicate). If this is not corrected, it will cause neck, arm, shoulder tightness/pain,
 respiration, digestion, genitourinary symptoms, ear disorders, metabolism
-problems, thyroid problems, ovary malfunction, body temperature problems,
-abnormal sweating, muscle spasms, etc.<o:p></o:p></span></p>
+problems, thyroid <span style=3D'mso-tab-count:1'> </span>problems, ovary
+malfunction, body temperature problems, abnormal sweating, muscle spasms, etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoBodyText2><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext'><span style='mso-tab-count:1'>            </span>SI</span><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;
-font-weight:normal'> = meridian to and from the </span><span lang=EN-US
-style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext'>S</span><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;
-font-weight:normal'>mall </span><span lang=EN-US style='font-size:11.0pt;
-mso-bidi-font-size:12.0pt;color:windowtext'>I</span><span lang=EN-US
-style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;font-weight:
-normal'>ntestine, which changes food to vital nutrients.<span
-style='mso-spacerun:yes'>  </span>If this is not corrected it will cause neck,
-shoulder pain/stiffness, lower abdominal pain, hearing problems, TMJ, facial
-pain, etc.</span><span lang=EN-US style='font-size:4.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext;font-weight:normal'><o:p></o:p></span></p>
+<p class=3DMsoBodyText><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext'>LI
+</span><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt;
+color:windowtext;font-weight:normal'>=3D meridian to and from the </span><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext'>L</span><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;
+font-weight:normal'>arge </span><span lang=3DEN-US style=3D'font-size:11.0pt;
+mso-bidi-font-size:12.0pt;color:windowtext'>I</span><span lang=3DEN-US
+style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt;color:windowtext;font-weight:
+normal'>ntestine, which is responsible for a regular (1 X day) bowel
+movement.<span style=3D'mso-spacerun:yes'>&nbsp; </span>If this is not corrected
+it will cause sinus headaches, constipation, diarrhea, shoulder, arm problems,
+etc.</span><span lang=3DEN-US style=3D'font-size:5.0pt;mso-bidi-font-size:12.0pt;
+color:windowtext;font-weight:normal'><o:p></o:p></span></p>
 
-<p class=MsoBodyText2><span lang=EN-US style='font-size:4.0pt;mso-bidi-font-size:
-12.0pt;color:windowtext;font-weight:normal'><o:p>&nbsp;</o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal style=3D'text-indent:36.0pt'><b><span lang=3DEN-US
+style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>SP</span></b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'> =3D meridian to
+and from the <b>SP</b>leen which filters the blood. If this is not corrected,
+it will cause hormone problems, menopausal / menstrual problems, blood sugar
+problems, lack of energy, digestive complaints, <span style=3D'mso-tab-count:
+1'>&nbsp;&nbsp; </span>indigestion, leg/knee pain, worry, easily bruised,
+edema, etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>HT</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'> =
-meridian to and from the <b>H</b>ear<b>T</b>.<span style='mso-spacerun:yes'> 
-</span>If this is not corrected, it will cause sleep problems, palpitations,
-heart disease, depression, anxiety, vivid dreaming, headache, poor memory,
-abnormal sweating, speech problems, etc.</span><span lang=EN-US
-style='font-size:4.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'><o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span lang=EN-US style='font-size:4.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>LIV</b>
+=3D meridian to and from the <b>LIV</b>er whose main function is to detox.<span
+style=3D'mso-spacerun:yes'>&nbsp; </span>If this is not corrected, it will cause one
+to be more emotional, muscle spasms/cramps, headache/migraine, knee pain,
+allergy, PMS etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;
+</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt'><span style='mso-tab-count:1'>            </span>P</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt'> = meridian to
-and from the muscles surrounding the heart.<span style='mso-spacerun:yes'> 
-</span>If this is not corrected it will cause sleep problems, blood circulation
-problems, sexual / reproductive hormone problems, palpitations, menstrual / menopausal
-problems, depression, anxiety, nausea, vomiting, etc.</span><span lang=EN-US
-style='font-size:5.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>KI
+</b>=3D meridian to and from the system which regulates hormones and also the <b>KI</b>dney.
+If this is not corrected, it will cause lower back pain, general severe pain,
+hearing disorders, bone disorders, arthritis, osteoporosis, respiratory
+malfunction, sexual malfunction, coldness in body, aversion to cold, hormone
+problems etc.</span><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><o:p>&nbsp;</o:p></span></b></p>
+<p class=3DMsoNormal><span lang=3DEN-US><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></sp=
+an><b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>BL</span></b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'> =3D meridian to
+and from the <b>BL</b>adder. If this is not corrected, it will cause neck, back
+tightness/pain, sciatica, headaches, bladder malfunction, prostate disorder=
+s,
+eye disorders, etc.</span><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:
-12.0pt;color:#00CCFF'><span style='mso-tab-count:1'>            </span>LU</span></b><span
-lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;color:#00CCFF'> =
-meridian (energy pathways) to and from the <b>LU</b>ngs. If this is not
-corrected, it will cause allergies, immune system problems, headaches, neck
-pain, cough, asthma, skin problems, shoulder, arm pain, numbness, tingling,
-thyroid problems, etc.<o:p></o:p></span></p>
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal align=right style='text-align:right'><i><span lang=EN-US
-style='font-size:8.0pt;mso-bidi-font-size:12.0pt;font-family:Symbol;mso-ascii-font-family:
-"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;
-mso-symbol-font-family:Symbol'><span style='mso-char-type:symbol;mso-symbol-font-family:
-Symbol'>ã</span></span></i><i><span lang=EN-US style='font-size:8.0pt;
-mso-bidi-font-size:12.0pt'> 2005 Body Feng Shui, Inc. &amp; The Prescott Group<o:p></o:p></span></i></p>
+<p class=3DMsoNormal><span lang=3DEN-US><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></sp=
+an><b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>GB</span></b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>: meridian to and
+from the <b>G</b>all <b>B</b>ladder which regulates the digestion of fats.<span
+style=3D'mso-spacerun:yes'>&nbsp;&nbsp; </span>If this is not corrected, it will
+cause shoulder, hip, knee, ankle tightness/pain, eye/ear disorders, headache,
+dizziness, gallbladder <span style=3D'mso-tab-count:1'>&nbsp; </span>disorders,
+etc.<o:p></o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US><span style=3D'mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></sp=
+an><b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>ST</span></b><span
+lang=3DEN-US style=3D'font-size:11.0pt;mso-bidi-font-size:12.0pt'>: meridian to and
+from the <b>ST</b>omach. If this is not corrected, it will cause various
+stomach problems, leg aches and/or pain, bloating, appetite disorders, fatigue,
+eye disorders, jaw pain, breast disorders etc.<b><o:p></o:p></b></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
 </div>
-
 </body>
 
 </html>

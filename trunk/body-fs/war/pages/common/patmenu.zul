@@ -28,6 +28,9 @@
 		<toolbarbutton label="Patient NPI" image="/img/user_add.png"
 			sclass="${page.title eq 'NPI View' ? 'bodyfs-toolbar-selected' : ''}"
 			href="/pages/usermgmt/npiview.zul?id=${param.id }" orient="vertical" width="80px" />
+		<toolbarbutton label="Goals" orient="vertical" image="/img/vcard_add.png" id="tbtnGoals"
+			href="/pages/usermgmt/goals.zul?id=${param.id }"
+			sclass="${page.title eq 'Program Goals' ? 'bodyfs-toolbar-selected' : ''}" />
 	</hbox>
 	<n:div width="100%"
 		style="background: black url('/img/borderlayout-hm.png') repeat-x 0px 0px;text-align:center;font-size:12pt;color:white;"

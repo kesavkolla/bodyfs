@@ -346,6 +346,9 @@ eye disorders, jaw pain, breast disorders etc.<b><o:p></o:p></b></span></p>
 <p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:5.0pt'><o:p>&nbsp;</o:p></span></p>
 
 </div>
+<div style="text-align: center; width: 100%">
+<button onclick="window.print()">Print</button>
+</div>
 </body>
 
 </html>

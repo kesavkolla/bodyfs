@@ -112,7 +112,7 @@
 							</n:tr>
 						</n:table>
 						<space height="20px" width="100%" />
-						<n:table id="herbsTable">
+						<n:table id="herbsTable" style="display:none;">
 							<n:tr align="left">
 								<n:th class="bordercell">Forumula</n:th>
 								<n:th class="bordercell">Herbs</n:th>

@@ -56,29 +56,29 @@
 									</n:table>
 								</cell>
 							</row>
-							<row valign="top">
+							<row valign="top" spans="2">
 								<cell>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Diagnosis" />
 										<textbox id="txtDiagnosisPlan" style="width:100%" rows="5"
 											value="@{treatment.diagnosisPlan }" readonly="true" />
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Plan" />
 										<textbox id="txtPlan" style="width:100%" rows="5" value="@{treatment.plan }"
 											readonly="true" />
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Massage Notes" />
 										<textbox id="txtMassageNotes" style="width:100%" rows="5"
 											value="@{treatment.massageNotes }" readonly="true" />
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="Additional Notes" />
 										<textbox id="txtAdditionalNotes" style="width:100%" rows="5"
 											value="@{treatment.additionalNotes }" readonly="true" />
 									</groupbox>
-									<groupbox closable="false">
+									<groupbox closable="false" visible="false">
 										<caption label="" />
 									</groupbox>
 									<n:table id="tblServices">
@@ -113,16 +113,14 @@
 											</zk>
 										</n:tbody>
 									</n:table>
-								</cell>
-								<cell>
 									<textbox id="txtMarkers" visible="false" value="@{treatment.markers }"
 										readonly="true" />
 									<textbox id="txtServices"
 										value="@{txtServices.value, save-when='btnPrev.onClick, btnNext.onClick' }" visible="false" readonly="true" />
-									<n:div id="imgdiv" />
+									<n:div id="imgdiv" style="display:none"/>
 								</cell>
 							</row>
-							<row>
+							<row visible="false">
 								<cell></cell>
 								<cell>
 									<script type="text/javascript" defer="false">

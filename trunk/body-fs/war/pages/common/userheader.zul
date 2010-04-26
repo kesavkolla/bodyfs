@@ -31,6 +31,9 @@
 				<toolbarbutton label="Payments" image="/img/money_100dollar_Coins.png" hflex="1" href="/pages/user/payments.zul" />
 				<toolbarbutton label="NPI View" image="/img/user_add.png" hflex="1" href="/pages/user/npiview.zul" 
 					zclass="${page.title eq 'NPI View' ? 'bodyfs-toolbar-selected' : '' }" />
+				<toolbarbutton label="Goal" image="/img/vcard_add.png" hflex="1" href="/pages/user/goals.zul" 
+					zclass="${page.title eq 'Program Goals' ? 'bodyfs-toolbar-selected' : '' }" />
+			
 			</vbox>
 			<script type="text/javascript" defer="true">
 				zk.afterMount(function() { $("$logo").click(function() {

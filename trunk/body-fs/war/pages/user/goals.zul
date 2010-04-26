@@ -8,25 +8,15 @@
 
 		#tblPrograms td { padding-left: 10px;}
 	</style>
-	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
-		<center autoscroll="false" flex="true">
+	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.UserLayoutCtrl">
+		<center vflex="1" hflex="1">
 			<borderlayout>
-				<north size="90px">
-					<include src="/pages/common/npimenu.zul" />
-				</north>
 				<center autoscroll="true" flex="true" id="controller" apply="com.bodyfs.ui.GoalsComposer">
 					<div hflex="1" style="margin:10px" vflex="1">
-						<n:div style="text-align:right;width:90%">
-							<!-- n:button id="btnPrint">Print</n:button -->
-							<button id="btnPrev" label="Prev" sclass="submitbtn"
-								forward="onClick=controller.onSave(Prev)" />
-							<button id="btnNext" label="Next" sclass="submitbtn"
-								forward="onClick=controller.onSave(Next)" />
-						</n:div>
 						<n:br />
 						<n:br />
 						<n:div style="overflow:auto;background-color:white;height:300px;width:90%">
-							<n:input type="text" style="display:none" id="isReadonly" value="false"/>
+							<n:input type="text" style="display:none" id="isReadonly" value="true"/>
 							<n:table id="tblGoals" width="100%" align="top" cellspacing="0" cellpadding="0"
 								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;color:black;">
 								<n:col width="*" style="border-right:1px solid black;" />
@@ -36,14 +26,11 @@
 									<n:tr>
 										<n:td>
 											Goal&amp;nbsp;
-											<n:input type="text" size="40" style="width:70%" />
+											<n:input type="text" readonly="true" size="40" style="width:70%" />
 										</n:td>
 										<n:td>
 											For&amp;nbsp;
-											<n:input type="text" size="40" style="width:70%" />
-										</n:td>
-										<n:td>
-											<n:img src='/img/add.png' class='imgGoalsAdd' />
+											<n:input type="text" readonly="true" size="40" style="width:70%" />
 										</n:td>
 									</n:tr>
 								</n:tbody>
@@ -58,37 +45,37 @@
 								<n:tr>
 									<n:td>Medications</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 								</n:tr>
 								<n:tr class="z-listbox-odd">
 									<n:td>Medications</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 								</n:tr>
 								<n:tr>
 									<n:td>Medications</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 								</n:tr>
 								<n:tr class="z-listbox-odd">
 									<n:td>Medications</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 									<n:td>
-										<n:input type="text" style="width:90%" />
+										<n:input readonly="true" type="text" style="width:90%" />
 									</n:td>
 								</n:tr>
 								<n:tr>
@@ -96,7 +83,7 @@
 										<n:br />
 										<n:span style="font-weight:bold">Other Notes:</n:span>
 										<n:br />
-										<n:textarea id="txtNotes" style="width: 90%" rows="5"></n:textarea>
+										<n:textarea readonly="true" id="txtNotes" style="width: 90%" rows="5"></n:textarea>
 										<n:br />
 									</n:td>
 								</n:tr>
@@ -105,7 +92,7 @@
 										<n:span style="font-weight:bold">Due Date</n:span>
 									</n:td>
 									<n:td>
-										<n:input id="txtDueDate" type="text" style="width:90%" />
+										<n:input readonly="true" id="txtDueDate" type="text" style="width:90%" />
 									</n:td>
 									<n:td>&amp;nbsp;</n:td>
 								</n:tr>

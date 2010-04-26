@@ -94,7 +94,7 @@
 														<zk if="${each.serviceName == 'Powder'}">
 															<n:select id="txt${each.id }" serviceid="${each.id }">
 																<n:option value="0.25">0.25 bottle</n:option>
-																<n:option value="0.5">0.5 bottle</n:option>
+																<n:option value="0.50">0.5 bottle</n:option>
 																<n:option value="1">1 bottle</n:option>
 																<n:option value="2">2 bottle</n:option>
 															</n:select>

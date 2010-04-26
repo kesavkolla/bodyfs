@@ -48,16 +48,19 @@ public class QuickPatientListComposer extends GenericForwardComposer {
 
 		final String curId = execution.getParameter("id");
 		for (final QuickPatient qp : quicklist) {
+			if (qp.getIsNewPatient() != null && qp.getIsNewPatient().booleanValue()) {
+				buffer.append("<div style=\"display:inline;\" ><img src=\"/img/plus.png\" />");
+			}
 			buffer.append("<div class='bodyfs-qpatient");
 			if (curId != null && curId.equals(qp.getId().toString())) {
 				buffer.append(" bodyfs-qpatient-selected");
 			}
-			if (qp.getIsNewPatient() == null || qp.getIsNewPatient().booleanValue()) {
+			if (qp.getIsNewPatient() != null && qp.getIsNewPatient().booleanValue()) {
 				buffer
 						.append(
-								"' style='background-image:url(\"/img/plus.png\"); background-repeat: no-repeat'><a href='/pages/npi/npiview.zul?&id=")
+								"'><a href='/pages/npi/npiview.zul?&id=")
 						.append(qp.getId()).append("&visitDate=").append(qp.getDate().getTime()).append("'>").append(
-								qp.getName()).append("</a></div>");
+								qp.getName()).append("</a></div></div>");
 			} else {
 				buffer.append("'><a href='/pages/patient/weeklyvisit.zul?&id=").append(qp.getId())
 						.append("&visitDate=").append(qp.getDate().getTime()).append("'>").append(qp.getName()).append(

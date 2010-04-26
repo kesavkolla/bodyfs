@@ -24,7 +24,7 @@
 			<vbox width="100%">
 				<toolbarbutton label="Patients" image="/img/user_group_colored.png" hflex="1"
 					href="/pages/usermgmt/customersearch.zul" />
-				<div style="font-size:14px; text-align:right;overflow:auto"
+				<div style="font-size:14px; text-align:left; display:inline"
 					apply="com.bodyfs.ui.QuickPatientListComposer" />
 				<!-- toolbarbutton label="Scheduling" image="/img/ical.png" hflex="1" href="/pages/schedule/calendar.zul" / -->
 				<!-- toolbarbutton label="Settings" image="/img/preferences.png" hflex="1" href="#" /-->

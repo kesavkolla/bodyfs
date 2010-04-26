@@ -29,8 +29,10 @@ function setupData() {
 		buffer
 				.push('<td>Goal &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[0].goal + '" /></td>');
 		buffer
-				.push('<td>Time &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[0].time + '"/></td>');
+				.push('<td>For &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[0].time + '"/></td>');
+		if ($("#isReadonly").val() != "true" ) {
 		buffer.push('<td><img src="/img/add.png" class="imgGoalsAdd" /></td>');
+		}
 		buffer.push('</tr>');
 		/* for rest of the data add a new row */
 		for ( var i = 1, len = data.goals.length; i < len; i++) {
@@ -38,9 +40,12 @@ function setupData() {
 			buffer
 					.push('<td>Goal &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[i].goal + '"/></td>');
 			buffer
-					.push('<td>Time &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[i].time + '"/></td>');
-			buffer
-					.push('<td><img src="/img/delete.png" class="imgGoalsDelete" /><img src="/img/add.png" class="imgGoalsAdd" /></td>');
+					.push('<td>For &nbsp;<input type="text" size="40" style="width:70%" value="' + data.goals[i].time + '"/></td>');
+			
+			if ($("#isReadonly").val() != "true" ) {
+				buffer
+				.push('<td><img src="/img/delete.png" class="imgGoalsDelete" /><img src="/img/add.png" class="imgGoalsAdd" /></td>');
+			}
 			buffer.push('</tr>');
 		}
 		$("#tblGoals > tbody").html(buffer.join(''));
@@ -65,7 +70,7 @@ function AddGoalsRow() {
 	var buffer = new Array();
 	buffer.push('<tr>');
 	buffer.push('<td>Goal &nbsp;<input type="text" size="40" style="width:70%" /></td>');
-	buffer.push('<td>Time &nbsp;<input type="text" size="40" style="width:70%" /></td>');
+	buffer.push('<td>For &nbsp;<input type="text" size="40" style="width:70%" /></td>');
 	buffer
 			.push('<td><img src="/img/delete.png" class="imgGoalsDelete" /><img src="/img/add.png" class="imgGoalsAdd" /></td>');
 	buffer.push('</tr>');

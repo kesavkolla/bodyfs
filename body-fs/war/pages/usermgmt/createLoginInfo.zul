@@ -17,11 +17,11 @@
 									<panelchildren>
 										<grid>
 											<rows>
-												<row>
+												<row spans=",2">
 													Account Number: 
 													<textbox id="accntNum" readonly="true" hflex="1" value="@{person.id, save-when='btnSave.onClick'}" />
 												</row>
-												<row>
+												<row spans=",2">
 													Diagnosis Code:
 													<listbox mold="select" rows="1"
 														selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
@@ -105,14 +105,13 @@
 												State:
 												<textbox value="@{ginfo.state, save-when='btnSave.onClick' }" hflex="1" />
 											</row>
-											<row>
+											<row spans=",,,2,">
 												Zipcode:
 												<textbox value="@{ginfo.zipcode, save-when='btnSave.onClick' }" hflex="1" />
 												Email:
 												<textbox value="@{person.email, save-when='btnSave.onClick' }"
 													constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
-												Referred By:
-												<textbox value="@{ginfo.referredBy, save-when='btnSave.onClick' }" hflex="1" />
+												<div></div>
 											</row>
 											<row>
 												Cell Phone:
@@ -130,10 +129,12 @@
 												<textbox value="@{ginfo.weight, save-when='btnSave.onClick' }" hflex="1" />
 												<div></div>
 											</row>
-											<row spans="2,2,2">
+											<row spans="2,2,,">
 											Emergency Contact's Name &amp; Phone
 												<textbox value="@{ginfo.emergencycontact, save-when='btnSave.onClick' }" hflex="1" />
-												<div></div>
+													Referred By:
+												<textbox value="@{ginfo.referredBy, save-when='btnSave.onClick' }" hflex="1" />
+											
 											</row>
 											<row spans="6">
 												<hbox pack="center" hflex="1">

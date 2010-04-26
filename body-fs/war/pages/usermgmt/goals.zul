@@ -19,6 +19,7 @@
 						<n:br />
 						<n:br />
 						<n:div style="overflow:auto;background-color:white;height:300px;width:90%">
+							<n:input type="text" style="display:none" id="isReadonly" value="true"/>
 							<n:table id="tblGoals" width="100%" align="top" cellspacing="0" cellpadding="0"
 								style="table-layout:fixed;border-collapse:collapse;vertical-align:top;color:black;">
 								<n:col width="*" style="border-right:1px solid black;" />
@@ -31,7 +32,7 @@
 											<n:input type="text" readonly="true" size="40" style="width:70%" />
 										</n:td>
 										<n:td>
-											Time&amp;nbsp;
+											For&amp;nbsp;
 											<n:input type="text" readonly="true" size="40" style="width:70%" />
 										</n:td>
 									</n:tr>
@@ -43,13 +44,6 @@
 						<n:table width="90%" align="top" cellspacing="0" cellpadding="0" id="tblPrograms"
 							style="background-color:white;table-layout:fixed;border-collapse:collapse;vertical-align:top;color:black;">
 							<n:col width="100px" />
-							<n:thead>
-								<n:tr>
-									<n:th>Program</n:th>
-									<n:th>Corrective Care</n:th>
-									<n:th>Maintenence Care</n:th>
-								</n:tr>
-							</n:thead>
 							<n:tbody>
 								<n:tr>
 									<n:td>Medications</n:td>

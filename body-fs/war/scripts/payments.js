@@ -309,6 +309,9 @@ function printSummary(id) {
 	buffer.push("<p></p>");
 	buffer.push("<span style='font-weight:bold'>Total Treatments:</span><br /><br />");
 	buffer.push("<table>");
+	buffer.push("<tr><td colspan='2'><table border='1' style='border: 2px solid black; border-collapse: collapse;' >");
+	buffer.push("<tr><td><b>Treatment</b></td><td><b>Number of Sessions</b></td><td><b>Total Cost</b></td></tr");
+	
 	/* prepare the cost of session */
 	$("#tblServicesSummary" + id + " > tbody > tr").each(function() {
 		var cell1 = $(this).find("td:first").html().split(":");
@@ -316,15 +319,16 @@ function printSummary(id) {
 		var total = $(this).find("td:last").html();
 		buffer.push("<tr>");
 		buffer.push("<td>");
-		buffer.push(cost);
-		buffer.push("&nbsp;X&nbsp;");
 		buffer.push(cell1[0]);
+		buffer.push("</td><td>");
+		buffer.push(cost);
 		buffer.push("&nbsp;&nbsp;</td><td style='text-align: right;'>");
 		buffer.push(total);
 		buffer.push("</td></tr>");
 	});
-	buffer.push("<tr><td colspan='3'>&nbsp;</td></tr>");
-	buffer.push("<tr><td colspan='3' style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;</td></tr>");
+	buffer.push("</table></td></tr>");
+	buffer.push("<tr><td colspan='2' style='display:inline-block;width:100px;border-bottom:1px solid black;'>&nbsp;</td></tr>");
+	buffer.push("<tr><td colspan='2' >&nbsp;</td></tr>");
 	/* prepare the final totals */
 	buffer.push("<tr><td style='font-weight:bold;'>Total</td><td style='text-align: right;'>" + $("#spntotal" + id).html() + "</td></tr>");
 	buffer.push("<tr><td style='font-weight:bold;'>Discount</td><td style='text-align: right;'>" + $("#spndiscount" + id).html()

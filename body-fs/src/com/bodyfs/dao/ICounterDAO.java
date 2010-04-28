@@ -4,6 +4,7 @@ package com.bodyfs.dao;
 import com.bodyfs.model.Diagnosis;
 import com.bodyfs.model.Herb;
 import com.bodyfs.model.HerbFormula;
+import com.bodyfs.model.Person;
 
 /**
  * This DAO is responsible for maintaining all table counts
@@ -15,6 +16,7 @@ public interface ICounterDAO {
 	public static final String HERBFORUMLA_COUNTER = HerbFormula.class.getName();
 	public static final String DIAGNOSIS_COUNTER = Diagnosis.class.getName();
 	public static final String HERB_COUNT = Herb.class.getName();
+	public static final String ACCOUNT_SEQ = Person.class.getName();
 
 	/**
 	 * Creates a new table counter with the given name and with the initial

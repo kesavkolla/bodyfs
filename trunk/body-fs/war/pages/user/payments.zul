@@ -32,7 +32,7 @@
 							<zk forEach="${controller$composer.activePlans }">
 								{'id': ${each.id }, 'planLength': ${each.planLength }, 'discount': ${each.discount },
 								'personId': ${each.personId }, 'paymentDate': ${each.paymentDate.time }, 'active':
-								${each.active }, 'planItems': ${each.planItems } },
+								${each.active }, 'planItems': ${each.planItems }, 'careType': '${each.careType }' },
 							</zk>
 							{}];
 

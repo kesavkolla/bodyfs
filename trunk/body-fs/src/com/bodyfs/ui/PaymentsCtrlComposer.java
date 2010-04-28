@@ -20,6 +20,7 @@ import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.api.Radiogroup;
 
 import com.bodyfs.dao.IPaymentDAO;
 import com.bodyfs.dao.IPersonDAO;
@@ -89,6 +90,10 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		final Intbox planLength = (Intbox) Path.getComponent(page, "planLength");
 		plan.setPlanLength(planLength.getValue());
 		// parse the json data in the txtPaymentData
+		final Radiogroup careType = (Radiogroup) Path.getComponent(page, "care");
+		if(careType != null) {
+			plan.setCareType(careType.getSelectedItemApi().getValue());
+		}
 		final JSONParser parser = new JSONParser();
 		final JSONArray arrData = (JSONArray) parser.parse(txtPaymentData.getValue());
 		final List<String> planItems = new ArrayList<String>(arrData.size());
@@ -156,7 +161,10 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		if (txtDiscount.getValue() != null) {
 			plan.setDiscount(txtDiscount.getValue().floatValue());
 		}
-
+		final Radiogroup careType = (Radiogroup) Path.getComponent(page, "care");
+		if(careType != null) {
+			plan.setCareType(careType.getSelectedItemApi().getValue());
+		}
 		plan.setPlanItems(planItems);
 		final IPaymentDAO paymentDAO = (IPaymentDAO) SpringUtil.getBean("paymentDAO");
 		paymentDAO.createPaymentPlan(plan);

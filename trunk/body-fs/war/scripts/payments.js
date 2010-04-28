@@ -44,20 +44,13 @@ function appendPlan(plan) {
 	for ( var i = 0, len = plan.planItems.length; i < len; i++) {
 		var service = getServiceById(plan.planItems[i].serviceid);
 		var planitem = plan.planItems[i];
-		if (service.serviceName == "Herbal Treatment") {
-			buffer.push("<tr serviceid='" + service.id + "'>");
-			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>" + service.serviceName + " per week for</td>");
-			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='"
-					+ plan.planItems[i].weeks + "' /> weeks</td>");
-			if (!plan.active) {
-				buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-			}
-			buffer.push("</tr>");
-		} else if (service.serviceName != "Re-Exam") {
+		if (service.serviceName != "Re-Exam") {
+			var treatment = service.serviceName != "Herbal Treatment" ? " treatment" : "";
+			
 			buffer.push("<tr serviceid='" + service.id + "'>");
 			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + planitem.count
 					+ "'/><span class='space' /></td>");
-			buffer.push("<td>" + service.serviceName + " per week for</td>");
+			buffer.push("<td>" + service.serviceName + treatment +" per week for</td>");
 			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='"
 					+ plan.planItems[i].weeks + "' /> weeks</td>");
 			if (!plan.active) {
@@ -79,6 +72,9 @@ function appendPlan(plan) {
 	/* Add discount and calculate button */
 	buffer.push('</tbody></table>')
 	buffer.push('</div>');
+	buffer.push("<br />");
+	buffer.push('<input type="radio" name="careType' + plan.id + '" value="corrective"' + (plan.careType == "corrective" ? "CHECKED" : "") + '>Corrective Care ');
+	buffer.push('<input type="radio" name="careType' + plan.id + '" value="maintenance" ' + (plan.careType == "maintenance" ? "CHECKED" : "") + '>Maintenance Care<br>');
 	buffer.push("<br />");
 	buffer.push('Discount: <input type="text" size="10" id="txtDiscount' + plan.id + '" value="'
 			+ (plan.discount > 0 ? plan.discount : "") + '" />  %');
@@ -300,12 +296,11 @@ function printSummary(id) {
 				var week = parseInt($(this).find("input[class='txtWeek']").val());
 				var serviceid = $(this).attr("serviceid");
 				var service = getServiceById(serviceid);
-				if (service.serviceName == "Herbal Treatment") {
-					buffer.push(service.serviceName + "&nbsp; per week for " + week
-							+ "&nbsp; session" + (week > 1 ? "s" : ""));
-				} else if (service.serviceName != "Re-Exam") {
-					buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Treatment per week for " + week
-							+ "&nbsp; session" + (week > 1 ? "s" : ""));
+				if (service.serviceName != "Re-Exam") {
+					var treatment = service.serviceName != "Herbal Treatment" ? " treatment" : "";
+					
+					buffer.push(count + "&nbsp;" + service.serviceName + treatment+"&nbsp; per week for " + week
+							+ "&nbsp; week" + (week > 1 ? "s" : ""));
 				} else {
 					buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
 				}
@@ -368,17 +363,12 @@ function addService(id) {
 	var selService = getSelectedService(services, cmbServices.val());
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
-	if (selService.serviceName == "Herbal Treatment") {
-		buffer.push("<tr serviceid='" + selService.id + "'>");
-		buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
-		buffer.push(selService.serviceName + " per week for</td>");
-		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
-		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-		buffer.push("</tr>");
-	}else if (selService.serviceName != "Re-Exam") {
+	if (selService.serviceName != "Re-Exam") {
+		var treatment = selService.serviceName != "Herbal Treatment" ? " treatment" : "";
+		
 		buffer.push("<tr serviceid='" + selService.id + "'>");
 		buffer.push("<td><input type='text' class='txtCnt' size='3' value='1'/><span class='space' /></td>");
-		buffer.push("<td>" + selService.serviceName + " per week for</td>");
+		buffer.push("<td>" + selService.serviceName + treatment +" per week for</td>");
 		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
 		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
 		buffer.push("</tr>");
@@ -443,7 +433,8 @@ function prepareSave(id) {
 	});
 	var planlen = $("#txtPlanLength" + id).val();
 	var discount = $("#txtDiscount" + id).val();
-	var obj = {'planLength': planlen, 'discount': discount, 'planItems': arrServices};
+	var careType = $("input[@name='careType"+ id+"']:checked").val();
+	var obj = {'planLength': planlen, 'discount': discount, 'planItems': arrServices, 'careType': careType};
 	$("$txtPaymentData").val(toJSON(obj)).blur();
 	return true;
 }

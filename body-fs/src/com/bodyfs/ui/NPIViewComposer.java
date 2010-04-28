@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.BookmarkEvent;
-import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Include;
@@ -37,7 +36,6 @@ import com.bodyfs.ui.util.CommonUtils;
  * @author kesav
  * 
  */
-@SuppressWarnings("unchecked")
 public class NPIViewComposer extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -4039933079355260867L;
@@ -70,7 +68,6 @@ public class NPIViewComposer extends GenericForwardComposer {
 		this.setupPerson();
 	}
 
-
 	public void onBookmarkChange(final BookmarkEvent event) {
 		final String pageid = event.getBookmark();
 		if (CommonUtils.getIsAdminUser()) {
@@ -88,8 +85,8 @@ public class NPIViewComposer extends GenericForwardComposer {
 		}
 	}
 
-	
 	private void setupPerson() {
+		LOGGER.debug("Setting up the person");
 		Long patid = null;
 
 		try {

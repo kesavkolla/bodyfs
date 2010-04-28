@@ -43,9 +43,27 @@ public class PatientPaymentPlan implements Serializable {
 
 	@Persistent
 	private Boolean active = false;
+	
+	@Persistent
+	private String careType;
 
 	@Persistent
 	private List<String> planItems;
+	
+	
+	/**
+	 * @return the careType
+	 */
+	public String getCareType() {
+		return careType;
+	}
+
+	/**
+	 * @param careType the careType to set
+	 */
+	public void setCareType(String careType) {
+		this.careType = careType;
+	}
 
 	public Long getPersonId() {
 		return personId;

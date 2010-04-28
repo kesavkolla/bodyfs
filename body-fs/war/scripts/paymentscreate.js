@@ -124,17 +124,11 @@ function addService() {
 	var selService = getServiceById(selServiceid);
 	/* prepare the row and append to the tblServicesBreakDown table */
 	var buffer = new Array();
-	if (selService.serviceName == "Herbal Treatment") {
-		buffer.push("<tr serviceid='" + selService.id + "'>");
-		buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='1'/>");
-		buffer.push(selService.serviceName + " per week for</td>");
-		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
-		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-		buffer.push("</tr>");
-	} else if (selService.serviceName != "Re-Exam") {
+	if (selService.serviceName != "Re-Exam") {
+		var treatment = selService.serviceName != "Herbal Treatment" ? " treatment" : "";
 		buffer.push("<tr serviceid='" + selService.id + "'>");
 		buffer.push("<td><input type='text' class='txtCnt' size='3' value='1'/><span class='space' /></td>");
-		buffer.push("<td>" + selService.serviceName + " per week for</td>");
+		buffer.push("<td>" + selService.serviceName + treatment+" per week for</td>");
 		buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='1' /> weeks</td>");
 		buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
 		buffer.push("</tr>");
@@ -163,21 +157,12 @@ function populatePlan() {
 		var item = $.parseJSON(val);
 		var selService = getServiceById(item.serviceid);
 		/* prepare the row and append to the tblServicesBreakDown table */
-		if (selService.serviceName == "Herbal Treatment") {
-			
-			buffer.push("<tr serviceid='" + selService.id + "'>");
-			buffer.push("<td colspan='2'><input type='text' class='txtCnt' size='3' style='display:none' value='"
-					+ item.count + "'/>");
-			buffer.push(selService.serviceName + " per week for</td>");
-			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + item.weeks
-					+ "' /> weeks</td>");
-			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
-			buffer.push("</tr>");
-		} else if (selService.serviceName != "Re-Exam") {
+		if (selService.serviceName != "Re-Exam") {
+			var treatment = selService.serviceName != "Herbal Treatment" ? " treatment" : "";
 			buffer.push("<tr serviceid='" + selService.id + "'>");
 			buffer.push("<td><input type='text' class='txtCnt' size='3' value='" + item.count
 					+ "'/><span class='space' /></td>");
-			buffer.push("<td>" + selService.serviceName + " per week for</td>");
+			buffer.push("<td>" + selService.serviceName + treatment+" per week for</td>");
 			buffer.push("<td><span class='space' /><input type='text' class='txtWeek' size='3' value='" + item.weeks
 					+ "' /> weeks</td>");
 			buffer.push("<td><span class='space' /><img src='/img/delete.png' class='imgDelete'/></td>");
@@ -253,12 +238,10 @@ function printSummary() {
 				var week = parseInt($(this).find("input[class='txtWeek']").val());
 				var serviceid = $(this).attr("serviceid");
 				var service = getServiceById(serviceid);
-				if (service.serviceName == "Herbal Treatment") {
-					buffer.push(service.serviceName + "&nbsp; per week for " + week
-							+ "&nbsp; session" + (week > 1 ? "s" : ""));
-				} else if (service.serviceName != "Re-Exam") {
-					buffer.push(count + "&nbsp;" + service.serviceName + "&nbsp; Treatment per week for " + week
-							+ "&nbsp; session" + (week > 1 ? "s" : ""));
+				if (service.serviceName != "Re-Exam") {
+					var treatment = service.serviceName != "Herbal Treatment" ? " treatment" : "";
+					buffer.push(count + "&nbsp;" + service.serviceName + treatment +"&nbsp; per week for " + week
+							+ "&nbsp; week" + (week > 1 ? "s" : ""));
 				} else {
 					buffer.push("Number of Re-Exams during treatment&nbsp;" + week);
 				}

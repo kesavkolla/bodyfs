@@ -163,6 +163,7 @@ public class PaymentComposer extends GenericForwardComposer {
 		final JSONObject obj = (JSONObject) parser.parse(data);
 		plan.setPlanLength(new Integer(obj.get("planLength").toString()));
 		plan.setDiscount(new Float(obj.get("discount").toString()));
+		plan.setCareType(obj.get("careType").toString());
 		final JSONArray arrData = (JSONArray) obj.get("planItems");
 		final List<String> planItems = new ArrayList<String>(arrData.size());
 		for (int i = 0, len = arrData.size(); i < len; i++) {

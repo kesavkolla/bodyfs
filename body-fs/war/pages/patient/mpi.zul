@@ -4,6 +4,7 @@
 <?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
 <?script type="text/javascript" src="/scripts/mpi.js"?>
+<?xel-method prefix="user" name="displayname" class="com.bodyfs.ui.util.CommonUtils" signature="java.lang.String getDisplayName()"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client" xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.z-center { color: white;}</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
@@ -38,14 +39,20 @@
 						<space height="20px" orient="vertical" width="100%" />
 						<space />
 						<n:div id="mpiChart" style="width:600px;height:100%;margin-left:auto;margin-right:auto;" />
-						<n:div style="text-align:right"><n:button id="btnLegends" onclick="showLegends()">EMI-Legends</n:button></n:div>
-						
+						<n:div style="text-align:right">
+							<n:button id="btnLegends" onclick="showLegends()">EMI-Legends</n:button>
+						</n:div>
+
 					</div>
 				</center>
 			</borderlayout>
 		</center>
 	</borderlayout>
 	<script type="text/javascript" defer="true">
-		var mpidata = ${mpidata }; if(mpidata.examDate) { DrawChart(mpidata); }
+		patname = "${user:displayname()}";
+
+		var mpidata = ${mpidata };
+
+		if(mpidata.examDate) { DrawChart(mpidata); }
 	</script>
 </zk>

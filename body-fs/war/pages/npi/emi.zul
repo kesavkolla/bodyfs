@@ -2,6 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
 <?script type="text/javascript" src="/scripts/mpi.js"?>
+<?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
 		<center autoscroll="false" flex="true">
@@ -24,6 +25,9 @@
 		</center>
 	</borderlayout>
 	<script type="text/javascript" defer="true">
+
+		patname = "${user:displayname()}";
+
 		var mpidata = ${mpidata };
 
 		if(mpidata.examDate) { DrawChart(mpidata); }

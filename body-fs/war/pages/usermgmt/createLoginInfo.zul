@@ -17,8 +17,8 @@
 									<rows>
 										<row spans=",2">
 											Account Number:
-											<textbox id="accntNum" readonly="true" hflex="1"
-												value="@{person.id, save-when='btnSave.onClick'}" />
+											<intbox id="accntNum" readonly="true"
+												value="@{person.accountNumber, save-when='btnSave.onClick'}" />
 										</row>
 										<row spans=",2">
 											Diagnosis Code:

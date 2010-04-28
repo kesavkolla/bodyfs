@@ -1,5 +1,6 @@
 var maxValue = 220;
 function DrawChart(data) {
+	$('body').data('mpidata', data);
 	$('#mpiChart').gchart('destroy')
 	$('#mpiChart')
 			.gchart(
@@ -69,12 +70,25 @@ function DrawCompare(mpiarr) {
 }
 
 /**
+ * This method prints the current chart in a new window
  * 
  * @return
  */
 function printChart() {
+	var mpidata = $('body').data('mpidata');
+	if (mpidata == undefined) {
+		return;
+	}
 	var buffer = new Array();
 	buffer.push("<html><body>");
+	buffer.push("<table cellpadding='5px'><tr><td>Name:</td><td>");
+	buffer.push(patname);
+	buffer.push("</td></tr>");
+	buffer.push("<tr><td>Exam Date:</td><td>");
+	var examDate = new Date(mpidata.examDate);
+	var strDate = (examDate.getMonth() + 1) + "/" + examDate.getDate() + "/" + examDate.getFullYear();
+	buffer.push(strDate);
+	buffer.push("</td></tr></table><br /><br />");
 	buffer.push("<div style='800px;style:margin-left:auto;margin-right:auto;'>");
 	buffer.push($("#mpiChart").html());
 	buffer.push("</div>");

@@ -22,7 +22,7 @@ function DrawChart(data) {
 										'ST' ]),
 								$.gchart.axis('right', [ data.low, data.average, data.high ],
 										[ data.low, data.average, data.high ], 0, maxValue).ticks('blue',
-										-$('$mpiChart').width()) ],
+										-$('#mpiChart').width()) ],
 						series : [
 								$.gchart.series('Reading1', [ data.LU1, data.p1, data.HT1, data.SI1, data.TH1,
 										data.LI1, data.SP1, data.LV1, data.KI1, data.BL1, data.GB1, data.ST1 ], [

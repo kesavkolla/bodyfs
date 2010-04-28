@@ -3,152 +3,148 @@
 <zk xmlns:n="http://www.zkoss.org/2005/zk/native">
 	<style>.clstitle {font-weight:bold;text-decoration:underline }</style>
 	<borderlayout id="main" style="background:#1e1406;" use="com.bodyfs.ui.MainLayoutCtrl">
-		<center>
+		<center flex="true" autoscroll="false">
 			<borderlayout style="background:#1e1406;">
 				<north size="90px">
 					<include src="/pages/common/patmenu.zul" />
 				</north>
-				<center autoscroll="true" vflex="1" hflex="1">
-					<borderlayout id="logingrid" apply="com.bodyfs.ui.CreateLoginComposer" width="90%"
-						style="margin-left:10px; margin-right: 10px;">
-					 	<north vflex="1" hflex="1">
-							<hbox vflex="1" hflex="1">
-								<panel title="Account Details" border="normal" style="margin-bottom:10px" hflex="1">
-									<panelchildren>
-										<grid>
-											<rows>
-												<row spans=",2">
-													Account Number: 
-													<textbox id="accntNum" readonly="true" hflex="1" value="@{person.id, save-when='btnSave.onClick'}" />
-												</row>
-												<row spans=",2">
-													Diagnosis Code:
-													<listbox mold="select" rows="1"
-														selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
-														<listitem value="" label="Pain in Joint, Multiple Sites" />
-														<listitem value="719.49" label="Pain in Joint, Multiple Sites" />
-														<listitem value="723.1" label="Pain in Neck" />
-														<listitem value="724.5" label="Pain in Back (postural)" />
-														<listitem value="789" label="Pain Abdominal (unspecified sites)" />
-														<listitem value="724.2" label="Pain, lumbar region" />
-													</listbox>												
-												</row>
-											</rows>
-										</grid>
-														
-									</panelchildren>
-								</panel>
-								<panel title="Login Information" border="normal" style="margin-bottom:10px" hflex="1">
-									<panelchildren>
-										<grid>
-											<rows>
-												<row>
-													Login ID:
-													<textbox id="loginid" hflex="1" constraint="no empty"
-														value="@{logininfo.userid, save-when='btnSave.onClick'}" />
-													<label id="loginmsg" style="color:red" />
-												</row>
-												<row>
-													password:
-													<textbox id="password" hflex="1"
-														value="@{logininfo.password, save-when='btnSave.onClick'}" />
-												</row>
-											</rows>
-										</grid>													
-									</panelchildren>
-								</panel>
-							</hbox>
-						</north>
-						<center vflex="1" hflex="1">
-							<vbox vflex="1" hflex="1">
-								<panel title="Personal Details" border="normal" style="margin-bottom:10px" hflex="1">
-									<panelchildren>
-										<grid>
-										<rows>
-											<row hflex="true">
-												First Name:
-												<textbox id="firstName" value="@{person.firstName, save-when='btnSave.onClick' }"
-													maxlength="100" hflex="1" constraint="no empty" />
-												Initial:
-												<textbox id="initial" value="@{person.initial, save-when='btnSave.onClick' }"
-													maxlength="100" hflex="1" />
-												LastName:
-												<textbox id="lastName" value="@{person.lastName, save-when='btnSave.onClick' }"
-													maxlength="100" hflex="1" constraint="no empty" />
-											</row>
-											<row>
-												SSN:
-												<textbox id="ssn" value="@{person.SSN, save-when='btnSave.onClick' }" maxlength="11"
-													constraint="/\d{3}-?\d{2}-?\d{4}/: Invalid SSN Format" hflex="1" />
-												Marital Status:
-												<checkbox label="Married" checked="@{person.married, save-when='btnSave.onClick' }" />
-												Gender:
-												<radiogroup id="gender"
-													selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup', save-when='btnSave.onClick' }">
-													<radio label="M" />
-													<radio label="F" />
-												</radiogroup>
-											</row>											
-										</rows>
-									</grid>
-								</panelchildren>
-								</panel>
-								<panel title="General Information" border="normal" style="margin-bottom:10px" hflex="1">
-									<panelchildren>
-										<grid>
-										<rows>
-											<row>
-												Address
-												<textbox value="@{ginfo.street, save-when='btnSave.onClick' }" hflex="1" />
-												City:
-												<textbox value="@{ginfo.city, save-when='btnSave.onClick' }" hflex="1" />
-												State:
-												<textbox value="@{ginfo.state, save-when='btnSave.onClick' }" hflex="1" />
-											</row>
-											<row spans=",,,2,">
-												Zipcode:
-												<textbox value="@{ginfo.zipcode, save-when='btnSave.onClick' }" hflex="1" />
-												Email:
-												<textbox value="@{person.email, save-when='btnSave.onClick' }"
-													constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
-												<div></div>
-											</row>
-											<row>
-												Cell Phone:
-												<textbox value="@{ginfo.cellPhone, save-when='btnSave.onClick' }" hflex="1" />
-												Home Phone:
-												<textbox value="@{ginfo.homePhone, save-when='btnSave.onClick' }" hflex="1" />
-												Work Phone:
-												<textbox value="@{ginfo.workPhone, save-when='btnSave.onClick' }" hflex="1" />
-												
-											</row>
-											<row spans=",,,,2">
-												Height:
-												<textbox value="@{ginfo.height, save-when='btnSave.onClick' }" hflex="1" />
-												Weight:
-												<textbox value="@{ginfo.weight, save-when='btnSave.onClick' }" hflex="1" />
-												<div></div>
-											</row>
-											<row spans="2,2,,">
+				<center hflex="1" vflex="1" autoscroll="true">
+					<vbox id="logingrid" apply="com.bodyfs.ui.CreateLoginComposer" width="96%"
+						style="margin-top:10px;margin-left:10px">
+						<panel title="Account Details" border="normal" style="margin-bottom:10px" hflex="1">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row spans=",2">
+											Account Number:
+											<textbox id="accntNum" readonly="true" hflex="1"
+												value="@{person.id, save-when='btnSave.onClick'}" />
+										</row>
+										<row spans=",2">
+											Diagnosis Code:
+											<listbox mold="select" rows="1"
+												selectedItem="@{ginfo.diagnosisCode, save-when='btnSave.onClick' }">
+												<listitem value="" label="Pain in Joint, Multiple Sites" />
+												<listitem value="719.49" label="Pain in Joint, Multiple Sites" />
+												<listitem value="723.1" label="Pain in Neck" />
+												<listitem value="724.5" label="Pain in Back (postural)" />
+												<listitem value="789" label="Pain Abdominal (unspecified sites)" />
+												<listitem value="724.2" label="Pain, lumbar region" />
+											</listbox>
+										</row>
+									</rows>
+								</grid>
+
+							</panelchildren>
+						</panel>
+						<panel title="Login Information" border="normal" style="margin-bottom:10px" hflex="1">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row>
+											Login ID:
+											<textbox id="loginid" hflex="1" constraint="no empty"
+												value="@{logininfo.userid, save-when='btnSave.onClick'}" />
+											<label id="loginmsg" style="color:red" />
+										</row>
+										<row>
+											password:
+											<textbox id="password" hflex="1"
+												value="@{logininfo.password, save-when='btnSave.onClick'}" />
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+						<panel title="Personal Details" border="normal" style="margin-bottom:10px" hflex="1">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row hflex="true">
+											First Name:
+											<textbox id="firstName"
+												value="@{person.firstName, save-when='btnSave.onClick' }" maxlength="100" hflex="1" constraint="no empty" />
+											Initial:
+											<textbox id="initial"
+												value="@{person.initial, save-when='btnSave.onClick' }" maxlength="100" hflex="1" />
+											LastName:
+											<textbox id="lastName"
+												value="@{person.lastName, save-when='btnSave.onClick' }" maxlength="100" hflex="1" constraint="no empty" />
+										</row>
+										<row>
+											SSN:
+											<textbox id="ssn" value="@{person.SSN, save-when='btnSave.onClick' }"
+												maxlength="11" constraint="/\d{3}-?\d{2}-?\d{4}/: Invalid SSN Format" hflex="1" />
+											Marital Status:
+											<checkbox label="Married"
+												checked="@{person.married, save-when='btnSave.onClick' }" />
+											Gender:
+											<radiogroup id="gender"
+												selectedIndex="@{person.gender, converter='com.bodyfs.ui.util.GenderToRadiogroup', save-when='btnSave.onClick' }">
+												<radio label="M" />
+												<radio label="F" />
+											</radiogroup>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+						<panel title="General Information" border="normal" style="margin-bottom:10px" hflex="1">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row>
+											Address
+											<textbox value="@{ginfo.street, save-when='btnSave.onClick' }" hflex="1" />
+											City:
+											<textbox value="@{ginfo.city, save-when='btnSave.onClick' }" hflex="1" />
+											State:
+											<textbox value="@{ginfo.state, save-when='btnSave.onClick' }" hflex="1" />
+										</row>
+										<row spans=",,,2,">
+											Zipcode:
+											<textbox value="@{ginfo.zipcode, save-when='btnSave.onClick' }" hflex="1" />
+											Email:
+											<textbox value="@{person.email, save-when='btnSave.onClick' }"
+												constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" hflex="1" />
+											<div></div>
+										</row>
+										<row>
+											Cell Phone:
+											<textbox value="@{ginfo.cellPhone, save-when='btnSave.onClick' }" hflex="1" />
+											Home Phone:
+											<textbox value="@{ginfo.homePhone, save-when='btnSave.onClick' }" hflex="1" />
+											Work Phone:
+											<textbox value="@{ginfo.workPhone, save-when='btnSave.onClick' }" hflex="1" />
+
+										</row>
+										<row spans=",,,,2">
+											Height:
+											<textbox value="@{ginfo.height, save-when='btnSave.onClick' }" hflex="1" />
+											Weight:
+											<textbox value="@{ginfo.weight, save-when='btnSave.onClick' }" hflex="1" />
+											<div></div>
+										</row>
+										<row spans="2,2,,">
 											Emergency Contact's Name &amp; Phone
-												<textbox value="@{ginfo.emergencycontact, save-when='btnSave.onClick' }" hflex="1" />
-													Referred By:
-												<textbox value="@{ginfo.referredBy, save-when='btnSave.onClick' }" hflex="1" />
-											
-											</row>
-											<row spans="6">
-												<hbox pack="center" hflex="1">
-													<button id="btnSave" label="create" forward="onClick=logingrid.onSave" />
-													<button label="cancel" forward="onClick=logingrid.onCancel" />
-												</hbox>
-											</row>
-										</rows>
-									</grid>
-									</panelchildren>
-								</panel>
-							</vbox>
-							</center>
-					</borderlayout>
+											<textbox value="@{ginfo.emergencycontact, save-when='btnSave.onClick' }"
+												hflex="1" />
+											Referred By:
+											<textbox value="@{ginfo.referredBy, save-when='btnSave.onClick' }"
+												hflex="1" />
+
+										</row>
+										<row spans="6">
+											<hbox pack="center" hflex="1">
+												<button id="btnSave" label="create" forward="onClick=logingrid.onSave" />
+												<button label="cancel" forward="onClick=logingrid.onCancel" />
+											</hbox>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</vbox>
 				</center>
 			</borderlayout>
 		</center>

@@ -136,7 +136,7 @@ table {
 <table width="950px" border="1" cellpadding="10">
 	<tr>
 		<td><span class="label">Patient Name: </span><%=person.getDisplayName()%> <br />
-		<span class="label">Account Number:</span><%=person.getId()%><br />
+		<span class="label">Account Number:</span><%=person.getAccountNumber()%><br />
 		<span class="label">Address:</span><%=getAddress(ginfo)%>
 		</td>
 		<td><span class="label">Tax ID:</span>20-3596403<br />

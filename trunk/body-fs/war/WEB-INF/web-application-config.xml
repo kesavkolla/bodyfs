@@ -31,5 +31,6 @@
 	</bean>
 	<bean id="personDAO" class="com.bodyfs.dao.impl.PersonDAO" scope="singleton" lazy-init="true">
 		<property name="cache" ref="datacache" />
+		<property name="counterDAO" ref="counterDAO" />
 	</bean>
 </beans>

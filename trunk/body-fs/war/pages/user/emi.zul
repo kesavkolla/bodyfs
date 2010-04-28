@@ -2,6 +2,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
+<?xel-method prefix="fmt" name="format" class="com.bodyfs.ui.MPIViewComposer" signature="com.bodyfs.ui.MPIViewComposer format(java.util.Date)"?>
 <?script type="text/javascript" src="/scripts/jquery.gchart.pack.js"?>
 <?script type="text/javascript" src="/scripts/mpi.js"?>
 <zk xmlns:w="http://www.zkoss.org/2005/zk/client" xmlns:n="http://www.zkoss.org/2005/zk/native">
@@ -35,14 +36,18 @@
 						<space height="20px" orient="vertical" width="100%" />
 						<space />
 						<n:div id="mpiChart" style="width:600px;height:100%;margin-left:auto;margin-right:auto;" />
-						<n:div style="text-align:right"><n:button id="btnLegends" onclick="showLegends()">EMI-Legends</n:button></n:div>
-						
+						<n:div style="text-align:right">
+							<n:button id="btnLegends" onclick="showLegends()">EMI-Legends</n:button>
+						</n:div>
+
 					</div>
 				</center>
 			</borderlayout>
 		</center>
 	</borderlayout>
 	<script type="text/javascript" defer="true">
+		patname = "${user:displayname()}";
+
 		var mpidata = ${mpidata }; if(mpidata.examDate) { DrawChart(mpidata); }
 	</script>
 </zk>

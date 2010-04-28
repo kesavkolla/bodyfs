@@ -74,6 +74,9 @@ public class Person implements Serializable {
 	@Persistent
 	private boolean married;
 
+	@Persistent
+	private Long accountNumber;
+
 	public final Long getId() {
 		return id;
 	}
@@ -228,26 +231,37 @@ public class Person implements Serializable {
 		return this.lastName + " " + this.firstName;
 	}
 
+	public Long getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
 	@Override
 	public String toString() {
-		final StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		builder.append("Person [");
 		if (SSN != null)
 			builder.append("SSN=").append(SSN).append(", ");
-		if (email != null)
-			builder.append("email=").append(email).append(", ");
+		if (accountNumber != null)
+			builder.append("accountNumber=").append(accountNumber).append(", ");
+		if (dateOfBirth != null)
+			builder.append("dateOfBirth=").append(dateOfBirth).append(", ");
 		if (firstName != null)
 			builder.append("firstName=").append(firstName).append(", ");
-		if (gender != null)
-			builder.append("gender=").append(gender).append(", ");
 		if (id != null)
 			builder.append("id=").append(id).append(", ");
-		if (lastName != null)
-			builder.append("lastName=").append(lastName);
 		if (initial != null)
-			builder.append("initial=").append(initial);
+			builder.append("initial=").append(initial).append(", ");
+		if (lastName != null)
+			builder.append("lastName=").append(lastName).append(", ");
+		if (personType != null)
+			builder.append("personType=").append(personType);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bodyfs.PMF;
 import com.bodyfs.controllers.PersonController;
+import com.bodyfs.dao.ICounterDAO;
 import com.bodyfs.dao.IPersonDAO;
 import com.bodyfs.model.Cardiovascular;
 import com.bodyfs.model.Diet;
@@ -50,13 +51,21 @@ public class PersonDAO implements IPersonDAO, Serializable {
 	private JdoTemplate jdoTemplate = new JdoTemplate(PMF.get());
 
 	private Cache cache;
+	private ICounterDAO counterDAO;
 
 	public void setCache(final Cache cache) {
 		this.cache = cache;
 	}
 
+	public void setCounterDAO(final ICounterDAO counterDAO) {
+		this.counterDAO = counterDAO;
+	}
+
 	@Override
 	public Person createPerson(final Person person) {
+		if (person.getAccountNumber() == null) {
+			person.setAccountNumber(new Long(counterDAO.increment(ICounterDAO.ACCOUNT_SEQ)));
+		}
 		return this.jdoTemplate.makePersistent(person);
 	}
 
@@ -103,7 +112,8 @@ public class PersonDAO implements IPersonDAO, Serializable {
 
 	@Override
 	public Collection<Person> getAllCustomers() {
-		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class, "personType != '"	+ PersonType.EMPLOYEE + "' && personType != '"	+ PersonType.SIA_AGENT + "'"));
+		return this.jdoTemplate.detachCopyAll(this.jdoTemplate.find(Person.class, "personType != '"
+				+ PersonType.EMPLOYEE + "' && personType != '" + PersonType.SIA_AGENT + "'"));
 	}
 
 	@Override

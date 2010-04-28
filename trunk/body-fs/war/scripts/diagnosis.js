@@ -86,12 +86,7 @@ function setupData(reload) {
 		selVeinsUnderneathRight.find("option[value='" + data.VeinsUnderneathRight + "']").attr("selected", "selected").change();
 		selVeinsUnderneathRight.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
 	}
-	
-	
-		
-	
-	// nnnnnnnnnnnnnnnnnnnnnnn
-	
+
 	/* setup pulse right1 */
 	var selPulseRight1 = $("#selPulseRight1");
 	selPulseRight1.dropdownchecklist( {
@@ -106,8 +101,6 @@ function setupData(reload) {
 			selPulseRight3.find("option[value='" + data.PulseRight1 + "']").attr("selected", "selected").change();
 		}
 	}
-	
-	// nnnnnnnnnnnnnnnnnnnnnn
 	
 	/* setup pulse right2 */
 	var selPulseRight2 = $("#selPulseRight2");
@@ -138,14 +131,20 @@ function setupData(reload) {
 			selPulseRight3.find("option[value='" + data.PulseRight3 + "']").attr("selected", "selected").change();
 		}
 	}
+		
 	/* setup PulseLeft1 */
 	var selPulseLeft1 = $("#selPulseLeft1");
 	selPulseLeft1.dropdownchecklist( {
 		width : selPulseLeft1.width()
 	});
 	if (data.PulseLeft1) {
-		selPulseLeft1.find("option[value='" + data.PulseLeft1 + "']").attr("selected", "selected").change();
-		selPulseLeft1.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseLeft1)) {
+			$.each(data.PulseLeft1, function() {
+				selPulseLeft1.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseLeft1.find("option[value='" + data.TongueColor + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup PulseLeft2 */
@@ -154,8 +153,13 @@ function setupData(reload) {
 		width : selPulseLeft2.width()
 	});
 	if (data.PulseLeft2) {
-		selPulseLeft2.find("option[value='" + data.PulseLeft2 + "']").attr("selected", "selected").change();
-		selPulseLeft2.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseLeft2)) {
+			$.each(data.PulseLeft2, function() {
+				selPulseLeft2.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseLeft2.find("option[value='" + data.TongueColor + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup PulseLeft3 */
@@ -164,8 +168,13 @@ function setupData(reload) {
 		width : selPulseLeft3.width()
 	});
 	if (data.PulseLeft3) {
-		selPulseLeft3.find("option[value='" + data.PulseLeft3 + "']").attr("selected", "selected").change();
-		selPulseLeft3.data().dropdownchecklist.dropWrapper.find(":radio:checked").click();
+		if ($.isArray(data.PulseLeft3)) {
+			$.each(data.PulseLeft3, function() {
+				selPulseLeft3.find("option[value='" + this + "']").attr("selected", "selected").change();
+			});
+		} else {
+			selPulseLeft3.find("option[value='" + data.TongueColor + "']").attr("selected", "selected").change();
+		}
 	}
 
 	/* setup notes */
@@ -284,7 +293,6 @@ function initPage() {
 		/* Convert the elements array to single object */
 		var o = {};
 		$.each(elements, function() {
-			console.log(this.name);
 			var name = this.name.substring(3);
 			if (this.value == "" || this.value == "-1") {
 				return true;

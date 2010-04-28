@@ -17,7 +17,6 @@ function setupData(reload) {
 	} else {
 		data = parseJSON(wgt.getValue());
 	}
-	alert(data);
 	/* setup the tongue color */
 	var objselTongueColor = $("#selTongueColor");
 	objselTongueColor.dropdownchecklist( {
@@ -91,7 +90,7 @@ function setupData(reload) {
 	
 		
 	
-	//nnnnnnnnnnnnnnnnnnnnnnn
+	// nnnnnnnnnnnnnnnnnnnnnnn
 	
 	/* setup pulse right1 */
 	var selPulseRight1 = $("#selPulseRight1");
@@ -108,7 +107,7 @@ function setupData(reload) {
 		}
 	}
 	
-	//nnnnnnnnnnnnnnnnnnnnnn
+	// nnnnnnnnnnnnnnnnnnnnnn
 	
 	/* setup pulse right2 */
 	var selPulseRight2 = $("#selPulseRight2");
@@ -282,7 +281,6 @@ function initPage() {
 	$(".submitbtn").click(function() {
 		/* Get all the form elements those are filled */
 		var elements = $(":input").not(":radio[value=-1]").serializeArray();
-		alert("amit");
 		/* Convert the elements array to single object */
 		var o = {};
 		$.each(elements, function() {

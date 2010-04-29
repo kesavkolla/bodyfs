@@ -6,6 +6,7 @@ package com.bodyfs.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -28,7 +29,7 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 7682118330339432960L;
 
 	@PrimaryKey
-	@Persistent
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	@SearchableId
 	private Long id;
 
@@ -262,6 +263,5 @@ public class Person implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
-
 
 }

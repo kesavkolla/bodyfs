@@ -73,6 +73,7 @@ function appendPlan(plan) {
 	buffer.push('</tbody></table>')
 	buffer.push('</div>');
 	buffer.push("<br />");
+	buffer.push("<b>Program Goal: </b>");
 	buffer.push('<input type="radio" name="careType' + plan.id + '" value="corrective"' + (plan.careType == "corrective" ? "CHECKED" : "") + '>Corrective Care ');
 	buffer.push('<input type="radio" name="careType' + plan.id + '" value="maintenance" ' + (plan.careType == "maintenance" ? "CHECKED" : "") + '>Maintenance Care<br>');
 	buffer.push("<br />");

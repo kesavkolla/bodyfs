@@ -36,6 +36,7 @@
 							</n:table>
 						</n:div>
 						<space orient="horizontal" height="10px" />
+						<n:b>Program Goal:</n:b>
 						<radiogroup id="care">
 								<radio value="corrective" label="Corrective Care" />
 								<radio value="maintenance" label="Maintenance Care" />

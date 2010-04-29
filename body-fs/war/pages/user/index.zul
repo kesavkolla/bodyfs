@@ -35,23 +35,25 @@
 									<n:col width="70%" />
 									<n:col width="*" />
 									<n:tr>
+										<n:td>How much is left on your account</n:td>
+										<n:td><label id="accountBal" style="font-size:14px" />
+										</n:td>
+									</n:tr>
+									<n:tr>
+										<n:td>How many sessions have you used</n:td>
+										<n:td><label id="sessionsUsed" style="font-size:14px" /></n:td>
+									</n:tr>
+									<n:tr>
+										<n:td>When was the last re-examination done</n:td>
+										<n:td><label id="lastExamDate" style="font-size:14px" /></n:td>
+									</n:tr>
+									<n:tr>
 										<n:td>When is the next examination due</n:td>
 										<n:td>
 											<label id="nextApppointment" style="font-size:14px" />
 										</n:td>
 									</n:tr>
-									<n:tr>
-										<n:td>How much is left on your account</n:td>
-										<n:td></n:td>
-									</n:tr>
-									<n:tr>
-										<n:td>How many sessions have you used</n:td>
-										<n:td></n:td>
-									</n:tr>
-									<n:tr>
-										<n:td>Missed appointment notifications</n:td>
-										<n:td></n:td>
-									</n:tr>
+									
 								</n:table>
 							</n:div>
 						</hbox>

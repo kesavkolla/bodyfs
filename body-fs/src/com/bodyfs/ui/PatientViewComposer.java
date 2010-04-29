@@ -36,7 +36,9 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private static Log LOGGER = LogFactory.getLog(PatientViewComposer.class);
 	private Label week;
 	private Label totalWeeks;
-	private Label nextReExam;
+	private Label nextApppointment;
+	private Label sessionsUsed;
+	private Label lastExamDate;
 	private A newemails;
 	private Progressmeter pm;
 
@@ -62,19 +64,40 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());
 		final int totalPlanLength = getTotalPlansLength(person.getId());
-
+		
+		
+		
 		if (week != null) {
 			week.setValue(numweek + "");
+		}
+		if(sessionsUsed!=null) {
+			sessionsUsed.setValue(numweek + "");
 		}
 		if (totalWeeks != null) {
 			totalWeeks.setValue(totalPlanLength + "");
 		}
-		if (nextReExam != null) {
-			nextReExam.setValue("12/12/2009");
+		if (numweek == 0) {
+			if (nextApppointment != null) {
+				nextApppointment.setValue("8 more sessions to go.");
+			}
+			if (lastExamDate !=null) {
+				lastExamDate.setValue("-");
+			}
+			
+		} else {
+			int modulus = numweek % 8;
+			if (nextApppointment != null) {
+					nextApppointment.setValue(8-modulus +" more sessions to go.");
+				 
+			}
+			if (lastExamDate !=null) {
+				if(numweek > 8)
+					lastExamDate.setValue(modulus +" sessions ago.");
+				else 
+					lastExamDate.setValue("-");
+			}
 		}
-		if (newemails != null) {
-			newemails.setLabel("3 New emails");
-		}
+		
 		if (pm != null) {
 			if (numweek > 0 && totalPlanLength > 0) {
 				int percent = Math.round(numweek * 100 / totalPlanLength);

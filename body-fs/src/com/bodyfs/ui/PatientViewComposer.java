@@ -87,8 +87,10 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		} else {
 			int modulus = numweek % 8;
 			if (nextApppointment != null) {
+				if(totalPlanLength - numweek >= 8 )
 					nextApppointment.setValue(8-modulus +" more sessions to go.");
-				 
+				else  
+					nextApppointment.setValue("-");
 			}
 			if (lastExamDate !=null) {
 				if(numweek > 8)

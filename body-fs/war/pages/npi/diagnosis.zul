@@ -161,8 +161,8 @@
 												</n:td>
 												<n:td>
 													Cun
-													<n:select id="selPulseRight1" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseRight1" name="selPulseRight1"
+														style="width:75px" multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -178,8 +178,8 @@
 												</n:td>
 												<n:td>
 													Guan
-													<n:select id="selPulseRight2" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseRight2" name="selPulseRight2"
+														style="width:75px" multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -195,8 +195,8 @@
 												</n:td>
 												<n:td>
 													Chi
-													<n:select id="selPulseRight3" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseRight3" name="selPulseRight3"
+														style="width:75px" multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -217,8 +217,8 @@
 												</n:td>
 												<n:td>
 													Cun
-													<n:select id="selPulseLeft1" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseLeft1" name="selPulseLeft1" style="width:75px"
+														multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -234,8 +234,8 @@
 												</n:td>
 												<n:td>
 													Guan
-													<n:select id="selPulseLeft2" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseLeft2" name="selPulseLeft2" style="width:75px"
+														multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>
@@ -251,8 +251,8 @@
 												</n:td>
 												<n:td>
 													Chi
-													<n:select id="selPulseLeft3" style="width:75px">
-														<n:option value="-1">select pulse</n:option>
+													<n:select id="selPulseLeft3" name="selPulseLeft3" style="width:75px"
+														multiple="multiple">
 														<n:option>Fine</n:option>
 														<n:option>Forceless</n:option>
 														<n:option>Tight</n:option>

@@ -91,7 +91,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 		plan.setPlanLength(planLength.getValue());
 		// parse the json data in the txtPaymentData
 		final Radiogroup careType = (Radiogroup) Path.getComponent(page, "care");
-		if(careType != null) {
+		if (careType != null && careType.getSelectedItemApi() != null) {
 			plan.setCareType(careType.getSelectedItemApi().getValue());
 		}
 		final JSONParser parser = new JSONParser();
@@ -162,7 +162,7 @@ public class PaymentsCtrlComposer extends GenericForwardComposer {
 			plan.setDiscount(txtDiscount.getValue().floatValue());
 		}
 		final Radiogroup careType = (Radiogroup) Path.getComponent(page, "care");
-		if(careType != null) {
+		if (careType != null) {
 			plan.setCareType(careType.getSelectedItemApi().getValue());
 		}
 		plan.setPlanItems(planItems);

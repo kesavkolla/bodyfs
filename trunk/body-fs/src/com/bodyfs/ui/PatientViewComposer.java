@@ -14,7 +14,6 @@ import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericAutowireComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.api.A;
 import org.zkoss.zul.api.Progressmeter;
 import org.zkoss.zul.api.Window;
 
@@ -39,7 +38,6 @@ public class PatientViewComposer extends GenericAutowireComposer {
 	private Label nextApppointment;
 	private Label sessionsUsed;
 	private Label lastExamDate;
-	private A newemails;
 	private Progressmeter pm;
 
 	@SuppressWarnings("unchecked")
@@ -64,13 +62,11 @@ public class PatientViewComposer extends GenericAutowireComposer {
 		final IPatientVisitDAO visitDAO = (IPatientVisitDAO) SpringUtil.getBean("patientVisitDAO");
 		final int numweek = visitDAO.countPatientVisits(person.getId());
 		final int totalPlanLength = getTotalPlansLength(person.getId());
-		
-		
-		
+
 		if (week != null) {
 			week.setValue(numweek + "");
 		}
-		if(sessionsUsed!=null) {
+		if (sessionsUsed != null) {
 			sessionsUsed.setValue(numweek + "");
 		}
 		if (totalWeeks != null) {
@@ -80,26 +76,26 @@ public class PatientViewComposer extends GenericAutowireComposer {
 			if (nextApppointment != null) {
 				nextApppointment.setValue("8 more sessions to go.");
 			}
-			if (lastExamDate !=null) {
+			if (lastExamDate != null) {
 				lastExamDate.setValue("-");
 			}
-			
+
 		} else {
 			int modulus = numweek % 8;
 			if (nextApppointment != null) {
-				if(totalPlanLength - numweek >= 8 )
-					nextApppointment.setValue(8-modulus +" more sessions to go.");
-				else  
+				if (totalPlanLength - numweek >= 8)
+					nextApppointment.setValue(8 - modulus + " more sessions to go.");
+				else
 					nextApppointment.setValue("-");
 			}
-			if (lastExamDate !=null) {
-				if(numweek > 8)
-					lastExamDate.setValue(modulus +" sessions ago.");
-				else 
+			if (lastExamDate != null) {
+				if (numweek > 8)
+					lastExamDate.setValue(modulus + " sessions ago.");
+				else
 					lastExamDate.setValue("-");
 			}
 		}
-		
+
 		if (pm != null) {
 			if (numweek > 0 && totalPlanLength > 0) {
 				int percent = Math.round(numweek * 100 / totalPlanLength);
